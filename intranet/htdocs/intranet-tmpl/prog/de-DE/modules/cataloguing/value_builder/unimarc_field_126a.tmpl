@@ -1,0 +1,1042 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UNIMARC_Ersteller Feld 126a</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Materielle Aufmachung:</td>
+		<td>
+			<select name="f1" size="1">
+
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>Platte</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Platte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>Band (auf Spule)</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Band (auf Spule)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>Band (in Kassette)</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Band (in Kassette)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" SELECTED>Band (in Kartusche)</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Band (in Kartusche)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1e" -->
+				<option value="e" SELECTED>Aufnahme auf Draht</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Aufnahme auf Draht</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1f" -->
+				<option value="f" SELECTED>Zylinder</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Zylinder</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1g" -->
+				<option value="g" SELECTED>Rolle</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Rolle</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1h" -->
+				<option value="h" SELECTED>Film (Tonfilm)</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Film (Tonfilm)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Geschwindigkeit: </td>
+		<td>
+			<select name="f2" size="1">
+			<!-- TMPL_IF name="f2u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" SELECTED>16 2/3 U./Min.</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">16 2/3 U./Min.</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2b" -->
+				<option value="b" SELECTED>33 1/3 UMin.</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">33 1/3 UMin.</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2c" -->
+				<option value="c" SELECTED>45 U/min</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">45 U/min</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2d" -->
+				<option value="d" SELECTED>78 U/min</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">78 U/min</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2e" -->
+				<option value="e" SELECTED>8 U/min</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">8 U/min</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2g" -->
+				<option value="g" SELECTED>1.4 m/Sek (Compact Disc)</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">1.4 m/Sek (Compact Disc)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2h" -->
+				<option value="h" SELECTED>120 tpm</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">120 tpm</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2i" -->
+				<option value="i" SELECTED>160 U./Min.</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">160 U./Min.</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2k" -->
+				<option value="k" SELECTED>1 7/8 Inch/Sekunde</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">1 7/8 Inch/Sekunde</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2l" -->
+				<option value="l" SELECTED>15/16 Inch/Sek.</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">15/16 Inch/Sek.</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2m" -->
+				<option value="m" SELECTED>3 3/4 Inch/Sek.</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">3 3/4 Inch/Sek.</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2n" -->
+				<option value="n" SELECTED>7 1/2 Inch/Sek.</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">7 1/2 Inch/Sek.</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2o" -->
+				<option value="o" SELECTED>15 Inch/Sek.</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">15 Inch/Sek.</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2p" -->
+				<option value="p" SELECTED>30 Inch/Sek.</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">30 Inch/Sek.</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2q" -->
+				<option value="q" SELECTED>8/10 Inch/Sek.</option>
+			<!-- TMPL_ELSE -->
+				<option value="q">8/10 Inch/Sek.</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2r" -->
+				<option value="r" SELECTED>4/10 Inch/Sek.</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">4/10 Inch/Sek.</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Typ des Tons:</td>
+		<td>
+			<select name="f3" size="1">
+			<!-- TMPL_IF name="f3a" -->
+				<option value="a" SELECTED>Einohrig</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Einohrig</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3b" -->
+				<option value="b" SELECTED>Stereophon</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Stereophon</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3c" -->
+				<option value="c" SELECTED>Quadrophonisch</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Quadrophonisch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Breite der Furche:</td>
+		<td>
+			<select name="f4" size="1">
+			<!-- TMPL_IF name="f4a" -->
+				<option value="a" SELECTED>Größe/Standard</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Größe/Standard</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4b" -->
+				<option value="b" SELECTED>Mikrorille/fein</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Mikrorille/fein</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Materielle Abmessung:</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5a" -->
+				<option value="a" SELECTED>7.62 cm oder 3 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">7.62 cm oder 3 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5b" -->
+				<option value="b" SELECTED>12.7 cm oder 5 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">12.7 cm oder 5 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>17.78 cm oder 7 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">17.78 cm oder 7 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>25.4 cm oder 10 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">25.4 cm oder 10 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5e" -->
+				<option value="e" SELECTED>30,48 cm oder 12 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">30,48 cm oder 12 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5f" -->
+				<option value="f" SELECTED>40.64 cm oder 16 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">40.64 cm oder 16 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5g" -->
+				<option value="g" SELECTED>35.56 cm oder 14 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">35.56 cm oder 14 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5h" -->
+				<option value="h" SELECTED>12 cm oder 4 3/4 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">12 cm oder 4 3/4 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5j" -->
+				<option value="j" SELECTED>10 cm x 6.3 cm oder 3 7/8 Inch x 2 1/2 Inch </option>
+			<!-- TMPL_ELSE -->
+				<option value="j">10 cm x 6.3 cm oder 3 7/8 Inch x 2 1/2 Inch </option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5o" -->
+				<option value="o" SELECTED>13.2 cm x 9.7 cm oder 5 1/4 Inch x 3 7/8 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">13.2 cm x 9.7 cm oder 5 1/4 Inch x 3 7/8 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5s" -->
+				<option value="s" SELECTED>5.7 cm x 10 cm oder 2 1/4 Inch x 4 Inch, Zylinder</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">5.7 cm x 10 cm oder 2 1/4 Inch x 4 Inch, Zylinder</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Breite des Bandes:</td>
+		<td>
+			<select name="f6" size="1">
+			
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>1/4 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">1/4 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6b" -->
+				<option value="b" SELECTED>1/2 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">1/2 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" SELECTED>1 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">1 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6d" -->
+				<option value="d" SELECTED>1/8 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">1/8 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6e" -->
+				<option value="e" SELECTED>2 Inch</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">2 Inch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6f" -->
+				<option value="f" SELECTED>1/3 Inch (8 mm)</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">1/3 Inch (8 mm)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6x" -->
+				<option value="x" SELECTED>Die Aufnahme ist kein Band</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Die Aufnahme ist kein Band</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Spezifikationen des Magnetbandes:</td>
+		<td>
+			<select name="f7" size="1">
+			
+			<!-- TMPL_IF name="f7a" -->
+				<option value="a" SELECTED>Volle Spur</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Volle Spur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7b" -->
+				<option value="b" SELECTED>Halb-Piste</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Halb-Piste</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7c" -->
+				<option value="c" SELECTED>Viertelspur</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Viertelspur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7d" -->
+				<option value="d" SELECTED>8 spuren</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">8 spuren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7e" -->
+				<option value="e" SELECTED>12 Spuren</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">12 Spuren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7f" -->
+				<option value="f" SELECTED>16 Spuren</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">16 Spuren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7g" -->
+				<option value="g" SELECTED>24 Spuren</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">24 Spuren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7h" -->
+				<option value="h" SELECTED>6 Spuren</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">6 Spuren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7x" -->
+				<option value="x" SELECTED>Nicht auf Band aufgenommen</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht auf Band aufgenommen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Begleittext 1:</td>
+		<td>
+			<select name="f8" size="1">
+			<!-- TMPL_IF name="f8 " -->
+				<option value=" " SELECTED>Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8a" -->
+				<option value="a" SELECTED>Diskographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Diskographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8b" -->
+				<option value="b" SELECTED>Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8c" -->
+				<option value="c" SELECTED>Thematischer Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Thematischer Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8d" -->
+				<option value="d" SELECTED>Libretto oder Text</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Libretto oder Text</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8e" -->
+				<option value="e" SELECTED>Biographie des Komponisten</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Biographie des Komponisten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8f" -->
+				<option value="f" SELECTED>Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8g" -->
+				<option value="g" SELECTED>Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8h" -->
+				<option value="h" SELECTED>Technische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Technische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8i" -->
+				<option value="i" SELECTED>Historische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Historische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8j" -->
+				<option value="j" SELECTED>Andere geschichtliche Hinweise</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Andere geschichtliche Hinweise</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8k" -->
+				<option value="k" SELECTED>Ethnologische Auskünfte</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Ethnologische Auskünfte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8l" -->
+				<option value="l" SELECTED>Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8r" -->
+				<option value="r" SELECTED>Unterrichtsmaterial</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Unterrichtsmaterial</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8s" -->
+				<option value="s" SELECTED>Partitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Partitur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Begleittext 2:</td>
+		<td>
+			<select name="f9" size="1">
+			
+			<!-- TMPL_IF name="f9 " -->
+				<option value=" " SELECTED>Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9a" -->
+				<option value="a" SELECTED>Diskographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Diskographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9b" -->
+				<option value="b" SELECTED>Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9c" -->
+				<option value="c" SELECTED>Thematischer Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Thematischer Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9d" -->
+				<option value="d" SELECTED>Libretto oder Text</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Libretto oder Text</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9e" -->
+				<option value="e" SELECTED>Biographie des Komponisten</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Biographie des Komponisten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9f" -->
+				<option value="f" SELECTED>Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9g" -->
+				<option value="g" SELECTED>Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9h" -->
+				<option value="h" SELECTED>Technische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Technische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9i" -->
+				<option value="i" SELECTED>Historische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Historische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9j" -->
+				<option value="j" SELECTED>Andere geschichtliche Hinweise</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Andere geschichtliche Hinweise</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9k" -->
+				<option value="k" SELECTED>Ethnologische Auskünfte</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Ethnologische Auskünfte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9l" -->
+				<option value="l" SELECTED>Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9r" -->
+				<option value="r" SELECTED>Unterrichtsmaterial</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Unterrichtsmaterial</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9s" -->
+				<option value="s" SELECTED>Partitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Partitur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Begleittext 3:</td>
+		<td>
+			<select name="f10" size="1">
+			
+			<!-- TMPL_IF name="f10 " -->
+				<option value=" " SELECTED>Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10a" -->
+				<option value="a" SELECTED>Diskographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Diskographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10b" -->
+				<option value="b" SELECTED>Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10c" -->
+				<option value="c" SELECTED>Thematischer Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Thematischer Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10d" -->
+				<option value="d" SELECTED>Libretto oder Text</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Libretto oder Text</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10e" -->
+				<option value="e" SELECTED>Biographie des Komponisten</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Biographie des Komponisten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10f" -->
+				<option value="f" SELECTED>Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10g" -->
+				<option value="g" SELECTED>Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10h" -->
+				<option value="h" SELECTED>Technische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Technische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10i" -->
+				<option value="i" SELECTED>Historische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Historische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10j" -->
+				<option value="j" SELECTED>Andere geschichtliche Hinweise</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Andere geschichtliche Hinweise</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10k" -->
+				<option value="k" SELECTED>Ethnologische Auskünfte</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Ethnologische Auskünfte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10l" -->
+				<option value="l" SELECTED>Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10r" -->
+				<option value="r" SELECTED>Unterrichtsmaterial</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Unterrichtsmaterial</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10s" -->
+				<option value="s" SELECTED>Partitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Partitur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Begleittext 4:</td>
+		<td>
+			<select name="f11" size="1">
+			
+			<!-- TMPL_IF name="f11 " -->
+				<option value=" " SELECTED>Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11a" -->
+				<option value="a" SELECTED>Diskographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Diskographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11b" -->
+				<option value="b" SELECTED>Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11c" -->
+				<option value="c" SELECTED>Thematischer Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Thematischer Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11d" -->
+				<option value="d" SELECTED>Libretto oder Text</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Libretto oder Text</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11e" -->
+				<option value="e" SELECTED>Biographie des Komponisten</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Biographie des Komponisten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11f" -->
+				<option value="f" SELECTED>Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11g" -->
+				<option value="g" SELECTED>Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11h" -->
+				<option value="h" SELECTED>Technische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Technische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11i" -->
+				<option value="i" SELECTED>Historische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Historische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11j" -->
+				<option value="j" SELECTED>Andere geschichtliche Hinweise</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Andere geschichtliche Hinweise</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11k" -->
+				<option value="k" SELECTED>Ethnologische Auskünfte</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Ethnologische Auskünfte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11l" -->
+				<option value="l" SELECTED>Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11r" -->
+				<option value="r" SELECTED>Unterrichtsmaterial</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Unterrichtsmaterial</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11s" -->
+				<option value="s" SELECTED>Partitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Partitur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f11z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Begleittext 5:</td>
+		<td>
+			<select name="f12" size="1">
+                        <!-- TMPL_IF NAME="f12 "-->
+                            <option value=" " SELECTED>Wert nicht erforderlich</option>
+                        <!-- TMPL_ELSE -->
+                            <option value=" ">Wert nicht erforderlich</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12a" -->
+				<option value="a" SELECTED>Diskographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Diskographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12b" -->
+				<option value="b" SELECTED>Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12c" -->
+				<option value="c" SELECTED>Thematischer Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Thematischer Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12d" -->
+				<option value="d" SELECTED>Libretto oder Text</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Libretto oder Text</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12e" -->
+				<option value="e" SELECTED>Biographie des Komponisten</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Biographie des Komponisten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12f" -->
+				<option value="f" SELECTED>Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12g" -->
+				<option value="g" SELECTED>Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12h" -->
+				<option value="h" SELECTED>Technische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Technische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12i" -->
+				<option value="i" SELECTED>Historische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Historische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12j" -->
+				<option value="j" SELECTED>Andere geschichtliche Hinweise</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Andere geschichtliche Hinweise</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12k" -->
+				<option value="k" SELECTED>Ethnologische Auskünfte</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Ethnologische Auskünfte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12l" -->
+				<option value="l" SELECTED>Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12r" -->
+				<option value="r" SELECTED>Unterrichtsmaterial</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Unterrichtsmaterial</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12s" -->
+				<option value="s" SELECTED>Partitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Partitur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f12z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Begleittext 6:</td>
+		<td>
+			<select name="f13" size="1">
+                        <!-- TMPL_IF NAME="f13 "-->
+                            <option value=" " SELECTED>Wert nicht erforderlich</option>
+                        <!-- TMPL_ELSE -->
+                            <option value=" ">Wert nicht erforderlich</option>
+                        <!-- /TMPL_IF -->
+                        
+			<!-- TMPL_IF name="f13a" -->
+				<option value="a" SELECTED>Diskographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Diskographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13b" -->
+				<option value="b" SELECTED>Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13c" -->
+				<option value="c" SELECTED>Thematischer Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Thematischer Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13d" -->
+				<option value="d" SELECTED>Libretto oder Text</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Libretto oder Text</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13e" -->
+				<option value="e" SELECTED>Biographie des Komponisten</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Biographie des Komponisten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13f" -->
+				<option value="f" SELECTED>Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Biographie des Interpreten oder Geschichte des Ensembles</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13g" -->
+				<option value="g" SELECTED>Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Technische oder historische Auskünfte über die Instrumente</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13h" -->
+				<option value="h" SELECTED>Technische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Technische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13i" -->
+				<option value="i" SELECTED>Historische Auskünfte über die Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Historische Auskünfte über die Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13j" -->
+				<option value="j" SELECTED>Andere geschichtliche Hinweise</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Andere geschichtliche Hinweise</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13k" -->
+				<option value="k" SELECTED>Ethnologische Auskünfte</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Ethnologische Auskünfte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13l" -->
+				<option value="l" SELECTED>Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Biographie des Arrangeurs oder des Verfassers der Transkription</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13r" -->
+				<option value="r" SELECTED>Unterrichtsmaterial</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Unterrichtsmaterial</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13s" -->
+				<option value="s" SELECTED>Partitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Partitur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f13z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Aufnahmetechnik:</td>
+		<td>
+			<select name="f14" size="1">
+			<!-- TMPL_IF name="f14a" -->
+				<option value="a" SELECTED>Akustisch</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Akustisch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f14b" -->
+				<option value="b" SELECTED>Elektrisch</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Elektrisch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f14c" -->
+				<option value="c" SELECTED>Digital</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Digital</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f14u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f14z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Wiedergabetechnik:</td>
+		<td>
+			<select name="f15" size="1">
+			<!-- TMPL_IF name="f15a" -->
+				<option value="a" SELECTED>NAB Norm</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">NAB Norm</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15b" -->
+				<option value="b" SELECTED>CCIR/IEC Norm</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">CCIR/IEC Norm</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15c" -->
+				<option value="c" SELECTED>Verfahren DBX</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Verfahren DBX</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15d" -->
+				<option value="d" SELECTED>Digital (Compact-Disk)</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Digital (Compact-Disk)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15e" -->
+				<option value="e" SELECTED>Dolby A</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Dolby A</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15f" -->
+				<option value="f" SELECTED>Dolby B</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Dolby B</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15g" -->
+				<option value="g" SELECTED>Dolby C</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Dolby C</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15h" -->
+				<option value="h" SELECTED>Kodierung CX</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Kodierung CX</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f15z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="OK"  onClick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value = document.f_pop.f1.value+document.f_pop.f2.value+document.f_pop.f3.value+document.f_pop.f4.value+document.f_pop.f5.value+document.f_pop.f6.value+document.f_pop.f7.value+document.f_pop.f8.value+document.f_pop.f9.value+document.f_pop.f10.value+document.f_pop.f11.value+document.f_pop.f12.value+document.f_pop.f13.value+document.f_pop.f14.value+document.f_pop.f15.value ;
+	    window.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

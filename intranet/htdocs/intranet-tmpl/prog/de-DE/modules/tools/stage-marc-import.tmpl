@@ -1,0 +1,141 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Tools &rsaquo; MARC-Datensätze für Import bereitstellen</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="file-upload.inc" -->
+<!-- TMPL_INCLUDE NAME="background-job.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+
+function CheckForm(f) {
+    if (f.uploadedfileid.value == '') {
+        alert('Please upload a file first.');
+    } else {
+        return submitBackgroundJob(f);
+    }
+    return false;
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/tools/tools-home.pl">Werkzeuge</a> &rsaquo; MARC Datensätze für Import bereitstellen</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>MARC-Datensätze für Import bereitstellen</h1>
+
+<!-- TMPL_IF name="uploadmarc" -->
+<p>Resultate des MARC-Imports:</p>
+<ul>
+	<li><!-- TMPL_VAR name="total" --> Sätze in der Datei</li>
+	<li><!-- TMPL_VAR name="import_errors" --> Sätze wegen eines MARC-Fehlers nicht bereitgestellt</li>
+	<li><!-- TMPL_VAR name="staged" --> Sätze bereitgestellt</li>
+    <!-- TMPL_IF name="checked_matches" -->
+	<li><!-- TMPL_VAR name="matched" --> Titelsätze mit mindestens einer Übereinstimmung pro Übereinstimmungsregel &quot;<!-- TMPL_VAR name="matcher_code" -->&quot;</li>
+    <!-- TMPL_ELSE -->
+        <!-- TMPL_IF name="matcher_failed" -->
+          <li>Datensatzübereinstimmung fehlgeschlagen -- kann die ausgewählte Übereinstimmungsregel nicht finden. </li>
+        <!-- TMPL_ELSE -->
+          <li>Habe den Katalog nicht auf Übereinstimmungen mit vorhandenen Sätzen überprüft</li>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+	<li><!-- TMPL_VAR name="num_items" --> Exemplarsatz gefunden und bereitgestellt</li>
+	<!-- TMPL_IF name="label_batch" -->
+	  <li>Neuer Etikettenstapel erstellt: # <!-- TMPL_VAR name="label_batch" --> </li>
+    <!-- /TMPL_IF -->
+	<li><a href="/cgi-bin/koha/tools/manage-marc-import.pl?import_batch_id=<!-- TMPL_VAR name="import_batch_id" -->">Zwischengespeicherte Sätze managen</a></li>
+	<li><a href="/cgi-bin/koha/tools/tools-home.pl">Zurück</a></li>
+</ul>
+<!-- TMPL_ELSE -->
+<ul>
+	<li>Select a MARC file to stage in the import reservoir.  It will be parsed, and each valid record staged for later import into the catalogue.</li>
+	<li>You can enter a name for this import. It may be useful, when creating a biblio, to remember where the suggested MARC data comes from!</li>
+</ul>
+<fieldset class="rows">
+<legend>Stelle Datensätze im Datenpool bereit.</legend><ol>
+	<li>
+        <div id="fileuploadform">
+        <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+		<label for="fileToUpload">Datei zum Bereitstellen auswählen: </label>
+		<input type="file" id="fileToUpload" name="fileToUpload" /><br />
+        <button class="input" onclick="return ajaxFileUpload();">Datei hochladen</button>
+		</form>
+        <div id="fileuploadstatus" style="display:none">Fortschritt des Hochladens: <span id="fileuploadprogress">0</span>%</div>
+        <div id="fileuploadfailed" style="display:none"></div>
+        </div>
+	</li>
+</ol></fieldset>
+    <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+<fieldset class="rows">
+        <input type="hidden" name="uploadedfileid" id="uploadedfileid" value="" />
+        <input type="hidden" name="runinbackground" id="runinbackground" value="" />
+        <input type="hidden" name="completedJobID" id="completedJobID" value="" />
+	<ol><li>
+		<label for="comments">Hinweise zu dieser Datei: </label>
+		<input type="text" id="comments" name="comments" />
+		
+	</li>
+	<li>
+		<label for="syntax">Zeichensatz: </label>
+		<select name="syntax" id="syntax"><option value="MARC21">MARC21</option><option value="UNIMARC">UNIMARC</option></select>
+		
+	</li>
+</ol></fieldset>
+  <fieldset class="rows">
+    <legend>Nach vorhandenen Sätzen im Katalog sehen?</legend>
+    <ol><li><label for="matcher">Datensatz-Übereinstimmungsregel:</label>
+    <select name="matcher" id="matcher">
+       <option value="">Nicht nach passenden Titeln suchen.</option> 
+       <!-- TMPL_LOOP name="available_matchers" -->
+          <option value="<!-- TMPL_VAR name="matcher_id" -->"><!-- TMPL_VAR name="code" --> (<!-- TMPL_VAR name="description" -->)
+          </option>
+       <!-- /TMPL_LOOP -->
+    </select>
+    </li>
+      <li><label for="overlay_action">Aktion, wenn ein übereinstimmender bibliographischer Datensatz gefunden wurde </label>
+           <!-- TMPL_INCLUDE NAME="tools-overlay-action.inc" -->
+      </li>
+      <li><label for="nomatch_action">Aktion, wenn keine Übereinstimmung gefunden wurde: </label>
+           <!-- TMPL_INCLUDE NAME="tools-nomatch-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="rows">
+    <legend>Auf verbundene Exemplardaten prüfen?</legend>
+    <ol>
+      <li class="radio">
+        <input type="radio" id="parse_itemsyes" name="parse_items" value="1" checked="checked" />
+        <label for="parse_itemsyes">Ja</label>
+      </li>
+      <li class="radio">
+        <input type="radio" id="parse_itemsno" name="parse_items" value="0" />
+        <label for="parse_itemsno">Nein</label>
+      </li>
+    </ol>
+    <ol>
+      <li><label for="item_action">How to process items: </label>
+           <!-- TMPL_INCLUDE NAME="tools-item-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="action"><input type="button" id="mainformsubmit" onclick="return CheckForm(this.form);" value="Bereitstellen für den Import"></fieldset>
+  <div id="jobstatus" style="display:none">Auftrag Fortschritt:  <span id="jobprogress">0</span>%</div>
+  <div id="jobfailed" style="display:none"></div>
+</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="tools-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

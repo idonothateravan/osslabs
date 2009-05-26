@@ -1,0 +1,157 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo;采购 &rsaquo; <!-- TMPL_IF name="date" -->
+            收据摘要：<!-- TMPL_VAR NAME="name" --> <!--TMPL_IF Name="invoice"-->发票 <!-- TMPL_VAR NAME="invoice" --><!--/TMPL_IF --> 在 <!-- TMPL_VAR NAME="formatteddatereceived" --><!-- TMPL_ELSE -->从<!-- TMPL_VAR NAME="name" -->收到预订馆藏<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="greybox.inc" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="acquisitions-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首页</a> &rsaquo; <a href="/cgi-bin/koha/acqui/acqui-home.pl">采购</a> &rsaquo;  <!-- TMPL_IF name="datereceived" -->
+            收据摘要：<i><!-- TMPL_VAR NAME="name" --><i> <!--TMPL_IF Name="invoice"--><i>[<!-- TMPL_VAR NAME="invoice" -->]</i><!--/TMPL_IF --> 在 <i><!-- TMPL_VAR NAME="formatteddatereceived" --></i>
+        <!-- TMPL_ELSE -->
+            收到 <!-- TMPL_VAR NAME="name" --> 订单
+        <!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	<!-- TMPL_IF NAME="receive_error" -->
+	<div id="page_error" class="error">
+	<h3>Error adding items:</h3>
+	<ul>
+	<!-- TMPL_LOOP NAME="error_loop" -->
+		<li><!-- TMPL_VAR NAME="error_param" --> : <!-- TMPL_IF NAME="error_duplicate_barcode" -->Duplicate Barcode<!-- /TMPL_IF --> <!-- todo: other error conditions come here. --></li>
+	<!-- /TMPL_LOOP -->
+	</div>
+	<!-- /TMPL_IF -->
+    <h1>
+        <!-- TMPL_IF name="datereceived" -->
+            收据摘要：<i><!-- TMPL_VAR NAME="name" --><i> <!--TMPL_IF Name="invoice"--> <i> [<!-- TMPL_VAR NAME="invoice" -->] </i><!--/TMPL_IF --> 在 <i><!-- TMPL_VAR NAME="formatteddatereceived" --></i>
+        <!-- TMPL_ELSE -->
+            收到 <!-- TMPL_VAR NAME="name" --> 订单
+        <!-- /TMPL_IF -->
+    </h1>
+<div id="acqui_receive_summary">
+    <p>发票号码：<!-- TMPL_VAR NAME="invoice" --></p>
+    <p>接收者：<!-- TMPL_VAR NAME="loggedinusername" --></p>
+    <p>日期：<!-- TMPL_VAR NAME="formatteddatereceived" --></p>
+	<!-- TODO: Add date picker, change rcv date. -->
+</div>
+<div id="acqui_receive_receivelist">
+    <h2>馆藏运送中</h2>
+    <form action="/cgi-bin/koha/acqui/parcel.pl" method="get" name="orderform">
+    <table>
+        <tr>
+            <th>数量</th>
+            <th>购物篮/订单</th>
+            <th>摘要</th>
+            <th>显示记录</th>
+            <th>预算花费</th>
+            <th>实际成本</th>
+            <th>总计</th>
+        </tr>
+        <!-- TMPL_LOOP NAME="loop_received" -->
+            <tr>
+                <td><!-- TMPL_VAR NAME="quantityreceived" --></td>
+                <td><a href="/cgi-bin/koha/acqui/basket.pl?basketno=<!-- TMPL_VAR NAME="basketno" -->"><!-- TMPL_VAR NAME="basketno" --></a>&nbsp; / &nbsp;<!-- TMPL_VAR NAME="ordernumber" --></td>
+                <td><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a>
+                <!-- TMPL_IF NAME="isbn" --><br />国际标准书号（ISBN）<!-- TMPL_VAR NAME="isbn" --><!--/TMPL_IF-->
+                <!-- TMPL_IF NAME="author" --><br />作者：<!-- TMPL_VAR NAME="author" --><!--/TMPL_IF-->
+                <!-- TMPL_IF NAME="publishercode" --><br />出版者：<!-- TMPL_VAR NAME="publishercode" --><!--/TMPL_IF-->
+                </td>
+                <td><a href="/cgi-bin/koha/catalogue/showmarc.pl?id=<!-- TMPL_VAR NAME="biblionumber" -->" title="机读目录（MARC）" rel="gb_page_center[600,500]">显示机读格式（MARC）</a></td>
+                <td><!-- TMPL_VAR NAME="ecost" --></td>
+                <td><!-- TMPL_VAR NAME="unitprice" --></td>
+                <td><!-- TMPL_VAR NAME="total" --></td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+        <tr>
+            <td colspan="3">&nbsp;</td>
+            <th>次总计</th>
+            <td>&nbsp;</td>
+            <th><!-- TMPL_VAR NAME="totalprice" --></th>
+            <th><!-- TMPL_VAR NAME="tototal" --></th>
+        </tr>
+          <!-- TMPL_IF NAME="totalfreight" -->
+		<tr>
+            <td colspan="5">
+            </td>
+            </p>
+			<th colspan="1">发货：</th>
+            <td><!-- TMPL_VAR NAME="totalfreight" --></td>
+        </tr> <!-- /TMPL_IF -->
+          <!-- TMPL_IF NAME="gst" -->
+		<tr>
+            <td colspan="5">
+            <p class="message">
+			<b>帮助</b>
+                <p>The total at the bottom of the page should be within a few cents of the total for the invoice.</p>
+            </td>
+            </p>
+			<td colspan="2"><b>商品及服务税（GST）</b></td>
+            <td><!-- TMPL_VAR NAME="gst" --></td>
+        </tr> <!-- /TMPL_IF -->
+        <tr>
+        <td colspan="3">&nbsp;</td>
+            <th>总计</th>
+            <td colspan="2">&nbsp;</td>
+            <th><!-- TMPL_VAR NAME="grandtot" --></th>
+        </tr>
+    </table>
+    </form>
+</div>
+<div id="acqui_receive_search">
+    <h2>查询订单，添加到这次发货中</h2>
+    <form action="/cgi-bin/koha/acqui/orderreceive.pl">
+        <input type="hidden" name="supplierid" value="<!-- TMPL_VAR NAME="supplierid" -->" />
+        <input type="hidden" name="gst" value="<!-- TMPL_VAR NAME="gst" -->" />
+        <input type="hidden" name="freight" value="<!-- TMPL_VAR NAME="freight" -->" />
+        <input type="hidden" name="invoice" value="<!-- TMPL_VAR NAME="invoice" -->" />
+        <p><label for="receive">查询国际标准书号（ISBN）或是题名</label> <input type="text" size="25" id="receive" name="receive" /></p>
+    </form>
+    <table> <caption>或是选择一个等待处理的订单</caption>
+        <tr>
+            <th>购物篮</th>
+            <th>摘要</th>
+			<th>显示记录</th>
+            <th>仍在订购中</th>
+            <th>单位花费</th>
+            <th>订单花费</th>
+            <th>&nbsp;</th>
+        </tr>
+        <!-- TMPL_LOOP NAME="loop_orders" -->
+            <tr>
+                <td><a href="/cgi-bin/koha/acqui/basket.pl?basketno=<!-- TMPL_VAR NAME="basketno" -->"><!-- TMPL_VAR NAME="basketno" --></a></td>
+                <td>
+                  <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a>
+                <!-- TMPL_IF NAME="isbn" --><br />国际标准书号（ISBN）<!-- TMPL_VAR NAME="isbn" --><!--/TMPL_IF-->
+                <!-- TMPL_IF NAME="author" --><br />作者：<!-- TMPL_VAR NAME="author" --><!--/TMPL_IF-->
+                <!-- TMPL_IF NAME="publishercode" --><br />出版者：<!-- TMPL_VAR NAME="publishercode" --><!--/TMPL_IF-->
+                </td>
+                <td><a href="/cgi-bin/koha/catalogue/showmarc.pl?id=<!-- TMPL_VAR NAME="biblionumber" -->" title="机读目录（MARC）" rel="gb_page_center[600,500]">机读目录（MARC）</a> | <a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&id=<!-- TMPL_VAR NAME="biblionumber" -->" title="机读目录（MARC）" rel="gb_page_center[600,500]">借书证</a></td>
+                <td> <!-- TMPL_VAR NAME="quantity" --></td>
+                <td><!-- TMPL_VAR NAME="ecost" --></td>
+                <td><!-- TMPL_VAR NAME="ordertotal" --></td>
+				<td><a href="orderreceive.pl?receive=<!-- TMPL_VAR NAME="ordernumber" -->&amp;biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->&amp;datereceived=<!-- TMPL_VAR NAME="invoicedatereceived" -->&amp;invoice=<!-- TMPL_VAR NAME="invoice" -->&amp;gst=<!-- TMPL_VAR NAME="gst" -->&amp;freight=<!-- TMPL_VAR NAME="freight" -->&amp;supplierid=<!-- TMPL_VAR NAME="supplierid" -->">收到订单</a></td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+            <tr><td colspan="2">&nbsp;</td>
+                <th>总计</th>
+                <th> <!-- TMPL_VAR NAME="totalPquantity" --> </th>
+				<td>&nbsp;</td>
+                <th><!-- TMPL_VAR NAME="ordergrandtotal" --></th>
+				<td>&nbsp;</td>
+            </tr>
+     </table>
+</div>
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="acquisitions-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" --> 

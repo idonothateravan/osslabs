@@ -1,0 +1,283 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><title>Koha &rsaquo; 网页安装程序 &rsaquo; 步骤 3</title>
+<!--TMPL_IF Name="finish"--><meta http-equiv="refresh" content="10; url=/cgi-bin/koha/mainpage.pl"><!--/TMPL_IF-->
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div>
+<h1 id="logo"><img alt="Koha 图书馆自动化系统" src="/intranet-tmpl/prog/img/koha.org-logo.gif"> 网页安装程序 &rsaquo; 步骤 3</h1>
+
+<!--TMPL_IF NAME="selectframeworks"-->
+    <script language="JavaScript">
+    <!--
+    
+    var sURL = unescape(window.location.pathname);
+    
+    function doLoad()
+    {
+        // the timeout value should be the same as in the "refresh" meta-tag
+        setTimeout( "refresh()", 2*1000 );
+    }
+    
+    function refresh(value)
+    {
+        //  This version of the refresh function will cause a new
+        //  entry in the visitor's history.  It is provided for
+        //  those browsers that only support JavaScript 1.0.
+        //
+        sURL=sURL+'?step=3&op=selectframeworks&fwklanguage='+value;
+        window.location.href = sURL;
+    }
+    
+    //-->
+    </script>
+    
+    <script language="JavaScript1.1">
+    <!--
+    function refresh(value)
+    {
+        //  This version does NOT cause an entry in the browser's
+        //  page view history.  Most browsers will always retrieve
+        //  the document from the web-server whether it is already
+        //  in the browsers page-cache or not.
+        //  
+        sURL=sURL+'?step=3&op=selectframeworks&fwklanguage='+value;
+        window.location.replace( sURL );
+    }
+    //-->
+    </script>
+    
+    <script language="JavaScript1.2">
+    <!--
+    function refresh(value)
+    {
+        //  This version of the refresh function will be invoked
+        //  for browsers that support JavaScript version 1.2
+        //
+        
+        //  The argument to the location.reload function determines
+        //  if the browser should retrieve the document from the
+        //  web-server.  In our example all we need to do is cause
+        //  the JavaScript block in the document body to be
+        //  re-evaluated.  If we needed to pull the document from
+        //  the web-server again (such as where the document contents
+        //  change dynamically) we would pass the argument as 'true'.
+        //  
+        sURL=sURL+'?step=3&op=selectframeworks&fwklanguage='+value;
+        window.location.replace( sURL );
+    }
+    //-->
+    </script>
+    </head>
+    <body>
+    <script language="JavaScript">
+    function Hide(link) {
+            subfield = document.getElementById('bloc'+link);
+        var initstyle=subfield.style.display;
+            if (initstyle == 'block') subfield.style.display = 'none' ;
+            if (initstyle == 'none') subfield.style.display = 'block' ;
+    }
+    </script>
+<!--/TMPL_IF-->
+<!--TMPL_IF Name="finish"-->
+    <h1>恭喜，安装完成</h1>
+    <p>假如页面在 5 秒内，没有转向，点选 <a href="/">这里</a>。</p> 
+<!--/TMPL_IF-->
+<!--TMPL_IF Name="choosemarc"-->
+    <h2 align="center">选择你喜爱的MARC架构</h2>
+    <form name="frameworkselection" method="post" action="install.pl">   
+    <input type="hidden" name="step" value="3" />
+    <input type="hidden" name="op" value="selectframeworks" />
+    <p>  
+    <!--TMPL_LOOP Name="flavourloop"-->
+    <div>
+            <!--TMPL_IF Name="checked"-->
+                <input type="radio" name="marcflavour" value="<!--TMPL_VAR Name="code"-->" checked /> <!--TMPL_VAR Name="label"--> <br/>
+            <!--TMPl_ELSE-->
+                <input type="radio" name="marcflavour" value="<!--TMPL_VAR Name="code"-->" /> <!--TMPL_VAR Name="label"--> <br/>
+            <!--/TMPL_IF-->
+    </div>
+    <!--/TMPL_LOOP-->
+    </p>
+    <p> 继续点选下一个步骤 <input value="下一页 &gt;&gt;" type="submit"></p>
+    </form>
+<!--/TMPL_IF-->
+
+<!--TMPL_IF Name="selectframeworks"-->
+    <h2 align="center">选择默认设置</h2>
+    <form name="frameworkselection" method="post" action="install.pl">
+    <input type="hidden" name="step" value="3" />
+    <input type="hidden" name="op" value="addframeworks" />
+    
+    <!--TMPL_IF Name="frameworksloop"-->
+    <h2>机读目录（MARC）架构：<!--TMPL_VAR Name="marcflavour"--></h2>
+    <!-- TMPL_IF Name="en_marc_frameworks" -->
+        <h4><span class="error">No MARC frameworks are available for your language.  
+                Defaulting to the frameworks supplied for English (en)<span></h4>
+    <!-- /TMPL_IF -->
+    <!--TMPL_LOOP Name="frameworksloop"-->
+    <div>
+    <h3><!--TMPL_VAR Name="label"--></h3>
+    <!--TMPL_LOOP Name="frameworks"-->
+        <table style="border:1px;vertical-align:top;">
+        <tr>
+        <td style="vertical-align:top;">
+            <!--TMPL_IF Name="checked"-->
+                <input type="checkbox" name="framework" value="<!--TMPL_VAR Name="fwkfile"-->" checked="checked" />
+            <!--TMPl_ELSE-->
+                <input type="checkbox" name="framework" value="<!--TMPL_VAR Name="fwkfile"-->" />
+            <!--/TMPL_IF-->
+        </td>
+        <td>
+            <!--TMPL_VAR Name="fwkdescription"--> <em>（<!--TMPL_VAR Name="fwkname"-->）</em>
+        </td>
+        </table>
+    <!--/TMPL_LOOP-->
+    </div>
+    </p>
+    <!--/TMPL_LOOP-->
+    <h2>其它数据</h2>
+    <!--/TMPL_IF -->
+    <!-- TMPL_IF Name="en_sample_data" -->
+        <h4><span class="error">No sample data and settings are available for your language.  
+                Defaulting to the samples supplied for English (en)<span></h4>
+    <!-- /TMPL_IF -->
+    <!--TMPL_LOOP Name="levelloop"-->
+    <div>
+    <h3><!--TMPL_VAR Name="label"--></h3>
+    <!--TMPL_LOOP Name="frameworks"-->
+        <table style="border:1px;vertical-align:top;">
+        <tr>
+        <td style="vertical-align:top;">
+            <!--TMPL_IF Name="checked"-->
+                <input type="checkbox" name="framework" value="<!--TMPL_VAR Name="fwkfile"-->" checked="checked" />
+            <!--TMPl_ELSE-->
+                <input type="checkbox" name="framework" value="<!--TMPL_VAR Name="fwkfile"-->" />
+            <!--/TMPL_IF-->
+        </td>
+        <td>
+            <!--TMPL_VAR Name="fwkdescription"--> <em>（<!--TMPL_VAR Name="fwkname"-->）</em>
+        </td>
+        </table>
+    <!--/TMPL_LOOP-->
+    </div>
+    </p>
+    <!--/TMPL_LOOP-->
+    <p>When you've made your selections, please click 'Import' below to begin the process. It may take a while to complete,
+    please be patient.</p>
+    <p><input type="submit" value="导入">
+    </p>
+    </form>
+    </p>
+<!--/TMPL_IF-->
+
+
+<!--TMPL_IF Name="addframeworks"-->
+    <!--TMPL_LOOP Name="list"-->
+    <h3>新增 <!--TMPL_VAR Name="level"--> 笔资料</h3>
+    <ul>
+    <!--TMPL_LOOP Name="fwklist"-->
+        <li><!--TMPL_VAR Name="fwkname"--><!--TMPL_IF Name="error"--><br /><span class="error"><!--TMPL_VAR Name="error"--></span><!--/TMPL_IF--> </li>
+    <!--/TMPL_LOOP-->
+    </ul>
+    <!--/TMPL_LOOP-->
+    <h2>选择索引引擎</h2>
+    <p>Searching Koha's bibliographic and authorities databases can be accomplished in two ways:
+	Koha can utilize a textual index engine (Zebra) or use its own internal indexing scheme (NoZebra).
+	</p>
+    <p>You can change your selection after installation and re-index accordingly.</p>
+    <h3>Zebra</h3>
+      <ul>
+        <li>Is highly scalable (can scale to tens of millions of bibliographic records. Examples of
+		Zebra Koha installations include:
+		http://catalog.ccfls.org/cgi-bin/koha/opac-main.pl or 
+		http://www.mediathequeouestprovence.fr/)
+		</li>
+        <li>Native support for Z39.50 and SRU servers for bibliographic and authority data</li>
+		<li>支持字段权重、相关排序、切截、关联查询</li>
+		<li>任意复杂的查询</li>
+        <li>需要复杂的设定与维护</li>
+    </ul>
+    <h3>NoZebra（Koha 内部索引）</h3>
+        <ul>
+			<li>简单的配置和维护</li>
+            <li>尚未用超过 100,000 笔的记录进行测试。</li>
+            <li>无法提供公共 z39.50 主机（外面的）</li>
+        </ul>
+    <p>Note that, if you choose "Zebra", you must configure Zebra before your catalogue searching will work)</p>
+    <h3>请选择：</h3>
+        <form action="install.pl">
+            <input type="hidden" name="step" value="3" />
+            <input type="hidden" name="op" value="SetIndexingEngine" />
+            <p><input type="radio" name="NoZebra" value="1" />Nozebra: my catalogue is not that large and I want something simple to setup/maintain</p>
+            <p><input type="radio" name="NoZebra" value="0" />Zebra: I have a large catalogue, I understand I must configure Zebra after the installation has completed</p>
+            <input type="submit" value="选择"></form>
+        </form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="SetIndexingEngine" -->
+    <p>安装完成。<br />
+        <p>点选完成，并且加载 Koha 馆员接口。
+        <form name="finish">
+        <input type="hidden" name="step" value="3" />
+        <input type="hidden" name="op" value="finish" />
+        <input type="submit" value="完成"></form>
+        </p>
+    </p>
+<!--/TMPL_IF-->
+
+
+<!--TMPL_IF Name="importdatastructure"-->
+    <!--TMPL_IF Name="error"-->
+        <p>The following error occurred while importing the database structure:</p>
+        <p class="error"><!-- TMPL_VAR NAME="error" --> </p>
+        <p>请联系系统管理者</p>
+    <!-- TMPL_ELSE -->
+        <h2 align="center">成功</h2>
+        <ul>
+        <li>数据表被建立</li>
+        </ul>
+        <form action="install.pl">
+        <input type="hidden" name="step" value="3" />
+            <p> 继续点选下一个步骤 <input value="下一页 &gt;&gt;" type="submit"></p>
+        </form>
+    <!-- /TMPL_IF -->
+<!--/TMPL_IF-->
+
+
+<!--TMPL_IF Name="proposeimport"-->
+    <p>Now we're ready to create the database tables and fill them with some default data.</p>
+    <form action="install.pl">
+    <input type="hidden" name="step" value="3" />
+    <input type="hidden" name="op" value="importdatastructure" />
+    <p> 继续点选下一个步骤 <input value="下一页 &gt;&gt;" type="submit"></p>
+    </form>
+<!--/TMPL_IF-->
+
+
+<!--TMPL_IF Name="default"-->
+    <!-- TMPL_IF name="upgrading" -->
+        <p>
+            We are upgrading from Koha <!-- TMPL_VAR name="dbversion" --> to <!-- TMPL_VAR name="kohaversion" -->, you must <a href="install.pl?step=3&amp;op=updatestructure" class="button">update your database</a>
+        </p>
+    <!-- TMPL_ELSE -->
+        <p>We are ready to do some basic configuration. Please  <a href="install.pl?step=3&amp;op=choosemarc" class="button">install basic configuration settings</a>  to continue the installation.
+        </p>
+    <!-- /TMPL_IF -->
+<!--/TMPL_IF-->
+
+
+
+<!--TMPL_IF Name="updatestructure"-->
+  <div><h2 align="center">更新数据库结构</h2>
+  <!--TMPL_IF Name="updatereport"-->
+    <p>更新报表：</p>
+    <p>
+    <!--TMPL_VAR Name="updatereport"-->
+    </p>
+  <!--TMPL_ELSE-->
+    <p>每件事都没问题，更新完成。</p>
+  <!--/TMPL_IF-->
+<a href="install.pl?step=3&amp;op=finished" class="button">Continue to log in to Koha</a>
+  </div>
+<!--/TMPL_IF-->
+
+</body>
+</html>

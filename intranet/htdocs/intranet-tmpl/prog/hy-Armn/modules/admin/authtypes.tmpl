@@ -1,0 +1,170 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Կառավարում &rsaquo; <!-- TMPL_IF NAME="add_form" --><!-- TMPL_IF NAME="authtypecode" --> Հեղինակավորի տեսակներ &rsaquo; Ձևափոխիր հեղինակավորի տեսակը։<!-- TMPL_ELSE --> Հեղինակավորի տեսակներ &rsaquo; Նոր հեղինակավորի տեսակ։<!-- /TMPL_IF --><!-- TMPL_ELSE --><!-- TMPL_IF NAME="delete_confirm" -->Հեղինակավորի տեսակներ &rsaquo; Հաստատիր հեղինակավորի տեսակի ջնջումը։<!-- TMPL_ELSE -->Հեղինակավորի տեսակներ<!-- /TMPL_IF --><!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function isNotNull(f,noalert) {
+	if (f.value.length ==0) {
+		return false;
+	}
+	return true;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function toUC(f) {
+	var x=f.value.toUpperCase();
+	f.value=x;
+	return true;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function isNum(v,maybenull) {
+var n = new Number(v.value);
+if (isNaN(n)) {
+	return false;
+	}
+if (maybenull==0 && v.value=='') {
+	return false;
+}
+return true;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function isDate(f) {
+	var t = Date.parse(f.value);
+	if (isNaN(t)) {
+		return false;
+	}
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function Check(f) {
+	var ok=1;
+	var _alertString="";
+	var alertString2;
+	if (f.authtypecode.value.length==0) {
+		_alertString += "\n- " + _("Հեղինակավորի տեսակ . բացակայող կոդ");
+	}
+	if (!(isNotNull(window.document.Aform.authtypetext,1))) {
+		_alertString += "\n- " + _("Նկարագրությունը բացակա է");
+	}
+	if (_alertString.length==0) {
+		document.Aform.submit();
+	} else {
+		alertString2  = _("Ձևը չի գրանցված, հետևյալ պրոբլեմների պատճարով");
+		alertString2 += "\n------------------------------------------------------------------------------------\n";
+		alertString2 += _alertString;
+		alert(alertString2);
+	}
+}
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Տուն</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Կառավարում</a> &rsaquo; <!-- TMPL_IF NAME="add_form" --><!-- TMPL_IF NAME="authtypecode" --> <a href="/cgi-bin/koha/admin/authtypes.pl">Հեղինակավոր տեսակներ</a> &rsaquo; Ձևափոխիր Հեղինակավորի տեսակը<!-- TMPL_ELSE --> <a href="/cgi-bin/koha/admin/authtypes.pl">Հեղինակավոր տեսակներ</a> &rsaquo; Նոր հեղինակավոր տեսակ<!-- /TMPL_IF --><!-- TMPL_ELSE --><!-- TMPL_IF NAME="delete_confirm" --> <a href="/cgi-bin/koha/admin/authtypes.pl">Հեղինակավոր տեսակներ</a> &rsaquo; Հաստատիր Հեղինակավոր տեսակի ջնջումը<!-- TMPL_ELSE -->Հեղինակավորի տեսակներ<!-- /TMPL_IF --><!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="add_form" -->
+
+	<form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+		<fieldset class="rows">
+		<!-- TMPL_IF NAME="authtypecode" -->
+		<legend>Ձևափոխիր հեղինակավորի տեսակը</legend>
+	<!-- TMPL_ELSE -->
+		<legend>Նոր հեղինակավոր տեսակ</legend>
+	<!-- /TMPL_IF -->
+	<ol>
+		<!-- TMPL_IF NAME="authtypecode" -->
+		<input type="hidden" name="modif" value="1" />
+	<!-- /TMPL_IF -->
+			<!-- TMPL_IF NAME="authtypecode" -->
+				<li><label for="authtypecode">Հեղինակավորի տեսակ<label><input type="hidden" name="op" value="add_validate" />
+		<input type="hidden" name="checked" value="0" /><input type="hidden" name="authtypecode" value="<!-- TMPL_VAR NAME="authtypecode" -->" /><!-- TMPL_VAR NAME="authtypecode" --></li>
+			<!-- TMPL_ELSE -->
+				<li><label for="authtypecode">Հեղինակավորի տեսակ </label><input id="authtypecode" type="text" name="authtypecode" size="10" maxlength="10" onblur="toUC(this)" /></li>
+			<!-- /TMPL_IF -->
+		<li><label for="authtypetext">Նկարագրություն։ </label><input type="text" id="authtypetext" name="authtypetext" size="40" maxlength="80" value="<!-- TMPL_VAR NAME="authtypetext" ESCAPE="HTML" -->" /></li>
+		<li><label for="summary">Համառոտագրություն: </label><textarea id="summary" name="summary" cols="55" rows="7"><!-- TMPL_VAR NAME="summary" --></textarea></li>
+		<li>
+		<p class="tip">Note: for 'Authority field to copy', enter the authority field that should be copied from the authority record to the bibliographic record. E.g., in MARC21, field 100 in the authority record should be copied to field 100 in the bibliographic record</p>
+		<label for="auth_tag_to_report">Authority field to copy: </label><input type="text" id="auth_tag_to_report" name="auth_tag_to_report" size="5" maxlength="3" value="<!-- TMPL_VAR NAME="auth_tag_to_report">" />
+		<input type="hidden" name="op" value="add_validate" />
+	</li></ol>
+	</fieldset>
+	<fieldset class="action"><input type="submit" value="Հաստատել" onclick="Check(this.form); return false;"><a class="cancel" href="/cgi-bin/koha/admin/authtypes.pl">Չեղյալ անել</a></fieldset>
+	</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+		<div class="dialog alert"><h3>Confirm Deletion of authority structure definition for <span class="ex">'<!-- TMPL_VAR NAME="authtypetext" -->' (<!-- TMPL_VAR NAME="authtypecode" -->)</span></h3>
+	<!-- TMPL_IF NAME="total" -->
+		<p>Այս գրառումը օգտագործվել է։ <strong><!-- TMPL_VAR NAME="total" --></strong> անգամներ</p>
+	<!-- /TMPL_IF -->		
+			<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post"><input type="hidden" name="op" value="delete_confirmed" />
+			<input type="hidden" name="authtypecode" value="<!-- TMPL_VAR NAME="authtypecode" -->" />
+			<fieldset class="action"><input type="submit" class="approve" value="Այո, ջնջիր">
+		</form>
+		<form action="<!-- TMPL_VAR NAME="script_name" -->" method="get"><input type="submit" class="deny" value="Ոչ, մի հեռացրու"></form>
+		</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="else" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+	// prepare DOM for YUI Toolbar
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+	// YUI Toolbar Functions
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("authtype");
+	} //]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="authtype" href="/cgi-bin/koha/admin/authtypes.pl?op=add_form">Նոր հեղինակավոր տեսակ</a></li>
+</ul></div>
+
+<h1>Հեղինակավորի տեսակներ</h1>
+<p>Define authority types, then authority MARC structure in the same way you define itemtypes and biblio MARC tag structure. Authority values are managed through plugins</p>
+<table>
+	<tr>
+		<th>Կոդ</th>
+		<th>Նկարագրություն</th>
+		<th>Համառոտագրություն</th>
+		<th>Auth field copied</th>
+		<th>&nbsp;</th>
+		<th>Խմբագրել</th>
+		<th>Ջնջել</th>
+	</tr>
+	
+	<!-- TMPL_LOOP NAME="loop" -->
+		<tr>
+			<td><!-- TMPL_VAR NAME="authtypecode" --></td>
+			<td><!-- TMPL_VAR NAME="authtypetext" --></td>
+			<td><!-- TMPL_VAR NAME="summary" --></td>
+			<td><!-- TMPL_VAR NAME="auth_tag_to_report" --></td>
+			<td><a href="auth_tag_structure.pl?authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->" class="button parameters" >MARC կառուցվածք</a></td>
+			<td><a href="<!-- TMPL_VAR NAME="script_name" -->?op=add_form&amp;authtypecode=<!-- TMPL_VAR NAME="authtypecode" escape="HTML" -->">Խմբագրել</a></td>
+			<td><a href="<!-- TMPL_VAR NAME="script_name" -->?op=delete_confirm&amp;authtypecode=<!-- TMPL_VAR NAME="authtypecode" escape="HTML" -->">Ջնջել</a></td>
+		</tr>
+	<!-- /TMPL_LOOP -->
+</table>
+
+	<!-- TMPL_IF NAME="previous" --><p><a href="<!-- TMPL_VAR NAME="previous" -->">&lt;&lt; Նախորդ</a></p><!-- /TMPL_IF -->
+	<!-- TMPL_IF NAME="next" --><p><a href="<!-- TMPL_VAR NAME="next" -->">Հաջորդ &gt;&gt;</a></p><!-- /TMPL_IF -->
+
+<!-- /TMPL_IF -->
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

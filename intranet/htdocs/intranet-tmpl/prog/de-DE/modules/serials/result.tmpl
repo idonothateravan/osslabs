@@ -1,0 +1,67 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Reports &rsaquo; Suchergebnisse</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script language="Javascript">
+//<![CDATA[
+function GetIt(bibno,title)
+{
+    title = title.replace(/\?/,"\?");
+    title = title.replace(/"/,"\"");
+    title = title.replace(/'/,"\'");
+    opener.document.f.biblionumber.value = bibno;
+    opener.document.f.title.value = title;
+    window.close();
+}
+//]]>
+</script>
+</head>
+<body>
+
+<div id="doc" class="yui-t7">
+   <div id="bd">
+	
+
+<h1>Suchergebnisse</h1>
+<!-- TMPL_IF NAME="total"-->
+<table>
+    <tr>
+       <th>Titel</th>
+       <th>Verfasser</th>
+       <th>Verlag</th>
+       <th>Erscheinungsjahr</th>
+    </tr>
+    <!-- TMPL_LOOP NAME="resultsloop" -->
+        <tr>
+            <td>
+                <a href="#" onclick="GetIt('<!-- TMPL_VAR NAME="biblionumber" -->','<!-- TMPL_VAR escape="URL" NAME="title" -->');" title="Nimm dieses!">
+                    <!-- TMPL_VAR NAME="title" -->
+                </a>
+                <br />
+                <small><!-- TMPL_VAR NAME="subtitle" --></small>
+            </td>
+            <td>
+                <!-- TMPL_VAR NAME="author" -->
+            </td>
+            <td>
+                <!-- TMPL_VAR NAME="publishercode" -->
+            </td>
+            <td>
+                <!-- TMPL_VAR NAME="publicationyear" -->
+            </td>
+        </tr>
+    <!-- /TMPL_LOOP -->
+    </table>
+<!-- TMPL_ELSE -->
+<h2>Keine Ergebnisse für <b><!-- TMPL_VAR NAME="query" --></b> gefunden</h2>
+<!-- /TMPL_IF-->
+<a onclick="Plugin(f)" href="">Einen anderen Titel suchen</a> <a class="button" href="#" onclick="window.close()">Schließen</a></p>
+</div>
+
+<script type="text/javascript">
+function Plugin(f)
+{
+    window.open('subscription-bib-search.pl','FindABibIndex','width=800,height=400,toolbar=no,scrollbars=yes');
+}
+</script>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

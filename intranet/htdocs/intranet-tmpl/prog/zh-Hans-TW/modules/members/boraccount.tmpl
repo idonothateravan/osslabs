@@ -1,0 +1,64 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 讀者 &rsaquo; <!-- TMPL_VAR NAME="surname" --><!-- TMPL_VAR NAME="firstname" --> 的帳號</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="patron-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; <a href="/cgi-bin/koha/members/members-home.pl">讀者</a> &rsaquo; <!-- TMPL_VAR NAME="surname" --><!-- TMPL_VAR NAME="firstname" --> 的帳號</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="members-toolbar.inc" -->
+<form action="/cgi-bin/koha/members/boraccount.pl" method="get"><input type="hidden" name="borrowernumber" id="borrowernumber" value="<!-- TMPL_VAR NAME="borrowernumber" -->" /></form>
+
+<!-- The manual invoice and credit buttons -->
+<div class="toptabs">
+<ul class="ui-tabs-nav">
+	<li class="ui-tabs-selected"><a href="/cgi-bin/koha/members/boraccount.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->">金額</a></li>
+	<li><a href="/cgi-bin/koha/members/pay.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->" >繳交罰款</a></li>
+	<li><a href="/cgi-bin/koha/members/maninvoice.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->" >新增發票</a></li>
+	<li><a href="/cgi-bin/koha/members/mancredit.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->" >新增收據</a></li>
+</ul>
+<div class="tabs-container">
+<!-- The table with the account items -->
+<table>
+  <tr>
+  	<th>日期</th>
+    <th>費用描述</th>
+    <th>金額</th>
+    <th>額外金額</th>
+  </tr>
+
+	<!-- FIXME: Shouldn't hardcode dollar signs, since Euro or Pound might be needed -->
+  <!-- TMPL_LOOP NAME="accounts" -->
+
+   <!-- TMPL_IF NAME="toggle" --> <tr><!-- TMPL_ELSE --><tr class="highlight"><!-- /TMPL_IF -->
+      <td><!-- TMPL_VAR NAME="date" --></td>
+      <td><!-- TMPL_VAR NAME="description" -->&nbsp;<!-- TMPL_IF NAME="itemnumber" --><a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->&itemnumber=<!-- TMPL_VAR NAME="itemnumber" -->">View item</a>&nbsp;<!-- /TMPL_IF --><!-- TMPL_IF NAME="printtitle" --> <!-- TMPL_VAR NAME="title" --><!-- /TMPL_IF --></td>
+      <!-- TMPL_IF NAME="amountcredit" --><td class="credit"><!-- TMPL_ELSE --><td class="debit"><!-- /TMPL_IF -->$<!-- TMPL_VAR NAME="amount" --></td>
+      <!-- TMPL_IF NAME="amountoutstandingcredit" --><td class="credit"><!-- TMPL_ELSE --><td class="debit"><!-- /TMPL_IF -->$<!-- TMPL_VAR NAME="amountoutstanding" --></td>
+    </tr>
+
+  <!-- /TMPL_LOOP -->
+<tfoot>
+  <tr>
+    <td colspan="3">總欠款</td>
+    <!-- TMPL_IF NAME="totalcredit" --><td class="credit"><!-- TMPL_ELSE --><td class="debit"><!-- /TMPL_IF -->$<!-- TMPL_VAR NAME="total" --></td>
+  </tr>
+  </tfoot>
+</table>
+</div></div>
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="circ-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

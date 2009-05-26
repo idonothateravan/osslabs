@@ -1,0 +1,11 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+	
+	<h1>Çevrimiçi Yardım</h1>
+	<p>"Üzgünüz, bu konu için yardım mevcut değil "</p>
+<form action="/cgi-bin/koha/edithelp.pl" method="post">
+<input type="hidden" name="referer" value="<!-- TMPL_VAR NAME="referer" -->" />
+<input type="hidden" name="type" value="addnew" />
+<input type="submit" name="submit" class="submit" value="Yardım ekle">
+</form>
+	
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

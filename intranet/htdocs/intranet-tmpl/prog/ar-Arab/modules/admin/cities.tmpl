@@ -1,0 +1,198 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo;الادارة &rsaquo; <!-- TMPL_IF NAME="add_form" -->مدن &rsaquo; <!-- TMPL_IF NAME="cityid" --> عدّل مدينة<!-- TMPL_ELSE --> مدينة جديدة<!-- /TMPL_IF --><!-- TMPL_ELSE --><!-- TMPL_IF NAME="delete_confirm" -->مدن &rsaquo;اكد حذف مدينة<!-- TMPL_ELSE --> مدن<!-- /TMPL_IF --><!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		function isNotNull(f,noalert) {
+			if (f.value.length == 0) {
+		return false;
+			}
+		return true;
+		}
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		function toUC(f) {
+			var x=f.value.toUpperCase();
+			f.value=x;
+			return true;
+		}
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		function isNum(v,maybenull) {
+		var n = new Number(v.value);
+		if (isNaN(n)) {
+			return false;
+			}
+		if (maybenull == 0 && v.value =='') {
+			return false;
+		}
+		return true;
+		}
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		function isDate(f) {
+			var t = Date.parse(f.value);
+			if (isNaN(t)) {
+				return false;
+			}
+		}
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		function Check(f) {
+			var ok=1;
+			var _alertString="";
+			var alertString2;
+			if (f.city_zipcode.value.length == 0 && f.city_name.value.length == 0 ) {
+				_alertString += "\n- " + _("اسم المدينة والرمز البريدي مفقودان");
+				alert(_alertString);	
+			}
+			else{
+			document.Aform.submit();
+			}
+		}
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cities-admin-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">الادارة</a> &rsaquo; <!-- TMPL_IF NAME="add_form" --><a href="/cgi-bin/koha/admin/cities.pl">المدن</a> &rsaquo; <!-- TMPL_IF NAME="cityid" --> عدّل مدينة<!-- TMPL_ELSE --> مدينة جديدة<!-- /TMPL_IF --><!-- TMPL_ELSE --><!-- TMPL_IF NAME="delete_confirm" --><a href="/cgi-bin/koha/admin/cities.pl">المدن</a> &rsaquo;أكد حذف المدينة<!-- TMPL_ELSE --> مدن<!-- /TMPL_IF --><!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="add_form" -->
+	<!-- TMPL_IF NAME="cityid" -->
+		<h1>عدّل مدينة</h1>
+	<!-- TMPL_ELSE -->
+		<h1>مدينة جديدة</h1>
+	<!-- /TMPL_IF -->
+
+	<form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+	<input type="hidden" name="op" value="add_validate" />
+	<input type="hidden" name="checked" value="0" />
+	<input type="hidden" name="cityid" value="<!-- TMPL_VAR NAME="cityid" -->" />
+
+<fieldset class="rows"><ol>	<!-- TMPL_IF NAME="cityid" -->
+		<li>
+		<span class="label">معرف مدينة: </span><!-- TMPL_VAR NAME="cityid" --></li>
+	<!-- /TMPL_IF -->
+	<li>
+	<label for="city_name">إسم مدينة: </label>
+	<input  type="text" name="city_name" id="city_name" size="40" maxlength="80" value="<!-- TMPL_VAR NAME="city_name" ESCAPE="HTML" -->" />
+	</li>
+	<li>				
+	<label for="city_zipcode">الرمز البريدى للمدينة: </label>
+	<input type="text" name="city_zipcode" id="city_zipcode" size="10" maxlength="10" value="<!-- TMPL_VAR NAME="city_zipcode" -->" />
+	</li></ol></fieldset>
+	
+	<fieldset class="action">
+		<input class="button" type="button" onclick="Check(this.form)" value="أكّد"> <a class="cancel" href="/cgi-bin/koha/admin/cities.pl">إلغاء</a>
+	</fieldset>
+	</form>
+
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="delete_confirm" -->
+		<!-- TMPL_IF NAME="totalgtzero" -->
+<div class="dialog message">
+		<h3>Cannot Delete City "<!-- TMPL_VAR NAME="city_name" -->"</h3>
+		<p>هذه التسجيلة قيد الاستخدام <!-- TMPL_VAR NAME="total" -->أوقات.يمكن حذفها</p>
+		<!-- TMPL_ELSE -->
+<div class="dialog alert">
+<h3>Delete City "<!-- TMPL_VAR NAME="city_name" -->?"</h3>
+<!-- /TMPL_IF -->
+	<table>
+		<tr>
+			<th>معرف المدينة
+			</th>
+			<td>
+				<!-- TMPL_VAR NAME="cityid" -->
+			</td>
+		</tr>
+		        
+		<tr>
+			<th>إسم مدينة</th>
+			<td><!-- TMPL_VAR NAME="city_name" --></td>
+		</tr>
+		<tr>
+			<th>الرمز البريدى للمدينة</th>
+			<td><!-- TMPL_VAR NAME="city_zipcode" --></td>
+		</tr>
+</table>
+		<!-- TMPL_IF NAME="totalgtzero" -->
+				<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+				<input type="submit" class="approv" value="نعم">
+				</form>
+		<!-- TMPL_ELSE -->
+<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+			<input type="hidden" name="op" value="delete_confirmed" />
+			<input type="hidden" name="cityid" value="<!-- TMPL_VAR NAME="cityid" -->" /><input type="submit" class="approve" value="نعم, إحذف"></form> <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+			<input type="submit" class="deny" value="No, do not Delete" /></form>
+		<!-- /TMPL_IF -->
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="else" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+
+	// prepare DOM for YUI Toolbar
+
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+
+	// YUI Toolbar Functions
+
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("newcity");
+	}
+
+	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="newcity" href="/cgi-bin/koha/admin/cities.pl?op=add_form">مدينة جديدة</a></li>
+</ul></div>
+
+	<h2>مدن</h2>
+	<!-- TMPL_IF NAME="searchfield" -->
+		يبحث: <!-- TMPL_VAR NAME="searchfield" -->
+	<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="loop" -->	<table>
+		<tr>
+			<th>معرف المدينة</th>
+			<th>إسم مدينة</th>
+			<th>الرمز البريدى للمدينة</th>
+			<th>&nbsp;</th>
+			<th>&nbsp;</th>
+			
+		</tr>
+		<!-- TMPL_LOOP NAME="loop" -->
+		<!-- TMPL_IF NAME="toggle" -->
+		<tr class="hilighted">
+		<!-- TMPL_ELSE -->
+		<tr>
+		<!-- /TMPL_IF -->
+			<td><!-- TMPL_VAR NAME="cityid" --></td>
+			<td><!-- TMPL_VAR NAME="city_name" --></td>
+			<td><!-- TMPL_VAR NAME="city_zipcode" --></td>
+			
+			<td><a href="<!-- TMPL_VAR NAME="script_name" -->?op=add_form&amp;cityid=<!-- TMPL_VAR NAME="cityid" -->">تعديل</a></td>
+			<td><a href="<!-- TMPL_VAR NAME="script_name" -->?op=delete_confirm&amp;cityid=<!-- TMPL_VAR NAME="cityid" -->">حذف</a></td>
+		</tr>
+		<!-- /TMPL_LOOP -->
+	</table><!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->
+

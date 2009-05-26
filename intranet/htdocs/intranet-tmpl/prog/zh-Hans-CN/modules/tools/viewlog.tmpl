@@ -1,0 +1,204 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Tools &rsaquo; <!-- TMPL_IF NAME="do_it" -->Logs &rsaquo; Results<!-- TMPL_ELSE -->记录<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首页</a> &rsaquo; <a href="/cgi-bin/koha/tools/tools-home.pl">工具</a> &rsaquo; <!-- TMPL_IF NAME="do_it" --><a href="/cgi-bin/koha/tools/viewlog.pl">Logs</a> &rsaquo; Results<!-- TMPL_ELSE -->记录<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>浏览系统记录</h1>
+
+<form method="post" action="/cgi-bin/koha/tools/viewlog.pl">
+
+	    <!-- TMPL_IF NAME="do_it" --><input type="hidden" name="do_it" value="<!--TMPL_VAR NAME="do_it" -->" /><!-- /TMPL_IF -->
+<!--	These are selects below.
+		<input type="hidden" name="module" value="<!--TMPL_VAR NAME="module" -->" />
+	    <input type="hidden" name="action" value="<!--TMPL_VAR NAME="action" -->" />
+	    <input type="hidden" name="object" value="<!--TMPL_VAR NAME="object" -->" />
+-->	    <input type="hidden" name="src" value="<!--TMPL_VAR NAME="src" -->" />
+<fieldset>
+    <legend>其他参数</legend>
+        <p>
+        <label for="from"> 显示来自</label> <input type="text" size="10" id="from" name="from" value="<!-- TMPL_VAR NAME="datefrom"-->" />
+		<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" border="0" alt="显示日历" id="openCalendarFrom" style="cursor: pointer;">
+		<label for="to">到</label> <input size="10" id="to" name="to" type="text" value="<!-- TMPL_VAR NAME="dateto"-->" />
+		<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" id="openCalendarTo" alt="显示日历" style="cursor: pointer;" border="0">
+			<script type="text/javascript">
+//<![CDATA[
+				// function submit_check (from_id,to_id) {
+				//	var dateFrom = Date_from_syspref(document.getElementById(from_id).value);
+				//	var dateTo   = Date_from_syspref(document.getElementById(  to_id).value);
+				//	var today = new Date();
+				// 	if (dateFrom < dateTo) { 
+				//		alert("The starting date cannot be after the ending date.");
+				//		document.getElementById(to_id).select();
+				//		return false;
+				//	}
+				// 	if (dateFrom > today) { 
+				//		alert("The starting date cannot be in the future.");
+			    //		document.getElementById(from_id).select();
+				//		return false;
+				//	}
+				// }
+
+				// return true if the date is blocked.
+				function disable_from(date) {var limit = get_Calendar_limit(date,'to'  ); return (limit && limit < date);}
+				function disable_to  (date) {var limit = get_Calendar_limit(date,'from'); return (limit && limit > date);}
+
+				Calendar.setup({
+					inputField : "from",
+					ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+					button : "openCalendarFrom",
+					disableFunc : disable_from,
+					dateStatusFunc : disable_from
+				});
+				Calendar.setup({
+					inputField : "to",
+					ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+					button : "openCalendarTo",
+					disableFunc : disable_to,
+					dateStatusFunc : disable_to
+				});
+//]]>
+		    </script>
+		</p>
+
+		<p><b>导出</b></p>
+        <p><input id="screen" type="radio" checked="checked" name="output" value="screen" />
+        <label for="screen" >使用浏览器显示</label></p>
+		<p>
+		<input id="file" type="radio" name="output" value="file" />
+		 <label for="file">到文件</label>
+		<input type="text" name="basename" value="Export" /> into an application  <!-- TMPL_VAR NAME="CGIextChoice" -->  <!-- TMPL_VAR NAME="CGIsepChoice" -->
+	    <input type="hidden" name="report_name" value="<!--TMPL_VAR NAME="report_name" -->" />
+	    <input type="submit" value=" GO " />
+	    </p>
+</fieldset>
+    
+    <!-- TMPL_IF NAME="do_it" -->
+        <!-- TMPL_IF NAME="total" -->
+            <h4>找到 <!-- TMPL_VAR NAME="total" --> 行。</h4>
+        <!-- TMPL_ELSE -->
+            <div class="dialog alert">No log found
+			<!-- TMPL_IF EXPR="module eq 'CATALOGUING'" -->for <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="object" -->">Bibliographic Record <!-- TMPL_VAR NAME="object" --></a><!-- /TMPL_IF --><!-- TMPL_IF EXPR="module eq 'MEMBERS'" -->for <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="object" -->"><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --> (<!-- TMPL_VAR NAME="cardnumber" -->)</a><!-- /TMPL_IF -->
+			.</div>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+    <table>
+    <tr>
+        <th>日期</th>
+        <th>图书馆员</th>
+    	<th>模块</th>
+    	<th>处理</th>
+		<th>主题</th>
+		<th>信息</th>
+	</tr>
+	<tr>
+	    <td>
+            <input type="submit" value="设定查询条件">
+            <input type="hidden" name="do_it" value="1" />
+	    </td>
+	    <td>
+	        <input type="text" name="user" value="<!-- TMPL_VAR NAME="user"-->" />
+	    </td>
+	    <td>
+	        <select name="module">
+			    <option value="" selected="selected">全部</option>
+			    <option value ="CATALOGUING">馆藏目录</option>
+				<option value ="MEMBERS">读者</option>
+				<option value ="ACQUISITION">采购</option>
+				<option value ="SERIAL">期刊</option>
+				<option value="CIRCULATION">出纳</option>
+				<option value="LETTER">信纸</option>
+				<option value="FINES">罚款</option>
+				<option value="SYSTEMPREFERENCE">System Prefs</option>
+			</select>
+	    </td>
+	    <td>
+	        <select name="action">
+    			<option value ="">全部</option>
+				<option value ="add">新增</option>
+				<option value ="del">删除</option>
+				<option value ="mod">修改</option>
+				<option value="issue">期刊</option>
+				<option value="return">归还</option>
+			</select>
+	    </td>
+	    <td>
+	        <input type="text" name="object" value="<!-- TMPL_VAR NAME="object"-->" />
+	    </td>
+	    <td>
+	        <input type="text" name="info" value="<!-- TMPL_VAR NAME="info"-->" />
+	    </td>
+	</tr>
+	    <!-- TMPL_LOOP NAME="looprow" -->
+					<tr>
+						<td><!-- TMPL_VAR NAME="timestamp" --></td>
+						<td>
+						    <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="user" -->" title="显示此馆员详细资料">
+						        <!-- TMPL_VAR NAME="user" -->
+						    </a>
+						</td>
+						<td><!-- TMPL_VAR NAME="module" --></td>
+						<td><!-- TMPL_VAR NAME="action" --></td>
+						<td>
+						    <!-- TMPL_IF NAME="MEMBERS"-->
+						        <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="object" -->" title="显示读者详情。">
+						            会员 <!-- TMPL_VAR NAME="object" -->
+						        </a>
+						    <!-- TMPL_ELSE -->
+						    <!-- TMPL_IF NAME="CIRCULATION" -->
+						        <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="object" -->" title="显示读者详情。">
+						            <!-- TMPL_IF NAME="object"-->会员 <!-- TMPL_VAR NAME="object" --><!-- /TMPL_IF -->
+						        </a>
+						    <!-- TMPL_ELSE -->
+						    <!-- TMPL_IF NAME="CATALOGUING" -->
+						        <!-- TMPL_IF EXPR="info eq 'item'" -->
+							<a href="/cgi-bin/koha/catalogue/moredetail.pl?item=<!-- TMPL_VAR NAME="object" -->&biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->&bi=<!-- TMPL_VAR NAME="biblioitemnumber" -->#item<!-- TMPL_VAR NAME="object" -->">Item <!-- TMPL_VAR NAME="object" --></a>
+							<!-- TMPL_ELSE -->
+						        <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="object" -->" title="显示这笔数目记录详情">总共 <!-- TMPL_VAR NAME="object" --> 笔书目记录</a>
+							<!-- /TMPL_IF -->
+						    <!-- TMPL_ELSE-->
+						    <!-- TMPL_IF NAME="SERIAL"-->
+						        <a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=<!-- TMPL_VAR NAME="object" -->">
+						            <!-- TMPL_VAR NAME="object" -->
+						        </a>
+						    <!-- TMPL_ELSE -->
+    						    <!-- TMPL_VAR NAME="object" -->
+    						<!-- /TMPL_IF -->
+    						<!-- /TMPL_IF -->
+    						<!-- /TMPL_IF -->
+    						<!-- /TMPL_IF -->
+						</td>
+						<td>
+						    <!-- TMPL_IF NAME="CIRCULATION" -->
+						         <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="info" -->" title="显示这笔数目记录详情">总共 <!-- TMPL_VAR NAME="info" --> 笔书目记录</a>
+    						<!-- TMPL_ELSE -->
+    						    <!-- TMPL_VAR NAME="info" -->
+    						<!-- /TMPL_IF -->
+						</td>
+					</tr>
+		<!-- /TMPL_LOOP -->
+    </table>
+	</form>
+</div>
+</div>
+<div class="yui-b noprint">
+<!-- TMPL_IF NAME="menu" -->
+    <!-- TMPL_INCLUDE NAME="circ-menu.inc" -->
+<!-- TMPL_ELSE -->
+	
+    <!-- TMPL_IF EXPR="module eq 'CATALOGUING'" --><!-- TMPL_INCLUDE NAME="biblio-view-menu.inc" --><!-- TMPL_ELSE --><!-- TMPL_INCLUDE NAME="tools-menu.inc" --><!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

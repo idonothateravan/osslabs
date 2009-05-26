@@ -1,0 +1,58 @@
+
+
+
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><title>Koha &rsaquo; Web Installer &rsaquo; Step 2</title>
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div>
+<h1 id="logo"><img alt="Koha" src="/intranet-tmpl/prog/img/koha.org-logo.gif" /> Nettinstallasjon &rsaquo; steg 2</h1>
+<h2 align="center">Databaseinnstillinger:</h2>
+<ul>
+<li><em>databasetype: </em><!--TMPL_VAR NAME="dbms"--></li>
+<li><em>databasenavn: </em><!--TMPL_VAR NAME="dbname"--></li>
+<li><em>databasetjener: </em><!--TMPL_VAR NAME="hostname"--></li>
+<li> <em>databaseport: </em> <!--TMPL_VAR NAME="port"--> (det går sannsynligvis greit om dette feltet står tomt)</li>
+<li><em>databasebruker: </em><!--TMPL_VAR NAME="user"--></li>
+</ul>
+<div>
+<!--TMPL_IF NAME="dbconnection"-->
+<form name="checkdbparameters" type="post" action="install.pl">
+  <!--TMPL_IF NAME="checkdatabaseaccess"-->
+  <p>Forbindelsen er opprettet</p>
+     <!--TMPL_IF NAME="checkdatabasecreated"-->
+  <p>Database <code><!--TMPL_VAR NAME="dbname"--></code> exists.</p>
+        <!--TMPL_IF NAME="checkgrantaccess"-->
+  <p>Bruker <code><!--TMPL_VAR NAME="user"--></code> has all required privileges on database <code><!--TMPL_VAR Name="dbname"--></code>.</p>
+        <!--TMPL_ELSE-->
+  <p class="error">user <code><!--TMPL_VAR NAME="user"--></code> doesn't have enough privilege on database <code><!--TMPL_VAR Name="dbname"--></code> </p>
+  <p class="tip"> Be om eller endre brukerens rettigheter. Trenger du hjelp? Se <!--TMPL_IF NAME="mysql"--><a href=http://dev.mysql.com/doc/refman/4.1/en/grant.html><!--TMPL_ELSE-->http://www.postgresql.org/docs/8.2/interactive/sql-createrole.html<!--/TMPL_IF-->this page</a>. Bruker <code><!--TMPL_VAR NAME="user"--></code> must have USAGE, INSERT, UPDATE, DELETE, DROP and CREATE privileges on <code><!--TMPL_VAR Name="dbname"--></code></p>
+        <!--/TMPL_IF-->
+      <!--TMPL_ELSE-->
+  <p class="error">No database named <code><!--TMPL_VAR NAME="dbname"--></code> funnet.</p>
+  <p class="tip">Please create the database before continuing.</p>
+      <!--/TMPL_IF-->
+   <!--TMPL_ELSE-->
+    <div class="error"><!--TMPL_VAR name="error"--> : <!--TMPL_VAR NAME="message"-->
+    </div>
+    <div class="tip">
+      <ul>
+      <li>Sjekk at databasen kjører.</li>
+      <li>Sjekk oppsettet for databasen i <code>koha-conf.xml</code>. </li>
+      <li>Sjekk oppsettet for domenenavn i <code>koha-conf.xml</code>- Noen databasetjenere krever <code>127.0.0.1</code> rather than <code>localhost</code>.</li>
+    </div>
+    <p>Please correct these errors and <a href="/cgi-bin/koha/installer/install.pl">start the installer</a> again.
+  <!--/TMPL_IF-->
+  <!-- TMPL_IF NAME="error" --><!-- TMPL_ELSE -->
+<input type="hidden" name="step" value="3" />
+<p> Velg «Neste» for å fortsette <input value="Neste &gt;&gt;" type="submit"></p>
+<!-- /TMPL_IF -->
+</form>
+<!--TMPL_ELSE-->
+<form name="checkinformation" type="post" action="install.pl">
+<input type="hidden" name="step" value="2" />
+<input type="hidden" name="checkdb" value="1" />
+<p> Please click Next to continue if this information is correct <input value="Neste &gt;&gt;" type="submit"></p>
+</form>
+<!--/TMPL_IF-->
+</div>
+</body>
+</html>

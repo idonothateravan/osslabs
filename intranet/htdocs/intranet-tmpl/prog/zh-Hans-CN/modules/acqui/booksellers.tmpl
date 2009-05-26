@@ -1,0 +1,91 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 查询供货商 <!-- TMPL_VAR name="supplier" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="acquisitions-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/acqui/acqui-home.pl">Acquisitions</a> &rsaquo; Search for Vendor <em><!-- TMPL_VAR name="supplier" --></em> </div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	
+<!-- TMPL_INCLUDE NAME="acquisitions-toolbar.inc" -->
+<!-- TMPL_IF EXPR="count == 1" -->	
+<h1> <!-- TMPL_VAR NAME="supplier_name" --> </h1>
+<!-- TMPL_ELSE -->
+<h1>查询<b>供货商 <!-- TMPL_VAR name="supplier" --></b>，找到 <!-- TMPL_VAR name="count" --> 笔记录。</h1>
+<!-- /TMPL_IF -->
+<div id="acqui_order_supplierlist">
+	<table>
+	<tr>
+		<th>订单</th>
+		<th>收到订单</th>
+		<th>公司</th>
+		<th>&nbsp;</th>
+	</tr>
+	
+	<!-- TMPL_LOOP name="loop_suppliers" -->
+		<tr>
+			<td>	<!-- TMPL_IF name="active" -->
+					<a href="basket.pl?supplierid=<!-- TMPL_VAR name="supplierid" -->">新增订单</a>
+				<!-- TMPL_ELSE -->
+					未使用
+				<!-- /TMPL_IF -->
+			</td>
+			<td>	<a href="parcels.pl?supplierid=<!-- TMPL_VAR name="supplierid" -->">Receive shipment</a>
+			</td>
+			<!-- TMPL_IF NAME="name"-->
+			  <td><a href="supplier.pl?supplierid=<!-- TMPL_VAR name="supplierid" -->"><!-- TMPL_VAR name="name" --></a></td>
+			<!-- TMPL_ELSE -->
+			  <td><a href="supplier.pl?supplierid=<!-- TMPL_VAR name="supplierid" -->">缺少名称</a></td>
+			<!-- /TMPL_IF -->
+			<td>	<table>
+				    <!-- TMPL_IF NAME="loop_basket"-->
+						<tr>
+							<th>购物篮</th>
+							<th>馆藏</th>
+							<th>建立者</th>
+							<th>日期</th>
+							<th>&nbsp;</th>
+						</tr>
+						<!-- TMPL_LOOP NAME="loop_basket" -->
+							<tr>
+								<td><!-- TMPL_VAR NAME="basketno" --></td>
+								<td><TMPL_VAR NAME="total"></td>
+								<td>						<!-- TMPL_VAR name="firstname" -->
+										<!-- TMPL_VAR name="surname" -->
+								</td>
+								<td><!-- TMPL_VAR NAME="creationdate" --></td>
+								<td>						<!-- TMPL_IF name="closedate" -->
+										关闭日期 <!-- TMPL_VAR NAME="closedate" --> <a href="/cgi-bin/koha/acqui/basket.pl?basketno=<!-- TMPL_VAR NAME="basketno" -->">显示</a>
+									<!-- TMPL_ELSE -->
+										<!-- TMPL_IF name="active" -->
+											<a href="/cgi-bin/koha/acqui/basket.pl?basketno=<!-- TMPL_VAR NAME="basketno" -->">修改</a>
+										<!-- TMPL_ELSE -->
+											<a href="/cgi-bin/koha/acqui/basket.pl?basketno=<!-- TMPL_VAR NAME="basketno" -->">显示</a>
+										<!-- /TMPL_IF -->
+									<!-- /TMPL_IF -->
+								</td>
+							</tr>
+						<!-- /TMPL_LOOP -->
+					<!-- TMPL_ELSE -->
+					    <tr><td>没有进行购物</td></tr>
+					<!-- /TMPL_IF -->
+					</table>
+			</td>
+			</tr>
+		<!-- /TMPL_LOOP -->
+		</table>
+</div>
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="acquisitions-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

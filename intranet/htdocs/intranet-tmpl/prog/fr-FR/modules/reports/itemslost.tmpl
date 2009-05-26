@@ -1,0 +1,124 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Rapports  &rsaquo; Documents perdus</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">Rapports</a><!-- TMPL_IF NAME="get_items" --> &rsaquo; <a href="/cgi-bin/koha/reports/itemslost.pl">Documents perdus</a> &rsaquo; Résultats<!-- TMPL_ELSE --> &rsaquo; Exemplaires perdus<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Exemplaires perdus</h1>
+
+<!-- TMPL_IF NAME="get_items" -->
+
+<div class="results">
+    <!-- TMPL_IF NAME="total" -->
+        <!-- TMPL_VAR NAME="total" --> document(s) perdu(s) trouvé(s)
+    <!-- TMPL_ELSE-->
+        Pas d'exemplaire(s) perdu(s)
+    <!-- /TMPL_IF -->
+</div>
+
+    <!-- TMPL_IF NAME="itemsloop" --><table>
+    <tr>
+        <th>Titre</th>
+        <th>Auteur</th>
+        <th>Code perte</th>
+        <th>code-barres</th>
+        <th>Vu pour la dernière fois</th>
+        <th>Prix</th>
+        <th>Coût rempl.</th>
+        <th>Site</th>
+        <th>Type de document</th>
+        <th>Site de localisation</th>
+        <th>Localisation</th>
+    </tr>
+     <!-- TMPL_LOOP NAME="itemsloop"-->
+        <tr>
+            <td><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber"-->" title="<!-- TMPL_VAR NAME="itemnotes"-->">
+						  <!-- TMPL_VAR NAME="title"--></td>
+					 </a></td>
+            <td><!-- TMPL_VAR NAME="author"--></td>
+            <td><!-- TMPL_VAR NAME="lib"--></td>
+            <td><a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber"-->" title="<!-- TMPL_VAR NAME="itemnotes"-->">
+                    <!-- TMPL_VAR NAME="barcode"-->
+                </a></td>
+            <td><!-- TMPL_VAR NAME="datelastseen"--></td>
+            <td><!-- TMPL_VAR NAME="price" --></td>
+            <td><!-- TMPL_VAR NAME="replacementprice" --></td>
+            <td><!-- TMPL_VAR NAME="homebranch" --></td>
+            <td><!-- TMPL_VAR NAME="itype" --></td>
+            <td><!-- TMPL_VAR NAME="holdingbranch"--></td>
+            <td><!-- TMPL_VAR NAME="location"--></td>
+        </tr>
+    <!-- /TMPL_LOOP -->
+    </table>
+	<!-- /TMPL_IF --> 
+	<!-- TMPL_ELSE -->
+	
+	<form name="f" action="/cgi-bin/koha/reports/itemslost.pl" method="post">
+<fieldset class="rows"><ol>    <li><label for="orderbyfilter">Trié par : </label>
+    <select id="orderbyfilter" name="orderbyfilter">
+        <option value=""> --- </option>
+        <option value="title">Titre</option>
+        <option value="author">Auteur</option>
+        <option value="homebranch">Site</option>
+        <option value="itype">Types de document</option>
+        <option value="barcode">code-barres</option>
+        <option value="price">Prix</option>
+        <option value="replacementprice">Coût de remplacement</option>
+        <option value="lib">Code perte</option>
+        <option value="datelastseen">Vu pour la dernière fois</option>
+        <option value="location">Localisation</option>
+    </select></li>
+	
+	<li><label for="barcodefilter">code-barres :  </label><input type="text" name="barcodefilter" id="barcodefilter" size="6" /></li>
+	<li><label for="branchfilter">Site : </label><select name="branchfilter" id="branchfilter">
+                <option value="">Tous</option>
+            <!-- TMPL_LOOP name="branchloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="branchname" --></option>
+				<!-- TMPL_ELSE -->
+				<option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branchname" --></option>
+				<!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+            </select></li>
+	<li><label for="itemtypesfilter">Type de document :  </label><select name="itemtypesfilter" id="itemtypesfilter">
+                <option value="">Tous</option>
+                <!-- TMPL_LOOP name="itemtypeloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option>
+				<!-- TMPL_ELSE -->
+				<option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="description" --></option>
+				<!-- /TMPL_IF -->
+                <!-- /TMPL_LOOP -->
+            </select></li>
+
+	<li><label for="loststatusfilter">Etat de l'exemplaire : </label><select name="loststatusfilter" id="loststatusfilter">
+                <option value="">Tous</option>
+                <!-- TMPL_LOOP name="loststatusloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="authorised_value" -->" selected="selected"><!-- TMPL_VAR NAME="lib" --></option>
+		<!-- TMPL_ELSE -->
+		<option value="<!-- TMPL_VAR NAME="authorised_value" -->"><!-- TMPL_VAR NAME="lib" --></option>
+		<!-- /TMPL_IF -->
+                <!-- /TMPL_LOOP -->
+            </select></li>
+</ol></fieldset>
+<fieldset class="action">    <input type="submit" value="Valider">
+    <input type="hidden" name="get_items" value="1" /></fieldset>
+</form>
+	
+	<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

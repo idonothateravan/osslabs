@@ -1,0 +1,453 @@
+<html>
+<head>
+<title>Leader builder</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_field_006.pl">
+<table>
+	<tr>
+		<td>0شكل المادّة</td>
+                <td>
+                        <select name="f0" size="1">
+                        <!-- TMPL_IF name="f0a" -->
+                                <option value="a" SELECTED>a-مادّة لغة </option>
+                        <!-- TMPL_ELSE -->
+                                <option value="a">a-مادّة لغة </option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f0b" -->
+                                <option value="b" SELECTED>b-مادّة لغة مخطوطة </option>
+                        <!-- TMPL_ELSE -->
+                                <option value="b">b-مادّة لغة مخطوطة </option>
+                        <!-- /TMPL_IF -->
+        		</select>
+		</td>
+	</tr>
+	<tr>
+                <td>01-04 إيضاحيات </td>
+                <td>(ملئ آلي من 300)<input type="hidden" name="f014" size="4"  maxlength="4" value="<!-- TMPL_VAR NAME="f014" -->"/></td>
+        </tr>
+	        <tr>
+                <!-- 5 Target Audience -->
+                <td>5-الجمهور المستهدف</td>
+                <td>
+                <select name="f5" size="1">
+
+                        <!-- TMPL_IF name="f5|" -->
+                        <option value="|" SELECTED>|- إفتراضى</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- إفتراضى</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f50" -->
+                        <option value=" " SELECTED>#-غير معروف او غير محدد</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#-غير معروف او غير محدد</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5a" -->
+                         <option value="a" SELECTED>a- Preschool</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- Preschool</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5b" -->
+                         <option value="b" SELECTED>b- أولى</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="b">b- أولى</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5c" -->
+                         <option value="c" SELECTED>c- Elementary and junior high</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- Elementary and junior high</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5d" -->
+                         <option value="d" SELECTED>d-ثانوي (مستوى عالي كبير) </option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d-ثانوي (مستوى عالي كبير) </option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5e" -->
+                         <option value="e" SELECTED>e-بالغ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="e">e-بالغ</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5f" -->
+                         <option value="f" SELECTED>f- متخصّص</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- متخصّص</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5g" -->
+                         <option value="g" SELECTED>g- عام</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="g">g- عام</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5j" -->
+                         <option value="j" SELECTED>j- Juvenile</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="j">j- Juvenile</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        <tr>
+	 <tr>
+                <!-- 06 Form of an item -->
+                <td>06-شكل مادة</td>
+                <td>
+                <select name="f6" size="1">
+
+                        <!-- TMPL_IF name="f60" -->
+                        <option value=" " SELECTED>#-ليس من التالى</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#-ليس من التالى</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6a" -->
+                        <option value="a" SELECTED>a-ميكروفيلم</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a-ميكروفيلم</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6b" -->
+                        <option value="b" SELECTED>b- ميكروفيش</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="b">b- ميكروفيش</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6c" -->
+                        <option value="c" SELECTED>a- Microopaque</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">a- Microopaque</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6d" -->
+                        <option value="d" SELECTED>d- طبعة كبيرة</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- طبعة كبيرة</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6f" -->
+                        <option value="f" SELECTED>f-برايل</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f-برايل</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6r" -->
+                        <option value="r" SELECTED>r-إعادة إنتاج الطبعة المنتظمة </option>
+                        <!-- TMPL_ELSE -->
+                        <option value="r">r-إعادة إنتاج الطبعة المنتظمة </option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6s" -->
+                        <option value="s" SELECTED>s- إلكترونى</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- إلكترونى</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6!" -->
+                        <option value="!" SELECTED>!- غير مكود</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="!">!- غير مكود</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+       <tr>
+                <td>7-10طبيعة المحتوى </td>
+                <td>(قيمة مشتقة)
+                        <input type="hidden" name="f710" size="4" maxlength="4" value="<!-- TMPL_VAR NAME="f710" -->"/>                </td>
+        </tr>
+        <tr>
+                <td>11-منشور حكومي</td>
+                <td>
+                <select name="f11" size="1">
+		
+                        <!-- TMPL_IF name="f11|" -->
+                        <option value="|" SELECTED>|- إفتراضى</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- إفتراضى</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f110" -->
+                        <option value=" " SELECTED>#- مطبوع غير حكومى</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- مطبوع غير حكومى</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11a" -->
+                        <option value="a" SELECTED>a- مكوّن مستقل ذاتيا أو نصف مستقل ذاتيا</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- مكوّن مستقل ذاتيا أو نصف مستقل ذاتيا</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11c" -->
+                        <option value="c" SELECTED>c- Multilocal</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- Multilocal</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11f" -->
+                        <option value="f" SELECTED>f-الإتحادي / وطنى</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f-الإتحادي / وطنى</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f11i" -->
+                        <option value="i" SELECTED>i- International intergovernmental</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="i">i- International intergovernmental</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f11l" -->
+                        <option value="l" SELECTED>l- محلى</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="l">l- محلى</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f11m" -->
+                        <option value="m" SELECTED>m- Multistate</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="m">m- Multistate</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11o" -->
+                        <option value="o" SELECTED>o مبطوع حكومي - المستوى غير مقرّر</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="o">o مبطوع حكومي - المستوى غير مقرّر</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11s" -->
+                        <option value="s" SELECTED>s-ولاية، إقليمية إقليمية، تابع، الخ.</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s-ولاية، إقليمية إقليمية، تابع، الخ.</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11u" -->
+                        <option value="u" SELECTED>u-مجهول إذا كانت المادة نشر حكومي</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="u">u-مجهول إذا كانت المادة نشر حكومي</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11z" -->
+                        <option value="z" SELECTED>z- آخر</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="z">z- آخر</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+        <tr>
+                <td>12- مطبوع مؤتمر</td>
+                <td>
+                <select name="f12" size="1">
+                        <!-- TMPL_IF name="f120" -->
+                        <option value="0" SELECTED>0-ليس منشور مؤتمر</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0-ليس منشور مؤتمر</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f121" -->
+                        <option value="1" SELECTED>1- مطبوع مؤتمر</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- مطبوع مؤتمر</option>
+                        <!-- /TMPL_IF -->
+
+		</select>
+		</td>
+	</tr>
+	<tr>
+                <td>13- كتاب تذكاري</td>
+                <td>
+                <select name="f13" size="1">
+                        <!-- TMPL_IF name="f130" -->
+                        <option value="0" SELECTED>0- ليس كتاب تذكاري</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- ليس كتاب تذكاري</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f131" -->
+                        <option value="1" SELECTED>1- كتاب تذكاري</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- كتاب تذكاري</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+
+        <tr>
+                <td>14-فهرس</td>
+                <td>
+                <select name="f14" size="1">
+                        <!-- TMPL_IF name="f14|" -->
+                        <option value="|" SELECTED>|- إفتراضى</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- إفتراضى</option>
+                        <!-- /TMPL_IF -->
+	
+                        <!-- TMPL_IF name="f140" -->
+                        <option value="0" SELECTED>0-لا فهرس</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0-لا فهرس</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f141" -->
+                        <option value="1" SELECTED>1-تقديم الفهرس</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1-تقديم الفهرس</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        	</tr>
+		<tr><td>15غير معرّف</td><td></td>
+		</tr>
+		<tr>
+                <td>16-الشكل الأدبي</td>
+                <td>
+                <select name="f16" size="1">
+                        <!-- TMPL_IF name="f160" -->
+                        <option value="0" SELECTED>0- غير أدبي</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- غير أدبي</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f161" -->
+                        <option value="1" SELECTED>1-قصة</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1-قصة</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f16c" -->
+                        <option value="c" SELECTED>c- Comic strips</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- Comic stripts</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16d" -->
+                        <option value="d" SELECTED>d- مسرحيات</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- مسرحيات</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f16e" -->
+                        <option value="e" SELECTED>e-مقالات</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="e">e-مقالات</option>
+                        <!-- /TMPL_IF -->
+
+			
+                        <!-- TMPL_IF name="f16f" -->
+                        <option value="f" SELECTED>f-روايات</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f-روايات</option>
+                        <!-- /TMPL_IF -->
+
+			
+                        <!-- TMPL_IF name="f16h" -->
+                        <option value="h" SELECTED>h- Humor,satires,etc.</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="h">h- Humor,satires,etc.</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16i" -->
+                        <option value="i" SELECTED>i- خطابات</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="i">i- خطابات</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16j" -->
+                        <option value="j" SELECTED>j- قصص قصيرة</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="j">j- قصص قصيرة</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16m" -->
+                        <option value="m" SELECTED>m-الأشكال المختلطة </option>
+                        <!-- TMPL_ELSE -->
+                        <option value="m">m-الأشكال المختلطة </option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f16p" -->
+                        <option value="p" SELECTED>p- شعر</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="p">p- شعر</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f16s" -->
+                        <option value="s" SELECTED>s -خطابات </option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s -خطابات </option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16u" -->
+                        <option value="u" SELECTED>u-غير معروف</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="u">u-غير معروف</option>
+                        <!-- /TMPL_IF -->
+
+                </select>
+                </td>
+        </tr>
+	<tr>
+                <td>17-سيرة ذاتية</td>
+                <td>
+                <select name="f17" size="1">
+                        <!-- TMPL_IF name="f170" -->
+                        <option value=" " SELECTED>#- مادة ليست سيرة ذاتية</option>                              <!-- TMPL_ELSE -->
+                        <option value=" ">#- مادة ليست سيرة ذاتية</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f17a" -->
+                        <option value="a" SELECTED>a- سيرة ذاتية</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- سيرة ذاتية</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f17b" -->
+                        <option value="b" SELECTED>b- تراجم فردية </option>                              <!-- TMPL_ELSE -->
+                        <option value="b">b- تراجم فردية </option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f17c" -->
+                        <option value="c" SELECTED>c- تراجم مجمعة </option>                              <!-- TMPL_ELSE -->
+                        <option value="c">c- تراجم مجمعةl</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f17d" -->
+                        <option value="d" SELECTED>d- يحتوى على معلومات ببليوجرافية</option>                              <!-- TMPL_ELSE -->
+                        <option value="d">d- يحتوى على معلومات ببليوجرافية</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+
+	<tr><td colspan=2><input type="submit" value="نعم"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			'<!-- TMPL_VAR NAME="dateentered" -->'+
+			document.f_pop.f0.value+
+			document.f_pop.f014.value+
+			document.f_pop.f5.value+
+			document.f_pop.f6.value+
+			document.f_pop.f710.value+
+			document.f_pop.f11.value+
+			document.f_pop.f12.value+
+			document.f_pop.f13.value+
+			document.f_pop.f14.value+ ' '+
+			document.f_pop.f16.value+
+			document.f_pop.f17.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

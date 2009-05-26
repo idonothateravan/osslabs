@@ -1,0 +1,318 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo;التزويد &rsaquo; سلة التسوق <!-- TMPL_VAR NAME="basketno" --> &rsaquo; <!-- TMPL_IF name="ordnum" -->عدّل تفاصيل طلب (line #<!-- TMPL_VAR NAME="ordnum" -->)<!-- TMPL_ELSE -->طلب جديد<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+function update(f){
+//collect values
+quantity=f.quantity.value
+if (quantity ==0) {
+    alert("Quantity must be >0");
+}
+discount=f.discount.value
+listinc=parseInt(f.listinc.value)
+currency=f.currency.value
+applygst=parseInt(f.applygst.value)
+listprice=f.list_price.value
+//  rrp=f.rrp.value
+//  ecost=f.ecost.value  //budgetted cost
+//  GST=f.GST.value
+//  total=f.total.value
+//make useful constants out of the above
+exchangerate=f.elements[currency].value      //get exchange rate
+gst_on=(!listinc && applygst);
+//do real stuff
+rrp=listprice*exchangerate;
+ecost=rrp*(100-discount)/100
+GST=0;
+if (gst_on){
+    rrp=rrp*(1+<!-- TMPL_VAR NAME="gstrate" -->);
+    GST=ecost*(<!-- TMPL_VAR NAME="gstrate" -->);
+}
+
+total=(ecost+GST)*quantity
+
+f.rrp.value=rrp;
+f.ecost.value=ecost;
+f.total.value=total;
+<!-- TMPL_IF NAME="GST"-->
+f.GST.value=GST;
+<!-- /TMPL_IF -->
+return true;
+}
+
+function messenger(X,Y,etc){	// FIXME: unused?
+    win=window.open("","mess","height="+X+",width="+Y+",screenX=150,screenY=0");
+    win.focus();
+    win.document.close();
+    win.document.write("<body link='#333333' bgcolor='#ffffff' text='#000000'><font size='2'><p><br />");
+    win.document.write(etc);
+    win.document.write("<center><form><input type=button onclick='self.close()' value='Close'></form></center>");
+    win.document.write("</font></body></html>");
+}
+
+function check(f) {
+quantity=f.quantity.value
+title=f.title.value
+if (title == "") {
+    alert("Title can't be empty");
+    return false;
+}
+if (quantity ==0) {
+    alert("Quantity must be >0");
+    return false;
+}
+    document.frusin.submit();
+}
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="acquisitions-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; <a href="/cgi-bin/koha/acqui/acqui-home.pl">التزويد</a> &rsaquo; <a href="/cgi-bin/koha/acqui/basket.pl?basketno=<!-- TMPL_VAR NAME="basketno" -->">سلة التسوق <!-- TMPL_VAR NAME="basketno" --></a> &rsaquo; <!-- TMPL_IF name="ordnum" -->عدّل تفاصيل طلب (line #<!-- TMPL_VAR NAME="ordnum" -->)<!-- TMPL_ELSE -->طلب جديد<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	
+<h1>
+    <!-- TMPL_IF name="ordnum" -->
+        عدّل تفاصيل طلب (line #<!-- TMPL_VAR NAME="ordnum" -->)
+    <!-- TMPL_ELSE -->
+        طلب جديد
+    <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="suggestionid" -->(عرّف من الاقتراح #<!-- TMPL_VAR NAME="suggestionid" -->)<!-- /TMPL_IF -->
+</h1>
+
+<!-- TMPL_IF name="basketno" -->
+<div id="basket-details">تفاصيل سلة
+  <ul>  <li>رقم السلة: <!-- TMPL_VAR NAME="basketno" --></li>
+    <li>مدار بواسطة: <!-- TMPL_VAR NAME="authorisedbyname" --></li>
+    <li>إفتح في: <!-- TMPL_VAR NAME="creationdate" --></li>
+    <li>For vendor ID: <!-- TMPL_VAR NAME="booksellerid" --></li>
+    <li>رقم الفاتورة: <!-- TMPL_VAR NAME="booksellerinvoicenumber" --></li>
+    <!-- TMPL_IF name="closedate" --><li>تم إغلاقة على: <!-- TMPL_VAR name="closedate" --></li><!-- /TMPL_IF --></ul>
+</div>
+<!-- /TMPL_IF -->
+
+<form action="/cgi-bin/koha/acqui/addorder.pl" method="post" name="frusin">
+<fieldset class="rows">
+        <legend>تفاصيل الفهرس</legend>
+        <!-- TMPL_UNLESS name="existing" -->
+		<input type="hidden" name="existing" value="no" />
+        <!-- /TMPL_UNLESS -->
+        <input type="hidden" name="ordnum" value="<!-- TMPL_VAR NAME="ordnum" -->" />
+        <input type="hidden" name="basketno" value="<!-- TMPL_VAR NAME="basketno" -->" />
+        <input type="hidden" name="booksellerid" value="<!-- TMPL_VAR NAME="booksellerid" -->" />
+        <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->" />
+        <input type="hidden" name="biblioitemnumber" value="<!-- TMPL_VAR NAME="biblioitemnumber" -->" />
+        <input type="hidden" name="oldtype" value="<!-- TMPL_VAR NAME="itemtype" -->" />
+        <input type="hidden" name="discount" value="<!-- TMPL_VAR NAME="discount" -->" />
+        <input type="hidden" name="listinc" value="<!-- TMPL_VAR NAME="listincgst" -->" />
+        <input type="hidden" name="currency" value="<!-- TMPL_VAR NAME="currency" -->" />
+        <input type="hidden" name="applygst" value="<!-- TMPL_VAR NAME="gstreg" -->" />
+        <input type="hidden" name="suggestionid" value="<!-- TMPL_VAR NAME="suggestionid" -->" />
+        <!-- TMPL_LOOP NAME="loop_currencies" -->
+            <input type="hidden" name="<!-- TMPL_VAR NAME="currency" -->" value="<!-- TMPL_VAR NAME="rate" -->" />
+        <!-- /TMPL_LOOP -->
+        <ol><li>
+            <!-- TMPL_IF name="biblionumber" -->
+			<span class="label">عنوان</span>
+                <input type="hidden" size="20" name="title" value="<!-- TMPL_VAR NAME="title" -->" /> <span class="title"><!-- TMPL_VAR NAME="title" --></span>
+            <!-- TMPL_ELSE -->
+            <label for="entertitle" class="required">عنوان: </label>
+                <input type="text" id="entertitle" size="20" name="title" value="<!-- TMPL_VAR NAME="title" -->" />
+            <!-- /TMPL_IF -->
+        </li>
+        <li>
+            <!-- TMPL_IF name="biblionumber" -->
+			<span class="label">المؤلف: </span>
+                <input type="hidden" size="20" name="author" id="author" value="<!-- TMPL_VAR NAME="author" -->" /><!-- TMPL_VAR NAME="author" -->
+            <!-- TMPL_ELSE -->
+            <label for="author">المؤلف: </label>
+                <input type="text" size="20" name="author" id="author" value="<!-- TMPL_VAR NAME="author" -->" />
+            <!-- /TMPL_IF -->
+        </li>
+        <li>
+            <!-- TMPL_IF name="biblionumber" -->
+			<span class="label">الناشر: </span>
+                <input type="hidden" size="20" name="publishercode" id="publishercode" value="<!-- TMPL_VAR NAME="publishercode" -->" /><!-- TMPL_VAR NAME="publishercode" -->
+            <!-- TMPL_ELSE -->
+            <label for="publishercode"> الناشر: </label>
+                <input type="text" size="20" name="publishercode" id="publishercode" value="<!-- TMPL_VAR NAME="publishercode" -->" />
+            <!-- /TMPL_IF -->
+        </li>
+        <li>
+            <!-- TMPL_IF name="biblionumber" -->
+			<span class="label">تاريخ حق النشر:  </span>
+                <input type="hidden" size="20" name="copyrightdate" id="copyrightdate" value="<!-- TMPL_VAR NAME="copyrightdate" -->" /><!-- TMPL_VAR NAME="copyrightdate" -->
+            <!-- TMPL_ELSE -->
+            <label for="copyrightdate">تاريخ حق النشر:  </label>
+                <input type="text" size="20" name="copyrightdate" id="copyrightdate" value="<!-- TMPL_VAR NAME="copyrightdate" -->" />
+            <!-- /TMPL_IF -->
+        </li>
+        <li>
+            <!-- TMPL_IF name="biblionumber" -->
+			<span class="label">نوع المادة: </span>
+                <input type="hidden" size="20" name="itemtype" id="itemtype" value="<!-- TMPL_VAR NAME="itemtype" -->" /><!-- TMPL_VAR NAME="itemtype_desc" -->
+			<!-- TMPL_ELSE -->
+            <label for="format">نوع المادة: </label>
+            <select name="format" id="format">
+            <!-- TMPL_LOOP name="itypeloop" -->
+				<option value="<!-- TMPL_VAR NAME="itemtype" -->"><!-- TMPL_VAR NAME="desc" --></option>
+            <!-- /TMPL_LOOP -->
+            </select>
+			 <!-- /TMPL_IF -->
+        </li>
+        <li>
+            <!-- TMPL_IF name="biblionumber" -->
+			<span class="label">تدمك: </span>
+                <input type="hidden" size="20" name="ISBN" id="ISBN" value="<!-- TMPL_VAR NAME="isbn" -->" /><!-- TMPL_VAR NAME="isbn" -->
+            <!-- TMPL_ELSE -->
+            <label for="ISBN">تدمك: </label>
+                <input type="text" size="20" name="ISBN" id="ISBN" value="<!-- TMPL_VAR NAME="isbn" -->" />
+            <!-- /TMPL_IF -->
+        </li>
+        <li>
+            <!-- TMPL_IF name="biblionumber" -->
+			<span class="label">السلاسل: </span>
+                <input type="hidden" size="20" name="series" id="series" value="<!-- TMPL_VAR NAME="seriestitle" -->" /><span class="title"><!-- TMPL_VAR NAME="seriestitle" --></span>
+            <!-- TMPL_ELSE -->
+            <label for="series">السلاسل: </label>
+                <input type="text" size="20" name="series" id="series" value="<!-- TMPL_VAR NAME="seriestitle" -->" />
+            <!-- /TMPL_IF -->
+        </li>
+        <li>
+            <label for="branch">المكتبة: </label>
+            <select name="branch" id="branch">
+            <!-- TMPL_LOOP name="branchloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="branchname" --></option>
+				<!-- TMPL_ELSE -->
+				<option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branchname" --></option>
+				<!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+            </select>
+        </li>
+		</ol>
+    </fieldset>
+	<fieldset class="rows">
+        <legend>تفاصيل المحاسبة</legend>
+		<ol>
+            <li>
+                <!-- TMPL_IF name="close" -->
+			<span class="label required">الكمية: </span>
+                    <input type="hidden" size="20" id="quantity" name="quantity" value="<!-- TMPL_VAR NAME="quantity" -->" /><!-- TMPL_VAR NAME="quantity" -->
+                <!-- TMPL_ELSE -->
+                <label class="required" for="quantity">الكمية: </label>
+                    <input type="text" size="20" id="quantity" name="quantity" value="<!-- TMPL_VAR NAME="quantity" -->" onchange="update(this.form);" />
+                <!--/TMPL_IF-->
+            </li>
+            <li>
+                <!-- TMPL_IF name="close" -->
+			<span class="label">تمويل: </span>
+                    <input type="hidden" size="20" name="bookfund" id="bookfund" value="<!-- TMPL_VAR NAME="bookfundid" -->" /><!-- TMPL_VAR NAME="bookfundname" -->
+                <!-- TMPL_ELSE -->
+                <label for="bookfund">تمويل: </label>
+                    <!-- TMPL_VAR NAME="CGIbookfund" -->
+                <!--/TMPL_IF-->
+            </li>
+            <li>
+                <!-- TMPL_IF name="close" -->
+			<span class="label">Vendor price: </span>
+                    <input type="hidden" size="20" name="list_price" id="list_price" value="<!-- TMPL_VAR NAME="listprice" -->" /><!-- TMPL_VAR NAME="listprice" -->
+                <!-- TMPL_ELSE -->
+                <label for="list_price">Vendor price: </label>
+                    <input type="text" size="20" name="list_price" id="list_price" value="<!-- TMPL_VAR NAME="listprice" -->" onchange="update(this.form)" />
+                <!--/TMPL_IF-->
+            </li>
+            <li>
+                <!-- TMPL_IF name="close" -->
+			<span class="label">تكلفة الاستبدال:  </span>
+                    <input type="hidden" size="20" name="rrp" id="rrp" value="<!-- TMPL_VAR NAME="rrp" -->" /><!-- TMPL_VAR NAME="rrp" -->
+                <!-- TMPL_ELSE -->
+                <label for="rrp">تكلفة الاستبدال:  </label>
+                    <input type="text" size="20" name="rrp" id="rrp" value="<!-- TMPL_VAR NAME="rrp" -->" />
+                <!--/TMPL_IF-->
+            </li>
+            <li>
+                <!-- TMPL_IF name="close" -->
+			<label for="ecost">تكلفة ميزانية موضوعة: </label>
+                    <input type="text" size="20" name="ecost" id="ecost" value="<!-- TMPL_VAR NAME="ecost" -->" readonly="readonly"  />
+                <!-- TMPL_ELSE -->
+                <label for="ecost">تكلفة ميزانية موضوعة: </label>
+                    <input type="text" size="20" name="ecost" id="ecost" value="<!-- TMPL_VAR NAME="ecost" -->" />
+                <!--/TMPL_IF-->
+            </li>
+            <!-- TMPL_IF NAME="GST"-->
+            <li>
+				<!-- TMPL_IF name="close" -->
+			<label for="GST">ميزانية موضوعة GST: </label>
+                <input type="text" id="" size="20" name="GST" value="" id="GST" readonly="readonly" />
+				<!-- TMPL_ELSE -->
+                <label for="GST">ميزانية موضوعة GST: </label>
+                <input type="text" size="20" name="GST" id="GST" value="" />
+				<!--/TMPL_IF-->
+            </li>
+            <!-- /TMPL_IF -->
+            <li>
+                <!-- TMPL_IF name="close" -->
+			<label for="total">المجموع: </label>
+				<input type="text" id="total" size="20" name="total" value="<!-- TMPL_VAR name="total" -->" readonly="readonly" />
+				<!-- TMPL_ELSE -->
+                <label for="total">المجموع: </label>
+                <input type="text" id="total" size="20" name="total" value="<!-- TMPL_VAR name="total" -->" />
+				<!--/TMPL_IF-->
+            </li>
+            <li>
+				<!-- TMPL_IF name="close" -->
+			<label for="cost">التكلفة الحقيقية: </label>
+                <input type="text" id="cost" size="20" name="cost" value="<!-- TMPL_VAR name="ecost"-->" readonly="readonly" />
+				<!-- TMPL_ELSE -->
+                <label for="cost">التكلفة الحقيقية: </label>
+                <input type="text" id="cost" size="20" name="cost" value="<!-- TMPL_VAR name="ecost"-->" />
+				<!--/TMPL_IF-->
+            </li>
+            <li>
+                <label for="purchaseordernumber">Purchase order: </label>
+                <input type="text" id="purchaseordernumber" size="20" name="purchaseordernumber"  value="<!-- TMPL_VAR name="purchaseordernumber" -->" /> 
+            </li>
+            <li>
+                <label for="invoice">رقم الفاتورة: </label>
+                <input type="text" id="invoice" size="20" name="invoice"  value="<!-- TMPL_VAR name="invoice" -->" /> (Fill when receiving)
+            </li>
+            <li>
+                <label for="notes">ملاحظات: </label>
+                <textarea id="notes" cols="30" rows="3" name="notes"><!-- TMPL_VAR NAME="notes" --></textarea>
+            </li>
+            <li><div class="hint">الحقلين التاليين متاحين لاستخدامك الخاص. يمكن ان يكونا مستخدمين للاغراض الاحصائية</div>
+                <!-- TMPL_IF Name="CGIsort1" -->
+                    <!-- TMPL_VAR Name="CGIsort1" -->
+                <!-- TMPL_ELSE -->
+                <label for="sort1">فرز الحقل 1: </label>
+                    <input type="text" id="sort1" size="20" name="sort1" value="<!-- TMPL_VAR NAME="sort1" -->" />
+                <!--/TMPL_IF -->
+            </li>
+            <li>
+                <!-- TMPL_IF Name="CGIsort2" -->
+                    <!-- TMPL_VAR Name="CGIsort2" -->
+                <!-- TMPL_ELSE -->
+                <label for="sort2">فرز الحقل 2: </label>
+                    <input type="text" id="sort2" size="20" name="sort2" value="<!-- TMPL_VAR NAME="sort2" -->" />
+                <!--/TMPL_IF -->
+            </li></ol>
+    </fieldset>
+    <fieldset class="action">
+        <input type="button" value="إحفظ" onclick="check(this.form)"> <!-- TMPL_IF name="suggestionid" --><a class="cancel" href="/cgi-bin/koha/acqui/newordersuggestion.pl?booksellerid=<!-- TMPL_VAR NAME="booksellerid" -->&basketno=<!-- TMPL_VAR NAME="basketno" -->">إلغاء</a><!-- TMPL_ELSE --><a class="cancel" href="/cgi-bin/koha/acqui/basket.pl?basketno=<!-- TMPL_VAR NAME="basketno" -->">إلغاء</a><!-- /TMPL_IF -->
+    </fieldset>
+</form>
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="acquisitions-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

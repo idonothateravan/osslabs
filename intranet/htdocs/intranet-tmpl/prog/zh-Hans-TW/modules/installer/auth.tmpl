@@ -1,0 +1,51 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 
+    <!-- TMPL_IF NAME="nopermission" -->權限不足<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="timed_out" -->Session 已逾時<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="different_ip" -->IP 位址改變<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="invalid_username_or_password" -->不合法使用者帳號或是密碼<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="loginprompt" -->登入 Koha<!-- /TMPL_IF -->
+</title>
+
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div id="login">
+<h1><a>Koha 3.0 安裝程式</a></h1>
+<!-- TMPL_IF NAME="nopermission" -->
+<div id="login_error"><strong>錯誤： </strong>未授權讀者 <a href="/cgi-bin/koha/mainpage.pl?logout.x=1">點選登出</a></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="timed_out" -->
+<div id="login_error"><strong>錯誤： </strong>對不起，您的 Session 已逾時，請重新登入。</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="different_ip" -->
+<div id="login_error"><strong>錯誤： </strong>IP 位址已經改變，請重新登入 </div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="invalid_username_or_password" -->
+<div id="login_error"><strong>錯誤： </strong>不合法使用者帳號或是密碼</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="loginprompt" -->
+<!-- login prompt time-->
+<form action="<!-- TMPL_VAR NAME="url" -->" method="post" name="mainform" id="mainform">
+<!-- TMPL_LOOP NAME="INPUTS" -->
+    <input type="hidden" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" />
+<!-- /TMPL_LOOP -->
+<h3>歡迎來到 Koha 網頁安裝程式</h3>
+<p>Before we begin, please verify you have the correct credentials to continue. Please log in
+with the username and password given to you by your systems administrator and located in your
+<code>koha-conf.xml</code> 設定沒問題！</p>
+<p>請輸入你的帳號和密碼：</p>
+<p><label>使用者名稱：<br />
+<input type="text" name="userid" id="userid" class="input" value="<!-- TMPL_VAR NAME="userid" -->" size="20" tabindex="1" /></label>
+</p>
+<p><label>密碼：<br />
+<input type="password" name="password" id="password" class="input" value="" size="20" tabindex="2" /></label>
+</p>
+<p class="submit"><input id="submit" type="submit" value="登入 &raquo;" tabindex="4"></p>
+</form>
+
+<!-- /TMPL_IF -->
+
+<!-- TMPL_INCLUDE name="intranet-bottom.inc" -->

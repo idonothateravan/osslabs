@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Առաջատարի կառուցող</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_field_007.pl">
+<table>
+	<tr>
+		<td>00 Նյութի դաս</td>
+                <td>
+                        <select name="f0" size="1">
+                        <!-- TMPL_IF name="f0t" -->
+                                <option value="t" SELECTED>t- Տեքստ</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="t">t- Տեքստ</option>
+                        <!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+                <td>01 Որոշակի նյութի պատկանելիություն</td>
+                <td>
+                        <select name="f1" size="1">
+                        <!-- TMPL_IF name="f1a" -->
+                                <option value="a" SELECTED>a- Կանոնավոր տպում</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="a">a- Կանոնավոր տպում</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1b" -->
+                                <option value="b" SELECTED>b- մեծ տպում</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="b">b- մեծ տպում </option>
+                        <!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f1c" -->
+                                <option value="c" SELECTED>c- Բրայլ</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="c">c- Բրայլ</option>
+                        <!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f1d" -->
+                                <option value="d" SELECTED>d- Պոկվող թերթիկներ</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="d">d- Պոկվող թերթիկներ</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1u" -->
+                                <option value="u" SELECTED>u- Չսահմանված</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="u">u- Չսահմանված</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1z" -->
+                                <option value="z" SELECTED>z- Այլ</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="z">z- Այլ</option>
+                        <!-- /TMPL_IF -->
+
+                        </select>
+                </td>
+        </tr>
+
+
+
+	<tr><td colspan=2><input type="submit" value="ԼԱՎ"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			document.f_pop.f0.value+
+			document.f_pop.f1.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

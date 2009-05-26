@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>建立指标</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_field_007.pl">
+<table>
+	<tr>
+		<td>00 数据类别</td>
+                <td>
+                        <select name="f0" size="1">
+                        <!-- TMPL_IF name="f0t" -->
+                                <option value="t" SELECTED>t- 文字</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="t">t- 文字</option>
+                        <!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+                <td>01 特殊数据类型标示</td>
+                <td>
+                        <select name="f1" size="1">
+                        <!-- TMPL_IF name="f1a" -->
+                                <option value="a" SELECTED>a- 规则印刷</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="a">a- 规则印刷</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1b" -->
+                                <option value="b" SELECTED>b-大号印刷</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="b">b-大号印刷 </option>
+                        <!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f1c" -->
+                                <option value="c" SELECTED>c- 点字本</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="c">c- 点字本</option>
+                        <!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f1d" -->
+                                <option value="d" SELECTED>d- 活页</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="d">d- 活页</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1u" -->
+                                <option value="u" SELECTED>u- 未定义</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="u">u- 未定义</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1z" -->
+                                <option value="z" SELECTED>z- 其他</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="z">z- 其他</option>
+                        <!-- /TMPL_IF -->
+
+                        </select>
+                </td>
+        </tr>
+
+
+
+	<tr><td colspan=2><input type="submit" value="完成"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			document.f_pop.f0.value+
+			document.f_pop.f1.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

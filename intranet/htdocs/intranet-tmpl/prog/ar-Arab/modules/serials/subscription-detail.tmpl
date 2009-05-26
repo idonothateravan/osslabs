@@ -1,0 +1,331 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo; دوريات  &rsaquo; تفاصيل للإشتراك #<!-- TMPL_VAR name="subscriptionid" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" language="javascript">
+<!--
+
+// the english words used in display purposes
+var text = new Array(_("رقم"),_("مجلد"),_("عدد"),_("شهر"),_("أسبوع"),_("يبدأ ب:"),_("إضافة في: "),_("Choose Hemisphere:"),_("Northern"),_("Southern",
+"Autumn"),_("شتاء"),_("Spring"),_("الصيف"),_("السقوط"),_("الموسم"),_("سنه"));
+
+
+// to display the options section
+function options(x,y,z){
+var textbox = '';
+    // alert("X: "+x+"Y: "+y+"Z: "+z);
+    if(x){
+        document.f.xfield.value = x;
+        if(y){
+            document.f.yfield.value = y;
+            if(z){
+                document.f.zfield.value = z;
+            }
+        }
+    }
+}
+
+function confirm_deletion() {
+    var is_confirmed = confirm(_("هل انت متأكد انك تريد حذف هذا الاشتراك?"));
+    if (is_confirmed) {
+        window.location="subscription-detail.pl?subscriptionid=<!-- TMPL_VAR name="subscriptionid" -->&op=del";
+    }
+}
+function popup(subscriptionid) {
+    newin=window.open("subscription-renew.pl?mode=popup&subscriptionid="+subscriptionid,'popup','width=590,height=440,toolbar=false,scrollbars=yes');
+}
+
+-->
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="serials-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; <a href="/cgi-bin/koha/serials/serials-home.pl">دوريات</a> &rsaquo;تفاصيل للاشتراك #<!-- TMPL_VAR name="subscriptionid" --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	<!-- TMPL_INCLUDE NAME="serials-toolbar.inc" -->
+
+    <h1>Subscription for <!-- TMPL_VAR name="bibliotitle" --> </h1>
+    <!--TMPL_IF Name="abouttoexpire"--><div class="problem">الاشتراك قارب أن ينتهى. يجب تجديدة الان.</div><!--/TMPL_IF-->
+    
+    <div id="subscription_info">
+        <h2>معلومات الاشتراك</h2>
+		<ul>
+		<li><span class="label">Subscription ID: </span><!--TMPL_VAR name="subscriptionid"--></li>
+        <li><span class="label">هوية المكتبي: "n"</span> <!-- TMPL_VAR name="librarian" --></li>
+        <li><span class="label">Vendor:</span> <a href="/cgi-bin/koha/acqui/supplier.pl?supplierid=<!-- TMPL_VAR name="aqbooksellerid"-->"><!-- TMPL_VAR name="aqbooksellername" -->&nbsp;</a></li>
+        <li><span class="label">Biblio:</span> <i>(<!-- TMPL_VAR name="bibnum" -->)</i> <a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR name="bibnum" -->"><!-- TMPL_VAR name="bibliotitle" --></a></li><br />
+<!-- TMPL_IF name="branchcode" --><li><span class="label">المكتبة:</span> <!-- TMPL_VAR name="branchcode" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="serialsadditems" -->
+            <li>Serial receipt creates an item record.</li>
+        <!-- TMPL_ELSE -->
+            <li>Serial receipt does not create an item record.</li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="callnumber" --><li><span class="label">رقم الطلب:</span> <!-- TMPL_VAR name="callnumber" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="letter" --><li><span class="label">تنبيه المستفيد مع:</span> <!-- TMPL_VAR name="letter" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="notes" --><li><span class="label">ملاحظات:</span> <!-- TMPL_VAR name="notes" --></li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="internalnotes" --><li><span class="label">ملاحظات الادارة:</span> <!-- TMPL_VAR name="internalnotes" --></li><!-- /TMPL_IF -->
+        
+    </div>
+    <div id="subscription_planning">
+        <h2>تخطيط</h2>
+            <p><label>تاريخ البدء:</label> <!-- TMPL_VAR name="startdate" -->
+            </p>
+            <p><label>التتابع (*):</label>
+                <!--TMPL_IF name="periodicity16" -->
+                        بدون إنتظام
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity32" -->
+                        غير منظم
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity0" -->
+                        غير معرّف
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity12" -->
+                        2/يوم
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity1" -->
+                        1/يوم
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity13" -->
+                        3/إسبوع
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity2" -->
+                        1/أسبوع
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity3" -->
+                        1/2أسابيع
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity4" -->
+                        1/3أسابيع
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity5" -->
+                        1/شهر
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity6" -->
+                        1/2 شهور (6/سنة)
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity7" -->
+                        1/الربع
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity8" -->
+                        1/الربع
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity9" -->
+                        2/سنه
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity10" -->
+                        1/سنه
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity11" -->
+                        1/2 سنين
+                <!-- /TMPL_IF -->
+              تاريخ يدوى :
+                <!--TMPL_IF Name="manualhistory"-->
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                <!-- TMPL_ELSE -->
+                    <input type="checkbox" disabled="disabled" />
+                <!--/TMPL_IF-->
+            </p>
+            <p><label>Number pattern:</label>
+                <!-- TMPL_IF name="numberpattern1" -->
+                    العدد فقط
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern2" -->
+                    مجلد, رقم, عدد
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern3" -->
+                    مجلد, رقم
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern4" -->
+                    مجلد, عدد
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern5" -->
+                    الرقم, العدد
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern8" -->
+                    سنه/رقم
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern6" -->
+                    موسمى فقط
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern7" -->
+                    ليس من الأعلى
+                <!-- /TMPL_IF -->
+            </p>
+            <table>
+            <tr><td><p>يبدأ ب:</p></td>
+                <td align="center"><!--TMPL_VAR NAME="lastvalue1"--></td>
+            <!--TMPL_IF NAME="lastvalue2"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="lastvalue2"-->
+                </td>
+            <!--/TMPL_IF-->
+            <!--TMPL_IF NAME="lastvalue3"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="lastvalue3"-->
+                </td>
+            <!--/TMPL_IF-->
+            </tr>
+            <tr><td><p>إضافة: </p></td>
+                <td align="center">&nbsp;</td>
+            <!--TMPL_IF NAME="whenmorethan2"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="whenmorethan2"-->
+                </td>
+            <!--/TMPL_IF-->
+            <!--TMPL_IF NAME="whenmorethan3"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="whenmorethan3"-->
+                </td>
+            <!--/TMPL_IF-->
+            </tr>
+            </table>
+            <!-- TMPL_IF NAME="irregular_issues" -->
+            <p><label>عدم انتظام:</label> <!-- TMPL_VAR name="irregular_issues" -->الاعداد
+            </p>
+            <!-- /TMPL_IF -->
+            <p><label>الوصول الأول: </label> <!--TMPL_VAR name="firstacquidate" -->
+            </p>
+        <!-- TMPL_IF name="numberlength" --><p><label>عدد الاعداد:</label> <!-- TMPL_VAR name="numberlength" --></p><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="weeklength" --><p><label>عدد الاسابيع:</label> <!-- TMPL_VAR name="weeklength" --></p><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="monthlength" --><p><label>عدد الشهور:</label> <!-- TMPL_VAR name="monthlength" --></p><!-- /TMPL_IF -->
+    </div>
+    <div id="subscription_numbering" style="display:none;">
+        <h3>Numbering calculation</h3>
+        <p><label>Numbering formula:</label> <!-- TMPL_VAR name="numberingmethod" --></p>
+        <table>
+            <tr>
+                <th>&nbsp;</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Z</th>
+                </tr>
+                <tr>
+                    <td>أضف</td>
+                    <td>
+                        <!-- TMPL_VAR name="add1" -->
+                    </td>
+                    <td>
+                        <!-- TMPL_VAR name="add2" -->
+                    </td>
+                    <td>
+                        <!-- TMPL_VAR name="add3" -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>مرّة في كلّ</td>
+                    <td><!-- TMPL_VAR name="every1" --></td>
+                    <td><!-- TMPL_VAR name="every2" --></td>
+                    <td><!-- TMPL_VAR name="every3" --></td>
+                </tr>
+                <tr>
+                    <td>عندما يكون أكثر من</td>
+                    <td><!-- TMPL_VAR name="whenmorethan1" --> <!-- TMPL_IF name="innerloop1" --><br />
+                        <i>(is <!-- TMPL_VAR name="innerloop1" -->)</i><!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_VAR name="whenmorethan2" --> <!-- TMPL_IF name="innerloop2" --><br />
+                        <i>(is <!-- TMPL_VAR name="innerloop2" -->)</i><!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_VAR name="whenmorethan3" --> <!-- TMPL_IF name="innerloop3" --><br />
+                        <i>(is <!-- TMPL_VAR name="innerloop3" -->)</i><!-- /TMPL_IF --></td>
+                </tr>
+                <tr>
+                    <td>أخر إلى</td>
+                    <td><!-- TMPL_VAR name="setto1" --></td>
+                    <td><!-- TMPL_VAR name="setto2" --></td>
+                    <td><!-- TMPL_VAR name="setto3" --></td>
+                </tr>
+                <tr>
+                    <td>
+                            Inner Counter
+                    </td>
+                    <td><!-- TMPL_VAR name="innerloop1" --></td>
+                    <td><!-- TMPL_VAR name="innerloop2" --></td>
+                    <td><!-- TMPL_VAR name="innerloop3" --></td>
+                </tr>
+                <tr>
+                    <td>
+                            قيمة أخيرة
+                    </td>
+                    <td><!-- TMPL_VAR name="lastvalue1" --></td>
+                    <td><!-- TMPL_VAR name="lastvalue2" --></td>
+                    <td><!-- TMPL_VAR name="lastvalue3" --></td>
+                </tr>
+            </table>
+    </div>
+    <div id="subscription_issues">
+        <h2>أعداد الدورية</h2>
+        <table>
+        <tr>
+            <th>رقم العد</th>
+            <th>تاريخ مخطّط</th>
+            <th>تاريخ منشور</th>
+            <th>حالة</th>
+        </tr>
+        <!-- TMPL_LOOP name="serialslist" -->
+            <tr>
+                <td>
+                    <!-- TMPL_VAR name="serialseq" -->
+                </td>
+                <td>
+                    <!-- TMPL_VAR name="planneddate" -->
+                </td>
+                <td>
+                    <!-- TMPL_VAR name="publisheddate" -->
+                </td>
+                <td>
+                        <!--TMPL_IF name="status1" -->
+                            Expected
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status2" -->
+                            وصل
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status3" -->
+                            متأخر
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status4" -->
+                            مفقود
+                        <!-- /TMPL_IF -->
+                </td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+        </table>
+    </div>
+    <div id="subscription_summary">
+        <h2>ملخص الاشتراك</h2>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td><label>تاريخ البدء</label></td>
+                <td> <!-- TMPL_VAR name="startdate" --> </td>
+            </tr>
+            <tr>
+                <td><label>تاريخ النهاية</label></td>
+                <td> <!-- TMPL_VAR name="enddate" --></td>
+            </tr>
+            <tr>
+                <td><label>History start date</label></td>
+                <td> <!-- TMPL_VAR name="histstartdate" --> </td>
+            </tr>
+            <tr>
+                <td><label>History end date</label></td>
+                <td> <!-- TMPL_VAR name="histenddate" --></td>
+            </tr>
+            <tr><td><label>الاعداد المستلمة</label></td><td><!-- TMPL_VAR name="recievedlist" --></td></tr>
+            <tr><td><label>أعداد مفقودة</label></td><td><!-- TMPL_VAR name="missinglist" --></td></tr>
+            <tr><td><label>Nonpublic note</label></td><td><!-- TMPL_VAR name="librariannote" --></td></tr>
+            <tr><td><label>Public note</label></td><td><!-- TMPL_VAR name="opacnote" --></td></tr>
+        </table>
+    </div>
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="serials-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

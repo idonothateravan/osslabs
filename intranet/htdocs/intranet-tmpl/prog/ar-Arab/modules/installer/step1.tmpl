@@ -1,0 +1,78 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo; مركّب ويب &rsaquo; الخطوة 1</title>
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div>
+<h1 id="logo"><img alt="كوها" src="/intranet-tmpl/prog/img/koha.org-logo.gif"> مركّب ويب &rsaquo؛ خطوة 1 </h1>
+<!--TMPL_UNLESS Name="language"-->
+<p>لقد قاربت على تركيب كوها.</p>
+
+<p>Please pick your language from the following list. If your language is not
+listed, please inform your systems administrator.</p>
+<form name="language" method="post">
+<select name="language">
+<!-- TMPL_IF NAME="installer_languages_loop" -->
+        <!-- TMPL_LOOP NAME="installer_languages_loop" -->
+            <!-- TMPL_IF NAME="plural" -->
+            <optgroup label="<!-- TMPL_VAR NAME="language" -->">
+            <!-- TMPL_LOOP NAME="sublanguages_loop" -->
+                <option value="<!-- TMPL_VAR NAME="rfc4646_subtag" -->"><!-- TMPL_IF NAME="native_description" --><!-- TMPL_VAR NAME="native_description" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="rfc4646_subtag" --><!-- /TMPL_IF --></option>
+            <!-- /TMPL_LOOP -->
+            </optgroup>
+            <!-- TMPL_ELSE -->
+		<option value="<!-- TMPL_VAR NAME="rfc4646_subtag" -->"><!-- TMPL_IF NAME="native_description" --><!-- TMPL_VAR NAME="native_description" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="rfc4646_subtag" --><!-- /TMPL_IF --></option>
+            <!-- /TMPL_IF -->
+        <!-- /TMPL_LOOP -->
+<!-- /TMPL_IF -->
+</select>
+</p>
+
+<p> أنقر التالى للاستمرار <input value="التالى&gt;&gt;" type="submit"></p>
+</form>
+<!--/TMPL_UNLESS-->
+<!--TMPL_IF Name="language"-->
+  <!--TMPL_UNLESS Name="checkmodule"-->
+  <!--TMPL_IF Name="missing"-->
+  <p>بعض وحدات البيرل مفقودة<br />
+  <ul>
+  <!--TMPL_LOOP Name="missing"-->
+    <li><!--TMPL_VAR Name="name"-->
+    <!--TMPL_IF Name="usagemail"-->
+      <br /> هذا النظام الفرعى مستخدم حينما كوها يجب أن يرسل بريد إلكتروني.
+    <!--/TMPL_IF-->
+    <!--TMPL_IF Name="usagebarcode"-->
+      <br /> هذا النظام الفرعى مطلوب إن كنت تنوى طباعة الباركود.
+    <!--/TMPL_IF-->
+    <!--TMPL_IF Name="usagespine"-->
+      <br /> هذا النظام الفرعى مطلوب إن كنت تنوى طباعة spine labels.
+    <!--/TMPL_IF-->
+    <!--TMPL_IF Name="usageLDAP"-->
+      <br /> هذا النظام الفرعى مطلوب إن كنت تنوى إستعمالLDAP للتحقّق.
+    <!--/TMPL_IF-->
+    </li>
+  <!--/TMPL_LOOP-->
+  رجاء راعى تركيب هذه الوحدات قبل الإستمرار.
+  <pre>
+  <!--TMPL_LOOP Name="missing"-->
+    perl -MCPAN -e "install <!--TMPL_VAR Name="name"-->";
+  <!--/TMPL_LOOP-->
+  </pre>
+  <!--/TMPL_IF-->
+  <!--TMPL_IF Name="problems"-->
+  <p>صادفت بعض المشاكل.</p>
+   <ul>
+    <!--TMPL_IF Name="perlversion"-->
+    <li>تبدو نسختك من بيرل ملغية. رجاء طوّر للنسخة الأحدث لبيرل (على الأقل نسخة 5.006001).</li>
+    <!--/TMPL_IF-->
+   </ul>
+  <!--/TMPL_IF-->
+  <!--/TMPL_UNLESS-->
+  <!--TMPL_IF Name="checkmodule"-->
+<form name="checkmodules" action="install.pl">
+<p> كل الاعتمادات ركبت.
+</p>
+<input type="hidden" name="step" value="2" />
+<p>من فضلك إنقر التالى للمتابعة <input value="التالى&gt;&gt;" type="submit"></p>
+</form>
+  <!--/TMPL_IF-->
+<!--/TMPL_IF-->
+<!-- TMPL_INCLUDE name="intranet-bottom.inc" -->

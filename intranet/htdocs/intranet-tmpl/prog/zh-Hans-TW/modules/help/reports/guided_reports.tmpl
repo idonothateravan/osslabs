@@ -1,0 +1,52 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+<a name="#top" title="#top"></a> <h1>報表精靈說明</h1>
+	<ul>
+		<li><a href="#new">新增報表</a></li>
+		<li><a href="#save">儲存報表</a></li>
+		<li><a href="#sql">由 SQL 產生報表</a></li>
+		<li><a href="#scheduler">定期產生一個報表</a></li>
+		<li>
+		<ul>
+			<li> 
+			<ul>
+				<li><strong>按表格計算的：</strong>只有簡單的欄位報表。</li>
+				<li><strong>矩陣：</strong><em>沒有完成</em></li>
+				<li><strong>摘要：</strong><em>沒有完成</em></li>
+			</ul>
+			<ul>
+				<li><strong>系統產生規則</strong> These criteria are known to the system and are drawn from your system preferences</li>
+				<li><strong>字典條件</strong> These are custom defined criteria defined for your Koha in the Reports Dictionary</li>
+			</ul>
+			<ul>
+				<li>總計：返回每一個數值的總計</li>
+				<li>總數：歸還總數</li>
+				<li>平均：歸還平均值</li>
+				<li>最小值：返回最低數值</li>
+				<li>最大值：返回最高數值</li>
+			</ul></li>
+<p>For help with the Reports Dictionary - see online help within the Dictionary Pages</p>
+<hr/><a name="#new" title="#new"></a><h2>Building A New Report</h2> <h3>步驟 6-1：選擇一個模組，產生報表</h3>
+<p>Select one of the module areas to report on. Guided reports can only generate reports from within one module. For reports across modules, you will need to use either a compound report, or build a custom report using SQL statements.</p><h3>步驟 6-2：選擇報表型式</h3>
+<p>這裡可以產生三種型式的報表：</p><h3>步驟 6-3：選擇顯示欄位</h3>
+<p>Select the columns to draw the report data from. Click the column to add in the left hand box and then click the &quot;Add&quot; button. Your column will now show up in the right hand box. To remove a selected column, click the column name on the right hand side and then click the delete button. Once you are happy with the columns, select the &quot;Choose Columns&quot; button to proceed to the next step.</p>
+<p><strong>小心選擇欄位。</strong> The guided reports feature expects that you have some knowledge of the Koha database structure and what each field is used for. Be careful selecting columns as a poor choice may lead to a report that is so large that it either times out before it can be generated, or it will require a large amount of system resources to generate and slow down the operation of Koha.</p>
+<p>在報表引擎沒有任何檢查</p><h3>步驟 6-4：選擇限制條件 </h3>
+<p>Criteria allow you to limit your report to display results to a given criteria.Criteria are bound to a specific reporting area.</p><h3>步驟 6-5：選擇欄位總數</h3>
+<p>Now choose operations that you want to preform on each column. The operations that can be selected are:</p>.	  <h3>步驟 6-6：選擇你報表排序的方式</h3>
+<p>Select how you wish to order the report. You can select multiple criteria to order against and the hierarchy that the are applied. For example order alphabetically by Surname, and then alphabetically by First Name</p><br/><a href="#top">
+返回最上層
+</a>
+<hr/><a name="#save" title="#save"> </a><h2>Saving A Report</h2>
+<p>Once you have generated a report, you can now choose to save the report definition so that you can run it again when required, or setup the Task Scheduler to run the report for you.</p><br/><a href="#top">
+返回最上層
+</a>
+<hr/><a name="#sql" title="#sql"> </a><h2>Generating A New Report From SQL</h2>
+<p>A report can be generated directly using from an SQL statement. On the &quot;Create from SQL&quot; page, give the report a Title and Description (using the notes field) and then paste your SQL statement into the text area.</p><br/><a href="#top">
+返回最上層
+</a>
+<hr/><a name="#scheduler" title="#scheduler"> </a><h2>Scheduling A Report</h2>
+<p>Reports can be scheduled to run either at a one off time, or repeatedly at a defined period using the task scheduler. The task scheduler is found under Tools &gt;Task Scheduler</p><br/><a href="#top">
+返回最上層
+</a>
+		</ul></li>
+	</ul><!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

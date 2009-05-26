@@ -1,0 +1,54 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 讀者 &rsaquo; 建立收據</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="patron-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; <a href="/cgi-bin/koha/members/members-home.pl">讀者</a> &rsaquo; 收據</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="members-toolbar.inc" -->
+
+<!-- The manual invoice and credit buttons -->
+<div class="toptabs">
+<ul class="ui-tabs-nav">
+	<li><a href="/cgi-bin/koha/members/boraccount.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->">金額</a></li>
+	<li><a href="/cgi-bin/koha/members/pay.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->" >繳交罰款</a></li>
+	<li><a href="/cgi-bin/koha/members/maninvoice.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->" >新增發票</a></li>
+	<li class="ui-tabs-selected"><a href="/cgi-bin/koha/members/mancredit.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->" >新增收據</a></li>
+</ul>
+<div class="tabs-container">
+
+<form action="/cgi-bin/koha/members/mancredit.pl" method="post">
+<input type="hidden" name="borrowernumber" id="borrowernumber" value="<!-- TMPL_VAR Name="borrowernumber" -->" />
+
+<fieldset class="rows">
+<legend>收據</legend><ol>
+	<li><label for="type">收據型式： </label><select name="type" id="type">
+<option value="C">收據</option>
+<option value="FOR">不需要繳交</option>
+</select></li>
+	<li><label for="barcode">登錄號： </label><input type="text" name="barcode" id="barcode" /></li>
+	<li><label for="desc">描述： </label><input type="text" name="desc" size="50" id="desc" /></li>
+	<li><label for="amount">金額： </label><input type="text" name="amount" id="amount" /></li>
+</ol></fieldset>
+
+<fieldset class="action"><input type="submit" name="add" value="新增收據"> <a class="cancel" href="/cgi-bin/koha/members/boraccount.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->">取消</a></fieldset>
+</form>
+
+</div></div>
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="circ-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

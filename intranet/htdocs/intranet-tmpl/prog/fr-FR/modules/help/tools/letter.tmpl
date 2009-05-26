@@ -1,0 +1,55 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Messages</h1>
+
+<p>Les notifications sont des messages envoyés aux adhérents, aux fournisseurs et au personnel à certains moments clés.</p>
+<h2>Ajouter une notice</h2>
+		<ul>
+			<li>Cliquez sur 'Ajouter notification'</li>
+			<li>Associez votre notification à un 'Module Koha' dans le menu déroulant</li>
+			<li>Entrez un code pour votre nouvelle notification (par exemple: 'ODUE' pour Overdue - les retards)</li>
+			<li>Entrez un Nom pour votre nouvelle notification (par exemple "Relance")</li>
+			<li>Entre un Sujet de message (par exemple "Document en retard")</li>
+			<li>Corps du message </li>
+		</ul>
+		<ul>
+			<li> 
+			<ul>
+				<li>Sélectionnez un champ dans le menu déroulant côté gauche
+				<ul>
+					<li>
+				    <span style="background-color: #ffe599">
+ASTUCE : Pour une aide sur chaque champs, voir : Notices: champs de la base de données, dans le manuel.</span></li>
+				</ul></li>
+				<li>Cliquez sur le bouton '&gt;&gt;' pour insérer ce champs dans votre message à l'endroit choisi.</li>
+				<li>Continuez à créer des champs et cliquez sur '&gt;&gt;' pour les insérer dans votre message.</li>
+				<li>Puis cliquez 'Valider'</li>
+			</ul></li>
+			<li>
+		    <span style="color: #ff0000">
+IMPORTANT: Currently, Koha can not reference multiple biblios in a single notice (in other words--in the example below-- there is not just ONE email sent that describes ALL currently overdue items, but an email sent for EACH overdue item) </span></li>
+		</ul><h3>	   
+	   Comment planifier les lettres de relance?</h3>Pour plannifier les notifications de retard, vous devez utiliser l'outil 'Déclencheur de notifications'<br/>
+		<ul>
+			<li><em>Allez à:</em> Plus &gt; Outils &gt; Déclencheur de notifications</li>
+		</ul><h3>	   
+	   Où sont utilisées les notifications?</h3>Mis à part ODUE ("Overdue Notice" - lettre de retard) deux autres messages sont prédéfinis dans Koha:<br/>
+		<ul>
+			<li>ACQCLAIM (Réclamation Acquisition): Utilisé dans le module claimacquisition module
+			<ul>
+				<li><em>Aller à:</em> Plus &gt; Acquisitions &gt; Commandes en retard</li>
+			</ul></li>
+		</ul>
+		<ul>
+			<li>RLIST (Routing List - ou Liste de Routage) : utilisé dans le module périodiques
+			<ul>
+				<li><em>Allez à:</em> Plus &gt; Périodiques &gt; Ajouter abonnement</li>
+				<li>Vous pouvez sélectionner la notification 'liste de circulation' au moment de la création du nouveal abonnement (dans le menu déroulant 'notification adhérent').<br/>
+				<ul>
+					<li>
+				    <span style="background-color: #ffe599">
+ASTUCE : Si vous voulez prévenir les adhérentes de l'arrivée d'un nouveau fascicule de périodiques, vous pouvez cliquer sur 'définir une notification', qui vous amènera à l'outil 'Messages'</span></li>
+				</ul></li>
+			</ul></li>
+		</ul>
+	</div>	<!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

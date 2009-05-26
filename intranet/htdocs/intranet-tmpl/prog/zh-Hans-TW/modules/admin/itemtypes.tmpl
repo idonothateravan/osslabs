@@ -1,0 +1,320 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 管理 &rsaquo; 館藏型式 <!-- TMPL_IF name="add_form" -->&rsaquo; 
+  <!-- TMPL_IF name="itemtype" -->
+修改 '<!-- TMPL_VAR name="itemtype" -->' 館藏型式
+  <!-- TMPL_ELSE -->
+新增館藏型式
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" -->&rsaquo; 
+  <!-- TMPL_IF name="total" -->
+無法刪除館藏型式 '<!-- TMPL_VAR name="itemtype" -->'
+  <!-- TMPL_ELSE -->
+刪除 '<!-- TMPL_VAR name="itemtype" -->' 館藏型式？
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirmed" -->&rsaquo; 資料被刪除
+<!-- /TMPL_IF -->
+</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" --><script type="text/javascript">
+//<![CDATA[
+
+function isNotNull(f,noalert) {
+	if (f.value.length ==0) {
+		return false;
+	}
+	return true;
+}
+
+function toUC(f) {
+	var x=f.value.toUpperCase();
+	f.value=x;
+	return true;
+}
+
+function isNum(v,maybenull) {
+var n = new Number(v.value);
+if (isNaN(n)) {
+	return false;
+	}
+if (maybenull==0 && v.value=='') {
+	return false;
+}
+return true;
+}
+
+function isDate(f) {
+	var t = Date.parse(f.value);
+	if (isNaN(t)) {
+		return false;
+	}
+}
+
+function Check(f) {
+	var ok=1;
+	var _alertString="";
+	var alertString2;
+	if (f.itemtype.value.length==0) {
+		_alertString += "\n- " + _("館藏型式遺失");
+	}
+	if (!(isNotNull(window.document.Aform.description,1))) {
+		_alertString += "\n- " + _("沒有描述");
+	}
+	if ((!isNum(f.rentalcharge,0)) && f.rentalcharge.value.length > 0) {
+		_alertString += "\n- " + _("借用費用不是數字");
+	}
+	if (_alertString.length==0) {
+		document.Aform.submit();
+	} else {
+		alertString2  = _("表格無法寄送，因為發現以下問題：");
+		alertString2 += "\n------------------------------------------------------------------------------------\n";
+		alertString2 += _alertString;
+		alert(alertString2);
+	}
+}
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">管理</a> &rsaquo; <!-- TMPL_IF name="add_form" -->
+  <!-- TMPL_IF name="itemtype" -->
+<a href="/cgi-bin/koha/admin/itemtypes.pl">館藏型式</a> &rsaquo; 修改 '<!-- TMPL_VAR name="itemtype" -->' 館藏型式
+  <!-- TMPL_ELSE -->
+<a href="/cgi-bin/koha/admin/itemtypes.pl">館藏型式</a> &rsaquo; 新增館藏型式
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" -->
+  <!-- TMPL_IF name="total" -->
+<a href="/cgi-bin/koha/admin/itemtypes.pl">館藏型式</a> &rsaquo; 無法刪除 '<!-- TMPL_VAR name="itemtype" -->' 館藏型式
+  <!-- TMPL_ELSE -->
+<a href="/cgi-bin/koha/admin/itemtypes.pl">館藏型式</a> &rsaquo; 刪除 '<!-- TMPL_VAR name="itemtype" -->' 館藏型式？
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirmed" -->
+<a href="/cgi-bin/koha/admin/itemtypes.pl">館藏型式</a> &rsaquo; 資料被刪除
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="else" -->
+館藏型式管理
+<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	
+<!-- TMPL_IF NAME="else" --><div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+
+	// prepare DOM for YUI Toolbar
+
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+
+	// YUI Toolbar Functions
+
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("newitemtype");
+	}
+
+	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="newitemtype" href="/cgi-bin/koha/admin/itemtypes.pl?op=add_form">新增館藏型式</a></li>
+</ul></div><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="add_form" -->
+  <!-- TMPL_IF name="itemtype" -->
+      <h3>修改館藏型式</h3>
+  <!-- TMPL_ELSE -->
+      <h3>新增館藏型式</h3>
+  <!-- /TMPL_IF -->
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="add_validate" />
+    <input type="hidden" name="checked" value="0" />
+		
+    <fieldset class="rows">
+	<ol>
+  <!-- TMPL_IF name="itemtype" -->
+      <li>
+          <span class="label">館藏型式</span> <input type="hidden" name="itemtype" value="<!-- TMPL_VAR name="itemtype" -->" />
+          <!-- TMPL_VAR name="itemtype" -->
+     </li>
+  <!-- TMPL_ELSE -->
+      <li>
+          <label for="itemtype">館藏型式</label> <input type="text" id="itemtype" name="itemtype" size="10" maxlength="10" onblur="toUC(this)" />
+      </li>
+  <!-- /TMPL_IF -->
+      <li>
+          <label for="description">描述</label><input type="text" id="description" name="description" size="48" maxlength="80" value="<!-- TMPL_VAR name="description" escape="HTML" -->" />      </li>
+     <!-- TMPL_IF NAME="noItemTypeImages" -->
+	 <li><span class="label">圖片： </span>Item type images are disabled. To enable them, turn off the <a href="/cgi-bin/koha/admin/systempreferences.pl?tab=all&searchfield=noItemTypeImages">noItemTypeImages system preference</a></li>
+	 <!-- TMPL_ELSE --> <li><fieldset>
+	  <legend>Images: </legend>
+        
+          <ol>
+  <!-- TMPL_LOOP NAME="imagesets" -->
+  <li>Icons from collection <b><!-- TMPL_VAR name="imagesetname" --></b>:</li>
+  <!-- TMPL_LOOP NAME="images" -->
+  			<li style="float: none; display: inline; clear : none; width: auto;">
+            <label> <!-- TMPL_IF NAME="StaffImageUrl" -->
+              <img src="<!-- TMPL_VAR name="StaffImageUrl" -->" alt="<!-- TMPL_VAR name="StaffImageUrl" -->" title="<!-- TMPL_VAR name="StaffImageUrl" -->" />
+        <!-- TMPL_ELSE -->
+        <!-- /TMPL_IF -->
+    <!-- TMPL_IF name="checked" -->
+              <input type="radio" name="image" value="<!-- TMPL_VAR name="KohaImage" -->" checked="checked" />
+    <!-- TMPL_ELSE -->
+              <!-- TMPL_IF NAME="KohaImage" --> <!-- to delete the radio button if there is no image after -->
+              <input type="radio" name="image" value="<!-- TMPL_VAR name="KohaImage" -->" />
+              <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+            </label>
+			</li>
+  <!-- /TMPL_LOOP -->
+  <!-- /TMPL_LOOP -->
+	<li>
+            <label for="remote_image_check"> 遠端圖片：</label>
+  <!-- TMPL_IF name="remote_image" -->
+            <input type="radio" id="remote_image_check" name="image" value="remoteImage" checked="checked" />
+  <!-- TMPL_ELSE -->
+            <input type="radio" id="remote_image_check" name="image" value="remoteImage" />
+  <!-- /TMPL_IF -->
+           
+            <input type="text" name="remoteImage" size="48" maxlength="200" value="<!-- TMPL_VAR name="remote_image" -->" onmousedown="document.getElementById('remote_image_check').checked = true;" />
+
+  <!-- TMPL_IF name="remote_image" -->
+            <img src="<!-- TMPL_VAR name="remote_image" -->" alt="" />
+  <!-- /TMPL_IF -->
+          </li>
+          <li>
+            <label for="noimage">沒有圖片： </label><input type="radio" name="image" id="noimage" value="removeImage" />
+          </li>
+        
+          </ol>
+		  </fieldset>
+      </li><!-- /TMPL_IF -->
+      <li>
+          <label for="notforloan">無法借閱</label>   <!-- TMPL_IF name="notforloan" -->
+                <input type="checkbox" id="notforloan" name="notforloan" checked="checked" value="1" />
+            <!-- TMPL_ELSE -->
+                <input type="checkbox" id="notforloan" name="notforloan" value="1" />
+            <!-- /TMPL_IF -->
+          (if checked, no item of this type can be issued. If not checked, every item of this type can be issued unless notforloan is set for a specific item)
+        
+      </li>
+      <li>
+          <label for="renewalsallowed">續借： </label>
+		  <input type="text" id="renewalsallowed" name="renewalsallowed" size="3" maxlength="3" value="<!-- TMPL_VAR NAME="renewalsallowed" -->" />
+        </li>
+      <li>
+          <label for="rentalcharge">借閱費用： </label>
+		  <input type="text" id="rentalcharge" name="rentalcharge" size="10" value="<!-- TMPL_VAR name="rentalcharge" -->" />
+         </li>
+      <li>
+          <label for="summary">摘要： </label>
+         <textarea id="summary" name="summary" cols="55" rows="5"><!-- TMPL_VAR NAME="summary" --></textarea>
+          <p>Enter a summary that will overwrite the default one in search results lists. Example, for a website itemtype : </p>
+          <p><b>&lt;a href="[856u]"&gt;open site&lt;/a&gt;</b> will show the link just below the title</p>
+      </li>
+	  </ol>
+    </fieldset>
+
+    <fieldset class="action">
+      <input type="button" value="儲存改變" onclick="Check(this.form)">
+	  <a href="/cgi-bin/koha/admin/itemtypes.pl" class="cancel">取消</a>
+    </fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="delete_confirm" -->
+<!-- TMPL_IF name="total" --><div class="dialog message">
+<h3>無法刪除館藏型式</h3>
+<p><strong>這筆書目記錄目前用了 <!-- TMPL_VAR name="total" --> 次</strong>。不可移除。</p>
+<!-- TMPL_ELSE --><div class="dialog alert">
+<h3>刪除 '<!-- TMPL_VAR name="itemtype" -->' 館藏型式？</h3>
+<!-- /TMPL_IF -->
+<table>
+		<tr>
+			<th scope="row">館藏型式</th>
+			<td><!-- TMPL_VAR name="itemtype" --></td>
+		</tr>
+
+	<tr><th scope="row">描述</th><td><!-- TMPL_VAR name="description" --></td></tr>
+	<tr><th scope="row">借閱時間</th><td><!-- TMPL_VAR name="loanlength" --></td></tr>
+	<tr><th scope="row">續借</th><td><!-- TMPL_IF name="renewalsallowed" -->允許<!-- TMPL_ELSE -->不允許<!-- /TMPL_IF --></td></tr>
+<tr><th scope="row">借閱費用</th><td><!-- TMPL_VAR name="rentalcharge" --></td></tr></table>
+		<form action="<!-- TMPL_VAR name="script_name" -->" method="post">
+		<input type="hidden" name="op" value="delete_confirmed" /><input type="hidden" name="itemtype" value="<!-- TMPL_VAR name="itemtype" -->" /><!-- TMPL_IF name="total" -->
+		</form>
+		
+		<form action="<!-- TMPL_VAR name="script_name" -->" method="post"><input type="submit" class="approve" value="完成"></form>
+	<!-- TMPL_ELSE -->
+		<input type="submit" class="approve" value="刪除這個館藏型式"></form> <form action="<!-- TMPL_VAR name="script_name" -->" method="post"><input type="submit" class="deny" value="無法刪除"></form>
+	<!-- /TMPL_IF -->
+</div>
+	
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="else" -->
+<h2>館藏型式管理</h2>
+<table>
+  <tr>
+    <!-- TMPL_UNLESS NAME="noItemTypeImages" --><th>圖片</th><!-- /TMPL_UNLESS -->
+    <th>代碼</th>
+    <th>描述</th>
+    <th>無法借閱</th>
+    <th>可續借</th>
+    <th>費用</th>
+    <th>處理</th>
+  </tr>
+  <!-- TMPL_LOOP name="loop" -->
+    <!-- TMPL_IF NAME="toggle" -->
+  <tr>
+    <!-- TMPL_ELSE -->
+  <tr class="highlight">
+    <!-- /TMPL_IF -->
+   <!-- TMPL_UNLESS NAME="noItemTypeImages" --> <td><img src="<!-- TMPL_VAR name="imageurl" -->" alt="" /></td><!-- /TMPL_UNLESS -->
+    <td>
+      <a href="<!-- TMPL_VAR name="script_name" -->?op=add_form&amp;itemtype=<!-- TMPL_VAR name="itemtype" escape="HTML" -->">
+        <!-- TMPL_VAR name="itemtype" -->
+      </a>
+    </td>
+    <td><!-- TMPL_VAR name="description" --></td>
+    <td><!-- TMPL_IF NAME="notforloan" -->是<!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td>
+    <td>
+    <!-- TMPL_IF NAME="renewalsallowed" -->
+      <!-- TMPL_VAR name="renewalsallowed" --> 次
+    <!-- TMPL_ELSE -->
+      否
+    <!-- /TMPL_IF -->
+    </td>
+    <td>
+    <!-- TMPL_UNLESS name="notforloan" -->
+      <!-- TMPL_VAR NAME="rentalcharge" -->
+    <!-- /TMPL_UNLESS -->
+    </td>
+    <td>
+      <a href="<!-- TMPL_VAR name="script_name" -->?op=add_form&amp;itemtype=<!-- TMPL_VAR name="itemtype" escape="HTML" -->">編輯</a> <a href="<!-- TMPL_VAR name="script_name" -->?op=delete_confirm&amp;itemtype=<!-- TMPL_VAR name="itemtype" escape="HTML" -->">刪除</a>
+    </td>
+  </tr>
+  <!-- /TMPL_LOOP -->
+</table>
+
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

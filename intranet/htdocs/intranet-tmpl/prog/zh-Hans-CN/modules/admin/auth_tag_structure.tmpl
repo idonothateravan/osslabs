@@ -1,0 +1,242 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 管理 &rsaquo; MARC 权威记录架构 <!-- TMPL_IF NAME="add_form" --><!-- TMPL_IF NAME="use-heading-flags-p" -->
+    <!-- TMPL_IF NAME="heading-modify-tag-p" -->&rsaquo; <!-- TMPL_IF NAME="authtypecode" -->书目记录架构 <!-- TMPL_VAR NAME="authtypecode" --><!-- TMPL_ELSE -->预设书目架构<!-- /TMPL_IF --> &rsaquo; 修改字段<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="heading-add-tag-p" -->&rsaquo; <!-- TMPL_IF NAME="authtypecode" -->书目记录架构 <!-- TMPL_VAR NAME="authtypecode" --><!-- TMPL_ELSE -->预设书目架构<!-- /TMPL_IF --> &rsaquo; 新增字段（tag）<!-- /TMPL_IF -->
+    <!-- TMPL_ELSE -->&rsaquo; <!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF --><!-- /TMPL_IF --><!-- TMPL_IF NAME="delete_confirm" -->&rsaquo; <!-- TMPL_IF NAME="authtypecode" -->书目记录架构 <!-- TMPL_VAR NAME="authtypecode" --><!-- TMPL_ELSE -->预设书目架构<!-- /TMPL_IF --> &rsaquo; 确认删除<!-- /TMPL_IF --><!-- TMPL_IF NAME="delete_confirmed" -->&rsaquo; <!-- TMPL_IF NAME="authtypecode" -->书目记录架构 <!-- TMPL_VAR NAME="authtypecode" --><!-- TMPL_ELSE -->预设书目架构<!-- /TMPL_IF --> &rsaquo; 数据被删除<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isNotNull(f,noalert) {
+        if (f.value.length ==0) {
+return false;
+        }
+        return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function toUC(f) {
+        var x=f.value.toUpperCase();
+        f.value=x;
+        return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isNum(v,maybenull) {
+    var n = new Number(v.value);
+    if (isNaN(n)) {
+        return false;
+        }
+    if (maybenull==0 && v.value=='') {
+        return false;
+    }
+    return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isDate(f) {
+        var t = Date.parse(f.value);
+        if (isNaN(t)) {
+            return false;
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function Check(f) {
+        var ok=1;
+        var _alertString="";
+        var alertString2;
+        if (f.tagfield.value.length==0) {
+            _alertString += "\n- " + _("标签号丢失");
+        }
+        if (_alertString.length==0) {
+            document.Aform.submit();
+        } else {
+            alertString2  = _("由于以下问题，表格无法提交");
+            alertString2 += "\n------------------------------------------------------------------------------------\n";
+            alertString2 += _alertString;
+            alert(alertString2);
+        }
+    }
+    //]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首页</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">管理</a> &rsaquo; <!-- TMPL_IF NAME="add_form" --><!-- TMPL_IF NAME="use-heading-flags-p" -->
+    <!-- TMPL_IF NAME="heading-modify-tag-p" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">MARC 权威记录架构</a> &rsaquo; <!-- TMPL_IF NAME="authtypecode" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->">书目记录架构 <!-- TMPL_VAR NAME="authtypecode" --></a><!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">预设书目架构</a><!-- /TMPL_IF --> &rsaquo; 修改字段<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="heading-add-tag-p" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">MARC 权威记录架构</a> &rsaquo; <!-- TMPL_IF NAME="authtypecode" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->">书目记录架构 <!-- TMPL_VAR NAME="authtypecode" --></a><!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">预设书目架构</a><!-- /TMPL_IF --> &rsaquo; 新增字段（tag）<!-- /TMPL_IF -->
+    <!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">MARC 权威记录架构</a> &rsaquo; <!-- TMPL_VAR NAME="action" -->
+    <!-- /TMPL_IF -->
+    <!-- TMPL_ELSE -->
+    <!-- TMPL_IF NAME="delete_confirm" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">MARC 权威记录架构</a> &rsaquo;
+    <!-- TMPL_IF NAME="authtypecode" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->">书目记录架构 <!-- TMPL_VAR NAME="authtypecode" --></a>
+    <!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">预设书目架构</a><!-- /TMPL_IF --> &rsaquo; 确认删除
+    <!-- TMPL_ELSE -->
+    <!-- TMPL_IF NAME="delete_confirmed" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">MARC 权威记录架构</a> &rsaquo; 书目记录被删除
+    <!-- TMPL_ELSE -->权威记录的（MARC）架构 <!-- TMPL_IF NAME="authtypecode" -->书目记录架构 <!-- TMPL_VAR NAME="authtypecode" -->
+    <!-- TMPL_ELSE -->预设书目架构<!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>权威记录的（MARC）架构 <!-- TMPL_IF NAME="authtypecode" --><!-- TMPL_VAR NAME="authtypecode" --><!-- TMPL_ELSE -->预设机读格式（MARC）架构<!-- /TMPL_IF --></h1>
+
+
+<!-- TMPL_IF NAME="add_form" -->
+
+    <h2>
+    <!-- TMPL_IF NAME="use-heading-flags-p" -->
+    <!-- TMPL_IF NAME="heading-modify-tag-p" -->修改字段<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="heading-add-tag-p" -->新增字段<!-- /TMPL_IF -->
+    <!-- TMPL_ELSE --><!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF -->
+    </h2>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+        <input type="hidden" name="op" value="add_validate" />
+        <!-- TMPL_IF NAME="heading-modify-tag-p" --><input type="hidden" name="modif" value="1" /><!-- /TMPL_IF -->
+        <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR NAME="authtypecode" -->" />
+        <fieldset class="rows"><ol>
+		<li><span class="label">字段</span><!-- TMPL_VAR NAME="searchfield" --></li>
+        <li><label for="liblibrarian">图书馆员说明：</label><input type="text" name="liblibrarian" id="liblibrarian" value="<!-- TMPL_VAR NAME="liblibrarian" escape="HTML" -->" size="40" maxlength="100" /></li>
+        <li><label for="libopac">OPAC 说明</label><input type="text" name="libopac" id="libopac" value="<!-- TMPL_VAR NAME="libopac" escape="HTML" -->" size="40" maxlength="100" /></li>
+        <li><label for="repeatable">可重复</label>
+            <!-- TMPL_IF NAME="repeatable" -->
+                <input type="checkbox" name="repeatable" id="repeatable" value="1" checked="checked" />
+            <!-- TMPL_ELSE -->
+                <input type="checkbox" name="repeatable" id="repeatable" value="1" />
+            <!-- /TMPL_IF -->
+        </li>
+        <li><label for="mandatory">必要</label>
+            <!-- TMPL_IF NAME="mandatory" -->
+                <input type="checkbox" name="mandatory" id="mandatory" value="1" checked="checked" />
+            <!-- TMPL_ELSE -->
+                <input type="checkbox" name="mandatory" id="mandatory" value="1" />
+            <!-- /TMPL_IF -->
+            </li>
+        <li><label for="authorised_value">容许值</label><!-- TMPL_VAR NAME="authorised_value" --> (if you select a value here, the indicators will be limited to the authorised value list)</li>
+</ol></fieldset>
+        <p><input type="button" value="送出" class="button" onclick="Check(this.form)"></p>
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+		<div class="dialog alert">
+		<h3>确认删除</h3>
+		<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+		<table>
+			<tr><th scope="row">字段： </th><td><!-- TMPL_VAR NAME="searchfield" --> <!-- TMPL_VAR NAME="liblibrarian" --></td></tr>
+		</table>
+        <input type="hidden" name="op" value="delete_confirmed" />
+        <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR name="authtypecode" -->" />
+        <input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+		<input type="submit" value="是，删除" class="approve"></form>
+		<form action="<!-- TMPL_VAR NAME="script_name" -->" method="get"><input type="submit" class="deny" value="否, 请勿删除"></form>
+		</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirmed" -->
+
+  <div class="dialog message">  <h3>数据被删除</h3>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+    <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR name="authtypecode" -->" />
+    <input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+    <input type="submit" value="完成" class="submit">
+    </form></div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="authtype_create" -->
+
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+        <input type="hidden" name="op" value="authtype_create_confirm" />
+        <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR NAME="authtypecode" -->" />
+        新增 <!-- TMPL_VAR NAME="authtypecode" --> 权威记录架构
+        <select name="existingauthtypecode">
+            <option value="">预设</option>
+        <!-- TMPL_LOOP NAME="existingauthtypeloop" -->
+            <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="authtypetext" --></option>
+        <!-- /TMPL_LOOP -->
+        </select>
+        <input type="submit" value="完成" class="submit">
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="else" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+	// prepare DOM for YUI Toolbar
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+	// YUI Toolbar Functions
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("newtag");
+	}	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="newtag" href="/cgi-bin/koha/admin/auth_tag_structure.pl?op=add_form&amp;authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->">新增字段</a></li>
+</ul></div>
+
+<h2>选择一个权威记录架构</h2>
+<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+    <select name="authtypecode">
+        <option value="">预设</option>
+    <!-- TMPL_LOOP NAME="authtypeloop" -->
+		<!-- TMPL_IF NAME="selected" -->
+        <option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="authtypetext" --></option>
+		<!-- TMPL_ELSE -->
+        <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="authtypetext" --></option>
+		<!-- /TMPL_IF -->
+            
+    <!-- /TMPL_LOOP -->
+    </select>
+    <input type="text" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+    <input type="submit" value="完成" class="submit">
+</form>
+<table>
+    <tr>
+        <th>字段</th>
+        <th>数据库</th>
+        <th>可重复</th>
+        <th>必要</th>
+        <th>容许值<br />数值</th>
+        <th>分栏</th>
+        <th>编辑</th>
+        <th>删除</th>
+	</tr>
+    <!-- TMPL_LOOP NAME="loop" -->
+		<!-- TMPL_IF NAME="toggle" --><tr class="highlight"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+        <td><b><!-- TMPL_VAR NAME="tagfield" --></b></td>
+        <td><!-- TMPL_VAR NAME="liblibrarian" --></td>
+        <td><!-- TMPL_IF NAME="repeatable" -->是<!-- TMPL_ELSE -->否<!-- /TMPL_IF --></td>
+        <td><!-- TMPL_IF NAME="mandatory" -->是<!-- TMPL_ELSE -->否<!-- /TMPL_IF --></td>
+        <td><!-- TMPL_VAR NAME="authorised_value" --></td>
+        <td><a href="<!-- TMPL_VAR NAME="subfield_link" -->" class="button">分栏</a></td>
+        <td><a href="<!-- TMPL_VAR NAME="edit" -->">编辑</a></td>
+        <td><a href="<!-- TMPL_VAR NAME="delete" -->">删除</a></td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    </table>
+
+        <div class="pages"><!-- TMPL_IF NAME="isprevpage" -->
+            <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="prevpage" -->&amp;searchfield=<!-- TMPL_VAR NAME="searchfield" -->&amp;authtypecode=<!-- TMPL_VAR NAME="authtypecode" --> ">&lt;&lt; 前一页</a>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="nextpage" -->
+            <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="nextpage" -->&amp;searchfield=<!-- TMPL_VAR NAME="searchfield" -->&amp;authtypecode=<!-- TMPL_VAR NAME="authtypecode" --> ">下一页 &gt;&gt;</a>
+        <!-- /TMPL_IF --></div>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

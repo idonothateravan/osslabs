@@ -1,0 +1,50 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo; 
+    <!-- TMPL_IF NAME="nopermission" -->غير مسموح بالوصول<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="timed_out" -->إنتهاء وقت الجلسة<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="different_ip" -->IP تغيير عنوان<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="invalid_username_or_password" -->خطأ فى إسم المستخدم أو كلمة المرور<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="loginprompt" -->أدخل إلى كوها<!-- /TMPL_IF -->
+</title>
+
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div id="login">
+<h1><a>كوها 3.0مركّب</a></h1>
+<!-- TMPL_IF NAME="nopermission" -->
+<div id="login_error"><strong>خطأ: </strong>Unauthorized user <a href="/cgi-bin/koha/mainpage.pl?logout.x=1">click to log out</a></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="timed_out" -->
+<div id="login_error"><strong>خطأ: </strong>Session timed out, please log in again</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="different_ip" -->
+<div id="login_error"><strong>خطأ: </strong>IP address has changed, please log in again </div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="invalid_username_or_password" -->
+<div id="login_error"><strong>خطأ: </strong>خطأ فى إسم المستخدم أو كلمة المرور</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="loginprompt" -->
+<!-- login prompt time-->
+<form action="<!-- TMPL_VAR NAME="url" -->" method="post" name="mainform" id="mainform">
+<!-- TMPL_LOOP NAME="INPUTS" -->
+    <input type="hidden" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" />
+<!-- /TMPL_LOOP -->
+<h3>مرحبا فى مركّب ويب كوها</h3>
+<p> قبل ان نبدأ, برجاء تأكد أن لديك المؤهلات الصحيحة للاستمرار . من فضلك أدخل بإستخدام اسم المستخدم و كلمة المرور المعطاة لك من قبل إدارة النظم وموقعها فى
+<code>koha-conf.xml</code> configuration file.</p>
+<p>من فضلك أدخل اسم المستخدم وكلمة المرور الخاصة بك:</p>
+<p><label>إسم المستخدم:<br />
+<input type="text" name="userid" id="userid" class="input" value="<!-- TMPL_VAR NAME="userid" -->" size="20" tabindex="1" /></label>
+</p>
+<p><label>كلمة المرور:<br />
+<input type="password" name="password" id="password" class="input" value="" size="20" tabindex="2" /></label>
+</p>
+<p class="submit"><input id="submit" type="submit" value="دخول &raquo;" tabindex="4"></p>
+</form>
+
+<!-- /TMPL_IF -->
+
+<!-- TMPL_INCLUDE name="intranet-bottom.inc" -->

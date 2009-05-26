@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Leader builder</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_field_007.pl">
+<table>
+	<tr>
+		<td>00فئه المادة</td>
+                <td>
+                        <select name="f0" size="1">
+                        <!-- TMPL_IF name="f0t" -->
+                                <option value="t" SELECTED>t- نص</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="t">t- نص</option>
+                        <!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+                <td>01 إسم المادة المحددة</td>
+                <td>
+                        <select name="f1" size="1">
+                        <!-- TMPL_IF name="f1a" -->
+                                <option value="a" SELECTED>a- طبعة منتظمة</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="a">a- طبعة منتظمة</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1b" -->
+                                <option value="b" SELECTED>b- طبعة كبيرة</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="b">b- طبعة كبيرة </option>
+                        <!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f1c" -->
+                                <option value="c" SELECTED>c-برايل</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="c">c-برايل</option>
+                        <!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f1d" -->
+                                <option value="d" SELECTED>d-منزوع الأوراق </option>
+                        <!-- TMPL_ELSE -->
+                                <option value="d">d-منزوع الأوراق </option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1u" -->
+                                <option value="u" SELECTED>u-غير محدد</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="u">u-غير محدد</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1z" -->
+                                <option value="z" SELECTED>z- آخر</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="z">z- آخر</option>
+                        <!-- /TMPL_IF -->
+
+                        </select>
+                </td>
+        </tr>
+
+
+
+	<tr><td colspan=2><input type="submit" value="نعم"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			document.f_pop.f0.value+
+			document.f_pop.f1.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

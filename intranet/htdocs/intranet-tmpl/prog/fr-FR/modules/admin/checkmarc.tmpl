@@ -1,0 +1,245 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration système &rsaquo; vérification MARC : 
+<!-- TMPL_IF name="total" --> : <!-- TMPL_VAR name="total" --> erreur(s) trouvée(s)<!-- TMPL_ELSE --> : Configuration OK !<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo; Vérification MARC
+<!-- TMPL_IF name="total" -->: <!-- TMPL_VAR name="total" --> erreur(s) trouvée(s)<!-- TMPL_ELSE --> : Configuration OK !<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Validation grilles de catalogage</h1>
+<table>
+    <tr>
+        <th>Test</th>
+        <th>Réponse</th>
+    </tr>
+<!-- -->
+<!-- TMPL_IF name="itemnum" -->
+    <tr>
+        <td>N° </td>
+        <td><ul><li>Le champ itemnum DOIT être relié à un sous champ MARC </li>
+            <li>Le sous-champ DOIT être dans l'onglet -1 (ignore)</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Itemnumber : le champ itemnumber est relié à un champ dans l'onglet -1</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemfields" -->
+    <tr>
+        <td>Champs exemplaires</td>
+        <td>TOUS les champs d'exemplaire DOIVENT : <br />
+            <ul><li>être relié au même champ,</li>
+            <li>et il doivent tous être dans l'onglet 10 (Exemplaires)</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Tous les champs d'exemplaires sont dans le même champ MARC et dans l'onglet exemplaire</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+    <!-- TMPL_IF NAME="itemtags" -->
+        <tr>
+            <td>Champ des exemplaires</td>
+            <td>Il y a plus d'un champ MARC relié à l'onglet des exemplaires (onglet 10) : <!-- TMPL_VAR name="itemtags" --></td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>1 seul champ MARC relié aux exemplaires</td>
+        </tr>
+    <!-- /TMPL_IF -->
+    <!--  -->
+<!-- TMPL_IF name="itemtype" -->
+    <tr>
+        <td>Type de document NON paramétré</td>
+        <td>Le champ biblioitems.itemtype DOIT<br />
+            <ul><li>être relié à un sous-champ MARC, </li>
+            <li>le sous-champ correspondant DOIT avoir une valeur autorisée=type de document</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Biblioitems.itemtype défini</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branch" -->
+    <tr>
+        <td>Site de rattachement (homebranch) non paramétré</td>
+        <td>le champ items.homebranch DOIT : <br />
+            <ul><li>être relié à un sous-champ MARC,</li>
+            <li>le sous-champ correspondant DOIT avoir une valeur autorisée =Sites</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Site de rattachement (homebranch) déterminé</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="holdingbranch" -->
+    <tr>
+        <td>Site de localisation (holdingbranch) non paramétré</td>
+        <td>Le champ items.holdingbranch DOIT : <br />
+            <ul><li>être relié à un sous-champ MARC, </li>
+            <li>le sous-champ correspondant DOIT avoir une valeur autorisée =Sites</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Site de localisation(holdingbranch)  déterminé</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemtypes_empty" -->
+    <tr>
+        <td>Type de document non défini</td>
+        <td>Vous devez créer au moins un type de document</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Au moins un type de document existe</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branches_empty" -->
+    <tr>
+        <td>Site non défini</td>
+        <td>Vous devez créer au moins 1 site</td>
+    </tr>
+<!-- TMPL_ELSE --> 
+    <tr>
+        <td>OK</td>             
+        <td>Au moins un site existe</td>
+    </tr>                                       
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="biblionumber" -->
+    <tr>
+        <td>biblio et biblionumber</td>
+        <td>Les champs du biblio.biblionumber et du biblioitems.biblioitemnumber doivent être liés à un sous-champ MARC,</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Biblionumber et biblioitemnumber correctement construits</td>
+    </tr>
+<!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="frameworknull" -->
+        <tr>
+            <td>valeurs de "framework"</td>
+            <td>Il y a une valeur NULL dans frameworkcode. Vérifier les tables suivantes<br />
+                <li>select * from marc_subfield_structure where frameworkcode is NULL</li>
+                <li>select * from marc_tag_structure where frameworkcode is NULL</li>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>Pas de valeur NULL dans le "frameworkcode"</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="inconsistent_tabs" -->
+        <tr>
+            <td style="vertical-align:top;">sous-champs dans des onglets différents</td>
+            <td>Les sous-champs des champs suivants ne sont pas tous dans le même onglet (ou ignorés)
+                <table>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Champ</th>
+                        <th>Onglets utilisés</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="tab_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>Grille par défaut</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tabs" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>Tous les champs d'exemplaires sont dans le même champ MARC (ou ignorés) et dans l'onglet exemplaire</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="invalid_authtypecodes" -->
+        <tr>
+            <td style="vertical-align:top;">Type d'autorité invalide</td>
+            <td>Certaines autorités utilisées par les grilles de catalogage ne sont pas définies.
+                <table>
+                    <tr>
+                        <th>Grille de catalogage</th>
+                        <th>Libellé de la grille</th>
+                        <th>Champ</th>
+                        <th>Sous-champ</th>
+                        <th>Type d'autorité invalide</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="authtypecode_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>Grille par défaut</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+                            <td><!-- TMPL_VAR NAME="authtypecode" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>Toutes les grilles de catalogage pointent vers des autorités existantes</td>
+        </tr>
+    <!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="total" -->
+    <tr>
+        <td>TOTAL</td>
+        <td>Vous avez <b><!-- TMPL_VAR name="total" --></b> erreur(s) dans votre configuration MARC.SVP corrigez les avant d'utiliser Koha</td>
+    </tr>
+</table>
+<!-- TMPL_ELSE -->
+    </table>
+        <p><b>Configuration OK, il n'y pas d'erreurs dans votre table de paramètres MARC</b></p>
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

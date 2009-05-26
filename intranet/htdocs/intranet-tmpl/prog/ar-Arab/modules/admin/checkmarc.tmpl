@@ -1,0 +1,245 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo;الادارة &rsaquo; MARC فحص
+<!-- TMPL_IF name="total" --> :<!-- TMPL_VAR name="total" -->إيجاد الاخطاء <!-- TMPL_ELSE --> : تمت التهيئة!<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">الادارة</a> &rsaquo;مراجعة MARC
+<!-- TMPL_IF name="total" -->: <!-- TMPL_VAR name="total" -->الأخطاء وجدت<!-- TMPL_ELSE --> : تمت التهيئة!<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>إختبار إطار مارك للبيانات الببليوجرافية</h1>
+<table>
+    <tr>
+        <th>إختبار</th>
+        <th>نتيجة</th>
+    </tr>
+<!-- -->
+<!-- TMPL_IF name="itemnum" -->
+    <tr>
+        <td>itemnum</td>
+        <td><ul><li>رقم مادة الحقل يجب أن تكون مماثلة </li>
+            <li>The correspounding subfield MUST be in with -1 (ignore) tab</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>نعم</td>
+        <td>itemnum : the field itemnumber is mapped to a field in tab -1</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemfields" -->
+    <tr>
+        <td>حقول مادة</td>
+        <td>كل حقول المواد  يجب:<br />
+            <ul><li>سيتم تخطيطه  لنفس التاج</li>
+            <li>ويجب أن يكونوا كلّهم في 10 (مواد) tab </li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>نعم</td>
+        <td>كلّ حقول المادة في نفس المدخل وجزء النسخة</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+    <!-- TMPL_IF NAME="itemtags" -->
+        <tr>
+            <td>رأس مادة</td>
+            <td>هناك أكثر من 1رأس مارك مرتبط  items tab (10) : <!-- TMPL_VAR name="itemtags" --></td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>نعم</td>
+            <td>فقط تاج واحد لمارك مخطط للنسخة</td>
+        </tr>
+    <!-- /TMPL_IF -->
+    <!--  -->
+<!-- TMPL_IF name="itemtype" -->
+    <tr>
+        <td>نوع مادة غير مخطط</td>
+        <td>the biblioitems.itemtype field MUST :<br />
+            <ul><li>سيتم تخطيطه للحقول الفرعية لمارك </li>
+            <li>correspounding الحقل الفرعى يجب أن يكون لديه قيمة إستنادية=نوع مادة</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>نعم</td>
+        <td>biblioitems.itemtype defined</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branch" -->
+    <tr>
+        <td>homebranch NOT mapped</td>
+        <td>the items.homebranch field MUST :<br />
+            <ul><li>سيتم تخطيطه للحقول الفرعية لمارك</li>
+            <li>correspounding الحقل الفرعى يجب أن يكون لديه قيمة إستنادية=فروع</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>نعم</td>
+        <td>homebranch defined</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="holdingbranch" -->
+    <tr>
+        <td>holdingbranch NOT mapped</td>
+        <td>the items.holdingbranch field MUST :<br />
+            <ul><li>سيتم تخطيطه للحقول الفرعية لمارك </li>
+            <li>correspounding الحقل الفرعى يجب أن يكون لديه قيمة إستنادية=فروع</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>نعم</td>
+        <td>holdingbranch defined</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemtypes_empty" -->
+    <tr>
+        <td>نوع المادة غير معرّف</td>
+        <td>على الاقل نوع مادة واحد يجب أن يعرّف</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>نعم</td>
+        <td>على الاقل نوع ماده واحد يعرّف</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branches_empty" -->
+    <tr>
+        <td>فرع غير معرّف</td>
+        <td>على الاقل فرع واحد يجب أن يعرّف</td>
+    </tr>
+<!-- TMPL_ELSE --> 
+    <tr>
+        <td>نعم</td>             
+        <td>على الاقل يعرّف فرع 1</td>
+    </tr>                                       
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="biblionumber" -->
+    <tr>
+        <td>الببليوجرافية والرقم الببليوجرافي</td>
+        <td>التسجيلة . الرقم الببليوجرافي والنسخة. حقل رقم النسخة يجب أن يخطط له في حقول مارك الفرعية</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>نعم</td>
+        <td>biblionumber and biblioitemnumber mapped correctly</td>
+    </tr>
+<!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="frameworknull" -->
+        <tr>
+            <td>قيم إطار</td>
+            <td>هناك قيمة ملغية فى رمز الاطار. إفحص الجداول التالية<br />
+                <li>إختر * من مارك _الحقل الفرعى_ بنيه عندما يكون رمز الاطار ملغي</li>
+                <li>إختر *من مارك_الرأس_البنيه عندما يكون رمز الاطار ملغى</li>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>نعم</td>
+            <td>لا قيمة ملغية في رمز الإطار</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="inconsistent_tabs" -->
+        <tr>
+            <td style="vertical-align:top;">subfields not in same tabs</td>
+            <td>Not all subfields for the following tags are in the same tab (or marked 'ignored').
+                <table>
+                    <tr>
+                        <th>رمز</th>
+                        <th>الوصف</th>
+                        <th>رأس</th>
+                        <th>Tabs in use</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="tab_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>إطار إفتراضى</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tabs" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>نعم</td>
+            <td>all subfields for each tag are in the same tab (or ignored)</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="invalid_authtypecodes" -->
+        <tr>
+            <td style="vertical-align:top;">invalid authority types</td>
+            <td>Not all authority types referred to by the frameworks are defined.
+                <table>
+                    <tr>
+                        <th>Framework code</th>
+                        <th>Framework description</th>
+                        <th>رأس</th>
+                        <th>حقل فرعى</th>
+                        <th>Invalid authority type</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="authtypecode_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>إطار إفتراضى</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+                            <td><!-- TMPL_VAR NAME="authtypecode" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>نعم</td>
+            <td>all authority types used in the frameworks are defined</td>
+        </tr>
+    <!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="total" -->
+    <tr>
+        <td>مجموع</td>
+        <td>لديك <!-- TMPL_VAR name="total" --> خطأ(s)فى تعديل مارك. من فضلك أصلحه قبل إستخدام كوها</td>
+    </tr>
+</table>
+<!-- TMPL_ELSE -->
+    </table>
+        <p><b>تمت التهيئة, لا يوجد لديك أخطاء فى جدول مؤشرات مارك</b></p>
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

@@ -1,0 +1,188 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration &rsaquo; Ausleihkonditionen</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+        $('#selectlibrary').find("input:submit").hide();
+        $('#branch').change(function() {
+                $('#selectlibrary').submit();
+        });
+});
+//]]>
+</script>
+
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo; Ausleihkonditionen</div>
+
+<div id="doc3" class="yui-t1">
+
+<div id="bd">
+    <div id="yui-main">
+    <div class="yui-b">
+    <h1 class="parameters">
+        <!-- TMPL_IF NAME="humanbranch" -->
+            Ausleihbedingungen für  "<!-- TMPL_VAR NAME="humanbranch" -->" definieren
+        <!-- TMPL_ELSE -->
+            Standard-Ausleihbedingungen definieren
+        <!-- /TMPL_IF -->
+    </h1>
+    <div class="help">
+        <p>The rules are applied from most specific to less specific, using the first found in this order:</p>
+        <ul>
+            <li>gleiche Bibliothek, gleicher Benutzertyp, gleicher Medientyp</li>
+            <li>gleiche Bibliothek, gleicher Benutzertyp, Standard-Medientyp</li>
+            <li>gleiche Bibliothek, Standard-Benutzertyp, gleicher Medientyp</li>
+            <li>gleiche Bibliothek, Standard-Benutzertyp, Standard-Medientyp</li>
+            <li>Standard-Bibliothek, gleicher Benutzertyp, gleicher Medientyp</li>
+            <li>Standard-Bibliothek, gleicher Benutzertyp, Standard-Medientyp</li>
+            <li>Standard-Bibliothek, Standard-Benutzertyp, gleicher Medientyp</li>
+            <li>Standard-Bibliothek, Standard-Benutzertyp, Standard-Medientyp</li>
+        </ul>
+        <p>Um eine Regel zu ändern, erstellen Sie eine neue mit dem selben Benutzer- und Medientyp.</p>
+    </div>
+    <div id="bloc100">
+        <form method="get" action="/cgi-bin/koha/admin/smart-rules.pl" id="selectlibrary">
+        eine Bibliothek wählen:
+            <select name="branch" id="branch" style="width:20em;">
+                <option value="*">Standard</option>
+            <!-- TMPL_LOOP NAME="branchloop" -->
+				<!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="branchname" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branchname" --></option><!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+            </select>
+        </form>
+		<br />
+		<br />
+        <form method="post" action="/cgi-bin/koha/admin/smart-rules.pl">
+            <input type="hidden" name="op" value="add" />
+            <table>
+            <tr>
+                <th>Benutzertypen</th>
+                <th>Exemplar Typus</th>
+                <th>Rechnungsbetrag</th>
+                <th>Gnadenfrist vor Gebührenerhebung</th>
+                <th>Zeitraum zwischen Gebührenerhebung</th>
+                <th>Anzahl erlaubter Ausleihen</th>
+                <th>Leihfrist</th><th>&nbsp;</th>
+            </tr>
+            <!-- TMPL_LOOP NAME="rules" -->
+                <tr>
+                    <td><!-- TMPL_IF NAME="default_humancategorycode" -->
+                            <em>Standard</em>
+                        <!-- TMPL_ELSE -->
+                            <!-- TMPL_VAR NAME="humancategorycode" -->
+                        <!-- /TMPL_IF -->
+                    </td>
+                    <td><!-- TMPL_IF NAME="default_humanitemtype" -->
+                            <em>Standard</em>
+                        <!-- TMPL_ELSE -->
+                            <!-- TMPL_VAR NAME="humanitemtype" -->
+                        <!-- /TMPL_IF -->
+                    </td>
+                    <td>€<!-- TMPL_VAR NAME="fine" --></td>
+                    <td><!-- TMPL_IF NAME="firstremind" --><!-- TMPL_VAR NAME="firstremind" --> Tag(e)<!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_IF NAME="chargeperiod" --><!-- TMPL_VAR NAME="chargeperiod" --> Tag(e)<!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_IF NAME="unlimited_maxissueqty" -->
+                            Unbegrenzt
+                        <!-- TMPL_ELSE -->
+                            <!-- TMPL_VAR NAME="maxissueqty" -->
+                        <!-- /TMPL_IF -->
+                    </td>
+                    <td><!-- TMPL_IF NAME="issuelength" --><!-- TMPL_VAR NAME="issuelength" --> Tag(e)<!-- /TMPL_IF --></td>
+                    <td>
+                        <a class="button" href="/cgi-bin/koha/admin/smart-rules.pl?op=delete&amp;itemtype=<!-- TMPL_VAR NAME="itemtype" -->&amp;categorycode=<!-- TMPL_VAR NAME="categorycode" -->&amp;branch=<!-- TMPL_VAR NAME="branch" -->">Löschen</a>
+                    </td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+                <tr>
+                    <td>
+                        <select name="categorycode">
+                            <option value="*">Standard</option>
+                        <!-- TMPL_LOOP NAME="categoryloop" -->
+                            <option value="<!-- TMPL_VAR NAME="categorycode" -->"><!-- TMPL_VAR NAME="description" --></option>
+                        <!-- /TMPL_LOOP -->
+                        </select>
+                    </td>
+                    <td>
+                        <select name="itemtype" style="width:13em;">
+                            <option value="*">Standard</option>
+                        <!-- TMPL_LOOP NAME="itemtypeloop" -->
+                            <option value="<!-- TMPL_VAR NAME="itemtype" -->"><!-- TMPL_VAR NAME="description" --></option>
+                        <!-- /TMPL_LOOP -->
+                        </select>
+                    </td>
+                    <td>€<input name="fine" size="4" /></td>
+                    <td><input name="firstremind" size="2" /> Tag(e)</td>
+                    <td><input name="chargeperiod" size="2" /> Tag(e)</td>
+                    <td><input name="maxissueqty" size="3" /></td>
+                    <td><input name="issuelength" size="3" /> Tag(e)</td>
+                    <td><input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branch" -->"/><input type="submit" value="Hinzufügen" class="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <!-- TMPL_IF NAME="show_branch_cat_rule_form" -->
+    <div class="help">
+        <p>Für diese Bibliothek kann eine maximale Anzahl an Ausleihen festgelegt werden, die ein Benutzer eines bestimmten Benutzertyps ausleihen kann, unabhängig vom Medientyp.
+        </p>
+        <p>Wenn die Gesamtsumme ausleihbarer Medien für einen Benutzertyp frei gelassen wird, gilt keine Begrenzung, außer einer Begrenzung, die Sie für den speziellen Medientyp definieren.
+        </p>
+    </div>
+    <div>
+        <form method="post" action="/cgi-bin/koha/admin/smart-rules.pl">
+            <input type="hidden" name="op" value="add-branch-cat" />
+            <input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branch" -->"/>
+            <table>
+                <tr>
+                    <th>Benutzertypen</th>
+                    <th>Gesamtzahl erlaubter Ausleihen</th>
+                    <th>&nbsp;</th>
+                </tr>
+                <!-- TMPL_LOOP NAME="branch_cat_rule_loop" -->
+                    <tr>
+                        <td><!-- TMPL_IF NAME="default_humancategorycode" -->
+                                <em>Standard</em>
+                            <!-- TMPL_ELSE -->
+                                <!-- TMPL_VAR NAME="humancategorycode" -->
+                            <!-- /TMPL_IF -->
+                        </td>
+                        <td><!-- TMPL_IF NAME="unlimited_maxissueqty" -->
+                                Unbegrenzt
+                            <!-- TMPL_ELSE -->
+                                <!-- TMPL_VAR NAME="maxissueqty" -->
+                            <!-- /TMPL_IF -->
+                        </td>
+                        <td>
+                            <a class="button" href="/cgi-bin/koha/admin/smart-rules.pl?op=delete-branch-cat&amp;categorycode=<!-- TMPL_VAR NAME="categorycode" -->&amp;branch=<!-- TMPL_VAR NAME="branch" -->">Löschen</a>
+                        </td>
+                    </tr>
+                <!-- /TMPL_LOOP -->
+                <tr>
+                    <td>
+                        <select name="categorycode">
+                            <option value="*">Standard</option>
+                        <!-- TMPL_LOOP NAME="categoryloop" -->
+                            <option value="<!-- TMPL_VAR NAME="categorycode" -->"><!-- TMPL_VAR NAME="description" --></option>
+                        <!-- /TMPL_LOOP -->
+                        </select>
+                    </td>
+                    <td><input name="maxissueqty" size="3" /></td>
+                    <td><input type="submit" value="Hinzufügen" class="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <!-- /TMPL_IF -->
+</div>
+
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

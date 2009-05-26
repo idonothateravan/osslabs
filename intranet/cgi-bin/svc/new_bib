@@ -1,0 +1,73 @@
+#!/usr/bin/perl
+
+# Copyright 2007 LibLime
+#
+# This file is part of Koha.
+#
+# Koha is free software; you can redistribute it and/or modify it under the
+# terms of the GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the License, or (at your option) any later
+# version.
+#
+# Koha is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Koha; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+# Suite 330, Boston, MA  02111-1307 USA
+#
+
+use strict;
+use CGI;
+use C4::Auth qw/check_api_auth/;
+use C4::Biblio;
+use XML::Simple;
+
+my $query = new CGI;
+
+my ($status, $cookie, $sessionID) = check_api_auth($query, { editcatalogue => 1} );
+unless ($status eq "ok") {
+    print $query->header(-type => 'text/xml', -status => '403 Forbidden');
+    print XMLout({ auth_status => $status }, NoAttr => 1, RootName => 'response', XMLDecl => 1);
+    exit 0;
+}
+
+if ($query->request_method eq "POST") {
+    add_bib($query);
+} else {
+    print $query->header(-type => 'text/xml', -status => '400 Bad Request');
+}
+
+exit 0;
+
+sub add_bib {
+    my $query = shift;
+
+    my $result = {};
+    my $inxml = $query->param('POSTDATA');
+    print $query->header(-type => 'text/xml');
+
+    my $record = eval {MARC::Record::new_from_xml( $inxml, "utf8", C4::Context->preference('marcflavour'))};
+    my $do_not_escape = 0;
+    if ($@) {
+        $result->{'status'} = "failed";
+        $result->{'error'} = $@;
+    } else {
+        # delete any item tags
+        my ( $itemtag, $itemsubfield ) = GetMarcFromKohaField("items.itemnumber", '');
+        foreach my $field ($record->field($itemtag)) {
+            $record->delete_field($field);
+        }
+        my ($biblionumber, $biblioitemnumber) = AddBiblio($record, '');
+        my $new_record = GetMarcBiblio($biblionumber);
+        $result->{'status'} = "ok";
+        $result->{'biblionumber'} = $biblionumber;
+        my $xml = $new_record->as_xml_record();
+        $xml =~ s/<\?xml.*?\?>//i;
+        $result->{'marcxml'} =  $xml;
+        $do_not_escape = 1;
+    }
+   
+    print XMLout($result, NoAttr => 1, RootName => 'response', XMLDecl => 1, NoEscape => $do_not_escape); 
+}

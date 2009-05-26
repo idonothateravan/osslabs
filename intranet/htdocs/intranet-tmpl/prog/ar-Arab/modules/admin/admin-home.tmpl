@@ -1,0 +1,86 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo;الادارة</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; الادارة</div>
+
+<div id="doc" class="yui-t7">
+   
+   <div id="bd">
+	<div id="yui-main" class="sysprefs">
+	<div class="yui-g"><h1>مفضلات النظام</h1></div>
+	<div class="yui-g">
+
+<div class="yui-u first">
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/systempreferences.pl">تفضيلات النظام العالمي</a></dt>
+	<dd>أدر مفضلات النظام العالمى مثل  MARC flavor, شكل البيانات, البريد الإلكتروني للمدير,وطبعات</dd>
+</dl>
+
+
+<div class="hint"><h4>إشارة:</h4><p>هيئ هذه العوامل عندما تظهر.</p></div>
+<h3>عوامل أساسية</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/branches.pl">المكتبات,الفروع والمجموعات</a></dt>
+	<dd>عرف المكتبات ,الفروع والمجموعات.</dd>
+	<dt><a href="/cgi-bin/koha/admin/aqbookfund.pl">Funds and budgets</a></dt>
+	<dd>Funds and budgets administration for acquisitions.</dd>
+	<dt><a href="/cgi-bin/koha/admin/currency.pl">عملات وأسعار صرف""</a></dt>
+	<dd>عرف العملات وأسعار الصرف المستخدمة للتزويد.</dd>
+	<dt><a href="/cgi-bin/koha/admin/itemtypes.pl">أنواع المادة ورموز الاعارة</a></dt>
+	<dd>عرف أنواع المادة و رموز الاعارة المستخدمة ل قواعد الاعارة.</dd>
+</dl>
+
+<h3>المستخدمين والاعارة</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/categorie.pl">فئات مستخدمين</a></dt>
+	<dd>عرف فئات المستخدمين.</dd>
+	<dt><a href="/cgi-bin/koha/admin/cities.pl"> مدن وبلدان</a></dt>
+	<dd>عرف المدن والبلاد التى يعيش فيها المستخدم.</dd>
+	<dt><a href="/cgi-bin/koha/admin/roadtype.pl" >أنواع الطريق</a>
+	</dt>
+	<dd>عرّف أنواع الطريق (شارع، درب، طريق، الخ. ).أنواع الطريق تعرض كقيم إستنادية عندما تضاف / تعديل الانماط ويمكن أن تستعمل في الإحصائيات الجغرافية.</dd>
+	<dt><a href="/cgi-bin/koha/admin/patron-attr-types.pl">Patron attribute types</a></dt>
+	<dd>Define extended attributes (identifiers and statistical categories) for patron records</dd>
+    <dt><a href="/cgi-bin/koha/admin/smart-rules.pl">Circulation and fines rules</a></dt>
+    <dd>Define circulation and fines rules for combinations of libraries, patron categories, and item types</dd>
+</dl>
+</div>
+<div class="yui-u">
+<h3>الفهرس</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/authorised_values.pl">قيم محققة</a></dt>
+	<dd>عرّف الفئات والقيم الاستنادية لهم.</dd>
+	<dt><a href="/cgi-bin/koha/admin/biblio_framework.pl">إطار مارك للبيانات الببليوجرافية</a></dt>
+	<dd>إنشئ وأدر الإطارات الببليوجرافية التي تعرف خصائص تسجيلات مارك الخاصة بك (تعريفات الحقل والحقل الفرعى)  مثل قوالب محرر مارك.</dd>
+	<dt><a href="/cgi-bin/koha/admin/koha2marclinks.pl">نخطيط مارك لكوها</a></dt>
+	<dd>حدد التماثل بين قاعدة بيانات كوها (SQL) تسجيلة مارك الببليوجرافية. لاحظ أن التخطيط يمكن أن يعرف من خلال إطار مارك الببليوجرافى. هذه الأداة فقط هى طريق مختصر لتسريع الربط.</dd>
+	<dt><a href="/cgi-bin/koha/admin/checkmarc.pl">إختبار إطار مارك للبيانات الببليوجرافية</a></dt>
+	<dd>فحص بنية مارك. إذا غيّرت إطار مارك الببليوجرافي الخاص بك فإنه يوصي بأن تشغل هذه الأداة للإختبار  الأخطاء.</dd>
+    <dt><a href="/cgi-bin/koha/admin/authtypes.pl">انواع الاستناد</a></dt>
+    <dd>إنشئ وأدر إطارات الاستناد التي تعرف خصائص تسجيلات مارك الخاصة بك (تعريفات الحقل والحقل الفرعى).</dd>
+    <dt><a href="/cgi-bin/koha/admin/classsources.pl">مصدر التصنيف</a></dt>
+    <dd>عرّف مصادر التصنيف (وبمعنى آخر: . ، مخططات رقم الطلب) مستخدمة من قبل مجموعتك. أيضا عرف قواعد التسجيل المستخدمة ل لتصنيف أرقام الطلب.</dd>
+    <dt><a href="/cgi-bin/koha/admin/matching-rules.pl">"قواعد مضاهاة التسجيلة"</a></dt>
+    <dd>أدر القواعد لمضاهاة تسجيلات مارك آليا أثناء إستيرادات التسجيلة.</dd>
+</dl>
+
+<h3>عوامل إضافية</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/stopwords.pl">Stop words</a></dt>
+	<dd>Words ignored during search.</dd>
+	<!-- <dt><a href="/cgi-bin/koha/admin/printers.pl">Network Printers</a></dt>
+	<dd>Printers (UNIX paths).</dd> -->
+	<dt><a href="/cgi-bin/koha/admin/z3950servers.pl">Z39.50 هدف عميل </a></dt>
+	<dd>عرف أي الخوادم يتم الإستفسار عن بيانات مارك في عميل z39.50 المتكامل</dd>
+</dl>
+</div>
+
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

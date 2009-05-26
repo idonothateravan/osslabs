@@ -1,0 +1,188 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration système &rsaquo; Règles de prêt</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+        $('#selectlibrary').find("input:submit").hide();
+        $('#branch').change(function() {
+                $('#selectlibrary').submit();
+        });
+});
+//]]>
+</script>
+
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo; Règles de prêt</div>
+
+<div id="doc3" class="yui-t1">
+
+<div id="bd">
+    <div id="yui-main">
+    <div class="yui-b">
+    <h1 class="parameters">
+        <!-- TMPL_IF NAME="humanbranch" -->
+            Définition des règles de prêt pour "<!-- TMPL_VAR NAME="humanbranch" -->"
+        <!-- TMPL_ELSE -->
+            Règles de prêt par défaut
+        <!-- /TMPL_IF -->
+    </h1>
+    <div class="help">
+        <p>Les règles sont appliquées de la plus spécifique à la plus générale. Dans l'ordre :</p>
+        <ul>
+            <li>Même document, même catégorie d'adhérent, même type de document</li>
+            <li>Même site, même catégorie d'adhérent, type de document par défaut</li>
+            <li>Même site, catégorie d'adhérent par défaut, même type de document</li>
+            <li>Même site, catégorie d'adhérent par défaut, type de document par défaut</li>
+            <li>Site par défaut, même catégorie d'adhérent, même type de document</li>
+            <li>Site par défaut, même catégorie d'adhérent, type de document par défaut</li>
+            <li>site par défaut, catégorie d'adhérent par défaut, même type de document</li>
+            <li>Site par défaut, catégorie d'adhérent par défaut, type de document par défaut</li>
+        </ul>
+        <p>Pour modifier une rêgle, crééez en une nouvelle avec le même type de document et la même catégorie de lecteur.</p>
+    </div>
+    <div id="bloc100">
+        <form method="get" action="/cgi-bin/koha/admin/smart-rules.pl" id="selectlibrary">
+        Sélection d'un site : 
+            <select name="branch" id="branch" style="width:20em;">
+                <option value="*">Par défaut</option>
+            <!-- TMPL_LOOP NAME="branchloop" -->
+				<!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="branchname" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branchname" --></option><!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+            </select>
+        </form>
+		<br />
+		<br />
+        <form method="post" action="/cgi-bin/koha/admin/smart-rules.pl">
+            <input type="hidden" name="op" value="add" />
+            <table>
+            <tr>
+                <th>Catégorie adhérent</th>
+                <th>Type de document</th>
+                <th>Montant de l'amende</th>
+                <th>Période de grâce</th>
+                <th>Périodicité de l'amende</th>
+                <th>Prêts autorisés</th>
+                <th>Durée de prêt</th><th>&nbsp;</th>
+            </tr>
+            <!-- TMPL_LOOP NAME="rules" -->
+                <tr>
+                    <td><!-- TMPL_IF NAME="default_humancategorycode" -->
+                            <em>Par défaut</em>
+                        <!-- TMPL_ELSE -->
+                            <!-- TMPL_VAR NAME="humancategorycode" -->
+                        <!-- /TMPL_IF -->
+                    </td>
+                    <td><!-- TMPL_IF NAME="default_humanitemtype" -->
+                            <em>Par défaut</em>
+                        <!-- TMPL_ELSE -->
+                            <!-- TMPL_VAR NAME="humanitemtype" -->
+                        <!-- /TMPL_IF -->
+                    </td>
+                    <td><!-- TMPL_VAR NAME="fine" --> €</td>
+                    <td><!-- TMPL_IF NAME="firstremind" --><!-- TMPL_VAR NAME="firstremind" --> jour(s)<!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_IF NAME="chargeperiod" --><!-- TMPL_VAR NAME="chargeperiod" --> jour(s)<!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_IF NAME="unlimited_maxissueqty" -->
+                            Illimité
+                        <!-- TMPL_ELSE -->
+                            <!-- TMPL_VAR NAME="maxissueqty" -->
+                        <!-- /TMPL_IF -->
+                    </td>
+                    <td><!-- TMPL_IF NAME="issuelength" --><!-- TMPL_VAR NAME="issuelength" --> jour(s)<!-- /TMPL_IF --></td>
+                    <td>
+                        <a class="button" href="/cgi-bin/koha/admin/smart-rules.pl?op=delete&amp;itemtype=<!-- TMPL_VAR NAME="itemtype" -->&amp;categorycode=<!-- TMPL_VAR NAME="categorycode" -->&amp;branch=<!-- TMPL_VAR NAME="branch" -->">Supprimer</a>
+                    </td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+                <tr>
+                    <td>
+                        <select name="categorycode">
+                            <option value="*">Par défaut</option>
+                        <!-- TMPL_LOOP NAME="categoryloop" -->
+                            <option value="<!-- TMPL_VAR NAME="categorycode" -->"><!-- TMPL_VAR NAME="description" --></option>
+                        <!-- /TMPL_LOOP -->
+                        </select>
+                    </td>
+                    <td>
+                        <select name="itemtype" style="width:13em;">
+                            <option value="*">Par défaut</option>
+                        <!-- TMPL_LOOP NAME="itemtypeloop" -->
+                            <option value="<!-- TMPL_VAR NAME="itemtype" -->"><!-- TMPL_VAR NAME="description" --></option>
+                        <!-- /TMPL_LOOP -->
+                        </select>
+                    </td>
+                    <td>€<input name="fine" size="4" /></td>
+                    <td><input name="firstremind" size="2" /> jour(s)</td>
+                    <td><input name="chargeperiod" size="2" /> jour(s)</td>
+                    <td><input name="maxissueqty" size="3" /></td>
+                    <td><input name="issuelength" size="3" /> jour(s)</td>
+                    <td><input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branch" -->"/><input type="submit" value="Ajouter" class="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <!-- TMPL_IF NAME="show_branch_cat_rule_form" -->
+    <div class="help">
+        <p>Pour ce site, vous pouvez définir le nombre maximum de prêts qu'un adhérent peut faire en fonction de sa catégorie, quel que soit le type de document.
+        </p>
+        <p>Si la quantité totale de documents empruntables pour une catégorie d'adhérent est laissé blanc, il n'y aura pas de limites, sauf si vous en définissez une pour les types de documents.
+        </p>
+    </div>
+    <div>
+        <form method="post" action="/cgi-bin/koha/admin/smart-rules.pl">
+            <input type="hidden" name="op" value="add-branch-cat" />
+            <input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branch" -->"/>
+            <table>
+                <tr>
+                    <th>Catégorie adhérent</th>
+                    <th>Nombre total de prêts autorisés</th>
+                    <th>&nbsp;</th>
+                </tr>
+                <!-- TMPL_LOOP NAME="branch_cat_rule_loop" -->
+                    <tr>
+                        <td><!-- TMPL_IF NAME="default_humancategorycode" -->
+                                <em>Par défaut</em>
+                            <!-- TMPL_ELSE -->
+                                <!-- TMPL_VAR NAME="humancategorycode" -->
+                            <!-- /TMPL_IF -->
+                        </td>
+                        <td><!-- TMPL_IF NAME="unlimited_maxissueqty" -->
+                                Illimité
+                            <!-- TMPL_ELSE -->
+                                <!-- TMPL_VAR NAME="maxissueqty" -->
+                            <!-- /TMPL_IF -->
+                        </td>
+                        <td>
+                            <a class="button" href="/cgi-bin/koha/admin/smart-rules.pl?op=delete-branch-cat&amp;categorycode=<!-- TMPL_VAR NAME="categorycode" -->&amp;branch=<!-- TMPL_VAR NAME="branch" -->">Supprimer</a>
+                        </td>
+                    </tr>
+                <!-- /TMPL_LOOP -->
+                <tr>
+                    <td>
+                        <select name="categorycode">
+                            <option value="*">Par défaut</option>
+                        <!-- TMPL_LOOP NAME="categoryloop" -->
+                            <option value="<!-- TMPL_VAR NAME="categorycode" -->"><!-- TMPL_VAR NAME="description" --></option>
+                        <!-- /TMPL_LOOP -->
+                        </select>
+                    </td>
+                    <td><input name="maxissueqty" size="3" /></td>
+                    <td><input type="submit" value="Ajouter" class="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <!-- /TMPL_IF -->
+</div>
+
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

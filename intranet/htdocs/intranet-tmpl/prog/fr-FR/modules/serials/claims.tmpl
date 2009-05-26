@@ -1,0 +1,197 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+    <title>Koha &rsaquo; Périodiques &rsaquo; Réclamations</title>
+    <!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" src="<!-- TMPL_VAR name="themelang" -->/lib/jquery/plugins/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="<!-- TMPL_VAR name="themelang" -->/lib/jquery/plugins/jquery.tablesorter.min.js"></script>
+<script type="text/JavaScript" language="JavaScript">
+//<![CDATA[
+	 $(document).ready(function() {
+		<!-- TMPL_UNLESS NAME="preview" -->$("#claimst").tablesorter({<!-- TMPL_IF EXPR="dateformat eq 'metric'" -->
+			dateFormat: 'uk',<!-- /TMPL_IF -->
+			headers: { 0: { sorter: false },1:{sorter:false},2: { sorter: false },3:{sorter:false},6:{sorter:false}}
+		});<!-- /TMPL_UNLESS -->
+	    $('#supplierid').change(function() {
+    	    $('#claims').submit();
+	    });
+	 });
+
+		function popup(supplierid,serialid){
+			window.open('claims.pl?supplierid='+ supplierid +'&amp;serialid='+ serialid +'&amp;op=preview' ,'popup', 'width=600,height=400,toolbar=no,scrollbars=yes');
+		}
+//]]>
+</script>
+</head>
+<body>
+    <!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_UNLESS NAME="preview" -->
+    <!--TMPL_INCLUDE NAME="serials-search.inc" -->
+<!-- /TMPL_UNLESS -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl"> Accueil </a> &rsaquo;<a href="/cgi-bin/koha/serials/serials-home.pl">Périodiques</a> &rsaquo; Réclamations</div>
+
+<!-- TMPL_UNLESS NAME="preview" -->
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+    <h1>Réclamations</h1>
+
+<!-- TMPL_IF NAME="letter" --><!-- TMPL_UNLESS NAME="missingissues" --><!-- TMPL_IF NAME="supplierid" --> <div class="dialog alert">No missing issues found.</div><!-- TMPL_ELSE --><div class="dialog message">Please choose a supplier.</div><!-- /TMPL_IF --><!-- /TMPL_UNLESS --><!-- /TMPL_IF -->
+	
+	<!-- TMPL_UNLESS NAME="letter" --><div class="dialog alert">No claims notice defined. <a href="/cgi-bin/koha/tools/letter.pl">Please define one</a>.</div><!-- /TMPL_UNLESS -->
+    <form id="claims" name="claims" action="claims.pl" method="post">
+    <fieldset><label for="supplierid">View: </label>
+        <!-- TMPL_VAR name="CGIsupplier" -->
+        <input type="submit" value="OK" />
+        <!-- TMPL_IF name="phone" -->Téléphone : <!-- TMPL_VAR name="phone" --><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="booksellerfax" -->Fax : <!-- TMPL_VAR name="booksellerfax" --><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="bookselleremail" --></p><p><a href="mailto:<!-- TMPL_VAR name="bookselleremail" -->"><!-- TMPL_VAR name="bookselleremail" --></a><!-- /TMPL_IF -->
+    </fieldset>
+</form>
+
+   <!-- TMPL_IF NAME="missingissues" -->	
+    <form action="claims.pl" method="post">
+        <input type="hidden" name="order" value="<!--TMPL_VAR Name="order"-->" />
+        <input type="hidden" name="op" value="" />
+            <h3>Lacunes</h3>
+            <table id="claimst">
+                <thead><tr>
+                    <!--TMPL_IF NAME="letter"-->
+                    <th>Réclamation</th>
+                    <!--/TMPL_IF-->
+                    <th>Fournisseur</th>
+                    <th>Titre</th>
+                    <th>Numéro de parution</th>
+                    <th>Etat</th>
+                    <th>Since</th>
+                    <th>&nbsp;</th>
+                <th>Begin Claim</th>
+                </tr></thead>
+                <tbody><!-- TMPL_LOOP name="missingissues" -->
+                    <tr>
+                        <!--TMPL_IF NAME="letter" -->
+                            <td>
+                    <input type="checkbox" name="serialid" value="<!-- TMPL_VAR NAME="serialid"-->" onclick="document.claims.op='send_alert';" />
+                            </td>
+                        <!--/TMPL_IF-->
+                        <td>
+                        <!-- TMPL_VAR name="name" -->
+                        </td>
+                        <td>
+                        <a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=<!-- TMPL_VAR NAME="subscriptionid" -->"><!-- TMPL_VAR name="title" --></a>
+                        </td>
+                        <td>
+                        <!-- TMPL_VAR name="serialseq" -->
+                        </td>
+                        <td>
+                            <!-- TMPL_IF Name="status1" -->Attendu<!-- /TMPL_IF -->
+                            <!-- TMPL_IF Name="status2" -->Arrivé<!-- /TMPL_IF -->
+                            <!-- TMPL_IF Name="status3" -->En retard<!-- /TMPL_IF -->
+                            <!-- TMPL_IF Name="status4" -->Manquant<!-- /TMPL_IF -->
+                            <!-- TMPL_IF Name="status7" -->Réclamé<!-- /TMPL_IF -->
+                        </td>
+                        <td>
+                        <!-- TMPL_VAR name="planneddate" -->
+                        </td>
+                        <td>
+                        <!-- TMPL_VAR name="claimdate" -->
+                        </td>
+                        <td>
+                            <a href="/cgi-bin/koha/serials/lateissues-excel.pl?supplierid=<!-- TMPL_VAR name="supplieri" -->&amp;serialid=<!-- TMPL_VAR name="serialid" -->&amp;op=claims">Exporter données exemplaires</a>
+                        </td>
+                    </tr>
+                <!-- /TMPL_LOOP --></tbody>
+            </table>
+        <!-- TMPL_IF Name="singlesupplier"-->
+            <input type="hidden" name="supplierid" value="<!--TMPL_VAR NAME="supplierid"-->" />
+            <!-- <a href="claims.pl?supplierid=<!-- TMPL_VAR name="supplierid" -->&amp;op=preview" onclick="popup(<!-- TMPL_VAR name="supplierid" -->,''); return false" class="button">Supplier Group Claim Notice</a></p> -->
+        <!-- /TMPL_IF -->
+
+<!--TMPL_IF Name="letter" -->
+        <fieldset class="action"> <label for="letter_code">Sélectionnez une notification :</label>
+            <select name="letter_code" id="letter_code">
+                <!-- TMPL_LOOP name="letters" -->
+                    <option value="<!--TMPL_VAR Name="code"-->"><!--TMPL_VAR Name="name"--></option>
+                <!--/TMPL_LOOP-->
+            </select> <input type="submit" name="submit" class="button" value="Envoyer la lettre"></fieldset>
+            <!--/TMPL_IF-->
+<!-- /TMPL_IF -->
+
+        </form>
+<!-- TMPL_ELSE -->
+
+<div id="doc" class="yui-t7">
+   <div id="bd">
+	
+<!-- TMPL_IF Name="supplierloop"-->
+        <!-- TMPL_LOOP Name="supplierloop"-->
+        <!-- TMPL_IF NAME="name" -->
+        <p><b><!-- TMPL_VAR NAME="name" --></b><br />
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="postal" -->
+        <!-- TMPL_VAR NAME="postal" --><br />
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="contphone" -->
+        Tel.: <!-- TMPL_VAR NAME="contphone" --><br />
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="contfax" -->
+        Fax : <!-- TMPL_VAR NAME="contfax" --><br />
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="contemail" -->
+        Email : <!-- TMPL_VAR NAME="contemail" --><br />
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="accountnumber" -->
+        A/C : <!-- TMPL_VAR NAME="accountnumber" --></p>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="contact" -->
+        <p>Cher <!-- TMPL_VAR NAME="contact" --></p>
+        <!-- TMPL_ELSE -->
+        <p>Vers la personne concernée</p>
+        <!-- /TMPL_IF -->
+        <p>Les fascicules suivants n'ont pas été reçus et sont considérés comme manquants :</p>
+        <!-- /TMPL_LOOP -->
+<!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="missingissues" -->
+        <h3>Lacunes</h3>
+        <table>
+            <tr>
+                <td><b>Fournisseur<b></td>
+                <td><b>Titre</b></td>
+                <td><b>Numéro de parution</b></td>
+                <td><b>En retard depuis</b></td>
+            </tr>
+            <!-- TMPL_LOOP name="missingissues" -->
+                <tr>
+                    <td>
+                    <!-- TMPL_VAR name="name" -->
+                    </td>
+                    <td>
+                    <!-- TMPL_VAR name="Title" -->
+                    </td>
+                    <td>
+                    <!-- TMPL_VAR name="serialseq" -->
+                    </td>
+                    <td>
+                    <!-- TMPL_VAR name="planneddate" -->
+                    </td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        </table>
+        <!-- /TMPL_IF -->
+
+<p class="noprint"><a href="#" onclick="window.print(); return false;"> Imprimer </a> &nbsp;<a href="#" class="close">Fermer</a></p>
+<!-- /TMPL_UNLESS -->
+
+</div>
+</div>
+
+<!-- TMPL_UNLESS NAME="preview" -->
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="serials-menu.inc" -->
+</div>
+<!-- /TMPL_UNLESS -->
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

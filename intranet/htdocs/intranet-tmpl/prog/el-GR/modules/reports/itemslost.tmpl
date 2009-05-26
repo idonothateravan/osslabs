@@ -1,0 +1,124 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Εκθέσεις &rsaquo; Απωλεσθέντα Τεκμήρια</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Αρχική</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">Εκθέσεις</a><!-- TMPL_IF NAME="get_items" --> &rsaquo; <a href="/cgi-bin/koha/reports/itemslost.pl">Απωλεσθέντα Τεκμήρια</a> &rsaquo; Αποτελέσματα<!-- TMPL_ELSE --> &rsaquo; Απωλεσθέντα Τεκμήρια<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Απωλεσθέντα Τεκμήρια</h1>
+
+<!-- TMPL_IF NAME="get_items" -->
+
+<div class="results">
+    <!-- TMPL_IF NAME="total" -->
+        βρέθηκαν <!-- TMPL_VAR NAME="total" --> χαμένα τεκμήρια
+    <!-- TMPL_ELSE-->
+        Δε βρέθηκαν απωλεσθέντα τεκμήρια
+    <!-- /TMPL_IF -->
+</div>
+
+    <!-- TMPL_IF NAME="itemsloop" --><table>
+    <tr>
+        <th>Τίτλος</th>
+        <th>Συγγραφέας</th>
+        <th>Lost Code</th>
+        <th>Barcode</th>
+        <th>Ημερομηνία που εμφανίστηκε τελευταία φορά</th>
+        <th>Τιμή</th>
+        <th>Rep.Price</th>
+        <th>Βιβλιοθήκη</th>
+        <th>Τύπος τεκμηρίου</th>
+        <th>Παράρτημα που το έχει στην κατοχή του</th>
+        <th>Θέση</th>
+    </tr>
+     <!-- TMPL_LOOP NAME="itemsloop"-->
+        <tr>
+            <td><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber"-->" title="<!-- TMPL_VAR NAME="itemnotes"-->">
+						  <!-- TMPL_VAR NAME="title"--></td>
+					 </a></td>
+            <td><!-- TMPL_VAR NAME="author"--></td>
+            <td><!-- TMPL_VAR NAME="lib"--></td>
+            <td><a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber"-->" title="<!-- TMPL_VAR NAME="itemnotes"-->">
+                    <!-- TMPL_VAR NAME="barcode"-->
+                </a></td>
+            <td><!-- TMPL_VAR NAME="datelastseen"--></td>
+            <td><!-- TMPL_VAR NAME="price" --></td>
+            <td><!-- TMPL_VAR NAME="replacementprice" --></td>
+            <td><!-- TMPL_VAR NAME="homebranch" --></td>
+            <td><!-- TMPL_VAR NAME="itype" --></td>
+            <td><!-- TMPL_VAR NAME="holdingbranch"--></td>
+            <td><!-- TMPL_VAR NAME="location"--></td>
+        </tr>
+    <!-- /TMPL_LOOP -->
+    </table>
+	<!-- /TMPL_IF --> 
+	<!-- TMPL_ELSE -->
+	
+	<form name="f" action="/cgi-bin/koha/reports/itemslost.pl" method="post">
+<fieldset class="rows"><ol>    <li><label for="orderbyfilter">Ταξινόμηση κατά: </label>
+    <select id="orderbyfilter" name="orderbyfilter">
+        <option value=""> --- </option>
+        <option value="title">Τίτλος</option>
+        <option value="author">Συγγραφέας</option>
+        <option value="homebranch">Βιβλιοθήκη</option>
+        <option value="itype">Τύποι τεκμηρίων</option>
+        <option value="barcode">Barcode</option>
+        <option value="price">Τιμή</option>
+        <option value="replacementprice">Replacement Price</option>
+        <option value="lib">Lost Code</option>
+        <option value="datelastseen">Date Last Seen</option>
+        <option value="location">Θέση</option>
+    </select></li>
+	
+	<li><label for="barcodefilter">Barcode: </label><input type="text" name="barcodefilter" id="barcodefilter" size="6" /></li>
+	<li><label for="branchfilter">Βιβλιοθήκη: </label><select name="branchfilter" id="branchfilter">
+                <option value="">Όλα</option>
+            <!-- TMPL_LOOP name="branchloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="branchname" --></option>
+				<!-- TMPL_ELSE -->
+				<option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branchname" --></option>
+				<!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+            </select></li>
+	<li><label for="itemtypesfilter">Τύπος Τεκμηρίου: </label><select name="itemtypesfilter" id="itemtypesfilter">
+                <option value="">Όλα</option>
+                <!-- TMPL_LOOP name="itemtypeloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option>
+				<!-- TMPL_ELSE -->
+				<option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="description" --></option>
+				<!-- /TMPL_IF -->
+                <!-- /TMPL_LOOP -->
+            </select></li>
+
+	<li><label for="loststatusfilter">Κατάσταση Απωλεσθέντους: </label><select name="loststatusfilter" id="loststatusfilter">
+                <option value="">Όλα</option>
+                <!-- TMPL_LOOP name="loststatusloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="authorised_value" -->" selected="selected"><!-- TMPL_VAR NAME="lib" --></option>
+		<!-- TMPL_ELSE -->
+		<option value="<!-- TMPL_VAR NAME="authorised_value" -->"><!-- TMPL_VAR NAME="lib" --></option>
+		<!-- /TMPL_IF -->
+                <!-- /TMPL_LOOP -->
+            </select></li>
+</ol></fieldset>
+<fieldset class="action">    <input type="submit" value="Υποβολή">
+    <input type="hidden" name="get_items" value="1" /></fieldset>
+</form>
+	
+	<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

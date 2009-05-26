@@ -1,0 +1,109 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Գործիքներ</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Տուն</a> &rsaquo; Գործիքներ</div>
+
+<div id="doc3">
+<div id="bd">
+	<div class="yui-gb">
+
+<div class="yui-u first">
+<dl>
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_news" -->
+    <dt><a href="/cgi-bin/koha/tools/koha-news.pl">Նորություններ</a></dt>
+    <dd>Write news for the OPAC and staff interfaces</dd>
+    <!-- /TMPL_IF -->
+	
+    <!-- TMPL_IF NAME="CAN_user_tools_label_creator" -->
+    <dt><a href="/cgi-bin/koha/labels/label-home.pl">Label and Patron Card Creator</a></dt>
+    <dd>Create printable labels and barcodes from catalog data and patron cards from patron data</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_calendar" -->
+    <dt><a href="/cgi-bin/koha/tools/holidays.pl">Calendar</a></dt>
+    <dd>Define days when the library is closed</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_moderate_comments" -->
+    <dt><a href="/cgi-bin/koha/reviews/reviewswaiting.pl">Դիտողություններ</a></dt>
+	<dd>Moderate patron comments</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_moderate_comments" --><!-- FIXME: Update here when Tag specific permission is created. -->
+    <dt><a href="/cgi-bin/koha/tags/review.pl">Tags</a></dt>
+	<dd>Moderate patron tags</dd>
+    <!-- /TMPL_IF -->
+	</dl>
+</div>
+<div class="yui-u">
+	<dl>
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_notices" -->
+    <dt><a href="/cgi-bin/koha/tools/letter.pl">Ծանուցումներ</a></dt>
+    <dd>Define notices (print and email notification messages for overdues, etc.)</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_notice_status_triggers" -->
+    <dt><a href="/cgi-bin/koha/tools/overduerules.pl">Ժամկետանց ծանուցում/կարգավիճակի նախաձեռնում</a></dt>
+    <dd> Տեղադրիր հիշեցման/կարգավիճակի սկզբնավորողները ժամկետանց նյութերի համար։</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_view_system_logs" -->
+	<dt><a href="/cgi-bin/koha/tools/viewlog.pl">Մուտքերի դիտակ</a></dt>
+    <dd>Թերթիր համակարգային մուտքերը</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_inventory" -->
+    <dt><a href="/cgi-bin/koha/tools/inventory.pl">Inventory/stocktaking</a></dt>
+    <dd>Իրականացրու քո քարտարանի գույքագրումը</dd>
+    <!-- /TMPL_IF -->
+	
+	</dl>
+</div>
+<div class="yui-u">
+<dl>
+    <!-- TMPL_IF NAME="CAN_user_tools_stage_marc_import" -->
+    <dt><a href="/cgi-bin/koha/tools/stage-marc-import.pl">Ներմուծման համար փուլավորիր MARC գրառումները</a></dt>
+    <dd>Ռեզերվուարի մեջ փուլավորիր MARC գրառումներ</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_manage_staged_marc" -->
+    <dt><a href="/cgi-bin/koha/tools/manage-marc-import.pl">Կառավարիր բազմաստիճան MARC գրառումները</a></dt>
+    <dd>Managed staged MARC records, including completing and reversing imports</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_export_catalog" -->
+    <dt><a href="/cgi-bin/koha/tools/export.pl">Արտահանել մատենագիտությունը և պահումները</a></dt>
+    <dd>Արտահանել մատենագիտության և պահումների տվյալները</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_import_patrons" -->
+    <dt><a href="/cgi-bin/koha/tools/import_borrowers.pl">Ներմուծել ընթերցողներին</a></dt>
+    <dd>Import patron data</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_delete_anonymize_patrons" -->
+    <dt><a href="/cgi-bin/koha/tools/cleanborrowers.pl">Patrons (anonymize, bulk-delete)</a></dt>
+    <dd>Delete old borrowers and anonymize circulation history (deletes borrower reading history)</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_batch_upload_patron_images" -->
+    <dt><a href="/cgi-bin/koha/tools/picture-upload.pl">Բեռնավորիր ընթերցողի պատկերները</a></dt>
+	<dd>Բեռնավորիր ընթերցողի պատկերները փաթեթով կամ մեկ առ մեկ</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_schedule_tasks" -->
+    <dt><a href="/cgi-bin/koha/tools/scheduler.pl">Աշխատանքի գրաֆիկի կազմակերպիչ</a></dt>
+    <dd>Նախատեսիր կատարման ենթակա աշխատանքները</dd>
+    <!-- /TMPL_IF -->
+	
+</dl>
+</div>
+
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

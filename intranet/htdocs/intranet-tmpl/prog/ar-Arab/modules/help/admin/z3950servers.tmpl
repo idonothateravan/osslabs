@@ -1,0 +1,17 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Z39.50 إدارة خوادم</h1>
+
+<p> z39.50 حدد أى خوادم ال .التى تريد نظام كوها ان يبحث فيه</p>
+
+<p>يأتي نظام كوها بموقع خادم z39.50 واحد معرف (مكتبة الكونجرس الأمريكية) لإيجاد تسجيلات الفهرس للاستيراد مباشرة الى الفهرس. في هذا المكان يمكنك تعريف خوادم أخرى للبحث.</p>
+
+<p>لإضافة الخوادم، ستحتاج لمعرفة اسم الملكية أو عنوان IP  الخاص بالخادم، رقم البوابة للاستخدام، واسم قاعدة البيانات للدخول. هذه المعلومات متوفرة للعديد من الخوادم حول العالم عن طريق الوصول الى موقع ويب بيانات الدليل في http://www.indexdata.dk/targettest/.. All of the servers listed there accept anonymous connections. (كن متأكّدا لإختيار الخوادم التى تسلّم التسجيلات في صيغة مارك الصحيحة لتركيب كوها.) </p>
+
+<p>If you have a login name and password for other Z39.50 servers, Koha will save your user ID and password in addition to the other information it needs to make a connection. (For anonymous servers, leave the userid and password fields blank.) The other fields on the form control whether or not the server is automatically searched when you request a Z39.50 search (put a "1" in the "Checked" field) and the order in which it is checked.</p>
+
+<p>إنها فكرة جيدة أن تكون إنتقائي في إختيار الخوادم. تعريف أكثر من خمسة أو ستة خوادم تم فحصها قد تبطئ نتيجة بحث Z39.50 الخاص بك، حتى إذا كانوا مسؤولين معا.</p>
+
+<p>ملاحظة هامة:بحث z 39.50 لن يعمل حتى يفعل مدير النظام عميل z 39.50 على الخادم .daemon يوجد في فهرس كوها/script/z3950daemon يجب أن يضاف إلى التسجيلة ليتم تنفيذه أثناء تشغيل الخادم ي.</p>
+
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

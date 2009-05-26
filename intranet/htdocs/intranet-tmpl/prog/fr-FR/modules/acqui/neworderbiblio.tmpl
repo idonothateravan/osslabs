@@ -1,0 +1,86 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Acquisitions &rsaquo; Rechercher les notices existantes</title>
+<!-- TMPL_INCLUDE NAME="greybox.inc" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="acquisitions-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> &rsaquo; <a href="/cgi-bin/koha/acqui/acqui-home.pl">Acquisitions</a> &rsaquo; Recherche de notices existantes</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	
+<h1>Recherche des notices existantes</h1>
+
+
+<!-- TMPL_IF NAME="total" -->
+<b><!-- TMPL_VAR NAME="total" --> réponse(s) trouvée(s)</b> <!-- TMPL_VAR name='pagination_bar'-->
+<!-- TMPL_ELSE -->
+<h3> Pas de réponse</h3>
+<p>
+    Pas de résultat correspondant à votre recherche pour <span style="font-weight: bold;">&ldquo;<!-- TMPL_VAR NAME="query" -->&rdquo;</span> à <!-- TMPL_VAR NAME="LibraryName" -->
+</p>
+<a href="JavaScript:back();" title="Nouvelle recherche">Nouvelle recherche</a>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="query_error" -->
+<br /><br />
+<b>Erreur : </b>
+<span class="problem">
+    <!-- TMPL_VAR NAME="query_error" -->
+</span>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="total"-->
+<div class="searchresults">
+    <table>
+    <tr>
+       <th>Résumé</th>
+       <th>Editeur</th>
+       <th>Copyright</th>
+       <th colspan="2">&nbsp;</th>
+    </tr>
+    <!-- TMPL_LOOP NAME="resultsloop" -->
+        <tr>
+            <td>
+                <p><span class="title"><!-- TMPL_VAR NAME="title" --></span>
+                <!-- TMPL_IF name="author" -->  par <span class="author"><!-- TMPL_VAR NAME="author" --></span>,<!-- /TMPL_IF --></p>
+                <p><!-- TMPL_IF name="isbn" --> <!-- TMPL_VAR name="isbn" --><!-- /TMPL_IF -->
+                <!-- TMPL_IF name="pages" --> - <!-- TMPL_VAR name="pages" --><!-- /TMPL_IF -->
+                <!-- TMPL_IF name="notes" --> : <!-- TMPL_VAR name="notes" --><!-- /TMPL_IF -->
+                <!-- TMPL_IF name="size" --> ; <!-- TMPL_VAR name="size" --><!-- /TMPL_IF -->
+                </p>
+            </td>
+            <td>
+                <!-- TMPL_VAR name="publishercode" -->
+                <!-- TMPL_IF name="place" --> ; <!-- TMPL_VAR name="place" --><!-- /TMPL_IF -->
+            </td>
+            <td>
+                <!-- TMPL_VAR NAME="copyrightdate" -->
+            </td>
+        <td>
+        <a href="/cgi-bin/koha/catalogue/showmarc.pl?id=<!-- TMPL_VAR NAME="biblionumber" -->" title="MARC" rel="gb_page_center[600,500]">Voir notice</a>
+        </td>
+            <td>
+            <a href="/cgi-bin/koha/acqui/neworderempty.pl?booksellerid=<!-- TMPL_VAR NAME="booksellerid" -->&amp;basketno=<!-- TMPL_VAR NAME="basketno" -->&amp;biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->" title="Commander celui-ci">
+                Commande
+            </a>
+            </td>
+        </tr>
+    <!-- /TMPL_LOOP -->
+    </table>
+</div>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="acquisitions-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

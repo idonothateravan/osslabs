@@ -1,0 +1,225 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo;الادارة &rsaquo;<!-- TMPL_IF name="add_form" --><!-- TMPL_IF NAME="use-heading-flags-p" --><!-- TMPL_IF NAME="heading-edit-subfields-p" --> بنيه الحقل الفرعى لمارك &rsaquo;عدّل قيود الحقول الفرعية لمارك <!-- /TMPL_IF --><!-- TMPL_ELSE --> بنيه الحقل الفرعى لمارك &rsaquo; <!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" --> بنيه الحقل الفرعى لمارك &rsaquo; أكد حذف الحقل الفرعى <!-- TMPL_VAR NAME="tagsubfield" --><!-- /TMPL_IF --><!-- TMPL_IF name="delete_confirmed" --> بنيه الحقل الفرعى لمارك &rsaquo; تم حذف الحقل الفرعى<!-- /TMPL_IF --><!-- TMPL_IF name="else" -->بنيه الحقل الفرعى لمارك<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+
+	 $(document).ready(function() {
+ 		$('#subfieldtabs > ul').tabs();
+	 });
+
+function displayMoreConstraint(numlayer){
+    var thisdiv = document.getElementById(numlayer);
+    if(thisdiv.getAttribute("class") == "content_hidden"){
+        thisdiv.removeAttribute('class');
+        thisdiv.setAttribute("class","content_visible");
+    } else {
+        thisdiv.removeAttribute('class');
+        thisdiv.setAttribute("class","content_hidden");
+    }
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs">
+  <a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">الادارة</a> &rsaquo; <a href="/cgi-bin/koha/admin/biblio_framework.pl">MARC إطار</a> &rsaquo; <a href="/cgi-bin/koha/admin/marctagstructure.pl?frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->&searchfield=<!-- TMPL_VAR name="tagfield" -->"><!-- TMPL_VAR NAME="frameworkcode" -->بنيه إطار</a> &rsaquo;
+  <!-- TMPL_IF name="add_form" -->
+  <!-- TMPL_IF NAME="use-heading-flags-p" -->
+  <!-- TMPL_IF NAME="heading-edit-subfields-p" --> <a href="/cgi-bin/koha/admin/marc_subfields_structure.pl?tagfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">Tag <!-- TMPL_VAR NAME="tagfield" --> بنية الحقل الفرعى</a> &rsaquo; عدل مقيدات الحقول الفرعية
+  <!-- /TMPL_IF -->
+  <!-- TMPL_ELSE --> <a href="/cgi-bin/koha/admin/marc_subfields_structure.pl?tagfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">Tag <!-- TMPL_VAR NAME="tagfield" --> بنيه الحقل الفرعى</a> &rsaquo; <!-- TMPL_VAR NAME="action" -->
+  <!-- /TMPL_IF -->
+  <!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" --> <a href="/cgi-bin/koha/admin/marc_subfields_structure.pl?tagfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">Tag <!-- TMPL_VAR NAME="tagfield" --> بنية الحقل الفرعى</a> &rsaquo; أكد حذف الحقل الفرعى <!-- TMPL_VAR NAME="tagsubfield" -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirmed" --> <a href="/cgi-bin/koha/admin/marc_subfields_structure.pl?tagfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">Tag <!-- TMPL_VAR NAME="tagfield" --> بنية الحقل الفرعى</a> &rsaquo; تم حذف الحقل الفرعى
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="else" -->الرأس <!-- TMPL_VAR NAME="tagfield" --> بنيه الحقل الفرعى<!-- /TMPL_IF -->
+</div>
+
+<div id="doc" class="yui-t7">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-g">
+
+<!-- TMPL_IF NAME="add_form" -->
+    <h1>
+        <!-- TMPL_IF NAME="use-heading-flags-p" -->
+            <!-- TMPL_IF NAME="heading-edit-subfields-p" -->الرأس <!-- TMPL_VAR NAME="tagfield" --> قيود الحقل الفرعى <!-- /TMPL_IF -->
+        <!-- TMPL_ELSE -->
+            <!-- TMPL_VAR NAME="action" -->
+        <!-- /TMPL_IF -->
+    </h1>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+    <input type="hidden" name="op" value="add_validate" />
+	<input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+    <input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+    <input type="submit" value="إحفظ التغييرات">
+    
+    <div id="subfieldtabs" class="toptabs numbered">
+   <ul>
+        <!-- TMPL_LOOP NAME="loop" -->
+            <!-- TMPL_IF NAME="new_subfield" -->
+                <!-- TMPL_IF EXPR="tagfield >=10" --><!-- display new only for > 10 fields -->
+                <li><a href="/cgi-bin/koha/admin/marc_subfields_structure.pl#sub<!-- TMPL_VAR NAME="urisubfieldcode" -->field" title="<!-- TMPL_VAR NAME="liblibrarian" -->">جديد</a></li>
+                <!-- /TMPL_IF -->
+            <!-- TMPL_ELSE -->
+                <li><a href="/cgi-bin/koha/admin/marc_subfields_structure.pl#sub<!-- TMPL_VAR NAME="urisubfieldcode" -->field" title="<!-- TMPL_VAR NAME="liblibrarian" -->">
+                    <!-- TMPL_VAR NAME="subfieldcode" -->
+               </a></li>
+            <!-- /TMPL_IF --></li>
+        <!-- /TMPL_LOOP -->
+    </ul>
+    
+    <!-- TMPL_LOOP NAME="loop" --> 
+        <div id="sub<!-- TMPL_VAR NAME="urisubfieldcode" -->field">
+        
+               <fieldset class="rows"><legend>القيود الأساسية</legend>
+                	<ol>
+                		<!-- TMPL_IF EXPR="subfieldcode eq 0 || subfieldcode" --> 
+                		<li><span class="label">رمز حقل فرعى:</span> <!-- TMPL_VAR NAME="subfieldcode" --> <input type="hidden" name="tagsubfield" value="<!-- TMPL_VAR NAME="subfieldcode" -->" /></li>
+                		<!-- TMPL_ELSE -->
+                		<li><span class="label">رمز حقل فرعى:</span> <input type="text" name="tagsubfield" value="<!-- TMPL_VAR NAME="subfieldcode" -->" /></li>
+                		<!-- /TMPL_IF -->
+                		<li><label for="liblibrarian<!-- TMPL_VAR NAME="row" -->">النص ل المكتبى: </label><input id="liblibrarian<!-- TMPL_VAR NAME="row" -->" type="text" name="liblibrarian" value="<!-- TMPL_VAR NAME="liblibrarian" -->" size="40" maxlength="80" /></li>
+                		<li><label for="libopac<!-- TMPL_VAR NAME="row" -->">النص ل OPAC: </label><input type="text" id="libopac<!-- TMPL_VAR NAME="row" -->" name="libopac" value="<!-- TMPL_VAR NAME="libopac" -->" size="40" maxlength="80" /></li>
+                		<li><label for="repeatable<!-- TMPL_VAR NAME="row" -->">متكرّر:  </label><!-- TMPL_VAR NAME="repeatable" --></li>
+                		<li><label for="mandatory<!-- TMPL_VAR NAME="row" -->">إلزامى: </label><!-- TMPL_VAR NAME="mandatory" --></li>
+                		<li><label for="tab<!-- TMPL_VAR NAME="row" -->">يستخدم في التسجيلة: </label><!-- TMPL_VAR NAME="tab" --> (ignore means that the subfield does not display in the record editor)</li>
+                	</ol>
+            </fieldset>
+			
+            <a href="javascript:displayMoreConstraint('more<!-- TMPL_VAR NAME="urisubfieldcode" -->')">إعرض قيود أكثر</a>
+            <div id="more<!-- TMPL_VAR NAME="urisubfieldcode" -->" class="content_hidden" style="clear: both">
+             <fieldset class="rows" id="advanced-constraints">
+				<legend>قيود متقدمة:</legend>
+                <ol><li><label for="defaultvalue">قيمة إفتراضية: </label>
+                    <input type="text" name="defaultvalue" id="defaultvalue" value="<!-- TMPL_VAR NAME="defaultvalue" -->" /></li>
+                <li><label for="hidden<!-- TMPL_VAR NAME="row" -->">مخفي</label><input type="text" id="hidden<!-- TMPL_VAR NAME="row" -->" name="hidden" value="<!-- TMPL_VAR name="hidden" -->" size="2" /> (ابحث في المساعدة علي الإنترنت)</li>
+                <li><label for="isurl<!-- TMPL_VAR NAME="row" -->">Is a URL:</label><!-- TMPL_VAR NAME="isurl" --> (إذا تم فحصه, فذلك يعني أن الحقل الفرعي عباره عن URL ويمكن الضغط عليه)</li>
+                <li><label for="link">رابط:</label><input type="text" id="link" name="link" value="<!-- TMPL_VAR NAME="link" -->" size="10" maxlength="80" /> (e.g., Title or Local-Number) <span class="error"><em>Warning: This value should not change after data has been added to your catalog</em></span></li>
+                <li><span class="label">خيارات الاخرين:</span> (اختر واحد)
+                    	<ol>
+                    		<li><label for="authorised_value">قيمة مقننة:</label><!-- TMPL_VAR NAME="authorised_value" --></li>
+                    		<li><label for="authtypecode">قاموس معاني: </label><!-- TMPL_VAR NAME="authtypes" --></li>
+                    		<li><label for="value_builder">Plugin:</label><!-- TMPL_VAR NAME="value_builder" --></li>
+                    	</ol>
+                </li>
+                <li><label for="kohafield<!-- TMPL_VAR NAME="row" -->">رابط كوها:</label><!-- TMPL_VAR NAME="kohafield" --></li>
+				</ol>
+				</fieldset>
+            </div><br class="clear" /><!-- /more  -->
+        </div><!-- /content_sub -->
+        <!-- /TMPL_LOOP -->
+		</div><!-- /content -->
+    </form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+
+<h3>تأكيد حذف الحقل الفرعى <!-- TMPL_VAR NAME="tagsubfield" -->؟ </h3>
+    <p>حقل فرعى: <!-- TMPL_VAR NAME="tagsubfield" --></p>
+    <p>وصف<!-- TMPL_VAR NAME="liblibrarian" --></p>
+
+            <form action="<!-- TMPL_VAR NAME="delete_link" -->" method="post"><input type="hidden" name="op" value="delete_confirmed" />
+                <input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+                <input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+				<input type="hidden" name="tagsubfield" value="<!-- TMPL_VAR NAME="tagsubfield" -->" />
+				<input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+				<input type="submit" value="نعم, إحذف هذا الحقل الفرعى">
+            </form>
+			
+			<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+			<input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+			<input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+			<input type="hidden" name="tagsubfield" value="<!-- TMPL_VAR NAME="tagsubfield" -->" />
+			<input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+			<input type="submit" value="لا,لا تحذف">
+            </form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirmed" -->
+
+    <h3>البيانات حذفت</h3>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+	<input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+    <input type="submit" value="نعم">
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="else" -->
+<h1>إدارة بنيه حقل مارك الفرعى ل <!-- TMPL_VAR NAME="tagfield" --> (إطار <!--TMPL_VAR NAME="frameworkcode" -->)</h1>
+<p>تعرض هذه الشاشة الحقول الفرعية المرتبطة بالرأس المختار.يمكنك أن تعدّل الحقل الفرعى أو يضيف واحد جديد بالنقر على تعديل. </p>
+<p>يوضّح حقل عمود كوها بأنّ الحقل الفرعى مرتبط مع حقل كوها. كوها يمكن أن يدير واجهه مارك، أو واجهه كوها. تضمن هذه الوصلة بأنّ كلا DB متزامنين، هكذا يمكنك أن تغيّر من مارك إلى واجهه كوها بسهولة.</p>
+
+<table>
+<tr>
+    <th>حقل فرعى</th>
+    <th>إختبار</th>
+    <th>القيود</th>
+    <th>حذف</th>
+</tr>
+<!-- TMPL_LOOP NAME="loop" -->
+<!-- TMPL_IF NAME="toggle" --><tr class="highlighted"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+    <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+    <td>
+        <!-- TMPL_IF NAME="subfield_ignored" -->
+            <i><!-- TMPL_VAR NAME="liblibrarian" --></i>
+        <!-- TMPL_ELSE -->
+            <!-- TMPL_VAR NAME="liblibrarian" -->
+        <!-- /TMPL_IF -->
+    </td>
+    <td>
+        <!-- TMPL_IF NAME="subfield_ignored" -->
+            <i>حقل فرعى مهمل</i>
+        <!-- TMPL_ELSE -->
+            فاصل:<!-- TMPL_VAR NAME="tab" -->,
+            <!-- TMPL_IF NAME="kohafield" --> |حقل كوها: <!-- TMPL_VAR NAME="kohafield" -->, <!--/TMPL_IF -->
+            <!-- TMPL_IF NAME="repeatable" -->متكرّر،  <!-- TMPL_ELSE -->غير مكرر,<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="mandatory" -->إلزامى, <!-- TMPL_ELSE -->غير إلزامى,<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="seealso" --> | أنظر أيضا: <!-- TMPL_VAR NAME="seealso" -->,<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="hidden" -->مخفى,<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="isurl" -->يكون URL,<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="authorised_value" --> | Auth value:<!-- TMPL_VAR NAME="authorised_value" -->,<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="authtypecode" --> |إستناد:<!-- TMPL_VAR NAME="authtypecode" -->,<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="value_builder" --> | Plugin:<!-- TMPL_VAR NAME="value_builder" -->,<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="link" --> | رابط<!-- TMPL_VAR NAME="link" -->,<!-- /TMPL_IF -->
+        <!-- /TMPL_IF -->
+    </td>
+    <td><a href="<!-- TMPL_VAR NAME="delete" -->">حذف</a></td>
+</tr>
+<!-- /TMPL_LOOP -->
+</table>
+
+<form action="<!-- TMPL_VAR NAME="script_name" -->" method="get">
+    <fieldset class="action"><input type="hidden" name="op" value="add_form" />
+    <input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="edit_tagfield" -->" />
+    <input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="edit_frameworkcode" -->" />
+    <input type="submit" value="تعديل حقول فرعية">
+	<a class="cancel" href="marctagstructure.pl?searchfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">إلغاء</a>
+	</fieldset>
+</form>
+
+<!-- TMPL_IF NAME="previous" -->
+    <input type="image" src="<!-- TMPL_VAR NAME="interface" -->/<!-- TMPL_VAR NAME="theme" -->/images/1leftarrow.png" title="السابق" alt="السابق" border="0">
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="next" -->
+    <!-- TMPL_VAR NAME="next" -->
+        <input type="image" src="<!-- TMPL_VAR NAME="interface" -->/<!-- TMPL_VAR NAME="theme" -->/images/1rightarrow.png" title="التالى" alt="التالى" border="0">
+<!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

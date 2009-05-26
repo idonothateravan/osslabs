@@ -1,0 +1,86 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; Adminsitration</div>
+
+<div id="doc" class="yui-t7">
+   
+   <div id="bd">
+	<div id="yui-main" class="sysprefs">
+	<div class="yui-g"><h1>Systemeinstellungen</h1></div>
+	<div class="yui-g">
+
+<div class="yui-u first">
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/systempreferences.pl">Globale Systemvorgaben</a></dt>
+	<dd>Manage global system preferences like MARC flavor, date format, administrator e-mail, and templates.</dd>
+</dl>
+
+
+<div class="hint"><h4>Tipp:</h4><p>Konfigurieren Sie die Parameter in der vorgegebenen Reihenfolge.</p></div>
+<h3>Basisparameter</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/branches.pl">Bibliotheken, Zweigstellen und Gruppen</a></dt>
+	<dd>Definieren von Bibliotheken, Zweigstellen und Gruppen</dd>
+	<dt><a href="/cgi-bin/koha/admin/aqbookfund.pl">Fonds und Etats</a></dt>
+	<dd>Funds and budgets administration for acquisitions.</dd>
+	<dt><a href="/cgi-bin/koha/admin/currency.pl">Währungen und Wechselkurse</a></dt>
+	<dd>Definiren SIe Währungen und Wechselkursen für die Erwerbung.</dd>
+	<dt><a href="/cgi-bin/koha/admin/itemtypes.pl">Medientypen und Ausleihcodes</a></dt>
+	<dd>Medientypen und  Ausleihcodes, die für die Ausleihbedingungen verwendet werden, definieren</dd>
+</dl>
+
+<h3>Benutzer und Ausleihe</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/categorie.pl">Benutzertypen</a></dt>
+	<dd>Benutzertypen definieren.</dd>
+	<dt><a href="/cgi-bin/koha/admin/cities.pl">Städte</a></dt>
+	<dd>Definieren Sie Städte, in denen ihre Benutzer wohnen.</dd>
+	<dt><a href="/cgi-bin/koha/admin/roadtype.pl" >Wegtypen</a>
+	</dt>
+	<dd>Definieren Sie Weg-Typen (Strasse, Allee, Weg, etc.). Weg-Typen erscheinen als autorisierte Werte beim Hinzufügen oder Ändern von Benutzern und können in geographischen Statistiken verwendet werden.</dd>
+	<dt><a href="/cgi-bin/koha/admin/patron-attr-types.pl">Benutzerattribute</a></dt>
+	<dd>Erweiterte Eigenschaften (Kennungen und statistische Kategorien) für Benutzerdatensätze definieren</dd>
+    <dt><a href="/cgi-bin/koha/admin/smart-rules.pl">Ausleihbedingungen und Gebührenregelungen</a></dt>
+    <dd>Definieren Sie Ausleihbedingungen und Gebührenregeln für Kombinationen aus Bibliotheken, Benutzertypen und Medientypen.</dd>
+</dl>
+</div>
+<div class="yui-u">
+<h3>Katalog</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/authorised_values.pl">Autorisierte Werte</a></dt>
+	<dd>Definieren Sie Kategorien und autorisierte Werte für sie.</dd>
+	<dt><a href="/cgi-bin/koha/admin/biblio_framework.pl">MARC bibliographisches Framework</a></dt>
+	<dd>Create and manage Bibliographic frameworks that define the characteristics of your MARC Records (field and subfield definitions) as well as templates for the MARC editor.</dd>
+	<dt><a href="/cgi-bin/koha/admin/koha2marclinks.pl">Koha zu MARC Mapping</a></dt>
+	<dd>Define the mapping between the Koha transactional database (SQL) and the MARC Bibliographic records. Note that the mapping can be defined through MARC Bibliographic Framework. This tool is just a shortcut to speed up linkage.</dd>
+	<dt><a href="/cgi-bin/koha/admin/checkmarc.pl">MARC Test bibliographisches Framework</a></dt>
+	<dd>Checks the MARC structure. If you change your MARC Bibliographic framework it's recommended that you run this tool to test for errors in your definition.</dd>
+    <dt><a href="/cgi-bin/koha/admin/authtypes.pl">Normdatentypen</a></dt>
+    <dd>Erstellen und Verwalten von Normdaten-Frameworks, die die Charakteristiken Ihrer MARC-Datensätze definieren (Definition der Felder und Unterfelder).</dd>
+    <dt><a href="/cgi-bin/koha/admin/classsources.pl">Klassifikationsquellen</a></dt>
+    <dd>Define classification sources (i.e., call number schemes) used by your collection.  Also define filing rules used for sorting call numbers.</dd>
+    <dt><a href="/cgi-bin/koha/admin/matching-rules.pl">Datensatz-Übereinstimmungsregeln</a></dt>
+    <dd>Manage rules for automatically matching MARC records during record imports.</dd>
+</dl>
+
+<h3>Weitere Parameter</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/stopwords.pl">Stopwörter</a></dt>
+	<dd>Während der Suche ignorierte Wörter.</dd>
+	<!-- <dt><a href="/cgi-bin/koha/admin/printers.pl">Network Printers</a></dt>
+	<dd>Printers (UNIX paths).</dd> -->
+	<dt><a href="/cgi-bin/koha/admin/z3950servers.pl">Z39.50 Clientprofile</a></dt>
+	<dd>Definieren Sie, welche Server nach MARC-Datensätzen im integrierten Z39.50-Client abgefragt werden sollen.</dd>
+</dl>
+</div>
+
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>Leader builder</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_leader_authorities.pl">
+<table>
+	<tr>
+		<td>1-4 Satzlänge</td>
+		<td>(automatisch ausgefüllt)</td>
+	</tr>
+	<tr>
+		<td>5- Satzstatus</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5a" -->
+				<option value="a" SELECTED>a- Erhöhe Codierungsebene</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">a- Erhöhe Codierungsebene</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>c- korrigiert oder überarbeitet</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- korrigiert oder überarbeitet</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>d- gelöscht</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- gelöscht</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5n" -->
+				<option value="n" SELECTED>n- Neu</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">n- Neu</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5o" -->
+				<option value="o" SELECTED>o- Hinfällig</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">o- Hinfällig</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5s" -->
+				<option value="s" SELECTED>s- Gelöscht; Ansetzungsform aufgeteilt in zwei oder mehr Ansetzungen</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">s- Gelöscht; Ansetzungsform aufgeteilt in zwei oder mehr Ansetzungen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5x" -->
+				<option value="x" SELECTED>x- Gelöscht; Eintrag ersetzt durch einen anderen Eintrag</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">x- Gelöscht; Eintrag ersetzt durch einen anderen Eintrag</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>6- Art des Satzes</td>
+		<td>
+            <input name="f6" value="z" type="hidden" />
+            z- Normdaten
+		</td>
+	</tr>
+	<tr>
+		<td>7-8 Nicht definiert</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td>9- Kodierung</td>
+		<td>
+			<select name="f9" size="1">
+				<!-- TMPL_IF name="f9 " -->
+					<option value=" " SELECTED>MARC-8</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">MARC-8</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f9a" -->
+					<option value="a" SELECTED>a- UCS/Unicode</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- UCS/Unicode</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>10-16 Indikator/Unterfeld/Länge</td>
+		<td>(automatisch ausgefüllt)</td>
+	<tr>
+		<td>17- Kodierungslevel</td>
+		<td>
+			<select name="f17" size="1">
+				<!-- TMPL_IF name="f17n" -->
+					<option value="n" SELECTED>n- unvollständiger Normdatensatz</option>
+				<!-- TMPL_ELSE -->
+					<option value="n">n- unvollständiger Normdatensatz</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f17o" -->
+					<option value="o" SELECTED>ö- unvollständiger Normdatensatz</option>
+				<!-- TMPL_ELSE -->
+					<option value="o">ö- unvollständiger Normdatensatz</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>18-19 Nicht definiert</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td>20-24 Eingabefeld & Längen</td>
+		<td>(automatisch ausgefüllt)</td>
+	<tr>
+
+	<tr><td colspan=2><input type="submit" value="OK"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			'     '+
+			document.f_pop.f5.value+
+			document.f_pop.f6.value+
+			'  '+
+			document.f_pop.f9.value+ 
+			'22     '+
+			document.f_pop.f17.value+
+			'  '+
+			'4500';
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

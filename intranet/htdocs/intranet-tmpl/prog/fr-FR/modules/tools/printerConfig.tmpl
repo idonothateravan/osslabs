@@ -1,0 +1,75 @@
+<!-- TMPL_INCLUDE NAME="doc-head-barcodes.inc" -->
+
+	<h1>Configuration imprimante</h1>
+	<h3>Sélectionner la configuration d'imprimante correspondant à votre environnement</h3>
+	<ul>
+		<li>Entrez la hauteur et la largeur des étiquettes que vous allez utiliser</li>
+		<li>Entrez la définition (DPI) par défaut</li>
+		<li>Déterminez le type de page.</li>
+		<li>Entrez le nombre de colonnes et de lignes dans votre page</li>
+		<li>Définissez les marges gauches et basses pour la page que vous souhaitez utiliser. Ces paramètres aideront à centrer les codes barres sur les étiquettes.</li>
+	</ul>
+	<br />
+	<form method="post" action="<!-- TMPL_VAR NAME="SCRIPT_NAME" -->" name="form1">
+		<input type="hidden" name="saveSettings" value="1" />
+		<fieldset class="rows"><ol>
+			<li>
+				<label for="labelWidth">
+					Largeur étiquette (en mm) : </label> 
+					<input id="labelWidth" type="text" name="labelWidth" size="5" value="<!-- TMPL_VAR NAME="LABEL_WIDTH" -->">
+				</li>
+				<li>
+				<label for="labelHeigth">
+					Hauteur étiquette (en mm) : </label> 
+					<input id="labelHeigth" type="text" name="labelHeigth" size="5" value="<!-- TMPL_VAR NAME="LABEL_HEIGTH" -->">
+				</li>
+				<li>
+				<label for="systemDpi">
+					DPI : </label>
+					<input id="systemDpi" type="text" name="systemDpi" size="5" value="<!-- TMPL_VAR NAME="SYSTEM_DPI" -->">
+				</li>
+				<li>
+				<label for="pageType">
+					Type de page : </label>	
+					<select name="pageType" id="pageType" size="1">
+						<!-- TMPL_IF name="A4" -->
+							<option value="A4" selected="selected">A4</option>
+				        <!-- TMPL_ELSE -->
+							<option value="A4">A4</option>
+						<!-- /TMPL_IF -->
+						<!-- TMPL_IF name="Letter" -->
+							<option value="Letter" selected="selected">Lettre</option>
+				        <!-- TMPL_ELSE -->
+							<option value="Letter">Lettre</option>
+						<!-- /TMPL_IF -->
+						<!-- TMPL_IF name="Legal" -->
+							<option value="Legal" selected="selected">Légal</option>
+				        <!-- TMPL_ELSE -->
+							<option value="Legal">Légal</option>
+						<!-- /TMPL_IF -->    </select>
+				</li>
+				<li>
+				<label for="columns">
+					Colonnes : </label>  
+					<input id="columns" type="text" name="columns" size="5" value="<!-- TMPL_VAR NAME="COLUMNS" -->">
+				</li>
+				<li>
+				<label for="rows">
+					Lignes : </label>   
+					<input id="rows" type="text" name="rows" size="5" value="<!-- TMPL_VAR NAME="ROWS" -->">
+				</li>
+				<li>
+				<label for="marginBottom">
+					Marge basse (en mm) </label>   
+					<input id="marginBottom" type="text" name="marginBottom" size="5" value="<!-- TMPL_VAR NAME="MARGIN_TOP" -->">
+				</li>
+				<li>
+				<label for="marginLeft">
+					Marge gauche (en mm) </label>   
+					<input id="marginLeft" type="text" name="marginLeft" size="5" value="<!-- TMPL_VAR NAME="MARGIN_LEFT" -->">
+				</li>
+			</ol></fieldset>
+			<fieldset class="action"><input type="submit" value="Enregistrer les réglages"></fieldset>
+	</form>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

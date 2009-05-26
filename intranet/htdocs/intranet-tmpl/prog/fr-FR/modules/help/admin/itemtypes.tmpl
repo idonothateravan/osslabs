@@ -1,0 +1,41 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Gestion des types de documents</h1>
+
+<p>Vous pouvez définir autant de types de document que vous souhaitez.</p>
+<p>Les types de document sont les "catégories" dans lesquelles vous répartisez vos documents. Par exemple, vous voulez probablement mettre les cassettes vidéo dans une catégorie différente des livres documentaires, et les policiers dans une catégorie différente de celle des livres d'images pour enfants. Si vous utilisez déjà un SIGB commercial, vous avez certainement déjà réparti vos collections dans des catégories. Maintenant vous devez indiquer à Koha quelles sont vos catégories.</p>
+<p>Le code de type de document est limité à quatre caractères.Ce code est rarement affiché par Koha;Les utilisateurs verront à la place la description du type de document.</p>
+<p>"Frais de location" correspond à la somme  que vous pourriez demander à vos adhérents pour le prêt d'un certain type de document (comme des vidéos).</p>
+<p>"Renouvellements autorisés" indique combien de fois un document de ce type peut-être renouvelé.</p>
+<p>Les types de document sont utiles pour de nombreuses choses, et  <strong>très</strong> important pour contrôler la façon dont fonctionne Koha:</p>
+	<ul>
+		<li>Les adhérents peuvent faire des recherches par types de document</li>
+		<li>Les règles de prêt sont établies par types de document (et par types d'adhérent / sites)</li>
+	</ul>
+<p>Déterminer les types de document est l'une des premières choses que vous aurez à faire après l'installation du logiciel Koha.</p>
+
+<h3>Ajouter &amp; Modifier des types de documents</h3>
+	<ul>
+		<li>Your system will come with some predefined item types.  From this screen you can edit or delete these items</li>
+		<li>Pour ajouter un nouveau type d'exemplaire, cliquez 'Ajouter type exemplaire'</li>
+		<li>Entrez un code pour le Type d'exemplaire</li>
+		<li>Entrez une explication plus complète en "Description"</li>
+		<li>Vous pouvez choisir une image pour chaque type de document (ou sélectionner l'option 'Pas d'image')</li>
+		<li>L'option 'Exclu du prêt' peut être utilisé pour les exemplaires qui ne sont pas prêtables</li>
+		<li>"Renouvellements autorisés" indique combien de fois le document peut-être renouvelé</li>
+		<li>Si vous appliquez un coût de location pour certains documents (par ex. les DVD), entrez la somme dans le champ 'Coût du prêt'</li>
+		<li>le champ résumé est utilisé pour modifier la façon dont les exemplaires sont affichés dans les résultats de recherche
+		<ul>
+			<li>
+		    <span style="background-color: #ffe599">
+ASTUCE : Pour les ressources électroniques, vous pouvez entrer</span>
+		    <span style="background-color: #ffe599">
+<em>&lt;a href=&quot;[856u]&quot;&gt;ouvrir le site&lt;/a&gt;</em></span>
+		    <span style="background-color: #ffe599">
+pour afficher le lien exemplaire sur la page des résultats</span></li>
+		</ul></li>
+		<li>Quand vous avez fini, cliquez sur 'Sauvegarder'</li>
+	</ul>
+<p><strong>Est-il possible d'avoir un type de document différent pour les nouveautés?</strong>
+Yes.  Just enter an item type for new items and assign different circulation rules for this item type.
+ </p><!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

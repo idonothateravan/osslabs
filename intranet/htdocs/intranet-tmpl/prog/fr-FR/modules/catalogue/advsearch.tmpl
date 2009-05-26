@@ -1,0 +1,305 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Catalogue &rsaquo; Recherche avancée</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/JavaScript" language="JavaScript">
+	/**
+	 *  Function add_field();
+	 *  This function allows to display a new field to search.
+	 */
+	function add_field() {
+	    var ButtonPlus = document.getElementById("ButtonPlus");
+		var line = ButtonPlus.parentNode;
+		var dad  = line.parentNode;
+		dad.appendChild(line.cloneNode(true));
+		line.removeChild(ButtonPlus);
+	}
+	$(document).ready(function() {
+		$("input[@name='q']:eq(0)").focus();
+	});
+</script>
+</head>
+<body>
+
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> &rsaquo; Recherche avancée</div>
+
+<div id="doc" class="yui-t7">
+   <div id="bd">
+	
+<form action="search.pl" method="get">
+<div id="advanced-search">
+<h1>Recherche avancée</h1>
+
+<!-- TMPL_IF NAME="outer_servers_loop" -->
+<!-- DATABASES -->
+
+<fieldset>
+        <legend>Sélectionnez des bases de données locales</legend>
+                <!-- TMPL_LOOP NAME="local_servers_loop" -->
+<!-- TMPL_IF NAME="checked" --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" checked="checked" value="<!-- TMPL_VAR NAME="value" -->" /><!-- TMPL_ELSE --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" /><!-- /TMPL_IF --><label for="<!-- TMPL_VAR NAME="id" -->"><img width="16" height="16" alt="<!-- TMPL_VAR NAME="id" -->" src="<!-- TMPL_VAR NAME="themelang" -->/img/<!-- TMPL_VAR NAME="icon" -->" /> <!-- TMPL_VAR NAME="label" --></label><!-- /TMPL_LOOP -->
+</fieldset>
+<!-- /DATABASES -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="outer_servers_loop" -->
+<!-- REMOTE DATABASES -->
+<fieldset>
+    <legend>Retirer des bases de données : </legend>
+                <!-- TMPL_LOOP NAME="outer_servers_loop" -->
+                <!-- TMPL_IF NAME="checked" --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" checked="checked" value="<!-- TMPL_VAR NAME="value" -->" /><!-- TMPL_ELSE --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" /><!-- /TMPL_IF -->
+<label for="<!-- TMPL_VAR NAME="id" -->"><img alt="<!-- TMPL_VAR NAME="id" -->" src="<!-- TMPL_VAR NAME="themelang" -->/images/<!-- TMPL_VAR NAME="icon" -->" /><!-- TMPL_VAR NAME="label" --></label>
+                <!-- /TMPL_LOOP -->
+    </fieldset>
+<!-- /REMOTE DATABASES -->
+<!-- /TMPL_IF -->
+
+<!-- BOOLEAN SEARCH OPTIONS -->
+    <fieldset>
+    <legend>Recherche sur :  </legend>
+    <!-- TMPL_LOOP NAME="search_boxes_loop" -->
+        <!-- TMPL_IF NAME="search_boxes_label" --><div style="text-indent: 4.5em;"><!-- TMPL_ELSE --><div><!-- /TMPL_IF -->
+			<!-- TMPL_IF NAME="expanded_options" -->
+            <!-- TMPL_IF NAME="boolean" -->
+                <select name="op">
+                    <option value="and" selected="selected">et</option>
+                    <option value="or">ou</option>
+                    <option value="not">sauf</option>
+                </select>
+            <!-- /TMPL_IF --> 
+			<!-- /TMPL_IF -->
+			<!-- TMPL_INCLUDE NAME="search_indexes.inc" -->
+			<input type="text" size="30" name="q" title="Entrer les termes de recherche" value="">
+            <!-- TMPL_IF NAME="expanded_options" -->
+                <!-- TMPL_IF NAME="add_field" -->
+                    <a href="JavaScript:add_field();" id="ButtonPlus" title="Ajouter un autre champ">[+]</a>
+				<!-- /TMPL_IF -->
+            	<!-- TMPL_IF NAME="scan_index" -->
+                	<label for="scan">Parcourir les index : </label><input type="checkbox" name="scan" id="scan" value="1" />
+            	<!-- /TMPL_IF -->
+            <!-- /TMPL_IF -->
+		</div>
+    <!-- /TMPL_LOOP -->
+    </fieldset>
+<!-- /BOOLEAN SEARCH OPTIONS -->
+
+<!-- ITEMTYPE LIMITS -->
+    <div id="itemtypelist">
+	<fieldset>
+     <legend>Restrictions sur les types de documents suivants</legend>
+    <table>
+        <tr>
+      <!--TMPL_LOOP Name="itemtypeloop"-->
+        <td>
+        <!-- TMPL_IF name="imageurl"--><img border="0" src="<!--TMPL_VAR Name="imageurl" -->" alt="<!--TMPL_VAR Name="description" -->" /><!-- /TMPL_IF -->
+		<input type="checkbox" id="<!-- TMPL_VAR NAME="ccl" -->-<!--TMPL_VAR Name="number" -->" name="limit" value='mc-<!-- TMPL_VAR NAME="ccl" --> :<!-- TMPL_VAR NAME="code" -->'>&nbsp;
+        <label for="<!-- TMPL_VAR NAME="ccl" -->-<!--TMPL_VAR Name="number" -->"><!--TMPL_VAR Name="description" --></label></td>
+        <!-- TMPL_UNLESS name="count5" --></tr><tr><!-- /TMPL_UNLESS -->
+      <!--/TMPL_LOOP-->
+	  <!-- FIXME: for validation, avoid generating empty row -->
+      </tr>
+    </table>
+	</fieldset>
+    </div>
+<!-- /ITEMTYPE LIMITS -->
+
+<!-- TMPL_IF NAME="expanded_options" -->
+<!-- BASIC LIMITS -->
+ <fieldset>
+	<legend>Limites :</legend>
+<!-- PUB / COPY YEAR LIMIT --><!-- FIXME: add publication,copyright,acquisition options -->
+	<p><label for="limit-yr">Année : </label>
+		<input size="15" name="limit-yr" id="" value=""/>&nbsp;&nbsp;(format: yyyy-yyyy)</p>
+<!-- /PUB / COPY YEAR LIMIT -->
+
+<!-- LANGUAGE LIMIT -->
+		<p><label for="language-limit">Langue : </label>                                        
+		<select name="limit">
+		<option value="">Pas de limite</option>
+		<!-- TMPL_LOOP NAME="search_languages_loop" -->
+		<!-- TMPL_IF NAME="selected" -->
+		<option value="ln:<!-- TMPL_VAR NAME="iso639_2_code" -->" selected="selected"><!-- TMPL_VAR NAME="language_description" --></option>
+		<!-- TMPL_ELSE -->
+		<option value="ln:<!-- TMPL_VAR NAME="iso639_2_code" -->"><!-- TMPL_VAR NAME="language_description" --></option>
+		<!-- /TMPL_IF -->
+		
+		<!-- /TMPL_LOOP -->
+		</select></p><!-- <a href="">Show all languages</a>-->
+<!-- /LANGUAGE LIMIT -->
+</fieldset>
+<!-- /BASIC LIMITS -->
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="UNIMARC" -->
+<!-- TMPL_INCLUDE NAME="subtypes_unimarc.inc" -->
+<!-- TMPL_ELSE -->
+<!-- SUBTYPE LIMITS -->
+        <fieldset>
+        <legend>Limites de sous-type</legend><p>
+        
+        <select name="limit" class="subtype">
+            <option value="" selected="selected" class="menuheader">Tout public</option>
+			<option value="aud:a">Préscolaire</option>
+			<option value="aud:b">Primaire</option>
+			<option value="aud:c">Pré-adolescent</option>
+			<option value="aud:d">Adolescent</option>
+			<option value="aud:e">Adulte</option>
+			<option value="aud:f">Spécialisé</option>
+			<option value="aud:g">Général</option>
+			<option value="aud:j">Jeunesse</option>
+        </select>
+        
+        <select name="limit" class="subtype">
+            <option value="" selected="selected" class="menuheader">Tout contenu</option>
+            <option value="fic:1" >Fiction</option>
+            <option value="fic:0" >Documentaire</option>
+            <option value="bio:b" >Biographie</option>
+            <option value="mus:j" >Enregistrement musical</option>
+            <option value="mus:i" >Enregistrement non musical</option>
+        </select>
+
+        
+        <select name="limit" class="subtype">
+            <option value="" selected="selected" class="menuheader">Tout format</option>
+            <option value="l-format:ta" >Impression normale</option>
+            <option value="l-format:tb" >Gros caractères</option>
+            <option value="l-format:fk" >Braille</option>
+            <option value="" >-----------</option>
+            <option value="l-format:sd" >CD Audio</option>
+            <option value="l-format:ss" >Cassette audio</option>
+            <option value="l-format:vf" >Bande VHS / Videocassette</option>
+            <option value="l-format:vd" >DVD Video / Videodisque</option>
+            <option value="l-format:co" >Logiciel sur CD</option>
+            <option value="l-format:cr" >Site Web</option>
+        </select>
+        
+        <select name="limit" class="subtype">
+            <option value="" >Autres types de contenu</option>
+            <option value="ctype:a" >Résumés/sommaires</option>
+            <option value="ctype:b" >Bibliographies</option>
+            <option value="ctype:c" >Catalogues</option>
+            <option value="ctype:d" >Dictionnaires</option>
+            <option value="ctype:e" >Encyclopédies </option>
+            <option value="ctype:f" >Livres de poche</option>
+            <option value="ctype:g" >Articles de loi</option>
+            <option value="ctype:i" >Index</option>
+            <option value="ctype:j" >Brevet</option>
+            <option value="ctype:k" >Discographies</option>
+            <option value="ctype:l" >Législation</option>
+            <option value="ctype:m" >Thèses</option>
+            <option value="ctype:n" >Enquêtes</option>
+            <option value="ctype:o" >Commentaires</option>
+            <option value="ctype:p" >Textes de programmes</option>
+            <option value="ctype:q" >Filmographies</option>
+            <option value="ctype:r" >Répertoires</option>
+            <option value="ctype:s" >Statistiques</option>
+            <option value="ctype:t" >Rapports techniques</option>
+            <option value="ctype:v" >Cas de lois et notes de cas</option>
+            <option value="ctype:w" >Rapports de lois et recueils</option>
+            <option value="ctype:z" >Traités </option>
+        </select>
+       </p>
+
+</fieldset>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="template-defined-limits" -->
+<!-- TYPE LIMITS -->
+    <fieldset>
+
+    <legend>Limiter le type à : combiner chacun des critères suivants</legend>
+    <table class="itemtypes">
+            <tr>
+            <td><input type="checkbox" id="mc-bks" name="limit" value="mc:t" />
+			<label for="mc-bks" title="Livres, Pamphlets, rapports techniques, Manuscrits, Publications légales, Mémoires et thèses">
+			<img border="0" src="/intranet-tmpl/prog/img/AF.gif" alt="Livres">Livres</label></td>
+			<td><input type="checkbox" id="mc-vis" name="limit" value="mc:v" />
+			<label for="mc-vis" title="Films, Videos, Diapos, Transparents,\nPhotos, cartes, Graphiques, Dessins">
+			<img border="0" src="/intranet-tmpl/prog/en/images/AV Aids.gif" alt="Matériels visuels">Matériels visuels</label></td>
+            <td><input type="checkbox" id="mc-sr" name="limit" value="mc-rtype:i" />
+			<label for="mc-sr" title="Discours, livres sur CD et cassette">
+			<img border="0" src="/intranet-tmpl/prog/en/images/AF.gif" alt="Livres-cassettes">Livres-cassettes</label></td>
+            </tr>
+
+            <tr>
+            <td><input type="checkbox" id="mc-cf" name="limit" value="mc:c" />
+			<label for="mc-cf" title="Fichiers informatiques, Données, Logiciel">
+			<img border="0" src="/intranet-tmpl/prog/en/images/CD-ROM software.gif" alt="Fichiers informatiques">Fichiers informatiques</label></td>
+            <td><input type="checkbox" id="mc-lh" name="limit" value="mc-collection:LH" />
+			<label for="mc-lh" title="Documents d'histoire locale">
+			<img border="0" src="/intranet-tmpl/prog/en/images/Local history.gif" alt="Documents d'histoire locale">Documents d'histoire locale</label></td>
+            <td><input type="checkbox" id="mc-map" name="limit" value="mc:a" />
+			<label for="mc-map" title="Cartes, Globes">
+			<img border="0" src="/intranet-tmpl/prog/en/images/PF.gif " alt="Cartes">Cartes</label></td>
+            </tr>
+
+            <tr>
+            <td><input type="checkbox" id="mc-mus" name="limit" value="mc-rtype:j" />
+			<label for="mc-mus" title="Musique">
+			<img border="0" src="/intranet-tmpl/prog/en/images/CDM.gif" alt="Musique">Musique</label></td>
+            <td><input type="checkbox" id="mc-kit" name="limit" value="mc-rtype:o" />
+			<label for="mc-kit" title="Kits"><img border="0" src="/intranet-tmpl/prog/en/images/KIT.gif" alt="Kits" />Kits</label></td>
+            <td><input type="checkbox" id="mc-ref" name="limit" value="mc-collection:REF" />
+			<label for="mc-ref" title="Ouvrages de référence">
+			<img border="0" src="/intranet-tmpl/prog/en/images/REF.gif" alt="Ouvrages de référence">Ouvrages de référence</label></td>
+            </tr>
+            
+            </table>
+</fieldset>
+<!-- /TMPL_IF -->
+<!-- /TYPE LIMITS -->
+
+<!-- AVAILABILITY LIMITS -->
+    <fieldset><legend>Localisation et disponibilité :  </legend>
+        <p>
+        <label for="available-items">Seulement les documents actuellement disponibles</label> <input type="checkbox" id="available-items" name="limit" value="disponible"></p>
+        <p>
+        <label for="branchloop">Bibliothèques particulières :</label><select name="limit" id="branchloop" onchange='if(this.value != ""){document.getElementById("categoryloop").disabled=true;} else {document.getElementById("categoryloop").disabled=false;}'>
+        <option value="">Tous sites</option>
+        <!-- TMPL_LOOP NAME="branchloop" -->
+        <option value="branch:<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branchname" --></option>
+        <!-- /TMPL_LOOP -->
+        </select>
+    <!-- <input type="hidden" name="limit" value="branch: MAIN" /> -->
+        </p>
+        <!-- TMPL_IF NAME="searchdomainloop" -->
+    <p>OU<p> <!-- should addjs to grey out group pulldown if a library is selected. -->
+    <p>
+        <label for="categoryloop">Groupes de bibliothèques</label><select name="multibranchlimit" id="categoryloop">
+        <option value=""> -- aucun -- </option>
+        <!-- TMPL_LOOP NAME="searchdomainloop" -->
+        <option value="<!-- TMPL_VAR NAME="categorycode" -->"><!-- TMPL_VAR NAME="categoryname" --></option>
+        <!-- /TMPL_LOOP -->
+        </select>
+        </p>
+    <!-- /TMPL_IF -->
+    </fieldset>
+<!-- /AVAILABILITY LIMITS -->
+
+<!-- RANK LIMITS -->
+
+<fieldset><legend>Tri par :  </legend>
+    <p><select id="sort_by" name="sort_by">
+  <!-- TMPL_INCLUDE NAME="resort_form.inc" -->
+    </select>
+        </p>
+</fieldset>
+<!-- RANK LIMITS -->
+
+</div>
+
+
+<!-- SEARCH BUTTONS -->
+            <p><input class="submit" type="submit" accesskey="s" value="Rechercher">
+            <!-- TMPL_IF NAME="expanded_options" -->
+            <a href="/cgi-bin/koha/catalogue/search.pl?expanded_options=0">[Moins d'options]</a>
+            <!-- TMPL_ELSE -->
+            <a href="/cgi-bin/koha/catalogue/search.pl?expanded_options=1">[Plus d'Options]</a>
+            <!-- /TMPL_IF -->
+            <a href="/cgi-bin/koha/catalogue/search.pl?do=Clear">[Nouvelle recherche]</a> 
+            </p>
+<!-- /SEARCH BUTTONS -->
+</form>
+</div>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

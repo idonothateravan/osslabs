@@ -1,0 +1,102 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Error 500</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Домівка</a> &rsaquo; Помилка 500</div>
+
+<div id="doc" class="yui-t7">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+    <h1>Трапилася помилка!</h1>
+    <h2>Помилка 500</h2>
+    <ul style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #CCC;">
+        <li>In Koha this typically means that the Koha team is working on new features</li>	
+        <li>Wait while system maintenance is being done or <a href="mailto:<!-- TMPL_VAR NAME="admin" -->">email the Koha Administrator</a>.</li>
+        <li> Використовуйте верхній рядок-меню, щоб переміститися до іншої частини Коха.</li>
+    </ul>
+</div>
+
+<div class="yui-g">
+<div class="yui-u first">
+	<!-- TMPL_IF NAME="CAN_user_circulate" -->
+	<h3><a href="/cgi-bin/koha/circ/circulation.pl">Обіг</a></h3>
+	<ul style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #CCC;"><li>
+       <form method="post" action="/cgi-bin/koha/circ/circulation.pl">
+        <label for="navfindborrower">Check out to:</label>
+            <input id="navfindborrower" name="findborrower" type="text" size="10" />
+            <input type="hidden" name="branch" value="<!-- TMPL_VAR name="branch" -->" />
+            <input type="hidden" name="printer" value="<!-- TMPL_VAR name="printer" -->" />
+            <input type="submit" class="submit" value="Гаразд">
+       </form>
+       </li>
+       <li><a accesskey="r" href="/cgi-bin/koha/circ/returns.pl">Повернення</a></li>
+        <li><a href="/cgi-bin/koha/circ/branchtransfers.pl">Transfers</a></li></ul>
+		<!-- /TMPL_IF -->
+		  <!-- TMPL_IF NAME="CAN_user_borrowers" -->
+		<h3><a href="/cgi-bin/koha/members/members-home.pl">Відвідувачі</a></h3>
+		<ul style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #CCC;">
+        <li><form action="/cgi-bin/koha/members/member.pl" method="post">
+           <label for="navmember">Пошук:&nbsp;</label>
+           <input id="navmember" type="text" size="10" name="member" />
+           <input type="submit" value="Гаразд" class="submit">
+            </form>
+        </li>
+    </ul>
+	<!-- /TMPL_IF -->
+		  <!-- TMPL_IF NAME="CAN_user_catalogue" -->
+                <h3><a href="/cgi-bin/koha/catalogue/search.pl">Каталог</a></h3>
+				<ul style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #CCC;">
+                    <li>
+                        <form name="searchform" method="get" action="/cgi-bin/koha/catalogue/search.pl" id="searchform">
+                        <input type="hidden" name="idx" value="" />
+                        <label for="navkeyword">
+                            Пошук:&nbsp;
+                        </label><input type="text" id="navkeyword" name="q" size="10" accesskey="s" />
+                        <input type="submit" value=" OK " class="submit" />
+                        </form>
+                     </li>
+                    <li><a href="/cgi-bin/koha/virtualshelves/shelves.pl">Lists</a></li>
+                </ul>
+   <!-- /TMPL_IF -->
+	</div>
+
+
+<div class="yui-u">
+
+    <!-- TMPL_IF NAME="CAN_user_editcatalogue" -->
+    <h3><a href="/cgi-bin/koha/cataloguing/addbooks.pl">Каталогізація</a></h3>
+	<ul style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #CCC;">
+        <li><a href="/cgi-bin/koha/cataloguing/addbiblio.pl">Додати МАРК-запис</a></li>
+        <li><a href="/cgi-bin/koha/authorities/authorities-home.pl">Авторитетні джерела</a></li>
+        <li><a href="/cgi-bin/koha/serials/serials-home.pl">Серіальні видання</a></li>
+    </ul>
+    <h3><a href="/cgi-bin/koha/acqui/acqui-home.pl">Надходження</a></h3>
+    <!-- /TMPL_IF --><!-- TMPL_IF NAME="CAN_user_reports" -->
+          <h3><a href="/cgi-bin/koha/reports/reports-home.pl">Звіти</a></h3>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="CAN_user_parameters" -->
+   <h3> <a href="/cgi-bin/koha/admin/admin-home.pl">Koha administration</a></h3>
+   			<ul style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #CCC;">
+            <li><a href="/cgi-bin/koha/admin/systempreferences.pl">Параметри системи</a></li>
+        </ul>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="CAN_user_tools" -->
+    <h3><a href="/cgi-bin/koha/tools/tools-home.pl">Інструменти</a></h3>
+    <!-- /TMPL_IF -->
+    <h3><a href="/cgi-bin/koha/about.pl">Про АБІС Коха</a></h3>
+	</div>
+	
+	
+	</div>
+
+</div>
+</div>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

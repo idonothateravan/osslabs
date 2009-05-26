@@ -1,0 +1,52 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+<a name="#top" title="#top"></a> <h1>Aide sur les rapports</h1>
+	<ul>
+		<li><a href="#new">Construire un nouveau rapport</a></li>
+		<li><a href="#save">Sauvegarder un rapport</a></li>
+		<li><a href="#sql">Générer un nouveau rapport à partir du SQL</a></li>
+		<li><a href="#scheduler">Planifier un rapport</a></li>
+		<li>
+		<ul>
+			<li> 
+			<ul>
+				<li><strong>Tabulaire :</strong>Rapport simple avec uniquement des colonnes</li>
+				<li><strong>Matrice :</strong><em>Pas terminé</em></li>
+				<li><strong>Abrégé :</strong><em>Pas terminé</em></li>
+			</ul>
+			<ul>
+				<li><strong>Critère généré par le système</strong> Ce sont des critères connus du système, déduits de vos préférences systèmes</li>
+				<li><strong>Critère dictionnaire</strong> Ce sont des critères personnalisés définis dans le dictionnaire.</li>
+			</ul>
+			<ul>
+				<li>Décompte : renvoie un décompte de chaque valeur</li>
+				<li>Somme : renvoie la somme de toutes les valeurs</li>
+				<li>Moyenne : calcule la valeur moyenne</li>
+				<li>Min : retourne la valeur la plus petite</li>
+				<li>Max : retourne la valeur la plus grande</li>
+			</ul></li>
+<p>Pour l'aide sur le dictionnaire des rapports - voir l'aide en ligne dans les pages de dictionnaire</p>
+<hr/><a name="#new" title="#new"></a><h2>Building A New Report</h2> <h3>Etape 1 sur 6 : Choisissez sur quel module votre rapport portera</h3>
+<p>Sélectionne le module sur lequel faire votre rapport. Les rapports peuvent être créés seulement pour un module de Koha. Pour les rapports inter-modules, vous devez utiliser un rapport composite, ou un rapport personnalisé à l'aide de requètes SQL.</p><h3>Etape 2 sur 6 : Sélectionner un type de rapport</h3>
+<p>Vous pouvez générer 3 types de rapports :</p><h3>Etape 3 sur 6 : Sélectionner les colonnes à afficher</h3>
+<p>Sélectionner les colonnes à afficher dans le rapport. Cliquer sur la colonne à ajouter dans la zone de gauche, et cliquer sur "Ajouter" pour la faire apparaître dans la zone de droite. Pour supprimer une colonne, cliquez sur son nom dans la partie droite et cliquez sur "Supprimer". Lorsque vous avez sélectionné les colonnes qui vous conviennent, cliquez sur "Choisir colonnes" pour passer à l'étape suivante.</p>
+<p><strong>Attention dans la saisie des colonnes.</strong> Le générateur de rapport suppose que vous avez déjà une connaissance de la structure de la base de données de Koha, et que vous savez à quoi chaque champ est utilisé. Soyez prudent en sélectionnant les colonnes, parce qu'un mauvais choix peut entrainer un rapport trop gros, qui n'aboutira pas ou demandera énormément de ressources au système, ce qui le ralentira.</p>
+<p>Il n'y a pas de vérification de cohérence dans le générateur de rapport</p><h3>Etape 4 sur 6 : Sélectionner un critère sur lequel limiter </h3>
+<p>Les critères vous permettent de limiter votre rapport à l'affichage de certains critères. Les critères correspondent à une partie de votre base</p><h3>Etape 5 sur 6 : Sélectionner les colonnes sur lesquelles faire un total</h3>
+<p>Maintenant, choisissez les opérations que vous voulez réaliser sur chaque colonne. Les opérations possibles sont :</p>.	  <h3>Etape 6 sur 6 : Choisir comment votre rapport sera trié</h3>
+<p>Sélectionnez comment vous souhaitez trier le rapport. Vous pouvez sélectionner plusieurs critères, et les trier. Par exemple, trier alphabétiquement par nom, puis par prénom.</p><br/><a href="#top">
+Retour en haut
+</a>
+<hr/><a name="#save" title="#save"> </a><h2>Saving A Report</h2>
+<p>Lorsque vous avez généré un rapport, vous pouvez l'enregistrer, pour pouvoir l'exécuter lorsque vous le souhaitez, ou bien utiliser la planificateur pour qu'il soit lancé automatiquement de manière périodique. </p><br/><a href="#top">
+Retour en haut
+</a>
+<hr/><a name="#sql" title="#sql"> </a><h2>Generating A New Report From SQL</h2>
+<p>Un rapport peut être généré directement à partir d'une requète SQL. Sur la page "Générer à partir de SQL", donnez  un titre  et une description au rapport (en utilisant la zone de notes) et copiez votre requête SQL dans le champ texte.</p><br/><a href="#top">
+Retour en haut
+</a>
+<hr/><a name="#scheduler" title="#scheduler"> </a><h2>Scheduling A Report</h2>
+<p>Les rapports peuvent être exécutés manuellement, ou de manière répétées en utilisant le planificateur de tâches. Le planificateur de tâches se trouve dans Outils &gt; Planificateur</p><br/><a href="#top">
+Retour en haut
+</a>
+		</ul></li>
+	</ul><!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

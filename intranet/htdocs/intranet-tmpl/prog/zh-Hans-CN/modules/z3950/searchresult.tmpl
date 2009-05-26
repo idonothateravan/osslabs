@@ -1,0 +1,45 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Z39.50 查询结果</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script language="javascript" type="text/javascript">
+//<![CDATA[
+    function Import(GetThisOne) {
+        opener.document.location= "../cataloguing/addbiblio.pl?z3950=1&oldbiblionumber=<!-- TMPL_VAR NAME="oldbiblionumber" -->&breedingid="+GetThisOne;
+        self.close();
+        return false;
+    }
+//]]>
+</script>
+</head>
+<body>
+
+    <h2>Z39.50 查询结果</h2>
+    
+    <!-- TMPL_IF NAME="breeding_loop" -->
+<table>
+    <tr>
+        <th>题名</th>
+        <th>作者</th>
+        <th>国际标准书号（ISBN）</th>
+        <th>来自</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+                <!-- TMPL_LOOP NAME="breeding_loop" -->
+        <tr bgcolor="<!-- TMPL_VAR NAME="toggle" -->">
+                        <td><!-- TMPL_VAR NAME="title" --></td>
+            <td><!-- TMPL_VAR NAME="author" --></td>
+            <td><!-- TMPL_VAR NAME="isbn" --></td>
+            <td><!-- TMPL_VAR NAME="file" --></td>
+            <td><a href="javascript:Import(<!-- TMPL_VAR NAME="id" -->)">导入此书目记录</a></td>
+        </tr>
+    <!-- /TMPL_LOOP -->
+        </table>
+    <!-- TMPL_ELSE -->
+                <p>找不到</p>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="numberpending" --><h1>有 <!-- TMPL_VAR NAME="numberpending" --> 个请求</h1><!-- /TMPL_IF -->
+    
+
+</body>
+</html>

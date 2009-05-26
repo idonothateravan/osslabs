@@ -1,0 +1,331 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 期刊 &rsaquo; #<!-- TMPL_VAR name="subscriptionid" --> 訂閱詳情</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" language="javascript">
+<!--
+
+// the english words used in display purposes
+var text = new Array(_("號碼"),_("冊"),_("期刊"),_("月"),_("週刊"),_("開始："),_("滾轉："),_("選擇範圍："),_("北方"),_("Southern",
+"Autumn"),_("冬季"),_("春季"),_("夏天"),_("秋季"),_("季刊"),_("年"));
+
+
+// to display the options section
+function options(x,y,z){
+var textbox = '';
+    // alert("X: "+x+"Y: "+y+"Z: "+z);
+    if(x){
+        document.f.xfield.value = x;
+        if(y){
+            document.f.yfield.value = y;
+            if(z){
+                document.f.zfield.value = z;
+            }
+        }
+    }
+}
+
+function confirm_deletion() {
+    var is_confirmed = confirm(_("你確定要刪除這筆訂閱？"));
+    if (is_confirmed) {
+        window.location="subscription-detail.pl?subscriptionid=<!-- TMPL_VAR name="subscriptionid" -->&op=del";
+    }
+}
+function popup(subscriptionid) {
+    newin=window.open("subscription-renew.pl?mode=popup&subscriptionid="+subscriptionid,'popup','width=590,height=440,toolbar=false,scrollbars=yes');
+}
+
+-->
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="serials-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/serials/serials-home.pl">Serials</a> &rsaquo; Details for Subscription #<!-- TMPL_VAR name="subscriptionid" --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	<!-- TMPL_INCLUDE NAME="serials-toolbar.inc" -->
+
+    <h1>Subscription for <!-- TMPL_VAR name="bibliotitle" --> </h1>
+    <!--TMPL_IF Name="abouttoexpire"--><div class="problem">訂閱快要結束，目前需要續訂嗎？</div><!--/TMPL_IF-->
+    
+    <div id="subscription_info">
+        <h2>訂閱資料</h2>
+		<ul>
+		<li><span class="label">Subscription ID: </span><!--TMPL_VAR name="subscriptionid"--></li>
+        <li><span class="label">圖書館員確認：</span> <!-- TMPL_VAR name="librarian" --></li>
+        <li><span class="label">供應商：</span> <a href="/cgi-bin/koha/acqui/supplier.pl?supplierid=<!-- TMPL_VAR name="aqbooksellerid"-->"><!-- TMPL_VAR name="aqbooksellername" -->&nbsp;</a></li>
+        <li><span class="label">書目記錄：</span> <i>(<!-- TMPL_VAR name="bibnum" -->)</i> <a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR name="bibnum" -->"><!-- TMPL_VAR name="bibliotitle" --></a></li><br />
+<!-- TMPL_IF name="branchcode" --><li><span class="label">圖書館：</span> <!-- TMPL_VAR name="branchcode" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="serialsadditems" -->
+            <li>Serial receipt creates an item record.</li>
+        <!-- TMPL_ELSE -->
+            <li>Serial receipt does not create an item record.</li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="callnumber" --><li><span class="label">索書號：</span> <!-- TMPL_VAR name="callnumber" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="letter" --><li><span class="label">讀者通知</span> <!-- TMPL_VAR name="letter" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="notes" --><li><span class="label">備註：</span> <!-- TMPL_VAR name="notes" --></li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="internalnotes" --><li><span class="label">管理附註：</span> <!-- TMPL_VAR name="internalnotes" --></li><!-- /TMPL_IF -->
+        
+    </div>
+    <div id="subscription_planning">
+        <h2>訂閱中</h2>
+            <p><label>開始日期：</label> <!-- TMPL_VAR name="startdate" -->
+            </p>
+            <p><label>頻率（*）：</label>
+                <!--TMPL_IF name="periodicity16" -->
+                        無規律
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity32" -->
+                        不正常
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity0" -->
+                        不明
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity12" -->
+                        半日刊
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity1" -->
+                        每日一期
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity13" -->
+                        每週三期
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity2" -->
+                        每週一期
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity3" -->
+                        雙週刊
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity4" -->
+                        一週三次
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity5" -->
+                        每月一期
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity6" -->
+                        雙月刊（每年 6 期）
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity7" -->
+                        每季一期
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity8" -->
+                        每季一期
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity9" -->
+                        半年刊
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity10" -->
+                        每年一期
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity11" -->
+                        半年刊
+                <!-- /TMPL_IF -->
+              訂閱歷史：
+                <!--TMPL_IF Name="manualhistory"-->
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                <!-- TMPL_ELSE -->
+                    <input type="checkbox" disabled="disabled" />
+                <!--/TMPL_IF-->
+            </p>
+            <p><label>期號型式：</label>
+                <!-- TMPL_IF name="numberpattern1" -->
+                    只有期號
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern2" -->
+                    卷，期（Volume, Number, Issue）
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern3" -->
+                    卷，期
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern4" -->
+                    卷，期
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern5" -->
+                    期，卷
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern8" -->
+                    年/號碼
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern6" -->
+                    只有季刊
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern7" -->
+                    上面沒有
+                <!-- /TMPL_IF -->
+            </p>
+            <table>
+            <tr><td><p>開始：</p></td>
+                <td align="center"><!--TMPL_VAR NAME="lastvalue1"--></td>
+            <!--TMPL_IF NAME="lastvalue2"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="lastvalue2"-->
+                </td>
+            <!--/TMPL_IF-->
+            <!--TMPL_IF NAME="lastvalue3"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="lastvalue3"-->
+                </td>
+            <!--/TMPL_IF-->
+            </tr>
+            <tr><td><p>滾轉：</p></td>
+                <td align="center">&nbsp;</td>
+            <!--TMPL_IF NAME="whenmorethan2"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="whenmorethan2"-->
+                </td>
+            <!--/TMPL_IF-->
+            <!--TMPL_IF NAME="whenmorethan3"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="whenmorethan3"-->
+                </td>
+            <!--/TMPL_IF-->
+            </tr>
+            </table>
+            <!-- TMPL_IF NAME="irregular_issues" -->
+            <p><label>不正常：</label> <!-- TMPL_VAR name="irregular_issues" --> 期
+            </p>
+            <!-- /TMPL_IF -->
+            <p><label>第一期到館：</label> <!--TMPL_VAR name="firstacquidate" -->
+            </p>
+        <!-- TMPL_IF name="numberlength" --><p><label>期數：</label> <!-- TMPL_VAR name="numberlength" --></p><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="weeklength" --><p><label>星期：</label> <!-- TMPL_VAR name="weeklength" --></p><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="monthlength" --><p><label>月數：</label> <!-- TMPL_VAR name="monthlength" --></p><!-- /TMPL_IF -->
+    </div>
+    <div id="subscription_numbering" style="display:none;">
+        <h3>期數計算</h3>
+        <p><label>計算期刊公式：</label> <!-- TMPL_VAR name="numberingmethod" --></p>
+        <table>
+            <tr>
+                <th>&nbsp;</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Z</th>
+                </tr>
+                <tr>
+                    <td>新增</td>
+                    <td>
+                        <!-- TMPL_VAR name="add1" -->
+                    </td>
+                    <td>
+                        <!-- TMPL_VAR name="add2" -->
+                    </td>
+                    <td>
+                        <!-- TMPL_VAR name="add3" -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>每次</td>
+                    <td><!-- TMPL_VAR name="every1" --></td>
+                    <td><!-- TMPL_VAR name="every2" --></td>
+                    <td><!-- TMPL_VAR name="every3" --></td>
+                </tr>
+                <tr>
+                    <td>當超過</td>
+                    <td><!-- TMPL_VAR name="whenmorethan1" --> <!-- TMPL_IF name="innerloop1" --><br />
+                        <i>（是 <!-- TMPL_VAR name="innerloop1" -->）</i><!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_VAR name="whenmorethan2" --> <!-- TMPL_IF name="innerloop2" --><br />
+                        <i>（是 <!-- TMPL_VAR name="innerloop2" -->）</i><!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_VAR name="whenmorethan3" --> <!-- TMPL_IF name="innerloop3" --><br />
+                        <i>（是 <!-- TMPL_VAR name="innerloop3" -->）</i><!-- /TMPL_IF --></td>
+                </tr>
+                <tr>
+                    <td>設定返回到：</td>
+                    <td><!-- TMPL_VAR name="setto1" --></td>
+                    <td><!-- TMPL_VAR name="setto2" --></td>
+                    <td><!-- TMPL_VAR name="setto3" --></td>
+                </tr>
+                <tr>
+                    <td>
+                            內部計算
+                    </td>
+                    <td><!-- TMPL_VAR name="innerloop1" --></td>
+                    <td><!-- TMPL_VAR name="innerloop2" --></td>
+                    <td><!-- TMPL_VAR name="innerloop3" --></td>
+                </tr>
+                <tr>
+                    <td>
+                            最終值：
+                    </td>
+                    <td><!-- TMPL_VAR name="lastvalue1" --></td>
+                    <td><!-- TMPL_VAR name="lastvalue2" --></td>
+                    <td><!-- TMPL_VAR name="lastvalue3" --></td>
+                </tr>
+            </table>
+    </div>
+    <div id="subscription_issues">
+        <h2>期刊</h2>
+        <table>
+        <tr>
+            <th>期刊號碼</th>
+            <th>訂閱日期：</th>
+            <th>出版日期：</th>
+            <th>狀態</th>
+        </tr>
+        <!-- TMPL_LOOP name="serialslist" -->
+            <tr>
+                <td>
+                    <!-- TMPL_VAR name="serialseq" -->
+                </td>
+                <td>
+                    <!-- TMPL_VAR name="planneddate" -->
+                </td>
+                <td>
+                    <!-- TMPL_VAR name="publisheddate" -->
+                </td>
+                <td>
+                        <!--TMPL_IF name="status1" -->
+                            預期
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status2" -->
+                            到館
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status3" -->
+                            最近
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status4" -->
+                            不見
+                        <!-- /TMPL_IF -->
+                </td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+        </table>
+    </div>
+    <div id="subscription_summary">
+        <h2>訂閱摘要</h2>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td><label>開始日期</label></td>
+                <td> <!-- TMPL_VAR name="startdate" --> </td>
+            </tr>
+            <tr>
+                <td><label>結束時間</label></td>
+                <td> <!-- TMPL_VAR name="enddate" --></td>
+            </tr>
+            <tr>
+                <td><label>History start date</label></td>
+                <td> <!-- TMPL_VAR name="histstartdate" --> </td>
+            </tr>
+            <tr>
+                <td><label>History end date</label></td>
+                <td> <!-- TMPL_VAR name="histenddate" --></td>
+            </tr>
+            <tr><td><label>收到期刊</label></td><td><!-- TMPL_VAR name="recievedlist" --></td></tr>
+            <tr><td><label>期刊遺失</label></td><td><!-- TMPL_VAR name="missinglist" --></td></tr>
+            <tr><td><label>Nonpublic note</label></td><td><!-- TMPL_VAR name="librariannote" --></td></tr>
+            <tr><td><label>Public note</label></td><td><!-- TMPL_VAR name="opacnote" --></td></tr>
+        </table>
+    </div>
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="serials-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

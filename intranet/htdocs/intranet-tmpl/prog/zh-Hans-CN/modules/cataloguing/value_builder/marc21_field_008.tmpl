@@ -1,0 +1,638 @@
+<html>
+<head>
+<title>建立指标</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_field_008.pl">
+<table>
+	<tr>
+		<td>1-5 档案输入日期</td>
+		<td>（自动填上）</td>
+		<td><input type="text" name="f1" maxlength="6" size="7" value="<!-- TMPL_VAR name="f1" -->"></td>
+	</tr>
+	<tr>
+		<!-- 06 Type of date / Publication status -->
+		<td>06- 日期型式 / 出版状况</td>
+		<td>
+			<!-- NO DATE; B.C. DATE -->
+
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f60" -->
+                                <option value=" " SELECTED>#- 空白</option>
+                        <!-- TMPL_ELSE -->
+                                <option value=" ">#- 空白</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6b" -->
+				<option value="b" SELECTED>b- 公元前日期</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">b- 公元前日期</option>
+			<!-- /TMPL_IF -->
+
+			<!-- SINGLE DATE -->
+			<!-- TMPL_IF name="f6e" -->
+                                <option value="e" SELECTED>e- 详细日期</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="e">e- 详细日期</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6s" -->
+                                <option value="s" SELECTED>s- 单个日期</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="s">s- 单个日期</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- MULTIPLE DATES -->
+			<!-- TMPL_IF name="f6i" -->
+                                <option value="i" SELECTED>i- 包含日期收藏</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="i">i- 包含日期收藏</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6k" -->
+                                <option value="k" SELECTED>k- 大批量收藏年代范围</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="k">k- 大批量收藏年代范围</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6m" -->
+                                <option value="m" SELECTED>m- 多个日期</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="m">m- 多个日期</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6p" -->
+                                <option value="p" SELECTED>p- 发布时间</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="p">p- 发布时间</option>
+			<!-- /TMPL_IF -->
+	
+			<!-- TMPL_IF name="f6r" -->
+				<option value="r" SELECTED>r- 重印/起始日期</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">r- 重印/起始日期</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6t" -->
+                                <option value="t" SELECTED>t- 出版日期</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="t">t- 出版日期</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- UNKNOWN DATES -->
+			<!-- TMPL_IF name="f6n" -->
+                                <option value="n" SELECTED>n- 日期不明</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="n">n- 日期不明</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6q" -->
+                                <option value="q" SELECTED>q- 提问日期</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="q">q- 提问日期</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6c" -->
+                                <option value="c" SELECTED>c- 期刊馆藏目前已出版</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="c">c- 期刊馆藏目前已出版</option>
+                        <!-- /TMPL_IF -->
+				
+			<!-- TMPL_IF name="f6d" -->
+                                <option value="d" SELECTED>d- 期刊馆藏终止出版 （死亡状态）</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="d">d- 期刊馆藏终止出版 （死亡状态）</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6u" -->
+                                <option value="u" SELECTED>u- 期刊馆藏状态不明</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="u">u- 期刊馆藏状态不明</option>
+                        <!-- /TMPL_IF -->
+
+
+	
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>7-10 日期 1 / 出版品开始日期 </td>
+		<td>
+			<input type="text" name="f710" size="4" maxlength="4" value="<!-- TMPL_VAR NAME="f710" -->"/>
+		</td>
+	</tr>
+	<tr>
+                <td>11-14 日期2 / 出版结束日期 </td>
+                <td>
+                        <input type="text" name="f1114" size="4" maxlength="4" value="<!-- TMPL_VAR NAME="f1114" -->"/>                </td>
+        </tr>
+
+	<tr>
+                <td>15-17 出版地、出版品或是出版者 </td>
+                <td>
+                        <input type="text" name="f1517" size="3"  maxlength="3" value="<!-- TMPL_VAR NAME="f1517" -->"/>
+                </td>
+        </tr>
+	 <tr>
+                <td>18-21 绘图 </td>
+		<td>（字段 300 自动填上）<input type="hidden" name="f1821" size="4"  maxlength="4" value="<!-- TMPL_VAR NAME="f1821" -->"/></td>
+        </tr>
+	<tr>
+                <!-- 22 Target Audience -->
+                <td>22- 读者对象</td>
+                <td>                        
+                <select name="f22" size="1">
+
+                        <!-- TMPL_IF name="f22|" -->
+                        <option value="|" SELECTED>|- 预设</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- 预设</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f220" -->
+                        <option value=" " SELECTED>#- 不详或是标明不清楚</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- 不详或是标明不清楚</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f22a" -->
+                         <option value="a" SELECTED>a- 学龄前</option>
+	                <!-- TMPL_ELSE -->
+			<option value="a">a- 学龄前</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f22b" -->
+                         <option value="b" SELECTED>b-初级</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="b">b-初级</option>
+                        <!-- /TMPL_IF -->	
+
+			<!-- TMPL_IF name="f22c" -->
+                         <option value="c" SELECTED>c- 小学和中学</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- 小学和中学</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f22d" -->
+                         <option value="d" SELECTED>d- 次要</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- 次要</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f22e" -->
+                         <option value="e" SELECTED>e- 成人</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="e">e- 成人</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f22f" -->
+                         <option value="f" SELECTED>f- 专门的</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- 专门的</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f22g" -->
+                         <option value="g" SELECTED>g- 一般</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="g">g- 一般</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f22j" -->
+                         <option value="j" SELECTED>j- 青少年</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="j">j- 青少年</option>
+                        <!-- /TMPL_IF -->
+		</select>
+		</td>
+	<tr>
+	<tr>
+                <!-- 23 Form of an item -->
+                <td>23- 馆藏型式</td>
+                <td>
+                <select name="f23" size="1">
+
+                        <!-- TMPL_IF name="f230" -->
+                        <option value=" " SELECTED>#- 以下没有</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- 以下没有</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f23a" -->
+                        <option value="a" SELECTED>a- 缩微胶卷</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- 缩微胶卷</option>
+                        <!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f23b" -->
+                        <option value="b" SELECTED>b-微缩胶片</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="b">b-微缩胶片</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f23c" -->
+                        <option value="c" SELECTED>a- 缩微不透明</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">a- 缩微不透明</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f23d" -->
+                        <option value="d" SELECTED>d- 大号印刷</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- 大号印刷</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f23f" -->
+                        <option value="f" SELECTED>f- 布莱叶盲文</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- 布莱叶盲文</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f23r" -->
+                        <option value="r" SELECTED>r- 规则印刷再版物</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="r">r- 规则印刷再版物</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f23s" -->
+                        <option value="s" SELECTED>s- 电子资源</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- 电子资源</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f23!" -->
+                        <option value="!" SELECTED>！- 没有需要编码</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="!">！- 没有需要编码</option>
+                        <!-- /TMPL_IF -->
+		</select>
+		</td>
+	</tr>
+	<tr>
+                <td>24-27 内容形式代码 </td>
+                <td>（衍生值）
+                        <input type="hidden" name="f2427" size="4" maxlength="4" value="<!-- TMPL_VAR NAME="f2427" -->"/>                </td>
+        </tr>
+        <tr>
+                <td>28- 政府出版物</td>
+                <td>
+                <select name="f28" size="1">                                    
+                        <!-- TMPL_IF name="f280" -->
+                        <option value=" " SELECTED>#- 非政府出版物</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- 非政府出版物</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f28a" -->
+                        <option value="a" SELECTED>a-匿名或半匿名成分</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a-匿名或半匿名成分</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f28c" -->
+                        <option value="c" SELECTED>c- 多地</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- 多地</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f28f" -->
+                        <option value="f" SELECTED>f- 联邦的/国家的</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- 联邦的/国家的</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f28i" -->
+                        <option value="i" SELECTED>i- 国际政府间</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="i">i- 国际政府间</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f28l" -->
+                        <option value="l" SELECTED>I- 本地</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="l">I- 本地</option>
+                        <!-- /TMPL_IF -->
+
+			
+                        <!-- TMPL_IF name="f28m" -->
+                        <option value="m" SELECTED>m- 多种状态</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="m">m- 多种状态</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f28o" -->
+                        <option value="o" SELECTED>o- 政府出版物 - 层次未决定</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="o">o- 政府出版物 - 层次未决定</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f28s" -->
+                        <option value="s" SELECTED>s- 州、省、领土、独立，等等</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- 州、省、领土、独立，等等</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f28u" -->
+                        <option value="u" SELECTED>u- 假如馆藏是政府出品，不明</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="u">u- 假如馆藏是政府出品，不明</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f28z" -->
+                        <option value="z" SELECTED>z- 其他</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="z">z- 其他</option>
+                        <!-- /TMPL_IF -->
+		</select>
+		</td>
+	</tr>
+        <tr>
+                <td>29- 会议论文</td>
+                <td>
+                <select name="f29" size="1">
+                        <!-- TMPL_IF name="f290" -->
+                        <option value="0" SELECTED>0- 不是会议论文</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- 不是会议论文</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f291" -->
+                        <option value="1" SELECTED>1- 会议论文</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- 会议论文</option>
+                        <!-- /TMPL_IF -->
+
+		</select>
+		</td>
+	</tr>
+	<tr>
+                <td>30- 纪念论文集</td>
+                <td>
+                <select name="f30" size="1">
+                        <!-- TMPL_IF name="f300" -->
+                        <option value="0" SELECTED>0- 不是纪念文集</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- 不是纪念文集</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f301" -->
+                        <option value="1" SELECTED>1- 纪念论文集</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- 纪念论文集</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+
+        <tr>
+                <td>31- 索引</td>
+                <td>
+                <select name="f31" size="1">
+                        <!-- TMPL_IF name="f31|" -->
+                        <option value="|" SELECTED>|- 预设</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- 预设</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f310" -->
+                        <option value="0" SELECTED>0- 没有索引</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- 没有索引</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f311" -->
+                        <option value="1" SELECTED>1- 呈现索引</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- 呈现索引</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        	</tr>
+		<tr><td>32 没有定义</td><td></td>
+		</tr>
+		<tr>
+                <td>33- 文献型式</td>
+                <td>
+                <select name="f33" size="1">
+                        <!-- TMPL_IF name="f330" -->
+                        <option value="0" SELECTED>0- 不是小说</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- 不是小说</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f331" -->
+                        <option value="1" SELECTED>1- 小说</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- 小说</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f33c" -->
+                        <option value="c" SELECTED>c- 连环漫画</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- 连环漫画</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f33d" -->
+                        <option value="d" SELECTED>d- 戏剧</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- 戏剧</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f33e" -->
+                        <option value="e" SELECTED>e- 小品文</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="e">e- 小品文</option>
+                        <!-- /TMPL_IF -->
+
+			
+                        <!-- TMPL_IF name="f33f" -->
+                        <option value="f" SELECTED>f- 小说</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- 小说</option>
+                        <!-- /TMPL_IF -->
+
+			
+                        <!-- TMPL_IF name="f33h" -->
+                        <option value="h" SELECTED>h- 幽默、讽刺等</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="h">h- 幽默、讽刺等</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f33i" -->
+                        <option value="i" SELECTED>i- 书信</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="i">i- 书信</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f33j" -->
+                        <option value="j" SELECTED>j- 短篇故事</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="j">j- 短篇故事</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f33m" -->
+                        <option value="m" SELECTED>m- 混合格式</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="m">m- 混合格式</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f33p" -->
+                        <option value="p" SELECTED>p- 诗歌</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="p">p- 诗歌</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f33s" -->
+                        <option value="s" SELECTED>s- 演讲</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- 演讲</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f33u" -->
+                        <option value="u" SELECTED>u- 不明</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="u">u- 不明</option>
+                        <!-- /TMPL_IF -->
+
+
+
+                </select>
+                </td>
+        </tr>
+	<tr>
+                <td>34- 自传</td>
+                <td>
+                <select name="f34" size="1">
+                        <!-- TMPL_IF name="f340" -->
+                        <option value=" " SELECTED>#- 非传记资料</option>                              <!-- TMPL_ELSE -->
+                        <option value=" ">#- 非传记资料</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f34a" -->
+                        <option value="a" SELECTED>a- 自传</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- 自传</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f34b" -->
+                        <option value="b" SELECTED>b- 分传</option>                              <!-- TMPL_ELSE -->
+                        <option value="b">b- 分传</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f34c" -->
+                        <option value="c" SELECTED>c- 总传</option>                              <!-- TMPL_ELSE -->
+                        <option value="c">c- 总传 1</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f34d" -->
+                        <option value="d" SELECTED>d- 包括书目信息</option>                              <!-- TMPL_ELSE -->
+                        <option value="d">d- 包括书目信息</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+
+	 <tr>
+
+                <td>35-37 语言参见 <a href="http://www.itsmarc.com/crs/lang0098.htm">机读格式（MARC）语言代码列表</a></td>
+                <td>
+                        <input type="text" name="f3537" size="4"  maxlength="4" value="<!-- TMPL_VAR NAME="f3537" -->"/>
+                </td>
+        </tr>
+	<tr>
+                <td>38- 修改过的记录</td>
+                <td>                
+		<select name="f38" size="1">                        			
+			<!-- TMPL_IF name="f380" -->
+                        <option value=" " SELECTED>#- 没有修改</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- 没有修改</option>
+                        <!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f38s" -->
+                        <option value="s" SELECTED>s- 删减</option>
+			<!-- TMPL_ELSE -->
+                        <option value="s">s- 删减</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f38d" -->
+                        <option value="d" SELECTED>d- 忽略虚线标注信息</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- 忽略虚线标注信息</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f38x" -->
+                        <option value="x" SELECTED>x-字符丢失</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="x">x-字符丢失</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f38r" -->
+                        <option value="r" SELECTED>r- 完全罗马化</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="r">r- 完全罗马化</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f38o" -->
+                        <option value="o" SELECTED>o-完全罗马化的/印刷卡罗马化的</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="o">o-完全罗马化的/印刷卡罗马化的</option>
+                        <!-- /TMPL_IF -->
+		</select>
+
+                </td>
+        </tr>
+<tr>
+                <td>39- 馆藏记录来源</td>
+                <td>
+                <select name="f39" size="1">                                    
+                        <!-- TMPL_IF name="f390" -->
+                        <option value=" " SELECTED>#- 国家书目中心</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- 国家书目中心</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f39c" -->
+                        <option value="c" SELECTED>c- 合作编目程序</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- 合作编目程序</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f39d" -->
+                        <option value="d" SELECTED>d- 其他</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- 其他</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f39u" -->
+                        <option value="u" SELECTED>u- 不明</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="u">u- 不明</option>
+                        <!-- /TMPL_IF -->
+		</select>
+                </td>
+        </tr>
+
+	<tr><td colspan=2><input type="submit" value="完成"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			document.f_pop.f1.value+
+			document.f_pop.f6.value+
+			document.f_pop.f710.value+
+			document.f_pop.f1114.value+
+			document.f_pop.f1517.value+
+			document.f_pop.f1821.value+
+			document.f_pop.f22.value+
+			document.f_pop.f23.value+
+			document.f_pop.f2427.value+
+			document.f_pop.f28.value+
+			document.f_pop.f29.value+
+			document.f_pop.f30.value+
+			document.f_pop.f31.value+ ' '+
+			document.f_pop.f33.value+
+			document.f_pop.f34.value+
+			document.f_pop.f3537.value+
+			document.f_pop.f38.value+
+			document.f_pop.f39.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

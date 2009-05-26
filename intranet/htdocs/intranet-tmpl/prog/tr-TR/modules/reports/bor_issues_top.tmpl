@@ -1,0 +1,27 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>"Koha &rsaquo; Raporlar &rsaquo; En Çok Ödünç Alan Kullanıcılar"</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs">" <!-- TMPL_IF NAME="do_it" -->&rsaquo; <a href="/cgi-bin/koha/reports/bor_issues_top.pl">En fazla ödünç alan kullanıcılar</a> &rsaquo; Sonuçlar<!-- TMPL_ELSE -->&rsaquo; En fazla ödünç alan kullanıcılar<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+ <div id="bd">
+  <div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="do_it" -->
+<script language="JavaScript" type="text/javascript">
+function Dopop(link) {
+	newin=window.open(link,'width=500,height=400,toolbar=false,scrollbars=yes');
+}
+</script>
+
+
+	<!-- TMPL_LOOP NAME="mainloop" -->
+		<h1>

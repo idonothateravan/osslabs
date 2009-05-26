@@ -1,0 +1,109 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 工具</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; 工具</div>
+
+<div id="doc3">
+<div id="bd">
+	<div class="yui-gb">
+
+<div class="yui-u first">
+<dl>
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_news" -->
+    <dt><a href="/cgi-bin/koha/tools/koha-news.pl">公告</a></dt>
+    <dd>發佈公告到 OPAC 和館員介面。</dd>
+    <!-- /TMPL_IF -->
+	
+    <!-- TMPL_IF NAME="CAN_user_tools_label_creator" -->
+    <dt><a href="/cgi-bin/koha/labels/label-home.pl">Label and Patron Card Creator</a></dt>
+    <dd>Create printable labels and barcodes from catalog data and patron cards from patron data</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_calendar" -->
+    <dt><a href="/cgi-bin/koha/tools/holidays.pl">行事曆</a></dt>
+    <dd>設定假日（閉館日）</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_moderate_comments" -->
+    <dt><a href="/cgi-bin/koha/reviews/reviewswaiting.pl">書評</a></dt>
+	<dd>管理讀者書評</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_moderate_comments" --><!-- FIXME: Update here when Tag specific permission is created. -->
+    <dt><a href="/cgi-bin/koha/tags/review.pl">Tags</a></dt>
+	<dd>Moderate patron tags</dd>
+    <!-- /TMPL_IF -->
+	</dl>
+</div>
+<div class="yui-u">
+	<dl>
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_notices" -->
+    <dt><a href="/cgi-bin/koha/tools/letter.pl">通知</a></dt>
+    <dd>Define notices (print and email notification messages for overdues, etc.)</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_notice_status_triggers" -->
+    <dt><a href="/cgi-bin/koha/tools/overduerules.pl">逾期通知/狀況 觸發</a></dt>
+    <dd>設定逾期館藏的通知/狀況的觸發</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_view_system_logs" -->
+	<dt><a href="/cgi-bin/koha/tools/viewlog.pl">瀏覽記錄</a></dt>
+    <dd>瀏覽系統記錄</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_inventory" -->
+    <dt><a href="/cgi-bin/koha/tools/inventory.pl">財產清單/館藏清單</a></dt>
+    <dd>完成館藏目錄財產清單</dd>
+    <!-- /TMPL_IF -->
+	
+	</dl>
+</div>
+<div class="yui-u">
+<dl>
+    <!-- TMPL_IF NAME="CAN_user_tools_stage_marc_import" -->
+    <dt><a href="/cgi-bin/koha/tools/stage-marc-import.pl">請選擇匯入 MARC 書目記錄</a></dt>
+    <dd>上傳機讀格式記錄（MARC）至書目資料庫</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_manage_staged_marc" -->
+    <dt><a href="/cgi-bin/koha/tools/manage-marc-import.pl">管理匯入機讀格式（MARC）記錄</a></dt>
+    <dd>處理的 MARC 書目記錄，包含完整的匯入和匯出。</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_export_catalog" -->
+    <dt><a href="/cgi-bin/koha/tools/export.pl">匯出書目和館藏記錄</a></dt>
+    <dd>匯出書目和館藏記錄</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_import_patrons" -->
+    <dt><a href="/cgi-bin/koha/tools/import_borrowers.pl">匯入讀者</a></dt>
+    <dd>匯入讀者資料</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_delete_anonymize_patrons" -->
+    <dt><a href="/cgi-bin/koha/tools/cleanborrowers.pl">Patrons (anonymize, bulk-delete)</a></dt>
+    <dd>Delete old borrowers and anonymize circulation history (deletes borrower reading history)</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_batch_upload_patron_images" -->
+    <dt><a href="/cgi-bin/koha/tools/picture-upload.pl">上傳讀者照片</a></dt>
+	<dd>利用批次或是一個一個上傳讀者照片</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_schedule_tasks" -->
+    <dt><a href="/cgi-bin/koha/tools/scheduler.pl">定期工作清單</a></dt>
+    <dd>執行定期工作時程表</dd>
+    <!-- /TMPL_IF -->
+	
+</dl>
+</div>
+
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立 UNIMARC 欄位 125b</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Type de texte écrit:</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1 " -->
+				<option value=" " SELECTED>無需填寫</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">無需填寫</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>Poesie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Poesie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>戲劇（包括電視劇、電影劇本）</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">戲劇（包括電視劇、電影劇本）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>小說</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">小說</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" SELECTED>歷史</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">歷史</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1e" -->
+				<option value="e" SELECTED>講演</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">講演</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1f" -->
+				<option value="f" SELECTED>說明：</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">說明：</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1g" -->
+				<option value="g" SELECTED>Sons</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Sons</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1h" -->
+				<option value="h" SELECTED>自傳</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">自傳</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1i" -->
+				<option value="i" SELECTED>傳記代碼</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">傳記代碼</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1j" -->
+				<option value="j" SELECTED>散文</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">散文</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1k" -->
+				<option value="k" SELECTED>報導</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">報導</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1l" -->
+				<option value="l" SELECTED>回憶錄</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">回憶錄</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1m" -->
+				<option value="m" SELECTED>Repetition</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Repetition</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1n" -->
+				<option value="n" SELECTED>訪談</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">訪談</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1o" -->
+				<option value="o" SELECTED>Textes publicitaires</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Textes publicitaires</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1p" -->
+				<option value="p" SELECTED>講演</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">講演</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1q" -->
+				<option value="q" SELECTED>會議紀錄</option>
+			<!-- TMPL_ELSE -->
+				<option value="q">會議紀錄</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1r" -->
+				<option value="r" SELECTED>喜劇</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">喜劇</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1s" -->
+				<option value="s" SELECTED>民間故事</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">民間故事</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1t" -->
+				<option value="t" SELECTED>Textes sacres</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">Textes sacres</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" SELECTED>Autres textes litteraires</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Autres textes litteraires</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="完成" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value =  document.f_pop.f1.value;
+	    window.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

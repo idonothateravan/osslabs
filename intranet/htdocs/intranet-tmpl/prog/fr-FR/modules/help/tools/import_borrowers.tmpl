@@ -1,0 +1,31 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Import adhérent</h1>
+
+		<ul>
+			<li>Créez un fichier csv pour les adhérents<br/>
+			<ul>
+				<li>Formatez le fichier au format suivant
+				<ul>
+					<li>'cardnumber', 'surname', 'firstname', 'title', 'othernames', 'initials', 'streetnumber', 'streettype', 'address', 'address2', 'city', 'zipcode', 'email', 'phone', 'mobile', 'fax', 'emailpro', 'phonepro', 'B_streetnumber', 'B_streettype', 'B_address', 'B_city', 'B_zipcode', 'B_email', 'B_phone', 'dateofbirth', 'branchcode', 'categorycode', 'dateenrolled', 'dateexpiry', 'gonenoaddress', 'lost', 'debarred', 'contactname', 'contactfirstname', 'contacttitle', 'borrowernotes', 'relationship', 'ethnicity', 'ethnotes', 'sex', 'userid', 'opacnote', 'contactnote', 'password', 'sort1', 'sort2'
+					<ul>
+						<li>
+					    <span style="background-color: #ffe599">
+ASTUCE : consultez votre administrateur système si vous n'êtes pas certain de la façon dont il faut remplir ces champs.</span></li>
+						<li>					   
+					   IMPORTANT: Vérifiez que le code site et la catégorie d'adhérent existent dans votre système.</li>
+						<li>Les mots de passe doivent être stoqués en plein texte, et seront encryptés à l'importation
+						<ul>
+							<li>
+						    <span style="background-color: #ffe599">
+ASTUCE: si vos mots de passe sont déjà cryptés, voyez votre administrateur système pour envisager des solutions.</span></li>
+						</ul></li>
+					</ul></li>
+				</ul></li>
+			</ul></li>
+			<li>Sélectionner un fichier à importer dans la table des adhérents</li>
+			<li>Si le numéro de carte existe déjà dans la table, vous pouvez choisir soit d'ignorer la nouvelle fiche, soit d'écraser l'ancienne.</li>
+			<li>Cliquez sur 'Import'</li>
+			<li>Vous serez emmené à un écran de confirmation.</li>
+		</ul>
+	</div>	<!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

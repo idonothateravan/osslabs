@@ -1,0 +1,150 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --> 
+<title>"Koha &rsaquo; Raporlar &rsaquo; Kasa Kontrolü"</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" --> 
+
+</head>    
+<body>   
+<!-- TMPL_INCLUDE NAME="header.inc" -->                                    
+<!-- TMPL_INCLUDE NAME="circ-search.inc" -->
+<div id="breadcrumbs">"
+</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>"Kasa kontrolü"</h1>
+
+<fieldset><legend>"iki tarih arasında tara"</legend>
+<form action="stats.screen.pl" method="post">
+  <label for="from">" </label>
+  <input type="text" name="time" size="10" value="<!-- TMPL_IF NAME="date" --><!-- TMPL_VAR NAME="date" --><!-- TMPL_ELSE -->today<!-- /TMPL_IF -->" id="from" /> 
+  <img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" id="buttonfrom1" alt='"Takvimi Göster"' style="cursor: pointer;">
+     <script type="text/javascript">
+     Calendar.setup({
+     inputField     :    "from",
+     ifFormat       :    "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+     button         :    "buttonfrom1",
+     align          :    "Tl"
+     });
+     </script>
+  <label for="to">"Bitiş Tarihi:" </label>
+  <input type="text" name="time2" size="10" value="<!-- TMPL_IF NAME="date2" --><!-- TMPL_VAR NAME="date2" --><!-- TMPL_ELSE -->tomorrow<!-- /TMPL_IF -->" id="to" />
+  <img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" id="buttonto1" alt='"Takvimi Göster"' style="cursor: pointer;">
+     <script type="text/javascript">
+     Calendar.setup({
+     inputField     :    "to",
+     ifFormat       :    "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+     button         :    "buttonto1",
+     align          :    "Tl"
+     });
+     </script>
+  <input type="submit" value='"Görüntülemek için"' name="submit" class="submit">
+<!--  <input type="submit" value="To Excel" name="submit" class="button"> --></fieldset>
+</form>
+
+<h2>Ödemeler</h2>
+
+        <table>
+                <tr>
+                        <th>Kütüphane</th>
+                        <th>Tarih/saat</th>
+                        <th>"Soyad"</th>
+                        <th>"Adı"</th>
+                        <th>"Tanım "</th>
+                        <th>Ödenti Türü</th>
+                        <th>"Fatura Miktarı"</th>
+                        <th>Ödeme Türü</th>
+                        <th>Ödeme Tutarı</th>
+                </tr>
+
+                <!-- TMPL_LOOP NAME=loop1 -->
+                <tr>
+                     <td><!-- TMPL_VAR NAME="branch" --></td>
+                        <td><!-- TMPL_VAR NAME="datetime" --></td>
+                        <td><!-- TMPL_VAR NAME="surname" --></td>
+                        <td><!-- TMPL_VAR NAME="firstname" --></td>
+                        <td><!-- TMPL_VAR NAME="description" --></td>
+                        <td><!-- TMPL_VAR NAME="accounttype" --></td>
+                        <td><!-- TMPL_VAR NAME="amount" --></td>
+                        <td><!-- TMPL_VAR NAME="type" --></td>
+                        <td><!-- TMPL_VAR NAME="value" --></td>
+                </tr>
+                <!-- /TMPL_LOOP -->
+        </table>
+
+<p>
+        <b>Ödenen toplam miktar: <!-- TMPL_VAR NAME="totalpaid" --> YTL.</b>
+</p>
+
+
+<h2>"</h2>
+
+        <table>
+                <tr>
+                        <th>Kütüphane</th>
+                        <th>Tarih/saat</th>
+                        <th>"Soyad"</th>
+                        <th>"Adı"</th>
+                        <th>"Tanım "</th>
+                        <th>Ödenti Türü</th>
+                        <th>"Fatura Miktarı"</th>
+                </tr>
+
+                <!-- TMPL_LOOP NAME=loop2 -->
+                <tr>
+                     <td><!-- TMPL_VAR NAME="creditbranch" --></td>
+                        <td><!-- TMPL_VAR NAME="creditdate" --></td>
+                        <td><!-- TMPL_VAR NAME="creditsurname" --></td>
+                        <td><!-- TMPL_VAR NAME="creditfirstname" --></td>
+                        <td><!-- TMPL_VAR NAME="creditdescription" --></td>
+                        <td><!-- TMPL_VAR NAME="creditaccounttype" --></td>
+                        <td><!-- TMPL_VAR NAME="creditamount" --></td>
+                </tr>
+                <!-- /TMPL_LOOP -->
+        </table>
+<p>
+       <ul><li> <b>Toplam alacak miktarı: <!-- TMPL_VAR NAME="totalcredits" --></b></li>
+        <li><b>"Toplam borç silme sayısı: <!-- TMPL_VAR NAME="totalwritten" --> borç"</b></li></ul>
+</p>
+
+
+<h2>"Geri ödemeler"</h2>
+
+        <table>
+                <tr>
+                        <th>Kütüphane</th>
+                        <th>Tarih/saat</th>
+                        <th>"Soyad"</th>
+                        <th>"Adı"</th>
+                        <th>"Tanım "</th>
+                        <th>Ödenti Türü</th>
+                        <th>"Fatura Miktarı"</th>
+                </tr>
+
+                <!-- TMPL_LOOP NAME=loop3 -->
+                <tr>
+                     <td><!-- TMPL_VAR NAME="refundbranch" --></td>
+                        <td><!-- TMPL_VAR NAME="refunddate" --></td>
+                        <td><!-- TMPL_VAR NAME="refundsurname" --></td>
+                        <td><!-- TMPL_VAR NAME="refundfirstname" --></td>
+                        <td><!-- TMPL_VAR NAME="refunddescription" --></td>
+                        <td><!-- TMPL_VAR NAME="refundaccounttype" --></td>
+                        <td><!-- TMPL_VAR NAME="refundamount" --></td>
+                </tr>
+                <!-- /TMPL_LOOP -->
+        </table>
+<p>
+        <ul><li><b>msgid Geri ödenen toplam miktar: <!-- TMPL_VAR NAME="totalrefund" --> YTL. "</b></li>
+        <li><b>Toplanan toplam nakit miktarı:<!-- TMPL_VAR NAME="totalcash" --> YTL. </b></li></ul>
+</p>
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

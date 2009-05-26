@@ -1,0 +1,53 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 报表 &rsaquo; 馆藏类型</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首页</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">报表</a><!-- TMPL_IF NAME="do_it" --> &rsaquo; <a href="/cgi-bin/koha/reports/manager.pl?report_name=itemtypes">馆藏类型</a> &rsaquo;<!-- TMPL_ELSE --> &rsaquo; 馆藏类型<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="do_it" -->
+<!-- TMPL_LOOP NAME="mainloop" -->
+	<h1>馆藏类型报表 <!--TMPL_IF NAME="branch" --> 分馆 = <!-- TMPL_VAR NAME="branch" --><!-- /TMPL_IF --></h1>
+	<table>
+		<tr>
+			<th>馆藏类型</th>
+			<th>数量</th>
+		</tr>
+			<!-- TMPL_LOOP NAME="loopitemtype" -->
+				<tr>
+					<td><!-- TMPL_VAR NAME="itemtype" --></td>
+					<td><!-- TMPL_VAR NAME="count" --></td>
+				</tr>
+			<!-- /TMPL_LOOP -->
+			<tr>
+				<th>总计</th>
+				<th><!-- TMPL_VAR NAME="total" --></th>
+	</table>
+<!-- /TMPL_LOOP -->
+<!-- TMPL_ELSE -->
+
+	<form method="post" action="/cgi-bin/koha/reports/manager.pl?report_name=itemtypes">
+		<fieldset class="rows"><legend>依照馆藏类型显示馆藏目录</legend><ol><li><label for="value">选择一个分馆</label> <!-- TMPL_VAR NAME="CGIbranch" -->
+		<span class="tip">没有任何选择，将显示所有分馆</span></li></ol></fieldset>
+		<fieldset class="action"><input type="submit" value="送出">
+		<input type="hidden" name="report_name" value="<!--TMPL_VAR NAME="report_name" -->" />
+		<input type="hidden" name="do_it" value="1" /></fieldset>
+	</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

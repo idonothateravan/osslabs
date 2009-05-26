@@ -1,0 +1,75 @@
+<!-- TMPL_INCLUDE NAME="doc-head-barcodes.inc" -->
+
+	<h1>تهيئة الطابعة</h1>
+	<h3>قم بتهيئة الطابعة طبقا لبيئتك</h3>
+	<ul>
+		<li>حدد طول وعرض الملصق الذي سوف تستخدمه في العمل.</li>
+		<li>حدد القيمة الإفتراضية ل DPI.</li>
+		<li>حدد نوع الصفحة.</li>
+		<li>إختر كم عدد الاعمدة والصفوف فى نوع الصفحة الخاصة بك.</li>
+		<li>حدد اليسارt- والأسفل-هوامش الصفحة التي ستستخدمها هذه الخاصية ستساعدك  لتوسيط الباركود على الملصق.</li>
+	</ul>
+	<br />
+	<form method="post" action="<!-- TMPL_VAR NAME="SCRIPT_NAME" -->" name="form1">
+		<input type="hidden" name="saveSettings" value="1" />
+		<fieldset class="rows"><ol>
+			<li>
+				<label for="labelWidth">
+					عرض الملصق (Expressed in mm): </label> 
+					<input id="labelWidth" type="text" name="labelWidth" size="5" value="<!-- TMPL_VAR NAME="LABEL_WIDTH" -->">
+				</li>
+				<li>
+				<label for="labelHeigth">
+					إرتفاع الملصق((Expressed في mm): </label> 
+					<input id="labelHeigth" type="text" name="labelHeigth" size="5" value="<!-- TMPL_VAR NAME="LABEL_HEIGTH" -->">
+				</li>
+				<li>
+				<label for="systemDpi">
+					System dpi: </label>
+					<input id="systemDpi" type="text" name="systemDpi" size="5" value="<!-- TMPL_VAR NAME="SYSTEM_DPI" -->">
+				</li>
+				<li>
+				<label for="pageType">
+					نوع الصفحة: </label>	
+					<select name="pageType" id="pageType" size="1">
+						<!-- TMPL_IF name="A4" -->
+							<option value="A4" selected="selected">A4</option>
+				        <!-- TMPL_ELSE -->
+							<option value="A4">A4</option>
+						<!-- /TMPL_IF -->
+						<!-- TMPL_IF name="Letter" -->
+							<option value="Letter" selected="selected">الرسالة</option>
+				        <!-- TMPL_ELSE -->
+							<option value="Letter">الرسالة</option>
+						<!-- /TMPL_IF -->
+						<!-- TMPL_IF name="Legal" -->
+							<option value="Legal" selected="selected">قانوني</option>
+				        <!-- TMPL_ELSE -->
+							<option value="Legal">قانوني</option>
+						<!-- /TMPL_IF -->    </select>
+				</li>
+				<li>
+				<label for="columns">
+					الاعمدة: </label>  
+					<input id="columns" type="text" name="columns" size="5" value="<!-- TMPL_VAR NAME="COLUMNS" -->">
+				</li>
+				<li>
+				<label for="rows">
+					صفوف: </label>   
+					<input id="rows" type="text" name="rows" size="5" value="<!-- TMPL_VAR NAME="ROWS" -->">
+				</li>
+				<li>
+				<label for="marginBottom">
+					هامش سفلى (صوّر في المليمتر):  </label>   
+					<input id="marginBottom" type="text" name="marginBottom" size="5" value="<!-- TMPL_VAR NAME="MARGIN_TOP" -->">
+				</li>
+				<li>
+				<label for="marginLeft">
+					هامش يسار (صوّر في المليمتر):  </label>   
+					<input id="marginLeft" type="text" name="marginLeft" size="5" value="<!-- TMPL_VAR NAME="MARGIN_LEFT" -->">
+				</li>
+			</ol></fieldset>
+			<fieldset class="action"><input type="submit" value="إحفظ الاعدادات"></fieldset>
+	</form>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

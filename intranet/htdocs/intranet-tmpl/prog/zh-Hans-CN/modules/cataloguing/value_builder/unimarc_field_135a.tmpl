@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立 UNIMARC 字段 135a</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>索引卡片类型信息</td>
+		<td>
+			<select name="f1" size="1">
+            
+			<!-- TMPL_IF name="f1 " -->
+				<option value=" " SELECTED>无需填写</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">无需填写</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>数字</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">数字</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>节目单</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">节目单</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>代表</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">代表</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" SELECTED>Texte</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Texte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1v" -->
+				<option value="v" SELECTED>数据合并</option>
+			<!-- TMPL_ELSE -->
+				<option value="v">数据合并</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="完成" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            
+            field.value =  document.f_pop.f1.value;
+            window.close();
+            return false;
+	}
+</script>
+</body>
+</html>

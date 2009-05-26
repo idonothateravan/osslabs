@@ -1,0 +1,408 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Catalogue &rsaquo; Détails pour <!-- TMPL_VAR NAME="title" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" --><script type="text/JavaScript" language="JavaScript">
+//<![CDATA[
+// http://www.oreillynet.com/pub/a/javascript/2003/10/21/amazonhacks.html
+function verify_images() {
+    $("#bookcoverimg img").each(function(i){
+           if ((this.src.indexOf('images.amazon.com') >= 0) || (this.src.indexOf('g-images.amazon.com') >=0)) {
+            w = this.width;
+            h = this.height;
+            if ((w == 1) || (h == 1)) {
+                $("#bookcoverimg").remove();
+                $(".yui-gb").attr("class","yui-g");
+            } else if ((this.complete != null) && (!this.complete)) {
+                $("#bookcoverimg").remove();
+                $(".yui-gb").attr("class","yui-g");
+            }
+        }
+        });
+	$("#editions img").each(function(i){
+           if ((this.src.indexOf('images.amazon.com') >= 0) || (this.src.indexOf('g-images.amazon.com') >=0)) {
+            w = this.width;
+            h = this.height;
+            if ((w == 1) || (h == 1)) {
+				this.src = 'http://g-images.amazon.com/images/G/01/x-site/icons/no-img-sm.gif';
+            } else if ((this.complete != null) && (!this.complete)) {
+				this.src = 'http://g-images.amazon.com/images/G/01/x-site/icons/no-img-sm.gif';
+            }
+        }
+        });
+}
+     $(document).ready(function() {
+        $('#bibliodetails > ul').tabs();
+     });
+     <!-- TMPL_IF NAME="AmazonContent" -->$(window).load(function() {
+        verify_images();
+     });<!-- /TMPL_IF -->
+//]]>
+</script>
+</head>
+
+<body>
+
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl"> Accueil </a> &rsaquo;<a href="/cgi-bin/koha/catalogue/search.pl">Catalogue</a> &rsaquo; Détails pour <i><!-- TMPL_VAR NAME="title" --></i></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+    <div id="yui-main">
+    <div class="yui-b">
+
+<!-- TMPL_INCLUDE NAME="cat-toolbar.inc" -->
+    <!-- TMPL_IF NAME="AmazonContent" --><div class="yui-gb"><!-- TMPL_ELSE --><div class="yui-g"><!-- /TMPL_IF -->
+    <div id="catalogue_detail_biblio" class="yui-u first">
+        
+    <h3><!-- TMPL_VAR NAME="title" --> <!-- TMPL_VAR NAME="subtitle" --></h3> 
+            <!-- TMPL_UNLESS NAME="item-level_itypes" --><img src="<!-- TMPL_VAR NAME="imageurl" -->" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->"><!-- /TMPL_UNLESS -->
+            <!-- TMPL_IF name="volume" --> <!-- TMPL_VAR name="volume" --><!-- /TMPL_IF -->
+            <!-- TMPL_IF name="volumedesc" -->, <!-- TMPL_VAR name="volumedesc" --><!-- /TMPL_IF --> <!-- TMPL_IF NAME="number" --> <!-- TMPL_VAR NAME="number" --> <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="unititle" -->, <!-- TMPL_VAR name="unititle" --> /<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="author" -->Par <a href="/cgi-bin/koha/catalogue/search.pl?q=au:<!-- TMPL_VAR NAME="author" -->"><!-- TMPL_VAR NAME="author" --></a><!-- /TMPL_IF -->
+        <ul>
+        <!-- TMPL_IF name="MARCAUTHORS" -->
+            <li><strong>Autres auteurs :</strong><ul>
+            <!-- TMPL_LOOP NAME="MARCAUTHORS" -->
+                <li><!-- TMPL_LOOP NAME="MARCAUTHOR_SUBFIELDS_LOOP" --><!-- TMPL_VAR NAME="separator" --><a title="‡<!-- TMPL_VAR NAME=code --> <!-- TMPL_VAR NAME=value -->" href="/cgi-bin/koha/catalogue/search.pl?q=<!-- TMPL_LOOP NAME=link_loop --><!-- TMPL_VAR NAME=operator --><!-- TMPL_VAR name='limit' -->:<!-- TMPL_VAR NAME=link --><!-- /TMPL_LOOP -->"><!-- TMPL_VAR NAME="value" --></a><!-- /TMPL_LOOP --></li>
+                <!-- /TMPL_LOOP -->
+
+        </ul>
+            </li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="publishercode" -->
+    <li><strong>édité par :</strong>
+        <a href="/cgi-bin/koha/catalogue/search.pl?q=pb:<!-- TMPL_VAR NAME="publishercode"-->">
+            <!-- TMPL_VAR NAME="publishercode" --> 
+        </a> <!-- TMPL_IF name="place" -->(<!-- TMPL_VAR NAME="place"-->)<!--/TMPL_IF--> <!-- TMPL_IF NAME="publicationyear" -->, <!-- TMPL_VAR NAME="publicationyear" --><!-- /TMPL_IF --> <!-- TMPL_IF NAME="editionstatement" --><!-- TMPL_VAR NAME="editionstatement" --><!-- /TMPL_IF --> <!-- TMPL_IF NAME="editionresponsability" --><!-- TMPL_VAR NAME="editionresponsability" --><!-- /TMPL_IF -->
+    </li>
+    <!-- /TMPL_IF -->
+        <li><strong>Description :</strong>
+                <!-- TMPL_IF name="pages" --> <!-- /TMPL_IF --><!-- TMPL_VAR name="pages" --> <!-- TMPL_IF NAME="illus" --><!-- TMPL_VAR NAME="illus" --><!-- /TMPL_IF -->
+                <!-- TMPL_IF name="size" --><!-- TMPL_VAR name="size" --><!-- /TMPL_IF -->
+        </li>
+<!-- TMPL_IF name="MARCURLS" --><li>
+    
+	<strong>Ressources en ligne :</strong>
+    <ul>    <!-- TMPL_LOOP name="MARCURLS" -->
+		<li><!-- TMPL_IF NAME="part" --><!-- TMPL_VAR NAME="part" -->
+			<br /><!-- /TMPL_IF --> 
+		<!-- here you might do a tmpl_if name="toc" and use greybox or equivalent for table of contents -->
+		<a href="<!-- TMPL_VAR NAME="MARCURL" -->" title="<!-- TMPL_VAR NAME="MARCURL" -->"><!-- TMPL_VAR NAME="linktext" --></a>
+			<!-- TMPL_IF NAME="notes" --><ul><!-- TMPL_LOOP NAME="notes" --><li><!-- TMPL_VAR NAME="note" --></li><!-- /TMPL_LOOP --></ul><!-- /TMPL_IF --></li>
+            <!-- /TMPL_LOOP --></ul>
+</li>
+    <!-- /TMPL_IF -->
+        </ul>
+        </div>
+        
+<!-- TMPL_IF NAME="AmazonContent" --><div class="yui-u" id="bookcoverimg">
+        <a href="http://www.amazon.com/gp/reader/<!-- TMPL_VAR NAME="isbn" -->/ref=sib_dp_pt/002-7879865-0184864#reader-link"><img border="0" src="http://images.amazon.com/images/P/<!-- TMPL_VAR NAME="isbn" -->.01._PIdp-schmooS,TopRight,7,-26_SCMZZZZZZZ_.jpg" alt="" /></a></div><!-- /TMPL_IF -->
+        
+        <div class="yui-u" style="margin-top: 1em;">
+        <ul>
+        <!-- TMPL_IF name="isbn" -->
+            <li><strong>ISBN : </strong> <!-- TMPL_VAR NAME="isbn" --></li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="issn" -->
+            <li><strong>ISSN : </strong><!-- TMPL_VAR NAME="issn" --></li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="collectiontitle" -->
+            <li><strong>Collection :  </strong>
+                <!-- TMPL_VAR NAME="collectiontitle" --> <!-- TMPL_IF name="collectionvolume" -->, <!-- TMPL_VAR NAME="collectionvolume" --><!-- /TMPL_IF --><!-- TMPL_IF name="collectionissn" --> (<strong>ISSN : </strong> <!-- TMPL_VAR NAME="collectionissn" -->)<!-- /TMPL_IF -->
+            </li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="MARCSUBJCTS" -->
+            <li><strong>Mots-clés : </strong> 
+            <ul>
+                <!-- TMPL_LOOP NAME="MARCSUBJCTS" -->
+                <li><!-- TMPL_LOOP NAME="MARCSUBJECT_SUBFIELDS_LOOP" --> <!-- TMPL_VAR NAME="separator" --> <a title="‡<!-- TMPL_VAR NAME="code" --> <!-- TMPL_VAR NAME="value" -->" href="/cgi-bin/koha/catalogue/search.pl?q=<!-- TMPL_LOOP NAME="link_loop" --><!-- TMPL_VAR NAME="operator" --><!-- TMPL_VAR name="limit" -->:<!-- TMPL_VAR NAME="link" --><!-- /TMPL_LOOP -->"><!-- TMPL_VAR NAME="value" --></a><!-- /TMPL_LOOP --></li>
+                <!-- /TMPL_LOOP -->
+                </ul>
+            </li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="copyrightdate" -->
+            <li><strong>Copyright : </strong> <!-- TMPL_VAR NAME="copyrightdate" --></li>
+        <!-- /TMPL_IF -->
+     
+        <!-- TMPL_IF name="classification" -->
+            <li><strong>Classification :</strong> <!-- TMPL_VAR name="subclass" --><!-- TMPL_VAR name="classification" --></li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="dewey" -->
+            <li><strong>Dewey : </strong> <!-- TMPL_VAR name="dewey" --></li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="URLS" -->
+            <li><strong>URL : </strong> 
+                <!-- TMPL_LOOP name="URLS" -->
+                    <a href="<!-- TMPL_VAR name="url" -->"><!-- TMPL_VAR NAME="url" --></a>
+                <!-- /TMPL_LOOP -->
+            </li>
+        <!-- /TMPL_IF -->
+        </ul>
+</div>
+</div>
+
+<div id="bibliodetails" class="toptabs">
+
+<ul>   
+<li><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->#holdings">Exemplaires</a></li>
+<li><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->#description">Descriptions</a></li>
+<!-- TMPL_IF NAME="FRBRizeEditions" --><!-- TMPL_IF NAME="XISBNS" --><li><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->#editions">Notes</a></li><!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="AmazonSimilarItems" --><li><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->#related">Titres en relation</a></li><!-- /TMPL_IF -->
+ </ul>
+
+<div id="holdings">
+<!-- TMPL_IF name="count" -->
+        <table>
+            <tr>
+                <!-- TMPL_IF NAME="item-level_itypes" --><th>Type de document</th><!-- /TMPL_IF -->
+                <th>Localisation</th>
+                <!-- TMPL_IF NAME="itemdata_ccode" --><th>Collection</th><!-- /TMPL_IF -->
+                <th>Cote</th>
+                <th>Etat</th>
+                <th>Vu pour la dernière fois</th>
+                <th>code-barres</th>
+                <!-- TMPL_IF NAME="volinfo" --><th>Détails de publication</th><!-- /TMPL_IF -->
+                <!-- TMPL_IF NAME="itemdata_copynumber" --><th>Copie n°</th><!-- /TMPL_IF -->
+            </tr>
+            <!-- TMPL_LOOP NAME="itemloop" -->
+                <tr>
+                    <!-- TMPL_IF NAME="item-level_itypes" --><td class="itype"><!-- TMPL_IF NAME="noItemTypeImages" --><!-- TMPL_VAR NAME="description" --><!-- TMPL_ELSE --><img src="<!-- TMPL_VAR NAME="imageurl" -->" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->" /><!-- /TMPL_IF --></td><!-- /TMPL_IF -->
+                    <td class="location"><!-- TMPL_UNLESS NAME="singlebranchmode" --><!-- TMPL_VAR NAME="branchname" --><!-- /TMPL_UNLESS --> <!-- TMPL_VAR NAME="location" --> </td>
+                    <!-- TMPL_IF NAME="itemdata_ccode" --><td><!-- TMPL_VAR name="ccode" --></td><!-- /TMPL_IF -->
+                    <td class="itemcallnumber"><!-- TMPL_IF NAME="itemcallnumber" --> <!-- TMPL_VAR NAME="itemcallnumber" --><!-- /TMPL_IF --></td>
+                    <td class="status">
+
+                <!-- TMPL_IF name="datedue" -->
+						<span class="datedue">Prêté
+                    <!-- TMPL_UNLESS  NAME="NOTSAMEBRANCH" -->
+                          à <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->"><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --></a>
+                    <!-- /TMPL_UNLESS -->
+						: dû <!-- TMPL_VAR NAME="datedue" -->
+						</span>
+                <!-- TMPL_ELSIF Name="transfertwhen" -->
+                           Document en transfert de <!-- TMPL_VAR NAME="transfertfrom" -->, à <!-- TMPL_VAR NAME="transfertto" -->, depuis le <!-- TMPL_VAR NAME="transfertwhen" -->
+							<!-- FIXME: the "since" clause is redundant w/ lastseen field -->
+                <!-- /TMPL_IF -->
+
+                <!-- TMPL_IF NAME="itemlost" -->
+                    <!-- TMPL_IF NAME="itemlostloop" -->
+                    <!-- TMPL_LOOP NAME="itemlostloop" -->
+                        <!-- TMPL_IF NAME="selected" -->
+                                        <span class="lost"><!-- TMPL_VAR NAME="lib" --></span>
+                        <!-- /TMPL_IF -->
+                    <!-- /TMPL_LOOP -->
+                    <!-- TMPL_ELSE -->
+                                        <span class="lost">Indisponible (manquant ou perdu)</span>
+                    <!-- /TMPL_IF -->
+                <!-- /TMPL_IF -->
+
+                <!-- TMPL_IF NAME="wthdrawn" -->
+                                        <span class="wdn">Retiré</span>
+                <!-- /TMPL_IF -->
+
+                <!-- TMPL_IF NAME="damaged" -->
+                    <!-- TMPL_IF NAME="itemdamagedloop" -->
+                        <!-- TMPL_LOOP NAME="itemdamagedloop" -->
+                        <!-- TMPL_IF NAME="selected" -->
+                                        <span class="dmg"><!-- TMPL_VAR NAME="lib" --></span>
+                        <!-- /TMPL_IF -->
+                        <!-- /TMPL_LOOP -->
+                    <!-- TMPL_ELSE -->
+                                        <span class="dmg">Endommagé</span>
+                    <!-- /TMPL_IF -->
+                <!-- /TMPL_IF -->
+
+                <!-- TMPL_IF Name="itemnotforloan" -->
+                    Exclu du prêt 
+                    <!-- TMPL_IF Name="notforloanvalue" -->
+                        (<!-- TMPL_VAR NAME="notforloanvalue" -->)
+                    <!-- /TMPL_IF -->
+                <!-- /TMPL_IF -->
+
+                            
+                <!-- TMPL_IF NAME="reservedate"-->
+                    <!-- TMPL_IF NAME="waitingdate" -->
+                        Mis de coté
+                    <!-- TMPL_ELSE -->
+                        Réservé
+                    <!-- /TMPL_IF -->
+                    <!-- TMPL_IF NAME="canreservefromotherbranches" -->Pour <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="ReservedForBorrowernumber" -->"><!-- TMPL_VAR NAME="ReservedForFirstname" --> <!-- TMPL_VAR NAME="ReservedForSurname" --></a><!-- /TMPL_IF -->
+                    <!-- TMPL_IF NAME="waitingdate" -->
+                        à<!-- TMPL_ELSE -->Attendu à
+                    <!-- /TMPL_IF -->   <!-- TMPL_VAR NAME="ExpectedAtLibrary" --> depuis
+                    <!-- TMPL_IF NAME="waitingdate" --><!-- TMPL_VAR NAME="waitingdate" -->
+                    <!-- TMPL_ELSE -->
+                        <!-- TMPL_IF name="reservedate" --><!-- TMPL_VAR NAME="reservedate" --><!-- /TMPL_IF -->
+                    <!-- /TMPL_IF -->
+                <!-- /TMPL_IF -->
+                <!-- TMPL_UNLESS name="itemnotforloan" --><!-- TMPL_UNLESS NAME="onloan" --><!-- TMPL_UNLESS NAME="itemlost" --><!-- TMPL_UNLESS NAME="wthdrawn" --><!-- TMPL_UNLESS NAME="damaged" --><!-- TMPL_UNLESS NAME="transfertwhen" --><!-- TMPL_UNLESS NAME="reservedate" -->
+                                        Disponible
+                <!-- /TMPL_UNLESS --><!-- /TMPL_UNLESS --><!-- /TMPL_UNLESS --><!-- /TMPL_UNLESS --><!-- /TMPL_UNLESS --><!-- /TMPL_UNLESS --><!-- /TMPL_UNLESS -->
+                        
+                    </td>
+                    <td class="datelastseen"><!-- TMPL_VAR NAME="datelastseen" --></td>
+                    <td><a href="/cgi-bin/koha/catalogue/moredetail.pl?type=<!-- TMPL_VAR NAME="type" -->&amp;item=<!-- TMPL_VAR NAME="itemnumber" -->&amp;biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->&amp;bi=<!-- TMPL_VAR NAME="biblioitemnumber" -->#item<!-- TMPL_VAR NAME="itemnumber">"><!-- TMPL_VAR NAME="barcode" --></a></td>
+				<!-- TMPL_IF NAME="volinfo" -->	<td class="enumchron">
+					<!-- TMPL_IF NAME="itemdata_enumchron" -->
+						<!-- TMPL_IF NAME="enumchron" -->
+						<!-- TMPL_VAR NAME="enumchron" --><!-- TMPL_IF NAME="serialseq" --> -- <!-- /TMPL_IF -->
+						<!-- /TMPL_IF -->
+					<!-- /TMPL_IF -->
+					<!-- TMPL_VAR NAME="serialseq" --><!-- TMPL_IF NAME="publisheddate" --> (<!-- TMPL_VAR NAME="publisheddate" -->)<!-- /TMPL_IF -->
+				</td><!-- /TMPL_IF -->
+				<!-- TMPL_IF NAME="itemdata_copynumber" -->
+					<td class="copynumber"><!-- TMPL_VAR NAME="copynumber" --></td>
+				<!-- /TMPL_IF -->
+                <!-- TMPL_IF NAME="type" -->
+                    <td><a href="/cgi-bin/koha/maint/catmaintain.pl?type=fixitemtype&amp;bi=<!-- TMPL_VAR NAME="biblioitemnumber" -->&amp;item=<!-- TMPL_VAR NAME="itemtype" -->">Choisir  le type de document</a></td>
+                <!-- /TMPL_IF -->
+
+                </tr>
+            <!-- /TMPL_LOOP -->
+        </table>
+		<!-- TMPL_IF NAME="debug_display" -->
+		<br /><br />
+		<table>
+			<tr><td>itemdata_enumchron</td><td><!-- TMPL_VAR NAME="itemdata_enumchron" --></td></tr>
+			<tr><td>itemdata_copynumber</td><td><!-- TMPL_VAR NAME="itemdata_copynumber" --></td></tr>
+			<tr><td>périodique</td><td><!-- TMPL_VAR NAME="serial" --></td></tr>
+		</table>
+		<!-- /TMPL_IF -->
+<!-- TMPL_ELSE -->
+    <p>Nous n'avons pas d'exemplaire de ce document</p>
+<!-- /TMPL_IF -->
+    </div>
+    
+<div id="description">
+<div class="content_set">
+<!-- TMPL_IF NAME="AmazonContent" -->
+<!-- TMPL_LOOP NAME="AMAZON_EDITORIAL_REVIEWS" -->
+    <!-- TMPL_IF NAME="Content" -->
+    <h4>De <!-- TMPL_VAR NAME="Source" --> :</h4>
+    <p><!-- TMPL_VAR NAME="Content" --></p>
+    <!-- /TMPL_IF -->
+<!-- /TMPL_LOOP -->
+<!-- /TMPL_IF-->
+
+<!-- TMPL_IF name="MARCNOTES" -->
+    <!-- TMPL_LOOP NAME="MARCNOTES" -->
+    <p><!-- TMPL_VAR NAME="marcnote" --></p>
+    <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <!-- TMPL_IF name="notes" -->
+    <p><!-- TMPL_VAR NAME="notes" --></p>
+    <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+</div>
+</div>
+<!-- TMPL_IF NAME="FRBRizeEditions" --><!-- TMPL_IF NAME="XISBNS" -->
+<div id="editions"><h2>Notes</h2>
+<table>
+<!-- TMPL_LOOP NAME="XISBNS" --><tr><!-- TMPL_IF NAME="AmazonContent" --><td><a href="http://www.amazon.com/gp/reader/<!-- TMPL_VAR NAME="isbn" -->/ref=sib_dp_pt/002-7879865-0184864#reader-link"><img src="http://images.amazon.com/images/P/<!-- TMPL_VAR NAME="isbn" -->.01._AA75_PU_PU-5_.jpg" /></a></td><!-- /TMPL_IF --><td><!-- TMPL_IF NAME="noItemTypeImages" --><!-- TMPL_VAR NAME="description" --><!-- TMPL_ELSE --><img src="<!-- TMPL_VAR NAME="imageurl" -->" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->"><!-- /TMPL_IF --></td><td>
+<a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a> pas <!-- TMPL_VAR NAME="author" --> &copy;<!-- TMPL_VAR NAME="copyrightdate" -->
+  <!-- TMPL_IF name="publishercode" -->
+<!-- TMPL_VAR NAME="publishercode" --> <!-- TMPL_IF name="place" -->(<!-- TMPL_VAR NAME="place"-->)<!--/TMPL_IF--> <!-- TMPL_IF NAME="publicationyear" -->, <!-- TMPL_VAR NAME="publicationyear" --><!-- /TMPL_IF --> <!-- TMPL_IF NAME="editionstatement" --><!-- TMPL_VAR NAME="editionstatement" --><!-- /TMPL_IF --> <!-- TMPL_IF NAME="editionresponsability" --><!-- TMPL_VAR NAME="editionresponsability" --><!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="pages" --> <!-- /TMPL_IF --><!-- TMPL_VAR name="pages" --> <!-- TMPL_IF NAME="illus" --><!-- TMPL_VAR NAME="illus" --><!-- /TMPL_IF -->
+                <!-- TMPL_IF name="size" -->, <!-- /TMPL_IF --><!-- TMPL_VAR name="size" -->
+</td>
+
+    <!-- TMPL_LOOP NAME=items -->
+    <!-- <!-- TMPL_IF NAME="itype" --><img src="/opac-tmpl/prog/itemtypeimg/<!-- TMPL_VAR NAME="itype" -->.gif" title="<!-- TMPL_VAR NAME="itype" -->" /><!-- /TMPL_IF --> -->
+    <!-- barcode:<!-- TMPL_VAR NAME="barcode" --> -->
+    <!-- /TMPL_LOOP -->
+
+<!-- /TMPL_LOOP -->
+</table></div><!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="AmazonContent" --><!-- TMPL_IF NAME="AmazonSimilarItems" -->
+<div id="related">
+<h4>Documents similaires</h4>
+<ul>
+<!-- TMPL_LOOP NAME="AMAZON_SIMILAR_PRODUCTS" -->
+<!-- TMPL_LOOP NAME="similar_biblionumbers" -->
+<li><img alt="img" src="http://images.amazon.com/images/P/<!-- TMPL_VAR NAME="ASIN"-->.01._SS50_.jpg" /> <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" ESCAPE="HTML" --></a> </li>
+<!-- /TMPL_LOOP -->
+<!-- /TMPL_LOOP -->
+</ul>
+</div>
+<!-- /TMPL_IF --><!-- /TMPL_IF -->
+
+</div><!-- /bibliodetails -->
+
+<div class="yui-g" id="export" style="margin-top: 1em;">
+<form method="get" action="/cgi-bin/koha/catalogue/export.pl">
+<table>  <tr>
+      <th>Enregistrer </th>   </tr>
+  <tr>     <td> Sélectionner un format de téléchargement :    <select name="format">
+        <option value="mods">MODS (XML)</option>
+        <option value="dc">Dublin Core (XML)</option>
+        <option value="marcxml">MARCXML</option>
+        <option value="marc8">MARC (non-Unicode/MARC-8)</option>
+        <option value="utf8">MARC (Unicode/UTF-8)</option>    </select>
+        <input type="submit" name="save" value="Télécharger notice"></td>
+  </tr>
+  <tr><td>
+    <input type="hidden" name="op" value="export" /><input type="hidden" name="bib" value="<!-- TMPL_VAR name="biblionumber" -->" />
+  </td></tr>
+</table>
+</form>
+</div>
+
+
+
+<!-- TMPL_IF name="subscriptionsnumber" -->
+<div class="yui-g">
+<div id="catalogue_detail_subscriptions">
+    <h2>Ceci est un abonnement de périodique</h2>
+    <p> (Nous avons  <!-- TMPL_VAR name="subscriptionsnumber" --> abonnement(s) à ce titre).</p> 
+    <!-- TMPL_LOOP Name="subscriptions" -->
+            <!-- TMPL_IF NAME="subscriptionnotes" --><p><!--TMPL_VAR NAME="subscriptionnotes"--> </p><!-- /TMPL_IF -->
+            <!--TMPL_IF NAME="latestserials"-->
+            <p> Les trois derniers numéros parus de cet abonnement : </p>
+            <table>
+                <tr>
+                    <th>Prêt n°</th>
+                    <th>Date</th>
+                    <th>Etat</th>
+                    <th>Note</th>
+                </tr>
+            <!--TMPL_LOOP Name="latestserials"-->
+                <tr>
+                    <td><!--TMPL_VAR Name="serialseq"--></td>
+                    <td><!--TMPL_VAR Name="planneddate"--></td>
+                    <td><!--TMPL_IF Name="status1"-->Attendu
+                        <!--TMPL_ELSE -->
+                            <!-- TMPL_IF Name="status2"-->Arrivé
+                            <!--TMPL_ELSE -->
+                                <!-- TMPL_IF Name="status3"-->En retard
+                                <!--TMPL_ELSE -->
+                                    <!-- TMPL_IF Name="status4"-->Manquant
+                                    <!--TMPL_ELSE -->
+                                        <!-- TMPL_IF Name="status5"-->Pas en prêt
+                                        <!--/TMPL_IF-->
+                                    <!--/TMPL_IF-->
+                                <!--/TMPL_IF-->
+                            <!--/TMPL_IF-->
+                        <!--/TMPL_IF--></td>
+                    <td><!--TMPL_VAR Name="notes"--></td>
+                </tr>
+            <!--/TMPL_LOOP -->
+            </table>
+            <!-- /TMPL_IF -->
+    <!-- /TMPL_LOOP -->
+</div>
+</div>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="biblio-view-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

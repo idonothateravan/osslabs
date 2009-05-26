@@ -1,0 +1,117 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Statistiques &rsaquo; Adhérents n'empruntant pas</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl"> Accueil </a> &rsaquo;<a href="/cgi-bin/koha/reports/reports-home.pl">Statistiques</a> &rsaquo; Adhérents n'empruntant pas</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="do_it" -->
+    <!-- TMPL_LOOP NAME="mainloop" -->
+        <h1>Adhérents sans emprunts</h1>
+        <!-- TMPL_IF NAME="loopfilter"-->
+            <p>Sélectionné sur</p>
+            <!-- TMPL_LOOP NAME="loopfilter" -->
+                    <p><!-- TMPL_IF NAME="err" -->  <!--/TMPL_IF --> <!-- TMPL_VAR NAME="crit"-->=<!-- TMPL_VAR NAME="filter"--><!-- TMPL_IF NAME="err" -->  <!--/TMPL_IF --></p>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_IF-->
+        
+        <table>
+            <tr>
+                <th>N°/Adhérent</th>
+                <!-- TMPL_LOOP NAME="loopcol" -->
+                    <th><!-- TMPL_VAR NAME="coltitle" --></th>
+                <!-- /TMPL_LOOP -->
+            </tr>
+                <!-- TMPL_LOOP NAME="looprow" -->
+                    <tr>
+                        <!-- TMPL_IF NAME="hilighted" --><td class="hilighted"><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+                        <!-- TMPL_VAR NAME="rowtitle" --></td>
+                        <!-- TMPL_LOOP NAME="loopcell" -->
+                            <!-- TMPL_IF NAME="hilighted" --><td class="hilighted"><!-- TMPL_ELSE --><td ><!-- /TMPL_IF -->
+                                <!-- TMPL_IF NAME="value" --><!-- TMPL_VAR NAME="value" --><!-- /TMPL_IF -->
+                            </td>
+                        <!-- /TMPL_LOOP -->
+                    </tr>
+                <!-- /TMPL_LOOP -->
+        </table>
+    <!-- /TMPL_LOOP -->
+<!-- TMPL_ELSE -->
+    <h1>Adhérents sans emprunts</h1>
+    <form method="post" action="/cgi-bin/koha/reports/borrowers_out.pl">
+    <fieldset class="rows">
+		<ol>
+			<li><label for="patroncategory">Catégorie adhérent : </label> <select name="Filter" id="patroncategory"><option value="" > Tout code catégorie</option>
+    <!--TMPL_LOOP Name="borcatloop"-->
+        <option value="<!--TMPL_VAR Name="value"-->" ><!--TMPL_VAR Name="description"--> </option>  
+     <!--/TMPL_LOOP --> 
+    </select>
+</li>
+	<li><label for="to">Pas d'emprunt depuis : </label> <input size="10" id="to" name="Filter" value="" type="text" />
+                        <img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="Voir calendrier" id="openCalendarTo" style="cursor: pointer;" border="0">
+                            <script type="text/javascript">
+                                Calendar.setup(
+                                    {
+                                        inputField : "to",
+                                        ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+                                        button : "openCalendarTo",
+                                    }
+                                );
+                            </script></li>
+		</ol>
+	</fieldset>
+	
+    <fieldset class="rows">
+	<legend>Limites</legend>
+		<ol>
+			<li><label for="numberlimit">Limiter à : </label><select name="Limit" id="numberlimit">
+                        <option value ="" selected="selected">Aucun</option>
+                        <option value ="5"> 5</option>
+                        <option value ="10">10</option>
+                        <option value ="15">15</option>
+                        <option value ="20">20</option>
+                        <option value ="25">25</option>
+                        <option value ="40">40</option>
+                        <option value ="50">50</option>
+                        <option value ="100">100</option>
+                    </select></li>
+			<li><label for="criteria">Par : </label><select name="Criteria" id="criteria">
+                        <option value ="" selected="selected">Aucun</option>
+                        <option value ="categorycode">Code catégorie</option>
+                        <option value ="itemtype">Type de document</option>
+                    </select></li>
+		</ol>
+	</fieldset>
+	
+<fieldset class="rows">
+	<legend>Affichage</legend>
+<ol><li><label for="outputscreen">A afficher dans le navigateur </label><input type="radio" checked="checked" name="output" id="outputscreen" value="screen" /> </li>
+<li><label for="outputfile">Vers un fichier :</label> 		<input type="radio" name="output" value="file" id="outputfile" /> <label class="inline" for="basename">Nom : </label><input type="text" name="basename" id="basename" value="Export" /> <label class="inline" for="MIME">Dans un logiciel  
+		</label><!-- TMPL_VAR NAME="CGIextChoice" -->
+		<!-- TMPL_VAR NAME="CGIsepChoice" --></li></ol>
+	</fieldset>
+
+	<fieldset class="action">
+	<input type="submit" value="Valider">
+	<input type="hidden" name="report_name" value="<!--TMPL_VAR NAME="report_name" -->" />
+	<input type="hidden" name="do_it" value="1" />
+	</fieldset>
+	</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

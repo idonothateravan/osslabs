@@ -1,0 +1,175 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Ajouter des adhérents</h1>
+
+<h2>Ajouter un adhérent</h2>   
+   <p>ATTENTION: les préférences système doivent être définies avant qu'on puisse ajouter des adhérents.<p>
+	<ul>
+		<li>
+<em>Aller à :</em></span>More &gt; Administration </li>
+	</ul>	Ajouter un adhérent :<br/>
+	<ul>
+		<li>Cliquez le bouton 'Ajouter'</li>
+		<li>Sélectionnez le type d'adhérent à ajouter:
+		<ul>
+			<li>Bibliothécaire = un utilisateur auquel on peut attribuer des droits sur l'interface professionnelle.</li>
+			<li>Adulte = un adhérent standard (on peut lui associer des adhérents Enfant).</li>
+			<li>Child = A patron who can have an adult guarantor. </li>
+			<li>Organisation = Une organisation à laquelle sont rattaché des adhérents professionnels.</li>
+			<li>Professional = A patron that can have an organization as a guarantor. </li>
+			<li>Statistical =		   
+		   A &quot;fake&quot; patron card. When items are scanned on to a Statistical patron card, the items are not checked out, but recorded. 
+			<ul>
+				<li>
+			    <span style="background-color: #ffe599">
+ASTUCE : Peut être utilisé pour enregistrer des statistiques pour les exemplaires utilisés, mais non prêtés, comme les ouvrages de référence, les magazines, etc. Vous pouvez alors faire tourner un rapport qui exploite ces statistiques</span></li>
+			</ul></li>
+		</ul></li>
+	</ul>
+	<ul>
+		<li>	   
+	   	   
+	   Chaque type d'adhérent propose des options légèrement différentes.</li>	   
+		<li>	   
+	   	   
+	   Remplissez les champs liés à l'adhérent
+		<ul>
+			<li>		   
+		   		   
+		   Note that the Surname (or Last Name) is required for each patron as a default setting. You can define which fields, if any, should be required. 
+			<ul>
+				<li>			   
+
+<em>Get there</em>: Administration &gt; System Preferences &gt; Patrons &gt; BorrowerMandatoryField.</li>
+			</ul></li>		   
+			<li>		   
+<span style="background-color: #ffe599">
+ASTUCE : 'Initiales' et 'Autre nom' sont utiles pour différencier des adhérents</span></li>
+		</ul></li>
+	</ul>
+	<ul>
+		<li>Si vous ajoutez un adhérent 'Enfant' ou 'Professionnel', vous verrez un champ complémentaire vous permettant de choisir un Garant.
+		<ul>
+			<li>		   
+		   		   
+		   Vous devez choisir dans ce menu l'adhérent auquel lier cet enfant ou ce professionnel.
+			<ul>
+				<li>			   
+			   			   
+			   Cliquez sur 'Trouver garant' et sélectionnez l'adhérent dans la liste résultat.
+				<ul>
+					<li>
+				    <span style="background-color: #ffe599">
+TIP: Only patrons of type &quot;A&quot; (adult) are searched for when you look for guarantors through the &quot;find guarantor&quot; interface.  This means that (for example) library staff (type &quot;S&quot;) and other children (type &quot;C&quot;) cannot be found as guarantors</span></li>
+					<li style="color: #ff0000">				   
+				   				   
+				   ATTENTION : Saisir un adhérent à la main ne fonctionnera pas comme vous l'imagine - vous devez faire une recherche</li>
+				</ul></li>
+			</ul></li>
+			<li>		   
+		   		   
+		   
+		    <span style="background-color: #ffe599">
+ASTUCE : Vous pouvez définir les termes utilisés dans le champ 'Garant'. 'Père' et 'Mère' sont là par défaut, mais vous pouvez par exemple ajouter "Grand-Parent" ou "Tuteur"</span>
+			<ul>
+				<li>			   
+			   			   
+			   
+			    <span>
+<em>Aller à : </em></span>Administration &gt; Global system preferences &gt; Patrons &gt;borrowerRelationship</li>
+			</ul></li>
+		</ul></li>
+	</ul>
+	<ul>
+		<li>	   
+	   	   
+	   Si vous ajoutez une 'Organisation', cette première section conprendra moins de champs.</li>
+		<li>	   
+	   	   
+	   Entrez l'adresse principale de l'adhérent.
+		<ul>
+			<li>		   
+		   		   
+		   Le menu déroulant 'Type de voie' est issu de vos paramétres Adhérents et Circulation
+			<ul>
+				<li>			   
+			   			   
+			   
+			    <span>
+<em>Aller à : </em></span>Administration &gt; Adhérents et circulation &gt; Types de voies</li>
+			</ul></li>
+			<li>		   
+		   		   
+		   Le menu déroulant 'Commune' est issu de vos paramétres Adhérents et Circulation
+			<ul>
+				<li>
+			    <span>
+<em>Aller à : </em></span>Administration &gt; Adhérents et circulation &gt; Communes</li>
+			</ul></li>
+		</ul></li>
+		<li>Ajoutez des informations de contact supplémentaires pour cet adhérent.<br/>
+		<ul>
+			<li>
+		    <span style="background-color: #ffe599">
+ASTUCE : encouragez vos adhérents à donner leur adresse email. Kokha utilisera cette adresse pour les contacter quand une réservation les attend et pour les notifications de retard.</span></li>
+		</ul></li>
+	</ul>
+	<ul>
+		<li>Entrez une adresse secondaire (si nécessaire).
+		<ul>
+			<li>
+		    <span style="background-color: #ffe599">
+ASTUCE : Utile si un adhérent a une boite postale et que vous voulez aussi leur adresse de domicile.</span></li>
+		</ul></li>
+	</ul>
+	<ul>
+		<li>Entrez un contact secondaire (si nécessaire).</li>
+		<li>Entrez les éléments de gestion utiles à la bibliothèque
+		<ul>
+			<li>Le numéro de carte peut être auto-calculé, scanné à partir d'un code-barres, ou entré à la main. La fonction de calcul du numéro de carte peut être activée/désactivée dans les préférences systèmes.
+			<ul>
+				<li>
+			    <span>
+<em>Aller à</em></span>: Administration &gt; System Preferences &gt; Patrons &gt;  autoMemberNum.</li>
+			</ul></li>
+			<li>Les sites de bibliothèque sont défini dans les Paramétres de base.<ul>
+				<li>
+			    <span>
+<em>Aller à :</em></span>Administration &gt; Paramétres de base &gt; Sites de la bibliothèque et groupes</li>
+			</ul></li>
+			<li>Les catégories d'adhérent sont définies dans Adhérents et Circulation.<ul>
+				<li>
+			    <span>
+<em>Aller à :</em></span>Administration &gt; Adhérents et circulation &gt; Catégories adhérent</li>
+			</ul></li>
+			<li>Les champs de tri sont utilisés en interne et dans les rapports.</li>
+		</ul></li>
+	</ul>
+	<ul>
+		<li>Entrez les informations spécifiques à votre bibliothèque
+
+		<ul>
+			<li>
+		    <span style="background-color: #ffe599">
+ASTUCE : Utilisez 'Note interne' pour des notes à destination des bibliothécaires</span></li>
+			<li>
+		    <span style="background-color: #ffe599">
+ASTUCE : Utilisez 'Note OPAC' pour des notes à destination de l'adhérent<br/></span></li>
+			<li>
+		    <span style="background-color: #ffe599">
+		   		   
+		    <span style="background-color: #ffffff">
+ATTENTION : le personnel doit bien comprendre la différence entre ces champs. 'Note interne' est une note qui ne sera vue que par le personnel. La 'Note OPAC' sera vue par l'adhérent.<br/></span></span></li>
+		</ul></li>
+	</ul>
+	<ul>
+		<li>Fournit un login de connexion à l'opac pour l'adhérent.
+		<ul>
+			<li>
+		    <span style="background-color: #ffe599">
+ATUCE : Les adhérents pourront modifier leur mot de passe à l'OPAC</span></li>
+		</ul></li>
+	</ul>
+	<ul>
+		<li>Cliquez sur 'Sauvegarder'.</li>
+	</ul><!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

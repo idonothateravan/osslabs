@@ -1,0 +1,42 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Serials &rsaquo; Select Vendor</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" language="Javascript">
+
+function GetIt(aqbooksellerid,name)
+{
+  opener.document.f.aqbooksellerid.value = aqbooksellerid;
+  opener.document.f.aqbooksellername.value = name;
+  window.close();
+}
+</script>
+</head>
+<body>
+
+<div id="doc" class="yui-t7">
+   <div id="bd">
+	
+
+<h1>Vendor Search Results</h1>
+<h2>查询<b>供货商 <!-- TMPL_VAR name="supplier" --></b>，找到 <!-- TMPL_VAR name="count" --> 笔记录。</h2>
+
+<!-- TMPL_IF NAME="loop_suppliers" -->
+<table>
+	<tr>
+		<th>供货商</th>
+		<th>选择</th>
+	</tr>
+	<!-- TMPL_LOOP name="loop_suppliers" -->
+		<tr>
+			<td><!-- TMPL_VAR name="name" --></td>
+			<td><a href="#" onclick="GetIt(<!-- TMPL_VAR NAME="aqbooksellerid" -->,'<!--  TMPL_VAR escape="URL" NAME="name" -->')">选择</a></td>
+		</tr>
+	<!-- /TMPL_LOOP -->
+</table>
+<!-- /TMPL_IF -->
+
+    <p><a href="/cgi-bin/koha/serials/acqui-search.pl">查询</a> <a class="button" href="#" onclick="window.close()">关闭</a></p>
+
+</div>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

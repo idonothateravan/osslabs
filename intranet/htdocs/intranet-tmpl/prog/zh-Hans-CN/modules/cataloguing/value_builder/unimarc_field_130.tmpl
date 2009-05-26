@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立 UNIMARC 字段 130</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Presentation materielle:</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>孔卡</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">孔卡</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>匣式微缩卷片</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">匣式微缩卷片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>卡式微缩卷片</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">卡式微缩卷片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" SELECTED>盘式微缩卷片</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">盘式微缩卷片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1e" -->
+				<option value="e" SELECTED>微缩单片</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">微缩单片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1f" -->
+				<option value="f" SELECTED>卡式微缩单片</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">卡式微缩单片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1g" -->
+				<option value="g" SELECTED>不透明微缩片</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">不透明微缩片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1h" -->
+				<option value="h" SELECTED>长条微缩片</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">长条微缩片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Polarite:</td>
+		<td>
+			<select name="f2" size="1">
+
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" SELECTED>Positif</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Positif</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2b" -->
+				<option value="b" SELECTED>负片</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">负片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2c" -->
+				<option value="c" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">不详</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2d" -->
+				<option value="d" SELECTED>Plusieurs polarites</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Plusieurs polarites</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>大小尺寸</td>
+		<td>
+			<select name="f3" size="1">
+
+			<!-- TMPL_IF name="f3 " -->
+				<option value=" " SELECTED>无需填写</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">无需填写</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3a" -->
+				<option value="a" SELECTED>8 毫米（微缩胶片）</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">8 毫米（微缩胶片）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3d" -->
+				<option value="d" SELECTED>16 毫米（微缩胶片）</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">16 毫米（微缩胶片）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3f" -->
+				<option value="f" SELECTED>35 毫米（微缩胶片）</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">35 毫米（微缩胶片）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3g" -->
+				<option value="g" SELECTED>70 毫米（微缩胶片）</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">70 毫米（微缩胶片）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3h" -->
+				<option value="h" SELECTED>105 毫米（微缩胶片）</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">105 毫米（微缩胶片）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3l" -->
+				<option value="l" SELECTED>3 x 5 吋</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">3 x 5 吋</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3m" -->
+				<option value="m" SELECTED>4 x 6 吋</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">4 x 6 吋</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3o" -->
+				<option value="o" SELECTED>6 x 9 吋</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">6 x 9 吋</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3p" -->
+				<option value="p" SELECTED>9 x 19 厘米</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">9 x 19 厘米</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Rapport de reduction:</td>
+		<td>
+			<select name="f4" size="1">		
+			<!-- TMPL_IF name="f4a" -->
+				<option value="a" SELECTED>低缩率</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">低缩率</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4b" -->
+				<option value="b" SELECTED>正常缩率（16-30 倍）</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">正常缩率（16-30 倍）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4c" -->
+				<option value="c" SELECTED>高缩率（31-60 倍）</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">高缩率（31-60 倍）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4d" -->
+				<option value="d" SELECTED>极高缩率（61-90 倍）</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">极高缩率（61-90 倍）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4e" -->
+				<option value="e" SELECTED>超高缩率（91 倍- ）</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">超高缩率（91 倍- ）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4v" -->
+				<option value="v" SELECTED>各式各样的</option>
+			<!-- TMPL_ELSE -->
+				<option value="v">各式各样的</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+    <tr>
+                <td>Rapport de reduction specifique</td>
+                <td><input type="text" name="f5" maxlength=3 size=4 
+value="<!-- TMPL_VAR name="f5" -->"></td>
+        </tr>
+
+		</td></tr>
+	<tr>
+		<td>色彩：</td>
+		<td>
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>单色</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">单色</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6b" -->
+				<option value="b" SELECTED>色彩</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">色彩</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6v" -->
+				<option value="v" SELECTED>各式各样的</option>
+			<!-- TMPL_ELSE -->
+				<option value="v">各式各样的</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>电影片感光乳剂性质：</td>
+		<td>
+			<select name="f7" size="1">
+			<!-- TMPL_IF name="f7a" -->
+				<option value="a" SELECTED>Sel d'argent</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Sel d'argent</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7b" -->
+				<option value="b" SELECTED>重氮</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">重氮</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7c" -->
+				<option value="c" SELECTED>重泡</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">重泡</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7d" -->
+				<option value="d" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">不详</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7u" -->
+				<option value="u" SELECTED>混合感光乳剂</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">混合感光乳剂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7x" -->
+				<option value="x" SELECTED>如不适用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不适用</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>生成（副本）</td>
+		<td>
+			<select name="f8" size="1">
+			<!-- TMPL_IF name="f8a" -->
+				<option value="a" SELECTED>Premiere generation (master)</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Premiere generation (master)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8b" -->
+				<option value="b" SELECTED>出版、印刷</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">出版、印刷</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8c" -->
+				<option value="c" SELECTED>发行片</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">发行片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8v" -->
+				<option value="v" SELECTED>混合</option>
+			<!-- TMPL_ELSE -->
+				<option value="v">混合</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Support de film:</td>
+		<td>
+			<select name="f9" size="1">
+			<!-- TMPL_IF name="f9a" -->
+				<option value="a" SELECTED>Support de securite</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Support de securite</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9b" -->
+				<option value="b" SELECTED>非安全胶卷基底</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">非安全胶卷基底</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9x" -->
+				<option value="x" SELECTED>如不适用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不适用</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="完成" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+	    document.f_pop.f5.value=document.f_pop.f5.value+'   ';
+	    document.f_pop.f5.value=document.f_pop.f5.value.substring(0,3);
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value =  document.f_pop.f1.value+document.f_pop.f2.value+document.f_pop.f3.value+document.f_pop.f4.value+document.f_pop.f5.value+document.f_pop.f6.value+document.f_pop.f7.value+document.f_pop.f8.value+document.f_pop.f9.value ;
+	    window.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

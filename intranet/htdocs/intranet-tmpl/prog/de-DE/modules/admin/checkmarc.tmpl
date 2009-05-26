@@ -1,0 +1,245 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration &rsaquo; Check MARC-Struktur
+<!-- TMPL_IF name="total" --> :<!-- TMPL_VAR name="total" --> Fehler gefunden<!-- TMPL_ELSE --> : Konfiguration OK!<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo; MARC Check
+<!-- TMPL_IF name="total" -->: <!-- TMPL_VAR name="total" --> Fehler gefunden<!-- TMPL_ELSE --> : Konfiguration OK!<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>MARC Test bibliographisches Framework</h1>
+<table>
+    <tr>
+        <th>Test</th>
+        <th>Ergebnis</th>
+    </tr>
+<!-- -->
+<!-- TMPL_IF name="itemnum" -->
+    <tr>
+        <td>Exemplarnummer</td>
+        <td><ul><li>Das Feld itemnum MUSS gemapped sein </li>
+            <li>Das entsprechende Unterfeld MUSS dabei sein mit dem -1 (ingorieren) Reiter</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>itemnum: Das feld itemnumber ist auf ein Feld im tab -1 gemapped</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemfields" -->
+    <tr>
+        <td>Exemplarfelder</td>
+        <td>ALLE Exemplar-Felder MÜSSEN:<br />
+            <ul><li>verbunden werden mit dem gleichen Feld, </li>
+            <li>und sie müssen alle im 10 (Exemplare) Tab sein</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Alle Exemplare sin im selben TAg und im Exemplar-Reiter</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+    <!-- TMPL_IF NAME="itemtags" -->
+        <tr>
+            <td>Exemplar Feld</td>
+            <td>Merh als 1 MARC-Tag ist auf den Exemplare Reiter (10) verwiesen: <!-- TMPL_VAR name="itemtags" --></td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>Nur 1 MARC Feld mit den Exemplaren verbunden</td>
+        </tr>
+    <!-- /TMPL_IF -->
+    <!--  -->
+<!-- TMPL_IF name="itemtype" -->
+    <tr>
+        <td>Medientyp nicht zugeordnet</td>
+        <td>Das biblioitems.itemtype Feld MUSS :<br />
+            <ul><li>ist auf ein MARC-Teilfeld gemapped </li>
+            <li>das dazugehörige Unterfeld MUSS autorised_value=itemtype haben</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>biblioitems.itemtype definiert</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branch" -->
+    <tr>
+        <td>Heimatzweigstelle NICHT bekannt</td>
+        <td>Das items.homebranch Feld MUSS :<br />
+            <ul><li>ist auf ein MARC-Teilfeld gemapped</li>
+            <li>das dazugehörige Unterfeld MUSS den autorisierten Wert=Abteilungen haben</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Heimatzweigstelle definiert</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="holdingbranch" -->
+    <tr>
+        <td>haltende Zweigstelle NICHT bekannt</td>
+        <td>Das items.holdingbranch Feld MUSS :<br />
+            <ul><li>ist auf ein MARC-Teilfeld gemapped </li>
+            <li>das dazugehörige Unterfeld MUSS den autorisierten Wert=Abteilungen haben</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>haltende Zweistelle definiert</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemtypes_empty" -->
+    <tr>
+        <td>Exemplar nicht definiert</td>
+        <td>mindestens 1 Medientyp muß definiert sein</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>mindestens 1 Medientyp definiert</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branches_empty" -->
+    <tr>
+        <td>Zweigstelle nicht definiert</td>
+        <td>mindestens 1 Zweigstelle muß definiert werden</td>
+    </tr>
+<!-- TMPL_ELSE --> 
+    <tr>
+        <td>OK</td>             
+        <td>mindestens 1 Zweigstelle definiert</td>
+    </tr>                                       
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="biblionumber" -->
+    <tr>
+        <td>Biblio und Biblionummer</td>
+        <td>The biblio.biblionumber and biblioitems.biblioitemnumber fields be mapped to a MARC subfield,</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>biblionumber und biblioitemnumber korrekt zugeordnet  \t</td>
+    </tr>
+<!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="frameworknull" -->
+        <tr>
+            <td>Vorlagenwerte</td>
+            <td>es gib einen null-Wert in eimen Framework-Code. Überprüfen Sie die folgenden Tabellen<br />
+                <li>select * from marc_subfield_structure where frameworkcode is NULL</li>
+                <li>select * from marc_tag_structure where frameworkcode is NULL</li>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>kein NULL Wert im Framworkcode</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="inconsistent_tabs" -->
+        <tr>
+            <td style="vertical-align:top;">Unterfelder sind nicht in den gleichen Tabs</td>
+            <td>Nicht alle Unterfelder der folgenden Felder befinden sich im selben Tab (oder sind als 'ignoriert' markiert)
+                <table>
+                    <tr>
+                        <th>Code</th>
+                        <th>Beschreibung</th>
+                        <th>Tag</th>
+                        <th>Verwendete Tabs</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="tab_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>Standard Framework</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tabs" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>alle Unterfelder jeden Feldes sind im selben Tab (oder werden ignoriert)</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="invalid_authtypecodes" -->
+        <tr>
+            <td style="vertical-align:top;">ungültige Normdatentypen</td>
+            <td>Nicht alle Normsatztypen, die im Framework referenziert werden, sind definiert.
+                <table>
+                    <tr>
+                        <th>Framework-Code</th>
+                        <th>Beschreibung des Frameworks</th>
+                        <th>Tag</th>
+                        <th>Unterfeld</th>
+                        <th>Ungültiger Normdatentyp</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="authtypecode_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>Standard Framework</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+                            <td><!-- TMPL_VAR NAME="authtypecode" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>Alle Normsatztypen die in den Frameworks verwendet werden, sind definiert.</td>
+        </tr>
+    <!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="total" -->
+    <tr>
+        <td>GESAMT</td>
+        <td>You have <!-- TMPL_VAR name="total" --> error(s) in your MARC configuration. Please fix them before using Koha</td>
+    </tr>
+</table>
+<!-- TMPL_ELSE -->
+    </table>
+        <p><b>Konfiguration OK. Sie haben keine Fehler in Ihren MARC-Tabellen</b></p>
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

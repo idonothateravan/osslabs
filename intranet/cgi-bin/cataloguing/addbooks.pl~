@@ -1,0 +1,357 @@
+#!/usr/bin/perl
+# Copyright 2000-2002 Katipo Communications
+#
+# This file is part of Koha.
+#
+# Koha is free software; you can redistribute it and/or modify it under the
+# terms of the GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the License, or (at your option) any later
+# version.
+#
+# Koha is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Koha; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+# Suite 330, Boston, MA  02111-1307 USA
+
+=head1 cataloguing:addbooks.pl
+
+	TODO
+
+=cut
+
+## Load Koha modules
+use strict;
+use CGI qw('-no_undef_params);
+use C4::Auth;
+use C4::Biblio;
+use C4::Breeding;
+use C4::Output;
+use C4::Koha;
+use C4::Search;
+
+# Follwoing added by satya to make addbooks.pl to look similar to search.pl
+use C4::Context;
+use C4::Branch; # GetBranches
+use POSIX qw(ceil floor);
+use C4::Languages qw(getAllLanguages);
+
+#create a new CGI object
+my $input = new CGI;
+
+my $success = $input->param('biblioitem');
+my $query   = $input->param('q');
+my @value   = $input->param('value');
+my $page    = $input->param('page') || 1;
+my $results_per_page = 20;
+
+my ($template_name, $borrowernumber, $cookie);
+#my ($template,$borrowernumber,$cookie);
+
+my ( $template, $loggedinuser, $cookie ) = get_template_and_user(
+    {
+        template_name   => "cataloguing/addbooks.tmpl",
+	query		=> $input,
+        type            => "intranet",
+        authnotrequired => 0,
+        flagsrequired   => { editcatalogue => 1 },
+        debug           => 1,
+    }
+);
+
+# get framework list
+my $frameworks = getframeworks;
+my @frameworkcodeloop;
+foreach my $thisframeworkcode ( keys %$frameworks ) {
+    my %row = (
+        value         => $thisframeworkcode,
+        frameworktext => $frameworks->{$thisframeworkcode}->{'frameworktext'},
+    );
+    push @frameworkcodeloop, \%row;
+}
+
+#/************************************************************************************************************************************/
+
+# load the branches
+my $branches = GetBranches();
+my @branch_loop;
+
+for my $branch_hash (sort { $branches->{$a}->{branchname} cmp $branches->{$b}->{branchname} } keys %$branches) {
+    push @branch_loop, {value => "$branch_hash" , branchname => $branches->{$branch_hash}->{'branchname'}, };
+}
+
+my $categories = GetBranchCategories(undef,'searchdomain');
+
+$template->param(branchloop => \@branch_loop, searchdomainloop => $categories);
+
+# load the Type stuff
+# load the Type stuff
+my $itemtypes = GetItemTypes;
+# the index parameter is different for item-level itemtypes
+my $itype_or_itemtype = (C4::Context->preference("item-level_itypes"))?'itype':'itemtype';
+my @itemtypesloop;
+my $selected=1;
+my $cnt;
+my $imgdir = getitemtypeimagesrc('intranet');
+my $advanced_search_types = C4::Context->preference("AdvancedSearchTypes");
+
+if (!$advanced_search_types or $advanced_search_types eq 'itemtypes') {                                                                 foreach my $thisitemtype ( sort {$itemtypes->{$a}->{'description'} cmp $itemtypes->{$b}->{'description'} } keys %$itemtypes ) {
+    my %row =(  number=>$cnt++,
+                imageurl=> $itemtypes->{$thisitemtype}->{'imageurl'}?($imgdir."/".$itemtypes->{$thisitemtype}->{'imageurl'}):"",
+                ccl => $itype_or_itemtype,
+                code => $thisitemtype,
+                selected => $selected,
+                description => $itemtypes->{$thisitemtype}->{'description'},
+                count5 => $cnt % 4,
+            );
+        $selected = 0 if ($selected) ;
+        push @itemtypesloop, \%row;
+    }
+    $template->param(itemtypeloop => \@itemtypesloop);
+} else {
+    my $advsearchtypes = GetAuthorisedValues($advanced_search_types);
+    for my $thisitemtype (@$advsearchtypes) {
+        my %row =(
+                number=>$cnt++,
+                imageurl=> $thisitemtype->{'imageurl'}?($imgdir."/".$thisitemtype->{'imageurl'}):"",
+                ccl => $advanced_search_types,
+                code => $thisitemtype->{authorised_value},
+                selected => $selected,
+                description => $thisitemtype->{'lib'},
+                count5 => $cnt % 4,
+            );
+        push @itemtypesloop, \%row;
+    }
+    $template->param(itemtypeloop => \@itemtypesloop);
+}
+
+### OK, if we're this far, we're performing a search, not just loading the advanced search page
+
+# Fetch the paramater list as a hash in scalar context:
+#  * returns paramater list as tied hash ref
+#  * we can edit the values by changing the key
+#  * multivalued CGI paramaters are returned as a packaged string separated by "\0" (null)
+my $params = $input->Vars;
+
+# Params that can have more than one value
+# sort by is used to sort the query
+# in theory can have more than one but generally there's just one
+my @sort_by;
+my $default_sort_by = C4::Context->preference('defaultSortField')."_".C4::Context->preference('defaultSortOrder') 
+    if (C4::Context->preference('defaultSortField') && C4::Context->preference('defaultSortOrder'));
+
+@sort_by = split("\0",$params->{'sort_by'}) if $params->{'sort_by'};
+$sort_by[0] = $default_sort_by unless $sort_by[0];
+foreach my $sort (@sort_by) {
+    $template->param($sort => 1);
+}
+$template->param('sort_by' => $sort_by[0]);
+
+# Use the servers defined, or just search our local catalog(default)
+my @servers;
+@servers = split("\0",$params->{'server'}) if $params->{'server'};
+unless (@servers) {
+    #FIXME: this should be handled using Context.pm
+    @servers = ("biblioserver");
+    # @servers = C4::Context->config("biblioserver");
+}
+# operators include boolean and proximity operators and are used
+# to evaluate multiple operands
+my @operators;
+@operators = split("\0",$params->{'op'}) if $params->{'op'};
+
+# indexes are query qualifiers, like 'title', 'author', etc. They
+# can be single or multiple parameters separated by comma: kw,right-Truncation 
+my @indexes;
+@indexes = split("\0",$params->{'idx'});
+
+# if a simple index (only one)  display the index used in the top search box
+if ($indexes[0] && !$indexes[1]) {
+    $template->param("ms_".$indexes[0] => 1);}
+
+
+# an operand can be a single term, a phrase, or a complete ccl query
+my @operands;
+@operands = split("\0",$params->{'q'}) if $params->{'q'};
+
+# limits are use to limit to results to a pre-defined category such as branch or language
+my @limits;
+@limits = split("\0",$params->{'limit'}) if $params->{'limit'};
+
+if($params->{'multibranchlimit'}) {
+push @limits, join(" or ", map { "branch: $_ "}  @{GetBranchesInCategory($params->{'multibranchlimit'})}) ;
+}
+
+my $available;
+foreach my $limit(@limits) {
+    if ($limit =~/available/) {
+        $available = 1;
+    }
+}
+$template->param(available => $available);
+
+# append year limits if they exist
+my $limit_yr;
+my $limit_yr_value;
+if ($params->{'limit-yr'}) {
+    if ($params->{'limit-yr'} =~ /\d{4}-\d{4}/) {
+        my ($yr1,$yr2) = split(/-/, $params->{'limit-yr'});
+        $limit_yr = "yr,st-numeric,ge=$yr1 and yr,st-numeric,le=$yr2";
+        $limit_yr_value = "$yr1-$yr2";
+    }
+    elsif ($params->{'limit-yr'} =~ /\d{4}/) {
+        $limit_yr = "yr,st-numeric=$params->{'limit-yr'}";
+        $limit_yr_value = $params->{'limit-yr'};
+    }
+    push @limits,$limit_yr;
+    #FIXME: Should return a error to the user, incorect date format specified
+}
+
+# Params that can only have one value
+my $scan = $params->{'scan'};
+my $count = C4::Context->preference('numSearchResults') || 20;
+my $results_per_page = $params->{'count'} || $count;
+my $offset = $params->{'offset'} || 0;
+my $page = $input->param('page') || 1;
+#my $offset = ($page-1)*$results_per_page;
+my $hits;
+my $expanded_facet = $params->{'expand'};
+
+# Define some global variables
+my ( $error,$query,$simple_query,$query_cgi,$query_desc,$limit,$limit_cgi,$limit_desc,$stopwords_removed,$query_type);
+
+my @results;
+
+## I. BUILD THE QUERY
+( $error,$query,$simple_query,$query_cgi,$query_desc,$limit,$limit_cgi,$limit_desc,$stopwords_removed,$query_type) = buildQuery(\@operators,\@operands,\@indexes,\@limits,\@sort_by,$scan);
+
+## parse the query_cgi string and put it into a form suitable for <input>s
+my @query_inputs;
+my $scan_index_to_use;
+
+for my $this_cgi ( split('&',$query_cgi) ) {
+    next unless $this_cgi;
+    $this_cgi =~ m/(.*=)(.*)/;
+    my $input_name = $1;
+    my $input_value = $2;
+    $input_name =~ s/=$//;
+    push @query_inputs, { input_name => $input_name, input_value => $input_value };
+	if ($input_name eq 'idx') {
+    	$scan_index_to_use = $input_value; # unless $scan_index_to_use;
+	}
+}
+$template->param ( QUERY_INPUTS => \@query_inputs,
+                   scan_index_to_use => $scan_index_to_use );
+
+## parse the limit_cgi string and put it into a form suitable for <input>s
+my @limit_inputs;
+for my $this_cgi ( split('&',$limit_cgi) ) {
+    next unless $this_cgi;
+    # handle special case limit-yr
+    if ($this_cgi =~ /yr,st-numeric/) {
+        push @limit_inputs, { input_name => 'limit-yr', input_value => $limit_yr_value };   
+        next;
+    }
+    $this_cgi =~ m/(.*=)(.*)/;
+    my $input_name = $1;
+    my $input_value = $2;
+    $input_name =~ s/=$//;
+    push @limit_inputs, { input_name => $input_name, input_value => $input_value };
+}
+$template->param ( LIMIT_INPUTS => \@limit_inputs );
+
+## II. DO THE SEARCH AND GET THE RESULTS
+my $total; # the total results for the whole set
+my $facets; # this object stores the faceted results that display on the left-hand of the results page
+my @results_array;
+my $results_hashref;
+
+#/************************************************************************************************************************************/
+
+# Searching the catalog.
+if ($query) {
+
+    $query=~s/yr(:|=)\s*([\d]{1,4})-([\d]{1,4})/(yr>=$2 and yr<=$3)/g;
+    $simple_query=~s/yr\s*(:|=)([\d]{1,4})-([\d]{1,4})/(yr>=$2 and yr<=$3)/g;
+    warn $query; 
+
+    # find results
+#    my ( $error, $marcresults, $total_hits ) = SimpleSearch($query, $results_per_page * ($page - 1), $results_per_page);
+    my ($error, $results_hashref, $facets) = getRecords($query,$simple_query,\@sort_by,\@servers,$results_per_page,$offset,$expanded_facet,$branches,$query_type,$scan);
+
+    if ( defined $error ) {
+        $template->param( error => $error );
+        warn "error: " . $error;
+        output_html_with_http_headers $input, $cookie, $template->output;
+        exit;
+    }
+
+    for (my $i=0;$i<@servers;$i++) 
+    {
+    	my $server = $servers[$i];
+	if ($server =~/biblioserver/) 
+    	{
+	    $hits = $results_hashref->{$server}->{"hits"};
+    	    my $page = $input->param('page') || 0;
+    	    my @newresults = searchResults( $query_desc,$hits,$results_per_page,$offset,$scan,@{$results_hashref->{$server}->{"RECORDS"}});
+    	    $total = $total + $results_hashref->{$server}->{"hits"};
+ 	}
+    }
+
+    # format output
+#    my $total = scalar @$marcresults;
+#    my @newresults = searchResults( $query, $total, $results_per_page, $page-1, 0, @$marcresults );    
+    $template->param(
+        total          => $total_hits,
+        query          => $query,
+        resultsloop    => \@newresults,
+	pagination_bar => pagination_bar( "/cgi-bin/koha/cataloguing/addbooks.pl?q=$query&", getnbpages( $total_hits, $results_per_page ), $page, 'page' ),
+    );
+}
+
+
+# fill with books in breeding farm
+my $toggle = 0;
+my ( $title, $isbn );
+
+my $query_b   = $input->param('q');
+
+# fill isbn or title, depending on what has been entered
+#u must do check on isbn because u can find number in beginning of title
+#check is on isbn legnth 13 for new isbn and 10 for old isbn
+my $querylength = length($query_b);
+if ( $query_b =~ /\d/ and ( $querylength eq 13 or $querylength eq 10 ) ) {
+    $isbn = $query_b;
+}
+$title = $query_b unless $isbn;
+my ( $countbr, @resultsbr ) = BreedingSearch( $title, $isbn ) if $query_b;
+my @breeding_loop = ();
+for ( my $i = 0 ; $i <= $#resultsbr ; $i++ ) {
+    my %row_data;
+    if ( $i % 2 ) {
+        $toggle = 0;
+    }
+    else {
+        $toggle = 1;
+    }
+    $row_data{toggle} = $toggle;
+    $row_data{id}     = $resultsbr[$i]->{'id'};
+    $row_data{isbn}   = $resultsbr[$i]->{'isbn'};
+    $row_data{file}   = $resultsbr[$i]->{'file'};
+    $row_data{title}  = $resultsbr[$i]->{'title'};
+    $row_data{author} = $resultsbr[$i]->{'author'};
+    push( @breeding_loop, \%row_data );
+}
+
+$template->param(
+    frameworkcodeloop => \@frameworkcodeloop,
+    breeding_count    => $countbr,
+    breeding_loop     => \@breeding_loop,
+);
+
+output_html_with_http_headers $input, $cookie, $template->output;
+# VI. BUILD THE TEMPLATE
+#output_html_with_http_headers $input, $cookie, $template->output;
+

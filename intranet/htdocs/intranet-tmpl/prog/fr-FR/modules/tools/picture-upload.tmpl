@@ -1,0 +1,128 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Outils &rsaquo; Charger des photos d'adhérents</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+ $(document).ready(function() {
+	$("#zipfile").click(function(){
+		$("#cardnum").hide();
+	});
+	$("#image").click(function(){
+		$("#cardnum").show();
+	});
+});
+</script>
+</head>
+<body>
+
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="patron-search.inc"-->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl"> Accueil </a> &rsaquo;<a href="/cgi-bin/koha/tools/tools-home.pl">Outils</a> &rsaquo; Import de photos d'adhérents </div>
+
+<div id="doc3" class="yui-t2">
+    <div id="bd">
+        <div id="yui-main">
+<!-- TMPL_IF name="TOTAL" -->
+    <div class="yui-b">
+        <div class="yui-g">
+            <div class="yui-u first">
+            <!-- TMPL_IF name="ERRORS" -->
+				<!-- TMPL_IF name = "TCOUNTS" -->
+					<div class="dialog alert">
+					<h3>Photos des adhérents téléchargées avec quelques erreurs</h3>
+				<!-- TMPL_ELSE -->
+					<div class="dialog alert">
+					<h3>Le chargement des photos des adhérents a échoué</h3>
+				<!-- /TMPL_IF -->
+            <!-- TMPL_ELSE -->
+                <div class="dialog message">
+                <h3>Chargement des photos des adhérents réussi</h3>
+            <!-- /TMPL_IF -->
+	        <ul class="data">
+	            <li>Décompression terminée</li>
+                  <li><!-- TMPL_VAR NAME ="TOTAL" --> répertoires scannés.</li>
+                    <li><!-- TMPL_VAR NAME="HANDLED" --> répertoires traités.</li>
+                </ul>
+                <!-- TMPL_LOOP name="COUNTS" -->
+	            <ul class="data">
+                        <!-- TMPL_IF name = "TCOUNTS" --><li><!-- TMPL_VAR name="TCOUNTS" --> image(s) déplacée(s) dans la base :</li><!-- /TMPL_IF -->
+                        <!-- TMPL_LOOP name="filenames" -->
+                            <li><!-- TMPL_VAR name="source" --> - Numéro de carte : <!-- TMPL_VAR name="cardnumber" -->
+                                    <!-- TMPL_IF NAME="filerrors" --><br /> <b>ALERTE</b> Cette image n'a <i>pas</i> été importée parce que  
+                                    <!-- TMPL_LOOP NAME="filerrors" -->
+                                        <!-- TMPL_IF NAME="DBERR" -->La base de données a renvoyé une erreur. Merci de voir dans les logs Koha pour plus de détails.</li>
+                                        <!-- TMPL_ELSIF NAME="IMGEXISTS" -->cet adhérent n'existe pas dans la base.</li>
+                                        <!-- TMPL_ELSIF NAME="MIMERR" -->Le format de l'image est inconnu.</li>
+                                        <!-- TMPL_ELSIF NAME="CORERR" -->le fichier image est corrompu.</li>
+                                        <!-- TMPL_ELSIF NAME="OPNERR" -->Koha n'a pas pu lire l'image</li>
+                                        <!-- TMPL_ELSIF NAME="OVRSIZ" -->le fichier image est trop grand.</li>
+                                        <!-- TMPL_ELSIF NAME="CRDFIL" -->Le <!-- TMPL_VAR NAME="CRDFIL" --> est absent.</li>
+                                        <!-- TMPL_ELSE -->Erreur inconnue. Merci de vous référer aux logs pour plus de détails.</li><!-- /TMPL_IF -->
+                                    <!-- /TMPL_LOOP -->
+                                        <!--TMPL_ELSE --> Import réussi</li>
+                                    <!-- /TMPL_IF -->
+                        <!-- /TMPL_LOOP -->
+                        </ul>
+                <!-- /TMPL_LOOP -->
+
+				</div>
+				<!-- TMPL_IF name = "borrowernumber" -->
+					<a id="member" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR name = "borrowernumber" -->">Retour au détail de l'adhérent</a>
+				<!-- TMPL_ELSE -->
+					<a id="uploadmore" href="/cgi-bin/koha/tools/picture-upload.pl">Télécharger d'autres images</a><a id="doneupload" href="/cgi-bin/koha/tools/tools-home.pl">Retour au menu outils</a>
+            	<!-- /TMPL_IF -->
+            </div>
+<!-- TMPL_ELSE -->
+    <div class="yui-b">
+        <div class="yui-g">
+            <div class="yui-u first">
+                <h1>Chargement de photos d'adhérents</h1>
+                <!-- TMPL_IF name="ERRORS" -->
+                <div class="dialog alert">
+                    <!-- TMPL_LOOP name="ERRORS" -->
+                        <!-- TMPL_IF name="NOTZIP" --><li><b>Le fichier à importer ne semble pas être un fichier .zip, son extension est erronée.</b></li>
+                        <!-- TMPL_ELSIF name="NOWRITETEMP" --><li><b>Ce script ne peut pas enregistrer le fichier dans le répertoire temporaire.</b></li>
+                        <!-- TMPL_ELSIF name="EMPTYUPLOAD" --><li><b>Le fichier à importer semble vide.</b></li>
+                        <!-- TMPL_ELSIF name="OPNLINK" --><li><b>Impossible d'ouvrir <!-- TMPL_VAR NAME="OPNLINK" --> en lecture.<br />Merci de vérifier qu'il existe.</b></li>
+                        <!-- TMPL_ELSIF name="OPNIMG" --><li><b>Impossible d'ouvrir <!-- TMPL_VAR NAME="OPNIMG" --> en lecture.<br />Merci de vérifier qu'il existe.</b></li>
+                        <!-- TMPL_ELSIF name="DELERR" --><li><b>Délimiteur non reconnu ou manquant.<br />Merci de vérifier que vous utilisez soit une simple quote, soit une tabulation.</b></li>
+                        <!-- TMPL_ELSIF name="UZIPFAIL" --><li><b><!-- TMPL_VAR name="UZIPFAIL" --> impossible à décompresser<br />Merci de vérifier l'intégrité de votre archive zip.</b></li>
+                        <!-- TMPL_ELSE --><li><b><!-- TMPL_VAR name ="CORERR" --> Une erreur inconnue s'est produite.<br />Merci de voir le log des erreurs pour plus de détails.</b></li><!-- /TMPL_IF -->
+                    <!-- /TMPL_LOOP -->
+                </div>
+                <!-- /TMPL_IF -->
+	        <form method="post" action="/cgi-bin/koha/tools/picture-upload.pl" enctype="multipart/form-data">
+	            <fieldset class="brief">
+			 <div class="hint"><B>NOTE :</b> Seuls les formats PNG, GIF, JPEG et XPM sont acceptés.</div>
+                        <ol class="radio">
+                            <li class="radio">
+                                <label for="zipfile"><input type="radio" id="zipfile" name="filetype" value="zip" checked="checked" /> fichier compressé</label></li>
+                                <li>
+                                <label for="image">
+								<!-- TMPL_IF EXPR="filetype eq 'image'" --><input type="radio" id="image" name="filetype" value="image" checked="checked" /><!-- TMPL_ELSE --><input type="radio" id="image" name="filetype" value="image" /><!-- /TMPL_IF -->
+								 Fichier image</label>
+	                <ol>
+                            <li>
+                                <label for="uploadfile">Sélectionnez le fichier à importer : </label><input type="file" id="uploadfile" name="uploadfile" />
+                                <!-- TMPL_IF EXPR="filetype eq 'image'" --><span id="cardnum"><!-- TMPL_ELSE --><span id="cardnum" style="display: none"><!-- /TMPL_IF --><label for="cardnumber">Entrer le n° de carte d'adhérent : </label><input type="text" id="cardnumber" name="cardnumber" value="<!-- TMPL_VAR NAME="cardnumber" -->" size="15" /></span>
+                            </li>
+    	                </ol>
+					</li></ol>
+	            </fieldset>
+                    <fieldset class="action">
+                        <input type="hidden" name="op" value="Upload" />
+                        <input type="submit" value="Télécharger" class="submit">
+						<a href="/cgi-bin/koha/tools/tools-home.pl" class="cancel">Annuler</a>
+                    </fieldset>
+                </form>
+	
+            </div>	
+<!-- /TMPL_IF -->
+        </div>
+    </div>
+</div>
+<div class="yui-b noprint">
+    <!-- TMPL_INCLUDE NAME="tools-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

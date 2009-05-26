@@ -1,0 +1,332 @@
+<html>
+<head>
+<title>Constructor del l&iacute;der</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_leader_computerfile.pl">
+<table>
+	<tr>
+		<td>1-4 Tama&nilde;o del registro</td>
+		<td>(auto-relleno)</td>
+	</tr>
+	<tr>
+		<td>%- Estado del registro</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5a" -->
+				<option value=" " SELECTED>a- Aumento en nivel de codificaci&oacute;n</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">a- Aumento en nivel de codificaci&oacute;n</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>c- corregido  o revisado</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- corregido  o revisado</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>d- Borrado</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- Borrado</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5n" -->
+				<option value="n" SELECTED>n- Nuevo</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">n- Nuevo</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5p" -->
+				<option value="p" SELECTED> p- Aumento en el nivel de codificaci&oacute;n desde la prepublicaci&oacute;n</option>
+			<!-- TMPL_ELSE -->
+				<option value="p"> p- Aumento en el nivel de codificaci&oacute;n desde la prepublicaci&oacute;n</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>6- Tipo de registro</td>
+		<td>
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>a- Material del lenguaje (monograf&iacute;a)</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">a- Material del lenguaje (monograf&iacute;a)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" SELECTED>c- Notaci&oacute;n musical</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- Notaci&oacute;n musical</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6d" -->
+				<option value="d" SELECTED>d- Manuscrito de notaci&oacute;n musical</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- Manuscrito de notaci&oacute;n musical</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6e" -->
+				<option value="e" SELECTED>e- Material cartogr&aacute;fico</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">e- Material cartogr&aacute;fico</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6f" -->
+				<option value="f" SELECTED>f- Material cartogr&aacute;fico manuscrito</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">f- Material cartogr&aacute;fico manuscrito</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6g" -->
+				<option value="g" SELECTED>g - Medio proyectado</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">g - Medio proyectado</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6i" -->
+				<option value="i" SELECTED>i - Grabaci&oacute;n de sonidos no musicales</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">i - Grabaci&oacute;n de sonidos no musicales</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6j" -->
+				<option value="j" SELECTED>j - Grabaci&oacute;n de sonidos musicales</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">j - Grabaci&oacute;n de sonidos musicales</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6k" -->
+				<option value="k" SELECTED>k - Gr&aacute;fico no projectable de dos dimensiones</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">k - Gr&aacute;fico no projectable de dos dimensiones</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6m" -->
+				<option value="m" SELECTED>m - Fichero electr&oacute;nico</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">m - Fichero electr&oacute;nico</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6o" -->
+				<option value="o" SELECTED>o - Kit</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">o - Kit</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6r" -->
+				<option value="r" SELECTED>r - Artefacto tridimensional u objeto natural</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">r - Artefacto tridimensional u objeto natural</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6t" -->
+				<option value="t" SELECTED>t - Material de idioma manuscrito</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">t - Material de idioma manuscrito</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>7- Nivel bibliogr&aacute;fico</td>
+		<td>
+			<select name="f7" size="1">
+				<!-- TMPL_IF name="f7a" -->
+					<option value="a" SELECTED>a- Componente monofr&aacute;fica</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- Componente monofr&aacute;fica</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7b" -->
+					<option value="b" SELECTED>b- Componente serial</option>
+				<!-- TMPL_ELSE -->
+					<option value="b">a- Componente serial</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7c" -->
+					<option value="c" SELECTED>c- Colecci&oacute;n</option>
+				<!-- TMPL_ELSE -->
+					<option value="c">c- Colecci&oacute;n</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7d" -->
+					<option value="d" SELECTED>d- Subunidad</option>
+				<!-- TMPL_ELSE -->
+					<option value="d">d- Subunidad</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7i" -->
+					<option value="i" SELECTED>i- Recurso que integraci&oacute;n</option>
+				<!-- TMPL_ELSE -->
+					<option value="i">i- Recurso que integraci&oacute;n</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7m" -->
+					<option value="m" SELECTED>m- Monograf&iacute;a/Art&iacute;culo</option>
+				<!-- TMPL_ELSE -->
+					<option value="m">m- Monograf&iacute;a/Art&iacute;culo</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7s" -->
+					<option value="s" SELECTED>s- Serie</option>
+				<!-- TMPL_ELSE -->
+					<option value="s">s- Serie</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>8 - Nivel jer&aacute;rquico</td>
+		<td>
+			<select name="f8" size="1">
+				<!-- TMPL_IF name="f8 " -->
+					<option value=" " SELECTED>Sin tipo espec&iacute;fico</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">Sin tipo espec&iacute;fico</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f8a" -->
+					<option value="a" SELECTED>a- Archivado</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- Archivado</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>9- Codificaci&oacute;n</td>
+		<td>
+			<select name="f9" size="1">
+				<!-- TMPL_IF name="f9 " -->
+					<option value=" " SELECTED>MARC-8</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">MARC-8</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f9a" -->
+					<option value="a" SELECTED>a- UCS/Unicode</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- UCS/Unicode</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>10-16 indicador/subcampos/tama&ntilde;o</td>
+		<td>(auto-relleno)</td>
+	<tr>
+		<td>17- Codificaci&oacute;n</td>
+		<td>
+			<select name="f17" size="1">
+				<!-- TMPL_IF name="f17 " -->
+					<option value=" " SELECTED>nivel completo</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">Nivel completo</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f171" -->
+					<option value="1" SELECTED>1- Alto nivel, material no examinado</option>
+				<!-- TMPL_ELSE -->
+					<option value="1">1- Alto nivel, material no examinado</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f172" -->
+					<option value="2" SELECTED>2 - nivel Menos-que-lleno, material no examinado</option>
+				<!-- TMPL_ELSE -->
+					<option value="2">2 - nivel Menos-que-lleno, material no examinado</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f173" -->
+					<option value="3" SELECTED>3- Nivel abreviado</option>
+				<!-- TMPL_ELSE -->
+					<option value="3">3- Nivel abreviado</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f174" -->
+					<option value="4" SELECTED>4- Nivel de base</option>
+				<!-- TMPL_ELSE -->
+					<option value="4">4- Nivel de base</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f175" -->
+					<option value="5" SELECTED>5 - Nivel (preliminar) parcial</option>
+				<!-- TMPL_ELSE -->
+					<option value="5">5 - Nivel (preliminar) parcial</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f177" -->
+					<option value="7" SELECTED>7- Nivel minimo</option>
+				<!-- TMPL_ELSE -->
+					<option value="7">7- Nivel minimo</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f178" -->
+					<option value="8" SELECTED>8- Nivel de prepublicaci&oacute;n</option>
+				<!-- TMPL_ELSE -->
+					<option value="8">8- Nivel de prepublicaci&oacute;n</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f17u" -->
+					<option value="u" SELECTED>u - Desconocido</option>
+				<!-- TMPL_ELSE -->
+					<option value="u">u - Desconocido</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f17z" -->
+					<option value="z" SELECTED>z- No aplicable</option>
+				<!-- TMPL_ELSE -->
+					<option value="z">z- No aplicable Nivel completo</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>18 - Formulario de catalogaci&oacute;n descriptiva</td>
+		<td>
+			<select name="f18" size="1">
+				<!-- TMPL_IF name="f18 " -->
+					<option value=" " SELECTED>No-ISDB</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">No-ISDB</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18a" -->
+					<option value="a" SELECTED>a- AACR 2</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- AACR 2</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18i" -->
+					<option value="i" SELECTED>i- ISBD</option>
+				<!-- TMPL_ELSE -->
+					<option value="i">i- ISBD</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18u" -->
+					<option value="u" SELECTED>u- Desconocido</option>
+				<!-- TMPL_ELSE -->
+					<option value="u">u- Desconocido</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>19 - Requisito de registro enlazado</td>
+		<td>
+			<select name="f19" size="1">
+				<!-- TMPL_IF name="f19 " -->
+					<option value=" " SELECTED>Registro relacionado no requerido</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">Registro relacionado no requerido</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18r" -->
+					<option value="r" SELECTED>r- Registro requerido relaccionado</option>
+				<!-- TMPL_ELSE -->
+					<option value="r">r- Registro requerido relaccionado</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>20-24 entrada de mapa y longitudes</td>
+		<td>(auto-relleno)</td>
+	<tr>
+
+	<tr><td colspan=2><input type="submit" value="ACEPTAR"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value =
+            '     '+
+            document.f_pop.f5.value +
+			document.f_pop.f6.value+
+            document.f_pop.f7.value+
+			document.f_pop.f8.value+
+            document.f_pop.f9.value+
+            '22     '+
+			document.f_pop.f17.value+
+            document.f_pop.f18.value+
+            document.f_pop.f19.value+
+            '4500';
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

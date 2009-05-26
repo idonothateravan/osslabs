@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UNIMARC_Ersteller Feld 125b</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Typ des geschriebenen Textes: </td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1 " -->
+				<option value=" " SELECTED>Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>Poesie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Poesie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>Theater</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Theater</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>Roman</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Roman</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" SELECTED>Geschichte</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Geschichte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1e" -->
+				<option value="e" SELECTED>Vorträge, Reden</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Vorträge, Reden</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1f" -->
+				<option value="f" SELECTED>Anweisungen</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Anweisungen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1g" -->
+				<option value="g" SELECTED>Töne</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Töne</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1h" -->
+				<option value="h" SELECTED>Autobiographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Autobiographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1i" -->
+				<option value="i" SELECTED>Biographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Biographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1j" -->
+				<option value="j" SELECTED>Essais</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Essais</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1k" -->
+				<option value="k" SELECTED>Konferenzbericht</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Konferenzbericht</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1l" -->
+				<option value="l" SELECTED>Memoiren</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Memoiren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1m" -->
+				<option value="m" SELECTED>Wiederholung</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Wiederholung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1n" -->
+				<option value="n" SELECTED>Gespräche</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">Gespräche</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1o" -->
+				<option value="o" SELECTED>Werbetexte</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Werbetexte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1p" -->
+				<option value="p" SELECTED>Sprachkurse</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">Sprachkurse</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1q" -->
+				<option value="q" SELECTED>Kolloquiumsakten</option>
+			<!-- TMPL_ELSE -->
+				<option value="q">Kolloquiumsakten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1r" -->
+				<option value="r" SELECTED>Komödie</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Komödie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1s" -->
+				<option value="s" SELECTED>Volksmärchen</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Volksmärchen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1t" -->
+				<option value="t" SELECTED>Sakrale Texte</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">Sakrale Texte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" SELECTED>Andere literarische Texte</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere literarische Texte</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="OK"  onClick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value =  document.f_pop.f1.value;
+	    window.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>oha &rsaquo; 權威記錄 &rsaquo; 權威記錄查詢結果</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" >
+//<![CDATA[
+function confirm_deletion(id) {
+    
+    var is_confirmed = confirm('Are you sure you want to delete this authority?');
+    if (is_confirmed) {
+        window.location="authorities-home.pl?op=delete&amp;authid="+id;
+    }
+}
+function Help() {
+    newin=window.open("/cgi-bin/koha/help.pl","Koha Help",'width=600,height=600,toolbar=false,scrollbars=yes');
+}
+
+function addauthority() {
+    X = document.forms[0].authtype.value;
+    window.location="/cgi-bin/koha/authorities/authorities.pl?authtypecode="+X;
+}
+function searchauthority() {
+    X = document.forms[0].authtype2.value;
+    Y = document.forms[0].value.value;
+    window.location="/cgi-bin/koha/authorities/authorities-home.pl?op=do_search&type=intranet&authtypecode="+X+"&value="+Y+"&marclist=&and_or=and&excluding=&operator=contains";
+}
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="authorities-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/authorities/authorities-home.pl">Authorities</a> &rsaquo; Authority search results</div>
+
+<div id="doc" class="yui-t7">
+   
+   <div id="bd">
+    <div id="yui-main">
+    <div class="yui-g">
+    
+    <!-- TMPL_INCLUDE NAME="authorities-toolbar.inc" -->
+<h1>權威記錄查詢結果</h1>
+
+<!-- TMPL_IF name="total" -->
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+
+<p id="authorities_searchresultlist_current_page_info">
+  總共 <b><!-- TMPL_VAR NAME="total" --></b> 筆，第 <b><!-- TMPL_VAR NAME="from" --></b> 筆到 <b><!-- TMPL_VAR NAME="to" --></b> 筆。
+</p>
+
+<div id="authorities_searchresultlist_results">
+  <table>
+    <tr>
+      <th>摘要</th>
+<!-- TMPL_UNLESS name="isEDITORS" -->
+      <th>用在</th>
+<!-- /TMPL_UNLESS -->
+      <th>刪除</th>
+    </tr>
+<!-- TMPL_LOOP NAME="result" -->
+    <tr>
+      <td><a href="detail.pl?authid=<!-- TMPL_VAR NAME="authid" -->"><!-- TMPL_VAR NAME="summary" --></a></td>
+  <!-- TMPL_UNLESS name="isEDITORS" -->
+      <td>
+        <a href="../catalogue/search.pl?type=intranet&amp;op=do_search&amp;idx=an&amp;q=<!--TMPL_VAR Name="authid" -->" class="button"><!-- TMPL_VAR NAME="used" --> 筆書目記錄</a>
+      </td>
+  <!-- /TMPL_UNLESS -->
+      <td>
+  <!-- TMPL_UNLESS name="used" -->
+        <a href="javascript:confirm_deletion(<!-- TMPL_VAR NAME="authid" -->)">刪除</a>
+  <!-- /TMPL_UNLESS -->
+      </td>
+    </tr>
+<!-- /TMPL_LOOP -->
+  </table>
+</div>
+
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+
+<!-- TMPL_ELSE -->
+  找不到
+<!-- /TMPL_IF -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

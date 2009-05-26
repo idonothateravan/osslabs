@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立 UNIMARC 字段 124b</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Forme du document cartographique:</td>
+		<td>
+			<select name="f1" size="1">
+            
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>地图集</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">地图集</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>图表</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">图表</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>地球仪</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">地球仪</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" SELECTED>地图</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">地图</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1e" -->
+				<option value="e" SELECTED>模型</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">模型</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1f" -->
+				<option value="f" SELECTED>人物简介</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">人物简介</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1g" -->
+				<option value="g" SELECTED>Image de teledetection</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Image de teledetection</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1h" -->
+				<option value="h" SELECTED>杯</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">杯</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1i" -->
+				<option value="i" SELECTED>图</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">图</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1j" -->
+				<option value="j" SELECTED>计划</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">计划</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="完成" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value =  document.f_pop.f1.value;
+	    self.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

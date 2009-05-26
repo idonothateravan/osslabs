@@ -1,0 +1,1164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UNIMARC_Ersteller Feld 120</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Anzeiger für Farben:</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>Monochrom</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Monochrom</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>Polychrome</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Polychrome</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+		<td>Anzeiger für Indices:</td>
+		<td>
+			<select name="f2" size="1">
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" SELECTED>Index oder Liste, die Teil des kartographischen Dokuments ist</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Index oder Liste, die Teil des kartographischen Dokuments ist</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2b" -->
+				<option value="b" SELECTED>Index ou
+				liste accompagnant le document
+				cartographique sous forme de livret...</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Index ou liste
+				accompagnant le document
+				cartographique sous forme de livret...</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2c" -->
+				<option value="c" SELECTED>Index oder Liste vorhanden ohne Lokalisierung</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Index oder Liste vorhanden ohne Lokalisierung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2y" -->
+				<option value="y" SELECTED>Kein Index oder Namensliste</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Kein Index oder Namensliste</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+		<td>Anzeiger für Texte:</td>
+		<td>
+			<select name="f3" size="1">
+
+			<!-- TMPL_IF name="f3a" -->
+				<option value="a" SELECTED>Text über das Dokument selbst</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Text über das Dokument selbst</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3b" -->
+				<option value="b" SELECTED>Texte
+				accompagnant le document
+				cartographique sous forme de livret, opuscule</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Texte accompagnant
+				le document cartographique sous forme
+				de livret, opuscule</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3y" -->
+				<option value="y" SELECTED>Kein Text</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Kein Text</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+		<td>Code der Darstellung des Relielfs 1:</td>
+		<td>
+			<select name="f4" size="1">
+			<!-- TMPL_IF name="f4 " -->
+				<option value=" " SELECTED>Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4a" -->
+				<option value="a" SELECTED>Höhenlinien</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Höhenlinien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4b" -->
+				<option value="b" SELECTED>Relief durch Schummerung</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Relief durch Schummerung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4c" -->
+				<option value="c" SELECTED>Hypsometrische Färbungen - Schichtverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Hypsometrische Färbungen - Schichtverfahren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4d" -->
+				<option value="d" SELECTED>Schraffuren</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Schraffuren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4e" -->
+				<option value="e" SELECTED>Sonar-Bathymetrie</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Sonar-Bathymetrie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4f" -->
+				<option value="f" SELECTED>Bildlinien</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Bildlinien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4g" -->
+				<option value="g" SELECTED>Eckpunkte</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Eckpunkte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4h" -->
+				<option value="h" SELECTED>Andere Farbgebungsverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Andere Farbgebungsverfahren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4i" -->
+				<option value="i" SELECTED>Höhen- oder perspektivisches Bild</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Höhen- oder perspektivisches Bild</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4j" -->
+				<option value="j" SELECTED>Morphographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Morphographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4k" -->
+				<option value="k" SELECTED>Bathymetrie</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Bathymetrie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4z" -->
+				<option value="z"
+				SELECTED>Andere Reliefdarstellungsverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere Reliefdarstellungsverfahren</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr><tr>
+		<td>Code der Darstellung des Relielfs 2:</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5 " -->
+				<option value=" " SELECTED>Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5a" -->
+				<option value="a" SELECTED>Höhenlinien</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Höhenlinien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5b" -->
+				<option value="b" SELECTED>Relief durch Schummerung</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Relief durch Schummerung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>Hypsometrische Färbungen - Schichtverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Hypsometrische Färbungen - Schichtverfahren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>Schraffuren</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Schraffuren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5e" -->
+				<option value="e" SELECTED>Sonar-Bathymetrie</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Sonar-Bathymetrie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5f" -->
+				<option value="f" SELECTED>Bildlinien</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Bildlinien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5g" -->
+				<option value="g" SELECTED>Eckpunkte</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Eckpunkte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5h" -->
+				<option value="h" SELECTED>Andere Farbgebungsverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Andere Farbgebungsverfahren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5i" -->
+				<option value="i" SELECTED>Höhen- oder perspektivisches Bild</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Höhen- oder perspektivisches Bild</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5j" -->
+				<option value="j" SELECTED>Morphographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Morphographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5k" -->
+				<option value="k" SELECTED>Bathymetrie</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Bathymetrie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5z" -->
+				<option value="z"
+				SELECTED>Andere Reliefdarstellungsverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere Reliefdarstellungsverfahren</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr><tr>
+		<td>Code der Darstellung des Relielfs 3:</td>
+		<td>
+			<select name="f6" size="1">
+                        
+                        <!-- TMPL_IF name="f6 " -->
+                                <option value=" " SELECTED>Wert nicht erforderlich</option>
+                        <!-- TMPL_ELSE -->
+                                <option value=" ">Wert nicht erforderlich</option>
+                        <!-- /TMPL_IF -->
+                        
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>Höhenlinien</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Höhenlinien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6b" -->
+				<option value="b" SELECTED>Relief durch Schummerung</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Relief durch Schummerung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" SELECTED>Hypsometrische Färbungen - Schichtverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Hypsometrische Färbungen - Schichtverfahren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6d" -->
+				<option value="d" SELECTED>Schraffuren</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Schraffuren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6e" -->
+				<option value="e" SELECTED>Sonar-Bathymetrie</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Sonar-Bathymetrie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6f" -->
+				<option value="f" SELECTED>Bildlinien</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Bildlinien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6g" -->
+				<option value="g" SELECTED>Eckpunkte</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Eckpunkte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6h" -->
+				<option value="h" SELECTED>Andere Farbgebungsverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Andere Farbgebungsverfahren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6i" -->
+				<option value="i" SELECTED>Höhen- oder perspektivisches Bild</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Höhen- oder perspektivisches Bild</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6j" -->
+				<option value="j" SELECTED>Morphographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Morphographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6k" -->
+				<option value="k" SELECTED>Bathymetrie</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Bathymetrie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6z" -->
+				<option value="z"
+				SELECTED>Andere Reliefdarstellungsverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere Reliefdarstellungsverfahren</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr><tr>
+		<td>Code der Darstellung des Relielfs 4:</td>
+		<td>
+			<select name="f7" size="1">
+                        <!-- TMPL_IF name="f7 " -->
+                                <option value=" " SELECTED>Wert nicht erforderlich</option>
+                        <!-- TMPL_ELSE -->
+                                <option value=" ">Wert nicht erforderlich</option>
+                        <!-- /TMPL_IF -->
+                        
+			<!-- TMPL_IF name="f7a" -->
+				<option value="a" SELECTED>Höhenlinien</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Höhenlinien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7b" -->
+				<option value="b" SELECTED>Relief durch Schummerung</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Relief durch Schummerung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7c" -->
+				<option value="c" SELECTED>Hypsometrische Färbungen - Schichtverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Hypsometrische Färbungen - Schichtverfahren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7d" -->
+				<option value="d" SELECTED>Schraffuren</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Schraffuren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7e" -->
+				<option value="e" SELECTED>Sonar-Bathymetrie</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Sonar-Bathymetrie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7f" -->
+				<option value="f" SELECTED>Bildlinien</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Bildlinien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7g" -->
+				<option value="g" SELECTED>Eckpunkte</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Eckpunkte</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7h" -->
+				<option value="h" SELECTED>Andere Farbgebungsverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Andere Farbgebungsverfahren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7i" -->
+				<option value="i" SELECTED>Höhen- oder perspektivisches Bild</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Höhen- oder perspektivisches Bild</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7j" -->
+				<option value="j" SELECTED>Morphographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Morphographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7k" -->
+				<option value="k" SELECTED>Bathymetrie</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Bathymetrie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7z" -->
+				<option value="z"
+				SELECTED>Andere Reliefdarstellungsverfahren</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere Reliefdarstellungsverfahren</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>		<td>Projektion:</td>
+		<td>
+			<select name="f8" size="1">
+
+			<!-- TMPL_IF name="f8aa" -->
+				<option value="aa" SELECTED>Aitoff</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">Aitoff</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8bb" -->
+				<option value="bb" SELECTED>Gnomonik</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">Gnomonik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ac" -->
+				<option value="ac" SELECTED>Azimut gemäss Lambert</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">Azimut gemäss Lambert</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ad" -->
+				<option value="ad" SELECTED>Orthographisch</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">Orthographisch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ae" -->
+				<option value="ae" SELECTED>Abstandsgleich</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">Abstandsgleich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8af" -->
+				<option value="af" SELECTED>Stereographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">Stereographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ag" -->
+				<option value="ag" SELECTED>Azimut mit gleichen Zonen</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">Azimut mit gleichen Zonen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8au" -->
+				<option value="au" SELECTED>Azimut, von unbekanntem spezifischem Typ</option>
+			<!-- TMPL_ELSE -->
+				<option value="au">Azimut, von unbekanntem spezifischem Typ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8az" -->
+				<option value="az" SELECTED>Azimut, anderer bekannter spezifischer Typ </option>
+			<!-- TMPL_ELSE -->
+				<option value="az">Azimut, anderer bekannter spezifischer Typ </option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ba" -->
+				<option value="ba" SELECTED>Gall</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">Gall</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8bb" -->
+				<option value="bb"
+				SELECTED>Homolographie nach Goode</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">Homolographie nach Goode</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ca" -->
+				<option value="ca" SELECTED>Albers</option>
+			<!-- TMPL_ELSE -->
+				<option value="ca">Albers</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8cb" -->
+				<option value="cb"
+				SELECTED>Gut</option>
+			<!-- TMPL_ELSE -->
+				<option value="cb">Gut</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cc" -->
+				<option value="cc" SELECTED>Konisch nach Lambert</option>
+			<!-- TMPL_ELSE -->
+				<option value="cc">Konisch nach Lambert</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cd" -->
+				<option value="cd" SELECTED>Konisch (einfach)</option>
+			<!-- TMPL_ELSE -->
+				<option value="cd">Konisch (einfach)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8ce" -->
+				<option value="ce" SELECTED>Miller-Code</option>
+			<!-- TMPL_ELSE -->
+				<option value="ce">Miller-Code</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cf" -->
+				<option value="cf" SELECTED>De Lisle</option>
+			<!-- TMPL_ELSE -->
+				<option value="cf">De Lisle</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cg" -->
+				<option value="cg"
+				SELECTED>Modifizierte polykonische Ausgabe der internationale Karte der Welt</option>
+			<!-- TMPL_ELSE -->
+				<option value="cg">Modifizierte polykonische Ausgabe der internationale Karte der Welt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ch" -->
+				<option value="ch" SELECTED>Konisch nach Tissot</option>
+			<!-- TMPL_ELSE -->
+				<option value="ch">Konisch nach Tissot</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8cp" -->
+				<option value="cp" SELECTED>Polykonisch</option>
+			<!-- TMPL_ELSE -->
+				<option value="cp">Polykonisch</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cu" -->
+				<option value="cu" SELECTED>Konisch, andere unbekannte Typen</option>
+			<!-- TMPL_ELSE -->
+				<option value="cu">Konisch, andere unbekannte Typen</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cz" -->
+				<option value="cz" SELECTED>Konisch, andere bekannte Typen</option>
+			<!-- TMPL_ELSE -->
+				<option value="cz">Konisch, andere bekannte Typen</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8da" -->
+				<option value="da" SELECTED>Als Gürteltier</option>
+			<!-- TMPL_ELSE -->
+				<option value="da">Als Gürteltier</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8db" -->
+				<option value="db" SELECTED>Als Falter</option>
+			<!-- TMPL_ELSE -->
+				<option value="db">Als Falter</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bc" -->
+				<option value="bc" SELECTED>Flächentreue nach Lambert</option>
+			<!-- TMPL_ELSE -->
+				<option value="bc">Flächentreue nach Lambert</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bd" -->
+				<option value="bd" SELECTED>Nach Mercator</option>
+			<!-- TMPL_ELSE -->
+				<option value="bd">Nach Mercator</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8be" -->
+				<option value="be" SELECTED>Miller</option>
+			<!-- TMPL_ELSE -->
+				<option value="be">Miller</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bf" -->
+				<option value="bf" SELECTED>Mollweide</option>
+			<!-- TMPL_ELSE -->
+				<option value="bf">Mollweide</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bg" -->
+				<option value="bg" SELECTED>Sinus-</option>
+			<!-- TMPL_ELSE -->
+				<option value="bg">Sinus-</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bh" -->
+				<option value="bh" SELECTED>Traverse Mercator</option>
+			<!-- TMPL_ELSE -->
+				<option value="bh">Traverse Mercator</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bi" -->
+				<option value="bi" SELECTED>Gauss</option>
+			<!-- TMPL_ELSE -->
+				<option value="bi">Gauss</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bj" -->
+				<option value="bj" SELECTED>Quadratische Platte</option>
+			<!-- TMPL_ELSE -->
+				<option value="bj">Quadratische Platte</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bk" -->
+				<option value="bk" SELECTED>De Cassini</option>
+			<!-- TMPL_ELSE -->
+				<option value="bk">De Cassini</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bl" -->
+				<option value="bl" SELECTED>Laborde</option>
+			<!-- TMPL_ELSE -->
+				<option value="bl">Laborde</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bm" -->
+				<option value="bm" SELECTED>Zentrische Streckung nach Mercator</option>
+			<!-- TMPL_ELSE -->
+				<option value="bm">Zentrische Streckung nach Mercator</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bu" -->
+				<option value="bu"
+				SELECTED>Zylindrisch, nichtdefinerter Typ</option>
+			<!-- TMPL_ELSE -->
+				<option value="bu">Zylindrisch, nichtdefinerter Typ</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bz" -->
+				<option value="bz"
+				SELECTED>Zylindrisch, anderer definierter Typ</option>
+			<!-- TMPL_ELSE -->
+				<option value="bz">Zylindrisch, anderer definierter Typ</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8dc" -->
+				<option value="dc" SELECTED>Eckert</option>
+			<!-- TMPL_ELSE -->
+				<option value="dc">Eckert</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8dd" -->
+				<option value="dd" SELECTED>Homolosine nach Goode</option>
+			<!-- TMPL_ELSE -->
+				<option value="dd">Homolosine nach Goode</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8de" -->
+				<option value="de" SELECTED>Miller-Code</option>
+			<!-- TMPL_ELSE -->
+				<option value="de">Miller-Code</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8df" -->
+				<option value="df" SELECTED>Van der Griten</option>
+			<!-- TMPL_ELSE -->
+				<option value="df">Van der Griten</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8dg" -->
+				<option value="dg" SELECTED>Dymaxion</option>
+			<!-- TMPL_ELSE -->
+				<option value="dg">Dymaxion</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8dh" -->
+				<option value="dh" SELECTED>Herzförmig</option>
+			<!-- TMPL_ELSE -->
+				<option value="dh">Herzförmig</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8di" -->
+				<option value="di" SELECTED>Polyedrisch</option>
+			<!-- TMPL_ELSE -->
+				<option value="di">Polyedrisch</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8uu" -->
+				<option value="uu" SELECTED>Unbekannter Typ</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">Unbekannter Typ</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8xx" -->
+				<option value="xx" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="xx">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8zz" -->
+				<option value="zz" SELECTED>Anderer Videotyp</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">Anderer Videotyp</option>
+			<!-- /TMPL_IF -->
+
+			</select>
+
+		</td></tr><tr><td>Referenzmeridian 1:</td>
+		<td>
+			<select name="f9" size="1">
+			<!-- TMPL_IF name="f9  " -->
+				<option value="  " SELECTED>Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value="  ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9aa" -->
+				<option value="aa"
+				SELECTED>Greenwich (G.B.)</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">Greenwich (G.B.)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ab" -->
+				<option value="ab" SELECTED>Amsterdam (Niederlande)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ab">Amsterdam (Niederlande)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ac" -->
+				<option value="ac" SELECTED>Athen (Griechenland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">Athen (Griechenland)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ad" -->
+				<option value="ad" SELECTED>Djakarta (Indonesien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">Djakarta (Indonesien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ae" -->
+				<option value="ae" SELECTED>Bern (Schweiz)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">Bern (Schweiz)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9af" -->
+				<option value="af" SELECTED>Bogota (Kolumbien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">Bogota (Kolumbien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ag" -->
+				<option value="ag" SELECTED>Bombay (Indien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">Bombay (Indien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ah" -->
+				<option value="ah" SELECTED>Brüssel (Belgien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ah">Brüssel (Belgien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ai" -->
+				<option value="ai" SELECTED>Cadiz (Spanien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ai">Cadiz (Spanien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9aj" -->
+				<option value="aj" SELECTED>Kapstadt (Südafrika)</option>
+			<!-- TMPL_ELSE -->
+				<option value="aj">Kapstadt (Südafrika)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ak" -->
+				<option value="ak" SELECTED>Caracas (Venezuela)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ak">Caracas (Venezuela)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9al" -->
+				<option value="al" SELECTED>Kopenhagen (Dänemark)</option>
+			<!-- TMPL_ELSE -->
+				<option value="al">Kopenhagen (Dänemark)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9am" -->
+				<option value="am"
+				SELECTED>Cordoba (Argentinien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="am">Cordoba (Argentinien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9an" -->
+				<option value="an" SELECTED>El Hierro (Kanarische Inseln)</option>
+			<!-- TMPL_ELSE -->
+				<option value="an">El Hierro (Kanarische Inseln)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9ao" -->
+				<option value="ao" SELECTED>Helsinki (Finnland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ao">Helsinki (Finnland)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9ap" -->
+				<option value="ap" SELECTED>Istambul (Türkei)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ap">Istambul (Türkei)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9aq" -->
+				<option value="aq"
+				SELECTED>Julianehaab (Groenland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="aq">Julianehaab (Groenland)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ar" -->
+				<option value="ar" SELECTED>Lissabon (Portugal)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ar">Lissabon (Portugal)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9as" -->
+				<option value="as" SELECTED>London (G.B.)</option>
+			<!-- TMPL_ELSE -->
+				<option value="as">London (G.B.)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9at" -->
+				<option value="at" SELECTED>Madras (Indien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="at">Madras (Indien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9ba" -->
+				<option value="ba" SELECTED>Madrid (Spanien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">Madrid (Spanien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bb" -->
+				<option value="bb" SELECTED>Mexiko (Mexiko)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">Mexiko (Mexiko)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bc" -->
+				<option value="bc" SELECTED>Moskau (Russland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bc">Moskau (Russland)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bd" -->
+				<option value="bd" SELECTED>München (Deutschland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bd">München (Deutschland)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9be" -->
+				<option value="be" SELECTED>Neapel (Italien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="be">Neapel (Italien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bf" -->
+				<option value="bf" SELECTED>Oslo (Christiana) (Norwegen)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bf">Oslo (Christiana) (Norwegen)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bg" -->
+				<option value="bg" SELECTED>Paris (Frankreich)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bg">Paris (Frankreich)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bh" -->
+				<option value="bh" SELECTED>Peking (Volksrepublik China)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bh">Peking (Volksrepublik China)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bi" -->
+				<option value="bi"
+				SELECTED>Philadelphia (USA)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bi">Philadelphia (USA)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bj" -->
+				<option value="bj" SELECTED>Pulkova (St.Petersburg) (Russland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bj">Pulkova (St.Petersburg) (Russland)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bk" -->
+				<option value="bk" SELECTED>Rio de Janeiro (Brasilien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bk">Rio de Janeiro (Brasilien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bl" -->
+				<option value="bl" SELECTED>Rom (Italien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bl">Rom (Italien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bm" -->
+				<option value="bm" SELECTED>Santiago (Chile)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bm">Santiago (Chile)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bn" -->
+				<option value="bn" SELECTED>Stockholm (Schweden)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bn">Stockholm (Schweden)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bo" -->
+				<option value="bo" SELECTED>Sydney (Australien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bo">Sydney (Australien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bp" -->
+				<option value="bp" SELECTED>Tirana (Albanien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bp">Tirana (Albanien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bq" -->
+				<option value="bq" SELECTED>Tokyo (Japan)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bq">Tokyo (Japan)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9br" -->
+				<option value="br" SELECTED>Washington (USA)</option>
+			<!-- TMPL_ELSE -->
+				<option value="br">Washington (USA)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9uu" -->
+				<option value="uu" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">Unbekannt</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9zz" -->
+				<option value="zz" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">Andere</option>
+			<!-- /TMPL_IF -->
+
+			</select>
+
+		</td></tr><tr>		<td>Referenzmeridian 2:</td>
+		<td>
+			<select name="f10" size="1">
+            
+			<!-- TMPL_IF name="f10  " -->
+				<option value="  " SELECTED>Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10aa" -->
+				<option value="aa"
+				SELECTED>Greenwich (G.B.)</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">Greenwich (G.B.)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ab" -->
+				<option value="ab" SELECTED>Amsterdam (Niederlande)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ab">Amsterdam (Niederlande)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ac" -->
+				<option value="ac" SELECTED>Athen (Griechenland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">Athen (Griechenland)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ad" -->
+				<option value="ad" SELECTED>Djakarta (Indonesien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">Djakarta (Indonesien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ae" -->
+				<option value="ae" SELECTED>Bern (Schweiz)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">Bern (Schweiz)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10af" -->
+				<option value="af" SELECTED>Bogota (Kolumbien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">Bogota (Kolumbien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ag" -->
+				<option value="ag" SELECTED>Bombay (Indien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">Bombay (Indien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ah" -->
+				<option value="ah" SELECTED>Brüssel (Belgien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ah">Brüssel (Belgien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ai" -->
+				<option value="ai" SELECTED>Cadiz (Spanien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ai">Cadiz (Spanien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10aj" -->
+				<option value="aj" SELECTED>Kapstadt (Südafrika)</option>
+			<!-- TMPL_ELSE -->
+				<option value="aj">Kapstadt (Südafrika)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ak" -->
+				<option value="ak" SELECTED>Caracas (Venezuela)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ak">Caracas (Venezuela)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10al" -->
+				<option value="al" SELECTED>Kopenhagen (Dänemark)</option>
+			<!-- TMPL_ELSE -->
+				<option value="al">Kopenhagen (Dänemark)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10am" -->
+				<option value="am"
+				SELECTED>Cordoba (Argentinien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="am">Cordoba (Argentinien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10an" -->
+				<option value="an" SELECTED>El Hierro (Kanarische Inseln)</option>
+			<!-- TMPL_ELSE -->
+				<option value="an">El Hierro (Kanarische Inseln)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10ao" -->
+				<option value="ao" SELECTED>Helsinki (Finnland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ao">Helsinki (Finnland)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10ap" -->
+				<option value="ap" SELECTED>Istambul (Türkei)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ap">Istambul (Türkei)</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f10aq" -->
+				<option value="aq"
+				SELECTED>Julianehaab (Groenland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="aq">Julianehaab (Groenland)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ar" -->
+				<option value="ar" SELECTED>Lissabon (Portugal)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ar">Lissabon (Portugal)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10as" -->
+				<option value="as" SELECTED>London (G.B.)</option>
+			<!-- TMPL_ELSE -->
+				<option value="as">London (G.B.)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10at" -->
+				<option value="at" SELECTED>Madras (Indien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="at">Madras (Indien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10ba" -->
+				<option value="ba" SELECTED>Madrid (Spanien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">Madrid (Spanien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bb" -->
+				<option value="bb" SELECTED>Mexiko (Mexiko)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">Mexiko (Mexiko)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bc" -->
+				<option value="bc" SELECTED>Moskau (Russland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bc">Moskau (Russland)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bd" -->
+				<option value="bd" SELECTED>München (Deutschland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bd">München (Deutschland)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10be" -->
+				<option value="be" SELECTED>Neapel (Italien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="be">Neapel (Italien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bf" -->
+				<option value="bf" SELECTED>Oslo (Christiana) (Norwegen)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bf">Oslo (Christiana) (Norwegen)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bg" -->
+				<option value="bg" SELECTED>Paris (Frankreich)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bg">Paris (Frankreich)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bh" -->
+				<option value="bh" SELECTED>Peking (Volksrepublik China)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bh">Peking (Volksrepublik China)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bi" -->
+				<option value="bi"
+				SELECTED>Philadelphia (USA)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bi">Philadelphia (USA)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bj" -->
+				<option value="bj" SELECTED>Pulkova (St.Petersburg) (Russland)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bj">Pulkova (St.Petersburg) (Russland)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bk" -->
+				<option value="bk" SELECTED>Rio de Janeiro (Brasilien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bk">Rio de Janeiro (Brasilien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bl" -->
+				<option value="bl" SELECTED>Rom (Italien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bl">Rom (Italien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bm" -->
+				<option value="bm" SELECTED>Santiago (Chile)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bm">Santiago (Chile)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bn" -->
+				<option value="bn" SELECTED>Stockholm (Schweden)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bn">Stockholm (Schweden)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bo" -->
+				<option value="bo" SELECTED>Sydney (Australien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bo">Sydney (Australien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bp" -->
+				<option value="bp" SELECTED>Tirana (Albanien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bp">Tirana (Albanien)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bq" -->
+				<option value="bq" SELECTED>Tokyo (Japan)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bq">Tokyo (Japan)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10br" -->
+				<option value="br" SELECTED>Washington (USA)</option>
+			<!-- TMPL_ELSE -->
+				<option value="br">Washington (USA)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10uu" -->
+				<option value="uu" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">Unbekannt</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10zz" -->
+				<option value="zz" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+
+	<tr><td colspan=2><input type="button" value="OK"  onClick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value =  document.f_pop.f1.value + document.f_pop.f2.value +document.f_pop.f3.value +document.f_pop.f4.value +document.f_pop.f5.value +document.f_pop.f6.value +document.f_pop.f7.value +document.f_pop.f8.value +document.f_pop.f9.value +document.f_pop.f10.value;
+	    self.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

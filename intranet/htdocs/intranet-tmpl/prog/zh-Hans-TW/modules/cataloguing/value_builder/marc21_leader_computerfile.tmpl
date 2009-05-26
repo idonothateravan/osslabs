@@ -1,0 +1,332 @@
+<html>
+<head>
+<title>建立指標</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_leader_computerfile.pl">
+<table>
+	<tr>
+		<td>1-4 記錄長度</td>
+		<td>（自動填上）</td>
+	</tr>
+	<tr>
+		<td>5- 記錄狀態</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5a" -->
+				<option value=" " SELECTED>a- Increase in encoding level</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">a- Increase in encoding level</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>c- Corrected or revised</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- Corrected or revised</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>d- 刪除</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- 刪除</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5n" -->
+				<option value="n" SELECTED>n- 新記錄</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">n- 新記錄</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5p" -->
+				<option value="p" SELECTED>p- Increase in encoding level from prepublication</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">p- Increase in encoding level from prepublication</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>6- 紀錄類型</td>
+		<td>
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>a- Language material (monography)</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">a- Language material (monography)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" SELECTED>c- Notated music</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- Notated music</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6d" -->
+				<option value="d" SELECTED>d- Manuscript notated music</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- Manuscript notated music</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6e" -->
+				<option value="e" SELECTED>e- Cartographic material</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">e- Cartographic material</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6f" -->
+				<option value="f" SELECTED>f - Manuscript cartographic material</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">f - Manuscript cartographic material</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6g" -->
+				<option value="g" SELECTED>g - Projected medium</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">g - Projected medium</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6i" -->
+				<option value="i" SELECTED>i - 錄音資料（非音樂性）</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">i - 錄音資料（非音樂性）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6j" -->
+				<option value="j" SELECTED>j - Musical sound recording</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">j - Musical sound recording</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6k" -->
+				<option value="k" SELECTED>k - Two-dimensional nonprojectable graphic</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">k - Two-dimensional nonprojectable graphic</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6m" -->
+				<option value="m" SELECTED>m - 電腦檔</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">m - 電腦檔</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6o" -->
+				<option value="o" SELECTED>o - 工具書</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">o - 工具書</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6r" -->
+				<option value="r" SELECTED>r - Three-dimensional artifact or naturally occurring object</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">r - Three-dimensional artifact or naturally occurring object</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6t" -->
+				<option value="t" SELECTED>t - Manuscript language material</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">t - Manuscript language material</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>7- 書目記錄層次</td>
+		<td>
+			<select name="f7" size="1">
+				<!-- TMPL_IF name="f7a" -->
+					<option value="a" SELECTED>a- Monographic component part</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- Monographic component part</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7b" -->
+					<option value="b" SELECTED>b- Serial component part</option>
+				<!-- TMPL_ELSE -->
+					<option value="b">a- Serial component part</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7c" -->
+					<option value="c" SELECTED>c- Collection</option>
+				<!-- TMPL_ELSE -->
+					<option value="c">c- Collection</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7d" -->
+					<option value="d" SELECTED>d- Subunit</option>
+				<!-- TMPL_ELSE -->
+					<option value="d">d- Subunit</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7i" -->
+					<option value="i" SELECTED>i- 整合資源</option>
+				<!-- TMPL_ELSE -->
+					<option value="i">i- 整合資源</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7m" -->
+					<option value="m" SELECTED>m- Monograph/item</option>
+				<!-- TMPL_ELSE -->
+					<option value="m">m- Monograph/item</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7s" -->
+					<option value="s" SELECTED>s- 期刊</option>
+				<!-- TMPL_ELSE -->
+					<option value="s">s- 期刊</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>8- 層次等級</td>
+		<td>
+			<select name="f8" size="1">
+				<!-- TMPL_IF name="f8 " -->
+					<option value=" " SELECTED>沒有特殊型式</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">沒有特殊型式</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f8a" -->
+					<option value="a" SELECTED>a- 檔案</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- 檔案</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>9- 機讀格式（MARC）</td>
+		<td>
+			<select name="f9" size="1">
+				<!-- TMPL_IF name="f9 " -->
+					<option value=" " SELECTED>MARC-8</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">MARC-8</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f9a" -->
+					<option value="a" SELECTED>a- UCS/Unicode</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- UCS/Unicode</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>10-16 指標/分欄/長度</td>
+		<td>（自動填上）</td>
+	<tr>
+		<td>17- 著錄依據</td>
+		<td>
+			<select name="f17" size="1">
+				<!-- TMPL_IF name="f17 " -->
+					<option value=" " SELECTED>完整記錄層次</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">完整層次</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f171" -->
+					<option value="1" SELECTED>1- 完整著錄，資料無法檢查</option>
+				<!-- TMPL_ELSE -->
+					<option value="1">1- 完整著錄，資料無法檢查</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f172" -->
+					<option value="2" SELECTED>2 - 次完整著錄，資料無法檢查</option>
+				<!-- TMPL_ELSE -->
+					<option value="2">2 - 次完整著錄，資料無法檢查</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f173" -->
+					<option value="3" SELECTED>3- 未達最小層級的著錄</option>
+				<!-- TMPL_ELSE -->
+					<option value="3">3- 未達最小層級的著錄</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f174" -->
+					<option value="4" SELECTED>4- 核心階層</option>
+				<!-- TMPL_ELSE -->
+					<option value="4">4- 核心階層</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f175" -->
+					<option value="5" SELECTED>5- 不完整著錄</option>
+				<!-- TMPL_ELSE -->
+					<option value="5">5- 不完整著錄</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f177" -->
+					<option value="7" SELECTED>7- 最小著錄層次</option>
+				<!-- TMPL_ELSE -->
+					<option value="7">7- 最小著錄層次</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f178" -->
+					<option value="8" SELECTED>8- 出版前著錄</option>
+				<!-- TMPL_ELSE -->
+					<option value="8">8- 出版前著錄</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f17u" -->
+					<option value="u" SELECTED>u - 不明</option>
+				<!-- TMPL_ELSE -->
+					<option value="u">u - 不明</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f17z" -->
+					<option value="z" SELECTED>z- Not applicable</option>
+				<!-- TMPL_ELSE -->
+					<option value="z">z- Not applicableFull level</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>18- 描述書目記錄型式</td>
+		<td>
+			<select name="f18" size="1">
+				<!-- TMPL_IF name="f18 " -->
+					<option value=" " SELECTED>不採用ISBD 之格式</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">不採用ISBD 之格式</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18a" -->
+					<option value="a" SELECTED>a- AACR 2</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- AACR 2</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18i" -->
+					<option value="i" SELECTED>i- ISBD</option>
+				<!-- TMPL_ELSE -->
+					<option value="i">i- ISBD</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18u" -->
+					<option value="u" SELECTED>u- 不明</option>
+				<!-- TMPL_ELSE -->
+					<option value="u">u- 不明</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>19- 連結記錄要求</td>
+		<td>
+			<select name="f19" size="1">
+				<!-- TMPL_IF name="f19 " -->
+					<option value=" " SELECTED>不需要相關記錄</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">不需要相關記錄</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18r" -->
+					<option value="r" SELECTED>r- Related record required</option>
+				<!-- TMPL_ELSE -->
+					<option value="r">r- Related record required</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>20-24 指引格局 & 長度</td>
+		<td>（自動填上）</td>
+	<tr>
+
+	<tr><td colspan=2><input type="submit" value="完成"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value =
+            '     '+
+            document.f_pop.f5.value +
+			document.f_pop.f6.value+
+            document.f_pop.f7.value+
+			document.f_pop.f8.value+
+            document.f_pop.f9.value+
+            '22     '+
+			document.f_pop.f17.value+
+            document.f_pop.f18.value+
+            document.f_pop.f19.value+
+            '4500';
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

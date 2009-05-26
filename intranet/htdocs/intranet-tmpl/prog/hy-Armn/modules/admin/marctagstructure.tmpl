@@ -1,0 +1,257 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Կառավարում &rsaquo;
+<!-- TMPL_IF name="add_form" -->MARC կառուցվածքներ &rsaquo; <!-- TMPL_VAR name="action" --> <!-- TMPL_VAR NAME="searchfield" --><!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" -->MARC կառուցվածքներ &rsaquo; Հաստատիր ցուցիչի ջնջումը '<!-- TMPL_VAR name="searchfield" -->'<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirmed" -->MARC կառուցվածքներ &rsaquo; Տվյալը ջնջված է<!-- /TMPL_IF -->
+<!-- TMPL_IF name="else" -->MARC կառուցվածքներ<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isNotNull(f,noalert) {
+        if (f.value.length ==0) {
+			return false;
+        }
+        return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function toUC(f) {
+        var x=f.value.toUpperCase();
+        f.value=x;
+        return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isNum(v,maybenull) {
+    var n = new Number(v.value);
+    if (isNaN(n)) {
+        return false;
+        }
+    if (maybenull==0 && v.value=='') {
+        return false;
+    }
+    return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isDate(f) {
+        var t = Date.parse(f.value);
+        if (isNaN(t)) {
+            return false;
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function Check(f) {
+        var ok=1;
+        var _alertString="";
+        var alertString2;
+        if (f.tagfield.value.length==0) {
+            _alertString += "\n- " + _("ցուցիչի համարը բացակա է");
+        }
+        if (_alertString.length==0) {
+            document.Aform.submit();
+        } else {
+            alertString2  = _("Ձևը չի գրանցված, հետևյալ պրոբլեմների պատճարով");
+            alertString2 += "\n------------------------------------------------------------------------------------\n";
+            alertString2 += _alertString;
+            alert(alertString2);
+        }
+    }
+    //]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Տուն</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Կառավարում</a> &rsaquo; <!-- TMPL_IF name="add_form" --> <a href="/cgi-bin/koha/admin/marctagstructure.pl">MARC Frameworks</a> &rsaquo; <a href="/cgi-bin/koha/admin/marctagstructure.pl?frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">MARC Framework for <!-- TMPL_VAR NAME="frameworktext" --> (<!-- TMPL_VAR NAME="frameworkcode" -->)</a> &rsaquo; <!-- TMPL_VAR name="action" --> <!-- TMPL_VAR NAME="searchfield" --><!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" --> <a href="/cgi-bin/koha/admin/marctagstructure.pl">MARC շրջանակներ</a> &rsaquo; Հաստատիր ցուցիչի ջնջումը '<!-- TMPL_VAR name="searchfield" -->'<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirmed" --> <a href="/cgi-bin/koha/admin/marctagstructure.pl">MARC շրջանակներ</a> &rsaquo; Տվյալը ջնջված է<!-- /TMPL_IF -->
+<!-- TMPL_IF name="else" --><a href="/cgi-bin/koha/admin/biblio_framework.pl">MARC շրջանակներ</a> &rsaquo; MARC շրջանակ <!-- TMPL_VAR NAME="frameworktext" --> (<!-- TMPL_VAR NAME="frameworkcode" -->)<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="else" --><div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+
+	// prepare DOM for YUI Toolbar
+
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+
+	// YUI Toolbar Functions
+
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("addtag");
+	}
+
+	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="addtag" href="/cgi-bin/koha/admin/marctagstructure.pl?op=add_form&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">Նոր ցուցիչ</a></li>
+</ul></div><!-- /TMPL_IF -->
+
+<h1>MARC կառուցվածք <!-- TMPL_IF NAME="frameworkcode" --><!-- TMPL_VAR NAME="frameworktext" --> (<!-- TMPL_VAR NAME="frameworkcode" -->)<!-- TMPL_ELSE -->լռակյաց MARC կառուցվածք<!-- /TMPL_IF --></h1>
+
+<!-- TMPL_IF NAME="add_form" -->
+
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+	
+      <fieldset class="rows"><legend><!-- TMPL_IF NAME="use-heading-flags-p" --><!-- TMPL_IF NAME="heading-modify-tag-p" -->Ձևափոխիր ցուցիչը <input type="hidden" name="modif" value="1" /><!-- TMPL_VAR NAME="searchfield" --><!-- /TMPL_IF --><!-- TMPL_IF NAME="heading-add-tag-p" -->Ավելացրու ցուցիչ<!-- /TMPL_IF --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF --></legend>  <input type="hidden" name="op" value="add_validate" />
+	<input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+
+	<ol> <li><label for="tagfield">Ցուցիչ։ </label><input id="tagfield" type="text" name="tagfield" value="<!-- TMPL_VAR NAME="searchfield" -->" maxlength="3" size="3" /></li>    
+    <li><label for="liblibrarian">Պիտակ lib համար ։ </label><input type="text" id="liblibrarian" name="liblibrarian" value="<!-- TMPL_VAR NAME="liblibrarian" ESCAPE="HTML" -->" size="40" maxlength="100" /></li>
+    <li><label for="libopac">Պիտակ ՀՕԱՔ-ի համար ։ </label><input type="text" id="libopac" name="libopac" value="<!-- TMPL_VAR NAME="libopac" ESCAPE="HTML" -->" size="40" maxlength="100" /></li>
+    <li><label for="repeatable">Կրկնվող։ </label><!-- TMPL_VAR NAME="repeatable" --></li>
+    <li><label for="mandatory">Պարտադիր ։ </label><!-- TMPL_VAR NAME="mandatory" --></li>
+    <li><label for="authorised_value">Լիազորված արժեք: </label><!-- TMPL_VAR NAME="authorised_value" --> (if you select a value here, the indicators will be limited to the authorised value list)</li>
+</ol></fieldset> 
+	<fieldset class="action">
+            <input type="submit" value="Հիշել փոփոխությունները" onclick="Check(this.form)">
+            <a class="cancel" href="<!-- TMPL_VAR NAME="script_name" -->?frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">Չեղյալ անել</a>
+	</fieldset>
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+
+<div class="dialog alert"><h3>Confirm Deletion of Tag <span class="ex">'<!-- TMPL_VAR NAME="searchfield" -->'</span>?</h3>
+    <p>Ցուցիչ։ <!-- TMPL_VAR NAME="searchfield" --></p>
+    <p>Նկարագրություն։ <!-- TMPL_VAR NAME="liblibrarian" --></p>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+	<input type="hidden" name="op" value="delete_confirmed" />
+	<input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" /><input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+	<input type="submit" class="approve" value="Այո, ջնջիր այս ցուցիչը"></form>
+	
+	<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post"><input type="submit" value="Ոչ, մի հեռացրու" class="deny"></form></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirmed" -->
+
+    <div class="dialog message"><h3>Ցուցիչը ջնջված է</h3>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post"><input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+    <input type="submit" value="ԼԱՎ" class="approve">
+    </form></div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="framework_create" -->
+
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+        <input type="hidden" name="op" value="framework_create_confirm" />
+        <input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+        Ստեղծիր կառուցվածք <!-- TMPL_VAR NAME="frameworkcode" --> (<!-- TMPL_VAR NAME="frameworktext" -->) օգտագործման համար
+        <select name="existingframeworkcode">
+            <option value="">լռակյաց</option>
+        <!-- TMPL_LOOP NAME="existingframeworkloop" -->
+            <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="frameworktext" --></option>
+        <!-- /TMPL_LOOP -->
+        </select>
+        <input type="submit" value="ԼԱՎ">
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="else" -->
+
+<form name="f" action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+    <p><label for="frameworkcode">Կառուցվածք</label>
+        <select id="frameworkcode" name="frameworkcode">
+            <option value="">լռակյաց</option>
+            <!-- TMPL_LOOP NAME="frameworkloop" -->
+			<!-- TMPL_IF NAME="selected" -->
+                <option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="frameworktext" --></option>
+				<!-- TMPL_ELSE -->
+                <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="frameworktext" --></option>
+				<!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+        </select>
+    </p>
+    <p>
+        <label for="searchfield">Փնտրիր ցուցիչի համար</label>
+        <input type="text" name="searchfield" id="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+        <input type="submit" value="Փնտրում">
+    </p>
+    <p>
+        <!-- TMPL_IF Name="select_display"-->
+            <label for="select_display">Արտածիր միայն օգտագործված ցուցիչները, ենթադաշտերը</label> <input type="checkbox" name="select_display" id="select_display" value="Ճշմարիտ" checked="checked" onchange="this.form.submit();">
+        <!-- TMPL_ELSE -->
+            <label for="select_display">Արտածիր միայն օգտագործված ցուցիչները, ենթադաշտերը</label> <input type="checkbox" name="select_display" id="select_display" value="Ճշմարիտ" onchange="this.form.submit();">
+        <!--/TMPL_IF -->
+    </p>
+</form>
+<p>NOTE : if you change the link between a MARC subfield and a non-MARC field, ask your administrator to run misc/rebuildnonmarc.pl script.</p>
+
+    <table>
+    <tr>
+        <th>Ցուցիչ</th>
+        <th>Lib</th>
+        <th>Կրկնվող</th>
+        <th>Պարտադիր</th>
+        <th>Auth արժեք</th>
+        <th>Ենթադաշտեր</th>
+        <th>Խմբագրել</th>
+        <th>Ջնջել</th>
+	</tr>
+
+    <!-- TMPL_IF NAME="select_display" -->
+        <!-- TMPL_LOOP NAME="loop" -->
+            <!-- TMPL_IF NAME="toggle" --><tr><!-- TMPL_ELSE --><tr class="highlight"><!-- /TMPL_IF -->
+            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+            <td><!-- TMPL_VAR NAME="liblibrarian" --></td>
+            <td><!-- TMPL_IF NAME="repeatable" -->Այո<!-- TMPL_ELSE -->Ոչ<!-- /TMPL_IF --></td>
+            <td><!-- TMPL_IF NAME="mandatory" -->Այո<!-- TMPL_ELSE -->Ոչ<!-- /TMPL_IF --></td>
+            <td><!-- TMPL_VAR NAME="authorised_value" --></td>
+            <td><a href="<!-- TMPL_VAR NAME="subfield_link" -->">ենթադաշտեր</a></td>
+            <td><a href="<!-- TMPL_VAR NAME="edit" -->">Խմբագրել</a></td>
+            <td><a href="<!-- TMPL_VAR NAME="delete" -->">Ջնջել</a></td>
+        </tr>
+      <!-- TMPL_IF NAME="toggle" --><tr><!-- TMPL_ELSE --><tr class="highlight"><!-- /TMPL_IF -->
+            <td>
+                &nbsp;
+            </td>
+            <td colspan="7">
+                <!-- TMPL_LOOP NAME="subfields" -->
+                    <p>	Տաբ։<!-- TMPL_VAR NAME="tab" --> | $<!-- TMPL_VAR NAME="tagsubfield" --> <!-- TMPL_VAR NAME="liblibrarian" --> <!-- TMPL_IF NAME="kohafield" --><!-- TMPL_VAR NAME="kohafield" --><!--/TMPL_IF --><!-- TMPL_IF NAME="repeatable" -->, կրկնվող<!-- /TMPL_IF --><!-- TMPL_IF NAME="mandatory" -->, Պարտադիր<!-- /TMPL_IF --><!-- TMPL_IF NAME="seealso" -->, Տես <!-- TMPL_VAR name="seealso" --><!--/TMPL_IF --><!-- TMPL_IF NAME="authorised_value" -->, <!-- TMPL_VAR NAME="authorised_value" --><!--/TMPL_IF --><!-- TMPL_IF NAME="authtypecode" -->, <!-- TMPL_VAR NAME="authtypecode" --><!--/TMPL_IF --><!-- TMPL_IF NAME="value_builder" -->, <!-- TMPL_VAR NAME="value_builder" --><!--/TMPL_IF -->
+                    </p>
+                <!-- /TMPL_LOOP -->
+            </td>
+        </tr>
+        <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <!-- TMPL_LOOP NAME="loop" -->
+    <!-- TMPL_IF NAME="toggle" --><tr><!-- TMPL_ELSE --><tr class="highlight"><!-- /TMPL_IF -->
+        <td><!-- TMPL_VAR NAME="tagfield" --></td>
+        <td><!-- TMPL_VAR NAME="liblibrarian" --></td>
+        <td><!-- TMPL_IF NAME="repeatable" -->Այո<!-- TMPL_ELSE -->Ոչ<!-- /TMPL_IF --></td>
+        <td><!-- TMPL_IF NAME="mandatory" -->Այո<!-- TMPL_ELSE -->Ոչ<!-- /TMPL_IF --></td>
+        <td><!-- TMPL_VAR NAME="authorised_value" --></td>
+        <td><a href="<!-- TMPL_VAR NAME="subfield_link" -->">Ենթադաշտեր</a></td>
+        <td><a href="<!-- TMPL_VAR NAME="edit" -->">Խմբագրել</a></td>
+        <td><a href="<!-- TMPL_VAR NAME="delete" -->">Ջնջել</a></td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    <!--/TMPL_IF -->
+    </table>
+    <!-- TMPL_IF NAME="isprevpage" -->
+            <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="prevpage" -->&amp;searchfield=<!-- TMPL_VAR NAME="searchfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" --><!--TMPL_IF Name="select_display"-->&amp;select_display=True<!--/TMPL_IF -->">&lt;&lt; Նախորդ</a>
+        <!-- /TMPL_IF -->
+
+        <!-- TMPL_IF NAME="nextpage" -->
+            <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="nextpage" -->&amp;searchfield=<!-- TMPL_VAR NAME="searchfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" --><!--TMPL_IF Name="select_display"-->&amp;select_display=True<!--/TMPL_IF -->">Հաջորդ &gt;&gt;</a>
+        <!-- /TMPL_IF -->
+
+<!-- /TMPL_IF -->
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

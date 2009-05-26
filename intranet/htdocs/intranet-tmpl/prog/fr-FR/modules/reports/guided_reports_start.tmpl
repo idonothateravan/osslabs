@@ -1,0 +1,516 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Stats <!-- TMPL_IF NAME="start" --> &rsaquo; Assistant de rapports guidés <!-- /TMPL_IF --><!-- TMPL_IF NAME="saved1" --> &rsaquo; Assistant de rapport guidé &rsaquo; Rapports enregistrés<!-- /TMPL_IF --><!-- TMPL_IF NAME="create" --> &rsaquo; Assistant de rapport guidé &rsaquo; Créer à partir de SQL<!-- /TMPL_IF --><!-- TMPL_IF NAME="showsql" -->
+ &rsaquo; Assistant de rapport guidé &rsaquo; Rapports enregistrés &rsaquo; Voir SQL<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="execute" --> &rsaquo; Assistant de rapport guidé &rsaquo; Rapports enregistrés &rsaquo, Rapport <!-- TMPL_VAR NAME="name" --><!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build1" -->&rsaquo; Assistant de rapport guidé &rsaquo; Construire un rapport, Etape 1, choisir un module<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build2" -->&rsaquo; Assistant de rapport guidé &rsaquo; Construire un rapport, Etape 2, choisir un type de rapport<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build3" -->&rsaquo; Assistant de rapport guidé &rsaquo; Construire un rapport, Etape 3 de 6, choisir les colonnes à afficher<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build4" --> &rsaquo; Assistant de rapport guidé &rsaquo; Construire un rapport, Etape 4 de 6 : choisir un critère sur lequel limiter le rapport<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build5" --> &rsaquo; Assistant de rapport guidé &rsaquo; Construire un rapport, Etape 5 de 6 : choisir sur quelles colonnes totaliser<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build6" -->&rsaquo; Assistant de rapport guidé &rsaquo; Construire un rapport, Etape 6 de 6 : choisir comment ordonner le rapport<!-- /TMPL_IF -->
+</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" -->
+<!-- TMPL_IF NAME="saved1" -->
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	$(".confirmdelete").click(function(){
+		$(this).parents('tr').attr("class","warn");
+		if(confirm("Are you sure you want to "+$(this).attr("title")+"?")){
+			return true;
+		} else {
+			$(this).parents('tr').attr("class","");
+			return false;
+		}
+	});
+});
+//]]>
+ </script>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="showsql" -->
+<style type="text/css">
+	#sql { width: 90%; height: 9em; border: 1px solid #EEE; }
+</style>
+
+<script type="text/javascript">
+ $(document).ready(function() {
+ 	$("#sql").focus(function() {
+		$(this).select();
+		});
+ });
+ </script><!-- /TMPL_IF -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="circ-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">Rapports</a><!-- TMPL_IF NAME="start" --> &rsaquo; <strong>Assistant de rapports </strong><!-- /TMPL_IF --><!-- TMPL_IF NAME="saved1" --> &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de  rapport guidé</a> &rsaquo; <strong>Rapports sauvegardés</strong><!-- /TMPL_IF --><!-- TMPL_IF NAME="create" --> &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de  rapport guidé</a> &rsaquo; <strong>Créer à partir de SQL</strong><!-- /TMPL_IF --><!-- TMPL_IF NAME="showsql" -->
+ &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de rapport guidé</a> &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Used%20saved">Rapports enregistrés</a> &rsaquo; <strong>Vue SQL</strong><!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="execute" -->&rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de rapport guidé</a> &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Used%20saved">Rapports enregistrés</a> &rsaquo; Rapport <em><!-- TMPL_VAR NAME="name" --></em><!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build1" -->&rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de rapport guidé</a> &rsaquo; Construire un rapport, Etape 1 : choisir un module<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build2" -->&rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de  rapport guidé</a> &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Build%20new">Construire un rapport</a> Etape 2 : choisir un type de rapport<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build3" -->&rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de  rapport guidé</a> &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Build%20new">Construire un rapport</a> Etape 3 de 6 : sélectionner les colonnes à afficher<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build4" -->&rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de  rapport guidé</a> &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Build%20new">Construire un rapport</a> Etape 4 de 6 : choisir un critère sur lequel limiter le rapport<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build5" -->&rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de  rapport guidé</a> &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Build%20new">Construire un rapport</a> Etape 5 de 6 : choisir les colonnes à totaliser<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="build6" -->&rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl">Assistant de  rapport guidé</a> &rsaquo; <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Build%20new">Construire un rapport</a> Etape 6 de 6 : sélectionner l'ordre dans lequel vous voulez trier le rapport<!-- /TMPL_IF -->
+</div>
+
+<div id="doc3" class="yui-t1">
+
+    <div id="bd">
+    <div id="yui-main">
+    <div class="yui-b">
+
+	<div class="details">
+
+<!-- TMPL_IF NAME="start" -->
+     <h2>Rapports</h2>
+     <p>Utilisez l'assistant de rapport pour créer des rapports non standards. Cette fonctionnalité a pour but de proposer un intermédiaire entre les rapports pré-programmés et l'écriture de commandes SQL.</p>
+
+     <h3>Construire et exécuter un rapport</h3>     	   						    			      
+	      <form action="/cgi-bin/koha/reports/guided_reports.pl">
+		  <input type="hidden" name="phase" value="Build new" />
+		<input type="submit" name="submit" value="Construire nouveau">
+		</form>
+		<form action="/cgi-bin/koha/reports/guided_reports.pl">
+		<input type="hidden" name="phase" value="Used saved"/>
+		<input type="submit" name="submit" value="Rapports sauvegardés">
+		</form>
+		<form action="/cgi-bin/koha/reports/guided_reports.pl">
+		<input type="hidden" name="phase" value="Create report from SQL"/>
+		<input type="submit" name="submit" value="Créer rapport à partir de SQL">
+        </form>
+<h3>Dictionnaire des rapports</h3>
+<p>Utilisez le dictionnaire pour définir des critères personnalisés à utiliser dans vos rapports</p>
+<form action="/cgi-bin/koha/reports/dictionary.pl">
+<input type="hidden" name="phase" value="View Dictionary"/>
+<input type="submit" name="submit" value="Voir dictionnaire">
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="saved1" -->
+<!-- TMPL_IF NAME="savedreports" --><h1>Rapports sauvegardés</h1>
+<p>Choisir le rapport à exécuter à partir de la liste</p>
+<form action="/cgi-bin/koha/reports/guided_reports.pl">
+<table>
+<tr><th>Nom du rapport</th><th>Type</th><th>Notes</th><th>Résultats sauvegardés</th><th>SQL sauvegardé</th><th colspan="3">&nbsp;</th></tr>
+<!-- TMPL_LOOP NAME="savedreports" -->
+<tr><td><!-- TMPL_VAR NAME="report_name" --></td>
+<td><!-- TMPL_VAR NAME="type" --></td>
+<td><!-- TMPL_VAR NAME="notes" --></td>
+<td><!-- TMPL_IF NAME="date_run" --><a href="/cgi-bin/koha/reports/guided_reports.pl?phase=retrieve%20results&id=<!-- TMPL_VAR NAME="id" -->"><!-- TMPL_VAR NAME="date_run" --></a><!-- /TMPL_IF -->
+</td>
+<td><a href="/cgi-bin/koha/reports/guided_reports.pl?reports=<!-- TMPL_VAR NAME="id" -->&amp;phase=Show%20SQL">Voir SQL</a></td>
+<td><a href="/cgi-bin/koha/reports/guided_reports.pl?reports=<!-- TMPL_VAR NAME="id" -->&amp;phase=Run%20this%20report">Exécuter ce rapport</a></td>
+<td><a href="/cgi-bin/koha/tools/scheduler.pl?id=<!-- TMPL_VAR NAME="id" -->">Planifier ce rapport</a></td>
+<td><a class="confirmdelete" title="Supprimer ce rapport enregistré" href="/cgi-bin/koha/reports/guided_reports.pl?reports=<!-- TMPL_VAR NAME="id" -->&amp;phase=Delete%20Saved">Supprimer</a></td></tr>
+<!-- /TMPL_LOOP -->
+</table>
+</form>
+<!-- TMPL_ELSE --><h4>Il n'y a pas de rapport enregistré. <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Build%20new">Créer un nouveau ?</a></h4><!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="build1" -->
+<h1>Construire un rapport</h1>
+<form action="/cgi-bin/koha/reports/guided_reports.pl">
+<fieldset class="rows">
+<legend>Etape 1 sur 6 : Choisissez sur quel module votre rapport portera</legend>
+<ol><li><label for="areas">Choisir : </label><select name="areas" id="areas">
+<!-- TMPL_LOOP NAME="areas" -->
+<option value="<!-- TMPL_VAR NAME="id" -->"><!-- TMPL_VAR NAME="name"--></option>
+<!-- /TMPL_LOOP -->
+</select></li></ol>
+</fieldset>
+<fieldset class="action">
+<input type="hidden" name="phase" value="Report on this Area" />
+<input type="submit" name="submit" value="Suivant >>">
+
+</fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="build2" -->
+<h1>Construire un rapport</h1>
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+<input type="hidden" name="area" value="<!-- TMPL_VAR NAME="area" -->" />
+<fieldset class="rows"><legend>Etape 2 sur 6 : Sélectionner un type de rapport</legend>
+<ol><li><label for="types">Choisir : </label><select name="types" id="types">
+<!-- TMPL_LOOP NAME="types" -->
+<option value="<!-- TMPL_VAR NAME="id" -->"><!-- TMPL_VAR NAME="name"--></option>
+<!-- /TMPL_LOOP -->
+</select></li></ol></fieldset>
+
+<fieldset class="action">
+<input type="hidden" name="phase" value="Choose this type" />
+<input type="submit" name="submit" value="Suivant >>"></fieldset>
+</form>
+</div>
+<div class="yui-gb"><div class="yui-u first"></div>
+
+<!--- Summary and Matrix reports have not yet been implemented-->
+<!--<div class="yui-u">Summary:
+<img src="/intranet-tmpl/prog/img/reports-summary-graphic.gif" /></div>
+<div class="yui-u">Matrix:
+<img src="/intranet-tmpl/prog/img/reports-matrix-graphic.gif" /></div>-->
+
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="build3" -->
+<h3>Etape 3 sur 6 : Sélectionner les colonnes à afficher</h3>
+<p>Note : soyez prudents lors de la sélection des colonnes. Si vous en sélectionnez trop, le rapport peut être trop important et ne pas aboutir ou ralentir votre système.</p>
+
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+	<input type="hidden" name="area" value="<!-- TMPL_VAR NAME="area" -->" />
+	<input type="hidden" name="type" value="<!-- TMPL_VAR NAME="type" -->" />
+	<fieldset>
+<div class="yui-g">
+<div class="yui-u first">	<div style="float: left;"><select id="availableColumns" name="oldcolumns2" multiple="multiple" size="25" style="min-width: 200px;height:300px;">
+<!-- TMPL_LOOP NAME="columns" -->
+<!-- TMPL_IF NAME="table" -->
+
+<!-- TMPL_IF NAME="__first__" -->
+<!-- TMPL_ELSE -->
+</optgroup>
+<!-- /TMPL_IF -->
+
+<optgroup label="<!-- TMPL_VAR NAME="table"-->">
+<!-- TMPL_ELSE -->
+<option value="<!-- TMPL_VAR NAME="name" -->">
+<!-- TMPL_IF NAME="description" --><!-- TMPL_VAR NAME="description" -->
+<!-- TMPL_ELSE -->
+<!-- TMPL_VAR NAME="name" -->
+<!-- /TMPL_IF -->
+</option>
+<!-- /TMPL_IF -->
+<!-- /TMPL_LOOP -->
+</optgroup>
+</select></div>
+<div style="width: 6.3em; float: right; margin-top: 100px"><input type="button" name="Add" value="Ajouter" class="button" style="width:6em;" onclick="addColumn()"><br />
+<input type="button" name="delete" value="&lt;&lt; Supprimer" class="button" style="width: 6em; margin: 1em 0;" onclick="delColumn()"></div>
+</div>
+
+<div class="yui-u">
+<select id="selectedColumns" name="columns" multiple="multiple" size="25" style="min-width:200px;height:300px;"></select>
+</div>
+</div>
+</fieldset>
+<div class="yui-g">
+<fieldset class="action">
+<input type="hidden" name="phase" value="Choose these columns" />
+<input type="submit" name="submit" value="Suivant >>">
+</fieldset>
+</div>
+</form>
+
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="build4" -->
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post" >
+<input type="hidden" name="area" value="<!-- TMPL_VAR NAME="area" -->" />
+<input type="hidden" name="type" value="<!-- TMPL_VAR NAME="type" -->" />
+<input type="hidden" name="column" value="<!-- TMPL_VAR NAME="column" -->" />
+<fieldset><legend>Etape 4 sur 6 : Sélectionner un critère sur lequel limiter</legend><table>
+<!-- TMPL_LOOP NAME="criteria" -->
+<tr><td><input type="checkbox" name="criteria_column" id="<!-- TMPL_VAR
+NAME="name" -->" value="<!-- TMPL_VAR
+NAME="name" -->" /> <label for="<!-- TMPL_VAR
+NAME="name" -->"><!-- TMPL_VAR NAME="description" --> </label>
+</td>
+<!-- TMPL_IF NAME="date" -->
+<td><input type="text" size="10" id="<!-- TMPL_VAR NAME="name"
+-->_value" name="<!-- TMPL_VAR NAME="name" -->_value" value=""
+/><img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" id="buttonfrom<!-- TMPL_VAR NAME="name" -->" style="cursor: pointer;" alt="Voir calendrier" title="Voir calendrier">                 
+<script type="text/javascript">   
+Calendar.setup({  
+inputField     : "<!-- TMPL_VAR NAME="name" -->_value",
+ifFormat       : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+button         : "buttonfrom<!-- TMPL_VAR NAME="name" -->",
+align          : "Tl" 
+});     
+</script>          
+</td></tr>
+<!-- TMPL_ELSE -->
+<td><select name="<!-- TMPL_VAR NAME="name" -->_value">
+<!-- TMPL_LOOP NAME="values" -->
+<option value="<!-- TMPL_VAR NAME="availablevalues"-->"><!-- TMPL_VAR NAME="availablevalues" --></option>
+<!-- /TMPL_LOOP -->
+</select>
+</td></tr>
+<!-- /TMPL_IF -->
+<!-- /TMPL_LOOP -->
+</table></fieldset>
+
+<!-- TMPL_IF NAME="definitions" -->
+<fieldset><legend>Définitions de dictionnaires</legend><table>
+<!-- TMPL_LOOP NAME="definitions" -->
+       <tr><td><input type="checkbox" name="definition" value="<!--
+TMPL_VAR NAME="id" -->" /> <!-- TMPL_VAR NAME="name" --></td></tr>
+<!-- /TMPL_LOOP -->
+</table>
+<!-- /TMPL_IF -->
+
+<fieldset class="action"><input type="hidden" name="phase" value="Choose these criteria" />
+<input type="submit" name="submit" value="Suivant >>"> </fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="build5" -->
+<h3>Etape 5 sur 6 : Sélectionner les colonnes sur lesquelles faire un total</h3>
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+<input type="hidden" name="area" value="<!-- TMPL_VAR NAME="area" -->" />
+<input type="hidden" name="type" value="<!-- TMPL_VAR NAME="type" -->" />
+<input type="hidden" name="column" value="<!-- TMPL_VAR NAME="column" -->" />
+<input type="hidden" name="definition" value="<!-- TMPL_VAR NAME="definition" -->" />
+<input type="hidden" name="criteria" value="<!-- TMPL_VAR NAME="criteriastring" -->" />
+<fieldset><table>
+<!-- TMPL_LOOP NAME="total_by" -->
+<tr><td><input type="checkbox" name="total_by" id="<!-- TMPL_VAR
+NAME="name" -->" value="<!-- TMPL_VAR
+NAME="name" -->" /> <label for="<!-- TMPL_VAR
+NAME="name" -->"><!-- TMPL_VAR NAME="name"--></label></td>
+<td><select name="<!-- TMPL_VAR NAME="name" -->_tvalue">
+
+<!-- TMPL_LOOP NAME="select" -->
+<option value="<!-- TMPL_VAR NAME="value"-->"><!-- TMPL_VAR NAME="value" --></option>
+<!-- /TMPL_LOOP -->
+</select>
+
+</td></tr>
+<!-- /TMPL_LOOP -->
+</table></fieldset>
+
+<fieldset class="action"><input type="hidden" name="phase" value="Choose These Operations" />
+<input type="submit" name="submit" value="Suivant >>"></fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="build6" -->
+<h3>Etape 6 de 6 : Choisir comment votre rapport sera trié</h3>
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+<input type="hidden" name="area" value="<!-- TMPL_VAR NAME="area" -->" />
+<input type="hidden" name="type" value="<!-- TMPL_VAR NAME="type" -->" />
+<input type="hidden" name="column" value="<!-- TMPL_VAR NAME="column" -->" />
+<input type="hidden" name="criteria" value="<!-- TMPL_VAR NAME="criteriastring" -->" />
+<input type="hidden" name="definition" value="<!-- TMPL_VAR NAME="definition" -->" />
+<input type="hidden" name="totals" value="<!-- TMPL_VAR NAME="totals" -->" />
+<fieldset><table><!-- TMPL_LOOP NAME="order_by" -->
+<tr><td><input type="checkbox" id="<!-- TMPL_VAR
+NAME="name" -->" name="order_by" value="<!-- TMPL_VAR
+NAME="name" -->" /> <label for="<!-- TMPL_VAR
+NAME="name" -->"><!-- TMPL_VAR NAME="name"--></label></td><td>
+<select name="<!-- TMPL_VAR NAME="name" -->_ovalue">
+
+<!-- TMPL_LOOP NAME="select" -->
+<option value="<!-- TMPL_VAR NAME="value"-->"><!-- TMPL_VAR NAME="value" --></option>
+<!-- /TMPL_LOOP -->
+</select>
+</td></tr>
+
+<!-- /TMPL_LOOP -->
+</table></fieldset>
+
+<fieldset class="action">
+<input type="hidden" name="phase" value="Build Report" />
+<input type="submit" name="submit" value="Terminer"></fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="showreport" -->
+<h1>Confirmer le rapport</h1>
+<p>Votre rapport sera généré avec la commande SQL suivante.</p>
+<p> 
+<!-- TMPL_VAR NAME="sql" -->
+</p>
+
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+<input type="hidden" name="sql" value="<!-- TMPL_VAR NAME="sql" -->" />
+<input type="hidden" name="type" value="<!-- TMPL_VAR NAME="type" -->" />
+<p>Vous devrez enregistrer le rapport avant de pouvoir l'exécuter</p>
+<fieldset class="action"><input type="hidden" name="phase" value="Save" />  
+<input type="submit" name="submit" value="Enregistrer">  </fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="save" -->
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+<input type="hidden" name="sql" value="<!-- TMPL_VAR NAME="sql" -->" />
+<input type="hidden" name="type" value="<!-- TMPL_VAR NAME="type" -->" />
+<fieldset class="rows">
+<legend>Enregistrer votre rapport personnalisé</legend>
+<ol>
+	<li><label for="reportname">Nom du rapport : </label><input type="text" id="reportname" name="reportname" /></li>
+	<li><label for="notes">Notes : </label> <textarea name="notes" id="notes"></textarea></li>
+</ol></fieldset>
+<fieldset class="action"><input type="hidden" name="phase" value="Save Report" />
+<input type="submit" name="submit" value="Enregistrer rapport"></fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="execute" -->
+<h1><!-- TMPL_VAR NAME="name" --></h1>
+<p><!-- TMPL_VAR NAME="notes" --></p>
+<!-- TMPL_IF name="pagination_bar" --><!-- TMPL_VAR name='pagination_bar'--><!-- /TMPL_IF -->
+<!-- TMPL_UNLESS name="errors" -->
+<table>
+<!-- TMPL_LOOP NAME="results" -->
+<!-- TMPL_VAR NAME="row" -->
+<!-- /TMPL_LOOP -->
+</table>
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+<fieldset class="action">
+<label for="format">Télécharger le rapport </label>
+<select name="format" id="format">
+<option value="csv">fichier CSV</option>
+<option value="tab">Texte séparé par une tabulation</option>
+</select>
+<input type="hidden" name="sql" value="<!-- TMPL_VAR NAME="sql" -->" />
+<input type="hidden" name="phase" value="Export" />
+<input type="submit" name="submit" value="Télécharger"></fieldset>
+</form>
+<!-- /TMPL_UNLESS -->
+<!-- TMPL_IF NAME="errors" -->
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+<div class="dialog alert">
+<b>The following error was encountered:</b><br />
+<!-- TMPL_LOOP name="errors" -->
+<!-- TMPL_IF NAME="sqlerr" -->This report contains the SQL keyword <!-- TMPL_VAR name="sqlerr" -->.<br />Use of this keyword is not allowed in Koha reports due to security and data integrity risks.<br />Please return to the "Saved Reports" screen and delete this report.
+<!-- TMPL_ELSIF NAME="queryerr" -->The database returned the following error: <br /><!-- TMPL_VAR NAME="queryerr" --><br />Please check the log for further details.
+<!-- /TMPL_IF -->
+<!-- /TMPL_LOOP -->
+</div>
+<fieldset class="action"><input type="hidden" name="phase" value="Used saved" />
+<input type="submit" name="submit" value="Rapports sauvegardés"></fieldset>
+</form>
+<!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="create" -->
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+<fieldset class="rows">
+<legend>Créer rapport à partir de SQL</legend>
+<ol>
+	<li><label for="reportname">Nom du rapport :</label> <input type="text" id="reportname" name="reportname"<!--TMPL_IF NAME="reportname" --> value="<!-- TMPL_VAR NAME="reportname"-->"<!-- /TMPL_IF --> /> </li>
+	<li><label for="notes">Notes : </label> <textarea  id="notes" name="notes" cols="50" rows="2"><!--TMPL_IF NAME="notes" --><!-- TMPL_VAR NAME="notes"--><!-- /TMPL_IF --></textarea></li>
+	<li><label for="types">Type :</label><select id="types"  name="types"><!-- TMPL_LOOP NAME="types" --><option value="<!-- TMPL_VAR NAME="id" -->"<!-- TMPL_IF NAME="selected" --> selected="selected"<!-- /TMPL_IF -->><!-- TMPL_VAR NAME="name"--></option><!-- /TMPL_LOOP --></select></li>
+	<li><label for="sql">SQL : </label><textarea  id="sql" name="sql" cols="50" rows="10"><!--TMPL_IF NAME="sql" --><!-- TMPL_VAR NAME="sql"--><!-- /TMPL_IF --></textarea></li>
+</ol>
+</fieldset>
+
+<fieldset class="action"><input type="hidden" name="phase" value="Save Report" />
+<input type="submit" name="submit" value="Enregistrer rapport"></fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="compound" -->
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+Maitre :  <select name="master">
+<!-- TMPL_LOOP NAME="savedreports" -->
+<option value="<!-- TMPL_VAR NAME="id" -->"><!-- TMPL_VAR NAME="report_name"--></option>
+<!-- /TMPL_LOOP -->
+</select>
+ &nbsp;
+Sous rapport :<select name="subreport">
+<!-- TMPL_LOOP NAME="savedreports" -->
+<option value="<!-- TMPL_VAR NAME="id" -->"><!-- TMPL_VAR NAME="report_name"--></option>
+<!-- /TMPL_LOOP -->
+</select>
+<br />
+<input type="hidden" name="phase" value="Save Compound" />
+<input type="submit" name="submit" value="Enregistrer">
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="save_compound" -->
+<!-- TMPL_VAR NAME="master" --> <br />
+<!-- TMPL_VAR NAME="subsql" -->
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="retresults" -->
+<h1>Résultat de l'enregistrement du rapport</h1>
+<h2><!-- TMPL_VAR NAME="name" --></h2>
+<p><!-- TMPL_VAR NAME="notes" --></p>
+<table>
+<!-- TMPL_LOOP NAME="results" -->
+<!-- TMPL_VAR NAME = "row" -->
+<!-- /TMPL_LOOP -->
+</table>
+
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="showsql" -->
+<textarea id="sql"><!-- TMPL_VAR NAME="sql" --></textarea>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="save_successful" -->
+<!-- TMPL_UNLESS NAME="errors" -->
+<h2>Votre rapport a été sauvegardé</h2>
+<p>Le rapport que vous avez créé est maintenant enregistré. Vous pouvez </p>
+<ul>
+	<li>Accéder à ce rapport à partir de <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Used+saved">la page des rapports enregistrés</a></li>
+	<li>Planifier l'exécution de ce rapport à l'aide du <a href="/cgi-bin/koha/tools/scheduler.pl">planificateur de tâches</a></li>
+	<li>Retour aux <a href="/cgi-bin/koha/reports/guided_reports.pl?phase=Used+saved">Rapports</a></li>
+</ul>
+<!-- /TMPL_UNLESS -->
+<!-- TMPL_IF NAME="errors" -->
+<form action="/cgi-bin/koha/reports/guided_reports.pl" method="post">
+<div class="dialog alert">
+<b>The following error was encountered:</b><br />
+<!-- TMPL_LOOP name="errors" -->
+<!-- TMPL_IF NAME="sqlerr" -->The SQL statement contains the keyword <!-- TMPL_VAR name="sqlerr" -->. Use of this keyword is not allowed in Koha reports due to security and data integrity risks.
+<!-- TMPL_ELSIF NAME="queryerr" -->The SQL statment is missing the SELECT keyword.<br />Please check the SQL statement syntax.
+<!-- /TMPL_IF -->
+<!-- /TMPL_LOOP -->
+</div>
+<input type="hidden" name="sql" value="<!-- TMPL_VAR NAME="sql" -->" />
+<input type="hidden" name="reportname" value="<!-- TMPL_VAR NAME="reportname" -->" />
+<input type="hidden" name="type" value="<!-- TMPL_VAR NAME="type" -->" />
+<input type="hidden" name="notes" value="<!-- TMPL_VAR NAME="notes" -->" />
+<fieldset class="action"><input type="hidden" name="phase" value="Create report from SQL" />
+<input type="submit" name="submit" value="Edit SQL" /></fieldset>
+</form>
+<!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="guided-reports-view.inc" -->
+</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function setObjects() {
+	selectedColumnsObj=document.getElementById('selectedColumns');
+	availableColumnsObj=document.getElementById('availableColumns');
+}
+setObjects();
+
+function addColumn() {
+	for (i=0;i<availableColumnsObj.length;i++) {
+		if (availableColumnsObj.options[i].selected==true) {
+			var newColumnObj=document.createElement("OPTION");
+			newColumnObj.value=availableColumnsObj.options[i].value;
+			newColumnObj.text=availableColumnsObj.options[i].text;
+			selectedColumnsObj.appendChild(newColumnObj);
+			newColumnObj.selected=true;
+		}
+	}
+}
+
+function delColumn() {
+	for (i=0;i<=selectedColumnsObj.options.length;i++) {
+		if (selectedColumnsObj.options.selectedIndex>=0)
+		selectedColumnsObj.remove(selectedColumnsObj.options.selectedIndex)
+	}
+}
+//]]>
+</script>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

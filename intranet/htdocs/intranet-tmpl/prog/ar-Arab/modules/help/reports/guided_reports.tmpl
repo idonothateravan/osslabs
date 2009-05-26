@@ -1,0 +1,52 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+<a name="#top" title="#top"></a> <h1>مساعد مرشد التقارير</h1>
+	<ul>
+		<li><a href="#new">أنشئ تقرير جديد</a></li>
+		<li><a href="#save">حفظ تقرير</a></li>
+		<li><a href="#sql">إنشئ تقرير جديد من SQL</a></li>
+		<li><a href="#scheduler">جدولة تقرير</a></li>
+		<li>
+		<ul>
+			<li> 
+			<ul>
+				<li><strong>Tabular:</strong>تقرير بسيط من الأعمدة فقط.</li>
+				<li><strong>Matrix:</strong><em>لم يتنهى</em></li>
+				<li><strong>ملخص:</strong><em>لم يتنهى</em></li>
+			</ul>
+			<ul>
+				<li><strong>System Generated Criteria</strong> هذه المعايير معروفه إلى النظام ومأخوذة من تفضيلات نظامك</li>
+				<li><strong>معيار القاموس</strong> هذه معايير عرّفت حسب الطّلب لكوها في قاموس التقارير</li>
+			</ul>
+			<ul>
+				<li>إحصاء: عائدات إحصاء كلّ قيمة </li>
+				<li>المجموع: إرجاع مجموع كل القيم.</li>
+				<li>متوسّط: ترجع القيمة المتوسطة </li>
+				<li>Min : Returns the lowest value</li>
+				<li>Max: يرجع القيمة الأعلى </li>
+			</ul></li>
+<p>للمساعدة بقاموس التقارير - أنظر المساعدة على الإنترنت ضمن صفحات القاموس </p>
+<hr/><a name="#new" title="#new"></a><h2>Building A New Report</h2> <h3>خطوة 1 من 6:إختار النظام الفرعي لعمل التقرير</h3>
+<p>Select one of the module areas to report on. Guided reports can only generate reports from within one module. For reports across modules, you will need to use either a compound report, or build a custom report using SQL statements.</p><h3>خطوة 2 من 6:إختر نوع تقرير</h3>
+<p>هناك 3 أنواع من التقارير يمكنها أن تنشأ:</p><h3>خطوة 3 من 6: إختر أعمدة للعرض</h3>
+<p>Select the columns to draw the report data from. Click the column to add in the left hand box and then click the &quot;Add&quot; button. Your column will now show up in the right hand box. To remove a selected column, click the column name on the right hand side and then click the delete button. Once you are happy with the columns, select the &quot;Choose Columns&quot; button to proceed to the next step.</p>
+<p><strong>كن حذرا فى اختيار الأعمدة.</strong> إن خاصية التقارير المرشدة تتوقع أنك لديك بعض المعرفة عن بنيه قاعدة بيانات كوها و ما هى إستخدامات كل حقل.كن حذرا إختيار أعمدة ك إختيار سيّئ قد يؤدّي إلى تقريركبير جدا بحيث يوقّت قبل أن ينشأ, أو سيتطلّب كمية كبيرة من مصادر النظام لانشاء وإبطاء عملية كوها.</p>
+<p>ليس هناك مدقق صحة في محرّكِ التقاريرَ</p><h3>خطوة 4 من 6: إختر معيار للتحديد </h3>
+<p>المعايير تسمح لك بتحديد تقريرك لعرض النتائج إلى المعايير المعطاة.المعايير مقيدة إلى منطقة تقرير معينة.</p><h3>خطوة 5 من 6: إختر أيّ أعمدة للجمع</h3>
+<p>الان إختر العملية الذى تود أدائها فى كل عمود. العمليات التى يمكن أن يتم إختيارها هى:</p>.	  <h3>خطوة 6 من 6: إختر كيف تريد طلب التقرير</h3>
+<p>إختر كيف تريد أن يطلب التقرير. يمكنك أن تختار معايير متعدّدة للطلب فى المقابل والتدرج التي تطبيقي. على سبيل المثال الطلب مرتب أبجديا باللقب، وبعد ذلك أبجديا بالاسم الأول </p><br/><a href="#top">
+الرجوع للأعلى
+</a>
+<hr/><a name="#save" title="#save"> </a><h2>Saving A Report</h2>
+<p>Once you have generated a report, you can now choose to save the report definition so that you can run it again when required, or setup the Task Scheduler to run the report for you.</p><br/><a href="#top">
+الرجوع للأعلى
+</a>
+<hr/><a name="#sql" title="#sql"> </a><h2>Generating A New Report From SQL</h2>
+<p>A report can be generated directly using from an SQL statement. On the &quot;Create from SQL&quot; page, give the report a Title and Description (using the notes field) and then paste your SQL statement into the text area.</p><br/><a href="#top">
+الرجوع للأعلى
+</a>
+<hr/><a name="#scheduler" title="#scheduler"> </a><h2>Scheduling A Report</h2>
+<p>Reports can be scheduled to run either at a one off time, or repeatedly at a defined period using the task scheduler. The task scheduler is found under Tools &gt;Task Scheduler</p><br/><a href="#top">
+الرجوع للأعلى
+</a>
+		</ul></li>
+	</ul><!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

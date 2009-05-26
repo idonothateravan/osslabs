@@ -1,0 +1,225 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 報表 <!-- TMPL_IF NAME="do_it" -->&rsaquo; 館藏目錄統計 &rsaquo;<!-- TMPL_ELSE -->&rsaquo; 館藏目錄統計<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">報表</a> <!-- TMPL_IF NAME="do_it" -->&rsaquo; <a href="/cgi-bin/koha/reports/catalogue_stats.pl">館藏目錄統計</a> &rsaquo;<!-- TMPL_ELSE -->&rsaquo; 館藏目錄統計<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="do_it" -->
+	<!-- TMPL_LOOP NAME="mainloop" -->
+		<h1>館藏目錄統計</h1>
+		<!-- TMPL_IF NAME="loopfilter"-->
+			<p>條件</p>
+			<!-- TMPL_LOOP NAME="loopfilter" -->
+					<p><!-- TMPL_VAR NAME="crit"--> =<!-- TMPL_VAR NAME="filter"--></p>
+			<!-- /TMPL_LOOP -->
+		<!-- /TMPL_IF-->
+		
+		<table>
+			<tr>
+				<th><!-- TMPL_VAR name="line" --> / <!-- TMPL_VAR name="column" --></th>
+				<!-- TMPL_LOOP NAME="loopcol" -->
+					<th><!-- TMPL_VAR NAME="coltitle" --></th>
+				<!-- /TMPL_LOOP -->
+				<th>總計</th>
+			</tr>
+				<!-- TMPL_LOOP NAME="looprow" -->
+					<tr>
+						<!-- TMPL_IF NAME="hilighted" --><td class="hilighted"><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+						<!-- TMPL_VAR NAME="rowtitle" --></td>
+						<!-- TMPL_LOOP NAME="loopcell" -->
+							<!-- TMPL_IF NAME="hilighted" --><td><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+								<!--TMPL_IF NAME="value" --><!-- TMPL_VAR NAME="value" -->
+								<!--TMPL_ELSE-->&nbsp;
+								<!--/TMPL_IF-->
+							</td>
+						<!-- /TMPL_LOOP -->
+						<!-- TMPL_IF NAME="hilighted" --><td><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+							<!-- TMPL_VAR NAME="totalrow" -->
+						</td>
+					</tr>
+				<!-- /TMPL_LOOP-->
+				<tr>
+					<th>總計</th>
+					<!-- TMPL_LOOP NAME="loopfooter" -->
+						<th>
+							<!-- TMPL_VAR NAME="totalcol" -->
+						</th>
+					<!-- /TMPL_LOOP -->
+					<th><!-- TMPL_VAR NAME="total" --></th>
+				</tr>
+		</table>
+	<!-- /TMPL_LOOP -->
+<!-- TMPL_ELSE -->
+
+	<form method="post" action="/cgi-bin/koha/reports/catalogue_stats.pl">
+	<fieldset class="rows">
+	<legend>館藏目錄統計</legend>
+	<table>
+		<thead>
+			<tr>
+			<th>題名</th>
+			<th>列</th>
+			<th>欄</th>
+			<th>條件</th>
+			</tr>
+		</thead>
+		<tbody>
+				<input type="hidden" name="Filter" /> <input type="hidden" name="Filter" />
+			<!-- TMPL_IF Name="haslccn" -->
+					<tr>
+					<td>國會圖書館分類法</td>
+					<td><input type="radio" name="Line" value="lccn" /></td>
+					<td><input type="radio" name="Column" value="lccn" /></td>
+					<td> <label for="locFrom">來自</label> <input type="text" name="Filter" id="locFrom" /> <label for="locTo">到</label> <input type="text" name="Filter" id="locTo" /></td>
+				</tr>
+					<tr>
+					<td>&nbsp;</td>
+					<td colspan="2"><select name="lccndigits" id="lccndigits">
+						<option value=""> </option>
+						<option value ="1">1</option>
+						<option value ="2">2</option>
+						<option value ="3">3</option>
+						<option value ="4">4</option>
+						<option value ="5">5</option>
+						</select>
+						<label for="lccndigits">詞彙</label>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<!-- TMPL_ELSE -->
+				<input type="hidden" name="Filter" /> <input type="hidden" name="Filter" />
+			<!-- /TMPL_IF  -->
+			<!-- TMPL_IF Name="hascote" -->
+			  <tr>
+					<td>Koha Full Call Number</td>
+					<td><input type="radio" name="Line" value="items.itemcallnumber" /></td>
+					<td><input type="radio" name="Column" value="items.itemcallnumber" /></td>
+					<td><label for="callnoFrom">來自</label> <input type="text" name="Filter" id="callnoFrom" /> <label for="callnoTo">到</label> <input type="text" name="Filter" id="callnoTo" /></td>
+				</tr>
+			 <tr>
+					<td>&nbsp;</td>
+					<td colspan="2"><select name="cotedigits" id="cotedigits">
+						<option value=""> </option>
+						<option value ="1">1</option>
+						<option value ="2">2</option>
+						<option value ="3">3</option>
+						<option value ="4">4</option>
+						<option value ="5">5</option>
+						</select>
+						<label for="cotedigits">詞彙</label> 
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<!-- TMPL_ELSE -->
+				<tr><td colspan="4"><input type="hidden" name="Filter" /> <input type="hidden" name="Filter" /></td></tr>
+			<!-- /TMPL_IF -->
+			 <tr>
+				<td>館藏型式</td>
+				<td><input type="radio" name="Line" value="itemtype" /></td>
+				<td><input type="radio" name="Column" value="itemtype" /></td>
+				<td><select name="Filter" id="itemtype">
+					<option value=""> </option>
+					<!-- TMPL_LOOP NAME="CGIItemType" -->
+					<!-- TMPL_IF NAME="selected" -->
+					<option value="<!-- TMPL_VAR NAME="itemtype" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="itemtype" -->"><!-- TMPL_VAR NAME="description" --></option><!-- /TMPL_IF -->
+
+					<!-- /TMPL_LOOP -->
+					</select>
+				</td>
+			</tr>
+			 <tr>
+				<td>出版者</td>
+				<td><input type="radio" name="Line" value="publishercode" /></td>
+				<td><input type="radio" name="Column" value="publishercode" /></td>
+				<td><input type="text" name="Filter" /></td>
+			</tr>
+			<tr>
+				<td>出版年</td>
+				<td><input type="radio" name="Line" value="publicationyear" /></td>
+				<td><input type="radio" name="Column" value="publicationyear" /></td>
+				<td><label for="pubyearFrom">來自</label> <input type="text" name="Filter" id="pubyearFrom" /> <label for="pubyearTo">到</label> <input type="text" name="Filter" id="pubyearTo" /></td>
+			</tr>
+			<tr>
+				<td>總館</td>
+				<td><input type="radio" name="Line" value="items.homebranch" /></td>
+				<td><input type="radio" name="Column" value="items.homebranch" /></td>
+				<td><select name="Filter" id="branch">
+					<option value=""> </option>
+					<!-- TMPL_LOOP NAME="CGIBranch" -->
+					<!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="branchcode" -->" selected="selected"><!-- TMPL_VAR NAME="branchname" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="branchcode" -->"><!-- TMPL_VAR NAME="branchname" --></option><!-- /TMPL_IF -->
+					<!-- /TMPL_LOOP -->
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Shelving Location</td>
+				<td><input type="radio" name="Line" value="items.location" /></td>
+				<td><input type="radio" name="Column" value="items.location" /></td>
+				<td><select name="Filter" id="location">
+					<option value=""> </option>
+					<!-- TMPL_LOOP NAME="locationloop" -->
+					<!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="code" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="code" -->"><!-- TMPL_VAR NAME="description" --></option><!-- /TMPL_IF -->
+					<!-- /TMPL_LOOP -->
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>集叢</td>
+				<td><input type="radio" name="Line"   value="items.ccode" /></td>
+				<td><input type="radio" name="Column" value="items.ccode" /></td>
+				<td><select name="Filter" id="ccode">
+					<option value=""> </option>
+					<!-- TMPL_LOOP NAME="authvals" -->
+					<!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="code" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="code" -->"><!-- TMPL_VAR NAME="description" --></option><!-- /TMPL_IF -->
+					<!-- /TMPL_LOOP -->
+					</select>
+				</td>
+			</tr>
+		</tbody>
+	</table><br /></fieldset>
+	
+	<fieldset class="rows">
+	<legend>輸出</legend>
+	<ol><li><label for="outputscreen">使用瀏覽器顯示： </label><input type="radio" checked="checked" name="output" id="outputscreen" value="screen" /></li>
+		<li><label for="outputfile">變成一個檔案 </label><input type="radio" name="output" value="file" id="outputfile" />
+			<label class="inline" for="basename">命名： </label><input type="text" name="basename" id="basename" value="Export" />
+			<label class="inline" for="MIME">Into an application: </label>
+			<select name="MIME" id="MIME">
+			<!-- TMPL_LOOP NAME="CGIextChoice" -->
+			<option value="<!-- TMPL_VAR NAME="type" -->"><!-- TMPL_VAR NAME="type" --></option>
+			<!-- /TMPL_LOOP -->
+			</select>
+			<!-- <label class="inline" for="sep">Delimiter: </label> -->
+			<select name="sep" id="sep">
+			<!-- TMPL_LOOP NAME="CGIsepChoice" -->
+			<option value="<!-- TMPL_VAR NAME="delim" -->"><!-- TMPL_VAR NAME="delim" --></option>
+			<!-- /TMPL_LOOP -->
+			</select>
+		</li>
+	</ol>
+	</fieldset>
+
+	<fieldset class="action">
+	<input type="submit" value="送出">
+	<input type="hidden" name="report_name" value="<!--TMPL_VAR NAME="report_name" -->" />
+	<input type="hidden" name="do_it" value="1" />
+	</fieldset>
+	</form>
+<!-- /TMPL_IF -->
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

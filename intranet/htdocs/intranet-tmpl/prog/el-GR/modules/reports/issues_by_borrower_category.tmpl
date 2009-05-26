@@ -1,0 +1,76 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Εκθέσεις &rsaquo; Δανεισμοί ανά κατηγορία μελών</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Αρχική</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">Εκθέσεις</a> <!-- TMPL_IF NAME="do_it" -->&rsaquo; <a href="/cgi-bin/koha/reports/manager.pl?report_name=issues_by_borrower_category">Δανεισμοί ανά κατηγορία μέλους</a> &rsaquo; Αποτελέσματα<!-- TMPL_ELSE -->&rsaquo; Δανεισμοί ανά κατηγορία μελών<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="do_it" -->
+<!-- TMPL_LOOP NAME="mainloop" -->
+	<h1>Δανεισμοί κατά κατηγορία μελών <!--TMPL_IF NAME="borrower_category" --> για κατηγορία = <!-- TMPL_VAR NAME="borrower_category" --><!-- /TMPL_IF --></h1>
+	<table>
+		<tr>
+			<th>&nbsp;</th>
+			<!-- TMPL_LOOP NAME="categorycodeloop" -->
+				<th><!-- TMPL_VAR NAME="categorycode" --></th>
+			<!-- /TMPL_LOOP -->
+			<th>ΣΥΝΟΛΟ</th>
+		</tr>
+			<!-- TMPL_LOOP NAME="loopborrowertype" -->
+				<tr>
+					<!-- TMPL_IF NAME="hilighted" --><td class="hilighted"><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+					<!-- TMPL_VAR NAME="itemtype" --></td>
+					<!-- TMPL_LOOP NAME="loopitemtype" -->
+						<!-- TMPL_IF NAME="hilighted" --><td><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+							<!-- TMPL_VAR NAME="issues" -->
+						</td>
+					<!-- /TMPL_LOOP -->
+					<!-- TMPL_IF NAME="hilighted" --><td><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+						<!-- TMPL_VAR NAME="totalitemtype" -->
+					</td>
+				</tr>
+			<!-- /TMPL_LOOP -->
+			<tr>
+				<th>ΣΥΝΟΛΟ</th>
+				<!-- TMPL_LOOP NAME="loopborrowertotal" -->
+					<th>
+						<!-- TMPL_VAR NAME="issues" -->
+					</th>
+				<!-- /TMPL_LOOP -->
+				<th><!-- TMPL_VAR NAME="grantotal" --></th>
+			</tr>
+	</table>
+<!-- /TMPL_LOOP -->
+<!-- TMPL_ELSE -->
+	<form method="post" action="/cgi-bin/koha/reports/manager.pl">
+		<fieldset class="rows">
+		<legend>Δανεισμοί κατά κατηγορία μελών</legend>
+		<ol><li><label for="borrowercategory">Επιλογή μίας κατηγορίας μελών</label><select name="value" id="borrowercategory"><option value="" > Any Category code</option>
+    <!--TMPL_LOOP Name="loopcategories"-->
+        <option value="<!--TMPL_VAR Name="value"-->" ><!--TMPL_VAR Name="description"--> </option>  
+     <!--/TMPL_LOOP --> 
+    </select></li>
+		<li><label for="branch">Επιλογή παραρτήματος:</label> <!-- TMPL_VAR NAME="CGIbranch" --></li></ol></fieldset>
+		<fieldset class="action"><input type="submit" value="Υποβολή">
+		<input type="hidden" name="report_name" value="<!--TMPL_VAR NAME="report_name" -->" />
+		<input type="hidden" name="do_it" value="1" /></fieldset>
+	</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

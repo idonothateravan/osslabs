@@ -1,0 +1,33 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Catégories adhérent</h1>
+
+<p>C'est ici que vous déterminez les types d'adhérents à votre bibliothèque et quels seront leurs droits.</p>
+
+<h2>Catégories, Descriptions et Types</h2>
+<p>Démarrer en choisissant un code et une description pour chaque catégorie d'adhérent. Chaque catégorie doit être de l'un des 5 types suivants :</p>
+	<ul>
+		<li>Les adhérents Adultes peuvent être "garants" pour d'autres adhérents dont ils sont responsables. C'est la catégorie d'adhérent par défaut.</li>
+		<li>Les adhérents enfants sont une catégorie qui a un "garant".</li>
+		<li>Les adhérents "collectivités/institutions" sont des institutions telles que des bibliothèques à qui vous prêtez vos documents. Koha demande des informations différentes pour ces adhérents;</li>
+		<li>Les adhérents professionnels peuvent être associés à un garant (habituellement une organisation).</li>
+		<li>Bibliothécaire : un membre de la bibliothèque.</li>
+		<li>Adhérents "statistiques" : faire un prêt sur un adhérent de ce type créée un enregistrement statistique (usage local), mais ne prête pas réellement le document.</li>
+	</ul>
+	
+<h3>Note sur les permissions</h3>
+<p>Les adhérents, quelque soit leur catégorie peuvent avoir des habilitations dans l'interface bibliothécaire.</p>
+
+<h2>Durée d'inscription (mois)</h2>
+<p>La durée d'inscription indique en mois la durée de validité d'une inscription. Si l'inscription n'expire jamais, entrez un nombre anormalement élevé (&gt;= 99).</p>
+
+<h2>Limite d'âge supérieure et âge requis</h2>
+<p>La limite d'âge supérieure et l'âge requis fixent les critères d'âge pour ce type d'adhérent .Si vous délivrez des cartes enfants pour les adhérents entre 2 et 18 ans, par exemple, alors l'âge requis sera"2" et la limite d'âge supérieure "18". S'il n'y a pas d'âge limite supérieure, fixez cette valeur à 99 (la plus grande valeur autorisée).</p>
+
+<h2>Droits d'inscription et frais de réservation</h2>
+<p>Les frais d'inscription et de réservation (s'il y en a) doivent être entrés soit comme des nombres entiers ou jsqu'à 6 décimales, sans indication de la devise (ex. "1,25000" au lieu de "1,25 €").</p>
+
+<h2>Message de retard demandé</h2>
+<p>Message de retard demandé vous permet de forcer les messages de retard affichés pour ce type d'adhérent.</p>
+
+<!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

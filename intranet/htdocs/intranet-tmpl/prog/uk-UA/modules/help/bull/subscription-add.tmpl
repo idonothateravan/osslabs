@@ -1,0 +1,32 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Допомога по додаванню та зміні передплати серіальних видань</h1>
+	<ul>
+		<h2>Блок інформації про передплату</h2>
+		<p>it contains the name of the librarian that created the subscription, the name of the supplier providing the subscription, the cost and the budget affected. It also contains the title of the biblio managed by the subscription.</p>
+		<h2>Блок інформації про планування</h2>
+		<p>тут міститься різна інформація для обрахунку дати прибуття.</p>
+		<h2>Тривалість передплати</h2>
+		<p>one field in this bloc should be filled : the subscription length can be calculated in weeks, months or number of issues to receive</p>
+		<h2>Обчислення нумерації</h2>
+		<p>The numbering of issues received can be a complex formulas. The "numbering formula" can be filled with any text and/or numbers. 3 special tokens <b>{X} {Y}</b> and <b>{Z}</b> can be user to define the calculation formula. XYZ values are calculated with the following method:</p>
+			<ul>
+				<li>Додати: це число додається до XYZ</li>
+				<li>once every : the number before can be added on every issue or less often</li>
+				<li>Коли більш ніж: якщо обраховане число є більше за значення тут</li>
+				<li>Set back to : if the previous condition is valid, the calculated number is set to this one instead</li>
+				<li>Last value / begins with : the last value calculated or the 1st value (when adding a subscription</li>
+			</ul>
+		<h2>Зразок</h2>
+		Consider the formula <b>#{X}/{Y}</b>. The following XYZ settings :
+		<ul>
+			<li> <b>X</b> додається <b>1</b> раз в <b>4</b> разів. Коли більш ніж <b>9999999</b> повернути назад до <b>empty</b>. Починається з <b>2004</b></li>
+			<li> <b>Y</b> додається <b>1</b> раз в <b>1</b> разів. Коли більш ніж <b>4</b> повернути назад до <b>4</b>. Починається з <b>1</b></li>
+		</ul>
+		приводитиме до наступних номерів випусків:
+		<p>#2004/1, #2004/2, #2004/3, #2004/4, #2005/1, #2005/2, #2005/3, #2005/4, #2006/1</p>
+		<p>
+			<b>Note:</b> when you add a subscription, Koha assumes you have already created the order, or that you will do it soon. So, NO information is sent to the acquisition module. This is not the case when the subscription expires. In this case, a subscription renewal creates a "suggestion" that is sent to the acquisition module.
+		</p>
+
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

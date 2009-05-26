@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UNIMARC_Ersteller Feld 125a</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Typ der Partitur: </td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>Orchesterpartitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Orchesterpartitur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>Klein- oder Studienpartitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Klein- oder Studienpartitur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>Gesangspartitur, Begleitung im Klavierauszug</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Gesangspartitur, Begleitung im Klavierauszug</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" SELECTED>Vokalpartitur, Chorpartitur, ohne Begleitung</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Vokalpartitur, Chorpartitur, ohne Begleitung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1e" -->
+				<option value="e" SELECTED>Verdichtete Partitur, Dirigierpartitur auf Grundlage des Pianos</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Verdichtete Partitur, Dirigierpartitur auf Grundlage des Pianos</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1g" -->
+				<option value="g" SELECTED>Kombinierte Partitur, in der mehrere Stimmen in einem Notensystem notiert sind</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Kombinierte Partitur, in der mehrere Stimmen in einem Notensystem notiert sind</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1m" -->
+				<option value="m" SELECTED>Verschiedene Formen</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Verschiedene Formen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1x" -->
+				<option value="x" SELECTED>Nicht anwendbar, das ist keine Partitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar, das ist keine Partitur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Anzeiger für Teile:</td>
+		<td>
+			<select name="f2" size="1">
+
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" SELECTED>Existierende Teile</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Existierende Teile</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2y" -->
+				<option value="y" SELECTED>Nichtexistierende Teile</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Nichtexistierende Teile</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="OK"  onClick="javascript:report()"></td></tr>
+</table>
+</form>
+
+<script type="text/javascript">
+	function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value =  document.f_pop.f1.value+document.f_pop.f2.value;
+	    window.close();
+	    return false;
+	}
+</script>
+
+</body>
+</html>

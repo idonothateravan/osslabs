@@ -1,0 +1,214 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; About Koha</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+
+     $(document).ready(function() {
+        $('#abouttabs > ul').tabs();
+     });
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; About Koha</div>
+
+<div id="doc3" class="yui-t7">
+   
+   <div id="bd">
+    <div id="yui-main">
+    <div class="yui-g">
+            <h1>A Koha-ról</h1>
+    
+    <div id="abouttabs" class="toptabs numbered">
+        <ul>
+        <li><a href="about.pl#about">Server Information</a></li>
+        <li><a href="about.pl#perl">Perl modules</a></li>
+        <li><a href="about.pl#team">Koha Team</a></li>
+        <li><a href="about.pl#licenses">Licenses</a></li>
+        <li><a href="about.pl#translations">Translations</a></li>
+        </ul>
+        
+        <div id="about">
+            
+        <table>
+            <caption>Server information</caption>
+            <tr><th scope="row">Koha version: </th><td><!-- TMPL_VAR ESCAPE="HTML" name="kohaVersion" --></td></tr>
+            <tr><th scope="row">OS version ('uname -a'): </th><td><!-- TMPL_VAR ESCAPE="HTML" name="osVersion" --></td></tr>
+            <tr><th scope="row">Perl interpreter: </th><td><!-- TMPL_VAR ESCAPE="HTML" name="perlPath" --></td></tr>
+            <tr><th scope="row">Perl version: </th><td><!-- TMPL_VAR ESCAPE="HTML" name="perlVersion" --></td></tr>
+            <tr><th scope="row">Perl @INC: </th><td>
+                <!-- TMPL_LOOP name="perlIncPath" -->
+                    <!-- TMPL_VAR ESCAPE="HTML" name="perlinc" --> <br />
+                <!-- /TMPL_LOOP -->
+            </td></tr>
+            <tr><th scope="row">MySQL version: </th><td><!-- TMPL_VAR ESCAPE="HTML" name="mysqlVersion" --></td></tr>
+            <tr><th scope="row">Apache verzió: </th><td><!-- TMPL_VAR ESCAPE="HTML" name="apacheVersion" --></td></tr>
+            <tr><th scope="row">Zebra verzió: </th><td><!-- TMPL_VAR ESCAPE="HTML" name="zebraVersion" --></td></tr>
+        </table>
+        </div>
+        <div id="perl">
+            <table>
+                    <caption>Perl modules</caption>
+                    <tr>
+                <!-- TMPL_LOOP name="components" -->
+                        <th scope="row"><!-- TMPL_VAR NAME="name" --></th>
+                        <td><!-- TMPL_VAR NAME="version" --></td>
+                    <!-- TMPL_UNLESS name="counter" --></tr><tr><!-- /TMPL_UNLESS -->
+                <!-- /TMPL_LOOP -->
+            </table>
+        </div>
+        <div id="team">
+            <h2>Special thanks to the following organizations</h2>
+            <ul>
+                <li><strong><a href="http://library.org.nz">Horowhenua Library Trust</a></strong>, Új Zéland, és Rosalie Blake, Könyvtár igazgató, (Koha 1.0)</li>
+                <li>The <strong><a href="http://myacpl.org">Nelsonville Public Library System</a></strong>, Ohio, USA (MARC, dokumentació, sablonok karbantartása)</li>
+                <li><strong>EMN (Ecole des Mines de Nantes)</strong> , Franciaország (Ajánlások, Statisztikai varázslók és jobbított LDAP támogatások)</li>
+                <li><strong><a href="http://www.ensmp.fr">ENSMP (Ecole Nationale Supérieure des Mines de Paris)</a></strong>, France (biblio frameworks, MARC authorities, OPAC basket, Serials sponsorship)</li>
+                <li><strong><a href="http://www.mediathequeouestprovence.fr/">SAN-Ouest Provence</a></strong>, Franciaország (Koha 3.0 jobbítások a olvasó és előjegyzési modulon)</li>
+                <li>The <strong><a href="http://ccfls.org">Crawford County Federated Library System</a></strong>, PA, USA (Koha 3.0 Zebra Integration)</li>
+                <li>The <strong><a href="http://library.neu.edu.tr">Near East University</a></strong>, Ciprus</li>
+                <li><strong>OPUS International Consultants</strong>, Wellington, Új Zéland (Jogi sorozatok)</li>
+                <li><strong><a href="http://www.famfamfam.com/">famfamfam.com</a></strong> Birmingham (UK) based developer Mark James for the famfamfam Silk iconset.</li>
+            </ul>   
+                
+            <h2>Development team</h2>
+            <ul>
+                <li><strong>LibLime (Joshua Ferraro, Ryan Higgins, Chris Cormack, Galen Charlton, Mason James, Chris Catalfo, Joe Atzberger, Russel Garlick, Andrew Moore)</strong>, USA (a Koha 3.0 forgalomba hozataláért felelős)</li>
+                <li><strong>BibLibre (Paul Poulain, Henri-Damien Laurent, Antoine Farnault)</strong>, Franciaország (a Koha 2.0 és 2.2 forgalomba hozataláért felelős)</li>
+                <li><strong>Katipo Communications </strong>, Új Zéland (a Koha 1.0 and 1.2 forgalomba hozataláért felelős)</li>
+                <li><strong>SAN-Ouest Provence (Bruno Toumi and Arnaud Laurin)</strong>, Franciaország</li>
+        <li><strong>Nelsonville Public Library (Owen Leonard)</strong>, Ohio, USA (kezelőfelület tervezés)</li>
+        <li><strong>MJ Ray and Chris Nighswonger</strong>, UK (Installáló)</li>
+            </ul>
+
+            <h2>További köszönet:</h2>
+            <ul>
+                <li>Adam Thick</li>
+                <li>Andrew Hooper</li>
+                <li>Al Banks</li>
+                <li>Ambrose Li (fordítói eszköz)</li>
+                <li>Andrew Arensburger (a kicsi és nagyszerű C4::Context modul)</li>
+                <li>Benedykt P. Barszcz (Polish for 2.0)</li>        
+                <li>Brig C. McCoy</li>
+                <li>Chris Catalfo (new plugin MARC editor)</li>
+                <li>Daniel Holth</li>
+                <li>David Strainchamps</li>
+                <li>Dorian Meid (German translation)</li>
+                <li>doXulting (Matthieu Branlat) OPAC basket</li>
+                <li>Ed Summers (Some code and Perl packages like MARC::Record)</li>
+                <li>Ecole des Mines de Saint Etienne, Philippe Jaillon (OAI-PMH support)</li>
+                <li>Esiee School (Jérome Vizcaino, Michel Lerenard, Pierre Cauchois)</li>
+                <li>Finlay Thompson</li>
+                <li>Florian Bischof</li>
+                <li>Francisco M. Marzoa Alonso</li>
+                <li>Glen Stewart</li>
+                <li>Gynn Lomax</li>
+                <li>Jo Ransom</li>
+                <li>Kip DeGraaf</li>
+                <li>Marco Gaiarin</li>
+                <li>Md. Aftabuddin</li>
+                <li>Michaes Herman</li>
+                <li>Mike Hansen</li>
+                <li>Mike Johnson</li>
+                <li>Mike Mylonas</li>
+                <li>MJ Ray and Turo Technology LLP, (quality control, installer and updater, 2.0 release maintainer)</li>
+                <li>Nicholas Rosasco, (Documentation Compiler)</li>
+                <li>Nicolas Morin (French Translation in 2.0)</li>
+        <li>Olwen Williams (Database design and data extraction for Koha 1.0)</li>
+                <li>Pawel Skuza (Polish for 1.2)</li>
+                <li>Pate Eyler (Kaitiaki from 2002 to 2004)</li>
+        <li>Rachel Hamilton-Williams (Kaitiaki from 2004 to now)</li>
+                <li>Regula Sebastiao</li>
+        <li>Robert Lyon (Corporate Serials)</li>
+                <li>Roger Buck</li>
+                <li>Ron Wickersham</li>
+                <li>Sebastiaan Durand</li>
+                <li>Steve Tonnesen (early MARC work, Virtual Bookshelves concept, KohaCD)</li>
+                <li>Stephen Hedges</li>
+                <li>Thomas Dukleth (MARC Frameworks Maintenance)</li>
+                <li>Tumer Garip</li>
+                <li>Universidad ORT Uruguay (Ernesto Silva, Andres Tarallo)</li>
+            </ul>
+        </div>
+        <div id="licenses">
+            <h2>Koha</h2>
+            <p>
+            <a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License, version 2</a>
+            </p>
+            <h2>YUI</h2>
+            <p>
+            <a href="http://developer.yahoo.com/auth/license.txt">BSD License</a>
+            </p> 
+            <h2>Famfamfam iconset</h2>
+            <p>
+              <ul>
+                <li><a href="http://www.famfamfam.com/lab/icons/silk/">FamFamFam Site</a></li>
+                <li><a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 License</a></li>
+              </ul>
+            </p>
+            <h2>The Bridge Material Type Icon Set</h2>
+            <p>
+              <ul>
+                <li><a href="http://apps.carleton.edu/campus/library/bridge_icons/">Bridge Material Type Icons Project</a></li>
+                <li>The Bridge Material Type Icon Set is licensed under a  <a rel="license" href="http://creativecommons.org/licenses/by-sa/2.5/">Creative Commons Attribution-ShareAlike 2.5 License</a>  by the Bridge Consortium of Carleton College and St. Olaf College.</li>
+              </ul>
+            </p>
+        </div>
+        <div id="translations">
+            <h2>Translation</h2>
+            <ul>
+<li><strong>&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577; (Arabic)</strong></li>
+<li><strong>&#4768;&#4635;&#4653;&#4763; (Amharic)</strong> Getway II Ethiopia Co. (Yohannes Mulugeta (Team Leader), Tegene Assefa, Abiyot Bayou)</li>
+<li><strong>Armenian</strong> Tigran Zargaryan</li>
+<li><strong>&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080; (Bulgarian)</strong> Radoslav Kolev</li>
+<li><strong>euskara (Basque)</strong> Nere Erkiaga</li>
+<li><strong>&#2476;&#2494;&#2434;&#2482;&#2494; (Bengali)</strong> Parthasarathi Mukhopadhyay</li>
+<li><strong>&#20013;&#25991; (Chinese)</strong></li>
+<li><strong>Hrvatski (Croatian)</strong></li>
+<li><strong>&#x010D;e&#353;tina (Czech)</strong></li>
+<li><strong>D&aelig;nsk (Danish)</strong></li>
+<li><strong>ned&#601;rl&#593;ns (Dutch)</strong></li>
+<li><strong>English</strong></li>
+<li><strong>suomi, suomen kieli (Finnish)</strong> Pasi Korkalo</li>
+<li><strong>Fran&ccedil;ais (French) </strong> Pascale Nalon (ENSMP) and Jean Yves Lemaire (Chatel Saint Germain)</li>
+<li><strong>Galego (Galician)</strong> Ignacio Javier</li>
+<li><strong>Deutsch (German)</strong> Friedrich zur Hellen, Robert Hillig and Beda Szukics</li>
+<li><strong>&#949;&#955;&#955;&#951;&#957;&#953;&#954;&#940; (Greek, Modern [1453- ])</strong>Georgia Katsarou, Panoraia Gaitanou</li>
+<li><strong>&#1506;&#1489;&#1512;&#1497;&#1514; (Hebrew)</strong></li>
+<li><strong>&#2361;&#2367;&#2344;&#2381;&#2342;&#2368; (Hindi)</strong></li>
+<li><strong>Magyar (Hungarian)</strong>Agnes Imecs</li>
+<li><strong>Norsk Bokmål (Norwegian)</strong> Axel Bojer and Thomas Gramstad</li>
+<li><strong>Norsk Nynorsk (Norwegian)</strong> Unni Knutsen and Marit Kristine Ådland</li>
+<li><strong>Armenian</strong>Tigran Zargaryan</li>
+<li><strong>(Indonesian)</strong></li>
+<li><strong>Italiano (Italian)</strong> Zeno Tajoli, Pietro Gozzetti and Paolo Pozzan</li>
+<li><strong>&#26085;&#26412;&#35486; (Japanese)</strong></li>
+<li><strong>&#54620;&#44397;&#50612; (Korean)</strong></li>
+<li><strong>&#3221;&#3240;&#3277;&#3240;&#3233; (kanna&#7693;a)</strong></li>
+<li><strong>Latina (Latin)</strong></li>
+<li><strong>Lao</strong> Anousak Anthony Souphavanh</li>
+<li><strong>M&#257;ori</strong></li>
+<li><strong>&#3374;&#3378;&#3375;&#3390;&#3379;&#3330; (Malayalam)</strong></li>
+<li><strong>&#1601;&#1575;&#1585;&#1587;&#1609; (Persian)</strong></li>
+<li><strong>&#2835;&#2908;&#2879;&#2822; (&#x014D;&#7771;iy&#257;)</strong></li>
+<li><strong>Polski (Polish)</strong></li>
+<li><strong>Portugu&ecirc;s (Portuguese)</strong></li>
+<li><strong>Rom&acirc;n&#259; (Romanian)</strong></li>
+<li><strong>&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081; (Russian)</strong> Victor Titarchuk and Serhij Dubyk</li>
+<li><strong>Espa&ntilde;ol (Spanish)</strong> Santiago Hermira Anchuelo </li>
+<li><strong>Espa&ntilde;ol (Spanish, Venezuela)</strong> Ailé Filippi </li>
+<li><strong>Svenska (Swedish)</strong></li>
+<li><strong>Tetun (Tetum)</strong> Karen Myers</li>
+<li><strong>&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618; (Thai)</strong></li>
+<li><strong>T&uuml;rk&ccedil;e (Turkish)</strong> Selma Aslan</li>
+<li><strong>&#1575;&#1585;&#1583;&#1608;(Urdu)</strong> Ata ur Rehman</li>
+<li><strong>&#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1089;&#1100;&#1082;&#1072; (Ukrainian)</strong> Victor Titarchuk and Serhij Dubyk</li>
+            </ul>
+    
+        </div>
+    </div>
+</div></div></div>
+<!-- TMPL_INCLUDE name="intranet-bottom.inc" -->

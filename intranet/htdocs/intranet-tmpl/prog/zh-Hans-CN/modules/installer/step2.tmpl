@@ -1,0 +1,58 @@
+
+
+
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><title>Koha &rsaquo; 网页安装程序 &rsaquo; 步骤 2</title>
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div>
+<h1 id="logo"><img alt="Koha 图书馆自动化系统" src="/intranet-tmpl/prog/img/koha.org-logo.gif"> 网页安装程序 &rsaquo; 步骤 2</h1>
+<h2 align="center">数据库设定：</h2>
+<ul>
+<li><em>数据库类型：</em><!--TMPL_VAR NAME="dbms"--></li>
+<li><em>数据库名称：</em><!--TMPL_VAR NAME="dbname"--></li>
+<li><em>数据库主机：</em><!--TMPL_VAR NAME="hostname"--></li>
+<li><em>数据库端口号：</em><!--TMPL_VAR NAME="port"--> （假如空白，或许也没问题）</li>
+<li><em>数据库用户：</em><!--TMPL_VAR NAME="user"--></li>
+</ul>
+<div>
+<!--TMPL_IF NAME="dbconnection"-->
+<form name="checkdbparameters" type="post" action="install.pl">
+  <!--TMPL_IF NAME="checkdatabaseaccess"-->
+  <p>连结被建立。</p>
+     <!--TMPL_IF NAME="checkdatabasecreated"-->
+  <p>数据库 <code><!--TMPL_VAR NAME="dbname"--></code> 存在。</p>
+        <!--TMPL_IF NAME="checkgrantaccess"-->
+  <p>用户 <code><!--TMPL_VAR NAME="user"--></code> 需要数据库所有权限 <code><!--TMPL_VAR Name="dbname"--></code>.</p>
+        <!--TMPL_ELSE-->
+  <p class="error">使用者 <code><!--TMPL_VAR NAME="user"--></code> 在数据库中没有足够的权限 <code><!--TMPL_VAR Name="dbname"--></code> </p>
+  <p class="tip"> 要求改变一个用户权力。参考说明如 <!--TMPL_IF NAME="mysql"--><a href=http://dev.mysql.com/doc/refman/4.1/en/grant.html><!--TMPL_ELSE-->http://www.postgresql.org/docs/8.2/interactive/sql-createrole.html<!--/TMPL_IF-->这页</a>。使用者 <code><!--TMPL_VAR NAME="user"--></code> 必须有 USAGE, INSERT, UPDATE, DELETE, DROP, CREATE 权限 <code><!--TMPL_VAR Name="dbname"--></code></p>
+        <!--/TMPL_IF-->
+      <!--TMPL_ELSE-->
+  <p class="error">数据库没有命名 <code><!--TMPL_VAR NAME="dbname"--></code> 被侦查到。</p>
+  <p class="tip">在继续前，请新增数据库。</p>
+      <!--/TMPL_IF-->
+   <!--TMPL_ELSE-->
+    <div class="error"><!--TMPL_VAR name="error"--> : <!--TMPL_VAR NAME="message"-->
+    </div>
+    <div class="tip">
+      <ul>
+      <li>确认你的数据库正在运行。</li>
+      <li>确认你的数据库设定 <code>koha-conf.xml</code>. </li>
+      <li>确认主机名设定 <code>koha-conf.xml</code>。有些数据库服务器需要 <code>127.0.0.1</code> 而不是 <code>localhost</code>.</li>
+    </div>
+    <p>请改正这些错误，并重新<a href="/cgi-bin/koha/installer/install.pl">开始安装</a>。
+  <!--/TMPL_IF-->
+  <!-- TMPL_IF NAME="error" --><!-- TMPL_ELSE -->
+<input type="hidden" name="step" value="3" />
+<p> 继续点选下一个步骤 <input value="下一页 &gt;&gt;" type="submit"></p>
+<!-- /TMPL_IF -->
+</form>
+<!--TMPL_ELSE-->
+<form name="checkinformation" type="post" action="install.pl">
+<input type="hidden" name="step" value="2" />
+<input type="hidden" name="checkdb" value="1" />
+<p> 如果此信息正确，请点击“下一步”继续 <input value="下一页 &gt;&gt;" type="submit"></p>
+</form>
+<!--/TMPL_IF-->
+</div>
+</body>
+</html>

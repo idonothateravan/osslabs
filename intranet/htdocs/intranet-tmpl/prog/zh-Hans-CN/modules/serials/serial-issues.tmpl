@@ -1,0 +1,119 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 期刊 &rsaquo; <!-- TMPL_VAR name="bibliotitle" --> 订阅信息</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="serials-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/serials/serials-home.pl">Serials</a> &rsaquo; Subscription information for <i><!-- TMPL_VAR name="bibliotitle" --></i></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>订阅 <!-- TMPL_VAR name="bibliotitle" --> 信息</h1>
+<div id="action">
+    <a href="/cgi-bin/koha/serials/serials-home.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">订阅</a> <a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">返回书目记录</a> <a href="/cgi-bin/koha/serials/serial-issues.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->&amp;selectview=full">完全视图</a>
+</div>
+<!-- TMPL_LOOP name="subscription_LOOP" -->
+    <div id="serials_serial_issue_<!-- TMPL_VAR name="subscriptionid" -->">
+    <h2>订阅摘要</h2>
+        <p>期刊创始于 <b><!-- TMPL_VAR name="histstartdate" --></b>，每<b>发行一期
+        <!--TMPL_IF name="periodicity1" -->
+                日
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity2" -->
+                周刊
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity3" -->
+                双周刊
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity4" -->
+                3 星期
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity5" -->
+                月
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity6" -->
+                双月刊
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity7" -->
+                季刊
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity8" -->
+                季刊
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity9" -->
+                双季刊
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity10" -->
+                年
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity11" -->
+                双年刊
+        <!-- /TMPL_IF -->
+        </b>
+        <!--TMPL_IF name="arrival1" -->
+            在 <b>星期一</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival2" -->
+            在 <b>星期二</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival3" -->
+            在 <b>星期三</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival4" -->
+            在 <b>星期四</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival5" -->
+            在 <b>星期五</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival6" -->
+            在 <b>星期六</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival7" -->
+            在 <b>星期天</b>
+        <!-- /TMPL_IF -->
+        给 <b>
+            <!-- TMPL_IF name="numberlength" --><!-- TMPL_VAR name="numberlength" --> 期<!-- /TMPL_IF -->
+            <!-- TMPL_IF name="weeklength" --><!-- TMPL_VAR name="weeklength" --> 星期<!-- /TMPL_IF -->
+            <!-- TMPL_IF name="monthlength" --><!-- TMPL_VAR name="monthlength" --> 月<!-- /TMPL_IF -->
+            </b>
+        </p>
+        <p>最近续订日期为 <b><!-- TMPl_VAR name="startdate" --></b></p>
+        <!-- TMPL_IF name="enddate" --><p><b>This subscription is now ended. The last issue was received on <!-- TMPL_VAR name="enddate" --></b></p><!-- /TMPL_IF -->
+    <!--TMPL_UNLESS Name="fullinfo" -->
+        <p><!-- TMPL_VAR name="notes" --></p>
+        <!-- TMPL_IF name="opacnote" -->
+            <h2>期刊摘要</h2>
+            <p>
+                <!-- TMPL_VAR name="opacnote" -->
+            </p>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="recievedlist" -->
+            <h2>收到期刊</h2>
+            <p>
+                <!-- TMPL_VAR name="recievedlist" -->
+            </p>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="missinglist" -->
+            <h2>期刊遗失</h2>
+            <p>
+                <!-- TMPL_VAR name="missinglist" -->
+            </p>
+        <!-- /TMPL_IF -->
+    </div>
+    <!-- /TMPL_UNLESS -->
+<!-- /TMPL_LOOP -->
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="serials-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

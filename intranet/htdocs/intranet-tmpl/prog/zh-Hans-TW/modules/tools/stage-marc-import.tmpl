@@ -1,0 +1,141 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 工具 &rsaquo; MARC 書目記錄匯入步驟</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="file-upload.inc" -->
+<!-- TMPL_INCLUDE NAME="background-job.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+
+function CheckForm(f) {
+    if (f.uploadedfileid.value == '') {
+        alert('Please upload a file first.');
+    } else {
+        return submitBackgroundJob(f);
+    }
+    return false;
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/tools/tools-home.pl">Tools</a> &rsaquo; Stage MARC Records For Import</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>請選擇匯入 MARC 書目記錄</h1>
+
+<!-- TMPL_IF name="uploadmarc" -->
+<p>機讀格式（MARC）處理結果：</p>
+<ul>
+	<li>檔案裡有 <!-- TMPL_VAR name="total" --> 筆書目記錄</li>
+	<li><!-- TMPL_VAR name="import_errors" --> 筆書目記錄沒有被顯示，因為 MARC 錯誤。</li>
+	<li><!-- TMPL_VAR name="staged" --> 筆書目記錄被顯示</li>
+    <!-- TMPL_IF name="checked_matches" -->
+	<li><!-- TMPL_VAR name="matched" --> records with at least one match in catalogue per matching rule  &quot;<!-- TMPL_VAR name="matcher_code" -->&quot;</li>
+    <!-- TMPL_ELSE -->
+        <!-- TMPL_IF name="matcher_failed" -->
+          <li>書目記錄對應條失敗 -- 無法查詢對應規則。</li>
+        <!-- TMPL_ELSE -->
+          <li>你不確認館藏目錄中已存在書目記錄的查詢條件。</li>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+	<li><!-- TMPL_VAR name="num_items" --> 筆館藏記錄被找到並且顯示</li>
+	<!-- TMPL_IF name="label_batch" -->
+	  <li>New label batch created: # <!-- TMPL_VAR name="label_batch" --> </li>
+    <!-- /TMPL_IF -->
+	<li><a href="/cgi-bin/koha/tools/manage-marc-import.pl?import_batch_id=<!-- TMPL_VAR name="import_batch_id" -->">管理匯入的書目記錄</a></li>
+	<li><a href="/cgi-bin/koha/tools/tools-home.pl">返回</a></li>
+</ul>
+<!-- TMPL_ELSE -->
+<ul>
+	<li>Select a MARC file to stage in the import reservoir.  It will be parsed, and each valid record staged for later import into the catalogue.</li>
+	<li>You can enter a name for this import. It may be useful, when creating a biblio, to remember where the suggested MARC data comes from!</li>
+</ul>
+<fieldset class="rows">
+<legend>上傳機讀格式記錄（MARC）書目資料庫</legend><ol>
+	<li>
+        <div id="fileuploadform">
+        <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+		<label for="fileToUpload">選擇這個檔案匯入： </label>
+		<input type="file" id="fileToUpload" name="fileToUpload" /><br />
+        <button class="input" onclick="return ajaxFileUpload();">上傳檔案</button>
+		</form>
+        <div id="fileuploadstatus" style="display:none">上傳過程： <span id="fileuploadprogress">0</span>%</div>
+        <div id="fileuploadfailed" style="display:none"></div>
+        </div>
+	</li>
+</ol></fieldset>
+    <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+<fieldset class="rows">
+        <input type="hidden" name="uploadedfileid" id="uploadedfileid" value="" />
+        <input type="hidden" name="runinbackground" id="runinbackground" value="" />
+        <input type="hidden" name="completedJobID" id="completedJobID" value="" />
+	<ol><li>
+		<label for="comments">注意這個檔案： </label>
+		<input type="text" id="comments" name="comments" />
+		
+	</li>
+	<li>
+		<label for="syntax">字元編碼： </label>
+		<select name="syntax" id="syntax"><option value="MARC21">MARC21</option><option value="UNIMARC">UNIMARC</option></select>
+		
+	</li>
+</ol></fieldset>
+  <fieldset class="rows">
+    <legend>查詢館藏目錄已存在書目記錄？</legend>
+    <ol><li><label for="matcher">Record matching rule:</label>
+    <select name="matcher" id="matcher">
+       <option value="">無法找到書目記錄</option> 
+       <!-- TMPL_LOOP name="available_matchers" -->
+          <option value="<!-- TMPL_VAR name="matcher_id" -->">題名：<!-- TMPL_VAR name="code" -->（作者：<!-- TMPL_VAR name="description" -->）
+          </option>
+       <!-- /TMPL_LOOP -->
+    </select>
+    </li>
+      <li><label for="overlay_action">Action if matching bibliographic record found: </label>
+           <!-- TMPL_INCLUDE NAME="tools-overlay-action.inc" -->
+      </li>
+      <li><label for="nomatch_action">Action if no match is found: </label>
+           <!-- TMPL_INCLUDE NAME="tools-nomatch-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="rows">
+    <legend>確認館藏記錄資料？</legend>
+    <ol>
+      <li class="radio">
+        <input type="radio" id="parse_itemsyes" name="parse_items" value="1" checked="checked" />
+        <label for="parse_itemsyes">是</label>
+      </li>
+      <li class="radio">
+        <input type="radio" id="parse_itemsno" name="parse_items" value="0" />
+        <label for="parse_itemsno">否</label>
+      </li>
+    </ol>
+    <ol>
+      <li><label for="item_action">How to process items: </label>
+           <!-- TMPL_INCLUDE NAME="tools-item-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="action"><input type="button" id="mainformsubmit" onclick="return CheckForm(this.form);" value="選擇匯入"></fieldset>
+  <div id="jobstatus" style="display:none">工作處理過程： <span id="jobprogress">0</span>%</div>
+  <div id="jobfailed" style="display:none"></div>
+</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="tools-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

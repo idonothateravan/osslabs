@@ -1,0 +1,245 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration &rsaquo; MARC Check
+<!-- TMPL_IF name="total" --> :<!-- TMPL_VAR name="total" --> errors found<!-- TMPL_ELSE --> : Configuration OK!<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"> <a href="/cgi-bin/koha/mainpage.pl">Inicio</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administraci&oacute;n</a> &rsaquo; Comprobar MARC
+<!-- TMPL_IF name="total" -->: <!-- TMPL_VAR name="total" --> errors found<!-- TMPL_ELSE --> : Configuration OK!<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>MARC Bibliographic Framework Test</h1>
+<table>
+    <tr>
+        <th>Prueba</th>
+        <th>Resultado</th>
+    </tr>
+<!-- -->
+<!-- TMPL_IF name="itemnum" -->
+    <tr>
+        <td>n&uacute;mero de art&iacute;culo</td>
+        <td><ul><li>El campo n&uacute;mero de art&iacute;culo DEBE estar mapeado </li>
+            <li>El subcampo correspondiente DEBE estar con pesta&ntilde;a -1 (ignorar)</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ACEPTAR</td>
+        <td> n&uacute;mero de art&iacute;culo : el campo n&uacute;mero de art&iacute;culo est&aacute; mapeado a un campo en la secci&oacute;n -1</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemfields" -->
+    <tr>
+        <td>campos del art&iacute;culo</td>
+        <td>TODOS los campos DEBEN :<br />
+            <ul><li>tiene que ser mapeado a la misma etiqueta,</li>
+            <li>y deben estar todos en los 10 (art&iacute;culos) de etiqueta</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ACEPTAR</td>
+        <td> Todos los campos de art&iacute;culo estan en el mismo campo y en la etiqueta art&iacute;culo</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+    <!-- TMPL_IF NAME="itemtags" -->
+        <tr>
+            <td>Etiqueta del ejemplar</td>
+            <td> Hay mas de 1 etiqueta MARC relacionada con el campo (10) de los art&iacute; culos (10): <!-- TMPL_VAR name="itemtags" --></td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>ACEPTAR</td>
+            <td>Only 1 MARC tag mapped to items</td>
+        </tr>
+    <!-- /TMPL_IF -->
+    <!--  -->
+<!-- TMPL_IF name="itemtype" -->
+    <tr>
+        <td>el tipo de art&iacute;culo no est&aacute; mapeado</td>
+        <td>el campo biblioitems.itemtype DEBE :<br />
+            <ul><li>tiene que ser mapeado a un campo MARC </li>
+            <li> el subcampo correspondiente DEBE autorizarse el valor ="tipo de art&iacute; culo"</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ACEPTAR</td>
+        <td>biblioitems.itemtype definido</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branch" -->
+    <tr>
+        <td>la sede central NO est&aacute; mapeada</td>
+        <td>el campo items.homebranch DEBE<br />
+            <ul><li>tiene que ser mapeado a un campo MARC</li>
+            <li>el subcampo correspondiente DEBE autorizarse el valor ="sedes"</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ACEPTAR</td>
+        <td>sede propietaria definida</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="holdingbranch" -->
+    <tr>
+        <td>la sede NO est&aacute; mapeada</td>
+        <td>el campo items.holdingbranch DEBE :<br />
+            <ul><li>tiene que ser mapeado a un campo MARC </li>
+            <li>el subcampo correspondiente DEBE autorizarse el valor ="sedes"</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ACEPTAR</td>
+        <td>sede definida</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemtypes_empty" -->
+    <tr>
+        <td>item type not defined</td>
+        <td>at least 1 item type must be defined</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ACEPTAR</td>
+        <td>at least 1 item type defined</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branches_empty" -->
+    <tr>
+        <td>branch not defined</td>
+        <td>at least 1 branch must be defined</td>
+    </tr>
+<!-- TMPL_ELSE --> 
+    <tr>
+        <td>ACEPTAR</td>             
+        <td>at least 1 branch defined</td>
+    </tr>                                       
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="biblionumber" -->
+    <tr>
+        <td>biblio y biblionumber</td>
+        <td>The biblio.biblionumber and biblioitems.biblioitemnumber fields be mapped to a MARC subfield,</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ACEPTAR</td>
+        <td>biblionumber y biblioitemnumber mapeados correctamente</td>
+    </tr>
+<!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="frameworknull" -->
+        <tr>
+            <td>valores del formato</td>
+            <td> hay un valor nulo en un c&oacute;digo de formato. Compruebe las tablas siguientes<br />
+                <li>select * from marc_subfield_structure where frameworkcode is NULL</li>
+                <li>select * from marc_tag_structure where frameworkcode is NULL</li>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>ACEPTAR</td>
+            <td>ning&uacute;n valor NULO en el c&oacute;digo del formato</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="inconsistent_tabs" -->
+        <tr>
+            <td style="vertical-align:top;">subfields not in same tabs</td>
+            <td>Not all subfields for the following tags are in the same tab (or marked 'ignored').
+                <table>
+                    <tr>
+                        <th>C&oacute;digo</th>
+                        <th>Descripci&oacute;n</th>
+                        <th>Etiqueta</th>
+                        <th>Tabs in use</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="tab_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>entorno predeterminado</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tabs" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>ACEPTAR</td>
+            <td>all subfields for each tag are in the same tab (or ignored)</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="invalid_authtypecodes" -->
+        <tr>
+            <td style="vertical-align:top;">invalid authority types</td>
+            <td>Not all authority types referred to by the frameworks are defined.
+                <table>
+                    <tr>
+                        <th>Framework code</th>
+                        <th>Framework description</th>
+                        <th>Etiqueta</th>
+                        <th>Subcampo</th>
+                        <th>Invalid authority type</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="authtypecode_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>entorno predeterminado</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+                            <td><!-- TMPL_VAR NAME="authtypecode" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>ACEPTAR</td>
+            <td>all authority types used in the frameworks are defined</td>
+        </tr>
+    <!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="total" -->
+    <tr>
+        <td>TOTAL</td>
+        <td>You have <!-- TMPL_VAR name="total" --> error(s) in your MARC configuration. Please fix them before using Koha</td>
+    </tr>
+</table>
+<!-- TMPL_ELSE -->
+    </table>
+        <p><b> La configuraci&oacute;n est&aacute; OK, no hay errores en su tabla de par&aacute;metros MARC</b></p>
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

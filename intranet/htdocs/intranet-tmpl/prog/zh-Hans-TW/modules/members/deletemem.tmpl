@@ -1,0 +1,33 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 無法刪除讀者</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="patron-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; <a href="/cgi-bin/koha/members/members-home.pl">讀者</a> &rsaquo; 無法刪除讀者</div>
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="members-toolbar.inc" --><h3>無法刪除讀者</h3>
+		<ul><!-- TMPL_IF name="ItemsOnIssues" -->
+			<li>讀者借閱 <!-- TMPL_VAR name="ItemsOnIssues" --> 個館藏。</li>
+		<!-- /TMPL_IF -->
+		<!-- TMPL_IF name="charges" -->
+			<li>讀者有 <!-- TMPL_VAR name="charges" --> 筆罰款。</li>
+		<!-- /TMPL_IF -->
+		<!-- TMPL_IF name="guarantees" -->
+			<li>讀者記錄有附上擔保人帳號。</li>
+		<!-- /TMPL_IF --></ul>
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="members-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

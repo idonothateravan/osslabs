@@ -1,0 +1,141 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo;أدوات &rsaquo; نظّم تسجيلات مارك للاستيراد</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="file-upload.inc" -->
+<!-- TMPL_INCLUDE NAME="background-job.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+
+function CheckForm(f) {
+    if (f.uploadedfileid.value == '') {
+        alert('Please upload a file first.');
+    } else {
+        return submitBackgroundJob(f);
+    }
+    return false;
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; <a href="/cgi-bin/koha/tools/tools-home.pl">أدوات</a> &rsaquo; نظم تسجيلات MARC للاستيراد</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>نظّم تسجيلات مارك لاستيرادها</h1>
+
+<!-- TMPL_IF name="uploadmarc" -->
+<p>نتائج تنظيم مارك: </p>
+<ul>
+	<li><!-- TMPL_VAR name="total" -->التسجيلات فى ملف</li>
+	<li><!-- TMPL_VAR name="import_errors" --> التسجيلات غير منظمة بسبب أخطاء مارك</li>
+	<li><!-- TMPL_VAR name="staged" --> تم تنظيم التسجيلات</li>
+    <!-- TMPL_IF name="checked_matches" -->
+	<li><!-- TMPL_VAR name="matched" -->تسجيلات مع على الأقل واحد مقابل فى الفهرس بقواعد المضاهاة  &quot;<!-- TMPL_VAR name="matcher_code" -->&quot;</li>
+    <!-- TMPL_ELSE -->
+        <!-- TMPL_IF name="matcher_failed" -->
+          <li>مضاهاة التسجيلة فشل -- غير قادر على إسترجاع قاعدة المضاهاة المختارة.</li>
+        <!-- TMPL_ELSE -->
+          <li>لم يتم الفحص للمتشابهات بالتسجيلات الموجودة في الدليل</li>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+	<li><!-- TMPL_VAR name="num_items" -->نسخ مواد وجدت ونظمت</li>
+	<!-- TMPL_IF name="label_batch" -->
+	  <li>New label batch created: # <!-- TMPL_VAR name="label_batch" --> </li>
+    <!-- /TMPL_IF -->
+	<li><a href="/cgi-bin/koha/tools/manage-marc-import.pl?import_batch_id=<!-- TMPL_VAR name="import_batch_id" -->">أدر التسجيلات المنظمة</a></li>
+	<li><a href="/cgi-bin/koha/tools/tools-home.pl">الخلف</a></li>
+</ul>
+<!-- TMPL_ELSE -->
+<ul>
+	<li>Select a MARC file to stage in the import reservoir. It will be parsed, and each valid record staged for later import into the catalogue.</li>
+	<li>يمكنك إدخال إسم لهذا الاستيراد. يمكن أن يكون ذلك مفيدا, عند إنشاء biblio, للتذكّر من أين أتت بيانات مارك المقترحة!</li>
+</ul>
+<fieldset class="rows">
+<legend>Stage records into the reservoir</legend><ol>
+	<li>
+        <div id="fileuploadform">
+        <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+		<label for="fileToUpload">إختر ملف للتنظيم: </label>
+		<input type="file" id="fileToUpload" name="fileToUpload" /><br />
+        <button class="input" onclick="return ajaxFileUpload();">Upload file</button>
+		</form>
+        <div id="fileuploadstatus" style="display:none">Upload progress: <span id="fileuploadprogress">0</span>%</div>
+        <div id="fileuploadfailed" style="display:none"></div>
+        </div>
+	</li>
+</ol></fieldset>
+    <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+<fieldset class="rows">
+        <input type="hidden" name="uploadedfileid" id="uploadedfileid" value="" />
+        <input type="hidden" name="runinbackground" id="runinbackground" value="" />
+        <input type="hidden" name="completedJobID" id="completedJobID" value="" />
+	<ol><li>
+		<label for="comments">ملاحظات حول هذا الملف: </label>
+		<input type="text" id="comments" name="comments" />
+		
+	</li>
+	<li>
+		<label for="syntax">ترميز حرف: </label>
+		<select name="syntax" id="syntax"><option value="MARC21">مارك21</option><option value="UNIMARC">UNIMARC</option></select>
+		
+	</li>
+</ol></fieldset>
+  <fieldset class="rows">
+    <legend>إنظر إلى التسجيلات الحالية في الفهرس?</legend>
+    <ol><li><label for="matcher">Record matching rule:</label>
+    <select name="matcher" id="matcher">
+       <option value="">لا يبحث عن السجلات المماثلة</option> 
+       <!-- TMPL_LOOP name="available_matchers" -->
+          <option value="<!-- TMPL_VAR name="matcher_id" -->"><!-- TMPL_VAR name="code" --> (<!-- TMPL_VAR name="description" -->)
+          </option>
+       <!-- /TMPL_LOOP -->
+    </select>
+    </li>
+      <li><label for="overlay_action">Action if matching bibliographic record found: </label>
+           <!-- TMPL_INCLUDE NAME="tools-overlay-action.inc" -->
+      </li>
+      <li><label for="nomatch_action">Action if no match is found: </label>
+           <!-- TMPL_INCLUDE NAME="tools-nomatch-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="rows">
+    <legend>افحص بيانات المادة المضمنة المسجلة؟</legend>
+    <ol>
+      <li class="radio">
+        <input type="radio" id="parse_itemsyes" name="parse_items" value="1" checked="checked" />
+        <label for="parse_itemsyes">نعم</label>
+      </li>
+      <li class="radio">
+        <input type="radio" id="parse_itemsno" name="parse_items" value="0" />
+        <label for="parse_itemsno">لا</label>
+      </li>
+    </ol>
+    <ol>
+      <li><label for="item_action">How to process items: </label>
+           <!-- TMPL_INCLUDE NAME="tools-item-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="action"><input type="button" id="mainformsubmit" onclick="return CheckForm(this.form);" value="نظّم لاستيراد"></fieldset>
+  <div id="jobstatus" style="display:none">Job progress: <span id="jobprogress">0</span>%</div>
+  <div id="jobfailed" style="display:none"></div>
+</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="tools-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

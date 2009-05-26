@@ -1,0 +1,141 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Outils &rsaquo; Préparer les notices MARC pour</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="file-upload.inc" -->
+<!-- TMPL_INCLUDE NAME="background-job.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+
+function CheckForm(f) {
+    if (f.uploadedfileid.value == '') {
+        alert('Please upload a file first.');
+    } else {
+        return submitBackgroundJob(f);
+    }
+    return false;
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl"> Accueil </a> &rsaquo;<a href="/cgi-bin/koha/tools/tools-home.pl">Outils</a> &rsaquo; Traiter les notices MARC pour l'import</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Préparation des notices MARC à l'import</h1>
+
+<!-- TMPL_IF name="uploadmarc" -->
+<p>Résultats de la préparation  MARC :</p>
+<ul>
+	<li><!-- TMPL_VAR name="total" --> enregistrement(s) dans le fichier</li>
+	<li><!-- TMPL_VAR name="import_errors" --> enregistrement(s) non pris en compte à cause d'une erreur MARC</li>
+	<li><!-- TMPL_VAR name="staged" --> notice(s) préparée(s)</li>
+    <!-- TMPL_IF name="checked_matches" -->
+	<li><!-- TMPL_VAR name="matched" --> enregistrement(s) avec au moins un équivalent dans le catalogue &quot;<!-- TMPL_VAR name="matcher_code" -->&quot;</li>
+    <!-- TMPL_ELSE -->
+        <!-- TMPL_IF name="matcher_failed" -->
+          <li>Règle de concordance échouée -- impossible de récupérer la règle de concordance.</li>
+        <!-- TMPL_ELSE -->
+          <li>Ne correspondent pas à des notices existantes dans le catalogue</li>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+	<li><!-- TMPL_VAR name="num_items" --> notice(s) trouvée(s) et importée(s) dans le réservoir</li>
+	<!-- TMPL_IF name="label_batch" -->
+	  <li>Nouveau lot d'étiquettes créé : N°<!-- TMPL_VAR name="label_batch" --> </li>
+    <!-- /TMPL_IF -->
+	<li><a href="/cgi-bin/koha/tools/manage-marc-import.pl?import_batch_id=<!-- TMPL_VAR name="import_batch_id" -->">Gérer les notices préparées</a></li>
+	<li><a href="/cgi-bin/koha/tools/tools-home.pl">Retour</a></li>
+</ul>
+<!-- TMPL_ELSE -->
+<ul>
+	<li>Sélectionner un fichier à importer dans le réservoir.Il sera analysé et une nouvelle notice sera créée dans le réservoir pour chaque enregistrement valide.</li>
+	<li>Vous pouvez donner un nom à cette importation. Cela peut être utile, lors de la création d'une notice, pour vous rappeler d'où vient la notice MARC proposée !</li>
+</ul>
+<fieldset class="rows">
+<legend>Traiter des notices MARC dans le réservoir</legend><ol>
+	<li>
+        <div id="fileuploadform">
+        <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+		<label for="fileToUpload">Sélectionnez le fichier à préparer : </label>
+		<input type="file" id="fileToUpload" name="fileToUpload" /><br />
+        <button class="input" onclick="return ajaxFileUpload();">Télécharger fichier</button>
+		</form>
+        <div id="fileuploadstatus" style="display:none">Avancement du téléchargement <span id="fileuploadprogress">0</span>%</div>
+        <div id="fileuploadfailed" style="display:none"></div>
+        </div>
+	</li>
+</ol></fieldset>
+    <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+<fieldset class="rows">
+        <input type="hidden" name="uploadedfileid" id="uploadedfileid" value="" />
+        <input type="hidden" name="runinbackground" id="runinbackground" value="" />
+        <input type="hidden" name="completedJobID" id="completedJobID" value="" />
+	<ol><li>
+		<label for="comments">Notes à propos de ce fichier : </label>
+		<input type="text" id="comments" name="comments" />
+		
+	</li>
+	<li>
+		<label for="syntax">Format des données : </label>
+		<select name="syntax" id="syntax"><option value="MARC21">MARC21</option><option value="UNIMARC">UNIMARC</option></select>
+		
+	</li>
+</ol></fieldset>
+  <fieldset class="rows">
+    <legend>Rechercher notices existantes dans le catalogue ?</legend>
+    <ol><li><label for="matcher">Règle de concordance :</label>
+    <select name="matcher" id="matcher">
+       <option value="">Ne pas chercher de notices correspondantes</option> 
+       <!-- TMPL_LOOP name="available_matchers" -->
+          <option value="<!-- TMPL_VAR name="matcher_id" -->"><!-- TMPL_VAR name="code" --> (<!-- TMPL_VAR name="description" -->)
+          </option>
+       <!-- /TMPL_LOOP -->
+    </select>
+    </li>
+      <li><label for="overlay_action">Action si une notice concordante est trouvée : </label>
+           <!-- TMPL_INCLUDE NAME="tools-overlay-action.inc" -->
+      </li>
+      <li><label for="nomatch_action">Action s'il n'y a pas de concordance : </label>
+           <!-- TMPL_INCLUDE NAME="tools-nomatch-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="rows">
+    <legend>Vérifier les données exemplaires incluses ?</legend>
+    <ol>
+      <li class="radio">
+        <input type="radio" id="parse_itemsyes" name="parse_items" value="1" checked="checked" />
+        <label for="parse_itemsyes">Oui</label>
+      </li>
+      <li class="radio">
+        <input type="radio" id="parse_itemsno" name="parse_items" value="0" />
+        <label for="parse_itemsno">Non</label>
+      </li>
+    </ol>
+    <ol>
+      <li><label for="item_action">Que faire avec les notices d'exemplaire : </label>
+           <!-- TMPL_INCLUDE NAME="tools-item-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="action"><input type="button" id="mainformsubmit" onclick="return CheckForm(this.form);" value="Traiter pour import"></fieldset>
+  <div id="jobstatus" style="display:none">Avancement de la tache : <span id="jobprogress">0</span>%</div>
+  <div id="jobfailed" style="display:none"></div>
+</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="tools-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

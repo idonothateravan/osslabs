@@ -1,0 +1,43 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Types d'autorité</h1>
+
+<p>Vous pouvez définir autant de types d'autorités que vous le souhaitez.</p>
+	<ul>
+		<li>avec le bouton MARC, vous pouvez déterminer la structure MARC d'un type d'autorité donné</li>
+		<li>Le champ reporté doit contenir un numéro d'étiquette MARC. Chaque sous-champ du champ sélectionné sera copié dans le "champ destinataire" de la notice biblio. Par exemple, en UNIMARC, le champ 200 de l'autorité nom de personne sera reporté dans le 600, 700, 701... selon ce qui aura été coché dans l'éditeur MARC.</li>
+		<li>Le récapitulatif contient une description de type "ISBD" qui définit comment les données doivent être affichées dans la liste de résultats. La syntaxe est :
+		<ul>
+			<li>[xxxFFFSyyy] where are up to 3 digits BEFORE the field, FFF the field number, S the subfield code, yyy up to 3 digits AFTER the field.</li>
+			<li>Les éléments en dehors des []sont pris tels que (y compris HTML)</li>
+			<li>les champs répétables sont gérés.
+			<ul>
+			</ul></li>
+<p>IMPORTANT : </p>
+<p>Dans la grille bibliographique, le champ reporté <strong>DOIT</strong> contiennent un sous-champ $9, activé dans l'onglet où se trouve le champ, et caché. Le sous-champ $9 dans la notice bibliographique contiendra le numéro de l'autorité (numéro interne Koha)</p>
+		</ul></li>
+	</ul>
+	<h1>Créer Types d'autorité</h1>
+
+<p>Create and manage Authorities frameworks that define the characteristics of your MARC Records (field and subfield definitions).
+To create a new framework...</p>
+
+	<ul>
+		<li>Allez dans le module 'Administration'</li>
+		<li>Sélectionner les 'Types d'autorité'</li>
+		<li>Cliquez sur 'Ajoutez grille d'autorité'</li>
+		<li>Remplissez les champs qui permettent de décrire votre nouveau type d'autorité<br/>
+		<ul>
+			<li>
+		    <span style="background-color: #ffe599">
+ASTUCE : pour le 'champ autorité à reporter', saisissez le champ de l'autorité qu'il faut recopier dans le champ de la notice bibliographique. Par exemple, en UNIMARC, le champ 200 des notices d'autorité nom de personne se reportera dans les champs 700, 701, 702 de la notice bibliographique</span></li>
+		</ul></li>
+		<li>Cliquez 'Valider'</li>
+		<li>Pour mettre à jour la grille MARC avec votre nouveau type d'autorité, cliquez sur 'Structure MARC' à côté de l'autorité</li>
+		<li>Depuis cet écran, vous pouvez modifier les champs, les sous-champs et ajouter des champs.</li>
+		<li>Vous pouvez modifier les informations de ce champs en cliquant 'Modifier'</li>
+		<li>Vous pouvez modifier tous les sous-champs associés à ce champ en cliquant sur 'sous-champs'</li>
+		<li>Vous pouvez modifier l'information de chaque sous-champs en cliquant 'Modifier sous-champs'</li>
+		<li>Après avoir fait vos modifications, cliquez 'Valider'</li>
+		<li>Pour supprimer un sous-champs, cliquez simplement sur 'supprimer' à côté du champ à modifier</li>
+	</ul><!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

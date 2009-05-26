@@ -1,0 +1,748 @@
+<html>
+<head>
+<title>Leader builder</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_field_008_authorities.pl">
+<table>
+	<tr>
+		<td>00-05- Dateidatum</td>
+		<td><!-- TMPL_VAR name="f1" --></td>
+        <input name="f1" value="<!-- TMPL_VAR name="f1" -->" type="hidden" />
+	</tr>
+	<tr>
+		<td>06- Direkte oder indirekte geographische Unterteilung</td>
+		<td>
+			<select name="f6" size="1">
+            <!-- TMPL_IF name="f6 " -->
+                <option value=" " SELECTED>#- Geographisch nicht unterteilt</option>
+            <!-- TMPL_ELSE -->
+                <option value=" ">#- Geographisch nicht unterteilt</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f6d" -->
+                <option value="d" SELECTED>d- Geographisch unterschieden &mdash; direkt</option>
+            <!-- TMPL_ELSE -->
+                <option value="d">d- Geographisch unterschieden &mdash; direkt</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f6i" -->
+                <option value="i" SELECTED>i- Geographisch unterteilt &mdash, indirekt</option>
+            <!-- TMPL_ELSE -->
+                <option value="i">i- Geographisch unterteilt &mdash, indirekt</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f6n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f6|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+    <tr>
+        <td>07- Translitertationsschema</td>
+        <td>
+            <select name="f7" size="1">
+            <!-- TMPL_IF name="f7a" -->
+                <option value="a" SELECTED>a- Internationaler Standard</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Internationaler Standard</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f7b" -->
+                <option value="b" SELECTED>b- Nationaler Standard</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Nationaler Standard</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f7c" -->
+                <option value="c" SELECTED>c- National library or bibliographic agency standard</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- National library or bibliographic agency standard</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f7d" -->
+                <option value="d" SELECTED>d- National library or bibliographic agency standard</option>
+            <!-- TMPL_ELSE -->
+                <option value="d">d- National library or bibliographic agency standard</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f7e" -->
+                <option value="e" SELECTED>e- Lokaler Standard</option>
+            <!-- TMPL_ELSE -->
+                <option value="e">e- Lokaler Standard</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f7f" -->
+                <option value="f" SELECTED>f- Standard von unbekannter Herkunft</option>
+            <!-- TMPL_ELSE -->
+                <option value="f">f- Standard von unbekannter Herkunft</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f7g" -->
+                <option value="g" SELECTED>g- Conventional romanization or conventional form of name in language of cataloging agency</option>
+            <!-- TMPL_ELSE -->
+                <option value="g">g- Conventional romanization or conventional form of name in language of cataloging agency</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f7n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f7|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>08- Sprache des Katalogs</td>
+        <td>
+            <select name="f8" size="1">
+            <!-- TMPL_IF name="f8 " -->
+                <option value=" " SELECTED>#- Keine Information zur Verfügung gestellt</option>
+            <!-- TMPL_ELSE -->
+                <option value=" ">#- Keine Information zur Verfügung gestellt</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f8b" -->
+                <option value="b" SELECTED>b- Englisch und Französisch</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Englisch und Französisch</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f8e" -->
+                <option value="e" SELECTED>e- nur Englisch</option>
+            <!-- TMPL_ELSE -->
+                <option value="e">e- nur Englisch</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f8f" -->
+                <option value="f" SELECTED>f- nur französisch</option>
+            <!-- TMPL_ELSE -->
+                <option value="f">f- nur französisch</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f8|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>09- Satzart</td>
+        <td>
+            <select name="f9" size="1">
+            <!-- TMPL_IF name="f9a" -->
+                <option value="a" SELECTED>a- Festgelegte Eintragung</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Festgelegte Eintragung</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f9b" -->
+                <option value="b" SELECTED>b- Unverfolte Referenz</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Unverfolte Referenz</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f9c" -->
+                <option value="c" SELECTED>c- Verfolgte Referenz</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- Verfolgte Referenz</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f9d" -->
+                <option value="d" SELECTED>d- Unterteilung</option>
+            <!-- TMPL_ELSE -->
+                <option value="d">d- Unterteilung</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f9e" -->
+                <option value="e" SELECTED>e- Verknüpfungseintrag</option>
+            <!-- TMPL_ELSE -->
+                <option value="e">e- Verknüpfungseintrag</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f9f" -->
+                <option value="f" SELECTED>f- Festgelegte Eintragung und Unterteilung.</option>
+            <!-- TMPL_ELSE -->
+                <option value="f">f- Festgelegte Eintragung und Unterteilung.</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f9g" -->
+                <option value="g" SELECTED>g- Verweis und Unterteilung</option>
+            <!-- TMPL_ELSE -->
+                <option value="g">g- Verweis und Unterteilung</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>10- Beschreibende Katalogisierungsregeln</td>
+        <td>
+            <select name="f10" size="1">
+            <!-- TMPL_IF name="f10a" -->
+                <option value="a" SELECTED>a- Frühere Regeln</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Frühere Regeln</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f10b" -->
+                <option value="b" SELECTED>b- AACR 1</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- AACR 1</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f10c" -->
+                <option value="c" SELECTED>c- AACR 2</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- AACR 2</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f10d" -->
+                <option value="d" SELECTED>d- AACR2 kompatible Ansetzung</option>
+            <!-- TMPL_ELSE -->
+                <option value="d">d- AACR2 kompatible Ansetzung</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f10n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f10z" -->
+                <option value="z" SELECTED>z- Anderer</option>
+            <!-- TMPL_ELSE -->
+                <option value="z">z- Anderer</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f10|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>11- System der Sacheinträge/Thesaurus</td>
+        <td>
+            <select name="f11" size="1">
+            <!-- TMPL_IF name="f11a" -->
+                <option value="a" SELECTED>a- Library of Congress Subject Headings</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Library of Congress Subject Headings</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11b" -->
+                <option value="b" SELECTED>b- LC Schlagwörter für Kinderliteratur</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- LC Schlagwörter für Kinderliteratur</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11c" -->
+                <option value="c" SELECTED>c- medizinsche Schlagwörter</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- medizinsche Schlagwörter</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11d" -->
+                <option value="d" SELECTED>d- National Agricultural Library subject authority file</option>
+            <!-- TMPL_ELSE -->
+                <option value="d">d- National Agricultural Library subject authority file</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11k" -->
+                <option value="k" SELECTED>k- kanadische Schlagwörter</option>
+            <!-- TMPL_ELSE -->
+                <option value="k">k- kanadische Schlagwörter</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11r" -->
+                <option value="r" SELECTED>r- Kunst- und Archiktetur-Thesaurus</option>
+            <!-- TMPL_ELSE -->
+                <option value="r">r- Kunst- und Archiktetur-Thesaurus</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11s" -->
+                <option value="s" SELECTED>s- Sears Liste der Schlagwortansetzungen</option>
+            <!-- TMPL_ELSE -->
+                <option value="s">s- Sears Liste der Schlagwortansetzungen</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11v" -->
+                <option value="v" SELECTED>v- Repertoire de vedettes-matiere</option>
+            <!-- TMPL_ELSE -->
+                <option value="v">v- Repertoire de vedettes-matiere</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11z" -->
+                <option value="z" SELECTED>z- Anderer</option>
+            <!-- TMPL_ELSE -->
+                <option value="z">z- Anderer</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f11|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>12- Serienart</td>
+        <td>
+            <select name="f12" size="1">
+            <!-- TMPL_IF name="f12a" -->
+                <option value="a" SELECTED>a- Monographische Serien</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Monographische Serien</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f12b" -->
+                <option value="b" SELECTED>b- mehrteiliges Medium</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- mehrteiliges Medium</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f12c" -->
+                <option value="c" SELECTED>c- Serien-artiger Satz</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- Serien-artiger Satz</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f12n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f12z" -->
+                <option value="z" SELECTED>z- Anderer</option>
+            <!-- TMPL_ELSE -->
+                <option value="z">z- Anderer</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f12|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>13- Gezählte oder ungezählte Serien</td>
+        <td>
+            <select name="f13" size="1">
+            <!-- TMPL_IF name="f13a" -->
+                <option value="a" SELECTED>a- Nummeriert</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Nummeriert</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f13b" -->
+                <option value="b" SELECTED>b- nicht nummeriert</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- nicht nummeriert</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f13c" -->
+                <option value="c" SELECTED>c- Zählung wechselt</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- Zählung wechselt</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f13n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f13|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>14- Ansetzung - Haupt- oder Nebeneintrag</td>
+        <td>
+            <select name="f14" size="1">
+            <!-- TMPL_IF name="f14a" -->
+                <option value="a" SELECTED>a- Geeignet</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Geeignet</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f14b" -->
+                <option value="b" SELECTED>b- Nicht angemessen</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Nicht angemessen</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f14|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>15- Ansetzung - Sachwort-Nebeneintrag</td>
+        <td>
+            <select name="f15" size="1">
+            <!-- TMPL_IF name="f15a" -->
+                <option value="a" SELECTED>a- Geeignet</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Geeignet</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f15b" -->
+                <option value="b" SELECTED>b- Nicht angemessen</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Nicht angemessen</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f15|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>16- Ansetzung - Seriennebeneintrag</td>
+        <td>
+            <select name="f16" size="1">
+            <!-- TMPL_IF name="f16a" -->
+                <option value="a" SELECTED>a- Geeignet</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Geeignet</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f16b" -->
+                <option value="b" SELECTED>b- Nicht angemessen</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Nicht angemessen</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f16|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>17- Art der Schlagwortunterteilung</td>
+        <td>
+            <select name="f17" size="1">
+            <!-- TMPL_IF name="f17a" -->
+                <option value="a" SELECTED>a- Thematisch</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Thematisch</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f17b" -->
+                <option value="b" SELECTED>b- Form</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Form</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f17c" -->
+                <option value="c" SELECTED>c- chronologisch</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- chronologisch</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f17d" -->
+                <option value="d" SELECTED>d- geografisch</option>
+            <!-- TMPL_ELSE -->
+                <option value="d">d- geografisch</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f17e" -->
+                <option value="e" SELECTED>e- Sprache</option>
+            <!-- TMPL_ELSE -->
+                <option value="e">e- Sprache</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f17n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f17|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td>18-27 Nichtdefinierte Zeichenpositionen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>28- Typ der Amtsstelle</td>
+        <td>
+            <select name="f28" size="1">
+            <!-- TMPL_IF name="f28 " -->
+                <option value=" " SELECTED>#- Keine Regierungsbehörde</option>
+            <!-- TMPL_ELSE -->
+                <option value=" ">#- Keine Regierungsbehörde</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28a" -->
+                <option value="a" SELECTED>a- Autonome oder halb-autonome Komponente</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Autonome oder halb-autonome Komponente</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28c" -->
+                <option value="c" SELECTED>c- Vielörtig</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- Vielörtig</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28f" -->
+                <option value="f" SELECTED>f- Bund-/national</option>
+            <!-- TMPL_ELSE -->
+                <option value="f">f- Bund-/national</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28i" -->
+                <option value="i" SELECTED>i- International, zwischenstaatlich</option>
+            <!-- TMPL_ELSE -->
+                <option value="i">i- International, zwischenstaatlich</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28l" -->
+                <option value="l" SELECTED>l- Lokal</option>
+            <!-- TMPL_ELSE -->
+                <option value="l">l- Lokal</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28m" -->
+                <option value="m" SELECTED>m- In mehreren Staaten</option>
+            <!-- TMPL_ELSE -->
+                <option value="m">m- In mehreren Staaten</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28o" -->
+                <option value="o" SELECTED>o- Regierungsagentur &mdash; unbestimmter Typ</option>
+            <!-- TMPL_ELSE -->
+                <option value="o">o- Regierungsagentur &mdash; unbestimmter Typ</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28s" -->
+                <option value="s" SELECTED>s- Staat, provinziell, territorial, abhängig, usw.</option>
+            <!-- TMPL_ELSE -->
+                <option value="s">s- Staat, provinziell, territorial, abhängig, usw.</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28u" -->
+                <option value="u" SELECTED>u- Unbekannt, ob der Eintrag eine Behörde ist</option>
+            <!-- TMPL_ELSE -->
+                <option value="u">u- Unbekannt, ob der Eintrag eine Behörde ist</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28z" -->
+                <option value="z" SELECTED>z- Anderer</option>
+            <!-- TMPL_ELSE -->
+                <option value="z">z- Anderer</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f28|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>29- Bewertung der Quellen</td>
+        <td>
+            <select name="f29" size="1">
+            <!-- TMPL_IF name="f29a" -->
+                <option value="a" SELECTED>a- Kopien sind konsistent mit der Eintragung</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Kopien sind konsistent mit der Eintragung</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f29b" -->
+                <option value="b" SELECTED>b- Nebeneintragungen sind nicht notwendigerweise consistent mit den Eintragungen</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Nebeneintragungen sind nicht notwendigerweise consistent mit den Eintragungen</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f29n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f29|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td>30 Nichtdefinierte Zeichenposition</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>31- Der Datensatz wird gerade erneuert</td>
+        <td>
+            <select name="f31" size="1">
+            <!-- TMPL_IF name="f31a" -->
+                <option value="a" SELECTED>a- Satz kann verwendet werden</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Satz kann verwendet werden</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f31b" -->
+                <option value="b" SELECTED>b- Satz wurde geändert</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Satz wurde geändert</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f31|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>32- Undifferenzierter Personenname</td>
+        <td>
+            <select name="f32" size="1">
+            <!-- TMPL_IF name="f32a" -->
+                <option value="a" SELECTED>a- Unterschiedener Personenname</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Unterschiedener Personenname</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f32b" -->
+                <option value="b" SELECTED>b- Undifferenzierter Personenname</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Undifferenzierter Personenname</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f32n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f32|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>33- Niveau der Festlegung</td>
+        <td>
+            <select name="f33" size="1">
+            <!-- TMPL_IF name="f33a" -->
+                <option value="a" SELECTED>a- Voll festgelegt</option>
+            <!-- TMPL_ELSE -->
+                <option value="a">a- Voll festgelegt</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f33b" -->
+                <option value="b" SELECTED>b- Memorandum</option>
+            <!-- TMPL_ELSE -->
+                <option value="b">b- Memorandum</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f33c" -->
+                <option value="c" SELECTED>c- Provisorisch</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- Provisorisch</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f33d" -->
+                <option value="d" SELECTED>d- Vorschulalter</option>
+            <!-- TMPL_ELSE -->
+                <option value="d">d- Vorschulalter</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f33n" -->
+                <option value="n" SELECTED>n- Nicht anwendbar</option>
+            <!-- TMPL_ELSE -->
+                <option value="n">n- Nicht anwendbar</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f33|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td>34-37 Undefinierte Zeichenpositionen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>38- Geänderter Satz</td>
+        <td>
+            <select name="f38" size="1">
+            <!-- TMPL_IF name="f38 " -->
+                <option value=" " SELECTED># - Nicht bearbeitet</option>
+            <!-- TMPL_ELSE -->
+                <option value=" "># - Nicht bearbeitet</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f38s" -->
+                <option value="s" SELECTED>s- Gekürzt</option>
+            <!-- TMPL_ELSE -->
+                <option value="s">s- Gekürzt</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f38x" -->
+                <option value="x" SELECTED>x- Fehlende Zeichen</option>
+            <!-- TMPL_ELSE -->
+                <option value="x">x- Fehlende Zeichen</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f38|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>39- Quelle der Katalogaufnahme</td>
+        <td>
+            <select name="f39" size="1">
+            <!-- TMPL_IF name="f39 " -->
+                <option value=" " SELECTED>#- Amt für Nationalbibliographie</option>
+            <!-- TMPL_ELSE -->
+                <option value=" ">#- Amt für Nationalbibliographie</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f39c" -->
+                <option value="c" SELECTED>c- Kooperatives Katalgisierungsprogramm</option>
+            <!-- TMPL_ELSE -->
+                <option value="c">c- Kooperatives Katalgisierungsprogramm</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f39d" -->
+                <option value="d" SELECTED>d- Andere</option>
+            <!-- TMPL_ELSE -->
+                <option value="d">d- Andere</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f39u" -->
+                <option value="u" SELECTED>u- Unbekannt</option>
+            <!-- TMPL_ELSE -->
+                <option value="u">u- Unbekannt</option>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF name="f39|" -->
+                <option value="|" SELECTED>|- Kein Kodierungsversuch</option>
+            <!-- TMPL_ELSE -->
+                <option value="|">|- Kein Kodierungsversuch</option>
+            <!-- /TMPL_IF -->
+            </select>
+        </td>
+    </tr>
+	<tr><td colspan=2><input type="submit" value="OK"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			document.f_pop.f1.value+
+			document.f_pop.f6.value+
+			document.f_pop.f7.value+
+			document.f_pop.f8.value+
+			document.f_pop.f9.value+
+			document.f_pop.f10.value+
+			document.f_pop.f11.value+
+			document.f_pop.f12.value+
+			document.f_pop.f13.value+
+			document.f_pop.f14.value+
+			document.f_pop.f15.value+
+			document.f_pop.f16.value+
+			document.f_pop.f17.value+
+            '          '+
+			document.f_pop.f28.value+
+			document.f_pop.f29.value+
+			' '+
+			document.f_pop.f31.value+
+			document.f_pop.f32.value+
+			document.f_pop.f33.value+
+            '    '+
+			document.f_pop.f38.value+
+			document.f_pop.f39.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

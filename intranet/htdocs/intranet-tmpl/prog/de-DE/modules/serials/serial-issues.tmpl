@@ -1,0 +1,119 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Zeitschriften &rsaquo; Abonnementinformation für <!-- TMPL_VAR name="bibliotitle" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="serials-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/serials/serials-home.pl">Zeitschriften</a> &rsaquo; Abonnementsinformation für <i><!-- TMPL_VAR name="bibliotitle" --></i></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Informationen zum Abonnement für  <i><!-- TMPL_VAR name="bibliotitle" --></i></h1>
+<div id="action">
+    <a href="/cgi-bin/koha/serials/serials-home.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">Abonnements</a> <a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">Zurück zum Titel</a> <a href="/cgi-bin/koha/serials/serial-issues.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->&amp;selectview=full">Gesamtansicht</a>
+</div>
+<!-- TMPL_LOOP name="subscription_LOOP" -->
+    <div id="serials_serial_issue_<!-- TMPL_VAR name="subscriptionid" -->">
+    <h2>Abo-Beschreibung</h2>
+        <p>Es begann am <b><!-- TMPL_VAR name="histstartdate" --></b> und erscheint alla <b>
+        <!--TMPL_IF name="periodicity1" -->
+                Tag
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity2" -->
+                Woche
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity3" -->
+                2 Wochen
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity4" -->
+                3 Wochen
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity5" -->
+                Monat
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity6" -->
+                2 Monate
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity7" -->
+                3 Monate
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity8" -->
+                Viertel
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity9" -->
+                2 Quartale
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity10" -->
+                Jahr
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity11" -->
+                2 Jahre
+        <!-- /TMPL_IF -->
+        </b>
+        <!--TMPL_IF name="arrival1" -->
+            in <b>Montag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival2" -->
+            in <b>Dienstag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival3" -->
+            in <b>Mittwoch</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival4" -->
+            in <b>Donnerstag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival5" -->
+            in <b>Freitag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival6" -->
+            in <b>Samstag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival7" -->
+            in <b>Sonntag</b>
+        <!-- /TMPL_IF -->
+        für <b>
+            <!-- TMPL_IF name="numberlength" --><!-- TMPL_VAR name="numberlength" --> Ausleihen<!-- /TMPL_IF -->
+            <!-- TMPL_IF name="weeklength" --><!-- TMPL_VAR name="weeklength" --> Wochen<!-- /TMPL_IF -->
+            <!-- TMPL_IF name="monthlength" --><!-- TMPL_VAR name="monthlength" --> Monate<!-- /TMPL_IF -->
+            </b>
+        </p>
+        <p>Letzte Abo-Verlängerung war <b><!-- TMPl_VAR name="startdate" --></b></p>
+        <!-- TMPL_IF name="enddate" --><p><b>Das Abonnement ist beendet. Das letzte Heft wurde am <!-- TMPL_VAR name="enddate" --> geliefert.</b></p><!-- /TMPL_IF -->
+    <!--TMPL_UNLESS Name="fullinfo" -->
+        <p><!-- TMPL_VAR name="notes" --></p>
+        <!-- TMPL_IF name="opacnote" -->
+            <h2>Ausleihe Zusammenfassung</h2>
+            <p>
+                <!-- TMPL_VAR name="opacnote" -->
+            </p>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="recievedlist" -->
+            <h2>Erhaltene Exemplare</h2>
+            <p>
+                <!-- TMPL_VAR name="recievedlist" -->
+            </p>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="missinglist" -->
+            <h2>Vermisste Medien</h2>
+            <p>
+                <!-- TMPL_VAR name="missinglist" -->
+            </p>
+        <!-- /TMPL_IF -->
+    </div>
+    <!-- /TMPL_UNLESS -->
+<!-- /TMPL_LOOP -->
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="serials-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

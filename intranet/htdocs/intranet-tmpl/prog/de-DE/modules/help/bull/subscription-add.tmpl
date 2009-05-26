@@ -1,0 +1,32 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1> Hilfe zum Hinzufügen und Modifizieren von Zeitschriftenabonnements</h1>
+	<ul>
+		<h2>Informationsblock zum Abonnement</h2>
+		<p>es enthält den Namen des Bibliothekars, der das Abo angelegt hat, den Namen des Lieferanten, die Kosten und das betroffene Budget. Es enthält ebenfalls den Titel des zum Abo gehörenden Titelsatzes.</p>
+		<h2>Einen Informationsblock planend</h2>
+		<p>es enthält diverse Informationen um das Lieferdatum zu bestimmen.</p>
+		<h2>Laufzeit des Abonnemnets</h2>
+		<p>one field in this bloc should be filled : the subscription length can be calculated in weeks, months or number of issues to receive</p>
+		<h2>Berechnung der Nummerierung</h2>
+		<p>The numbering of issues received can be a complex formulas. The "numbering formula" can be filled with any text and/or numbers. 3 special tokens <b>{X} {Y}</b> and <b>{Z}</b> can be user to define the calculation formula. XYZ values are calculated with the following method:</p>
+			<ul>
+				<li>Hinzufügen: Die Anzahl hier wird XYZ hinzugefügt</li>
+				<li>once every : the number before can be added on every issue or less often</li>
+				<li>Wenn mehr als: Falls die berechnete Zahl grösser ist als der Wert hier</li>
+				<li>Set back to : if the previous condition is valid, the calculated number is set to this one instead</li>
+				<li>Last value / begins with : the last value calculated or the 1st value (when adding a subscription</li>
+			</ul>
+		<h2>Beispiel</h2>
+		Nehmen Sie die Formel <b>#{X}/{Y}</b> in Betracht. Die folgenden Einstellungen für XYZ:
+		<ul>
+			<li> <b>X</b> hinzufügen <b>1</b> einmal jede <b>4</b> Mal. Wenn mehr als <b>9999999</b> zurücksetzen auf <b>leer</b>. Beginnnt mit <b>2004</b></li>
+			<li> <b>Y</b> hinzufügen <b>1</b> einmal jede <b>1</b> Mal. Wenn mehr als <b>4</b> zurücksetzen auf <b>4</b>. Beginnnt mit <b>1</b></li>
+		</ul>
+		resultiert in den folgenden Ausgaben-Nummern:
+		<p>#2004/1, #2004/2, #2004/3, #2004/4, #2005/1, #2005/2, #2005/3, #2005/4, #2006/1</p>
+		<p>
+			<b>Achtung:</b> Wenn Sie ein Abonnement hinzufügen, nimmt Koha an, Sie hätten die Bestellung schon erstellt oder würden dies bald tun. Deshalb wird KEINE Information an das Erwerbsmodul übermittelt. Das ist nicht der Fall, wenn ein Abonnement abläuft. In diesem Fall verursacht eine Erneuerung des Abonnements einen &quot;Vorschlag&quot;, der an das Erwerbungsmodul gesendet wird.
+		</p>
+
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

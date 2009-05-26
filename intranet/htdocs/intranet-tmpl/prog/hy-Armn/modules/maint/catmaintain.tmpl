@@ -1,0 +1,120 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Քարտարանի ուղեկցում</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+
+<!-- TMPL_IF NAME="allsub-p" -->
+<table>
+<caption>Արդյունքներ</caption>
+<!-- TMPL_LOOP NAME="loop" -->
+<tr><td><a href="/cgi-bin/koha/maint/catmaintain.pl?type=allsub&amp;sub=<!-- TMPL_VAR NAME="sub" ESCAPE="URL" -->" onclick="messenger('/cgi-bin/koha/maint/catmaintain.pl?type=modsub&amp;sub=<!-- TMPL_VAR NAME="sub2" ESCAPE="URL" -->');window1.focus()"><!-- TMPL_VAR NAME="subject" ESCAPE="HTML" --></a></td></tr>
+<!-- /TMPL_LOOP -->
+</table>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="modsub-p" -->
+<form action="/cgi-bin/koha/maint/catmaintain.pl" method="post">
+Սա կփոխի խորագրերը հետևյալներին <strong>բոլորը</strong> այս խարագրի գրառումները կիրառված են
+<table>
+<caption>Խորագրի համընդհանուր թարմացում</caption>
+<tr><th scope="row"><label for="sub">Խորագիր։</label></th><td><input type="text" value="<!-- TMPL_VAR NAME="sub" ESCAPE="HTML" -->" name="sub" id="sub" size="40" /><input type="hidden" name="type" value="upsub" />
+<input type="hidden" name="oldsub" value="<!-- TMPL_VAR NAME="sub" ESCAPE="HTML" -->" /></td></tr>
+</table>
+<input type="submit" value="Ձևափոխիր">
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="upsub-p" -->
+Հաջողությամբ ձևափոխվել է <!-- TMPL_VAR NAME="oldsub" ESCAPE="HTML" --> հիմա <!-- TMPL_VAR NAME="sub" ESCAPE="HTML" -->
+<!-- <![ IGNORE [
+<p><a href="/cgi-bin/koha/maint/catmaintain.pl" onclick="window0.focus()">Back to catalogue maintenance</a><br />
+<a href=nowhere onclick="self.close()">Close this window</a>
+]]> -->
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="undel-p" -->
+<table>
+<thead>
+<tr><th>Վերնագիր</th><th>Հեղինակ</th><th>Հետ վերականգնել</th></tr>
+<!-- TMPL_LOOP NAME="loop" -->
+<tr>
+<td><!-- TMPL_VAR NAME="title" ESCAPE="HTML" --></td>
+<td><!-- TMPL_VAR NAME="author" ESCAPE="HTML" --></td>
+<td><a href="/cgi-bin/koha/maint/catmaintain.pl?<!-- TMPL_VAR NAME="undelete" escape="url" -->">Հետ վերականգնել</a></td>
+</tr>
+<!-- /TMPL_LOOP -->
+</table>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="finun-p" -->
+<h3>Հաջողությամբ հետ է վերականգնված</h3>
+<p><a href="/cgi-bin/koha/maint/catmaintain.pl">Հետ դեպի քարտարանի ուղեկցում</a></p>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="fixitemtype-p" -->
+<form method="post" action="/cgi-bin/koha/maint/catmaintain.pl">
+<table>
+<tr><th scope="row"><label for="itemtype">Նյութի տեսակ։</label></th><td><input type="hidden" name="bi" value="<!-- TMPL_VAR NAME="bi" ESCAPE="HTML">" />
+<input type="hidden" name="type" value="updatetype" />
+<input type="text" name="itemtype" id="itemtype" value="<!-- TMPL_VAR NAME="item" ESCAPE="HTML">" /></td></tr>
+</table>
+<input type="submit" value="Փոփոխություն">
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="updatetype-p" -->
+<h3>Հաջողությամբ թարմացված է</h3>
+<p><a href="/cgi-bin/koha/maint/catmaintain.pl">Հետ դեպի քարտարանի ուղեկցում</a></p>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="mainmenu-p" -->
+
+<h1>Քարտարանի ուղեկցում</h1>
+<form action="/cgi-bin/koha/maint/catmaintain.pl" method="post">
+<table>
+<caption>Խորագրի ուղեկցում</caption>
+<tr><th scope="row"><label for="sub">Ցույց տուր բոլոր խորագրերը, որոնք սկսվում են։ </label></th><td><input type="text" name="sub" id="sub"><input type="hidden" name="type" value="allsub" /></td></tr>
+</table>
+<input type="submit" value="Ցույց տուր">
+</form>
+
+<form action="/cgi-bin/koha/search.pl" method="post">
+<table>
+<caption>Խմբակային ուղեկցում</caption>
+<tr><th scope="row"><label for="title">Ցույց տուր բոլոր վերնագրերը որոնք սկսվում են։</label></th><td><input type="hidden" name="type" value="catmain"><input type="text" name="title" id="title" /></td></tr>
+<tr><th scope="row"><label for="item">Նյութի համար։</label></th><td><input type="text" size="25" id="item" name="item" /></td></tr>
+</table>
+<input type="submit" value="Ցույց տուր">
+</form>
+
+<form action="/cgi-bin/koha/maint/catmaintain.pl" method="post">
+<table>
+<caption>Հետ վերականգնել բիբլիոն</caption>
+<tr><th scope="row"><label for="title">Ցույց տուր բոլոր վերնագրերը որոնք սկսվում են</label></th><td><input type="text" name="title" id="title" /><input type="hidden" name="type" value="undel" /></td></tr>
+</table>
+<input type="submit" value="Ցույց տուր">
+</form>
+
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+</div>
+
+<!-- TMPL_INCLUDE NAME="mainmenu.inc" -->
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

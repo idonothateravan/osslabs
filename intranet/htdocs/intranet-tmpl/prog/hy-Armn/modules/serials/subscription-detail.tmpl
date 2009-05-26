@@ -1,0 +1,331 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Պարբերականներ &rsaquo; Բաժանորդագրության մանրամասներ #<!-- TMPL_VAR name="subscriptionid" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" language="javascript">
+<!--
+
+// the english words used in display purposes
+var text = new Array(_("Թիվ"),_("Հատոր"),_("Տրում"),_("Ամիս"),_("Շաբաթ"),_("Սկսվում է"),_("Պտույտ։"),_("Ընտրիր բնագավառը:"),_("Հյուսիսային"),_("Southern",
+"Autumn"),_("Ձմեռ"),_("Գարուն"),_("Ամառ"),_("Աշուն"),_("Սեզոն"),_("Տարի"));
+
+
+// to display the options section
+function options(x,y,z){
+var textbox = '';
+    // alert("X: "+x+"Y: "+y+"Z: "+z);
+    if(x){
+        document.f.xfield.value = x;
+        if(y){
+            document.f.yfield.value = y;
+            if(z){
+                document.f.zfield.value = z;
+            }
+        }
+    }
+}
+
+function confirm_deletion() {
+    var is_confirmed = confirm(_("Վստա՞հ ես որ ուզում ես ջնջել այս բաժանորդագրությունը։"));
+    if (is_confirmed) {
+        window.location="subscription-detail.pl?subscriptionid=<!-- TMPL_VAR name="subscriptionid" -->&op=del";
+    }
+}
+function popup(subscriptionid) {
+    newin=window.open("subscription-renew.pl?mode=popup&subscriptionid="+subscriptionid,'popup','width=590,height=440,toolbar=false,scrollbars=yes');
+}
+
+-->
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="serials-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/serials/serials-home.pl">Serials</a> &rsaquo; Details for Subscription #<!-- TMPL_VAR name="subscriptionid" --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	<!-- TMPL_INCLUDE NAME="serials-toolbar.inc" -->
+
+    <h1>Subscription for <!-- TMPL_VAR name="bibliotitle" --> </h1>
+    <!--TMPL_IF Name="abouttoexpire"--><div class="problem">Բաժանորդագրությունը մոտենում է ավարտին։ Այժմ այն պետք է թարմացվի։</div><!--/TMPL_IF-->
+    
+    <div id="subscription_info">
+        <h2>Բաժանորդագրության տեղեկատվություն</h2>
+		<ul>
+		<li><span class="label">Subscription ID: </span><!--TMPL_VAR name="subscriptionid"--></li>
+        <li><span class="label">Գրադարանավարի բնութագրիչ</span> <!-- TMPL_VAR name="librarian" --></li>
+        <li><span class="label">Vendor:</span> <a href="/cgi-bin/koha/acqui/supplier.pl?supplierid=<!-- TMPL_VAR name="aqbooksellerid"-->"><!-- TMPL_VAR name="aqbooksellername" -->&nbsp;</a></li>
+        <li><span class="label">Մատեն։</span> <i>(<!-- TMPL_VAR name="bibnum" -->)</i> <a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR name="bibnum" -->"><!-- TMPL_VAR name="bibliotitle" --></a></li><br />
+<!-- TMPL_IF name="branchcode" --><li><span class="label">Գրադարան ։</span> <!-- TMPL_VAR name="branchcode" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="serialsadditems" -->
+            <li>Serial receipt creates an item record.</li>
+        <!-- TMPL_ELSE -->
+            <li>Serial receipt does not create an item record.</li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="callnumber" --><li><span class="label">Դասիչ :</span> <!-- TMPL_VAR name="callnumber" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="letter" --><li><span class="label">Զգուշացրու հաճախորդին։</span> <!-- TMPL_VAR name="letter" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="notes" --><li><span class="label">Նշումներ։</span> <!-- TMPL_VAR name="notes" --></li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="internalnotes" --><li><span class="label">Կառավարման նշումներ ։</span> <!-- TMPL_VAR name="internalnotes" --></li><!-- /TMPL_IF -->
+        
+    </div>
+    <div id="subscription_planning">
+        <h2>Նախագծում</h2>
+            <p><label>Սկզբի ամսաթիվ:</label> <!-- TMPL_VAR name="startdate" -->
+            </p>
+            <p><label>Հաճախականություն (*)</label>
+                <!--TMPL_IF name="periodicity16" -->
+                        Առանց կանոնավորության
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity32" -->
+                        Ոչ կանոնավոր
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity0" -->
+                        Չճանաչված
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity12" -->
+                        2/օր
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity1" -->
+                        1/օր
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity13" -->
+                        3/շաբաթ
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity2" -->
+                        1/շաբաթ
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity3" -->
+                        1/2 շաբաթ
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity4" -->
+                        1/3 շաբաթ
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity5" -->
+                        1/Ամիս
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity6" -->
+                        1/2 Ամիս (6/տարի)
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity7" -->
+                        1/քառորդ
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity8" -->
+                        1/քառորդ
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity9" -->
+                        2/տարի
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity10" -->
+                        1/տարի
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity11" -->
+                        1/2 տարի
+                <!-- /TMPL_IF -->
+              Ձեռքով պատրաստած պատմություն ։
+                <!--TMPL_IF Name="manualhistory"-->
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                <!-- TMPL_ELSE -->
+                    <input type="checkbox" disabled="disabled" />
+                <!--/TMPL_IF-->
+            </p>
+            <p><label>Թվի նմուշ</label>
+                <!-- TMPL_IF name="numberpattern1" -->
+                    Միայն թիվ
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern2" -->
+                    Հատոր, համար, պրակ
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern3" -->
+                    Հատոր, համար
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern4" -->
+                    Հատոր, պրակ
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern5" -->
+                    Թիվ, համար
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern8" -->
+                    Տարի/Համար
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern6" -->
+                    Միայն սեզոնային
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern7" -->
+                    Ոչ մեկը վերևից
+                <!-- /TMPL_IF -->
+            </p>
+            <table>
+            <tr><td><p>Սկսվում է</p></td>
+                <td align="center"><!--TMPL_VAR NAME="lastvalue1"--></td>
+            <!--TMPL_IF NAME="lastvalue2"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="lastvalue2"-->
+                </td>
+            <!--/TMPL_IF-->
+            <!--TMPL_IF NAME="lastvalue3"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="lastvalue3"-->
+                </td>
+            <!--/TMPL_IF-->
+            </tr>
+            <tr><td><p>Պտույտ։</p></td>
+                <td align="center">&nbsp;</td>
+            <!--TMPL_IF NAME="whenmorethan2"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="whenmorethan2"-->
+                </td>
+            <!--/TMPL_IF-->
+            <!--TMPL_IF NAME="whenmorethan3"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="whenmorethan3"-->
+                </td>
+            <!--/TMPL_IF-->
+            </tr>
+            </table>
+            <!-- TMPL_IF NAME="irregular_issues" -->
+            <p><label>Ոչ կանոնավորություն։</label> <!-- TMPL_VAR name="irregular_issues" --> համարներ
+            </p>
+            <!-- /TMPL_IF -->
+            <p><label>Առաջին ստացում։</label> <!--TMPL_VAR name="firstacquidate" -->
+            </p>
+        <!-- TMPL_IF name="numberlength" --><p><label>Համարների քանակ։</label> <!-- TMPL_VAR name="numberlength" --></p><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="weeklength" --><p><label>Շաբաթների քանակ։</label> <!-- TMPL_VAR name="weeklength" --></p><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="monthlength" --><p><label>Ամիսների քանակ։</label> <!-- TMPL_VAR name="monthlength" --></p><!-- /TMPL_IF -->
+    </div>
+    <div id="subscription_numbering" style="display:none;">
+        <h3>Համարակալման հաշվարկ</h3>
+        <p><label>Համարակալման բանաձև։</label> <!-- TMPL_VAR name="numberingmethod" --></p>
+        <table>
+            <tr>
+                <th>&nbsp;</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Z</th>
+                </tr>
+                <tr>
+                    <td>Ավելացրու</td>
+                    <td>
+                        <!-- TMPL_VAR name="add1" -->
+                    </td>
+                    <td>
+                        <!-- TMPL_VAR name="add2" -->
+                    </td>
+                    <td>
+                        <!-- TMPL_VAR name="add3" -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>մեկ անգամ բոլորին</td>
+                    <td><!-- TMPL_VAR name="every1" --></td>
+                    <td><!-- TMPL_VAR name="every2" --></td>
+                    <td><!-- TMPL_VAR name="every3" --></td>
+                </tr>
+                <tr>
+                    <td>Երբ ավելին է քան</td>
+                    <td><!-- TMPL_VAR name="whenmorethan1" --> <!-- TMPL_IF name="innerloop1" --><br />
+                        <i>(<!-- TMPL_VAR name="innerloop1" --> է)</i><!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_VAR name="whenmorethan2" --> <!-- TMPL_IF name="innerloop2" --><br />
+                        <i>(<!-- TMPL_VAR name="innerloop2" --> է)</i><!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_VAR name="whenmorethan3" --> <!-- TMPL_IF name="innerloop3" --><br />
+                        <i>(<!-- TMPL_VAR name="innerloop3" --> է)</i><!-- /TMPL_IF --></td>
+                </tr>
+                <tr>
+                    <td>Դիր հետվերադարձը</td>
+                    <td><!-- TMPL_VAR name="setto1" --></td>
+                    <td><!-- TMPL_VAR name="setto2" --></td>
+                    <td><!-- TMPL_VAR name="setto3" --></td>
+                </tr>
+                <tr>
+                    <td>
+                            Ներքին հաշվիչ
+                    </td>
+                    <td><!-- TMPL_VAR name="innerloop1" --></td>
+                    <td><!-- TMPL_VAR name="innerloop2" --></td>
+                    <td><!-- TMPL_VAR name="innerloop3" --></td>
+                </tr>
+                <tr>
+                    <td>
+                            Վերջին արժեք
+                    </td>
+                    <td><!-- TMPL_VAR name="lastvalue1" --></td>
+                    <td><!-- TMPL_VAR name="lastvalue2" --></td>
+                    <td><!-- TMPL_VAR name="lastvalue3" --></td>
+                </tr>
+            </table>
+    </div>
+    <div id="subscription_issues">
+        <h2>Պարբերականի համարներ</h2>
+        <table>
+        <tr>
+            <th>Նյութի համար</th>
+            <th>Նախատեսված ամսաթիվ</th>
+            <th>Հրատարակման ամսաթիվ</th>
+            <th>Վիճակ</th>
+        </tr>
+        <!-- TMPL_LOOP name="serialslist" -->
+            <tr>
+                <td>
+                    <!-- TMPL_VAR name="serialseq" -->
+                </td>
+                <td>
+                    <!-- TMPL_VAR name="planneddate" -->
+                </td>
+                <td>
+                    <!-- TMPL_VAR name="publisheddate" -->
+                </td>
+                <td>
+                        <!--TMPL_IF name="status1" -->
+                            Expected
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status2" -->
+                            Ժամանած
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status3" -->
+                            Ուշ
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status4" -->
+                            Կորած
+                        <!-- /TMPL_IF -->
+                </td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+        </table>
+    </div>
+    <div id="subscription_summary">
+        <h2>Բաժանորդագրության համառոտագրություն</h2>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td><label>Սկզբի ամսաթիվ</label></td>
+                <td> <!-- TMPL_VAR name="startdate" --> </td>
+            </tr>
+            <tr>
+                <td><label>Ամսաթվի վերջ</label></td>
+                <td> <!-- TMPL_VAR name="enddate" --></td>
+            </tr>
+            <tr>
+                <td><label>History start date</label></td>
+                <td> <!-- TMPL_VAR name="histstartdate" --> </td>
+            </tr>
+            <tr>
+                <td><label>History end date</label></td>
+                <td> <!-- TMPL_VAR name="histenddate" --></td>
+            </tr>
+            <tr><td><label>Ստացված համարներ</label></td><td><!-- TMPL_VAR name="recievedlist" --></td></tr>
+            <tr><td><label>Կորած նյութեր</label></td><td><!-- TMPL_VAR name="missinglist" --></td></tr>
+            <tr><td><label>Nonpublic note</label></td><td><!-- TMPL_VAR name="librariannote" --></td></tr>
+            <tr><td><label>Public note</label></td><td><!-- TMPL_VAR name="opacnote" --></td></tr>
+        </table>
+    </div>
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="serials-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

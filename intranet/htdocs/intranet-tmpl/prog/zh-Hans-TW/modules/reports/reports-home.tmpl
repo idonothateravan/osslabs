@@ -1,0 +1,54 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 報表</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="circ-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; 報表</div>
+<div id="doc" class="yui-t7">
+
+   <div id="bd">
+    <div id="yui-main">
+
+	<div class="yui-g">
+	<h1>報表</h1>
+		<div class="yui-u first">
+	<h2>報表精靈</h2>
+	<ul>
+		<li><a href="/cgi-bin/koha/reports/guided_reports.pl">產生報表</a></li>
+	</ul>
+	<h2>統計精靈</h2>
+	<ul>
+		<li><a href="/cgi-bin/koha/reports/acquisitions_stats.pl">採訪</a></li>
+		<li><a href="/cgi-bin/koha/reports/borrowers_stats.pl">讀者</a></li>
+		<li><a href="/cgi-bin/koha/reports/catalogue_stats.pl">館藏目錄</a></li>
+		<li><a href="/cgi-bin/koha/reports/issues_stats.pl">流通</a></li>
+	</ul>
+	
+	<h2>沒有使用</h2>
+	<ul>
+		<li><a href="/cgi-bin/koha/reports/borrowers_out.pl">沒有借閱的讀者</a></li>
+		<li><a href="/cgi-bin/koha/reports/catalogue_out.pl">館藏無法預約</a></li>
+	</ul></div>
+
+
+	<div class="yui-u"><h2>排行榜</h2>
+	<ul>
+		<li><a href="/cgi-bin/koha/reports/bor_issues_top.pl">借閱最熱門讀者</a></li>
+		<li><a href="/cgi-bin/koha/reports/cat_issues_top.pl">借閱最熱門館藏</a></li>
+	</ul>
+	
+	<h2>其他</h2>
+	<ul>
+		<li><a href="/cgi-bin/koha/reports/itemslost.pl">館藏遺失</a></li>
+		<li><a href="/cgi-bin/koha/reports/manager.pl?report_name=itemtypes">館藏目錄依照館藏型式</a></li>
+		<li><a href="/cgi-bin/koha/reports/issues_avg_stats.pl">平均借閱時間</a></li>
+		<!--<li><a href="/cgi-bin/koha/reports/stats.screen.pl">Till Reconciliation</a></li> -->
+	</ul></div>
+</div>
+
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

@@ -1,0 +1,338 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 管理 &rsaquo; 分类法
+<!-- TMPL_IF name="class_source_form" -->
+  <!-- TMPL_IF name="edit_class_source" -->
+    &rsaquo; 修改分类法来源
+  <!-- TMPL_ELSE -->
+    &rsaquo; 新增分类法来源
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="sort_rule_form" -->
+  <!-- TMPL_IF name="edit_sort_rule" -->
+    &rsaquo; 修改分类法
+  <!-- TMPL_ELSE -->
+    &rsaquo; 新增分类法
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_class_source_form" -->
+  &rsaquo; 确认删除 <!-- TMPL_VAR name="class_source" --> 分类法
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_sort_rule_form" -->
+  &rsaquo; 确认删除 <!-- TMPL_VAR name="sort_rule" --> 分类法
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_sort_rule_impossible" -->
+  &rsaquo; 无法删除 <!-- TMPL_VAR name="sort_rule" --> 分类法
+<!-- /TMPL_IF -->
+</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+
+<script type="text/javascript">
+//<![CDATA[
+
+function CheckSourceForm(f) {
+    var ok=1;
+    var _alertString="";
+    var alertString2;
+    if (f.class_source.value.length==0) {
+        _alertString += "\n- " + _("分类法代码遗失");
+    }
+    if (f.sort_rule.value.length==0) {
+        _alertString += "\n- " + _("无分类法代码");
+    }
+    if (f.description.value.length==0) {
+        _alertString += "\n- " + _("没有描述");
+    }
+    if (_alertString.length==0) {
+        document.Aform.submit();
+    } else {
+        alertString2  = _("由于以下问题，表格无法提交");
+        alertString2 += "\n------------------------------------------------------------------------------------\n";
+        alertString2 += _alertString;
+        alert(alertString2);
+    }
+}
+
+function CheckRuleForm(f) {
+    var ok=1;
+    var _alertString="";
+    var alertString2;
+    if (f.sort_rule.value.length==0) {
+        _alertString += "\n- " + _("无分类法代码");
+    }
+    if (f.description.value.length==0) {
+        _alertString += "\n- " + _("没有描述");
+    }
+    if (f.sort_routine.value.length==0) {
+        _alertString += "\n- " + _("没有固定的排序方式");
+    }
+    if (_alertString.length==0) {
+        document.Aform.submit();
+    } else {
+        alertString2  = _("由于以下问题，表格无法提交");
+        alertString2 += "\n------------------------------------------------------------------------------------\n";
+        alertString2 += _alertString;
+        alert(alertString2);
+    }
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首页</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">管理</a> &rsaquo; <!-- TMPL_IF name="display_lists" -->分类法来源<!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/classsources.pl">分类法来源</a><!-- /TMPL_IF -->
+<!-- TMPL_IF name="class_source_form" -->
+  <!-- TMPL_IF name="edit_class_source" -->
+    &rsaquo; 修改分类法来源
+  <!-- TMPL_ELSE -->
+    &rsaquo; 新增分类法来源
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="sort_rule_form" -->
+  <!-- TMPL_IF name="edit_sort_rule" -->
+    &rsaquo; 修改分类法
+  <!-- TMPL_ELSE -->
+    &rsaquo; 新增分类法
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_class_source_form" -->
+  &rsaquo; 确认删除分类法 <span class="ex">'<!-- TMPL_VAR name="class_source" -->'</span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_sort_rule_form" -->
+  &rsaquo; 确认删除分类法 <span class="ex">'<!-- TMPL_VAR name="sort_rule" -->'</span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_sort_rule_impossible" -->
+  &rsaquo; 无法删除分类法 <span class="ex">'<!-- TMPL_VAR name="sort_rule" -->'</span>
+<!-- /TMPL_IF -->
+</div>
+
+<div id="doc3" class="yui-t2">
+
+   <div id="bd">
+    <div id="yui-main">
+    <div class="yui-b">
+
+<!-- TMPL_IF name="class_source_form" -->
+  <!-- TMPL_IF name="edit_class_source" -->
+<h2>&rsaquo; 修改分类法来源</h2>
+  <!-- TMPL_ELSE -->
+<h2>&rsaquo; 新增分类法来源</h2>
+  <!-- /TMPL_IF -->
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <fieldset class="rows">
+    <ol>
+      <li>
+          <!-- TMPL_IF name="edit_class_source" -->
+		  <span class="label">分类法来源： </span>
+            <input type="hidden" name="class_source" value="<!-- TMPL_VAR name="class_source" -->" />
+            <!-- TMPL_VAR name="class_source" -->
+          <!-- TMPL_ELSE -->
+		  <label for="class_source">分类法来源： </label>
+            <input type="text" id="class_source" name="class_source"  size="10" maxlength="10" />
+          <!-- /TMPL_IF -->
+       </li>
+       <li><label for="description">描述： </label>
+           <input type="text" id="description" name="description" size="50" maxlength="250" 
+                  value="<!-- TMPL_VAR name="description" escape="HTML" -->" />
+       </li>
+       <li><label for="used">资源在使用中？</label>
+           <!-- TMPL_IF NAME="used" --><input type="checkbox" id="used" name="used" value="使用" checked="checked"><!-- TMPL_ELSE -->
+		  <input type="checkbox" id="used" name="used" value="使用"><!-- /TMPL_IF -->
+       </li>
+       <li><label for="sort_rule">分类法： </label>
+           <select id="sort_rule" name="sort_rule">
+           <!-- TMPL_LOOP name="rules_dropdown" -->
+             <!-- TMPL_IF name="selected" -->
+             <option value="<!-- TMPL_VAR name="rule" -->" selected="selected">题名：<!-- TMPL_VAR name="description" -->（作者：<!-- TMPL_VAR name="rule" -->）</option>
+             <!-- TMPL_ELSE -->
+             <option value="<!-- TMPL_VAR name="rule" -->">题名：<!-- TMPL_VAR name="description" -->（作者：<!-- TMPL_VAR name="rule" -->）</option>
+             <!-- /TMPL_IF -->
+           <!-- /TMPL_LOOP -->
+           </select>
+       </li>    
+    </ol>
+  </fieldset>
+  <fieldset class="action">
+    <!-- TMPL_IF name="edit_class_source" -->
+    <input type="button" value="保存" onclick="CheckSourceForm(this.form)">
+    <!-- TMPL_ELSE -->
+    <input type="button" value="保存" onclick="CheckSourceForm(this.form)">
+    <!-- /TMPL_IF-->
+    <a class="cancel" href="/cgi-bin/koha/admin/classsources.pl">取消</a>
+  </fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="sort_rule_form" -->
+  <!-- TMPL_IF name="edit_sort_rule" -->
+<h2>&rsaquo; 修改分类法</h2>
+  <!-- TMPL_ELSE -->
+<h2>&rsaquo; 新增分类法</h2>
+  <!-- /TMPL_IF -->
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <fieldset class="rows">
+    <ol>
+      <li>
+          <!-- TMPL_IF name="edit_sort_rule" -->
+		  <span class="label">分类法代码： </span>
+            <input type="hidden" name="sort_rule" value="<!-- TMPL_VAR name="sort_rule" -->" />
+            <!-- TMPL_VAR name="sort_rule" -->
+          <!-- TMPL_ELSE -->
+		  <label for="sort_rule">分类法代码： </label>
+            <input type="text" id="sort_rule" name="sort_rule"  size="10" maxlength="10" />
+          <!-- /TMPL_IF -->
+       </li>
+       <li><label for="description">描述： </label>
+           <input type="text" id="description" name="description" size="50" maxlength="250" 
+                  value="<!-- TMPL_VAR name="description" escape="HTML" -->" />
+       </li>
+       <li><label for="sort_routine">分类法： </label>
+           <select id="sort_routine" name="sort_routine">
+           <!-- TMPL_LOOP name="routines_dropdown" -->
+             <!-- TMPL_IF name="selected" -->
+             <option value="<!-- TMPL_VAR name="routine" -->" selected="selected"><!-- TMPL_VAR name="routine" --></option>
+             <!-- TMPL_ELSE -->
+             <option value="<!-- TMPL_VAR name="routine" -->"><!-- TMPL_VAR name="routine" --></option>
+             <!-- /TMPL_IF -->
+           <!-- /TMPL_LOOP -->
+           </select>
+       </li>
+    </ol>
+  </fieldset>
+  <fieldset class="action">
+  <!-- TMPL_IF name="edit_sort_rule" -->
+        <input type="button" value="保存" onclick="CheckRuleForm(this.form)">
+    <!-- TMPL_ELSE -->
+        <input type="button" value="保存" onclick="CheckRuleForm(this.form)">    <!-- /TMPL_IF-->
+    	<a class="cancel" href="/cgi-bin/koha/admin/classsources.pl">取消</a>
+  </fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="delete_class_source_form" -->
+<div class="dialog alert"><h3>确认删除分类法来源？ <span class="ex">'<!-- TMPL_VAR name="class_source" -->'</span>?</h3>
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <input type="hidden" name="class_source" value="<!-- TMPL_VAR name="class_source" -->" />
+  <input type="submit" value="删除分类法" class="approve"></form>
+  <form action="<!-- TMPL_VAR name="script_name" -->" method="get"><input type="submit" value="否, 请勿删除" class="deny">
+</form>
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="delete_sort_rule_form" -->
+<div class="dialog alert"><h3>确认删除分类法？ <span class="ex">'<!-- TMPL_VAR name="sort_rule" -->'</span>?</h3>
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <input type="hidden" name="sort_rule" value="<!-- TMPL_VAR name="sort_rule" -->" />
+    <input type="submit" value="删除分类法" class="approve">
+</form>
+<form action="<!-- TMPL_VAR name="script_name" -->" method="get">    <input type="submit" value="否, 请勿删除" class="deny"></form></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="delete_sort_rule_impossible" -->
+<div class="dialog message"><h3>无法删除分类法 <span class="ex">'<!-- TMPL_VAR name="sort_rule" -->'</span></h3>
+<p>The filing rule <!-- TMPL_VAR name="sort_rule" --> is used by at least one classification source. Please remove it from all classification source definitions before trying again.
+</p>
+<form action="<!-- TMPL_VAR name="script_name" -->" method="get">
+    <input type="button" value="完成" class="approve"></form>
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="display_lists" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+	// prepare DOM for YUI Toolbar
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+	// YUI Toolbar Functions
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("newsource");
+	    new YAHOO.widget.Button("newrule");
+	}	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="newsource" href="<!-- TMPL_VAR name="script_name" -->?op=add_source">新增分类法</a></li>
+	<li><a id="newrule" href="<!-- TMPL_VAR name="script_name" -->?op=add_sort_rule">新增分类法</a></li>
+</ul></div>
+
+<h2>分类法来源</h2>
+<!-- TMPL_IF name="added_source" -->
+<span class="problem">新增 <!-- TMPL_VAR name="added_source" --> 分类法</span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="edited_source" -->
+<span class="problem">已修改的分级源 <!-- TMPL_VAR name="edited_source" --></span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="deleted_source" -->
+<span class="problem">删除 <!-- TMPL_VAR name="deleted_source" --> 分类法</span>
+<!-- /TMPL_IF -->
+<table>
+  <tr>
+    <th>代码</th>
+    <th>描述</th>
+    <th>使用中</th>
+    <th>分类法</th>
+    <th>处理</th>
+  </tr>
+  <!-- TMPL_LOOP name="class_sources" -->
+  <tr>
+    <td><!-- TMPL_VAR name="code" --></td>
+    <td><!-- TMPL_VAR name="description" --></td>
+    <td><!-- TMPL_IF name="used" -->是<!-- TMPL_ELSE -->否<!-- /TMPL_IF --></td>
+    <td><!-- TMPL_VAR name="sortrule" --></td>
+    <td>
+      <a href="<!-- TMPL_VAR name="script_name" -->?op=edit_source&amp;class_source=<!-- TMPL_VAR name="code" escape="HTML" -->">编辑</a> <a href="<!-- TMPL_VAR name="script_name" -->?op=delete_source&amp;class_source=<!-- TMPL_VAR name="code" escape="HTML" -->">删除</a>
+    </td>
+  </tr>
+  <!-- /TMPL_LOOP -->
+</table>
+
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+<h2>分类法</h2>
+<!-- TMPL_IF name="added_rule" -->
+<span class="problem">新增 <!-- TMPL_VAR name="added_rule" --> 分类法</span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="edited_rule" -->
+<span class="problem">已修改的归档方法 <!-- TMPL_VAR name="edited_rule" --></span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="deleted_rule" -->
+<span class="problem">删除 <!-- TMPL_VAR name="deleted_rule" --> 分类法</span>
+<!-- /TMPL_IF -->
+<table>
+  <tr>
+    <th>代码</th>
+    <th>描述</th>
+    <th>排序工作清单</th>
+    <th>处理</th>
+  </tr>
+  <!-- TMPL_LOOP name="class_sort_rules" -->
+  <tr>
+    <td><!-- TMPL_VAR name="rule" --></td>
+    <td><!-- TMPL_VAR name="description" --></td>
+    <td><!-- TMPL_VAR name="sort_routine" --></td>
+    <td>
+      <a href="<!-- TMPL_VAR name="script_name" -->?op=edit_sort_rule&amp;sort_rule=<!-- TMPL_VAR name="rule" escape="HTML" -->">编辑</a> <a href="<!-- TMPL_VAR name="script_name" -->?op=delete_sort_rule&amp;sort_rule=<!-- TMPL_VAR name="rule" escape="HTML" -->">删除</a>
+    </td>
+  </tr>
+  <!-- /TMPL_LOOP -->
+</table>
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

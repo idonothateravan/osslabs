@@ -1,0 +1,70 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title><!-- TMPL_VAR NAME="surname" --><!-- TMPL_VAR NAME="firstname" --> 的閱讀記錄</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="patron-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; <a href="/cgi-bin/koha/members/members-home.pl">讀者</a> &rsaquo;  <!-- TMPL_VAR NAME="surname" --><!-- TMPL_VAR NAME="firstname" --> 的閱讀歷史</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="circ-toolbar.inc" -->
+<h1>閱讀記錄</h1>
+<form action="/cgi-bin/koha/members/readingrec.pl" method="get"><input type="hidden" name="borrowernumber" id="borrowernumber" value="<!-- TMPL_VAR NAME="borrowernumber" -->" /></form>
+<table>
+<tr><td colspan="4"><!-- TMPL_IF NAME="showfulllink" -->顯示所有館藏 ｜ <a href="readingrec.pl?borrowernumber=<!-- TMPL_VAR name="borrowernumber" -->&amp;limit=full">只顯示最近 50 筆館藏</a> <!-- TMPL_ELSE -->	顯示最近 50 筆館藏 | <a href="readingrec.pl?borrowernumber=<!-- TMPL_VAR name="borrowernumber" -->&amp;limit=full">顯示所有館藏</a><!-- /TMPL_IF --></td></tr>
+<tr>
+	<th>
+		<a href="readingrec.pl?borrowernumber=<!-- TMPL_VAR name="borrowernumber" -->&amp;order=title&amp;amp;limit=<!-- TMPL_VAR name="limit" -->">題名</a>
+	</th>
+	<th>
+		<a href="readingrec.pl?borrowernumber=<!-- TMPL_VAR name="borrowernumber" -->&amp;order=author&amp;limit=<!-- TMPL_VAR name="limit" -->">作者</a>
+	</th>
+	<th>索書號</th>
+	<th>
+		<a href="readingrec.pl?borrowernumber=<!-- TMPL_VAR name="borrowernumber" -->&amp;order=returndate DESC&amp;limit=<!-- TMPL_VAR name="limit" -->">歸還日期</a>
+	</th>
+</tr>
+<!-- TMPL_LOOP name="loop_reading" -->
+<!-- TMPL_IF NAME="toggle" -->
+    <!-- TMPL_IF NAME="returndate" --><tr class="highlight"><!-- TMPL_ELSE --><tr class="highlight onissue"><!-- /TMPL_IF -->
+<!-- TMPL_ELSE -->
+    <!-- TMPL_IF NAME="returndate" --><tr><!-- TMPL_ELSE --><tr class="onissue"><!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+            <td>
+            <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">
+                <!-- TMPL_VAR name="title" -->
+            </a>
+        </td>
+
+            <td>
+        <!-- TMPL_VAR name="author" --></td>
+
+            <td>
+        <!-- TMPL_VAR NAME="classification" --></td>
+
+            <td>
+        <!-- TMPL_IF NAME="returndate" -->
+            <!-- TMPL_VAR name="returndate" -->
+        <!-- TMPL_ELSE -->
+            借閱
+        <!-- /TMPL_IF -->
+	</td>
+</tr>
+<!-- /TMPL_LOOP -->
+</table>
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="circ-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

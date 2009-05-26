@@ -1,0 +1,259 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Կառավարում &rsaquo; Ընթերցողական դասեր &rsaquo; <!-- TMPL_IF NAME="add_form" --><!-- TMPL_IF NAME="categorycode" -->Ձևափոխիր դասը '<!-- TMPL_VAR NAME="categorycode" -->'<!-- TMPL_ELSE -->Նոր դաս<!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="add_validate" -->Տվյալը գրանցված է<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="delete_confirm" --><!-- TMPL_IF NAME="totalgtzero" -->Չի կարող ջնջել: Տեսակը <!-- TMPL_VAR NAME="categorycode" --> օգտագործվում է<!-- TMPL_ELSE -->Հաստատիր այս դասի ջնջումը  '<!-- TMPL_VAR NAME="categorycode" -->'<!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="delete_confirmed" -->Դասը ջնջված է<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+	//
+	function isNotNull(f,noalert) {
+		if (f.value.length ==0) {
+   return false;
+		}
+		return true;
+	}
+	//
+	function toUC(f) {
+		var x=f.value.toUpperCase();
+		f.value=x;
+		return true;
+	}
+	//
+	function isNum(v,maybenull) {
+	var n = new Number(v.value);
+	if (isNaN(n)) {
+		return false;
+		}
+	if (maybenull==0 && v.value=='') {
+		return false;
+	}
+	return true;
+	}
+	//
+	function isDate(f) {
+		var t = Date.parse(f.value);
+		if (isNaN(t)) {
+			return false;
+		}
+	}
+	// to check if the data are correctly entered.
+	function Check(ff) {
+	    var ok=0;
+		var _alertString="Form not submitted because of the following problem(s)\n";
+		_alertString +="-------------------------------------------------------------------\n\n";
+		if (ff.categorycode.value.length==0) {
+		    ok=1;
+			_alertString += "- categorycode missing\n";
+		}
+		if (!(ff.category_type.value)){
+		    ok=1;
+		    _alertString += "- category type missing\n";
+		}
+		if (!(isNotNull(ff.description,1))) {
+		    ok=1;
+			_alertString += "- description missing\n";
+		}
+		if (!isNum(ff.upperagelimit,0) && ff.category_type.value=='C') {
+		    ok=1;
+		  	_alertString += "- upperagelimit is not a number\n";
+				
+		}
+		
+		if (ok) { // if there is a problem
+			alert(_alertString);
+             return false;
+        }
+        // if all is good
+		ff.submit();
+	}
+	//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="patrons-admin-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Տուն</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Կառավարում</a> &rsaquo; <!-- TMPL_IF NAME="add_form" --> <a href="/cgi-bin/koha/admin/categorie.pl">Ընթերցողական դասեր</a> &rsaquo; <!-- TMPL_IF NAME="categorycode" -->Ձևափոխիր դասը '<!-- TMPL_VAR NAME="categorycode" -->'<!-- TMPL_ELSE -->Նոր դաս<!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="add_validate" --> <a href="/cgi-bin/koha/admin/categorie.pl">Ընթերցողական դասեր</a> &rsaquo; Տվյալը գրանցված է<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="delete_confirm" --> <a href="/cgi-bin/koha/admin/categorie.pl">Ընթերցողական դասեր</a> &rsaquo; <!-- TMPL_IF NAME="totalgtzero" -->Չի կարող ջնջել: Տեսակը <!-- TMPL_VAR NAME="categorycode" --> օգտագործվում է<!-- TMPL_ELSE -->Հաստատիր այս դասի ջնջումը  '<!-- TMPL_VAR NAME="categorycode" -->'<!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="delete_confirmed" --> <a href="/cgi-bin/koha/admin/categorie.pl">Ընթերցողական դասեր</a> &rsaquo; Դասը ջնջված է<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="else" -->Հաճախորդի դասեր<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="add_form" -->
+	
+
+
+	
+	<form name="Aform" action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+	<input type="hidden" name="op" value="add_validate" />
+	<input type="hidden" name="checked" value="0" />
+<!-- TMPL_IF NAME="categorycode" -->
+		<h1>Ձևափոխիր դասը <!-- TMPL_VAR NAME="categorycode" --></h1>
+	<!-- TMPL_ELSE -->
+		<h1>Նոր դաս</h1>
+	<!-- /TMPL_IF -->
+	<fieldset class="rows">
+	<ol><!-- TMPL_IF NAME="categorycode" -->
+	<li><span class="label">Դասի կոդ</span><!-- TMPL_VAR NAME="categorycode" -->
+				<input type="hidden" name="categorycode" value="<!-- TMPL_VAR NAME="categorycode" -->" /><input type="hidden" name="is_a_modif" value="1" /></li>
+	<!-- TMPL_ELSE -->
+	<li><label for="categorycode">Դասի կոդ : </label> &nbsp; <input type="text" name="categorycode" id="categorycode" size="10" maxlength="10" onblur="toUC(this)" /></li>
+	<!-- /TMPL_IF -->
+	<li><label for="description">Նկարագրություն։ </label> &nbsp; <input type="text" name="description" id="description" size="40" maxlength="80" value="<!-- TMPL_VAR NAME="description" -->" /></li>
+	<li><label for="enrolmentperiod">Ներգրավման ժամանակահատված։ </label> &nbsp; <input type="text" name="enrolmentperiod" id="enrolmentperiod" size="3" maxlength="3" value="<!-- TMPL_VAR NAME="enrolmentperiod" -->" /> ամիսներ</li>
+	<li><label for="dateofbirthrequired">Տարիքը պահանջվում է: </label> &nbsp; <input type="text" name="dateofbirthrequired" id="dateofbirthrequired" value="<!-- TMPL_VAR NAME="dateofbirthrequired" -->" size="3" maxlength="3" /> տարի</li>
+	<li><label for="upperagelimit">Տարիքիվերին սահման։ </label> &nbsp; <input type="text" name="upperagelimit" id="upperagelimit" size="3" maxlength="3" value="<!-- TMPL_VAR NAME="upperagelimit" -->" /> տարի</li>
+	<li><label for="enrolmentfee">Ներգրավման վճար։ </label>$<input type="text" name="enrolmentfee" id="enrolmentfee" size="6" value="<!-- TMPL_VAR NAME="enrolmentfee" -->" /></li>
+	<li><label for="overduenoticerequired">Պահանջվում է ժամկետանցի ծանուցում։ </label> &nbsp; <select name="overduenoticerequired" id="overduenoticerequired">
+			<!-- TMPL_IF NAME="overduenoticerequired" -->
+						<option value="0">Ոչ</option>
+						<option value="1" selected="selected">Այո</option>
+			<!-- TMPL_ELSE -->
+						<option value="0" selected="selected">Ոչ</option>
+						<option value="1">Այո</option>
+			<!-- /TMPL_IF -->
+					</select></li>
+	<li><label for="reservefee">Ռեզերվի գումար։ </label>$<input type="text" name="reservefee" id="reservefee" size="6" value="<!-- TMPL_VAR NAME="reservefee" -->" /></li>
+	<li><label for="category_type">Դասի տեսակ : </label> &nbsp; <select name="category_type" id="category_type">
+						<!-- TMPL_IF NAME="type_n" --><option value="" selected="selected">Ընտրիր դասի տեսակը</option><!-- TMPL_ELSE --><option value="">Ընտրիր դասի տեսակը</option><!-- /TMPL_IF -->
+					<!-- TMPL_IF NAME="type_A" --><option value="A" selected="selected">Մեծահասակ</option><!-- TMPL_ELSE --><option value="A">Մեծահասակ</option><!-- /TMPL_IF -->
+					<!-- TMPL_IF NAME="type_C" --><option value="C" selected="selected">Երեխա</option><!-- TMPL_ELSE --><option value="C">Երեխա</option><!-- /TMPL_IF -->
+					<!-- TMPL_IF NAME="type_S" --><option value="S" selected="selected">Աշխատակազմ</option><!-- TMPL_ELSE --><option value="S">Աշխատակազմ</option><!-- /TMPL_IF -->
+					<!-- TMPL_IF NAME="type_I" --><option value="I" selected="selected">Կազմակերպություն</option><!-- TMPL_ELSE --><option value="I">Կազմակերպություն</option><!-- /TMPL_IF -->
+					<!-- TMPL_IF NAME="type_P" --><option value="P" selected="selected">Արհեստավարժ</option><!-- TMPL_ELSE --><option value="P">Արհեստավարժ</option><!-- /TMPL_IF -->
+					<!-- TMPL_IF NXME="type_X" --><option value="X" selected="selected">Statistical</option><!-- TMPL_ELSE --><option value="X">Statistical</option><!-- /TMPL_IF -->
+					</select>
+	</li></ol>
+</fieldset>
+
+	<fieldset class="action"><input type="button" value="Հիշել" onclick="Check(this.form);"> </fieldset>
+	</form>
+
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="add_validate" -->
+<h3>Տվյալը գրանցված է</h3>
+	<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+		<input type="submit" value="ԼԱՎ">
+	</form>
+
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+	
+    	<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+	<fieldset><legend>    	
+	<!-- TMPL_IF NAME="totalgtzero" -->
+	Category <!-- TMPL_VAR NAME="categorycode" --> is in use. Deletion not possible!<!-- TMPL_ELSE -->
+Հաստատիր այս դասի ջնջումը <!-- TMPL_VAR NAME="categorycode" --><!-- /TMPL_IF --></legend>
+
+<!-- TMPL_IF NAME="totalgtzero" --><div class="dialog alert"><strong>This category is used <!-- TMPL_VAR NAME="total" --> times</strong>. Deletion not possible</div><!-- /TMPL_IF -->
+	<table>
+	<tr><th scope="row">Դասի կոդ : </th><td><!-- TMPL_VAR NAME="categorycode" --></td></tr>
+	<tr><th scope="row">Նկարագրություն։ </th><td><!-- TMPL_VAR NAME="description" --></td></tr>
+	<tr><th scope="row">Ներգրավման ժամանակահատված։ </th><td><!-- TMPL_VAR NAME="enrolmentperiod" --> ամիսներ</td></tr>
+	<tr><th scope="row">Տարիքը պահանջվում է: </th><td><!-- TMPL_VAR NAME="dateofbirthrequired" --> տարիներ</td></tr>
+	<tr><th scope="row">Տարիքիվերին սահման։ </th><td><!-- TMPL_VAR NAME="upperagelimit" --> տարիներ</td></tr>
+	<tr><th scope="row">Ներգրավման վճար։ </th><td>$<!-- TMPL_VAR NAME="enrolmentfee" --></td></tr>
+	<tr><th scope="row">Receives overdue notices: </th><td><!-- TMPL_IF NAME="overduenoticerequired" -->Այո<!-- TMPL_ELSE -->Ոչ<!-- /TMPL_IF --></td></tr>
+	<tr><th scope="row">Ռեզերվի գումար։ </th><td>$<!-- TMPL_VAR NAME="reservefee" --></td></tr>
+</table>
+		<fieldset class="action"><!-- TMPL_IF NAME="totalgtzero" -->
+<input type="submit" value="ԼԱՎ"></form>
+		<!-- TMPL_ELSE -->
+			<input type="hidden" name="op" value="delete_confirmed" />
+			<input type="hidden" name="categorycode" value="<!-- TMPL_VAR NAME="categorycode" -->" /> <input type="submit" value="Ջնջիր այս դասը"> <a class="cancel" href="/cgi-bin/koha/admin/categorie.pl">Չեղյալ անել</a> 
+		<!-- /TMPL_IF --></fieldset></fieldset></form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirmed" -->
+<h3>Դասը ջնջված է</h3>
+
+        <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+        <input type="submit" value="ԼԱՎ">
+        </form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="else" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+
+	// prepare DOM for YUI Toolbar
+
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+
+	// YUI Toolbar Functions
+
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("newcategory");
+	}
+
+	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="newcategory" href="/cgi-bin/koha/admin/categorie.pl?op=add_form">Նոր դաս</a></li>
+</ul></div>
+
+<h2>Հաճախորդի դասի կառավարում</h2>
+<!-- TMPL_IF NAME="searchfield" -->
+		Դու փնտրել ես <!-- TMPL_VAR NAME="searchfield" --> համար</span>
+	<!-- /TMPL_IF -->
+
+        <table>
+		<tr>
+			<th scope="col">Կոդ։</th>
+			<th scope="col">Դասի անվանում :</th>
+			<th scope="col">Տեսակ։</th>
+			<th scope="col">Ներգրավման ժամանակահատված։</th>
+			<th scope="col">Տարիքը պահանջվում է:</th>
+			<th scope="col">Տարիքի վերին սահման։</th>
+			<th scope="col">Ներգրավման վճար։</th>
+			<th scope="col">Ժամկետանց։</th>
+ 			<th scope="col">Ռեզերվացման գումար։</th>
+			<th scope="col" colspan="2">&nbsp; </th>
+		</tr>
+		<!-- TMPL_LOOP NAME="loop" -->
+		<!-- TMPL_IF NAME="toggle" --><tr class="highlight"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+                        <td><!-- TMPL_VAR NAME="categorycode" --></td>
+                        <td>
+                            <a href="<!-- TMPL_VAR NAME="script_name" -->?op=add_form&amp;categorycode=<!-- TMPL_VAR NAME="categorycode" -->"><!-- TMPL_VAR NAME="description" --></a>
+                        </td>
+                        <td>
+                            <!-- TMPL_IF NAME="type_A" -->Մեծահասակ<!-- /TMPL_IF -->
+                            <!-- TMPL_IF NAME="type_C" -->Երեխա<!-- /TMPL_IF -->
+                            <!-- TMPL_IF NAME="type_P" -->Prof.<!-- /TMPL_IF -->
+                            <!-- TMPL_IF NAME="type_I" -->Կազմ.<!-- /TMPL_IF -->
+                            <!-- TMPL_IF NAME="type_S" -->Աշխատակազմ<!-- /TMPL_IF -->
+                            <!-- TMPL_IF NAME="type_X" -->Statistical<!-- /TMPL_IF -->
+                        </td>
+                        <td><!-- TMPL_VAR NAME="enrolmentperiod" --> ամիսներ</td>
+                        <td><!-- TMPL_VAR NAME="dateofbirthrequired" --> տարիներ</td>
+			<td><!-- TMPL_VAR NAME="upperagelimit" --> տարիներ</td>
+                        <td><!-- TMPL_VAR NAME="enrolmentfee" --></td>
+                        <td><!-- TMPL_IF NAME="overduenoticerequired" -->Այո<!-- TMPL_ELSE -->Ոչ<!-- /TMPL_IF --></td>
+                        <td><!-- TMPL_VAR NAME="reservefee" --></td>
+                        <td><a href="<!-- TMPL_VAR NAME="script_name" -->?op=add_form&amp;categorycode=<!-- TMPL_VAR NAME="categorycode" -->">Խմբագրել</a></td>
+						<td><a href="<!-- TMPL_VAR NAME="script_name" -->?op=delete_confirm&amp;categorycode=<!-- TMPL_VAR NAME="categorycode" -->">Ջնջել</a></td>
+		</tr>
+		<!-- /TMPL_LOOP -->
+	</table>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

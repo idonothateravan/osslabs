@@ -1,0 +1,40 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Zeitschriften</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+
+<div id="doc" class="yui-t7">
+   <div id="bd">
+	
+
+<h1>Katalogsuche</h1>
+<!-- TMPL_IF name="no_query" -->
+    <div class="warning">Sie müssen einen Suchbegriff für die Suche eingeben </div>
+<!-- /TMPL_IF -->
+<form name="f" action="/cgi-bin/koha/serials/subscription-bib-search.pl" method="post">
+    <input type="hidden" name="op" value="do_search" />
+    <input type="hidden" name="type" value="intranet" />
+    <label for="q">Stichwort</label>
+    <input type="text" id="q"  name="q" />
+    
+    <!-- ITEMTYPE LIMITS -->
+        <p>Limitiere Typ auf: 
+        <select name="itemtypelimit">
+	    <option value="">Alle</option>
+        <!--TMPL_LOOP Name="itemtypeloop"-->
+            <option value="<!--TMPL_VAR Name="code" -->" />
+            <!--TMPL_VAR Name="description" -->
+        <!--/TMPL_LOOP-->
+        </select>
+        </p>
+    <!-- /ITEMTYPE LIMITS -->
+
+    <input type="submit" value="Suche">
+
+
+</form>
+
+</div>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

@@ -1,0 +1,386 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo; الاعارة  &rsaquo; حجوزات &rsaquo; ضع الحجز فى <!-- TMPL_VAR NAME="title" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+// <![CDATA[ 
+function check() {
+	var msg = "";
+	var count_reserv = 0;
+	var alreadyreserved = 0;
+
+// check if we have checkitem form
+if (document.form.checkitem){
+	for (i=0;i<document.form.checkitem.length;i++){
+		if (document.form.checkitem[i].checked == true) {
+				count_reserv++ ;
+			}
+	}
+	// for only one item, check the checkitem without consider the loop checkitem
+	if (i==0){
+		if (document.form.checkitem.checked == true) {
+			count_reserv++;
+		}
+	}
+}
+
+if (document.form.request.checked == true){
+		count_reserv++ ;
+}
+
+if (document.form.alreadyreserved.value == "1"){
+		 alreadyreserved++ ;
+}
+
+if (count_reserv == "0"){
+		msg += ("- Please select an item to place a hold\n");
+}
+if (count_reserv >= "2"){
+		msg += ("- You may only place a hold on one item at a time\n");
+}
+
+if (alreadyreserved > "0"){
+		msg += ("- This patron had already placed a hold on this item\n Please cancel the previous hold first \n");
+}
+
+	if (msg == "") return(true);
+	else	{
+		alert(msg);
+		return(false);
+	}
+}
+
+ $(document).ready(function() {
+ 	$("#requestany").click(function() {
+		if(this.checked){
+		$("input[@name=checkitem]").each(function() {
+			$(this).attr("checked","");
+		});
+		}
+	});
+ 	$("input[@name=checkitem]").click(function() {
+		onechecked = 0;
+		$("input[@name=checkitem]").each(function() {
+			if(this.checked){
+				onechecked = 1;
+			}
+		});
+		if(onechecked == 1){
+			$("#requestany").attr("checked","");
+		} else {
+			$("#requestany").attr("checked","checked");
+		}
+	});
+ });
+
+// ]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="circ-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; <a href="/cgi-bin/koha/catalogue/search.pl">فهرس</a> &rsaquo; <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a> &rsaquo; من فضلك إحجز <!-- TMPL_VAR NAME="title" --></div>
+
+ <div id="doc3" class="yui-t2">
+
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+<!-- TMPL_IF NAME="noitems" -->
+<div class="dialog alert">            
+<strong>Cannot reserve:</strong> this record has no items attached.                            
+</div>
+<!-- TMPL_ELSE -->
+<!-- TMPL_IF NAME="messagetransfert" -->
+		<div class="dialog message">
+				<h2>حجز وجد ل (<!-- TMPL_VAR NAME="nextreservtitle" -->),من فضلك إنقل</h2>
+			<p>Hold placed by : <strong> <!-- TMPL_VAR NAME="nextreservsurname" --> <!-- TMPL_VAR NAME="nextreservfirstname" --></strong> at : <strong> <!-- TMPL_VAR NAME="branchname" --> </strong>, Please transfer this item.
+			</p>
+			<form name="cancelReservewithtransfert" action="branchreserves.pl" method="post">
+				<input type="submit" class="button" />
+			</form>
+		</div>
+	<!-- /TMPL_IF -->
+<h1>إحجز <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a></h1>
+
+<!-- TMPL_UNLESS NAME="cardnumber"-->
+    <!-- TMPL_IF NAME="messageborrower" -->                                    
+      <div class="dialog alert"><h3>Patron Not Found</h3><p>لا مستخدم بهذا الاسم، رجاء، جرّب آخر</p> </div>    
+    <!-- /TMPL_IF -->
+    <form action="request.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->" method="post">
+        <!-- TMPL_UNLESS name="CGIselectborrower" -->
+			<fieldset class="brief">
+		        <label for="patron">مستخدم: </label>
+				<div class="hint">إدخل رقم بطاقة مستخدم أو اسم جزئي: </div>
+                <input type="text" size="20" id="patron" class="focus" name="findborrower" /> 
+                <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber"-->" />
+                <input type="submit" value="بحث">
+			</fieldset>
+        <!-- TMPL_ELSE -->
+            <!-- TMPL_VAR NAME="CGIselectborrower" -->
+                <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber"-->" />
+                <input type="submit" value="إختار">
+        <!-- /TMPL_UNLESS -->
+    </form>
+<!-- TMPL_ELSE -->
+
+<!-- TMPL_IF NAME="warnings" -->
+    <div class="dialog alert">
+	<h3>Cannot Place Hold</h3>
+	<ul>
+<!-- TMPL_IF NAME="maxreserves" -->
+      <li><strong>Too Many Holds: </strong> <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->"><!-- TMPL_VAR NAME="borrowerfirstname" --> <!-- TMPL_VAR NAME="borrowersurname" --> </a> has too many holds.</li>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="alreadyreserved" -->
+     <li><a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->"><!-- TMPL_VAR NAME="borrowerfirstname" --> <!-- TMPL_VAR NAME="borrowersurname" --> </a> <strong>already has a hold</strong> on this item </li>
+    <!-- /TMPL_IF -->
+	</ul></div>
+<!-- /TMPL_IF -->	
+
+<!-- TMPL_IF NAME="messages" -->
+    <div class="dialog message"><ul>
+    <!-- TMPL_IF NAME="expiry" -->
+      <li><a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->"><!-- TMPL_VAR NAME="borrowerfirstname" --> <!-- TMPL_VAR NAME="borrowersurname" --> </a>'s <strong>account has expired</strong></li>
+    <!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="diffbranch" --><h3>Pickup Library Mismatch</h3>
+      <li> <strong>Pickup library is different</strong> than <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->"><!-- TMPL_VAR NAME="borrowerfirstname" --> <!-- TMPL_VAR NAME="borrowersurname" --> </a>'s home library (<!-- TMPL_VAR NAME="borrower_branchname" --> / <!-- TMPL_VAR NAME="borrower_branchcode" --> )</li>
+    <!-- /TMPL_IF -->
+</ul></div>
+<!-- /TMPL_IF -->
+
+  <!-- TMPL_IF NAME="messageborrower" -->
+   <div class="dialog alert"><h3>المستخدم غير موجود:</h3> <p>اسم أو باركود غير موجود. رجاء جرّب آخر  </p></div>
+  <!-- /TMPL_IF -->
+  
+  <fieldset class="rows left">
+    <legend>تفاصيل حجز</legend>
+        <form action="placerequest.pl" method="post" onsubmit="return check();" name="form">
+    
+        <input type="hidden" size="10" name="member" value="<!--  TMPL_VAR NAME="cardnumber" -->" />
+        <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->" />
+        <input type="hidden" name="type" value="str8" />
+        <input type="hidden" name="title" value="<!-- TMPL_VAR NAME="title" -->" />
+        <input type="hidden" name="rank-request" value="<!-- TMPL_VAR NAME="fixedRank" -->" />
+       <ol> <li><span class="label">مستخدم:</span>
+            <!-- TMPL_IF NAME="cardnumber"-->
+                <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->"><!-- TMPL_VAR NAME="borrowerfirstname" --> <!-- TMPL_VAR NAME="borrowersurname" --> (<!--  TMPL_VAR NAME="cardnumber" -->)</a>
+            <!-- TMPL_ELSE -->
+                لم تعرّف بعد
+            <!-- /TMPL_IF -->
+        </li>
+        <li>
+        <span class="label">الاولوية:</span>
+            <strong><!-- TMPL_VAR Name="fixedRank" --></strong>
+        </li>
+        <li>
+            <label for="holdnotes">ملاحظات:</label>
+            <textarea id="holdnotes" name="notes" cols="30" rows="1"></textarea>
+        </li>
+        <li>
+            <label for="pickup">الإلتقاط من:</label>
+            <!-- TMPL_VAR NAME="CGIbranch" -->
+        </li>
+
+        <li> <label for="requestany">Place a hold on the next available copy </label>
+               <input type="checkbox" id="requestany" name="request" checked="checked" value="أى">
+        </li>
+
+        <input type="hidden" name="biblioitem" value="<!-- TMPL_VAR NAME="biblioitemnumber" -->" />
+        <input type="hidden" name="alreadyreserved" value="<!-- TMPL_VAR NAME="alreadyreserved" -->" />
+</ol>
+        <fieldset class="action">
+        <!-- TMPL_IF NAME="cardnumber"-->
+        <input type="submit" value="إحجز">
+        <!-- /TMPL_IF -->
+        </fieldset>
+        <!-- TMPL_LOOP name="bibitemloop" -->
+<ol>
+	<!-- TMPL_UNLESS NAME="item-level_itypes" -->
+        <li><span class="label">نوع المادة:</span> <!-- TMPL_VAR NAME="description" --></li>
+	<!-- /TMPL_UNLESS -->
+        <!-- TMPL_IF NAME="publicationyear" --><li><span class="label">سنه النشر:</span> <!-- TMPL_VAR NAME="publicationyear" --></li><!-- /TMPL_IF -->
+</ol>
+         
+        <table id="requestspecific">
+        <caption>Place a hold on a specific copy</caption>
+		<tr>
+            <th>Hold</th>
+            <!-- TMPL_IF NAME="item-level_itypes" -->
+                <th>نوع المادة</th>
+            <!-- /TMPL_IF -->
+            <th>الباركود</th>
+            <th>مكتبة المنزل</th>
+            <th>Last Location</th>
+            <th>رقم الطلبr</th>
+            <th>معلومات</th>
+        </tr>
+    <!-- TMPL_LOOP Name="itemloop" -->
+        <tr class="<!-- TMPL_VAR NAME="backgroundcolor" -->">
+            <td>
+            <!-- TMPL_IF NAME="available" -->
+                <input type="checkbox" name="checkitem" value="<!-- TMPL_VAR NAME="itemnumber" -->" />
+            <!-- TMPL_ELSE -->
+                <input disabled="disabled" type="checkbox" name="checkitem" value="<!-- TMPL_VAR NAME="itemnumber" -->" /> 
+            <!-- /TMPL_IF -->
+            </td>
+            <!-- TMPL_IF NAME="item-level_itypes" -->
+                <td>
+                    <img src="<!-- TMPL_VAR name="imageurl" -->" alt="<!-- TMPL_VAR NAME="itypename" -->" title="<!-- TMPL_VAR NAME="itypename" -->" />
+                </td>
+            <!-- /TMPL_IF -->
+
+            <td>
+                    <!-- TMPL_VAR NAME="barcode" --> 
+            </td>
+            <td>
+            <!-- TMPL_VAR NAME="homebranchname" -->
+            </td>
+            <td>
+            <!-- TMPL_VAR NAME="holdingbranchname" -->
+            </td>
+            <td>
+            <!-- TMPL_VAR NAME="itemcallnumber" -->
+            </td>
+            <td>
+        	<!-- TMPL_IF Name="onloan" -->
+            <span class="checkedout">مستحق <!-- TMPL_VAR NAME="onloan" --> </span>
+			<!-- TMPL_ELSE -->
+        	<!-- TMPL_IF Name="transfertwhen" -->
+            In transit from <!-- TMPL_VAR NAME="transfertfrom" -->,  to <!-- TMPL_VAR NAME="transfertto" -->, since <!-- TMPL_VAR NAME="transfertwhen" -->
+        	<!-- /TMPL_IF -->
+        	<!-- /TMPL_IF -->
+    
+        	<!-- TMPL_IF Name="message" -->
+            Unavailable (lost or missing)
+        	<!-- /TMPL_IF -->
+    
+        	<!-- TMPL_IF Name="notforloan" -->
+            Not for loan (<!-- TMPL_VAR NAME="notforloanvalue" -->)
+        	<!-- /TMPL_IF -->
+
+            <!-- TMPL_IF NAME="reservedate"-->
+                    <!-- TMPL_IF NAME="nocancel" -->
+                            Can't be cancelled when item is in transit
+                    <!-- TMPL_ELSE -->
+                    <!-- TMPL_IF NAME="waitingdate" -->الإنتظار<!-- TMPL_ELSE -->On hold<!-- /TMPL_IF -->
+                    <!-- TMPL_IF NAME="canreservefromotherbranches" -->for <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="ReservedForBorrowernumber" -->"><!-- TMPL_VAR NAME="ReservedForFirstname" --> <!-- TMPL_VAR NAME="ReservedForSurname" --></a><!-- /TMPL_IF --> <!-- TMPL_IF NAME="waitingdate" -->at<!-- TMPL_ELSE -->expected at<!-- /TMPL_IF --> <!-- TMPL_VAR NAME="ExpectedAtLibrary" -->  since
+                    <!-- TMPL_IF NAME="waitingdate" --><!-- TMPL_VAR NAME="waitingdate" --><!-- TMPL_ELSE --><!-- TMPL_IF name="reservedate" --><!-- TMPL_VAR NAME="reservedate" --><!-- /TMPL_IF --><!-- /TMPL_IF -->. <a class="info" href="modrequest.pl?CancelBiblioNumber=<!-- TMPL_VAR NAME="biblionumber" -->&amp;CancelBorrowerNumber=<!-- TMPL_VAR NAME="ReservedForBorrowernumber" -->&amp;CancelItemnumber=<!--  TMPL_VAR NAME="itemnumber"-->"  onclick="if (window.confirm('Are you sure you want to delete this hold?')) {return true;} else {return false;}">Cancel hold</a>
+
+                    <!-- /TMPL_IF -->
+            <!-- TMPL_ELSE -->
+                    Not on hold
+            <!-- /TMPL_IF -->
+            </td>
+        </tr>
+    <!-- /TMPL_LOOP --> <!-- itemloop -->
+        </table>
+    <!-- /TMPL_LOOP --> <!-- bibitemloop -->
+    
+    <fieldset class="action">
+    <!-- TMPL_IF NAME="cardnumber"-->
+        <input type="submit" value="إحجز">
+    <!-- /TMPL_IF -->
+    </fieldset>
+	</fieldset>
+    </form>
+<!-- /TMPL_UNLESS -->
+
+<!-- TMPL_UNLESS NAME="cardnumber" -->
+<!-- TMPL_IF name="reserveloop" -->
+<form name="T<!-- TMPL_VAR NAME="time" -->" action="modrequest.pl" method="post">
+<fieldset class="rows left">
+<legend>حجوزات حالية</legend>
+    <table>
+      <tr>
+        <th>الأولوية</th>
+        <th>المستفيد</th>
+        <th>ملاحظات</th>
+        <th>تاريخ</th>
+        <th>إختر مكتبة</th>
+        <th>تفاصيل</th>
+      </tr>
+  <!-- TMPL_LOOP Name="reserveloop" -->
+      <tr>
+        <td>
+          <input type="hidden" name="borrowernumber" value="<!-- TMPL_VAR NAME="borrowernumber" -->" />
+          <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->" />
+          <select name="rank-request">
+    <!-- TMPL_IF Name="wait" -->
+            <option value="W" selected="selected">الإنتظار</option>
+    <!-- /TMPL_IF -->
+	<!-- TMPL_LOOP Name="optionloop" -->                 
+	<!-- TMPL_IF Name="selected" --><option value="<!-- TMPL_VAR NAME="num" -->" selected="selected"><!-- TMPL_VAR NAME="num" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="num" -->"><!-- TMPL_VAR NAME="num" --></option><!-- /TMPL_IF --> 
+	<!-- /TMPL_LOOP -->  
+            <option value="del">del</option>
+          </select>
+        </td>
+        <td>
+          <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->" ><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --></a>
+        </td>
+        <td><!-- TMPL_VAR NAME="notes" --></td>
+        <td><!-- TMPL_VAR NAME="date" --></td>
+        <td>
+    <!-- TMPL_IF Name="wait" -->
+    	<!-- TMPL_IF NAME="atdestination" -->
+                <!-- TMPL_IF name="found" -->
+                مادة معلّقة فى <b> <!-- TMPL_VAR NAME="wbrname" --></b> <input type="hidden" name="pickup" value="<!-- TMPL_VAR NAME="wbrcode" -->" />
+            <!-- TMPL_ELSE -->
+                في إنتظار السحب( الإستلام)
+            <!-- /TMPL_IF -->
+          <!-- TMPL_ELSE -->
+            سيتم نقل المادة ل <b> <!-- TMPL_VAR NAME="wbrname" --></b> <input type="hidden" name="pickup" value="<!-- TMPL_VAR NAME="wbrcode" -->" />
+         <!-- /TMPL_IF -->
+    <!-- TMPL_ELSE -->
+          <select name="pickup">
+      <!-- TMPL_LOOP Name="branchloop" -->
+        <!-- TMPL_IF Name="selected" -->
+            <option value="<!-- TMPL_VAR NAME="branch" -->" selected="selected">
+        <!-- TMPL_ELSE -->
+            <option value="<!-- TMPL_VAR NAME="branch" -->">
+        <!-- /TMPL_IF -->
+              <!-- TMPL_VAR NAME="branchname" -->
+            </option>
+      <!-- /TMPL_LOOP -->
+          </select>
+    <!-- /TMPL_IF -->
+        </td>
+        <td>
+    <!-- TMPL_IF Name="wait" -->
+          <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME='biblionumber' -->">
+                <!-- TMPL_IF NAME="barcodenumber" -->
+                    <!-- TMPL_VAR NAME="barcodenumber" -->
+                    <input type="hidden" name="itemnumber" value="<!-- TMPL_VAR NAME="itemnumber" -->" />
+                <!-- TMPL_ELSE -->
+                    لا  باركود
+                <!-- /TMPL_IF -->
+          </a>
+    <!-- TMPL_ELSE -->
+      <!-- TMPL_IF Name="constrainttypea" -->
+          <i>المتاح التالى</i>
+      <!-- TMPL_ELSE -->
+        <!-- TMPL_IF Name="constrainttypeo" -->
+          فقط هذا النوع :<b><!-- TMPL_VAR NAME="volumeddesc" --> <!-- TMPL_VAR NAME="itemtype" --></b>
+        <!-- /TMPL_IF -->
+      <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+        </td>
+      </tr>
+  <!-- /TMPL_LOOP --> <!-- existing reserveloop -->
+     </table>
+<fieldset class="action"><input type="submit" name="submit" value="Update hold(s)" /></fieldset>
+</fieldset>
+</form>
+<!-- /TMPL_IF -->
+<!-- /TMPL_UNLESS -->
+<!-- /TMPL_IF -->
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="biblio-view-menu.inc" -->
+
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

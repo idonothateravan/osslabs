@@ -1,0 +1,58 @@
+
+
+
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><title>Koha &rsaquo; Web Installer &rsaquo; Step 2</title>
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div>
+<h1 id="logo"><img alt="Koha" src="/intranet-tmpl/prog/img/koha.org-logo.gif" /> Web Installer &rsaquo; Step 2</h1>
+<h2 align="center">Datenbankeinstellungen:</h2>
+<ul>
+<li><em>Datenbank Typ: </em><!--TMPL_VAR NAME="dbms"--></li>
+<li><em>Datenbank Name: </em><!--TMPL_VAR NAME="dbname"--></li>
+<li><em>Datenbank Host: </em><!--TMPL_VAR NAME="hostname"--></li>
+<li><em>Datenbank Port: </em><!--TMPL_VAR NAME="port"--> (wenn leer, vermutlich OK)</li>
+<li><em>Datenbank Nutzer: </em><!--TMPL_VAR NAME="user"--></li>
+</ul>
+<div>
+<!--TMPL_IF NAME="dbconnection"-->
+<form name="checkdbparameters" type="post" action="install.pl">
+  <!--TMPL_IF NAME="checkdatabaseaccess"-->
+  <p>Verbindung hergestellt.</p>
+     <!--TMPL_IF NAME="checkdatabasecreated"-->
+  <p>Datenbank <code><!--TMPL_VAR NAME="dbname"--></code> existiert.</p>
+        <!--TMPL_IF NAME="checkgrantaccess"-->
+  <p>Nutzer <code><!--TMPL_VAR NAME="user"--></code> hat alle benötigten Rechte für die Datenbank <code><!--TMPL_VAR Name="dbname"--></code>.</p>
+        <!--TMPL_ELSE-->
+  <p class="error">Nutzer <code><!--TMPL_VAR NAME="user"--></code> habe nicht genügend Rechte auf der Datenbank <code><!--TMPL_VAR Name="dbname"--></code> </p>
+  <p class="tip"> Sie wollen Benutzerpriviliegeien setzen und brauchen Hilfe? Sehen Sie  <!--TMPL_IF NAME="mysql"--><a href=http://dev.mysql.com/doc/refman/4.1/en/grant.html><!--TMPL_ELSE-->http://www.postgresql.org/docs/8.2/interactive/sql-createrole.html  \t<!--/TMPL_IF-->diese Seite</a>. Benutzer <code><!--TMPL_VAR NAME="user"--></code> muss USAGE, INSERT, UPDATE, DELETE, DROP und CREATE Privilegien eingeschaltet haben <code><!--TMPL_VAR Name="dbname"--></code></p>
+        <!--/TMPL_IF-->
+      <!--TMPL_ELSE-->
+  <p class="error">Keine Datenbank benannt <code><!--TMPL_VAR NAME="dbname"--></code> gefunden.</p>
+  <p class="tip">Vor dem Weitermachen bitte die Datenbak anlegen</p>
+      <!--/TMPL_IF-->
+   <!--TMPL_ELSE-->
+    <div class="error"><!--TMPL_VAR name="error"--> : <!--TMPL_VAR NAME="message"-->
+    </div>
+    <div class="tip">
+      <ul>
+      <li>Prüfen, ob die Datenbank läuft</li>
+      <li>Ihre Datenbankeinstellungen prüfen in <code>koha-conf.xml</code>. </li>
+      <li>Den Hostnamen überpfrüfen in <code>koha-conf.xml</code>. Einige Datenbankserver benötigen <code>127.0.0.1</code> eher denn <code>localhost</code>.</li>
+    </div>
+    <p>Korrigiern Sie bitte diese Fehler und <a href="/cgi-bin/koha/installer/install.pl">starten den Installer</a> erneut.
+  <!--/TMPL_IF-->
+  <!-- TMPL_IF NAME="error" --><!-- TMPL_ELSE -->
+<input type="hidden" name="step" value="3" />
+<p> Klicken Sie Nächste um weiterzufahren <input value="Nächste >>" type="submit"></p>
+<!-- /TMPL_IF -->
+</form>
+<!--TMPL_ELSE-->
+<form name="checkinformation" type="post" action="install.pl">
+<input type="hidden" name="step" value="2" />
+<input type="hidden" name="checkdb" value="1" />
+<p> Bitte klicken Sie Weiter, wenn diese Information korrekt ist <input value="Nächste >>" type="submit"></p>
+</form>
+<!--/TMPL_IF-->
+</div>
+</body>
+</html>

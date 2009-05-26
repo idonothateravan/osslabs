@@ -1,0 +1,453 @@
+<html>
+<head>
+<title>Առաջատարի կառուցող</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_field_006.pl">
+<table>
+	<tr>
+		<td>0 Նյութի տեսակ</td>
+                <td>
+                        <select name="f0" size="1">
+                        <!-- TMPL_IF name="f0a" -->
+                                <option value="a" SELECTED>a- լեզվական նյութ</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="a">a- լեզվական նյութ</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f0b" -->
+                                <option value="b" SELECTED>b- Ձեռագրի լեզվի նյութ</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="b">b- Ձեռագրի լեզվի նյութ</option>
+                        <!-- /TMPL_IF -->
+        		</select>
+		</td>
+	</tr>
+	<tr>
+                <td>01-04 Նկարազարդումներ </td>
+                <td>(ավտո-լցնում սկսած 300)<input type="hidden" name="f014" size="4"  maxlength="4" value="<!-- TMPL_VAR NAME="f014" -->"/></td>
+        </tr>
+	        <tr>
+                <!-- 5 Target Audience -->
+                <td>5- Թիրախ լսարան</td>
+                <td>
+                <select name="f5" size="1">
+
+                        <!-- TMPL_IF name="f5|" -->
+                        <option value="|" SELECTED>|- Լռակյացt</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- Լռակյացt</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f50" -->
+                        <option value=" " SELECTED>#- Չճանաչված կամ չսահմանված</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- Չճանաչված կամ չսահմանված</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5a" -->
+                         <option value="a" SELECTED>a- Նախադպրոցական</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- Նախադպրոցական</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5b" -->
+                         <option value="b" SELECTED>b- Տարրական</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="b">b- Տարրական</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5c" -->
+                         <option value="c" SELECTED>c- Տարրական և ավագ պատանեկան</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- Տարրական և ավագ պատանեկան</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5d" -->
+                         <option value="d" SELECTED>d- Երկրորդական (ավագից բարձր)</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- Երկրորդական (ավագից բարձր)</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5e" -->
+                         <option value="e" SELECTED>e- Մեծահասակ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="e">e- Մեծահասակ</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5f" -->
+                         <option value="f" SELECTED>f- Մասնագիտացված</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- Մասնագիտացված</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5g" -->
+                         <option value="g" SELECTED>g- Ընդհանուր</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="g">g- Ընդհանուր</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5j" -->
+                         <option value="j" SELECTED>j- Երիտասարդական</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="j">j- Երիտասարդական</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        <tr>
+	 <tr>
+                <!-- 06 Form of an item -->
+                <td>06- Նյութի ձև</td>
+                <td>
+                <select name="f6" size="1">
+
+                        <!-- TMPL_IF name="f60" -->
+                        <option value=" " SELECTED>#- Հետևյալներից ոչ մեկը</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- Հետևյալներից ոչ մեկը</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6a" -->
+                        <option value="a" SELECTED>a- Միկրոֆիլմ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- Միկրոֆիլմ</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6b" -->
+                        <option value="b" SELECTED>b- Միկրոֆիշ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="b">b- Միկրոֆիշ</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6c" -->
+                        <option value="c" SELECTED>a- Microopaque</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">a- Microopaque</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6d" -->
+                        <option value="d" SELECTED>d- Լայն տպագրություն</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- Լայն տպագրություն</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6f" -->
+                        <option value="f" SELECTED>f- Բրայլ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- Բրայլ</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6r" -->
+                        <option value="r" SELECTED>r- Կանոնավոր տպագիր ռեպրոդուկցիա</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="r">r- Կանոնավոր տպագիր ռեպրոդուկցիա</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6s" -->
+                        <option value="s" SELECTED>s- Էլեկտրոնային</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- Էլեկտրոնային</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6!" -->
+                        <option value="!" SELECTED>!- Չկա կոդին դիմելու փորձ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="!">!- Չկա կոդին դիմելու փորձ</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+       <tr>
+                <td>7-10 Բովանդակության բնույթը </td>
+                <td>(Ածանցված արժեք)
+                        <input type="hidden" name="f710" size="4" maxlength="4" value="<!-- TMPL_VAR NAME="f710" -->"/>                </td>
+        </tr>
+        <tr>
+                <td>11- Կառավարական հրատարակություն</td>
+                <td>
+                <select name="f11" size="1">
+		
+                        <!-- TMPL_IF name="f11|" -->
+                        <option value="|" SELECTED>|- Լռակյացt</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- Լռակյացt</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f110" -->
+                        <option value=" " SELECTED>#- Ոչ կառավարական հրատարակություն</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- Ոչ կառավարական հրատարակություն</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11a" -->
+                        <option value="a" SELECTED>a- ավտոնոմ կամ կիսաավտոնոմ բաղադրիչներ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- ավտոնոմ կամ կիսաավտոնոմ բաղադրիչներ</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11c" -->
+                        <option value="c" SELECTED>c- Բազմալոկալ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- Բազմալոկալ</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11f" -->
+                        <option value="f" SELECTED>f- Դաշնային/ազգային</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- Դաշնային/ազգային</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f11i" -->
+                        <option value="i" SELECTED>i- միջազգային միջկառավարական</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="i">i- միջազգային միջկառավարական</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f11l" -->
+                        <option value="l" SELECTED>l- Տեղային</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="l">l- Տեղային</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f11m" -->
+                        <option value="m" SELECTED>m- Multistate</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="m">m- Multistate</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11o" -->
+                        <option value="o" SELECTED>o- Կառավարական հրատարակություն - մակարդակը սահմանված չէ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="o">o- Կառավարական հրատարակություն - մակարդակը սահմանված չէ</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11s" -->
+                        <option value="s" SELECTED>s- Նահանգ, ծայրամասային,տերիտորիալ,կախյալ,և այլն</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- Նահանգ, ծայրամասային,տերիտորիալ,կախյալ,և այլն</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11u" -->
+                        <option value="u" SELECTED>u- Անհայտ է, եթե նյութը կառավարական հրատարակություն է</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="u">u- Անհայտ է, եթե նյութը կառավարական հրատարակություն է</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11z" -->
+                        <option value="z" SELECTED>z- Այլ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="z">z- Այլ</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+        <tr>
+                <td>12- կոնֆերանսի հրատարակություն</td>
+                <td>
+                <select name="f12" size="1">
+                        <!-- TMPL_IF name="f120" -->
+                        <option value="0" SELECTED>0- Կոնֆերանսի հրատարակություն չէ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- Կոնֆերանսի հրատարակություն չէ</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f121" -->
+                        <option value="1" SELECTED>1- Կոնֆերանսի հրատարակություն</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- Կոնֆերանսի հրատարակություն</option>
+                        <!-- /TMPL_IF -->
+
+		</select>
+		</td>
+	</tr>
+	<tr>
+                <td>13- հոբելյանական հրատարակություն</td>
+                <td>
+                <select name="f13" size="1">
+                        <!-- TMPL_IF name="f130" -->
+                        <option value="0" SELECTED>0- Հոբելյանական հրատարակություն չէ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- Հոբելյանական հրատարակություն չէ</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f131" -->
+                        <option value="1" SELECTED>1- Հոբելյանական հրատարակություն</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- Հոբելյանական հրատարակություն</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+
+        <tr>
+                <td>14- Ցուցիչ</td>
+                <td>
+                <select name="f14" size="1">
+                        <!-- TMPL_IF name="f14|" -->
+                        <option value="|" SELECTED>|- Լռակյացt</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- Լռակյացt</option>
+                        <!-- /TMPL_IF -->
+	
+                        <!-- TMPL_IF name="f140" -->
+                        <option value="0" SELECTED>0- Ցուցիչ չկա</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- Ցուցիչ չկա</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f141" -->
+                        <option value="1" SELECTED>1- Ցուցիչը առկա է</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- Ցուցիչը առկա է</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        	</tr>
+		<tr><td>15 Չսահմանված</td><td></td>
+		</tr>
+		<tr>
+                <td>16- գրական ժանր</td>
+                <td>
+                <select name="f16" size="1">
+                        <!-- TMPL_IF name="f160" -->
+                        <option value="0" SELECTED>0- Գեղարվեստական գրականություն չէ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- Գեղարվեստական գրականություն չէ</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f161" -->
+                        <option value="1" SELECTED>1- Գեղարվեստական գրականություն</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- Գեղարվեստական գրականություն</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f16c" -->
+                        <option value="c" SELECTED>c- Կոմիկս</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- Comic stripts</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16d" -->
+                        <option value="d" SELECTED>d- Դրամաներ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- Դրամաներ</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f16e" -->
+                        <option value="e" SELECTED>e- Էսսեներ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="e">e- Էսսեներ</option>
+                        <!-- /TMPL_IF -->
+
+			
+                        <!-- TMPL_IF name="f16f" -->
+                        <option value="f" SELECTED>f- Նովելներ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- Նովելներ</option>
+                        <!-- /TMPL_IF -->
+
+			
+                        <!-- TMPL_IF name="f16h" -->
+                        <option value="h" SELECTED>h- հումոր, սատիրա և այլն</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="h">h- հումոր, սատիրա և այլն</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16i" -->
+                        <option value="i" SELECTED>i- Նամակներ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="i">i- Նամակներ</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16j" -->
+                        <option value="j" SELECTED>j- Կարճ պատմվածքներ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="j">j- Կարճ պատմվածքներ</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16m" -->
+                        <option value="m" SELECTED>m- Խառը ձևեր</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="m">m- Խառը ձևեր</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f16p" -->
+                        <option value="p" SELECTED>p- Պոեզիա</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="p">p- Պոեզիա</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f16s" -->
+                        <option value="s" SELECTED>s- Ելույթներ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- Ելույթներ</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16u" -->
+                        <option value="u" SELECTED>u- Անհայտ</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="u">u- Անհայտ</option>
+                        <!-- /TMPL_IF -->
+
+                </select>
+                </td>
+        </tr>
+	<tr>
+                <td>17- Կենսագրություն</td>
+                <td>
+                <select name="f17" size="1">
+                        <!-- TMPL_IF name="f170" -->
+                        <option value=" " SELECTED>#- Ոչ մատենագիտական նյութ</option>                              <!-- TMPL_ELSE -->
+                        <option value=" ">#- Ոչ մատենագիտական նյութ</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f17a" -->
+                        <option value="a" SELECTED>a- Ինքնակենսագրություն</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- Ինքնակենսագրություն</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f17b" -->
+                        <option value="b" SELECTED>b- Անհատի կենսագրություն</option>                              <!-- TMPL_ELSE -->
+                        <option value="b">b- Անհատի կենսագրություն</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f17c" -->
+                        <option value="c" SELECTED>c- Կոլեկտիվ կենսագրություն</option>                              <!-- TMPL_ELSE -->
+                        <option value="c">c- Կոլեկտիվ կենսագրությունl</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f17d" -->
+                        <option value="d" SELECTED>d- Պարունակում է մատենագիտական տեղեկատվություն</option>                              <!-- TMPL_ELSE -->
+                        <option value="d">d- Պարունակում է մատենագիտական տեղեկատվություն</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+
+	<tr><td colspan=2><input type="submit" value="ԼԱՎ"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			'<!-- TMPL_VAR NAME="dateentered" -->'+
+			document.f_pop.f0.value+
+			document.f_pop.f014.value+
+			document.f_pop.f5.value+
+			document.f_pop.f6.value+
+			document.f_pop.f710.value+
+			document.f_pop.f11.value+
+			document.f_pop.f12.value+
+			document.f_pop.f13.value+
+			document.f_pop.f14.value+ ' '+
+			document.f_pop.f16.value+
+			document.f_pop.f17.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

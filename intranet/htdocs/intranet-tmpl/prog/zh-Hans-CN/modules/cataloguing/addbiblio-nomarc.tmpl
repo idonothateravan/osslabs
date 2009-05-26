@@ -1,0 +1,43 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 编目 &rsaquo; 新增一个非 MARC 书目记录</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close-addbiblio.inc" -->
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+
+<!-- TMPL_IF name="ERROR" -->
+请设定标题
+<!-- /TMPL_IF -->
+
+<form action="savebiblio.pl" method="post">
+
+<table>
+	<caption>新增一笔书目记录</caption>
+	<tr><th scope="row"><label for="title">题名：*</label></th><td><input name="title" id="title" type="text" size="40" /> * Required</td>
+</tr>
+<tr><th scope="row"><label for="subtitle">副题名：</label></th><td><input name="subtitle" id="subtitle" type="text" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="author">作者：</label></th><td><input name="author" id="author" type="text" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="seriestitle">丛书题名</label><br />
+<i>（如适用）</i></th><td><input name="seriestitle" type="text" id="seriestitle" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="copyrightdate">版权日期：</label></th><td><input id="copyrightdate" name="copyrightdate" type="text" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="abstract">摘要：</label></th><td><textarea cols="30" id="abstract" rows="6" name="abstract"></textarea></td>
+</tr>
+<tr><th scope="row"><label for="bib-notes">备注：</label></th><td><textarea cols="30" rows="6" id="bib-notes" name="notes"></textarea></td>
+</tr>
+</table>
+<input type="submit" value="新增记录">
+
+</form>
+</div>
+</div>
+</div>
+
+<!-- TMPL_INCLUDE NAME="mainmenu.inc" -->
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

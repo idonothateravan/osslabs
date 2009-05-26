@@ -1,0 +1,120 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 馆藏目录维护</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+
+<!-- TMPL_IF NAME="allsub-p" -->
+<table>
+<caption>结果</caption>
+<!-- TMPL_LOOP NAME="loop" -->
+<tr><td><a href="/cgi-bin/koha/maint/catmaintain.pl?type=allsub&amp;sub=<!-- TMPL_VAR NAME="sub" ESCAPE="URL" -->" onclick="messenger('/cgi-bin/koha/maint/catmaintain.pl?type=modsub&amp;sub=<!-- TMPL_VAR NAME="sub2" ESCAPE="URL" -->');window1.focus()"><!-- TMPL_VAR NAME="subject" ESCAPE="HTML" --></a></td></tr>
+<!-- /TMPL_LOOP -->
+</table>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="modsub-p" -->
+<form action="/cgi-bin/koha/maint/catmaintain.pl" method="post">
+这将会改变主题标题 <strong>全部</strong> 此主题的记录被采用
+<table>
+<caption>更新所有主题标题</caption>
+<tr><th scope="row"><label for="sub">主题：</label></th><td><input type="text" value="<!-- TMPL_VAR NAME="sub" ESCAPE="HTML" -->" name="sub" id="sub" size="40" /><input type="hidden" name="type" value="upsub" />
+<input type="hidden" name="oldsub" value="<!-- TMPL_VAR NAME="sub" ESCAPE="HTML" -->" /></td></tr>
+</table>
+<input type="submit" value="修改">
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="upsub-p" -->
+成功修改 <!-- TMPL_VAR NAME="oldsub" ESCAPE="HTML" --> 成 <!-- TMPL_VAR NAME="sub" ESCAPE="HTML" -->
+<!-- <![ IGNORE [
+<p><a href="/cgi-bin/koha/maint/catmaintain.pl" onclick="window0.focus()">Back to catalogue maintenance</a><br />
+<a href=nowhere onclick="self.close()">Close this window</a>
+]]> -->
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="undel-p" -->
+<table>
+<thead>
+<tr><th>题名</th><th>作者</th><th>取消删除</th></tr>
+<!-- TMPL_LOOP NAME="loop" -->
+<tr>
+<td><!-- TMPL_VAR NAME="title" ESCAPE="HTML" --></td>
+<td><!-- TMPL_VAR NAME="author" ESCAPE="HTML" --></td>
+<td><a href="/cgi-bin/koha/maint/catmaintain.pl?<!-- TMPL_VAR NAME="undelete" escape="url" -->">取消删除</a></td>
+</tr>
+<!-- /TMPL_LOOP -->
+</table>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="finun-p" -->
+<h3>成功撤销删除</h3>
+<p><a href="/cgi-bin/koha/maint/catmaintain.pl">返回馆藏目录维护</a></p>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="fixitemtype-p" -->
+<form method="post" action="/cgi-bin/koha/maint/catmaintain.pl">
+<table>
+<tr><th scope="row"><label for="itemtype">馆藏类型：</label></th><td><input type="hidden" name="bi" value="<!-- TMPL_VAR NAME="bi" ESCAPE="HTML">" />
+<input type="hidden" name="type" value="updatetype" />
+<input type="text" name="itemtype" id="itemtype" value="<!-- TMPL_VAR NAME="item" ESCAPE="HTML">" /></td></tr>
+</table>
+<input type="submit" value="改变">
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="updatetype-p" -->
+<h3>更新成功</h3>
+<p><a href="/cgi-bin/koha/maint/catmaintain.pl">返回馆藏目录维护</a></p>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="mainmenu-p" -->
+
+<h1>馆藏目录维护</h1>
+<form action="/cgi-bin/koha/maint/catmaintain.pl" method="post">
+<table>
+<caption>主题维护</caption>
+<tr><th scope="row"><label for="sub">显示所有的主题从： </label></th><td><input type="text" name="sub" id="sub"><input type="hidden" name="type" value="allsub" /></td></tr>
+</table>
+<input type="submit" value="显示">
+</form>
+
+<form action="/cgi-bin/koha/search.pl" method="post">
+<table>
+<caption>群组维护</caption>
+<tr><th scope="row"><label for="title">显示所有的题名从：</label></th><td><input type="hidden" name="type" value="catmain"><input type="text" name="title" id="title" /></td></tr>
+<tr><th scope="row"><label for="item">馆藏号码：</label></th><td><input type="text" size="25" id="item" name="item" /></td></tr>
+</table>
+<input type="submit" value="显示">
+</form>
+
+<form action="/cgi-bin/koha/maint/catmaintain.pl" method="post">
+<table>
+<caption>取消删除书目记录</caption>
+<tr><th scope="row"><label for="title">显示所有的题名从</label></th><td><input type="text" name="title" id="title" /><input type="hidden" name="type" value="undel" /></td></tr>
+</table>
+<input type="submit" value="显示">
+</form>
+
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+</div>
+
+<!-- TMPL_INCLUDE NAME="mainmenu.inc" -->
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

@@ -1,0 +1,52 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+<a name="#top" title="#top"></a> <h1>Ուղեցույցով հաշվետվությունների օգնություն</h1>
+	<ul>
+		<li><a href="#new">Կառուցիր նոր հաշվետվություն</a></li>
+		<li><a href="#save">Հաշվետվությունը հիշվում է</a></li>
+		<li><a href="#sql">Գեներացրու նոր հաշվետվություն SQL-ից</a></li>
+		<li><a href="#scheduler">Հաշվետվության նախատեսում</a></li>
+		<li>
+		<ul>
+			<li> 
+			<ul>
+				<li><strong>Tabular:</strong>Միայն սյունակների պարզ հաշվետվություն</li>
+				<li><strong>Մատրիցա ։</strong><em>Անավարտ է</em></li>
+				<li><strong>Համառոտագրություն:</strong><em>Անավարտ է</em></li>
+			</ul>
+			<ul>
+				<li><strong>Համակարգի գեներացված չափանիշ</strong> These criteria are known to the system and are drawn from your system preferences</li>
+				<li><strong>Բառարանի չափանիշ</strong> These are custom defined criteria defined for your Koha in the Reports Dictionary</li>
+			</ul>
+			<ul>
+				<li>Հաշվիչ։ Վերադարձնում է յուրաքանչյուր արժեքի հաշիվը</li>
+				<li>Գումար . Վերադարձնում է բոլոր արժեքների գումարը</li>
+				<li>Միջին. վերադարձնում է միջին արժեքը</li>
+				<li>Մին։ վերադարձնում է ամենափոքր արժեքը</li>
+				<li>Մաքս : Վերադարձնում է ամենամեծ արժեքը</li>
+			</ul></li>
+<p>For help with the Reports Dictionary - see online help within the Dictionary Pages</p>
+<hr/><a name="#new" title="#new"></a><h2>Building A New Report</h2> <h3>Քայլ 1 ընդամենը 6: Ընտրիր մոդուլը հաշվետվության համար</h3>
+<p>Select one of the module areas to report on. Guided reports can only generate reports from within one module. For reports across modules, you will need to use either a compound report, or build a custom report using SQL statements.</p><h3>Քայլ 2 ընդամենը 6 : Ընտրիր հաշվետվության տեսակը</h3>
+<p>Կան 3 տեսակի հաշվետվություններ որոնց կարելի է գեներացնել։</p><h3>Քայլ 3 ընդամնեը 6 Ընտրիր սյունակներ արտածման համար</h3>
+<p>Select the columns to draw the report data from. Click the column to add in the left hand box and then click the &quot;Add&quot; button. Your column will now show up in the right hand box. To remove a selected column, click the column name on the right hand side and then click the delete button. Once you are happy with the columns, select the &quot;Choose Columns&quot; button to proceed to the next step.</p>
+<p><strong>Սյունակները ընտրելիս զգույշ եղիր։</strong> The guided reports feature expects that you have some knowledge of the Koha database structure and what each field is used for. Be careful selecting columns as a poor choice may lead to a report that is so large that it either times out before it can be generated, or it will require a large amount of system resources to generate and slow down the operation of Koha.</p>
+<p>Հաշվետվությունների շարժիչում չկա ողջամիտ ստուգիչ</p><h3>Քայլ 4 ընդամենը 6 : Սահմանափակման չափանիշ </h3>
+<p>Criteria allow you to limit your report to display results to a given criteria.Criteria are bound to a specific reporting area.</p><h3>Քայլ 5 ընդամենը 6 : Ընտրիր որ սյունակները հանրագումարի բերել</h3>
+<p>Now choose operations that you want to preform on each column. The operations that can be selected are:</p>.	  <h3>Քայլ 6 ընդամենը 6 : Ընտրիր ինչպես ես ուզում հաշվետվությունը դասավորել</h3>
+<p>Select how you wish to order the report. You can select multiple criteria to order against and the hierarchy that the are applied. For example order alphabetically by Surname, and then alphabetically by First Name</p><br/><a href="#top">
+Հետ դեպի Վեր
+</a>
+<hr/><a name="#save" title="#save"> </a><h2>Saving A Report</h2>
+<p>Once you have generated a report, you can now choose to save the report definition so that you can run it again when required, or setup the Task Scheduler to run the report for you.</p><br/><a href="#top">
+Հետ դեպի Վեր
+</a>
+<hr/><a name="#sql" title="#sql"> </a><h2>Generating A New Report From SQL</h2>
+<p>A report can be generated directly using from an SQL statement. On the &quot;Create from SQL&quot; page, give the report a Title and Description (using the notes field) and then paste your SQL statement into the text area.</p><br/><a href="#top">
+Հետ դեպի Վեր
+</a>
+<hr/><a name="#scheduler" title="#scheduler"> </a><h2>Scheduling A Report</h2>
+<p>Reports can be scheduled to run either at a one off time, or repeatedly at a defined period using the task scheduler. The task scheduler is found under Tools &gt;Task Scheduler</p><br/><a href="#top">
+Հետ դեպի Վեր
+</a>
+		</ul></li>
+	</ul><!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

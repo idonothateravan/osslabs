@@ -1,0 +1,128 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Tools &rsaquo; Benutzerfotos hochladen</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+ $(document).ready(function() {
+	$("#zipfile").click(function(){
+		$("#cardnum").hide();
+	});
+	$("#image").click(function(){
+		$("#cardnum").show();
+	});
+});
+</script>
+</head>
+<body>
+
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="patron-search.inc"-->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/tools/tools-home.pl">Werkzeuge</a> &rsaquo; Benutzerbilder hochladen </div>
+
+<div id="doc3" class="yui-t2">
+    <div id="bd">
+        <div id="yui-main">
+<!-- TMPL_IF name="TOTAL" -->
+    <div class="yui-b">
+        <div class="yui-g">
+            <div class="yui-u first">
+            <!-- TMPL_IF name="ERRORS" -->
+				<!-- TMPL_IF name = "TCOUNTS" -->
+					<div class="dialog alert">
+					<h3>Benutzerbilder wurden mit einigen Fehlern hochgeladen.</h3>
+				<!-- TMPL_ELSE -->
+					<div class="dialog alert">
+					<h3>Patron Image Failed to Upload</h3>
+				<!-- /TMPL_IF -->
+            <!-- TMPL_ELSE -->
+                <div class="dialog message">
+                <h3>Benutzerbilder erfolgreich hochgeladen.</h3>
+            <!-- /TMPL_IF -->
+	        <ul class="data">
+	            <li>Auspacken beendet</li>
+                  <li><!-- TMPL_VAR NAME ="TOTAL" --> directorie(s) scanned.</li>
+                    <li><!-- TMPL_VAR NAME="HANDLED" --> directorie(s) processed.</li>
+                </ul>
+                <!-- TMPL_LOOP name="COUNTS" -->
+	            <ul class="data">
+                        <!-- TMPL_IF name = "TCOUNTS" --><li><!-- TMPL_VAR name="TCOUNTS" --> Bilder wurden in der Datenbank gespeichert:</li><!-- /TMPL_IF -->
+                        <!-- TMPL_LOOP name="filenames" -->
+                            <li><!-- TMPL_VAR name="source" --> - Ausweisnummer: <!-- TMPL_VAR name="cardnumber" -->
+                                    <!-- TMPL_IF NAME="filerrors" --><br /> <b>WARNUNG:</b> Dieses Bild wurde <i>nicht</i> importiert, weil 
+                                    <!-- TMPL_LOOP NAME="filerrors" -->
+                                        <!-- TMPL_IF NAME="DBERR" -->Die Datenbank hat einen Fehler zurückgegeben. Weitere Details finden Sie in der Fehlerlogdatei.</li>
+                                        <!-- TMPL_ELSIF NAME="IMGEXISTS" -->this patron does not exist in the database.</li>
+                                        <!-- TMPL_ELSIF NAME="MIMERR" -->Das Grafikformat ist unbekannt.</li>
+                                        <!-- TMPL_ELSIF NAME="CORERR" -->the image file is corrupted.</li>
+                                        <!-- TMPL_ELSIF NAME="OPNERR" -->Koha konnte das Bild nicht öffnen.</li>
+                                        <!-- TMPL_ELSIF NAME="OVRSIZ" -->Die Grafikdatei ist zu groß.</li>
+                                        <!-- TMPL_ELSIF NAME="CRDFIL" -->das <!-- TMPL_VAR NAME="CRDFIL" --> i fehlt.</li>
+                                        <!-- TMPL_ELSE -->eines unbekannten Fehlers. Weitere Details finden Sie im Fehlerlog.</li><!-- /TMPL_IF -->
+                                    <!-- /TMPL_LOOP -->
+                                        <!--TMPL_ELSE --> erfolgreich importiert</li>
+                                    <!-- /TMPL_IF -->
+                        <!-- /TMPL_LOOP -->
+                        </ul>
+                <!-- /TMPL_LOOP -->
+
+				</div>
+				<!-- TMPL_IF name = "borrowernumber" -->
+					<a id="member" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR name = "borrowernumber" -->">Return to Patron Detail</a>
+				<!-- TMPL_ELSE -->
+					<a id="uploadmore" href="/cgi-bin/koha/tools/picture-upload.pl">Weitere Bilder hochladen</a> <a id="doneupload" href="/cgi-bin/koha/tools/tools-home.pl">Zurück zu Tools</a>
+            	<!-- /TMPL_IF -->
+            </div>
+<!-- TMPL_ELSE -->
+    <div class="yui-b">
+        <div class="yui-g">
+            <div class="yui-u first">
+                <h1>Benutzerfoto hochladen</h1>
+                <!-- TMPL_IF name="ERRORS" -->
+                <div class="dialog alert">
+                    <!-- TMPL_LOOP name="ERRORS" -->
+                        <!-- TMPL_IF name="NOTZIP" --><li><b>The upload file does not appear to be a zip file.  The extention is not '.zip'.</b></li>
+                        <!-- TMPL_ELSIF name="NOWRITETEMP" --><li><b>Dieses Script kann das benötigte temporäre Verzeichnis nicht anlegen oder darin schreiben.</b></li>
+                        <!-- TMPL_ELSIF name="EMPTYUPLOAD" --><li><b>Die hochgeladene Datei scheint leer zu sein</b></li>
+                        <!-- TMPL_ELSIF name="OPNLINK" --><li><b>Kann <!-- TMPL_VAR NAME="OPNLINK" --> nicht zum Lesen öffnen<br />Bitte bestätigen, dass es existiert.</b></li>
+                        <!-- TMPL_ELSIF name="OPNIMG" --><li><b>Kann <!-- TMPL_VAR NAME="OPNIMG" --> nicht zum Lesen öffnen<br />Bitte bestätigen, dass es existiert.</b></li>
+                        <!-- TMPL_ELSIF name="DELERR" --><li><b>Unbekannter oder Fehlender Feldtrenner.<br />Bitte stellen Sie sicher, dass Sie entweder eineinfache Anführungszeichen oder aber TAB-Zeichen benutzt. </b></li>
+                        <!-- TMPL_ELSIF name="UZIPFAIL" --><li><b><!-- TMPL_VAR name="UZIPFAIL" --> konnte nicht entpackt werden.<br />Bitte überprüfen Sie die Gültigkeit der ZIP-Datei und versuchen Sie es erneut.</b></li>
+                        <!-- TMPL_ELSE --><li><b><!-- TMPL_VAR name ="CORERR" --> An unknown error has occurred.<br />Für nähere Informationen prüfen Sie bitte die Fehler-Logdatei.</b></li><!-- /TMPL_IF -->
+                    <!-- /TMPL_LOOP -->
+                </div>
+                <!-- /TMPL_IF -->
+	        <form method="post" action="/cgi-bin/koha/tools/picture-upload.pl" enctype="multipart/form-data">
+	            <fieldset class="brief">
+			 <div class="hint"><b>NOTE:</b> Only PNG, GIF, JPEG, XPM formats are supported.</div>
+                        <ol class="radio">
+                            <li class="radio">
+                                <label for="zipfile"><input type="radio" id="zipfile" name="filetype" value="zip" checked="checked" /> ZIP-Datei</label></li>
+                                <li>
+                                <label for="image">
+								<!-- TMPL_IF EXPR="filetype eq 'image'" --><input type="radio" id="image" name="filetype" value="image" checked="checked" /><!-- TMPL_ELSE --><input type="radio" id="image" name="filetype" value="image" /><!-- /TMPL_IF -->
+								 Bilddatei</label>
+	                <ol>
+                            <li>
+                                <label for="uploadfile">Datei zum Upload auswählen: </label><input type="file" id="uploadfile" name="uploadfile" />
+                                <!-- TMPL_IF EXPR="filetype eq 'image'" --><span id="cardnum"><!-- TMPL_ELSE --><span id="cardnum" style="display: none"><!-- /TMPL_IF --><label for="cardnumber">Ausweisnummer eingeben: </label><input type="text" id="cardnumber" name="cardnumber" value="<!-- TMPL_VAR NAME="cardnumber" -->" size="15" /></span>
+                            </li>
+    	                </ol>
+					</li></ol>
+	            </fieldset>
+                    <fieldset class="action">
+                        <input type="hidden" name="op" value="Upload" />
+                        <input type="submit" value="Upload" class="submit" />
+						<a href="/cgi-bin/koha/tools/tools-home.pl" class="cancel">abbrechen</a>
+                    </fieldset>
+                </form>
+	
+            </div>	
+<!-- /TMPL_IF -->
+        </div>
+    </div>
+</div>
+<div class="yui-b noprint">
+    <!-- TMPL_INCLUDE NAME="tools-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

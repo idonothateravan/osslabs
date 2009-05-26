@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UNIMARC_Ersteller Feld 121b</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Höhe des Aufnehmers:</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>Irdisch</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Irdisch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>Flug</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Flug</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>Räumlich</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Räumlich</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+		<td>Richtung des Sensors: </td>
+		<td>
+			<select name="f2" size="1">
+                        
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" SELECTED>Schwache zentrische Streckung</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Schwache zentrische Streckung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2b" -->
+				<option value="b" SELECTED>Starke zentrische Streckung</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Starke zentrische Streckung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2c" -->
+				<option value="c" SELECTED>Vertikale</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Vertikale</option>
+			<!-- /TMPL_IF -->
+		</td></tr><tr>		<td>Spektralbänder (Zahlen mit zwei Ziffern 01->99 oder xx (01 für 1):</td>
+		   <td><input type="text" name="f3" maxlength=2 size=3
+		   value="<!-- TMPL_VAR name="f3" -->">
+		</td></tr>
+<tr>
+		<td>Bildqualität</td>
+		<td>
+			<select name="f4" size="1">
+			
+			<!-- TMPL_IF name="f4a" -->
+				<option value="a" SELECTED>Schwach</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Schwach</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4b" -->
+				<option value="b" SELECTED>Annehmbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Annehmbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4c" -->
+				<option value="c" SELECTED>Gut</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Gut</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4d" -->
+				<option value="d" SELECTED>Sehr gut</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Sehr gut</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+		<td>Bedeckung des Himmels in Achteln ausgedrückt:</td>
+		<td>
+			<select name="f5" size="1">
+
+			<!-- TMPL_IF name="f51" -->
+				<option value="1" SELECTED>1/8</option>
+			<!-- TMPL_ELSE -->
+				<option value="1">1/8</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f52" -->
+				<option value="2" SELECTED>2/8</option>
+			<!-- TMPL_ELSE -->
+				<option value="2">2/8</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f53" -->
+				<option value="3" SELECTED>3/8</option>
+			<!-- TMPL_ELSE -->
+				<option value="3">3/8</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f54" -->
+				<option value="4" SELECTED>4/8</option>
+			<!-- TMPL_ELSE -->
+				<option value="4">4/8</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f55" -->
+				<option value="5" SELECTED>5/8</option>
+			<!-- TMPL_ELSE -->
+				<option value="5">5/8</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f56" -->
+				<option value="6" SELECTED>6/8</option>
+			<!-- TMPL_ELSE -->
+				<option value="6">6/8</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f57" -->
+				<option value="7" SELECTED>7/8</option>
+			<!-- TMPL_ELSE -->
+				<option value="7">7/8</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f58" -->
+				<option value="8" SELECTED>Gesamte Abdeckung</option>
+			<!-- TMPL_ELSE -->
+				<option value="8">Gesamte Abdeckung</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+
+		       <td>Bildqualität</td>
+                <td>
+                        <select name="f6" size="1">
+                        <!-- TMPL_IF name="f6-" -->
+                                <option value="-" SELECTED>Kleiner als cm</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="-">Kleiner als cm</option>
+                        <!-- /TMPL_IF -->
+                        
+                        <!-- TMPL_IF name="f61" -->
+                                <option value="1" SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="1">1</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f62" -->
+                                <option value="2"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="2">2</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f63" -->
+                                <option value="3"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="3">3</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f64" -->
+                                <option value="4"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="4">4</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f51" -->
+                                <option value="5"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="5">5</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f66" -->
+                                <option value="6"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="6">6</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f71" -->
+                                <option value="7"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="7">7</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f68" -->
+                                <option value="8"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="8">8</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f69" -->
+                                <option value="9"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="9">9</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f6+" -->
+                                <option value="+"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="+">+</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f6x" -->
+                                <option value="x"
+                SELECTED>1</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="x">x</option>
+                        <!-- /TMPL_IF -->
+                        </select>
+                
+			<select name="f7" size="1">
+			
+			<!-- TMPL_IF name="f7c" -->
+				<option value="c" SELECTED>Zentimeter</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Zentimeter</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7i" -->
+				<option value="i" SELECTED>Dezimeter</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Dezimeter</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7m" -->
+				<option value="m" SELECTED>Meter</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Meter</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7d" -->
+				<option value="d" SELECTED>Dekameter</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Dekameter</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7h" -->
+				<option value="h" SELECTED>Hektometer</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Hektometer</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7k" -->
+				<option value="k" SELECTED>Kilometer</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Kilometer</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr><td colspan=2><input type="button" value="OK"  onClick="javascript:report()"></td></tr>
+</table>
+</form>
+<script>
+	function report() {
+
+document.f_pop.f3.value=document.f_pop.f3.value+'  ';
+
+
+
+document.f_pop.f3.value=document.f_pop.f3.value.substring(0,2);
+
+
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value =  document.f_pop.f1.value + document.f_pop.f2.value +document.f_pop.f3.value +document.f_pop.f4.value +document.f_pop.f5.value +document.f_pop.f6.value +document.f_pop.f7.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立 UNIMARC 欄位 110</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>資料類型代碼</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1|" -->
+                            <option value="|" selected="selected">|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" selected="selected">期刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">期刊</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" selected="selected">集叢</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">集叢</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" selected="selected">期刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">期刊</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" selected="selected">其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>刊期</td>
+		<td>
+			<select name="f2" size="1">
+			<!-- TMPL_IF name="f2|" -->
+                            <option value="|" selected="selected">|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" selected="selected">Quotidien</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Quotidien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2b" -->
+				<option value="b" selected="selected">半週刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">半週刊</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2c" -->
+				<option value="c" selected="selected">週刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">週刊</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f2d" -->
+				<option value="d" selected="selected">雙週刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">雙週刊</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f2e" -->
+				<option value="e" selected="selected">半月刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">半月刊</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f2f" -->
+				<option value="f" selected="selected">月刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">月刊</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f2g" -->
+				<option value="g" selected="selected">雙月刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">雙月刊</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f2h" -->
+				<option value="h" selected="selected">季刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">季刊</option>
+			<!-- /TMPL_IF -->
+
+ 			<!-- TMPL_IF name="f2i" -->
+				<option value="i" selected="selected">一年三次</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">一年三次</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f2j" -->
+				<option value="j" selected="selected">Semestriel</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Semestriel</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2k" -->
+				<option value="k" selected="selected">年鑑</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">年鑑</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2l" -->
+				<option value="l" selected="selected">半年刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">半年刊</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2m" -->
+				<option value="m" selected="selected">三年刊</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">三年刊</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2n" -->
+				<option value="n" selected="selected">一週三次</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">一週三次</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2o" -->
+				<option value="o" selected="selected">一月三次</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">一月三次</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2u" -->
+				<option value="u" selected="selected">不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不詳</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2y" -->
+				<option value="y" selected="selected">開始時間</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">開始時間</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2i" -->
+				<option value="i" selected="selected">其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">其他</option>
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Regularite</td>
+		<td>
+			<select name="f3" size="1">
+			<!-- TMPL_IF name="f3|" -->
+                            <option value="|" selected="selected">|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f3u" -->
+				<option value="u" selected="selected">不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不詳</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f3a" -->
+				<option value="a" selected="selected">Regulier</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Regulier</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f3b" -->
+				<option value="b" selected="selected">定期性的不規則（如月刊，除7—8 月外）</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">定期性的不規則（如月刊，除7—8 月外）</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f3y" -->
+				<option value="y" selected="selected">不正常</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">不正常</option>
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>參考資料型式</td>
+		<td>
+			<select name="f4" size="1">
+			<!-- TMPL_IF name="f4|" -->
+                            <option value="|" selected="selected">|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+            
+                    <!-- TMPL_IF name="f4 " -->
+                        <option value=" " selected="selected">無需填寫</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">無需填寫</option>
+                    <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4a" -->
+				<option value="a" selected="selected">書目</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">書目</option>
+	
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4b" -->
+				<option value="b" selected="selected">館藏目錄</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">館藏目錄</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4c" -->
+				<option value="c" selected="selected">索引</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">索引</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4d" -->
+				<option value="d" selected="selected">Resume ou extraits</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Resume ou extraits</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4e" -->
+				<option value="e" selected="selected">字典查詢</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">字典查詢</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4f" -->
+				<option value="f" selected="selected">百科全書</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">百科全書</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4g" -->
+				<option value="g" selected="selected">Repertoire</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Repertoire</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4h" -->
+				<option value="h" selected="selected">年鑑、年報</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">年鑑、年報</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4i" -->
+				<option value="i" selected="selected">Statistiques</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Statistiques</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4j" -->
+				<option value="j" selected="selected">編序教材</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">編序教材</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4k" -->
+				<option value="k" selected="selected">Revue critique</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Revue critique</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4l" -->
+				<option value="l" selected="selected">法規</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">法規</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4m" -->
+				<option value="m" selected="selected">判決報導及摘要</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">判決報導及摘要</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4n" -->
+				<option value="n" selected="selected">法律論文</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">法律論文</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4o" -->
+				<option value="o" selected="selected">Procès et compte rendu judiciaire</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Procès et compte rendu judiciaire</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4p" -->
+				<option value="p" selected="selected">傳記代碼</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">傳記代碼</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4r" -->
+				<option value="r" selected="selected">Synthese bibliographique</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Synthese bibliographique</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4t" -->
+				<option value="t" selected="selected">漫畫、連環圖書</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">漫畫、連環圖書</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4z" -->
+				<option value="z" selected="selected">Autre forme de contenu</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Autre forme de contenu</option>
+			<!-- /TMPL_IF -->
+
+				</select>
+		</td>
+
+        </tr>
+   <tr>
+                <td>內容性質代碼</td>
+                <td><input type="text" name="f5" maxlength="3" size="4" value="<!-- TMPL_VAR name="f5" -->"></td>
+
+	</tr>
+	<tr>
+		<td>題名頁</td>
+		<td>
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f6|" -->
+                            <option value="|" selected="selected">|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+                        
+			<!-- TMPL_IF name="f60" -->
+				<option value="0" selected="selected">非會議出版品</option>
+			<!-- TMPL_ELSE -->
+				<option value="0">非會議出版品</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f61" -->
+				<option value="1" selected="selected">會議出版品</option>
+			<!-- TMPL_ELSE -->
+				<option value="1">會議出版品</option>
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+	</tr>
+
+			<td>existence de la page de titre</td>
+		<td>
+			<select name="f7" size="1">
+			<!-- TMPL_IF name="f7|" -->
+                            <option value="|" selected="selected">|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+                        
+			<!-- TMPL_IF name="f7a" -->
+				<option value="a" selected="selected">活頁、附於下一卷之第一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">活頁、附於下一卷之第一期</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7b" -->
+				<option value="b" selected="selected">刊於每卷之最後一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">刊於每卷之最後一期</option>
+			<!-- /TMPL_IF -->
+
+
+			<!-- TMPL_IF name="f7c" -->
+				<option value="c" selected="selected">活頁、附於下一卷之第一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">活頁、附於下一卷之第一期</option>
+			<!-- /TMPL_IF -->
+
+
+			<!-- TMPL_IF name="f7d" -->
+				<option value="d" selected="selected">刊於下一卷之第一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">刊於下一卷之第一期</option>
+			<!-- /TMPL_IF -->
+
+
+			<!-- TMPL_IF name="f7e" -->
+				<option value="e" selected="selected">單獨刊行，免費備索</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">單獨刊行，免費備索</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7f" -->
+				<option value="f" selected="selected">單獨刊行，寄贈</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">單獨刊行，寄贈</option>
+			<!-- /TMPL_IF -->
+
+
+			<!-- TMPL_IF name="f7g" -->
+				<option value="g" selected="selected">單獨刊行，由出版商裝訂發售</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">單獨刊行，由出版商裝訂發售</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7u" -->
+				<option value="u" selected="selected">不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不詳</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7x" -->
+				<option value="x" selected="selected">如不適用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不適用</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7y" -->
+				<option value="y" selected="selected">Pas de page de titre parue</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Pas de page de titre parue</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7z" -->
+				<option value="z" selected="selected">其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+
+				</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>彙編索引來源代碼</td>
+		<td>
+			<select name="f8" size="1">
+			<!-- TMPL_IF name="f8|" -->
+                            <option value="|" selected="selected">|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f8a" -->
+				<option value="a" selected="selected">每期附有活頁之索引</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">每期附有活頁之索引</option>
+			<!-- /TMPL_IF -->
+
+
+			<!-- TMPL_IF name="f8b" -->
+				<option value="b" selected="selected">面數另計之活頁、附於下一卷之第一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">面數另計之活頁、附於下一卷之第一期</option>
+			<!-- /TMPL_IF -->
+
+
+			<!-- TMPL_IF name="f8c" -->
+				<option value="c" selected="selected">面數不計之活頁、附於下一卷之第一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">面數不計之活頁、附於下一卷之第一期</option>
+			<!-- /TMPL_IF -->
+
+
+			<!-- TMPL_IF name="f8d" -->
+				<option value="d" selected="selected">刊於每卷之最後一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">刊於每卷之最後一期</option>
+			<!-- /TMPL_IF -->
+
+
+			<!-- TMPL_IF name="f8e" -->
+				<option value="b" selected="selected">面數另計之活頁、附於下一卷之第一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">面數另計之活頁、附於下一卷之第一期</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8f" -->
+				<option value="f" selected="selected">面數不計之活頁、附於下一卷之第一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">面數不計之活頁、附於下一卷之第一期</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8g" -->
+				<option value="g" selected="selected">刊於每卷之最後一期</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">刊於每卷之最後一期
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8h" -->
+				<option value="h" selected="selected">單獨刊行，寄贈</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">單獨刊行，寄贈</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8i" -->
+				<option value="i" selected="selected">單獨刊行，免費備索</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">單獨刊行，免費備索</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8j" -->
+				<option value="j" selected="selected">單獨刊行，由出版商裝訂寄贈</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">單獨刊行，由出版商裝訂寄贈</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8k" -->
+				<option value="k" selected="selected">單獨刊行，由出版商裝訂發售</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">單獨刊行，由出版商裝訂發售</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8l" -->
+				<option value="l" selected="selected">單獨刊行，由出版商裝訂發售</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">單獨刊行，由出版商裝訂發售</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8m" -->
+				<option value="m" selected="selected">Supplement ou sous-serie indexe dans la publication mere</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Supplement ou sous-serie indexe dans la publication mere</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8u" -->
+				<option value="u" selected="selected">不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不詳</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8x" -->
+				<option value="x" selected="selected">如不適用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不適用</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8y" -->
+				<option value="y" selected="selected">無索引</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">無索引</option>
+			<!-- /TMPL_IF -->
+				
+
+			<!-- TMPL_IF name="f8z" -->
+				<option value="z" selected="selected">其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Existence d'un index cumulatif</td>
+		<td>
+			<select name="f9" size="1">
+			<!-- TMPL_IF name="f9|" -->
+                            <option value="|" selected="selected">|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f90" -->
+				<option value="0" selected="selected">Pas d'index cumulatif ou de table des matieres</option>
+			<!-- TMPL_ELSE -->
+				<option value="0">Pas d'index cumulatif ou de table des matieres </option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f91" -->
+				<option value="1" selected="selected">Index cumulatif ou table des matieres</option>
+			<!-- TMPL_ELSE -->
+				<option value="1">Index cumulatif ou table des matieres</option>
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+	</tr>
+
+	<tr><td colspan="2"><input type="button" value="完成" onclick="report();"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+    function report() {
+        document.f_pop.f5.value=document.f_pop.f5.value+'   ';
+        document.f_pop.f5.value=document.f_pop.f5.value.substring(0,3);
+        var doc   = opener.document; 
+        var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        field.value =  document.f_pop.f1.value +document.f_pop.f2.value+document.f_pop.f3.value+document.f_pop.f4.value+document.f_pop.f5.value+document.f_pop.f6.value+document.f_pop.f7.value+document.f_pop.f8.value+document.f_pop.f9.value;
+        self.close();
+        return false;
+    }
+</script>
+</body>
+</html>

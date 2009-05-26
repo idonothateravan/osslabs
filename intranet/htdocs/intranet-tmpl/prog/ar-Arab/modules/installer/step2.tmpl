@@ -1,0 +1,58 @@
+
+
+
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><title>كوها &rsaquo; مركب ويب &rsaquo; الخطوة 2</title>
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div>
+<h1 id="logo"><img alt="كوها" src="/intranet-tmpl/prog/img/koha.org-logo.gif"> مركّب ويب &rsaquo؛ خطوة 2 </h1>
+<h2 align="center">إعدادات قاعدة البيانات:</h2>
+<ul>
+<li><em>نوع قاعدة البيانات : </em><!--TMPL_VAR NAME="dbms"--></li>
+<li><em>إسم قاعدة البيانات: </em><!--TMPL_VAR NAME="dbname"--></li>
+<li><em>مضيف قاعدة البيانات : </em><!--TMPL_VAR NAME="hostname"--></li>
+<li><em>بوابة قاعدة البيانات : </em><!--TMPL_VAR NAME="port"--> (من المحتمل نعم إذا كان فارغا)</li>
+<li><em>مستخدم قاعدة البيانات : </em><!--TMPL_VAR NAME="user"--></li>
+</ul>
+<div>
+<!--TMPL_IF NAME="dbconnection"-->
+<form name="checkdbparameters" type="post" action="install.pl">
+  <!--TMPL_IF NAME="checkdatabaseaccess"-->
+  <p>تم إنشاء الاتصال.</p>
+     <!--TMPL_IF NAME="checkdatabasecreated"-->
+  <p>قاعدة البيانات <code><!--TMPL_VAR NAME="dbname"--></code> موجود.</p>
+        <!--TMPL_IF NAME="checkgrantaccess"-->
+  <p>مستخدم <code><!--TMPL_VAR NAME="user"--></code> له كلّ الإمتيازات المطلوبة فى قاعدة البيانات <code><!--TMPL_VAR Name="dbname"--></code>.</p>
+        <!--TMPL_ELSE-->
+  <p class="error">مستفيد <code><!--TMPL_VAR NAME="user"--></code> لا يملك إمتياز كافى فى قاعدة البيانات <code><!--TMPL_VAR Name="dbname"--></code> </p>
+  <p class="tip"> إسأل عن أو قم بتغيّير في إمتيازات المستخدم. تحتاج مساعدة؟ شاهد <!--TMPL_IF NAME="mysql"--><a href=http://dev.mysql.com/doc/refman/4.1/en/grant.html><!--TMPL_ELSE-->http://www.postgresql.org/docs/8.2/interactive/sql-createrole.html<!--/TMPL_IF-->هذه الصفحة</a>.مستفيد <code><!--TMPL_VAR NAME="user"--></code> يجب أن يكون عنده إستخدام، إدراج، تجديد، حذف، يسقط وينشئ الإمتيازات <code><!--TMPL_VAR Name="dbname"--></code></p>
+        <!--/TMPL_IF-->
+      <!--TMPL_ELSE-->
+  <p class="error">لا توجد قاعدة بيانات مسماة <code><!--TMPL_VAR NAME="dbname"--></code> detected.</p>
+  <p class="tip">من فضلك إنشئ قاعدة بيانات قبل الاستمرار.</p>
+      <!--/TMPL_IF-->
+   <!--TMPL_ELSE-->
+    <div class="error"><!--TMPL_VAR name="error"--> : <!--TMPL_VAR NAME="message"-->
+    </div>
+    <div class="tip">
+      <ul>
+      <li>تأكد من أن قاعدة البيانات الخاصة بك تعمل.</li>
+      <li>إفحص إعدادات قاعدة بياناتك <code>koha-conf.xml</code>. </li>
+      <li>إفحص إعدادات اسم المضيف <code>koha-conf.xml</code>.بعض خوادم قاعدة البيانات تتطلّب <code>127.0.0.1</code> بدلا من <code>localhost</code>.</li>
+    </div>
+    <p>من فضلك صحّح هذه الاخطاء و <a href="/cgi-bin/koha/installer/install.pl">إبدأ التركيب</a> مرة أخرى.
+  <!--/TMPL_IF-->
+  <!-- TMPL_IF NAME="error" --><!-- TMPL_ELSE -->
+<input type="hidden" name="step" value="3" />
+<p> أنقر التالى للاستمرار <input value="التالى&gt;&gt;" type="submit"></p>
+<!-- /TMPL_IF -->
+</form>
+<!--TMPL_ELSE-->
+<form name="checkinformation" type="post" action="install.pl">
+<input type="hidden" name="step" value="2" />
+<input type="hidden" name="checkdb" value="1" />
+<p> من فضلك إنقر التالى للمتابعة إذا كانت تلك المعلومات صحيحة <input value="التالى&gt;&gt;" type="submit"></p>
+</form>
+<!--/TMPL_IF-->
+</div>
+</body>
+</html>

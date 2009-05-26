@@ -1,0 +1,257 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo;الادارة &rsaquo;
+<!-- TMPL_IF name="add_form" -->إطارات مارك &rsaquo; <!-- TMPL_VAR name="action" --> <!-- TMPL_VAR NAME="searchfield" --><!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" -->إطارات مارك &rsaquo;أكد حذف الرأس '<!-- TMPL_VAR name="searchfield" -->'<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirmed" -->إطارات مارك &rsaquo; تم حذف البيانات<!-- /TMPL_IF -->
+<!-- TMPL_IF name="else" -->إطارات مارك<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isNotNull(f,noalert) {
+        if (f.value.length ==0) {
+			return false;
+        }
+        return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function toUC(f) {
+        var x=f.value.toUpperCase();
+        f.value=x;
+        return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isNum(v,maybenull) {
+    var n = new Number(v.value);
+    if (isNaN(n)) {
+        return false;
+        }
+    if (maybenull==0 && v.value=='') {
+        return false;
+    }
+    return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isDate(f) {
+        var t = Date.parse(f.value);
+        if (isNaN(t)) {
+            return false;
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function Check(f) {
+        var ok=1;
+        var _alertString="";
+        var alertString2;
+        if (f.tagfield.value.length==0) {
+            _alertString += "\n- " + _("رقم التاج مفقود");
+        }
+        if (_alertString.length==0) {
+            document.Aform.submit();
+        } else {
+            alertString2  = _("الشكل غير مقدم بسبب المشكلة التالية (s) ");
+            alertString2 += "\n------------------------------------------------------------------------------------\n";
+            alertString2 += _alertString;
+            alert(alertString2);
+        }
+    }
+    //]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">الادارة</a> &rsaquo; <!-- TMPL_IF name="add_form" --> <a href="/cgi-bin/koha/admin/marctagstructure.pl">إطارات مارك</a> &rsaquo; <a href="/cgi-bin/koha/admin/marctagstructure.pl?frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">إطار مارك ل <!-- TMPL_VAR NAME="frameworktext" --> (<!-- TMPL_VAR NAME="frameworkcode" -->)</a> &rsaquo; <!-- TMPL_VAR name="action" --> <!-- TMPL_VAR NAME="searchfield" --><!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" --> <a href="/cgi-bin/koha/admin/marctagstructure.pl">إطارات مارك</a> &rsaquo; أكد حذف التاج '<!-- TMPL_VAR name="searchfield" -->'<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirmed" --> <a href="/cgi-bin/koha/admin/marctagstructure.pl">إطارات مارك</a> &rsaquo;تم حذف البيانات<!-- /TMPL_IF -->
+<!-- TMPL_IF name="else" --><a href="/cgi-bin/koha/admin/biblio_framework.pl">إطارات مارك</a> &rsaquo;إطار مارك ل <!-- TMPL_VAR NAME="frameworktext" --> (<!-- TMPL_VAR NAME="frameworkcode" -->)<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="else" --><div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+
+	// prepare DOM for YUI Toolbar
+
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+
+	// YUI Toolbar Functions
+
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("addtag");
+	}
+
+	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="addtag" href="/cgi-bin/koha/admin/marctagstructure.pl?op=add_form&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">مدخل جديد</a></li>
+</ul></div><!-- /TMPL_IF -->
+
+<h1>إطار مارك ل <!-- TMPL_IF NAME="frameworkcode" --><!-- TMPL_VAR NAME="frameworktext" --> (<!-- TMPL_VAR NAME="frameworkcode" -->)<!-- TMPL_ELSE -->إطار مارك الافتراضى<!-- /TMPL_IF --></h1>
+
+<!-- TMPL_IF NAME="add_form" -->
+
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+	
+      <fieldset class="rows"><legend><!-- TMPL_IF NAME="use-heading-flags-p" --><!-- TMPL_IF NAME="heading-modify-tag-p" -->عدّل الرأس <input type="hidden" name="modif" value="1" /><!-- TMPL_VAR NAME="searchfield" --><!-- /TMPL_IF --><!-- TMPL_IF NAME="heading-add-tag-p" -->أضف تاج<!-- /TMPL_IF --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF --></legend>  <input type="hidden" name="op" value="add_validate" />
+	<input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+
+	<ol> <li><label for="tagfield">الرأس: </label><input id="tagfield" type="text" name="tagfield" value="<!-- TMPL_VAR NAME="searchfield" -->" maxlength="3" size="3" /></li>    
+    <li><label for="liblibrarian">مسمى المكتبة: </label><input type="text" id="liblibrarian" name="liblibrarian" value="<!-- TMPL_VAR NAME="liblibrarian" ESCAPE="HTML" -->" size="40" maxlength="100" /></li>
+    <li><label for="libopac">مسمى الأوباك: </label><input type="text" id="libopac" name="libopac" value="<!-- TMPL_VAR NAME="libopac" ESCAPE="HTML" -->" size="40" maxlength="100" /></li>
+    <li><label for="repeatable">متكرّر:  </label><!-- TMPL_VAR NAME="repeatable" --></li>
+    <li><label for="mandatory">إلزامى: </label><!-- TMPL_VAR NAME="mandatory" --></li>
+    <li><label for="authorised_value">قيمة مقننة: </label><!-- TMPL_VAR NAME="authorised_value" --> (إذا إخترت القيمة هنا، المؤشر سيتم تحديده بالقيمة المحددة للقائمة)</li>
+</ol></fieldset> 
+	<fieldset class="action">
+            <input type="submit" value="إحفظ التغييرات" onclick="Check(this.form)">
+            <a class="cancel" href="<!-- TMPL_VAR NAME="script_name" -->?frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">إلغاء</a>
+	</fieldset>
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+
+<div class="dialog alert"><h3>Confirm Deletion of Tag <span class="ex">'<!-- TMPL_VAR NAME="searchfield" -->'</span>?</h3>
+    <p>الرأس: <!-- TMPL_VAR NAME="searchfield" --></p>
+    <p>وصف: <!-- TMPL_VAR NAME="liblibrarian" --></p>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+	<input type="hidden" name="op" value="delete_confirmed" />
+	<input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" /><input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+	<input type="submit" class="approve" value="نعم,إحذف هذا الرأس"></form>
+	
+	<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post"><input type="submit" value="لا,لا تحذف" class="deny"></form></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirmed" -->
+
+    <div class="dialog message"><h3>الرأس حذف</h3>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post"><input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+    <input type="submit" value="نعم" class="approve">
+    </form></div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="framework_create" -->
+
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+        <input type="hidden" name="op" value="framework_create_confirm" />
+        <input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+        إخلق إطارا ل<!-- TMPL_VAR NAME="frameworkcode" --> (<!-- TMPL_VAR NAME="frameworktext" -->) إستخدام 
+        <select name="existingframeworkcode">
+            <option value="">إفتراضى</option>
+        <!-- TMPL_LOOP NAME="existingframeworkloop" -->
+            <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="frameworktext" --></option>
+        <!-- /TMPL_LOOP -->
+        </select>
+        <input type="submit" value="نعم">
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="else" -->
+
+<form name="f" action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+    <p><label for="frameworkcode">الإطار</label>
+        <select id="frameworkcode" name="frameworkcode">
+            <option value="">إفتراضى</option>
+            <!-- TMPL_LOOP NAME="frameworkloop" -->
+			<!-- TMPL_IF NAME="selected" -->
+                <option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="frameworktext" --></option>
+				<!-- TMPL_ELSE -->
+                <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="frameworktext" --></option>
+				<!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+        </select>
+    </p>
+    <p>
+        <label for="searchfield">بحث عن الرأس</label>
+        <input type="text" name="searchfield" id="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+        <input type="submit" value="بحث">
+    </p>
+    <p>
+        <!-- TMPL_IF Name="select_display"-->
+            <label for="select_display">إعرض فقط بإستخدام الرؤس/الحقول الفرعية</label> <input type="checkbox" name="select_display" id="select_display" value="True" checked="checked"  onchange="this.form.submit();" />
+        <!-- TMPL_ELSE -->
+            <label for="select_display">إعرض فقط بإستخدام الرؤس/الحقول الفرعية</label> <input type="checkbox" name="select_display" id="select_display" value="True" onchange="this.form.submit();" />
+        <!--/TMPL_IF -->
+    </p>
+</form>
+<p>ملاحظة: إذاغيّرت الرابط بين الحقل الفرعى لمارك وحقل غير مارك، أطلب من مديرك تشغيل misc/rebuildnonmarc.pl script.</p>
+
+    <table>
+    <tr>
+        <th>رأس</th>
+        <th>Lib</th>
+        <th>متكرّر</th>
+        <th>إلزامى</th>
+        <th>قيمة الإستناد</th>
+        <th>حقول فرعية</th>
+        <th>تعديل</th>
+        <th>حذف</th>
+	</tr>
+
+    <!-- TMPL_IF NAME="select_display" -->
+        <!-- TMPL_LOOP NAME="loop" -->
+            <!-- TMPL_IF NAME="toggle" --><tr><!-- TMPL_ELSE --><tr class="highlight"><!-- /TMPL_IF -->
+            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+            <td><!-- TMPL_VAR NAME="liblibrarian" --></td>
+            <td><!-- TMPL_IF NAME="repeatable" -->نعم<!-- TMPL_ELSE -->لا<!-- /TMPL_IF --></td>
+            <td><!-- TMPL_IF NAME="mandatory" -->نعم<!-- TMPL_ELSE -->لا<!-- /TMPL_IF --></td>
+            <td><!-- TMPL_VAR NAME="authorised_value" --></td>
+            <td><a href="<!-- TMPL_VAR NAME="subfield_link" -->">الحقول الفرعية</a></td>
+            <td><a href="<!-- TMPL_VAR NAME="edit" -->">تعديل</a></td>
+            <td><a href="<!-- TMPL_VAR NAME="delete" -->">حذف</a></td>
+        </tr>
+      <!-- TMPL_IF NAME="toggle" --><tr><!-- TMPL_ELSE --><tr class="highlight"><!-- /TMPL_IF -->
+            <td>
+                &nbsp;
+            </td>
+            <td colspan="7">
+                <!-- TMPL_LOOP NAME="subfields" -->
+                    <p>	فاصل:<!-- TMPL_VAR NAME="tab" --> | $<!-- TMPL_VAR NAME="tagsubfield" --> <!-- TMPL_VAR NAME="liblibrarian" --> <!-- TMPL_IF NAME="kohafield" --><!-- TMPL_VAR NAME="kohafield" --><!--/TMPL_IF --><!-- TMPL_IF NAME="repeatable" -->, متكرّر<!-- /TMPL_IF --><!-- TMPL_IF NAME="mandatory" -->,إلزامي<!-- /TMPL_IF --><!-- TMPL_IF NAME="seealso" -->,أنظر <!-- TMPL_VAR name="seealso" --><!--/TMPL_IF --><!-- TMPL_IF NAME="authorised_value" -->, <!-- TMPL_VAR NAME="authorised_value" --><!--/TMPL_IF --><!-- TMPL_IF NAME="authtypecode" -->, <!-- TMPL_VAR NAME="authtypecode" --><!--/TMPL_IF --><!-- TMPL_IF NAME="value_builder" -->, <!-- TMPL_VAR NAME="value_builder" --><!--/TMPL_IF -->
+                    </p>
+                <!-- /TMPL_LOOP -->
+            </td>
+        </tr>
+        <!-- /TMPL_LOOP -->
+    <!-- TMPL_ELSE -->
+    <!-- TMPL_LOOP NAME="loop" -->
+    <!-- TMPL_IF NAME="toggle" --><tr><!-- TMPL_ELSE --><tr class="highlight"><!-- /TMPL_IF -->
+        <td><!-- TMPL_VAR NAME="tagfield" --></td>
+        <td><!-- TMPL_VAR NAME="liblibrarian" --></td>
+        <td><!-- TMPL_IF NAME="repeatable" -->نعم<!-- TMPL_ELSE -->لا<!-- /TMPL_IF --></td>
+        <td><!-- TMPL_IF NAME="mandatory" -->نعم<!-- TMPL_ELSE -->لا<!-- /TMPL_IF --></td>
+        <td><!-- TMPL_VAR NAME="authorised_value" --></td>
+        <td><a href="<!-- TMPL_VAR NAME="subfield_link" -->">حقول فرعية</a></td>
+        <td><a href="<!-- TMPL_VAR NAME="edit" -->">تعديل</a></td>
+        <td><a href="<!-- TMPL_VAR NAME="delete" -->">حذف</a></td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    <!--/TMPL_IF -->
+    </table>
+    <!-- TMPL_IF NAME="isprevpage" -->
+            <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="prevpage" -->&amp;searchfield=<!-- TMPL_VAR NAME="searchfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" --><!--TMPL_IF Name="select_display"-->&amp;select_display=True<!--/TMPL_IF -->">&lt;&lt;السابق</a>
+        <!-- /TMPL_IF -->
+
+        <!-- TMPL_IF NAME="nextpage" -->
+            <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="nextpage" -->&amp;searchfield=<!-- TMPL_VAR NAME="searchfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" --><!--TMPL_IF Name="select_display"-->&amp;select_display=True<!--/TMPL_IF -->">التالى&gt;&gt;</a>
+        <!-- /TMPL_IF -->
+
+<!-- /TMPL_IF -->
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

@@ -1,0 +1,63 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>"</h1>
+
+<h2>"Bir Abonelik Kurmak için Ne Yapmam Gerekir?"</h2>
+<p>"Yeni bir abonelik kurabilmeniz için yeni ayarlar yapmanız gereklidir."</p>
+	<ul>
+		<li>a Sağlayıcı (Sağlamada abone olunan kaynakları sağlayan firma) </li>
+		<li>Cilt/kopya kaydı olmayan, aboneliği ekleyebileceğiniz künye </li>
+	</ul>	.  
+<h2>"</h2>
+<p>"Bu formun dört bölümü vardır:"</p>
+
+<h3>"Adım 1: Bir Tedarikçi Ara"</h3>
+
+<p>If you want to claim any issues then you need to elect a supplier at this point.</p>
+<h3>"Adım 2: Kayıt Tara"</h3>
+
+<p>It should find the item that was just set up in Acquisitions. Note If you have not yet set this up in Acquisitions, click Create Biblio. It will take you back to Acquisitions Order Form.</p>
+<h3>"Adım 3: Abonelik Bilgi kutusunda diğer ayrıntıları doldur."</h3>
+<p>This includes the Call Number, Home branch for the Serial and any notes.</p>
+<p>Select the Patron Alert: you will need to choose a Notice that can be sent to patrons when a new issue arrives. To edit this notice, go to Tools &gt; Notices.</p>
+<h3>"Adım 4: Planlama kutusundaki ayrıntıları doldurun"</h3>
+
+<p>This is a critical component of managing serials. In order to make the system predict the next issue the user must fill out each of these fields. Once completed it will populate the Numbering Calculation box below.</p>
+<p>Bakınız &gt; Planlama üzerine daha fazla bilgi</p>
+<h3>"Adım 5: Abonelik süresi kutusunu doldur "</h3>
+
+<p>Indicate the expected length of time that this serial will be subscribed to.</p>
+<p>This sets up the expiry date in the system and also sets up an Alert a month before expected expiry.</p>
+<h3>"Adım 6: Numaralama Hesabı"</h3>
+
+<p>If a choice has been made in the Numbering Pattern section then the Numbering Calculation will automatically be filled out and presented in this section. However, if the Numbering Pattern is &ldquo;None of the above&rdquo; then a formula will be presented and the user must fill this out.</p>
+<p>"Numaralama Hesaplaması formülü hakkında daha fazla bilgi için bakınız"</p>
+<h3>"Adım 7: Abonelik Ekle"</h3>
+
+<p>Once that is filled out then you see the completed details page. If there is a mistake you can go back and Edit the details.</p>
+<p>Sonraki adım - Sayıları kabul et (Çevrimiçi yardım için Sayıları Kabul Et sayfasına bakınız)</p><h2>"Planlama nasıl çalışır"</h2>
+
+<h3>1. İlk sayının tahmini geliş tarihi</h3>
+
+<p>Displays a calendar &ndash; choose the expected date of arrival in the library. This date is for administrative purposes only. It ties in with the Claims component of the Serials Module. It is not the date of the first issue. This is selected below in the Begins On field.</p>
+<h3>2. Sıklık</h3>
+
+<p>"Temel sıklık örüntülerini seçmek için aşağıya açılan menüyü kullanın."</p>
+<h3>3. Numaralama örüntüsü</h3>
+
+<p>"Ana numaralama örüntülerinin açılan listesi:"</p>
+	<ul>
+		<li>Number</li>
+		<li>"Cilt, Numara, Sayı"</li>
+		<li>"Cilt, Numara"</li>
+		<li>"Cilt, Sayı"</li>
+		<li>Number, Issue</li>
+		<li>"Sadece dönemsel[a]"</li>
+		<li>Yukarıdakilerin hiç biri</li>
+	</ul>
+<p>If it is &ldquo;none of the above&rdquo; this will bring up a Numbering Calculation formula at the bottom of the screen.</p>
+<p>The system handles exceptions (e.g Item arrives monthly but only 10 issues in the year). Set the rollover to the max number of issues expected in the year. Then click the &quot;Irregularity&quot; link. Choose which instances are skipped.</p>
+<h3>4. Tarihinde başlar</h3>
+
+<p>Displays a calendar &ndash; choose the date of the first issue. For example, the library is subscribing to a monthly magazine and the first issue expected is the February issue. You would then choose 1st of February.</p><h2>Numbering Calculation formula</h2>
+<p>The &quot;numbering formula&quot; can be filled with any text and/or numbers. Three special tokens {X}, {Y} and {Z} can be used to define the calculation formula. This allows you to define patterns not possible with the Numbering Pattern drop downs.</p><!-- TMPL_INCLUDE name="help-bottom.inc" -->

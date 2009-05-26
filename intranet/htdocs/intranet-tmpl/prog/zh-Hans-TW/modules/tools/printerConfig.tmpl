@@ -1,0 +1,75 @@
+<!-- TMPL_INCLUDE NAME="doc-head-barcodes.inc" -->
+
+	<h1>印表機設定</h1>
+	<h3>設定印表機環境</h3>
+	<ul>
+		<li>設定標籤寬度和高度。</li>
+		<li>設定系統預設解析度（DPI）。</li>
+		<li>設定頁面大小</li>
+		<li>選擇你的頁面型式，需要多少欄位和列。</li>
+		<li>Set left- and bottom-margins of the page that you are going to use. This parameter will help to center the barcodes on the labels.</li>
+	</ul>
+	<br />
+	<form method="post" action="<!-- TMPL_VAR NAME="SCRIPT_NAME" -->" name="form1">
+		<input type="hidden" name="saveSettings" value="1" />
+		<fieldset class="rows"><ol>
+			<li>
+				<label for="labelWidth">
+					標籤寬度（公厘） </label> 
+					<input id="labelWidth" type="text" name="labelWidth" size="5" value="<!-- TMPL_VAR NAME="LABEL_WIDTH" -->">
+				</li>
+				<li>
+				<label for="labelHeigth">
+					標籤高度（公厘） </label> 
+					<input id="labelHeigth" type="text" name="labelHeigth" size="5" value="<!-- TMPL_VAR NAME="LABEL_HEIGTH" -->">
+				</li>
+				<li>
+				<label for="systemDpi">
+					系統解析度（dpi）： </label>
+					<input id="systemDpi" type="text" name="systemDpi" size="5" value="<!-- TMPL_VAR NAME="SYSTEM_DPI" -->">
+				</li>
+				<li>
+				<label for="pageType">
+					頁面型式： </label>	
+					<select name="pageType" id="pageType" size="1">
+						<!-- TMPL_IF name="A4" -->
+							<option value="A4" selected="selected">A4</option>
+				        <!-- TMPL_ELSE -->
+							<option value="A4">A4</option>
+						<!-- /TMPL_IF -->
+						<!-- TMPL_IF name="Letter" -->
+							<option value="Letter" selected="selected">信紙</option>
+				        <!-- TMPL_ELSE -->
+							<option value="Letter">信紙</option>
+						<!-- /TMPL_IF -->
+						<!-- TMPL_IF name="Legal" -->
+							<option value="Legal" selected="selected">Legal</option>
+				        <!-- TMPL_ELSE -->
+							<option value="Legal">Legal</option>
+						<!-- /TMPL_IF -->    </select>
+				</li>
+				<li>
+				<label for="columns">
+					欄： </label>  
+					<input id="columns" type="text" name="columns" size="5" value="<!-- TMPL_VAR NAME="COLUMNS" -->">
+				</li>
+				<li>
+				<label for="rows">
+					列： </label>   
+					<input id="rows" type="text" name="rows" size="5" value="<!-- TMPL_VAR NAME="ROWS" -->">
+				</li>
+				<li>
+				<label for="marginBottom">
+					底下頁緣（公厘） </label>   
+					<input id="marginBottom" type="text" name="marginBottom" size="5" value="<!-- TMPL_VAR NAME="MARGIN_TOP" -->">
+				</li>
+				<li>
+				<label for="marginLeft">
+					左邊頁緣（公厘） </label>   
+					<input id="marginLeft" type="text" name="marginLeft" size="5" value="<!-- TMPL_VAR NAME="MARGIN_LEFT" -->">
+				</li>
+			</ol></fieldset>
+			<fieldset class="action"><input type="submit" value="儲存設定"></fieldset>
+	</form>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

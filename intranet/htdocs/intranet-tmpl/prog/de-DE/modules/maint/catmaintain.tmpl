@@ -1,0 +1,120 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Katalogpflege</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+
+<!-- TMPL_IF NAME="allsub-p" -->
+<table>
+<caption>Ergebnisse</caption>
+<!-- TMPL_LOOP NAME="loop" -->
+<tr><td><a href="/cgi-bin/koha/maint/catmaintain.pl?type=allsub&amp;sub=<!-- TMPL_VAR NAME="sub" ESCAPE="URL" -->" onclick="messenger('/cgi-bin/koha/maint/catmaintain.pl?type=modsub&amp;sub=<!-- TMPL_VAR NAME="sub2" ESCAPE="URL" -->');window1.focus()"><!-- TMPL_VAR NAME="subject" ESCAPE="HTML" --></a></td></tr>
+<!-- /TMPL_LOOP -->
+</table>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="modsub-p" -->
+<form action="/cgi-bin/koha/maint/catmaintain.pl" method="post">
+Dies ändert die Sachschlagworteintragungen für <strong>alle</strong> die Datensätze, mit denen dieses Thema verbunden ist.
+<table>
+<caption>Globale Erneuerung Sachschlagwort</caption>
+<tr><th scope="row"><label for="sub">Schlagwort:</label></th><td><input type="text" value="<!-- TMPL_VAR NAME="sub" ESCAPE="HTML" -->" name="sub" id="sub" size="40" /><input type="hidden" name="type" value="upsub" />
+<input type="hidden" name="oldsub" value="<!-- TMPL_VAR NAME="sub" ESCAPE="HTML" -->" /></td></tr>
+</table>
+<input type="submit" value="Ändern">
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="upsub-p" -->
+<!-- TMPL_VAR NAME="oldsub" ESCAPE="HTML" --> erfolgreich geändert. Ist nun <!-- TMPL_VAR NAME="sub" ESCAPE="HTML" -->
+<!-- <![ IGNORE [
+<p><a href="/cgi-bin/koha/maint/catmaintain.pl" onclick="window0.focus()">Back to catalogue maintenance</a><br />
+<a href=nowhere onclick="self.close()">Close this window</a>
+]]> -->
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="undel-p" -->
+<table>
+<thead>
+<tr><th>Titel</th><th>Verfasser</th><th>Löschen rückgängig machen</th></tr>
+<!-- TMPL_LOOP NAME="loop" -->
+<tr>
+<td><!-- TMPL_VAR NAME="title" ESCAPE="HTML" --></td>
+<td><!-- TMPL_VAR NAME="author" ESCAPE="HTML" --></td>
+<td><a href="/cgi-bin/koha/maint/catmaintain.pl?<!-- TMPL_VAR NAME="undelete" escape="url" -->">Löschen rückgängig machen</a></td>
+</tr>
+<!-- /TMPL_LOOP -->
+</table>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="finun-p" -->
+<h3>Löschung erfolgreich aufgehoben</h3>
+<p><a href="/cgi-bin/koha/maint/catmaintain.pl">Katalogpflege</a></p>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="fixitemtype-p" -->
+<form method="post" action="/cgi-bin/koha/maint/catmaintain.pl">
+<table>
+<tr><th scope="row"><label for="itemtype">Medientyp:</label></th><td><input type="hidden" name="bi" value="<!-- TMPL_VAR NAME="bi" ESCAPE="HTML">" />
+<input type="hidden" name="type" value="updatetype" />
+<input type="text" name="itemtype" id="itemtype" value="<!-- TMPL_VAR NAME="item" ESCAPE="HTML">" /></td></tr>
+</table>
+<input type="submit" value="Ändern">
+</form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="updatetype-p" -->
+<h3>erfolgreich aktualisiert</h3>
+<p><a href="/cgi-bin/koha/maint/catmaintain.pl">Katalogpflege</a></p>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="mainmenu-p" -->
+
+<h1>Katalogpflege</h1>
+<form action="/cgi-bin/koha/maint/catmaintain.pl" method="post">
+<table>
+<caption>Schlagwortpflege</caption>
+<tr><th scope="row"><label for="sub">Alle Schlagwörter anzeigen, berginnend mit: </label></th><td><input type="text" name="sub" id="sub"><input type="hidden" name="type" value="allsub" /></td></tr>
+</table>
+<input type="submit" value="Zeigen">
+</form>
+
+<form action="/cgi-bin/koha/search.pl" method="post">
+<table>
+<caption>Gruppenpflege</caption>
+<tr><th scope="row"><label for="title">Alle Titel anzeigen, beginnend mit:</label></th><td><input type="hidden" name="type" value="catmain"><input type="text" name="title" id="title" /></td></tr>
+<tr><th scope="row"><label for="item">Exemplar Nummer:</label></th><td><input type="text" size="25" id="item" name="item" /></td></tr>
+</table>
+<input type="submit" value="Zeigen">
+</form>
+
+<form action="/cgi-bin/koha/maint/catmaintain.pl" method="post">
+<table>
+<caption>Biblio löschen rückgängig machen</caption>
+<tr><th scope="row"><label for="title">Zeige alle Titel beginnent mit</label></th><td><input type="text" name="title" id="title" /><input type="hidden" name="type" value="undel" /></td></tr>
+</table>
+<input type="submit" value="Zeigen">
+</form>
+
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+</div>
+
+<!-- TMPL_INCLUDE NAME="mainmenu.inc" -->
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

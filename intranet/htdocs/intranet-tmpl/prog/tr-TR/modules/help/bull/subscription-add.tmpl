@@ -1,0 +1,32 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>"Süreli yayın abonelik ekleme ve değişiklik yapma yardım"</h1>
+	<ul>
+		<h2>"Abonelik bilgi grubu"</h2>
+		<p>it contains the name of the librarian that created the subscription, the name of the supplier providing the subscription, the cost and the budget affected. It also contains the title of the biblio managed by the subscription.</p>
+		<h2>Bilgi bloğunun planlanması</h2>
+		<p>"geliş tarihlerini hesaplamak için gerekli çeşitli bilgileri içerir."</p>
+		<h2>"Abonelik süresi"</h2>
+		<p>one field in this bloc should be filled : the subscription length can be calculated in weeks, months or number of issues to receive</p>
+		<h2>Numbering calculation</h2>
+		<p>The numbering of issues received can be a complex formulas. The "numbering formula" can be filled with any text and/or numbers. 3 special tokens <b>{X} {Y}</b> and <b>{Z}</b> can be user to define the calculation formula. XYZ values are calculated with the following method:</p>
+			<ul>
+				<li>Ekle: Buradaki sayı XYZ'ye eklenecektir</li>
+				<li>once every : the number before can be added on every issue or less often</li>
+				<li>"Daha fazla olduğunda: Eğer hesaplanmış olan sayı buradaki değerden fazla ise"</li>
+				<li>Set back to : if the previous condition is valid, the calculated number is set to this one instead</li>
+				<li>Last value / begins with : the last value calculated or the 1st value (when adding a subscription</li>
+			</ul>
+		<h2>Örnek</h2>
+		<b>#{X}/{Y}</b> formülünü düşünün. Aşağıdaki XYZ ayarları:
+		<ul>
+			<li> <b>X</b> ekle <b>1</b> "…de bir" <b>4</b> "kez.  …'den daha fazla olunca" <b>9999999</b> "eski ayara dönün" <b>boş</b>… ile başlar <b>2004</b></li>
+			<li> <b>Y</b> ekle <b>1</b> "…de bir" <b>1</b> "kez.  …'den daha fazla olunca" <b>4</b> "eski ayara dönün" <b>4</b>… ile başlar <b>1</b></li>
+		</ul>
+		"aşağıdaki dergi sayılarında sonuçlanacaktır:"
+		<p>#2004/1, #2004/2, #2004/3, #2004/4, #2005/1, #2005/2, #2005/3, #2005/4, #2006/1</p>
+		<p>
+			<b>Note:</b> when you add a subscription, Koha assumes you have already created the order, or that you will do it soon. So, NO information is sent to the acquisition module. This is not the case when the subscription expires. In this case, a subscription renewal creates a "suggestion" that is sent to the acquisition module.
+		</p>
+
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

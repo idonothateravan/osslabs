@@ -1,0 +1,825 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立 UNIMARC 欄位 117</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Presentation materielle</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1|" -->
+            	           <option value="|" SELECTED>|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f1aa" -->
+				<option value="aa" SELECTED>Trousse pedagogique</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">Trousse pedagogique</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ab" -->
+				<option value="ab" SELECTED>Trousse de laboratoire et de construction</option>
+			<!-- TMPL_ELSE -->
+				<option value="ab">Trousse de laboratoire et de construction</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ac" -->
+				<option value="ac" SELECTED>Specimens (biologie)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">Specimens (biologie)</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ad" -->
+				<option value="ad" SELECTED>植物</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">植物</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ae" -->
+				<option value="ae" SELECTED>植物</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">植物</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1af" -->
+				<option value="af" SELECTED>礦物</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">礦物</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ag" -->
+				<option value="ag" SELECTED>Plaques de microscopes</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">Plaques de microscopes</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ah" -->
+				<option value="ah" SELECTED>Jeux de patience (puzzle)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ah">Jeux de patience (puzzle)</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ai" -->
+				<option value="ai" SELECTED>Outils et equipements</option>
+			<!-- TMPL_ELSE -->
+				<option value="ai">Outils et equipements</option>	
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f1aj" -->
+				<option value="aj" SELECTED>紋章</option>
+			<!-- TMPL_ELSE -->
+				<option value="aj">紋章</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ak" -->
+				<option value="ak" SELECTED>Recipients</option>
+			<!-- TMPL_ELSE -->
+				<option value="ak">Recipients</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1al" -->
+				<option value="al" SELECTED>家俱</option>
+			<!-- TMPL_ELSE -->
+				<option value="al">家俱</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1be" -->
+				<option value="be" SELECTED>Production industrielle</option>
+			<!-- TMPL_ELSE -->
+				<option value="be">Production industrielle</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bf" -->
+				<option value="bf" SELECTED>機具</option>
+			<!-- TMPL_ELSE -->
+				<option value="bf">機具</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bg" -->
+				<option value="bg" SELECTED>Monnaies</option>
+			<!-- TMPL_ELSE -->
+				<option value="bg">Monnaies</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bh" -->
+				<option value="bh" SELECTED>Medailles</option>
+			<!-- TMPL_ELSE -->
+				<option value="bh">Medailles</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bi" -->
+				<option value="bi" SELECTED>珠寶</option>
+			<!-- TMPL_ELSE -->
+				<option value="bi">珠寶</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1am" -->
+				<option value="am" SELECTED>運輸工具</option>
+			<!-- TMPL_ELSE -->
+				<option value="am">運輸工具</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1an" -->
+				<option value="an" SELECTED>Textile</option>
+			<!-- TMPL_ELSE -->
+				<option value="an">Textile</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ao" -->
+				<option value="ao" SELECTED>服飾</option>
+			<!-- TMPL_ELSE -->
+				<option value="ao">服飾</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ap" -->
+				<option value="ap" SELECTED>Jeux</option>
+			<!-- TMPL_ELSE -->
+				<option value="ap">Jeux</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1aq" -->
+				<option value="aq" SELECTED>玩具</option>
+			<!-- TMPL_ELSE -->
+				<option value="aq">玩具</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ar" -->
+				<option value="ar" SELECTED>Poupees</option>
+			<!-- TMPL_ELSE -->
+				<option value="ar">Poupees</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1as" -->
+				<option value="as" SELECTED>Modeles reduit</option>
+			<!-- TMPL_ELSE -->
+				<option value="as">Modeles reduit</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1at" -->
+				<option value="at" SELECTED>Modeles a assembler</option>
+			<!-- TMPL_ELSE -->
+				<option value="at">Modeles a assembler</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ba" -->
+				<option value="ba" SELECTED>生態立體圖</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">生態立體圖</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bb" -->
+				<option value="bb" SELECTED>複本</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">複本</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bc" -->
+				<option value="bc" SELECTED>Sculptures</option>
+			<!-- TMPL_ELSE -->
+				<option value="bc">Sculptures</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bd" -->
+				<option value="bd" SELECTED>Materiel a dessin</option>
+			<!-- TMPL_ELSE -->
+				<option value="bd">Materiel a dessin</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bj" -->
+				<option value="bj" SELECTED>人工製品</option>
+			<!-- TMPL_ELSE -->
+				<option value="bj">人工製品</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1uu" -->
+				<option value="uu" SELECTED>不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">不詳</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vv" -->
+				<option value="vv" SELECTED>合成的</option>
+			<!-- TMPL_ELSE -->
+				<option value="vv">合成的</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1zz" -->
+				<option value="zz" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">其他</option>
+	
+			<!-- /TMPL_IF -->
+
+				</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Materiau 1</td>
+		<td>
+			<select name="f2" size="1">
+			<!-- TMPL_IF name="f2|" -->
+                            <option value="|" SELECTED>|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f2  " -->
+				<option value="  " SELECTED>無需填寫</option>
+			<!-- TMPL_ELSE -->
+				<option value="  ">無需填寫</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2aa" -->
+				<option value="aa" SELECTED>Terre cuite</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">Terre cuite</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ab" -->
+				<option value="ab" SELECTED>蠟</option>
+			<!-- TMPL_ELSE -->
+				<option value="ab">蠟</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ac" -->
+				<option value="ac" SELECTED>黏土</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">黏土</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ad" -->
+				<option value="ad" SELECTED>Majolique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">Majolique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ae" -->
+				<option value="ae" SELECTED>Porcelaine</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">Porcelaine</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2af" -->
+				<option value="af" SELECTED>Ceramique</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">Ceramique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ag" -->
+				<option value="ag" SELECTED>Platre</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">Platre</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ah" -->
+				<option value="ah" SELECTED>玻璃</option>
+			<!-- TMPL_ELSE -->
+				<option value="ah">玻璃</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ba" -->
+				<option value="ba" SELECTED>Bois</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">Bois</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ca" -->
+				<option value="ca" SELECTED>象牙</option>
+			<!-- TMPL_ELSE -->
+				<option value="ca">象牙</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2da" -->
+				<option value="da" SELECTED>Pierre</option>
+			<!-- TMPL_ELSE -->
+				<option value="da">Pierre</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2db" -->
+				<option value="db" SELECTED>Pierres precieuses</option>
+			<!-- TMPL_ELSE -->
+				<option value="db">Pierre precieuses</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2dc" -->
+				<option value="dc" SELECTED>大理石</option>
+			<!-- TMPL_ELSE -->
+				<option value="dc">大理石</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2dd" -->
+				<option value="dd" SELECTED>Basalte</option>
+			<!-- TMPL_ELSE -->
+				<option value="dd">Basalte</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2df" -->
+				<option value="df" SELECTED>Porphyre</option>
+			<!-- TMPL_ELSE -->
+				<option value="df">Porphyre</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ea" -->
+				<option value="ea" SELECTED>紙</option>
+			<!-- TMPL_ELSE -->
+				<option value="ea">紙</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2eb" -->
+				<option value="eb" SELECTED>紙板</option>
+			<!-- TMPL_ELSE -->
+				<option value="eb">紙板</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2fa" -->
+				<option value="fa" SELECTED>Metal Precieux</option>
+			<!-- TMPL_ELSE -->
+				<option value="fa">Metal Precieux</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2fb" -->
+				<option value="fb" SELECTED>金屬</option>
+			<!-- TMPL_ELSE -->
+				<option value="fb">金屬</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2fc" -->
+				<option value="fc" SELECTED>青銅</option>
+			<!-- TMPL_ELSE -->
+				<option value="fc">青銅</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2fd" -->
+				<option value="fd" SELECTED>銅</option>
+			<!-- TMPL_ELSE -->
+				<option value="fd">銅</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ga" -->
+				<option value="ga" SELECTED>Synthetique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ga">Synthetique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ha" -->
+				<option value="ha" SELECTED>Textile</option>
+			<!-- TMPL_ELSE -->
+				<option value="ha">Textile</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2ia" -->
+				<option value="ia" SELECTED>Plastique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ia">Plastique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2uu" -->
+				<option value="uu" SELECTED>不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">不詳</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2vv" -->
+				<option value="vv" SELECTED>合成的</option>
+			<!-- TMPL_ELSE -->
+				<option value="vv">合成的</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2zz" -->
+				<option value="zz" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">其他</option>
+	
+			<!-- /TMPL_IF -->
+
+				</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Materiau 2</td>
+		<td>
+			<select name="f3" size="1">
+			<!-- TMPL_IF name="f3|" -->
+                            <option value="|" SELECTED>|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f3  " -->
+				<option value="  " SELECTED>無需填寫</option>
+			<!-- TMPL_ELSE -->
+				<option value="  ">無需填寫</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f3aa" -->
+				<option value="aa" SELECTED>Terre cuite</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">Terre cuite</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ab" -->
+				<option value="ab" SELECTED>蠟</option>
+			<!-- TMPL_ELSE -->
+				<option value="ab">蠟</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ac" -->
+				<option value="ac" SELECTED>黏土</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">黏土</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ad" -->
+				<option value="ad" SELECTED>Majolique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">Majolique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ae" -->
+				<option value="ae" SELECTED>Porcelaine</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">Porcelaine</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3af" -->
+				<option value="af" SELECTED>Ceramique</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">Ceramique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ag" -->
+				<option value="ag" SELECTED>Platre</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">Platre</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ah" -->
+				<option value="ah" SELECTED>玻璃</option>
+			<!-- TMPL_ELSE -->
+				<option value="ah">玻璃</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ba" -->
+				<option value="ba" SELECTED>Bois</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">Bois</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ca" -->
+				<option value="ca" SELECTED>象牙</option>
+			<!-- TMPL_ELSE -->
+				<option value="ca">象牙</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3da" -->
+				<option value="da" SELECTED>Pierre</option>
+			<!-- TMPL_ELSE -->
+				<option value="da">Pierre</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3db" -->
+				<option value="db" SELECTED>Pierres precieuses</option>
+			<!-- TMPL_ELSE -->
+				<option value="db">Pierre precieuses</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3dc" -->
+				<option value="dc" SELECTED>大理石</option>
+			<!-- TMPL_ELSE -->
+				<option value="dc">大理石</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3dd" -->
+				<option value="dd" SELECTED>Basalte</option>
+			<!-- TMPL_ELSE -->
+				<option value="dd">Basalte</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3df" -->
+				<option value="df" SELECTED>Porphyre</option>
+			<!-- TMPL_ELSE -->
+				<option value="df">Porphyre</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ea" -->
+				<option value="ea" SELECTED>紙</option>
+			<!-- TMPL_ELSE -->
+				<option value="ea">紙</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3eb" -->
+				<option value="eb" SELECTED>紙板</option>
+			<!-- TMPL_ELSE -->
+				<option value="eb">紙板</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3fa" -->
+				<option value="fa" SELECTED>Metal Precieux</option>
+			<!-- TMPL_ELSE -->
+				<option value="fa">Metal Precieux</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3fb" -->
+				<option value="fb" SELECTED>金屬</option>
+			<!-- TMPL_ELSE -->
+				<option value="fb">金屬</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3fc" -->
+				<option value="fc" SELECTED>青銅</option>
+			<!-- TMPL_ELSE -->
+				<option value="fc">青銅</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3fd" -->
+				<option value="fd" SELECTED>銅</option>
+			<!-- TMPL_ELSE -->
+				<option value="fd">銅</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ga" -->
+				<option value="ga" SELECTED>Synthetique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ga">Synthetique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ha" -->
+				<option value="ha" SELECTED>Textile</option>
+			<!-- TMPL_ELSE -->
+				<option value="ha">Textile</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3ia" -->
+				<option value="ia" SELECTED>Plastique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ia">Plastique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3uu" -->
+				<option value="uu" SELECTED>不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">不詳</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3vv" -->
+				<option value="vv" SELECTED>合成的</option>
+			<!-- TMPL_ELSE -->
+				<option value="vv">合成的</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3zz" -->
+				<option value="zz" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">其他</option>
+	
+			<!-- /TMPL_IF -->
+
+				</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Materiau 3</td>
+		<td>
+			<select name="f4" size="1">
+			<!-- TMPL_IF name="f4|" -->
+                            <option value="|" SELECTED>|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f4  " -->
+                                <option value="  " SELECTED>無需填寫</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="  ">無需填寫</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4aa" -->
+				<option value="aa" SELECTED>Terre cuite</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">Terre cuite</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ab" -->
+				<option value="ab" SELECTED>蠟</option>
+			<!-- TMPL_ELSE -->
+				<option value="ab">蠟</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ac" -->
+				<option value="ac" SELECTED>黏土</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">黏土</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ad" -->
+				<option value="ad" SELECTED>Majolique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">Majolique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ae" -->
+				<option value="ae" SELECTED>Porcelaine</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">Porcelaine</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4af" -->
+				<option value="af" SELECTED>Ceramique</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">Ceramique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ag" -->
+				<option value="ag" SELECTED>Platre</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">Platre</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ah" -->
+				<option value="ah" SELECTED>玻璃</option>
+			<!-- TMPL_ELSE -->
+				<option value="ah">玻璃</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ba" -->
+				<option value="ba" SELECTED>Bois</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">Bois</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ca" -->
+				<option value="ca" SELECTED>象牙</option>
+			<!-- TMPL_ELSE -->
+				<option value="ca">象牙</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4da" -->
+				<option value="da" SELECTED>Pierre</option>
+			<!-- TMPL_ELSE -->
+				<option value="da">Pierre</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4db" -->
+				<option value="db" SELECTED>Pierres precieuses</option>
+			<!-- TMPL_ELSE -->
+				<option value="db">Pierre precieuses</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4dc" -->
+				<option value="dc" SELECTED>大理石</option>
+			<!-- TMPL_ELSE -->
+				<option value="dc">大理石</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4dd" -->
+				<option value="dd" SELECTED>Basalte</option>
+			<!-- TMPL_ELSE -->
+				<option value="dd">Basalte</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4df" -->
+				<option value="df" SELECTED>Porphyre</option>
+			<!-- TMPL_ELSE -->
+				<option value="df">Porphyre</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ea" -->
+				<option value="ea" SELECTED>紙</option>
+			<!-- TMPL_ELSE -->
+				<option value="ea">紙</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4eb" -->
+				<option value="eb" SELECTED>紙板</option>
+			<!-- TMPL_ELSE -->
+				<option value="eb">紙板</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4fa" -->
+				<option value="fa" SELECTED>Metal Precieux</option>
+			<!-- TMPL_ELSE -->
+				<option value="fa">Metal Precieux</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4fb" -->
+				<option value="fb" SELECTED>金屬</option>
+			<!-- TMPL_ELSE -->
+				<option value="fb">金屬</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4fc" -->
+				<option value="fc" SELECTED>青銅</option>
+			<!-- TMPL_ELSE -->
+				<option value="fc">青銅</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4fd" -->
+				<option value="fd" SELECTED>銅</option>
+			<!-- TMPL_ELSE -->
+				<option value="fd">銅</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ga" -->
+				<option value="ga" SELECTED>Synthetique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ga">Synthetique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ha" -->
+				<option value="ha" SELECTED>Textile</option>
+			<!-- TMPL_ELSE -->
+				<option value="ha">Textile</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4ia" -->
+				<option value="ia" SELECTED>Plastique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ia">Plastique</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4uu" -->
+				<option value="uu" SELECTED>不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">不詳</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4vv" -->
+				<option value="vv" SELECTED>合成的</option>
+			<!-- TMPL_ELSE -->
+				<option value="vv">合成的</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4zz" -->
+				<option value="zz" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">其他</option>
+			<!-- /TMPL_IF -->
+
+				</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>色彩</td>
+		<td>
+	<select name="f5" size="1">
+                        <!-- TMPL_IF name="f5|" -->
+                            <option value="|" SELECTED>|- 資料單元代碼</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- 資料單元代碼</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5a" -->
+				<option value="a" SELECTED>單色</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">單色</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5b" -->
+				<option value="b" SELECTED>黑白</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">黑白</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>Multicolore</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Multicolore</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>手工調色</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">手工調色</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5u" -->
+				<option value="u" SELECTED>不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不詳</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5v" -->
+				<option value="v" SELECTED>合成的</option>
+			<!-- TMPL_ELSE -->
+				<option value="v">合成的</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5x" -->
+				<option value="x" SELECTED>如不適用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不適用</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+	</tr>
+	<tr><td colspan=2><input type="button" value="完成" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value =  document.f_pop.f1.value +document.f_pop.f2.value+document.f_pop.f3.value+document.f_pop.f4.value+document.f_pop.f5.value;
+	    self.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

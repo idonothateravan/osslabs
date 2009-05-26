@@ -1,0 +1,78 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Web Installer &rsaquo; Step 1</title>
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div>
+<h1 id="logo"><img alt="Koha" src="/intranet-tmpl/prog/img/koha.org-logo.gif" /> Web Installer &rsaquo; Step 1</h1>
+<!--TMPL_UNLESS Name="language"-->
+<p>Sie sind dabei Koha zu installieren</p>
+
+<p>Bitte wählen Sie Ihre Sprache aus der folgenden Liste. Wird Ihre Sprache nicht angezeigt, informieren Sie bitte ihren Systemadministrator.</p>
+<form name="language" method="post">
+<select name="language">
+<!-- TMPL_IF NAME="installer_languages_loop" -->
+        <!-- TMPL_LOOP NAME="installer_languages_loop" -->
+            <!-- TMPL_IF NAME="plural" -->
+            <optgroup label="<!-- TMPL_VAR NAME="language" -->">
+            <!-- TMPL_LOOP NAME="sublanguages_loop" -->
+                <option value="<!-- TMPL_VAR NAME="rfc4646_subtag" -->"><!-- TMPL_IF NAME="native_description" --><!-- TMPL_VAR NAME="native_description" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="rfc4646_subtag" --><!-- /TMPL_IF --></option>
+            <!-- /TMPL_LOOP -->
+            </optgroup>
+            <!-- TMPL_ELSE -->
+		<option value="<!-- TMPL_VAR NAME="rfc4646_subtag" -->"><!-- TMPL_IF NAME="native_description" --><!-- TMPL_VAR NAME="native_description" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="rfc4646_subtag" --><!-- /TMPL_IF --></option>
+            <!-- /TMPL_IF -->
+        <!-- /TMPL_LOOP -->
+<!-- /TMPL_IF -->
+</select>
+</p>
+
+<p> Klicken Sie Nächste um weiterzufahren <input value="Nächste >>" type="submit"></p>
+</form>
+<!--/TMPL_UNLESS-->
+<!--TMPL_IF Name="language"-->
+  <!--TMPL_UNLESS Name="checkmodule"-->
+  <!--TMPL_IF Name="missing"-->
+  <p>Einige Perlmodule fehlen.<br />
+  <ul>
+  <!--TMPL_LOOP Name="missing"-->
+    <li><!--TMPL_VAR Name="name"-->
+    <!--TMPL_IF Name="usagemail"-->
+      <br /> Diese Modul wird immer dann benutzt, wenn Koha ein E-Mail schicken soll.
+    <!--/TMPL_IF-->
+    <!--TMPL_IF Name="usagebarcode"-->
+      <br /> Dieses Modul muss vorhanden sein, wenn Sie Barcodes drucken wollen.
+    <!--/TMPL_IF-->
+    <!--TMPL_IF Name="usagespine"-->
+      <br /> Dieses Modul ist nötig, wenn Sie Rückenschilder zu drucken wünschen.
+    <!--/TMPL_IF-->
+    <!--TMPL_IF Name="usageLDAP"-->
+      <br /> Diese Modul wird benötigt, wenn Sie LDAP zur Autentifizierung einsetzen wollen.
+    <!--/TMPL_IF-->
+    </li>
+  <!--/TMPL_LOOP-->
+  Bitte erwägen Sie die Installation dieser Module bevor Sie weitergehen.
+  <pre>
+  <!--TMPL_LOOP Name="missing"-->
+    perl -MCPAN -e "install <!--TMPL_VAR Name="name"-->";
+  <!--/TMPL_LOOP-->
+  </pre>
+  <!--/TMPL_IF-->
+  <!--TMPL_IF Name="problems"-->
+  <p>Ich hatte einige Probleme.</p>
+   <ul>
+    <!--TMPL_IF Name="perlversion"-->
+    <li>Your perl version seems to be obsolete.
+      Please upgrade to a newer version of Perl (at least Version 5.006001).</li>
+    <!--/TMPL_IF-->
+   </ul>
+  <!--/TMPL_IF-->
+  <!--/TMPL_UNLESS-->
+  <!--TMPL_IF Name="checkmodule"-->
+<form name="checkmodules" action="install.pl">
+<p> Alle benötigeten Pakete installiert.
+</p>
+<input type="hidden" name="step" value="2" />
+<p>Auf weiter klicken um fortzufahren <input value="Nächste >>" type="submit"></p>
+</form>
+  <!--/TMPL_IF-->
+<!--/TMPL_IF-->
+<!-- TMPL_INCLUDE name="intranet-bottom.inc" -->

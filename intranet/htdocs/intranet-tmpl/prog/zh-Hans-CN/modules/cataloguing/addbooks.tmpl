@@ -1,0 +1,151 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 编目</title>
+<!-- TMPL_INCLUDE NAME="greybox.inc" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+	$(document).ready(function() {
+	$('#header_search').tabs();
+ });
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cataloging-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首页</a> &rsaquo; 编目</div>
+
+<div id="doc" class="yui-t7">
+   
+   <div id="bd">
+	<div id="yui-main">
+	
+<!-- TMPL_INCLUDE NAME="cataloging-toolbar.inc" -->
+	
+	<!-- TMPL_IF name="noitemsfound" -->
+		找不到
+	<!-- /TMPL_IF -->
+
+<!-- display the search results -->
+
+<!-- TMPL_IF NAME="total"-->
+<!-- TMPL_VAR NAME="total"--> result(s) found in catalog, <a href="#searchresult-breeding"><!-- TMPL_VAR NAME="breeding_count" --> result(s) found in reservoir</a> <!-- TMPL_VAR name='pagination_bar'-->
+<div class="searchresults">
+    <table>
+        <tr>
+            <th>题名</th>
+            <th>馆藏地</th>
+            <th>preview</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+    <!-- TMPL_LOOP NAME="resultsloop" -->
+        <!-- TMPL_IF name="even" -->
+            <tr class="highlight">
+        <!-- TMPL_ELSE -->
+            <tr>
+        <!-- /TMPL_IF -->
+            <td>
+                <p>
+                    <a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a>
+                <!-- TMPL_VAR NAME="subtitle" --></p>
+                <!-- TMPL_IF name="summary" -->
+                    <p><!-- TMPL_VAR name="summary" --></p>
+                <!-- TMPL_ELSE -->
+                    <p>
+                        <!-- TMPL_IF NAME="author" -->
+                            <!-- TMPL_VAR NAME="author" -->
+                        <!-- TMPL_ELSE -->
+                            &nbsp;
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="publicationyear" --> - <!-- TMPL_VAR name="publicationyear" --><!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="publishercode" -->- <!-- TMPL_VAR name="publishercode" --><!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="place" --> ; <!-- TMPL_VAR name="place" --><!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="pages" --> - <!-- TMPL_VAR name="pages" --><!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="size" --> ; <!-- TMPL_VAR name="size" --><!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="timestamp" --> <i>（<!-- TMPL_VAR name="timestamp" --> 修改）</i><!-- /TMPL_IF -->
+                    </p>
+                <!-- /TMPL_IF -->
+                </td>
+                <td>
+                    <!-- TMPL_IF NAME="items_loop" -->
+                        <span class="available">
+                        <!-- TMPL_LOOP NAME="items_loop" -->
+                            <!-- TMPL_VAR NAME="count" --> <!-- TMPL_VAR NAME="branchname" -->
+                            <i>
+                        <!-- TMPL_IF name="location" --><!-- TMPL_VAR name="location" --><!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="itemcallnumber" --><!-- TMPL_VAR name="itemcallnumber" --><!-- /TMPL_IF -->
+                            <!-- TMPL_IF name="classification" -->
+                            <a href="/cgi-bin/koha/catalogue/search.pl?q=callnum:<!-- TMPL_VAR NAME="classification" ESCAPE="URL" -->">
+                                <!-- TMPL_VAR NAME="classification" -->
+                            </a>
+                        <!-- /TMPL_IF -->
+                        </i>
+                            <br />
+                        <!-- /TMPL_LOOP -->
+                        </span>
+                    <!-- /TMPL_IF -->
+                    <span class="unavailable">
+                        <!-- TMPL_IF NAME="onloancount" --> Checked out (<!-- TMPL_VAR NAME="onloancount" -->),<br /> <!-- /TMPL_IF -->
+                        <!-- TMPL_IF NAME="wthdrawncount" --> 注销（<!-- TMPL_VAR NAME="wthdrawncount" -->），<br /> <!-- /TMPL_IF -->
+                        <!-- TMPL_IF NAME="itemlostcount" --> 遗失（<!-- TMPL_VAR NAME="itemlostcount" -->）<br /><!-- /TMPL_IF -->
+                        <!-- TMPL_IF NAME="orderedcount" --> 订阅总计（<!-- TMPL_VAR NAME="orderedcount" -->）<!-- /TMPL_IF -->
+                    </span>
+                </td>
+				<td> <a href="/cgi-bin/koha/catalogue/showmarc.pl?id=<!-- TMPL_VAR NAME="biblionumber" -->" title="机读目录（MARC）" rel="gb_page_center[600,500]">机读目录（MARC）</a> | <a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;id=<!-- TMPL_VAR NAME="biblionumber" -->" title="机读目录（MARC）" rel="gb_page_center[600,500]">借书证</a>
+                </td>
+                <td><!-- TMPL_IF NAME="CAN_user_editcatalogue"--><a href="/cgi-bin/koha/cataloguing/addbiblio.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">编辑书目记录</a>
+					<!-- TMPL_ELSE --><a href="/cgi-bin/koha/cataloguing/addbiblio.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->" class="disabled" onclick="return false;">编辑书目记录</a>
+					<!-- /TMPL_IF -->
+                    
+                </td>
+                <td>
+                    <a href="/cgi-bin/koha/cataloguing/additem.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">Add holdings</a>
+                </td>
+            </tr>
+    <!-- /TMPL_LOOP -->
+    </table>
+</div>
+<!-- TMPL_ELSE -->
+    <!-- TMPL_IF name='query'-->
+        <b>找不到</b>
+        <!-- TMPL_IF NAME="error" -->
+            错误： <span class="error"><!-- TMPL_VAR NAME="error" --></span>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name='query'-->
+<div id="searchresult-breeding">
+    <h3>在数据库中的书目记录</h3>
+    <!-- TMPL_IF name="breeding_loop" -->
+        <table>
+            <tr>
+                <th>题名</th>
+                <th>国际标准书号（ISBN）</th>
+                <th>来自</th>
+                <th>preview</th>
+                <th>&nbsp;</th>
+            </tr>
+            <!-- TMPL_LOOP NAME="breeding_loop" -->
+            <!-- TMPL_IF NAME="toggle" --><tr><!-- TMPL_ELSE --><tr class="hilighted"><!-- /TMPL_IF -->
+                <td><!-- TMPL_VAR NAME="title" -->
+                <!-- TMPL_VAR NAME="author" --></td>
+                <td><!-- TMPL_VAR NAME="isbn" --></td>
+                <td><!-- TMPL_VAR NAME="file" --></td>
+                <td> <a href="/cgi-bin/koha/catalogue/showmarc.pl?importid=<!-- TMPL_VAR NAME="id" -->" title="机读目录（MARC）" rel="gb_page_center[600,500]">机读目录（MARC）</a> | <a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;importid=<!-- TMPL_VAR NAME="id" -->" title="机读目录（MARC）" rel="gb_page_center[600,500]">借书证</a>
+				</td>
+                <td><!-- TMPL_IF NAME="NOTMARC" -->
+                <!-- TMPL_ELSE -->
+                	<a href="/cgi-bin/koha/cataloguing/addbiblio.pl?breedingid=<!-- TMPL_VAR NAME="id" -->" <!-- TMPL_UNLESS NAME="CAN_user_editcatalogue" --> class="disabled" onclick="return false;"<!-- /TMPL_UNLESS -->>新增书目记录</a>
+                <!-- /TMPL_IF --></td>
+            </tr>
+            <!-- /TMPL_LOOP -->
+        </table>
+    <!-- TMPL_ELSE -->
+    <p>没有</p>
+    <!-- /TMPL_IF -->
+</div>
+<!-- /TMPL_IF -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

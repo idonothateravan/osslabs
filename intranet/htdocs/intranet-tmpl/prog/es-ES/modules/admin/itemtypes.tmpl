@@ -1,0 +1,91 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration &rsaquo; Item Types <!-- TMPL_IF name="add_form" -->&rsaquo; 
+  <!-- TMPL_IF name="itemtype" -->
+Modify Item Type '<!-- TMPL_VAR name="itemtype" -->'
+  <!-- TMPL_ELSE -->
+Add Item Type
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" -->&rsaquo; 
+  <!-- TMPL_IF name="total" -->
+No se puede borrar tipo de &iacute;tem '<!-- TMPL_VAR name="itemtype" -->'
+  <!-- TMPL_ELSE -->
+Delete Item Type '<!-- TMPL_VAR name="itemtype" -->'?
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirmed" -->&rsaquo; 
+Data Deleted
+<!-- /TMPL_IF -->
+</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" --><script type="text/javascript">
+//<![CDATA[
+
+function isNotNull(f,noalert) {
+	if (f.value.length ==0) {
+		return false;
+	}
+	return true;
+}
+
+function toUC(f) {
+	var x=f.value.toUpperCase();
+	f.value=x;
+	return true;
+}
+
+function isNum(v,maybenull) {
+var n = new Number(v.value);
+if (isNaN(n)) {
+	return false;
+	}
+if (maybenull==0 && v.value=='') {
+	return false;
+}
+return true;
+}
+
+function isDate(f) {
+	var t = Date.parse(f.value);
+	if (isNaN(t)) {
+		return false;
+	}
+}
+
+function Check(f) {
+	var ok=1;
+	var _alertString="";
+	var alertString2;
+	if (f.itemtype.value.length==0) {
+		_alertString += "\n- " + _("Falta el tipo de art&iacute;culo");
+	}
+	if (!(isNotNull(window.document.Aform.description,1))) {
+		_alertString += "\n- " + _("Falta Descripci&oacute;n");
+	}
+	if ((!isNum(f.rentalcharge,0)) && f.rentalcharge.value.length > 0) {
+		_alertString += "\n- " + _("El costo por pr&eacute;stamo no es un n&uacute;mero");
+	}
+	if (_alertString.length==0) {
+		document.Aform.submit();
+	} else {
+		alertString2  = _("El Formulario no fue procesado debido a los siguientes problemas");
+		alertString2 += "\n------------------------------------------------------------------------------------\n";
+		alertString2 += _alertString;
+		alert(alertString2);
+	}
+}
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Inicio</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administraci&oacute;n</a> &rsaquo; <!-- TMPL_IF name="add_form" -->
+  <!-- TMPL_IF name="itemtype" -->
+ <a href="/cgi-bin/koha/admin/itemtypes.pl">Tipos de Artculos</a> &rsaquo;&iquest;Modificar el Tipo de Artculo '<!-- TMPL_VAR name="itemtype" -->'?
+  <!-- TMPL_ELSE -->
+<a href="/cgi-bin/koha/admin/itemtypes.pl">Tipos de Artculos</a> &rsaquo; A&ntilde;adir Tipo de Artculo
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" -->
+  <!-- TMPL_IF name="total" -->

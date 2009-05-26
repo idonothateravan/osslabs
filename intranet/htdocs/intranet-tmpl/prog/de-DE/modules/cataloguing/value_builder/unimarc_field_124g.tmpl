@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UNIMARC_Ersteller Feld 124g</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Aufnahmetechnik für Bilder der Fernerkundung:</td>
+		<td>
+			<select name="f1" size="1">
+
+			<!-- TMPL_IF name="f1aa" -->
+				<option value="aa" SELECTED>Videoaufnahme</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">Videoaufnahme</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ab" -->
+				<option value="ab" SELECTED>Falschfarbenfotografie</option>
+			<!-- TMPL_ELSE -->
+				<option value="ab">Falschfarbenfotografie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ac" -->
+				<option value="ac" SELECTED>Multispektrale Fotografie</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">Multispektrale Fotografie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ad" -->
+				<option value="ad" SELECTED>Multispektrale Abtastung</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">Multispektrale Abtastung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1av" -->
+				<option value="av" SELECTED>Kombination von Techniken mit schwacher Strahlung</option>
+			<!-- TMPL_ELSE -->
+				<option value="av">Kombination von Techniken mit schwacher Strahlung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1da" -->
+				<option value="da" SELECTED>Infrarote Abtastung</option>
+			<!-- TMPL_ELSE -->
+				<option value="da">Infrarote Abtastung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1dv" -->
+				<option value="dv" SELECTED>Kombination verschiedener Techniken der thermischen Infraroterkennung</option>
+			<!-- TMPL_ELSE -->
+				<option value="dv">Kombination verschiedener Techniken der thermischen Infraroterkennung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ga" -->
+				<option value="ga" SELECTED>Luftgestütztes Schrägsichtradar-Aufklärungssystem</option>
+			<!-- TMPL_ELSE -->
+				<option value="ga">Luftgestütztes Schrägsichtradar-Aufklärungssystem</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1gb" -->
+				<option value="gb" SELECTED>Synthetic Aperture Radar</option>
+			<!-- TMPL_ELSE -->
+				<option value="gb">Synthetic Aperture Radar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1gc" -->
+				<option value="gc" SELECTED>Passive Abdeckung durch Mikrowellen</option>
+			<!-- TMPL_ELSE -->
+				<option value="gc">Passive Abdeckung durch Mikrowellen</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="OK"  onClick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value =  document.f_pop.f1.value;
+	    window.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

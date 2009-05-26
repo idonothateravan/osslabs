@@ -1,0 +1,283 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Statistiques Outils &rsaquo; Plus gros emprunteurs</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">Rapports</a> <!-- TMPL_IF NAME="do_it" -->&rsaquo; <a href="/cgi-bin/koha/reports/bor_issues_top.pl">Adhérents empruntant le plus</a> &rsaquo; Résultats<!-- TMPL_ELSE -->&rsaquo; Adhérents empruntant le plus<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+ <div id="bd">
+  <div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="do_it" -->
+<script language="JavaScript" type="text/javascript">
+function Dopop(link) {
+	newin=window.open(link,'width=500,height=400,toolbar=false,scrollbars=yes');
+}
+</script>
+
+
+	<!-- TMPL_LOOP NAME="mainloop" -->
+		<h1>Le palmarès des <!-- TMPL_VAR NAME="limit"--> plus gros emprunteurs</h1>
+		<!-- TMPL_IF NAME="loopfilter"-->
+			<p>Sélectionné sur</p>
+			<!-- TMPL_LOOP NAME="loopfilter" -->
+					<p><!-- TMPL_IF NAME="err" -->  <!--/TMPL_IF --> <!-- TMPL_VAR NAME="crit"-->=<!-- TMPL_VAR NAME="filter"--><!-- TMPL_IF NAME="err" -->  <!--/TMPL_IF --></p>
+			<!-- /TMPL_LOOP -->
+		<!-- /TMPL_IF -->
+		
+		<table>
+			<tr>
+				<th rowspan="2">Rang</th>
+				<!-- TMPL_LOOP NAME="loopcol" -->
+					<th colspan="2"><!-- TMPL_VAR NAME="coltitle" --></th>
+				<!-- /TMPL_LOOP -->
+			</tr>
+			<tr>
+				<!-- TMPL_LOOP NAME="loopcol" -->
+					<th>Adhérent</th>
+					<th>Décompte des prêts</th>
+				<!-- /TMPL_LOOP -->
+			</tr>
+				<!-- TMPL_LOOP NAME="looprow" -->
+				<tr>
+					<!-- TMPL_IF NAME="hilighted" --><td><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+					<!-- TMPL_VAR NAME="rowtitle" --></td>
+					<!-- TMPL_LOOP NAME="loopcell" -->
+						<!-- TMPL_IF NAME="hilighted" --><td><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+							<!-- TMPL_IF NAME="reference" --><a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="reference" -->"><!-- /TMPL_IF -->
+							<!-- TMPL_IF NAME="value" --><!-- TMPL_VAR NAME="value" --><!-- /TMPL_IF -->
+							<!-- TMPL_IF NAME="reference" --></a><!-- /TMPL_IF -->
+						</td>
+						<!-- TMPL_IF NAME="hilighted" --><td><!-- TMPL_ELSE --><td><!-- /TMPL_IF -->
+						<!-- TMPL_IF NAME="count" --><!-- TMPL_VAR NAME="count" --><!-- /TMPL_IF -->
+						</td>
+					<!-- /TMPL_LOOP -->
+				</tr>
+				<!-- /TMPL_LOOP -->
+		</table>
+	<!-- /TMPL_LOOP -->
+<!-- TMPL_ELSE -->
+	<h1>Adhérents empruntant le plus</h1>
+	<form method="post" action="/cgi-bin/koha/reports/bor_issues_top.pl">
+	<fieldset class="rows">
+	<ol><li><label for="from">Date de prêt du :</label> <input type="text" readonly="readonly" size="10" id="from" name="Filter" />
+							<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="Voir calendrier" border="0" id="openCalendarFrom" style="cursor: pointer;">
+								<script language="JavaScript" type="text/javascript">
+									function validate1(date) {
+										var day = date.getDate();
+										var month = date.getMonth() + 1;
+										var year = date.getFullYear();
+										var weekDay = date.getDay();
+										var dayMonth = month + '-' + day;
+										var dateString = year + '-' + month + '-' + day;
+										var dateTo = document.getElementById('to').value.split("-");
+										var limitDate = new Date(dateTo[0], (dateTo[1] - 1), dateTo[2]);
+										if (date > limitDate) {
+											return true;
+										} else {
+											return false;
+										}
+									}
+					
+									Calendar.setup(
+										{
+											inputField : "from",
+											ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+											button : "openCalendarFrom",
+											disableFunc : validate1,
+											dateStatusFunc : validate1
+										}
+									);
+								</script>
+					<label class="inline" for="to">au : </label> <input readonly="readonly" size="10" id="to" name="Filter" value="" type="text" />
+						<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="Voir calendrier" id="openCalendarTo" style="cursor: pointer;" border="0">
+							<script type="text/javascript">
+								function validate2(date) {
+									var day = date.getDate();
+									var month = date.getMonth() + 1;
+									var year = date.getFullYear();
+									var weekDay = date.getDay();
+									var dayMonth = month + '-' + day;
+									var dateString = year + '-' + month + '-' + day;
+									var dateFrom = document.getElementById('from').value.split("-");
+									var limitDate = new Date(dateFrom[0], (dateFrom[1] - 1), dateFrom[2]);
+									if (limitDate > date) {
+										return true;
+									} else {
+										return false;
+									}
+								}
+		
+								Calendar.setup(
+									{
+										inputField : "to",
+										ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+										button : "openCalendarTo",
+										disableFunc : validate2,
+										dateStatusFunc : validate2
+									}
+								);
+							</script></li>
+				<li> <label for="fromRO">Date de retour entre :</label> <input type="text" readonly="readonly" size="10" id="fromRO" name="Filter" />
+							<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" border="0" id="openCalendarFromRO" style="cursor: pointer;" alt="Voir calendrier">
+								<script language="JavaScript" type="text/javascript">
+									function validate1(date) {
+										var day = date.getDate();
+										var month = date.getMonth() + 1;
+										var year = date.getFullYear();
+										var weekDay = date.getDay();
+										var dayMonth = month + '-' + day;
+										var dateString = year + '-' + month + '-' + day;
+										var dateTo = document.getElementById('toRO').value.split("-");
+										var limitDate = new Date(dateTo[0], (dateTo[1] - 1), dateTo[2]);
+										if (date > limitDate) {
+											return true;
+										} else {
+											return false;
+										}
+									}
+					
+									Calendar.setup(
+										{
+											inputField : "fromRO",
+											ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+											button : "openCalendarFromRO",
+											disableFunc : validate1,
+											dateStatusFunc : validate1
+										}
+									);
+								</script>
+					<label class="inline" for="toRO">au : </label> <input type="text" readonly="readonly" size="10" id="toRO" name="Filter" value="" />
+						<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" id="openCalendarToRO" style="cursor: pointer;" alt="Voir calendrier" border="0">
+							<script type="text/javascript">
+								function validate2(date) {
+									var day = date.getDate();
+									var month = date.getMonth() + 1;
+									var year = date.getFullYear();
+									var weekDay = date.getDay();
+									var dayMonth = month + '-' + day;
+									var dateString = year + '-' + month + '-' + day;
+									var dateFrom = document.getElementById('fromRO').value.split("-");
+									var limitDate = new Date(dateFrom[0], (dateFrom[1] - 1), dateFrom[2]);
+									if (limitDate > date) {
+										return true;
+									} else {
+										return false;
+									}
+								}
+		
+								Calendar.setup(
+									{
+										inputField : "toRO",
+										ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+										button : "openCalendarToRO",
+										disableFunc : validate2,
+										dateStatusFunc : validate2
+									}
+								);
+							</script></li>
+			<li> 
+				<label for="branch">Site : </label>
+<select name="Filter" id="branch"><option value="" > Tout site</option>
+    <!--TMPL_LOOP Name="branchloop"-->
+        <option value="<!--TMPL_VAR Name="value"-->" ><!--TMPL_VAR Name="branchname"--> </option>  
+     <!--/TMPL_LOOP --> 
+    </select>			</li>
+			<li> 
+				<label for="documenttype">Type de document :  </label><select name="Filter" id="documenttype"><option value="" > Tout type de document</option>
+    <!--TMPL_LOOP Name="itemtypeloop"-->
+        <option value="<!--TMPL_VAR Name="value"-->" ><!--TMPL_VAR Name="description"--> </option>  
+     <!--/TMPL_LOOP --> 
+    </select>
+			</li>
+			<li> 
+				<label for="patroncategory">Catégorie adhérent : </label><select name="Filter" id="patroncategory"><option value="" > Tout code catégorie</option>
+    <!--TMPL_LOOP Name="borcatloop"-->
+        <option value="<!--TMPL_VAR Name="value"-->" ><!--TMPL_VAR Name="description"--> </option>  
+     <!--/TMPL_LOOP --> 
+    </select>
+			</li>
+			<li>
+				<label for="day">Jour : </label>
+				<input type="text" name="Filter" id="day" value="" />
+			</li>
+			<li>
+				<label for="month">Mois : </label>
+				<input type="text" name="Filter" id="month" value="" />
+			</li>
+			<li>
+				<label for="year">Année : </label>
+				<input type="text" name="Filter" id="year" value="" />
+			</li>
+
+		</ol>
+	</fieldset>
+	
+	<fieldset class="rows">
+	<ol>
+		<li><label for="numlimit">Limiter à : </label> <select name="Limit" id="numlimit">
+						<option value ="5" selected="selected"> 5</option>
+						<option value ="10">10</option>
+						<option value ="15">15</option>
+						<option value ="20">20</option>
+	<!--					<option value ="25">25</option>
+						<option value ="40">40</option>
+						<option value ="50">50</option>
+						<option value ="100">100</option>-->
+					</select></li>
+		<li><label for="criteria">Par : </label> <select name="Criteria" id="criteria">
+						<option value ="" selected="selected">Aucun</option>
+						<option value ="branchcode">Site</option>
+						<option value ="categorycode">Code catégorie</option>
+						<option value ="itemtype">Type de document</option>
+						<option value ="Day">Jour</option>
+						<option value ="Week">Semaine</option>
+						<option value ="Month">Mois</option>
+						<option value ="Year">Année</option>
+					</select></li>
+	</ol>
+	</fieldset>
+
+<fieldset class="rows">
+	<legend>Affichage</legend>
+	<ol><li><label for="outputscreen">A afficher dans le navigateur </label><input type="radio" checked="checked" name="output" id="outputscreen" value="screen" /></li>
+		<li><label for="outputfile">Vers un fichier : </label><input type="radio" name="output" value="file" id="outputfile" />
+			<label class="inline" for="basename">Nom : </label><input type="text" name="basename" id="basename" value="Export" />
+			<label class="inline" for="MIME">Dans le logiciel : </label>
+			<select name="MIME" id="MIME">
+			<!-- TMPL_LOOP NAME="mimeloop" -->
+				<option value="<!-- TMPL_VAR NAME="type" -->"><!-- TMPL_VAR NAME="type" --></option>
+			<!-- /TMPL_LOOP -->
+			</select>
+			<!-- <label class="inline" for="sep">Delimiter: </label> -->
+			<select name="sep" id="sep">
+			<!-- TMPL_LOOP NAME="seploop" -->
+				<option value="<!-- TMPL_VAR NAME="delim" -->"><!-- TMPL_VAR NAME="delim" --></option>
+			<!-- /TMPL_LOOP -->
+			</select>
+		</li>
+	</ol>
+	</fieldset>
+
+	<fieldset class="action">
+	<input type="submit" value="Valider">
+	<input type="hidden" name="report_name" value="<!--TMPL_VAR NAME="report_name" -->" />
+	<input type="hidden" name="do_it" value="1" />
+	</fieldset>
+	</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

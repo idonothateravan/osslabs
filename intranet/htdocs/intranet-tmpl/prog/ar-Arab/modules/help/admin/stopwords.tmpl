@@ -1,0 +1,14 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>صفحة إدارة كلمة توقف</h1>
+
+<p> هنا أنت يجب أن تدرج كل الكلمات تريد أن يتجاهلها كوها  عند عمل الفهرس أو بناء فهرس كلمات البحث</p>
+<h3>Koha with Zebra</h3>
+<p>Zebra handles stopwords internally, and does so effectively and efficiently.  In normal circumstances, there should be no reason for Koha to remove stopwords prior to submitting the search query to Zebra, and in most cases doing so will actually negatively affect relevance ranking and phrase searching without giving any performance benefit.</p>
+
+<h3>Koha without Zebra</h3>
+<p>Normally, you will not want Koha to save keyword references to articles like "The" and "A" and other very common words. Saving keyword references to these words does not help to limit a search and will make the keyword index very large and "cluttered" with words that are not really useful. The "stopwords" list defines these unnecessary words for your installation.</p>
+
+<p>(إشارة:إذا كنت بارع في MySQL,فإنه غالبا أسرع وأسهل في إيجاد قائمة كلمات الوقف الموجودة, تعديلها,ووضعها في الصيغة الصحيحة, وباستخدام أمر MySQL "Load Data Infile" لإستيراد القائمة إلى جدول كلمات الوقف.تنشر العديد من المكتبات الأكاديمية كلمات وقفهم على الإنترنت, أو يمكنك أن تسأل المكتبات الاخرى التى تستخدم نظام كوها إذا كانوا يشتركون في قائمة كلمات الوقف.)</p>
+
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

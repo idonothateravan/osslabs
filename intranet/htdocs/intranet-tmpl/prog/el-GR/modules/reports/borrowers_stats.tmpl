@@ -1,0 +1,266 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Εκθέσεις <!-- TMPL_IF NAME="do_it" -->&rsaquo; Στατιστικά στοιχεία μελών &rsaquo; Αποτελέσματα<!-- TMPL_ELSE -->&rsaquo; Στατιστικά Στοιχεία Μελών<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" -->
+<style type="text/css">
+	.sql {display:none;}
+	.debug {display:none;}
+</style>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">Reports</a> &rsaquo; <a href="/cgi-bin/koha/reports/borrowers_stats.pl">Patrons statistics</a><!-- TMPL_IF NAME="do_it"--> &rsaquo; Αποτελέσματα<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="do_it" -->
+	<!-- TMPL_LOOP NAME="mainloop" -->
+		<h1>Στατιστικά στοιχεία μελών</h1>
+		<!-- TMPL_IF NAME="loopfilter"-->
+			<p>Φιλτραρισμένο σε</p>
+			<!-- TMPL_LOOP NAME="loopfilter" -->
+				<p>
+					<!-- TMPL_VAR NAME="crit"--> = <!-- TMPL_VAR NAME="filter"-->
+				</p>
+			<!-- /TMPL_LOOP -->
+		<!-- /TMPL_IF -->
+		<table>
+			<tr>
+				<th><!-- TMPL_VAR name="line" --> / <!-- TMPL_VAR name="column" --></th>
+				<!-- TMPL_LOOP NAME="loopcol" -->
+					<th><!-- TMPL_IF NAME="coltitle_display" --><!-- TMPL_VAR NAME="coltitle_display" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="coltitle" --><!-- /TMPL_IF -->
+					</th>
+				<!-- /TMPL_LOOP -->
+				<th>ΣΥΝΟΛΟ</th>
+			</tr>
+				<!-- TMPL_LOOP NAME="looprow" -->
+					<tr<!-- TMPL_UNLESS NAME="__odd__" --> class="highlight"<!-- /TMPL_UNLESS -->>
+						<td><!-- TMPL_IF NAME="rowtitle_display" --><!-- TMPL_VAR NAME="rowtitle_display" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="rowtitle" --><!-- /TMPL_IF -->
+						</td>
+						<!-- TMPL_LOOP NAME="loopcell" -->
+						<td><!-- TMPL_IF NAME="value" --><!-- TMPL_VAR NAME="value" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF -->
+						</td>
+						<!-- /TMPL_LOOP -->
+						<td><!-- TMPL_VAR NAME="totalrow" --></td>
+					</tr>
+				<!-- /TMPL_LOOP -->
+				<tr>
+					<th>ΣΥΝΟΛΟ</th>
+					<!-- TMPL_LOOP NAME="loopfooter" -->
+						<th><!-- TMPL_VAR NAME="totalcol" --></th>
+					<!-- /TMPL_LOOP -->
+					<th><!-- TMPL_VAR NAME="total" --></th>
+				</tr>
+		</table>
+	<!-- /TMPL_LOOP -->
+<!-- TMPL_ELSE -->
+
+	<form method="post" action="/cgi-bin/koha/reports/borrowers_stats.pl">
+	<fieldset class="rows"><legend>Στατιστικά στοιχεία μελών</legend>
+	<table>
+		<thead>
+			<tr>
+			<th>Τίτλος</th>
+			<th>Σειρά</th>
+			<th>Στήλη</th>
+			<th>Φίλτρο</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="highlight">
+			<td>Κατηγορία μέλους</td>
+			<td><input type="radio" name="Line" value="categorycode" /></td>
+			<td><input type="radio" name="Column" value="categorycode" /></td>
+			<td><select name="Filter"  size="1" id="catcode">
+				<option value=""></option>
+				<!-- TMPL_LOOP NAME="CAT_LOOP" -->
+				<option value="<!-- TMPL_VAR NAME="categorycode" -->"><!-- TMPL_VAR NAME="description" --></option>
+				<!-- /TMPL_LOOP  -->
+				</select>
+			</td>
+			</tr>
+			<tr>
+			<td>Κατάσταση μέλους</td>
+			<td colspan="2"></td>
+			<td ><select name="status"><option value=""> </option><option value="debarred">αποκλεισμένο</option><option value="gonenoadress">gone no address</option><option value="lost">απωλεσθέν</option></select></td>
+			</tr>
+			<tr class="highlight">
+			<td>Δραστηριότητα Μέλους</td>
+			<td colspan="2"><select name="period" id="period">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			</select>
+			<label for="period">έτη δραστηριότητας</label> 
+			</td>
+			<td><select name="activity"><option value=""> </option><option value="active">ενεργό</option><option value="nonactive">μη ενεργό</option></select></td>
+			</tr>
+
+			<tr>
+			<td rowspan="2">Ταχυδρομικός Κώδικας</td>
+			<td><input type="radio" name="Line" value="zipcode" /></td>
+			<td><input type="radio" name="Column" value="zipcode" /></td>
+			<td><select name="Filter"  size="1" id="zipcode">
+				<option value=""> </option>
+				<!-- TMPL_LOOP NAME="ZIP_LOOP" -->
+				<option value="<!-- TMPL_VAR NAME="zipcode" -->"><!-- TMPL_VAR NAME="zipcode" --></option>
+				<!-- /TMPL_LOOP -->
+				</select>
+			</td>
+			</tr>
+			<tr>
+			<td colspan="2"><select name="digits" id="digits">
+			<option value=""> </option>
+			<option value ="1">1</option>
+			<option value ="2">2</option>
+			<option value ="3">3</option>
+			<option value ="4">4</option>
+			<option value ="5">5</option>
+			<option value ="6">6</option>
+			<option value ="7">7</option>
+			<option value ="8">8</option>
+			<option value ="9">9</option>
+			<option value ="10">10</option>
+			</select>
+			<label for="digits">ψηφία</label> 
+			</td>
+			<td>&nbsp;</td>
+			</tr>
+
+			<tr class="highlight">
+			<td>Βιβλιοθήκη</td>
+			<td><input type="radio" name="Line"   value="branchcode" /></td>
+			<td><input type="radio" name="Column" value="branchcode" /></td>
+			<td>
+				<select name="Filter"  size="1" id="branch">
+				<option value=""></option>
+				<!-- TMPL_LOOP NAME="BRANCH_LOOP" -->
+					<option value="<!-- TMPL_VAR NAME="branchcode" -->"><!-- TMPL_VAR NAME="branchcode" --> - <!-- TMPL_VAR NAME="branchname" --></option>
+				<!-- /TMPL_LOOP -->
+				</select>
+			</td>
+			</tr>
+		    <tr>
+            <td>Ημερομηνία Γέννησης</td>
+            <td colspan="2"></td>
+                <td><label for="from">Από</label> <input type="text" readonly="readonly" size="10" id="from" name="Filter" />
+                    <img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="Εμφάνιση Ημερολογίου" border="0" id="openCalendarFrom" style="cursor: pointer;">
+                   <script type="text/javascript">
+				   //<![CDATA[
+				    function validate1(date) {
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        var weekDay = date.getDay();
+                        var dayMonth = month + '-' + day;
+                        var dateString = year + '-' + month + '-' + day;
+                        var dateTo = document.getElementById('to').value.split("-");
+                        var limitDate = new Date(dateTo[0], (dateTo[1] - 1), dateTo[2]);
+                        if (date > limitDate) {
+                                return true;
+                        } else {
+                                return false;
+                        }
+                    }
+                    Calendar.setup({
+                            inputField : "from",
+                            ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+                            button : "openCalendarFrom",
+                            disableFunc : validate1,
+                            dateStatusFunc : validate1
+                    });
+					//]]>
+                    </script>
+                    <label for="to">Προς</label> <input readonly="readonly" size="10" id="to" name="Filter" value="" type="text" />
+                        <img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="Εμφάνιση Ημερολογίου" id="openCalendarTo" style="cursor: pointer;" border="0">
+                          <script type="text/javascript">
+						  //<![CDATA[ 
+						   function validate2(date) {
+                                var day = date.getDate();
+                                var month = date.getMonth() + 1;
+                                var year = date.getFullYear();
+                                var weekDay = date.getDay();
+                                var dayMonth = month + '-' + day;
+                                var dateString = year + '-' + month + '-' + day;
+                                var dateFrom = document.getElementById('from').value.split("-");
+                                var limitDate = new Date(dateFrom[0], (dateFrom[1] - 1), dateFrom[2]);
+                                if (limitDate > date) {
+                                        return true;
+                                } else {
+                                        return false;
+                                }
+                            }
+
+                            Calendar.setup({
+                                    inputField : "to",
+                                    ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+                                    button : "openCalendarTo",
+                                    disableFunc : validate2,
+                                    dateStatusFunc : validate2
+                            });
+							//]]>
+                        </script>
+                    </td>
+                </tr>
+
+			<!-- TMPL_IF name="SORT1_LOOP" -->
+				<tr class="highlight">
+				<td>Ταξινόμηση1</td>
+				<td><input type="radio" name="Line" value="sort1" /></td>
+				<td><input type="radio" name="Column" value="sort1" /></td>
+				<td>
+					<select id="sort1" size="1" name="Filter">
+					<option value=""/>
+					<!-- TMPL_LOOP NAME="SORT1_LOOP" -->
+						<option value="<!-- TMPL_VAR NAME="authorized_value" -->"><!-- TMPL_VAR NAME="lib" --></option>
+					<!-- /TMPL_LOOP -->
+					</select>
+				</td>
+				</tr>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="SORT2_LOOP" -->
+				<tr<!-- TMPL_UNLESS NAME="SORT1_LOOP" --> class="highlight"<!-- /TMPL_UNLESS -->>
+				<td>Ταξινόμηση2</td>
+				<td><input type="radio" name="Line" value="sort2" /></td>
+				<td><input type="radio" name="Column" value="sort2" /></td>
+				<td>
+					<select id="sort2" size="1" name="Filter">
+					<option value=""/>
+					<!-- TMPL_LOOP NAME="SORT2_LOOP" -->
+						<option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="value" --></option>
+					<!-- /TMPL_LOOP -->
+					</select>
+				</tr>
+			<!-- /TMPL_IF -->
+		</tbody>
+	</table><br /></fieldset>
+	
+	<fieldset class="rows">
+	<legend>Απόδοση</legend>
+<ol><li><label for="outputscreen">Να εμφανιστεί στον browser: </label><input type="radio" checked="checked" name="output" id="outputscreen" value="screen" /> </li>
+<li><label for="outputfile">Σε ένα αρχείο:</label> 		<input type="radio" name="output" value="file" id="outputfile" /> <label class="inline" for="basename">Με το όνομα: </label><input type="text" name="basename" id="basename" value="Export" /> <label class="inline" for="MIME">Σε μία εφαρμογή  
+		</label><!-- TMPL_VAR NAME="CGIextChoice" -->
+		<!-- TMPL_VAR NAME="CGIsepChoice" --></li></ol>
+	</fieldset>
+
+	<fieldset class="action">
+	<input type="submit" value="Υποβολή">
+	<input type="hidden" name="report_name" value="<!--TMPL_VAR NAME="report_name" -->" />
+	<input type="hidden" name="do_it" value="1" />
+	</fieldset>
+	</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

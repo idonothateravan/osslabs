@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Zusammensetzung des Leaders</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>1-4 Grösse</td>
+		<td>(automatisch berechnet)</td>
+	</tr>
+	<tr>
+		<td>5- Status des Eintrags</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5|" -->
+            	<option value="|" SELECTED>|- Füllzeichen</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- Füllzeichen</option>
+            <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>c- Korrigierte Notiz</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- Korrigierte Notiz</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>d- Notiz gelöscht</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- Notiz gelöscht</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5n" -->
+				<option value="n" SELECTED>n- Neue Nachricht</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">n- Neue Nachricht</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5o" -->
+				<option value="o" SELECTED>o- Tochternotiz</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">o- Tochternotiz</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5p" -->
+				<option value="p" SELECTED>p- Unvollständige Notiz oder vor-Publikation</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">p- Unvollständige Notiz oder vor-Publikation</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>6- Art des Dokumentes</td>
+		<td>
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f6|" -->
+            	<option value="|" SELECTED>|- Füllzeichen</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- Füllzeichen</option>
+            <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>a- Gedruckter Text</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">a- Gedruckter Text</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6b" -->
+				<option value="b" SELECTED>b- Text-Manusskript</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">b- Text-Manusskript</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" SELECTED>c- Gedruckte Musikpartitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- Gedruckte Musikpartitur</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6d" -->
+				<option value="d" SELECTED>d- Handgeschriebene musikalische Partitur</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- Handgeschriebene musikalische Partitur</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6e" -->
+				<option value="e" SELECTED>e- Gedrucktes kartographisches Element</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">e- Gedrucktes kartographisches Element</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6f" -->
+				<option value="f" SELECTED>f- Handschriftliches kartographisches Material</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">f- Handschriftliches kartographisches Material</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6g" -->
+				<option value="g" SELECTED>g- Projiziertes Dokument oder Video</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">g- Projiziertes Dokument oder Video</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6i" -->
+				<option value="i" SELECTED>i- Nichtmusikalische Tonaufnahme</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">i- Nichtmusikalische Tonaufnahme</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6j" -->
+				<option value="j" SELECTED>j - Musikalische Tonaufnahme</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">j - Musikalische Tonaufnahme</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6k" -->
+				<option value="k" SELECTED>k - Zweidimensionales graphisches Dokument</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">k - Zweidimensionales graphisches Dokument</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6l" -->
+				<option value="l" SELECTED>l - Elektronische Unterstützung</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">l - Elektronische Unterstützung</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6m" -->
+				<option value="m" SELECTED>m - Multimediales Dokument</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">m - Multimediales Dokument</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6r" -->
+				<option value="r" SELECTED>r - Dreidimensionales Objekt, Artefakt</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">r - Dreidimensionales Objekt, Artefakt</option>
+			<!-- /TMPL_IF -->
+			
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>7- Art des Eintrags</td>
+		<td>
+			<select name="f7" size="1">
+			<!-- TMPL_IF name="f7|" -->
+            	<option value="|" SELECTED>|- Füllzeichen</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- Füllzeichen</option>
+            <!-- /TMPL_IF -->
+            
+				<!-- TMPL_IF name="f7a" -->
+					<option value="a" SELECTED>a- Ananlytisch (Komponentenbestandteil)</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- Ananlytisch (Komponentenbestandteil)</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7c" -->
+					<option value="c" SELECTED>c- Imitierte Sammlung</option>
+				<!-- TMPL_ELSE -->
+					<option value="c">c- Imitierte Sammlung</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7m" -->
+					<option value="m" SELECTED>m- Monographie</option>
+				<!-- TMPL_ELSE -->
+					<option value="m">m- Monographie</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7s" -->
+					<option value="s" SELECTED>s- Serienpublikation</option>
+				<!-- TMPL_ELSE -->
+					<option value="s">s- Serienpublikation</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>8- Hierarchisches Niveau</td>
+		<td>
+			<select name="f8" size="1">
+			<!-- TMPL_IF name="f8|" -->
+            	<option value="|" SELECTED>|- Füllzeichen</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- Füllzeichen</option>
+            <!-- /TMPL_IF -->
+            
+				<!-- TMPL_IF name="f8 " -->
+					<option value=" " SELECTED> - Hierarchische Beziehung nicht definiert</option>
+				<!-- TMPL_ELSE -->
+					<option value=" "> - Hierarchische Beziehung nicht definiert</option>
+				<!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF name="f80" -->
+					<option value="0" SELECTED>0- Keine hierarchische Beziehung</option>
+				<!-- TMPL_ELSE -->
+					<option value="0">0- Keine hierarchische Beziehung</option>
+				<!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF name="f81" -->
+					<option value="1" SELECTED>1- Oberster Eintrag (Muttereintrag)</option>
+				<!-- TMPL_ELSE -->
+					<option value="1">1- Oberster Eintrag (Muttereintrag)</option>
+				<!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF name='f82' -->
+					<option value="2" SELECTED>2- Eintrag auf einem Niveau, das unter dem höchsten Niveau liegt (Tochtereintrag)</option>
+				<!-- TMPL_ELSE -->
+					<option value="2">2- Eintrag auf einem Niveau, das unter dem höchsten Niveau liegt (Tochtereintrag)</option>
+				<!-- /TMPL_IF -->
+				
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>9-16 Indikator/Unterfeld/Länge</td>
+		<td>(automatisch ausgefüllt)</td>
+	<tr>
+		<td>17- Katalogisierungslevel</td>
+		<td>
+			<select name="f17" size="1">
+			<!-- TMPL_IF name="f17|" -->
+            	<option value="|" SELECTED>|- Füllzeichen</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- Füllzeichen</option>
+            <!-- /TMPL_IF -->
+            
+				<!-- TMPL_IF name="f17 " -->
+					<option value=" " SELECTED>Redigiertes "Handdokument"</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">Redigiertes "Handdokument"</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f171" -->
+					<option value="1" SELECTED>1- Nicht redigiert "Handexemplar"</option>
+				<!-- TMPL_ELSE -->
+					<option value="1">1- Nicht redigiert "Handexemplar"</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f172" -->
+					<option value="2" SELECTED>2- Auf der Basis eines noch nicht publizierten Dokumentes erstellt</option>
+				<!-- TMPL_ELSE -->
+					<option value="2">2- Auf der Basis eines noch nicht publizierten Dokumentes erstellt</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f173" -->
+					<option value="3" SELECTED>3- Unvollständiger Eintrag</option>
+				<!-- TMPL_ELSE -->
+					<option value="3">3- Unvollständiger Eintrag</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>18- Beschreibende Katalogisierung</td>
+		<td>
+			<select name="f18" size="1">
+			<!-- TMPL_IF name="f18|" -->
+            	<option value="|" SELECTED>|- Füllzeichen</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- Füllzeichen</option>
+            <!-- /TMPL_IF -->
+            
+				<!-- TMPL_IF name="f18 " -->
+					<option value=" " SELECTED> ISBD konform</option>
+				<!-- TMPL_ELSE -->
+					<option value=" "> ISBD konform</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18i" -->
+					<option value="i" SELECTED>i- teilweise konform mit ISBD</option>
+				<!-- TMPL_ELSE -->
+					<option value="i">i- teilweise konform mit ISBD</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18n" -->
+					<option value="n" SELECTED>n- nicht ISBD konform</option>
+				<!-- TMPL_ELSE -->
+					<option value="n">n- nicht ISBD konform</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>19-17 Eingabefeld und Längen</td>
+		<td>(automatisch ausgefüllt)</td>
+	<tr>
+
+	<tr><td colspan=2><input type="button" value="OK"  onClick="javascript:report()"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value =  '     '+document.f_pop.f5.value +
+			document.f_pop.f6.value+ document.f_pop.f7.value+
+			document.f_pop.f8.value+ '        '+
+			document.f_pop.f17.value+ document.f_pop.f18.value+' 450  ';
+		window.close();
+		return false;
+	}
+</script>
+</body>
+</html>

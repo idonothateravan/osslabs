@@ -1,0 +1,106 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->   
+   <h1>Définir Permissions Adhérent</h1>
+   <p>Les permissions adhérents sont utilisées pour définir les droits des bibliothécaires quand il sont dans l'interface professionnelle.</p>
+	<ul>
+		<li>Pour modifier les permissions d'un adhérent, cliquez sur 'Adhérents' dans le menu en haut de l'écran.</li>
+		<li>Chercher l'adhérent que vous voulez modifier</li>
+		<li>Cliquez sur le nom de l'adhérent dans les résultats</li>
+		<li>Cliquez sur le bouton 'Plus' et sélectionnez 'Définir permissions'</li>
+		<li>Sélectionnez les permissions à attribuer à cet adhérent</li>
+		<li>Vous pouvez sélectionner autant de permissions que de besoin pour un bibliothécaire
+		<ul>
+			<li>
+		    <span style="background-color: #ffe599">
+ASTUCE : si un bibliothécaire est 'superlibrarian', il a accès à toutes les fonctions et il n'est pas utile de cocher d'autres permissions</span></li>
+		</ul></li>
+		<li>Pour donner aux bibliothécaires des droits plus fin, vous pouvez activer la préférence système GranularPermissions
+		<ul>
+			<li><em>Allez à:</em> Plus &gt; Administration &gt; Préférences système &gt; Admin &gt; GranularPermissions</li>
+			<li>Si ce paramétre est activé, le menu permission proposera des choix plus fins</li>
+			<li>Cela permet aux bibiothécaires d'accéder à des outils spécifiques
+			<ul>
+				<li>
+			    <span style="background-color: #ffe599">
+ASTUCE : si cette préférence est mise à OFF après avoir été à ON, le système reprend son fonctionnement d'origine, mais les permissions spécifiques sont conservées. Cela signifie que si un bibliothécaire a des permissions granulaire, il les conservera même si cela passe à OFF.</span></li>
+			</ul></li>
+		</ul></li>
+	</ul>
+
+<h3>What will each permission level do?</h3>
+
+<p>Depending on the permission certain menu items will be removed from the menus in Koha, preventing users from accessing them.</p>
+	<ul>
+		<li><strong>superlibrarian</strong>
+		<ul>
+			<li>Access to all librarian functions</li>
+		</ul></li>
+		<li><strong>circulate</strong>
+		<ul>
+			<li>Ability for logged in user to check books out and back in</li>
+		</ul></li>
+		<li><strong>catalogue</strong>
+		<ul>
+			<li>Must be given to all staff members to allow them to log into the staff interface</li>
+			<li>This permission will allow staff members to search the catalog via the staff interface</li>
+		</ul></li>
+		<li><strong>parameters</strong>
+		<ul>
+			<li>Provides access to all admin links and preferences</li>
+		</ul></li>
+		<li><strong>borrowers</strong>
+		<ul>
+			<li>Add or modify patrons (with the exception of setting permissions)</li>
+		</ul></li>
+		<li><strong>permissions</strong>
+		<ul>
+			<li>Ability to set patron permissions&nbsp;</li>
+		</ul></li>
+		<li><strong>reserveforothers</strong>
+		<ul>
+			<li>Place holds on books for patrons via the staff interface</li>
+		</ul></li>
+		<li><strong>borrow</strong>
+		<ul>
+			<li>Borrow books from the library with this staff account</li>
+		</ul></li>
+		<li><strong>editcatalogue</strong> Modify bibliogra
+		<ul>
+			<li>Provides cataloging permissions such as altering and adding bibliographic and holdings data)</li>
+		</ul></li>
+		<li><strong>updatecharges</strong>
+		<ul>
+			<li>Handle fines and charges for patrons (including paying, adding credits, and adding invoices)</li>
+		</ul></li>
+		<li><strong>acquisition</strong>
+		<ul>
+			<li>Access to acquisition and patron purchase suggestions management</li>
+		</ul></li>
+		<li><strong>management</strong>
+		<ul>
+			<li>Deprecated - no longer in use</li>
+		</ul></li>
+		<li><strong>tools</strong>
+		<ul>
+			<li>Use tools (export, import, barcodes)</li>
+			<li>With GranularPermissions on this section will be expanded to allow access only to specific tools
+			<ul>
+				<li><em>Allez à:</em> Plus &gt; Administration &gt; Préférences système &gt; Admin &gt; GranularPermissions</li>
+			</ul></li>
+		</ul></li>
+		<li><strong>editauthorities</strong>
+		<ul>
+			<li>Allow staff member to edit authorities</li>
+		</ul></li>
+		<li><strong>serials</strong>
+		<ul>
+			<li>Allow staff member to manage serials subscriptions and claims</li>
+		</ul></li>
+		<li><strong>reports</strong>
+		<ul>
+			<li>Allow staff member to access to the reports module</li>
+		</ul></li>
+		<li><strong>staffaccess</strong>
+		<ul>
+			<li>Provides the ability to modify login / permissions for staff users</li>
+		</ul></li>
+	</ul><!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

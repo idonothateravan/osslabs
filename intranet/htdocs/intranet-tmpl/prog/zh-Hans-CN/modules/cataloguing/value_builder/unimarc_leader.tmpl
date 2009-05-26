@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立记录标示</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>1-4 纪录长度</td>
+		<td>（自动填上）</td>
+	</tr>
+	<tr>
+		<td>5- 纪录性质</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>c- 修正过之纪录</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- 修正过之纪录</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>d- 删除之纪录</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- 删除之纪录</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5n" -->
+				<option value="n" SELECTED>n- 中篇小说通知</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">n- 中篇小说通知</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5o" -->
+				<option value="o" SELECTED>o- 少女</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">o- 少女</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5p" -->
+				<option value="p" SELECTED>p- Notice incomplète ou pré-publi</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">p- Notice incomplète ou pré-publi</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>6- 纪录类型</td>
+		<td>
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f6|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>a- 印刷型式之文字数据</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">a- 印刷型式之文字数据</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6b" -->
+				<option value="b" SELECTED>b- 手稿型式之文字数据</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">b- 手稿型式之文字数据</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" SELECTED>c- 印刷型式之乐谱</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- 印刷型式之乐谱</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6d" -->
+				<option value="d" SELECTED>d- 手稿型式之乐谱</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- 手稿型式之乐谱</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6e" -->
+				<option value="e" SELECTED>e- 印刷型式之地图数据</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">e- 印刷型式之地图数据</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6f" -->
+				<option value="f" SELECTED>f- 手稿类型之地图数据</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">f- 手稿类型之地图数据</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6g" -->
+				<option value="g" SELECTED>g - 放映性资料</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">g - 放映性资料</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6i" -->
+				<option value="i" SELECTED>i - 录音数据（非音乐性）</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">i - 录音数据（非音乐性）</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6j" -->
+				<option value="j" SELECTED>j - 录音数据（音乐性）</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">j - 录音数据（音乐性）</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6k" -->
+				<option value="k" SELECTED>k- 非放映性静画资料</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">k- 非放映性静画资料</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6l" -->
+				<option value="l" SELECTED>I- 电气支持</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">I- 电气支持</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6m" -->
+				<option value="m" SELECTED>m- 多媒体数据</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">m- 多媒体数据</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f6r" -->
+				<option value="r" SELECTED>r - Objet à 3 dimension, artefact</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">r - Objet à 3 dimension, artefact</option>
+			<!-- /TMPL_IF -->
+			
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>7- 书目层次</td>
+		<td>
+			<select name="f7" size="1">
+			<!-- TMPL_IF name="f7|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+            
+				<!-- TMPL_IF name="f7a" -->
+					<option value="a" SELECTED>a- 书目分析项目</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- 书目分析项目</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7c" -->
+					<option value="c" SELECTED>c- 合集</option>
+				<!-- TMPL_ELSE -->
+					<option value="c">c- 合集</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7m" -->
+					<option value="m" SELECTED>m- 专论</option>
+				<!-- TMPL_ELSE -->
+					<option value="m">m- 专论</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7s" -->
+					<option value="s" SELECTED>s- Publication en série</option>
+				<!-- TMPL_ELSE -->
+					<option value="s">s- Publication en série</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>8- 层次等级</td>
+		<td>
+			<select name="f8" size="1">
+			<!-- TMPL_IF name="f8|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+            
+				<!-- TMPL_IF name="f8 " -->
+					<option value=" " SELECTED> - 从属关系未定</option>
+				<!-- TMPL_ELSE -->
+					<option value=" "> - 从属关系未定</option>
+				<!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF name="f80" -->
+					<option value="0" SELECTED>0- 完整著录，系依据数据本身著录。</option>
+				<!-- TMPL_ELSE -->
+					<option value="0">0- 完整著录，系依据数据本身著录。</option>
+				<!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF name="f81" -->
+					<option value="1" SELECTED>1- Notice de niveau le + élevé (notice mère)</option>
+				<!-- TMPL_ELSE -->
+					<option value="1">1- Notice de niveau le + élevé (notice mère)</option>
+				<!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF name='f82' -->
+					<option value="2" SELECTED>2- 最高层以下之所有层次之纪录</option>
+				<!-- TMPL_ELSE -->
+					<option value="2">2- 最高层以下之所有层次之纪录</option>
+				<!-- /TMPL_IF -->
+				
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>9-16 指标长度/分栏识别长度/数据基位</td>
+		<td>（自动填上）</td>
+	<tr>
+		<td>17- 次完整著录</td>
+		<td>
+			<select name="f17" size="1">
+			<!-- TMPL_IF name="f17|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+            
+				<!-- TMPL_IF name="f17 " -->
+					<option value=" " SELECTED>Rédigée "document en mains"</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">Rédigée "document en mains"</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f171" -->
+					<option value="1" SELECTED>1- Non rédigée "document en mains"</option>
+				<!-- TMPL_ELSE -->
+					<option value="1">1- Non rédigée "document en mains"</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f172" -->
+					<option value="2" SELECTED>2 - 出版前著录</option>
+				<!-- TMPL_ELSE -->
+					<option value="2">2 - 出版前著录</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f173" -->
+					<option value="3" SELECTED>3- 不完整著录</option>
+				<!-- TMPL_ELSE -->
+					<option value="3">3- 不完整著录</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>18- 描述书目记录型式</td>
+		<td>
+			<select name="f18" size="1">
+			<!-- TMPL_IF name="f18|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+            
+				<!-- TMPL_IF name="f18 " -->
+					<option value=" " SELECTED> 符合国际标准书号（ISBD）</option>
+				<!-- TMPL_ELSE -->
+					<option value=" "> 符合国际标准书号（ISBD）</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18i" -->
+					<option value="i" SELECTED>i- 局部或不完全采用ISBD 之格式</option>
+				<!-- TMPL_ELSE -->
+					<option value="i">i- 局部或不完全采用ISBD 之格式</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18n" -->
+					<option value="n" SELECTED>n- 不采用ISBD 之格式</option>
+				<!-- TMPL_ELSE -->
+					<option value="n">n- 不采用ISBD 之格式</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>19-24 款目格局和长度</td>
+		<td>（自动填上）</td>
+	<tr>
+
+	<tr><td colspan=2><input type="button" value="完成" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value =  '     '+document.f_pop.f5.value +
+			document.f_pop.f6.value+ document.f_pop.f7.value+
+			document.f_pop.f8.value+ '        '+
+			document.f_pop.f17.value+ document.f_pop.f18.value+' 450  ';
+		window.close();
+		return false;
+	}
+</script>
+</body>
+</html>

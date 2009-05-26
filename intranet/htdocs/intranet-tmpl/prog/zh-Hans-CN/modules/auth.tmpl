@@ -1,0 +1,74 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 
+    <!-- TMPL_IF NAME="nopermission" -->权限不足<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="timed_out" -->会话已超时<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="different_ip" -->IP 地址改变<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="invalid_username_or_password" -->错误的用户名和密码<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="loginprompt" -->登录Koha<!-- /TMPL_IF -->
+</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+
+<div id="doc" class="yui-t7">
+   <div id="bd">
+
+<div id="login">
+<h1><a href="http://koha.org">Koha 图书馆自动化系统</a></h1>
+<!-- TMPL_IF NAME="nopermission" -->
+<div id="login_error"><strong>错误： </strong>未授权读者<a href="/cgi-bin/koha/mainpage.pl?logout.x=1">点击注销<a></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="timed_out" -->
+<div id="login_error"><strong>错误： </strong>对不起，您的会话已超时，请重新登入。</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="different_ip" -->
+<div id="login_error"><strong>错误： </strong>IP 地址已改变，请重新登录 </div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="wrongip" -->
+<div id="login_error"><strong>错误： </strong>Independent Branches and Autolocation are switched on and you are logging in with an IP address that doesn't match your branch. </div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="invalid_username_or_password" -->
+<div id="login_error"><strong>错误： </strong>错误的用户名和密码</div>
+<!-- /TMPL_IF -->
+
+<!-- login prompt time-->
+<form action="<!-- TMPL_VAR NAME="url" -->" method="post" name="loginform" id="loginform">
+    <input type="hidden" name="koha_login_context" value="intranet" />
+<!-- TMPL_LOOP NAME="INPUTS" -->
+    <input type="hidden" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" ESCAPE="html" -->" />
+<!-- /TMPL_LOOP -->
+<p><label for="userid">用户名称：</label>
+<input type="text" name="userid" id="userid" class="input focus" value="<!-- TMPL_VAR NAME="userid" -->" size="20" tabindex="1" />
+</p>
+<p><label for="password">密码：</label>
+<input type="password" name="password" id="password" class="input" value="" size="20" tabindex="2" />
+</p>
+
+<!-- TMPL_IF NAME="AutoLocation" --><!-- TMPL_ELSE -->
+<!-- TMPL_IF NAME="IndependantBranches" --><!-- TMPL_ELSE -->
+<p><label for="branch">图书馆：</label>
+    <select name="branch" id="branch" class="input" tabindex="3">
+    <option value="">My Library</option>
+    <!-- TMPL_LOOP NAME="branchloop" -->
+    <option value="<!-- TMPL_VAR NAME='branchcode' -->"><!-- TMPL_VAR NAME='branchname' --></option>
+    <!-- /TMPL_LOOP -->
+    </select>
+    </p><!-- /TMPL_IF -->
+	<!-- /TMPL_IF -->
+
+<!-- <p><label><input name="rememberme" type="checkbox" id="rememberme" value="forever" tabindex="3" />Remember me</label></p> -->
+
+<p class="submit"><input id="submit" type="submit" value="登录&raquo;" tabindex="4"></p>
+</form>
+<!--<ul> -->
+<!--	<li><a href="/cgi-bin/koha/lostpassword.pl" title="Password Lost and Found">Lost your password?</a></li> -->
+<!-- </ul> -->
+
+</div>
+</div>
+
+<!-- TMPL_INCLUDE name="intranet-bottom.inc" -->

@@ -1,0 +1,14 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Page de Gestion des mots vides</h1>
+
+<p>C'est ici que vous devez faire la liste de tous les mots que vous souhaitez que Koha ignore en faisant des recherches sur le catalogue ou en construisant l'index des mots-clé.</p>
+<h3>Koha with Zebra</h3>
+<p>Zebra handles stopwords internally, and does so effectively and efficiently.  In normal circumstances, there should be no reason for Koha to remove stopwords prior to submitting the search query to Zebra, and in most cases doing so will actually negatively affect relevance ranking and phrase searching without giving any performance benefit.</p>
+
+<h3>Koha without Zebra</h3>
+<p>En général, vous ne souhaiterez pas que Koha sauvegarde des mot-clés de référence vers des articles comme "Le" et "Un" et d'autres mots très courants. Sauvegarder des mots-clés de référence vers ces mots n'aidera pas à limiter une recherche et rendra l'index des mots-clés très volumineux et "encombré"de mots qui ne sont pas vraiment utiles. La liste des "mots vides" détermine la liste de ces mots inutiles à votre installation.</p>
+
+<p>(Astuce: si vous êtes expert en MySQL, il est souvent plus rapide et plus facile de trouver une liste de mots vides existantes, de la modifier, de la mettre au format adéquat, et d'utiliser la commande MySQL"Load Data Infile" pour importer la liste dans la table des mots vides. De nombreuses bibliothèques universitaires publient leurs listes de mots vides sur Internet, ou vous pouvez demander à d'autres bibliothèques Koha s'ils partageraient leur liste de mots vides.)</p>
+
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

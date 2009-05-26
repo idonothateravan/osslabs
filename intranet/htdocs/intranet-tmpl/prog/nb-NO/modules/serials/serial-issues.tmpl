@@ -1,0 +1,119 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Periodika &rsaquo; Abonnementsinformasjon for <!-- TMPL_VAR name="bibliotitle" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="serials-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/serials/serials-home.pl">Serials</a> &rsaquo; Subscription information for <i><!-- TMPL_VAR name="bibliotitle" --></i></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Abonnementsinformasjon for<i><!-- TMPL_VAR name="bibliotitle" --></i></h1>
+<div id="action">
+     <a href="/cgi-bin/koha/serials/serials-home.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">Abonnement</a> <a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">Tilbake til bibliografiske poster</a><a href="/cgi-bin/koha/serials/serial-issues.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->&amp;selectview=full">Full oversikt</a>
+</div>
+<!-- TMPL_LOOP name="subscription_LOOP" -->
+    <div id="serials_serial_issue_<!-- TMPL_VAR name="subscriptionid" -->">
+    <h2>Subscription summary</h2>
+        <p>Begynte <b><!-- TMPL_VAR name="histstartdate" --></b> og utgis hver(t) <b>
+        <!--TMPL_IF name="periodicity1" -->
+                dag
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity2" -->
+                uke
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity3" -->
+                To uker
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity4" -->
+                tre uker
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity5" -->
+                måned
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity6" -->
+                To måneder
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity7" -->
+                Tre måneder
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity8" -->
+                quarter
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity9" -->
+                To kvartal
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity10" -->
+                år
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="periodicity11" -->
+                To år
+        <!-- /TMPL_IF -->
+        </b>
+        <!--TMPL_IF name="arrival1" -->
+            på <b>Mandag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival2" -->
+            på <b>Tirsdag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival3" -->
+            på <b>Onsdag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival4" -->
+            på <b>Torsdag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival5" -->
+            på <b>Fredag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival6" -->
+            på <b>Lørdag</b>
+        <!-- /TMPL_IF -->
+        <!--TMPL_IF name="arrival7" -->
+            på <b>Søndag</b>
+        <!-- /TMPL_IF -->
+        for <b>
+            <!-- TMPL_IF name="numberlength" --><!-- TMPL_VAR name="numberlength" --> utgivelser<!-- /TMPL_IF -->
+            <!-- TMPL_IF name="weeklength" --><!-- TMPL_VAR name="weeklength" --> uker<!-- /TMPL_IF -->
+            <!-- TMPL_IF name="monthlength" --><!-- TMPL_VAR name="monthlength" --> måneder<!-- /TMPL_IF -->
+            </b>
+        </p>
+        <p>Last renewal of subscription was <b><!-- TMPl_VAR name="startdate" --></b></p>
+        <!-- TMPL_IF name="enddate" --><p><b>This subscription is now ended. The last issue was received on <!-- TMPL_VAR name="enddate" --></b></p><!-- /TMPL_IF -->
+    <!--TMPL_UNLESS Name="fullinfo" -->
+        <p><!-- TMPL_VAR name="notes" --></p>
+        <!-- TMPL_IF name="opacnote" -->
+            <h2>Utgivelsessammendrag</h2>
+            <p>
+                <!-- TMPL_VAR name="opacnote" -->
+            </p>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="recievedlist" -->
+            <h2>Received issues</h2>
+            <p>
+                <!-- TMPL_VAR name="recievedlist" -->
+            </p>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="missinglist" -->
+            <h2>Manglende utgaver</h2>
+            <p>
+                <!-- TMPL_VAR name="missinglist" -->
+            </p>
+        <!-- /TMPL_IF -->
+    </div>
+    <!-- /TMPL_UNLESS -->
+<!-- /TMPL_LOOP -->
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="serials-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

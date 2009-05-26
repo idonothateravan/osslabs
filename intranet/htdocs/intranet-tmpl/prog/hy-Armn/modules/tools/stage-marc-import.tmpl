@@ -1,0 +1,141 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title> Koha &rsaquo; Գործիքներ &rsaquo; Բազմաստիճան MARC գրառումներ ներմուծման համար</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="file-upload.inc" -->
+<!-- TMPL_INCLUDE NAME="background-job.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+
+function CheckForm(f) {
+    if (f.uploadedfileid.value == '') {
+        alert('Please upload a file first.');
+    } else {
+        return submitBackgroundJob(f);
+    }
+    return false;
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/tools/tools-home.pl">Tools</a> &rsaquo; Stage MARC Records For Import</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Ներմուծման համար փուլավորիր MARC գրառումները</h1>
+
+<!-- TMPL_IF name="uploadmarc" -->
+<p>MARC աստիճանավորման արդյունքներ :</p>
+<ul>
+	<li><!-- TMPL_VAR name="total" --> գրառումներ ֆայլում</li>
+	<li><!-- TMPL_VAR name="import_errors" --> գրառումներ չեն փուլավորվել MARC սխալի պատճառով</li>
+	<li><!-- TMPL_VAR name="staged" --> գրառումներ փուլավորված են</li>
+    <!-- TMPL_IF name="checked_matches" -->
+	<li><!-- TMPL_VAR name="matched" --> records with at least one match in catalogue per matching rule  &quot;<!-- TMPL_VAR name="matcher_code" -->&quot;</li>
+    <!-- TMPL_ELSE -->
+        <!-- TMPL_IF name="matcher_failed" -->
+          <li> Գրառման համընկեցումը տապալվեց -- չի կարողանում գտնել ընտրված համընկեցման օրենքը։</li>
+        <!-- TMPL_ELSE -->
+          <li>Քարտարանում առկա գրառումների համար մի ստուգիր համընկեցումները</li>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+	<li><!-- TMPL_VAR name="num_items" --> նյութի գրառում գտնված է և փուլավորված</li>
+	<!-- TMPL_IF name="label_batch" -->
+	  <li>New label batch created: # <!-- TMPL_VAR name="label_batch" --> </li>
+    <!-- /TMPL_IF -->
+	<li><a href="/cgi-bin/koha/tools/manage-marc-import.pl?import_batch_id=<!-- TMPL_VAR name="import_batch_id" -->">Կառավարիր բազմաստիճան գրառումները</a></li>
+	<li><a href="/cgi-bin/koha/tools/tools-home.pl">Հետ</a></li>
+</ul>
+<!-- TMPL_ELSE -->
+<ul>
+	<li>Select a MARC file to stage in the import reservoir.  It will be parsed, and each valid record staged for later import into the catalogue.</li>
+	<li>You can enter a name for this import. It may be useful, when creating a biblio, to remember where the suggested MARC data comes from!</li>
+</ul>
+<fieldset class="rows">
+<legend>Ռեզերվուարի մեջ փուլավորիր գրառումներ</legend><ol>
+	<li>
+        <div id="fileuploadform">
+        <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+		<label for="fileToUpload">Ընտրիր փուլավորման ֆայլը։ </label>
+		<input type="file" id="fileToUpload" name="fileToUpload" /><br />
+        <button class="input" onclick="return ajaxFileUpload();">Ֆայլի բեռնավորում</button>
+		</form>
+        <div id="fileuploadstatus" style="display:none">Բեռնավորման գործընթաց։ <span id="fileuploadprogress">0</span>%</div>
+        <div id="fileuploadfailed" style="display:none"></div>
+        </div>
+	</li>
+</ol></fieldset>
+    <form method="post" action="<!-- TMPL_VAR name="SCRIPT_NAME" -->" enctype="multipart/form-data">
+<fieldset class="rows">
+        <input type="hidden" name="uploadedfileid" id="uploadedfileid" value="" />
+        <input type="hidden" name="runinbackground" id="runinbackground" value="" />
+        <input type="hidden" name="completedJobID" id="completedJobID" value="" />
+	<ol><li>
+		<label for="comments">Նշումներ այս ֆայլի մասին </label>
+		<input type="text" id="comments" name="comments" />
+		
+	</li>
+	<li>
+		<label for="syntax">Նիշերի կոդավորում։ </label>
+		<select name="syntax" id="syntax"><option value="MARC21">MARC21</option><option value="UNIMARC">UNIMARC</option></select>
+		
+	</li>
+</ol></fieldset>
+  <fieldset class="rows">
+    <legend>Նայե՞լ քարտարանում գոյություն ունեցող գրառումները։</legend>
+    <ol><li><label for="matcher">Record matching rule:</label>
+    <select name="matcher" id="matcher">
+       <option value="">Մի նայիր համընկնող գրառումների համար</option> 
+       <!-- TMPL_LOOP name="available_matchers" -->
+          <option value="<!-- TMPL_VAR name="matcher_id" -->"><!-- TMPL_VAR name="code" --> (<!-- TMPL_VAR name="description" -->)
+          </option>
+       <!-- /TMPL_LOOP -->
+    </select>
+    </li>
+      <li><label for="overlay_action">Action if matching bibliographic record found: </label>
+           <!-- TMPL_INCLUDE NAME="tools-overlay-action.inc" -->
+      </li>
+      <li><label for="nomatch_action">Action if no match is found: </label>
+           <!-- TMPL_INCLUDE NAME="tools-nomatch-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="rows">
+    <legend>Ստուգե՞լ ներդրված նյութի գրառման արժեքը։</legend>
+    <ol>
+      <li class="radio">
+        <input type="radio" id="parse_itemsyes" name="parse_items" value="1" checked="checked" />
+        <label for="parse_itemsyes">Այո</label>
+      </li>
+      <li class="radio">
+        <input type="radio" id="parse_itemsno" name="parse_items" value="0" />
+        <label for="parse_itemsno">Ոչ</label>
+      </li>
+    </ol>
+    <ol>
+      <li><label for="item_action">How to process items: </label>
+           <!-- TMPL_INCLUDE NAME="tools-item-action.inc" -->
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset class="action"><input type="button" id="mainformsubmit" onclick="return CheckForm(this.form);" value="Փուլավորիր ներմուծման համար"></fieldset>
+  <div id="jobstatus" style="display:none">Job progress: <span id="jobprogress">0</span>%</div>
+  <div id="jobfailed" style="display:none"></div>
+</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="tools-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

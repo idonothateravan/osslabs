@@ -1,0 +1,208 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration &rsaquo; Valeurs autorisées <!-- TMPL_IF name="add_form" --> &rsaquo; <!-- TMPL_IF name="action_modify" -->Modifier la valeur autorisée<!-- /TMPL_IF -->
+	   <!-- TMPL_IF name="action_add_value" --> &rsaquo; Ajout valeur autorisée<!-- /TMPL_IF -->
+	   <!-- TMPL_IF name="action_add_category" --> &rsaquo; Nouvelle catégorie<!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" --> &rsaquo; Confirmer la suppression<!-- /TMPL_IF -->
+<!-- TMPL_IF name="else" -->Valeurs autorisées<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl"> Accueil </a> &rsaquo;<a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo; <!-- TMPL_IF name="add_form" --> <a href="/cgi-bin/koha/admin/authorised_values.pl">Valeur autorisées</a> &rsaquo; <!-- TMPL_IF name="action_modify" -->Modifier la valeur autorisée<!-- /TMPL_IF -->
+	   <!-- TMPL_IF name="action_add_value" -->Ajouter valeur autorisée<!-- /TMPL_IF -->
+	   <!-- TMPL_IF name="action_add_category" -->Ajouter catégorie<!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" --> <a href="/cgi-bin/koha/admin/authorised_values.pl">Valeur autorisées</a> &rsaquo; Confirmer la suppression<!-- /TMPL_IF -->
+<!-- TMPL_IF name="else" -->Valeurs autorisées<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF name="add_form" -->
+	<h1>
+	   <!-- TMPL_IF name="action_modify" -->Modifier la valeur autorisée<!-- /TMPL_IF -->
+	   <!-- TMPL_IF name="action_add_value" -->Ajouter valeur autorisée<!-- /TMPL_IF -->
+	   <!-- TMPL_IF name="action_add_category" -->Ajouter catégorie<!-- /TMPL_IF -->
+	</h1>
+	<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+	<input type="hidden" name="op" value="add_validate" />
+        <fieldset class="rows"><ol>
+        <li>
+			 <!-- TMPL_IF name="action_add_category" --><label for="category">Catégorie</label>
+		<input type="text" name="category"  id="category" size="16" maxlength="16" /> 
+			 <!-- TMPL_ELSE --><span class="label">Catégorie</span>
+		<input type="hidden" name="category" value="<!-- TMPL_VAR NAME='category' -->" />	 <!-- TMPL_VAR NAME='category' -->
+			 <!-- /TMPL_IF -->
+        </li>
+        <li>
+            <label for="authorised_value">Valeur autorisée</label>
+     <!-- TMPL_IF name="action_modify" --><input type="hidden" id="id" name="id" value="<!-- TMPL_VAR name="id" -->" /><!-- /TMPL_IF -->
+            <input type="text" id="authorised_value" name="authorised_value" value="<!-- TMPL_VAR name="authorised_value" -->" />
+        </li>
+        <li>
+            <label for="lib">Description</label>
+            <input type="text" name="lib" id="lib" value="<!-- TMPL_VAR name="lib" -->" />
+        </li>
+        <li>
+            <label for="lib">Icone</label>
+            <ul>
+  <!-- TMPL_LOOP NAME="imagesets" -->
+  <li>Collection d'icone <b><!-- TMPL_VAR name="imagesetname" --></b> :</li>
+  <!-- TMPL_LOOP NAME="images" -->
+  			<li style="float: none; display: inline; clear : none; width: auto;">
+            <label> <!-- TMPL_IF NAME="StaffImageUrl" -->
+              <img src="<!-- TMPL_VAR name="StaffImageUrl" -->" alt="<!-- TMPL_VAR name="StaffImageUrl" -->" title="<!-- TMPL_VAR name="StaffImageUrl" -->" />
+        <!-- TMPL_ELSE -->
+        <!-- /TMPL_IF -->
+    <!-- TMPL_IF name="checked" -->
+              <input type="radio" name="imageurl" value="<!-- TMPL_VAR name="KohaImage" -->" checked="checked" />
+    <!-- TMPL_ELSE -->
+              <!-- TMPL_IF NAME="KohaImage" --> <!-- to delete the radio button if there is no image after -->
+              <input type="radio" name="imageurl" value="<!-- TMPL_VAR name="KohaImage" -->" />
+              <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+            </label>
+			</li>
+  <!-- /TMPL_LOOP -->
+  <!-- /TMPL_LOOP -->
+  </ul><ul>
+  <li><label for="noimage">Pas d'image </label><input type="radio" name="imageurl" id="noimage" value="removeImage" /></li>
+  </ul>
+
+        
+        </ol></fieldset>
+       <fieldset class="action"> <input type="hidden" name="id" value="<!-- TMPL_VAR name="id" -->" />
+        <input type="submit" value="Enregistrer"> <a class="cancel" href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=<!-- TMPL_VAR NAME="category" -->">Annuler</a></fieldset>
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF name="delete_confirm" -->
+	<div class="dialog alert">
+<h3>Confirmer la suppression</h3>
+<table>
+	<tr>
+		<th>Catégorie</th>
+		<th>Variable</th>
+		<th>Valeur</th>
+	</tr>
+	<tr>
+		<td><!-- TMPL_VAR name="searchfield" --></td>
+	<td><!-- TMPL_VAR name="Tvalue" --></td>
+	<td><!-- TMPL_VAR name="Tlib" --></td></tr>
+	</table>
+	<form action="<!-- TMPL_VAR name=" script_name " -->" method="post">
+		<input type="hidden" name="op" value="delete_confirmed" />
+		<input type="hidden" name="id" value="<!-- TMPL_VAR name="id" -->" />
+		<input type="hidden" name="searchfield" value="<!-- TMPL_VAR name="searchfield" -->" /><fieldset class="action"><input type="submit" value="Oui, supprimer" class="approve"></form>
+<form action="<!-- TMPL_VAR name=" script_name " -->" method="get"><input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" /><input type="submit" value="Non, ne pas supprimer" class="deny"></form>
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="else" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+
+	// prepare DOM for YUI Toolbar
+
+	 $(document).ready(function() {
+	    yuiToolbar();
+		$('#category').find("input:submit").hide();
+		$('#searchfield').change(function() {
+		$('#category').submit();
+		});
+	 });
+
+	// YUI Toolbar Functions
+
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("addauth");
+	    new YAHOO.widget.Button("addcat");
+	}
+
+	//]]>
+	</script>
+	<ul class="toolbar">
+	 <li><a id="addauth" href= "/cgi-bin/koha/admin/authorised_values.pl?op=add_form&amp;category=<!-- TMPL_VAR NAME="category" -->">Ajouter valeur autorisée pour <!-- TMPL_VAR name="category" --></a></li>
+    <li><a id="addcat" href= "/cgi-bin/koha/admin/authorised_values.pl?op=add_form">Ajouter catégorie</a></li>
+</ul></div>
+
+<h1>Valeurs autorisées</h1>
+<p>Cette table est utilisée dans la définition de MARC. Vous pouvez définir autant de catégories que vous le souhaitez, et autant de valeurs autorisées que vous souhaitez dans chaque catégorie.</p>
+<p>Lorsque vous déterminez la structure des sous-champs MARC, vous pouvez lier un sous-champ à une catégorie de valeurs autorisées. Lorsque le bibliothécaire créée une notice, le sous-champ n'est plus une zone de saisie libre, mais une liste déroulante.</p>
+<!-- TMPL_IF name="duplicate_category" -->
+<div>
+<span class="problem">Impossible d'ajouter la valeur &quot;<!-- TMPL_VAR name="duplicate_value" -->&quot; pour la catégorie &quot;<!-- TMPL_VAR name="duplicate_category" -->&quot; &mdash; Valeur déjà présente.
+</span>
+</div>
+<!-- /TMPL_IF -->
+<form action="/cgi-bin/koha/admin/authorised_values.pl" method="post" id="category"><label for="searchfield">Voir catégorie :  </label><!-- TMPL_VAR name="tab_list" --> <input type="submit" value="Valider"></form>
+<!-- TMPL_IF EXPR="category eq 'Bsort1'" -->
+    <p>Bsort1 est une liste de valeurs autorisées associée aux adhérents, qui peut être utilisée pour les statistiques</p>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF EXPR="category eq 'Bsort2'" -->
+    <p>Bsort1 est une liste de valeurs autorisées associée aux adhérents, qui peut être utilisée pour les statistiques</p>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF EXPR="category eq 'Asort1'" -->
+    <p>Asort1 est une une liste de valeurs autorisées attachées aux acquisitions, qui peut être utilisée pour les statistiques</p>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF EXPR="category eq 'Asort2'" -->
+    <p>Asort2 est une une liste de valeurs autorisées attachées aux acquisitions, qui peut être utilisée pour les statistiques</p>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF EXPR="category eq 'SUGGEST'" -->
+    <p>La liste des motifs d'acceptation ou de rejet de suggestion des adhérents</p>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF EXPR="category eq 'DAMAGED'" -->
+    <p>La liste des états pour décrire les documents endommagés</p>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF EXPR="category eq 'LOST'" -->
+    <p>La liste des états pour décrire un document perdu</p>
+<!-- /TMPL_IF -->
+<table>
+<tr>
+	<th>Catégorie</th>
+	<th>Valeur autorisée</th>
+	<th>Description</th>
+	<th>Icone</th>
+	<th>Modifier</th>
+	<th>Supprimer</th>
+	</tr>
+<!-- TMPL_LOOP name="loop" -->
+<tr>
+	<td><!-- TMPL_VAR name="category" --></td>
+	<td><!-- TMPL_VAR name="authorised_value" --></td>
+	<td><!-- TMPL_VAR name="lib" --></td>
+	<td><img src="<!-- TMPL_VAR name="imageurl" -->" alt=""/></td>
+	<td><a href="<!-- TMPL_VAR name="edit" -->">Modifier</a></td>
+	<td><a href="<!-- TMPL_VAR name="delete" -->">Supprimer</a></td>
+</tr>
+<!-- /TMPL_LOOP -->
+</table>
+
+<!-- TMPL_IF NAME="isprevpage" -->
+<form class="inline" action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+<input type="hidden" name="offset" value="<!-- TMPL_VAR NAME="prevpage" -->" /><input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+	<input type="submit" value="&lt;&lt; Précédent"></form>
+<!-- /TMPL_IF --> 
+
+<!-- TMPL_IF NAME="nextpage" -->
+<form class="inline" action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+<input type="hidden" name="offset" value="<!-- TMPL_VAR NAME="nextpage" -->" /><input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+	<input type="submit" value="Page suivante >>"></form>
+<!-- /TMPL_IF -->
+
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

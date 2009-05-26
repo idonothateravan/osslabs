@@ -1,0 +1,63 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>新增期刊訂閱</h1>
+
+<h2>如何設定期刊訂閱？</h2>
+<p>你在訂閱前，你有一些設定需要處理：</p>
+	<ul>
+		<li>採訪供應商支援訂閱</li>
+		<li>你可以訂閱有書目記錄（沒有館藏記錄）。</li>
+	</ul>	.  
+<h2>如何設定新增訂閱？</h2>
+<p>這個表單有四個部分：</p>
+
+<h3>步驟 1：查詢供應商</h3>
+
+<p>If you want to claim any issues then you need to elect a supplier at this point.</p>
+<h3>步驟 2：查詢書目記錄</h3>
+
+<p>It should find the item that was just set up in Acquisitions. Note If you have not yet set this up in Acquisitions, click Create Biblio. It will take you back to Acquisitions Order Form.</p>
+<h3>步驟 3：填上其他訂單詳情</h3>
+<p>This includes the Call Number, Home branch for the Serial and any notes.</p>
+<p>Select the Patron Alert: you will need to choose a Notice that can be sent to patrons when a new issue arrives. To edit this notice, go to Tools &gt; Notices.</p>
+<h3>步驟 4：填上訂閱詳情。</h3>
+
+<p>This is a critical component of managing serials. In order to make the system predict the next issue the user must fill out each of these fields. Once completed it will populate the Numbering Calculation box below.</p>
+<p>參考  &gt; 更多訂閱資訊</p>
+<h3>步驟 5：填上訂閱長度</h3>
+
+<p>Indicate the expected length of time that this serial will be subscribed to.</p>
+<p>This sets up the expiry date in the system and also sets up an Alert a month before expected expiry.</p>
+<h3>步驟 6：計算期號</h3>
+
+<p>If a choice has been made in the Numbering Pattern section then the Numbering Calculation will automatically be filled out and presented in this section. However, if the Numbering Pattern is &ldquo;None of the above&rdquo; then a formula will be presented and the user must fill this out.</p>
+<p>參考更多訂閱計算公式</p>
+<h3>步驟 7：新增訂閱</h3>
+
+<p>Once that is filled out then you see the completed details page. If there is a mistake you can go back and Edit the details.</p>
+<p>下一步 - 收到期刊（參考收到期刊線上說明）</p><h2>如何處理期刊訂單？</h2>
+
+<h3>1. 第一期到館日</h3>
+
+<p>Displays a calendar &ndash; choose the expected date of arrival in the library. This date is for administrative purposes only. It ties in with the Claims component of the Serials Module. It is not the date of the first issue. This is selected below in the Begins On field.</p>
+<h3>2. 頻率</h3>
+
+<p>使用下拉式選單，來處理主要事情。</p>
+<h3>3. 期數計算方式</h3>
+
+<p>主要數字下拉式選單：</p>
+	<ul>
+		<li>號碼</li>
+		<li>卷，期（Volume, Number, Issue）</li>
+		<li>卷，期</li>
+		<li>卷，期</li>
+		<li>期，卷</li>
+		<li>只有季刊</li>
+		<li>上面沒有</li>
+	</ul>
+<p>If it is &ldquo;none of the above&rdquo; this will bring up a Numbering Calculation formula at the bottom of the screen.</p>
+<p>The system handles exceptions (e.g Item arrives monthly but only 10 issues in the year). Set the rollover to the max number of issues expected in the year. Then click the &quot;Irregularity&quot; link. Choose which instances are skipped.</p>
+<h3>4. 開始於</h3>
+
+<p>Displays a calendar &ndash; choose the date of the first issue. For example, the library is subscribing to a monthly magazine and the first issue expected is the February issue. You would then choose 1st of February.</p><h2>期刊計算</h2>
+<p>The &quot;numbering formula&quot; can be filled with any text and/or numbers. Three special tokens {X}, {Y} and {Z} can be used to define the calculation formula. This allows you to define patterns not possible with the Numbering Pattern drop downs.</p><!-- TMPL_INCLUDE name="help-bottom.inc" -->

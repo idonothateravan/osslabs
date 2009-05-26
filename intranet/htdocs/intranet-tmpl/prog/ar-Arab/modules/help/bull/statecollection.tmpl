@@ -1,0 +1,29 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>أعداد الدوريات وملخصها</h1>
+
+<p>هذه الشاشة مقسّمة الى جزئين</p>
+	<h2>الجزء الايمن</h2>
+	<p>يتعامل الجزء الايمن مع الاعداد. عندما تنشئ إشتراك جديد، العدد الأول يحسب آليا. عندما تريد/تحتاج، يمكنك أن تعرّف الاعداد التي لها حالة جديدة: </p>
+	<ul>
+		<li>وصل :عند وصول كتاب,يمكن ضبط حالتة على "وصل". بعدها, العدد سيختفى من هذه القائمة, ويضاف رقم العدد الى "قائمة الوصول" (فى الصندوق على اليسار)</li>
+		<li>متأخر :تعنى أن الكتاب متأخر وكان يجب أن يصل. الكتب تغيرت إلى "متأخر" تبقى الحالة على قائمة العدد, والعدد المنتظر القادم منشأ</li>
+		<li>Missing : means the book will never arrive. The issue disappear from the list, and the number of the issue is added to the "missing list" (on the left box)</li>
+	</ul>
+	<h2>الجزء الايسر</h2>
+	<p>يحتوي الجزء الايسر على ستّة عناصر، البعض يحسبون آليا لكن لكن يمكن أن يتم تغييرهم</p>
+	<ul>
+		<li>تاريخ بدء الاشتراك : تاريخ بدء الاشتراك الاول. لا يجب أن يكون معدّل ولم يعدّل آليا بتجديد الإشتراكات </li>
+		<li>تاريخ نهاية الاشتراك : يجب أن يدخل يدويا عندما يكون الإشتراك definetly مغلق</li>
+		<li>الارقام التى وصلت : قائمة الاعداد التى توجد فى مكتبتك. تملئ آليا عندما يحدد الرقم الجديد "وصل".يمكنك تغيير هذا الحقل يدويا إذا أردت, على سبيل المثال, لتغيير قائمة طويلة (1,2,3,4,...,51) الى واحدة أقصر (1-51)</li>
+		<li>Missing numbers : the list of issues you don't have in your library, and that will never arrive (or have been lost). Automatically filled when a new number is marked "missing". You can manually change this field if you want, for example, to change a long list (1,2,3,4,...,51) to a shorter one (1-51)</li>
+		<li>ملاحظة أوباك :الحقل الذي يظهر على الفهرس ( مع بعض معلومات الإشتراك مثل تاريخ بداية الإشتراك وتاريخ إنتهاءه. هذا الحقل يجب أن يملأ يدويا. ولا يوجد شيء يضاف أوتوماتيكيا</li>
+		<li>ملاحظة opac : الحقل الذي يظهر في واجهة أمين المكتبة (مع (مع بعض معلومات الاشتراك الاخرىمثل تاريخ البدء وتاريخ الانتهاء. هذا الحقل يجب أن يتم ملئه يدويا.لا يوضع أى شئ هنا آليا.</li>
+	</ul>
+	<h2>تجديدات إشتراك</h2>
+	<p>Koha calculates automatically the end of the subscription (based on the start date and the number of issues received). when a subscription has ended, you can't change the status of the last "waited number" (as it's not waited in fact). To be able to "receive" this number, you must renew your subscription.</p>
+	<p>تجديد إشتراك يعني بأنّك تعرّف بعض المعلومات للتجديد. عندما تكون تلك المعلومات ملئت , ينشأ إقتراح آليا في كوها. هذا الإقتراح يمكن أن يدار من قبل المكتبي الذي يطلب الكتب، كأيّ طلب آخر (= ميزانية وبائع كتب معرّف هنا).</p>
+	<p><i>Note that the subscription renewal done by the "serials librarian" is supposed to be immediate. We have decided to keep Koha as simple as possible. In fact, the subscription renewal won't be immediate, but we didn't wanted to add too much complexity.</i></p>
+	</p>
+
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

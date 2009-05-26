@@ -1,0 +1,55 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Տացք &rsaquo; Վիճակագրություն</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="circ-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Տուն</a> &rsaquo; <a href="/cgi-bin/koha/circ/circulation-home.pl">Տացք</a> &rsaquo; Վիճակագրություն</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+    <!-- TMPL_IF NAME="notime" -->
+        <h1>Արտածիր վիճակագրությունը համար</h1>
+        <ul>
+            <li><a href="/cgi-bin/koha/circ/stats.pl?time=yesterday">երեկ</a></li>
+            <li><a href="/cgi-bin/koha/circ/stats.pl?time=today">այսօր</a></li>
+    <!-- TMPL_ELSE -->
+    	<!-- TMPL_IF NAME="loop1" -->
+    	<table>
+    	<caption>Վիճակագրություն</caption>
+    		<tr>
+    			<th>Անուն</th>
+    			<th>Տեսակ</th>
+    			<th>Ամսաթիվ/ժամ</th>
+    			<th>Մեծություն</th>
+    			<th>Գրադարան</th>
+    		<tr>
+    		<!-- TMPL_LOOP name="loop1" -->
+    		<tr>
+    			<td><!-- TMPL_VAR NAME="name" --></td>
+    			<td><!-- TMPL_VAR NAME="type" --></td>
+    			<td><!-- TMPL_VAR NAME="time" --></td>
+    			<td><!-- TMPL_VAR NAME="amount" --></td>
+    			<td><!-- TMPL_VAR NAME="branch" --></td>
+    		</tr>
+    		<!-- /TMPL_LOOP -->
+    		</table>
+    		<p>Ընդամենը վճարված: <!-- TMPL_VAR NAME="total" --><br />Ընդամենը դուրս գրված: <!-- TMPL_VAR NAME="totalw" --></p>
+    	<!-- TMPL_ELSE -->
+    	<h3>Հաշվետվության համար չկա վիճակագրություն</h3>
+    	<!-- /TMPL_IF -->
+	
+    <!-- /TMPL_IF -->
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="circ-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

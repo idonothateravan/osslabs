@@ -1,0 +1,86 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 採訪 &rsaquo; 查詢已經存在的館藏記錄</title>
+<!-- TMPL_INCLUDE NAME="greybox.inc" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="acquisitions-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/acqui/acqui-home.pl">Acquisitions</a> &rsaquo; Search Existing Records</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	
+<h1>查詢存在的書目記錄</h1>
+
+
+<!-- TMPL_IF NAME="total" -->
+<b><!-- TMPL_VAR NAME="total" --> results found</b> <!-- TMPL_VAR name='pagination_bar'-->
+<!-- TMPL_ELSE -->
+<h3> 找不到</h3>
+<p>
+    沒有符合查詢條件 <span style="font-weight: bold;">&ldquo;<!-- TMPL_VAR NAME="query" -->&rdquo;</span> 在 <!-- TMPL_VAR NAME="LibraryName" -->
+</p>
+<a href="JavaScript:back();" title="新查詢：">查詢</a>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="query_error" -->
+<br /><br />
+<b>錯誤：</b>
+<span class="problem">
+    <!-- TMPL_VAR NAME="query_error" -->
+</span>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="total"-->
+<div class="searchresults">
+    <table>
+    <tr>
+       <th>摘要</th>
+       <th>出版者</th>
+       <th>出版日期</th>
+       <th colspan="2">&nbsp;</th>
+    </tr>
+    <!-- TMPL_LOOP NAME="resultsloop" -->
+        <tr>
+            <td>
+                <p><span class="title"><!-- TMPL_VAR NAME="title" --></span>
+                <!-- TMPL_IF name="author" -->  依照 <span class="author"><!-- TMPL_VAR NAME="author" --></span>,<!-- /TMPL_IF --></p>
+                <p><!-- TMPL_IF name="isbn" --> <!-- TMPL_VAR name="isbn" --><!-- /TMPL_IF -->
+                <!-- TMPL_IF name="pages" --> - <!-- TMPL_VAR name="pages" --><!-- /TMPL_IF -->
+                <!-- TMPL_IF name="notes" --> : <!-- TMPL_VAR name="notes" --><!-- /TMPL_IF -->
+                <!-- TMPL_IF name="size" --> ; <!-- TMPL_VAR name="size" --><!-- /TMPL_IF -->
+                </p>
+            </td>
+            <td>
+                <!-- TMPL_VAR name="publishercode" -->
+                <!-- TMPL_IF name="place" --> ; <!-- TMPL_VAR name="place" --><!-- /TMPL_IF -->
+            </td>
+            <td>
+                <!-- TMPL_VAR NAME="copyrightdate" -->
+            </td>
+        <td>
+        <a href="/cgi-bin/koha/catalogue/showmarc.pl?id=<!-- TMPL_VAR NAME="biblionumber" -->" title="MARC" rel="gb_page_center[600,500]">顯示機讀格式（MARC）</a>
+        </td>
+            <td>
+            <a href="/cgi-bin/koha/acqui/neworderempty.pl?booksellerid=<!-- TMPL_VAR NAME="booksellerid" -->&amp;basketno=<!-- TMPL_VAR NAME="basketno" -->&amp;biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->" title="訂購這一個">
+                訂單
+            </a>
+            </td>
+        </tr>
+    <!-- /TMPL_LOOP -->
+    </table>
+</div>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="acquisitions-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

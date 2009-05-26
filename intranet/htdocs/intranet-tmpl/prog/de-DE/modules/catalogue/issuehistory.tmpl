@@ -1,0 +1,103 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Katalog &rsaquo; Ausleihhistorie für <!-- TMPL_VAR NAME="title" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/catalogue/search.pl">Katalogisierung</a> &rsaquo; Ausleihhistorie für <i><!-- TMPL_VAR NAME="title" --></i></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Ausleihverlauf für <!-- TMPL_VAR NAME="title" --> <!-- TMPL_IF NAME="author" -->(<!-- TMPL_VAR NAME="author" -->)<!-- /TMPL_IF --> </h1>
+
+<div class="searchresults">
+    <!-- TMPL_IF NAME="issues" -->
+        <p><b>Wurde <!-- TMPL_VAR NAME="total" --> Mal ausgeliehen</b></p>
+        <table>
+            <tr><th>Datum</th>
+            <th>Nachname</th>
+            <th>Vorname</th>
+            <th>Barcode</th>
+            <th>Bibliothek</th>
+            <th>Issuing Library</th>
+            <th>Erneuern</th>
+            <th>Rückgabedatum</th>
+            <th>Rückgabedatum</th></tr>
+        <!-- TMPL_LOOP NAME="issues" -->
+            <tr>
+                <td><!-- TMPL_IF NAME="issuedate" -->
+                        <!-- TMPL_VAR NAME="issuedate" -->
+                    <!-- TMPL_ELSE -->
+                        &nbsp;
+                    <!-- /TMPL_IF --></td>
+                <td><!-- TMPL_IF NAME="surname" -->
+                        <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->">
+                            <!-- TMPL_VAR NAME="surname" -->
+                        </a>
+                    <!-- TMPL_ELSE -->
+                        &nbsp;
+                    <!-- /TMPL_IF --></td>
+                <td><!-- TMPL_IF NAME="firstname" -->
+                        <!-- TMPL_VAR NAME="firstname" -->
+                    <!-- TMPL_ELSE -->
+                        &nbsp;
+                    <!-- /TMPL_IF --></td>
+                <td><!-- TMPL_IF NAME="barcode" -->
+                        <!-- TMPL_VAR NAME="barcode" -->
+                    <!-- TMPL_ELSE -->
+                        &nbsp;
+                    <!-- /TMPL_IF --></td>
+                <td><!-- TMPL_IF NAME="branchcode" -->
+                        <!-- TMPL_VAR NAME="branchcode" -->
+                    <!-- TMPL_ELSE -->
+                        &nbsp;
+                    <!-- /TMPL_IF --></td>
+                <td><!-- TMPL_IF NAME="issuingbranch" -->
+                        <!-- TMPL_VAR NAME="issuingbranch" -->
+                    <!-- TMPL_ELSE -->
+                        &nbsp;
+                    <!-- /TMPL_IF --></td>
+                <td><!-- TMPL_IF NAME="renewals"-->
+                        JA<br />
+                        <small>
+                            <!-- TMPL_IF NAME="lastreneweddate" -->
+                                zuletzt am. <!-- TMPL_VAR NAME="lastreneweddate" -->
+                            <!-- /TMPL_IF -->
+                        </small>
+                    <!-- TMPL_ELSE -->
+                        NEIN
+                    <!-- /TMPL_IF --></td>
+                <td><!-- TMPL_IF NAME="date_due" -->
+                        <!-- TMPL_VAR NAME="date_due" -->
+                    <!-- TMPL_ELSE -->
+                        &nbsp;
+                    <!-- /TMPL_IF --></td>
+                <td><!-- TMPL_IF NAME="returndate" -->
+                        <!-- TMPL_VAR NAME="returndate" -->
+                    <!-- TMPL_ELSE -->
+                        &nbsp;
+                    <!-- /TMPL_IF --></td>
+           </tr>
+        <!-- /TMPL_LOOP -->
+		</table>
+    <!-- TMPL_ELSE -->
+        <p>
+        <b><!-- TMPL_VAR NAME="title" -->(<!-- TMPL_VAR NAME="author" -->)</b> <span class="problem">wurde nie entliehen.</span></p>
+        
+    <!-- /TMPL_IF -->
+</div>
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="biblio-view-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

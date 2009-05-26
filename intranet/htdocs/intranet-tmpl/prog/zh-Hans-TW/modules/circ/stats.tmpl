@@ -1,0 +1,55 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 流通 &rsaquo; 統計報表</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="circ-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; <a href="/cgi-bin/koha/circ/circulation-home.pl">流通</a> &rsaquo; 統計</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+    <!-- TMPL_IF NAME="notime" -->
+        <h1>顯示統計報表：</h1>
+        <ul>
+            <li><a href="/cgi-bin/koha/circ/stats.pl?time=yesterday">昨天</a></li>
+            <li><a href="/cgi-bin/koha/circ/stats.pl?time=today">今天</a></li>
+    <!-- TMPL_ELSE -->
+    	<!-- TMPL_IF NAME="loop1" -->
+    	<table>
+    	<caption>統計</caption>
+    		<tr>
+    			<th>名稱</th>
+    			<th>型式</th>
+    			<th>日期</th>
+    			<th>金額</th>
+    			<th>圖書館</th>
+    		<tr>
+    		<!-- TMPL_LOOP name="loop1" -->
+    		<tr>
+    			<td><!-- TMPL_VAR NAME="name" --></td>
+    			<td><!-- TMPL_VAR NAME="type" --></td>
+    			<td><!-- TMPL_VAR NAME="time" --></td>
+    			<td><!-- TMPL_VAR NAME="amount" --></td>
+    			<td><!-- TMPL_VAR NAME="branch" --></td>
+    		</tr>
+    		<!-- /TMPL_LOOP -->
+    		</table>
+    		<p>總計付款：<!-- TMPL_VAR NAME="total" --><br />總共註銷：<!-- TMPL_VAR NAME="totalw" --></p>
+    	<!-- TMPL_ELSE -->
+    	<h3>沒有統計報表</h3>
+    	<!-- /TMPL_IF -->
+	
+    <!-- /TMPL_IF -->
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="circ-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

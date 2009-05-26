@@ -1,0 +1,11 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+	
+	<h1>联机帮助</h1>
+	<p>对不起，这个主题没有说明。</p>
+<form action="/cgi-bin/koha/edithelp.pl" method="post">
+<input type="hidden" name="referer" value="<!-- TMPL_VAR NAME="referer" -->" />
+<input type="hidden" name="type" value="addnew" />
+<input type="submit" name="submit" class="submit" value="新增说明">
+</form>
+	
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

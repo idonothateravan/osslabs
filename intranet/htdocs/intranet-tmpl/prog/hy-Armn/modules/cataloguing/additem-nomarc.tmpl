@@ -1,0 +1,126 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Քարտագրում &rsaquo; Ավելացրու նյութեր</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+
+<!-- TMPL_IF NAME="NOBARCODE" -->
+Դու պետք է նյութին կցես շտրիխ կոդ
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="NOBIBLIOITEM" -->
+Դու պետք է ստեղծես նոր խումբ քո ավելացվող նյութի համար<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="BARCODEINUSE" -->
+Այդ շտրիխ կոդը արդեն գործածության մեջ է<!-- /TMPL_IF -->
+
+<h2>Ավելացրու նյութեր  <!-- TMPL_VAR NAME="TITLE" --></h2>
+
+<table>
+	<caption>Մատենագիտական մանրամասներ</caption>
+<tr><th scope="row">Հեղինակ:</th><td><!-- TMPL_VAR NAME="AUTHOR" --></td></tr>
+<tr><th scope="row">Հեղինակային իրավունք։</th><td><!-- TMPL_VAR NAME="COPYRIGHT" --></td></tr>
+<tr><th scope="row">Մատենաշարի վերնագիր։</th><td><!-- TMPL_VAR NAME="SERIES" --></td></tr>
+<tr><th scope="row">Նշումներ։</th><td><!-- TMPL_VAR NAME="NOTES" --></td></tr>
+
+<!-- TMPL_LOOP NAME="BIBITEMS" -->
+<tr><th scope="row">Մատենանյութի համար։ </th><td><!-- TMPL_VAR NAME="biblioitemnumber" --></td></tr>
+<tr><th scope="row">Նյութի տեսակ։ </th><td><!-- TMPL_VAR NAME="itemtype" --></td></tr>
+<tr><th scope="row">ISBN:</th><td><!-- TMPL_VAR NAME="isbn" --></td></tr>
+<tr><th scope="row">Դյուի։</th><td><!-- TMPL_VAR NAME="dewey" --></td></tr>
+<tr><th scope="row">Հրատարակիչ ։</th><td><!-- TMPL_VAR NAME="publishercode" --></td></tr>
+<tr><th scope="row">Վայր։</th><td><!-- TMPL_VAR NAME="place" --></td></tr>
+<tr><th scope="row">Ամսաթիվ։</th><td><!-- TMPL_VAR NAME="publicationyear" --></td></tr>
+
+<!-- TMPL_LOOP NAME="ITEMS -->
+<tr><th scope="row">Նյութ…</th><td><!-- TMPL_VAR NAME="barcode" --></td></tr>
+<tr><th scope="row">Տնային գրադարան։</th><td><!-- TMPL_VAR NAME="homebranch" --></td></tr>
+<tr><th scope="row">Նշումներ։</th><td><!-- TMPL_VAR NAME="itemnotes" --></td></tr>
+<!-- /TMPL_LOOP -->
+
+<!-- /TMPL_LOOP -->
+</table>
+
+
+<form action="saveitem.pl" method="post">
+<input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="BIBNUM" -->" />
+<table>
+<caption>Ավելացրու նոր նյութ</caption>
+<tr><th scope="row"><label for="barcode">Նյութի շտրիխ կոդ։</label></th><td><input type="text" id="barcode" name="barcode" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="homebranch">Գրադարան ։</label></th><td><select name="homebranch" id="branch">
+<!-- TMPL_LOOP NAME="BRANCHES" -->
+<option value="<!-- TMPL_VAR NAME="branchcode" -->"><!-- TMPL_VAR NAME="branchname" --></option>
+<!-- /TMPL_LOOP -->
+</select></td>
+</tr>
+<tr><th scope="row"><label for="replacementprice">Փոխարինման գին։</label></th><td><input type="text" name="replacementprice" id="replacementprice" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="itemnotes">Նշումներ։</label></th><td><textarea name="itemnotes" id="itemnotes" cols="30" rows="6"></textarea></td>
+</tr>
+<tr>
+<th colspan="2" >Ավելացրու առկա խմբին</td>
+</tr>
+<tr><th scope="row"><label for="biblioitemnumber">Մատենանյութի համար։</label></th><td><select name="biblioitemnumber" id="biblioitemnumber">
+<!-- TMPL_LOOP NAME="BIBITEMS" -->
+    <option value="<!-- TMPL_VAR NAME="biblioitemnumber" -->"><!-- TMPL_VAR NAME="itemtype" --></option>
+<!-- /TMPL_LOOP -->
+</select></td></tr>
+</table>
+<input type="submit" name="existinggroup" value="Ավելացրու նոր նյութ առկա խմբին">
+<table>
+<caption>ԿԱՄ ԱՎԵԼԱՑՐՈՒ նոր խմբին</caption>
+<tr><th scope="row"><label for="itemtype">Նյութի տեսակ։</label></th><td><select name="itemtype" id="itemtype">
+<!-- TMPL_LOOP NAME="ITEMTYPES" -->
+<option value="<!-- TMPL_VAR NAME="itemtype" -->"><!-- TMPL_VAR NAME="description" --></option>
+<!-- /TMPL_LOOP -->
+</select></td>
+</tr>
+<tr><th scope="row"><label for="isbn">ISBN:</label></th><td><input type="text" name="isbn" id="isbn" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="publishercode">Հրատարակիչ ։</label></th><td><input type="text" name="publishercode" id="publishercode" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="publicationyear">Հրատարակման տարի ։</label></th><td><input type="text" name="publicationyear" id="publicationyear" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="place">Հրատարակման վայր։</label></th><td><input type="text" name="place" id="place" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="illus">Ձևավորող։</label></th><td><input type="text" name="illus" id="illus" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="url">Կայքի հասցե:</label></th><td><input type="text" name="url" id="url" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="dewey">Դյուի։</label></th><td><input type="text" name="dewey" id="dewey" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="subclass">Դյուի ենթադաս</label></th><td><input type="text" name="subclass" id="subclass" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="issn">ISSN:</label></th><td><input type="text" name="issn" id="issn" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="lccn">LCCN:</label></th><td><input type="text" name="lccn" id="lccn" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="volume">Հատոր։</label></th><td><input type="text" name="volume" id="volume" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="number">Թիվ։</label></th><td><input type="text" name="number" id="number" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="volumeddesc">Հատորի նկարագրություն</label></th><td><input type="text" name="volumeddesc" id="volumeddesc" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="pages">Էջեր։</label></th><td><input type="text" name="pages" id="pages" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="size">Չափ։</label></th><td><input name="size" size="40" /></td>
+</tr>
+<tr><th scope="row"><label for="notes">Նշումներ։</label></th><td><textarea cols="30" rows="6" name="notes" id="notes"></textarea></td>
+</tr>
+</table>
+<input type="submit" name="newgroup" value="Ավելացրու նոր նյութ նոր խմբին">
+</form>
+</div>
+</div>
+</div>
+
+<!-- TMPL_INCLUDE NAME="mainmenu.inc" -->
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

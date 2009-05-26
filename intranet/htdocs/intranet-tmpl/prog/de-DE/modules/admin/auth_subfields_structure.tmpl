@@ -1,0 +1,215 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration &rsaquo; Normdaten MARC-Unterfeld-Struktur</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+
+	 $(document).ready(function() {
+ 		$('#subfieldtabs > ul').tabs();
+	 });
+
+function displayMoreConstraint(numlayer){
+    var thisdiv = document.getElementById(numlayer);
+    if(thisdiv.getAttribute("class") == "content_hidden"){
+        thisdiv.removeAttribute('class');
+        thisdiv.setAttribute("class","content_visible");
+    } else {
+        thisdiv.removeAttribute('class');
+        thisdiv.setAttribute("class","content_hidden");
+    }
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo;
+  <!-- TMPL_IF NAME="else" -->MARC Teilfeldstruktur für Normdaten
+  <!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/auth_subfields_structure.pl?tagfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;tagsubfield=<!-- TMPL_VAR NAME="tagsubfield" -->&amp;authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->">MARC Normdatenstruktur der Unterfelder</a> &rsaquo;
+  <!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="delete_confirm" -->Löschen des Unterfelds <!-- TMPL_VAR NAME="tagsubfield" --> bestätigen?<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="delete_confirmed" -->Daten gelöscht<!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="add_form" -->
+  <!-- TMPL_IF NAME="use-heading-flags-p" -->
+  <!-- TMPL_IF NAME="heading-edit-subfields-p" -->Einschränkungen für MARC Unterfelder bearbeiten<!-- /TMPL_IF -->
+  <!-- TMPL_ELSE --><!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF -->
+  <!-- /TMPL_IF -->
+</div>
+
+<div id="doc3" class="yui-t2">
+
+<div id="bd">
+    <div id="yui-main">
+    <div class="yui-b">
+
+<!-- TMPL_IF NAME="add_form" -->
+
+    <h1><!-- TMPL_IF NAME="use-heading-flags-p" -->
+    <!-- TMPL_IF NAME="heading-edit-subfields-p" -->Einschränkungen für MARC Unterfelder bearbeiten für Feld <!-- TMPL_VAR name="tagfield" --> Normdatensatz <!-- TMPL_VAR name="authtypecode" --><!-- /TMPL_IF -->
+    <!-- TMPL_ELSE --><!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF --></h1>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+        <input type="hidden" name="op" value="add_validate" />
+        <input type="hidden" name="tagfield" value="<!-- TMPL_VAR name="tagfield" -->" />
+        <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR NAME="authtypecode" -->" />
+        <fieldset class="action"><input type="submit" class="submit" value="Änderungen speichern"> <a class="cancel" href="/cgi-bin/koha/admin/auth_subfields_structure.pl?authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->">abbrechen</a></fieldset>
+        <div id="subfieldtabs" class="toptabs numbered">
+            <ul>
+                <!-- TMPL_LOOP NAME="loop" -->
+                    <!-- TMPL_IF NAME="new_subfield" -->
+                        <!-- TMPL_IF EXPR="tagfield >=10" --><!-- display new only for > 10 fields -->
+                        <li><a href="/cgi-bin/koha/admin/auth_subfields_structure.pl#sub<!-- TMPL_VAR NAME="tagsubfield" -->field" title="<!-- TMPL_VAR NAME="liblibrarian" -->">neu</a></li>
+                        <!-- /TMPL_IF -->
+                    <!-- TMPL_ELSE -->
+                        <li><a href="/cgi-bin/koha/admin/auth_subfields_structure.pl#sub<!-- TMPL_VAR NAME="tagsubfield" -->field" title="<!-- TMPL_VAR NAME="liblibrarian" -->">
+                            <!-- TMPL_VAR NAME="tagsubfield" -->
+                    </a></li>
+                    <!-- /TMPL_IF --></li>
+                <!-- /TMPL_LOOP -->
+            </ul>
+
+        <!-- TMPL_LOOP NAME="loop" -->
+        <div id="sub<!-- TMPL_VAR NAME="tagsubfield" -->field">
+			<fieldset class="rows"><ol>
+                
+                <li><input type="hidden" name="tagsubfield" value="<!-- TMPL_VAR name="tagsubfield" -->" /><label for="repeatable<!-- TMPL_VAR NAME="row" -->">Wiederholbar: </label><!-- TMPL_VAR NAME="repeatable" -->&nbsp;</li>
+                <li><label for="mandatory<!-- TMPL_VAR NAME="row" -->">obligatorisch: </label><!-- TMPL_VAR NAME="mandatory" -->&nbsp;</li>
+                <li><label for="liblibrarian<!-- TMPL_VAR NAME="row" -->">Text für Bibliothekare: </label><input id="liblibrarian<!-- TMPL_VAR NAME="row" -->" type="text" name="liblibrarian" value="<!-- TMPL_VAR NAME="liblibrarian" -->" size="40" maxlength="80" /></li>
+                <li><label for="libopac<!-- TMPL_VAR NAME="row" -->">Text für OPAC: </label><input type="text" id="libopac<!-- TMPL_VAR NAME="row" -->" name="libopac" value="<!-- TMPL_VAR NAME="libopac" -->" size="40" maxlength="80" /></li>
+                <li><label for="tab<!-- TMPL_VAR NAME="row" -->">In Reitern verwaltet:  </label><!-- TMPL_VAR NAME="tab" --> (ignorieren heißt, dass das Unterfeld nicht in der Katalogisierung angezeigt wird)</li>
+                <li>
+                    <fieldset>
+                        <legend>anzeigen</legend>
+                        <ol>
+                            <li><label for="ohidden<!-- TMPL_VAR NAME="row" -->">Opac:</label><!-- TMPL_VAR name="ohidden" -->  </li>
+                            <li><label for="ihidden<!-- TMPL_VAR NAME="row" -->">Intranet:</label><!-- TMPL_VAR name="ihidden" --> </li>
+                            <li><label for="ehidden<!-- TMPL_VAR NAME="row" -->">Bearbeiter:</label><!-- TMPL_VAR name="ehidden" --> (siehe Onlinehilfe)</li>
+                        </ol>
+                    </fieldset>
+                </li>
+                <li><label for="isurl<!-- TMPL_VAR NAME="row" -->">Ist eine URL:</label><!-- TMPL_VAR NAME="isurl" --> (wenn gewählt ist Unterfeld eine URL und kann angeklickt werden)</li>
+                <li>
+                    <fieldset><legend>Hilfe für Eingabe</legend>	
+                        <ol>
+                            <li><label for="authorised_value<!-- TMPL_VAR NAME="row" -->">Autorisierter Wert:</label> <!-- TMPL_VAR NAME="authorised_value" --></li>
+                            <li><label for="frameworkcode<!-- TMPL_VAR NAME="row" -->">Thesaurus:</label> <!-- TMPL_VAR NAME="frameworkcode" --></li>
+                            <li><label for="value_builder<!-- TMPL_VAR NAME="row" -->">Plugin:</label> <!-- TMPL_VAR NAME="value_builder" --></li>
+                        </ol>
+                    </fieldset>
+                </li>
+            </ol></fieldset><br class="clear" />
+        </div>
+        <!-- /TMPL_LOOP -->
+        </div>
+    </form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+
+	<div class="dialog alert"><h3>Unterfeld löschen? <span class="ex">'<!-- TMPL_VAR NAME="tagsubfield" -->'?</span></h3>
+    <form action="<!-- TMPL_VAR NAME="delete_link" -->" method="post"><input type="hidden" name="op" value="delete_confirmed" />
+    <table><tr><th scope="row">Unterfeld:</th> <td><!-- TMPL_VAR NAME="tagsubfield" --></td></tr>
+    <tr><th scope="row">Beschreibung:</th> <td><!-- TMPL_VAR NAME="liblibrarian" --></td></tr></table>
+        <input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+        <input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+        <input type="hidden" name="tagsubfield" value="<!-- TMPL_VAR NAME="tagsubfield" -->" />
+        <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR NAME="authtypecode" -->" />
+        <input type="submit" class="approve" value="Ja, dieses Teilfeld löschen">
+		</form>
+		<form action="<!-- TMPL_VAR NAME="delete_link" -->" method="get">
+		 <input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+        <input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+        <input type="hidden" name="tagsubfield" value="<!-- TMPL_VAR NAME="tagsubfield" -->" />
+        <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR NAME="authtypecode" -->" />
+        <input type="submit" class="deny" value="Nein, nicht löschen">
+		</form>
+    </form></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirmed" -->
+
+   <div class="dialog message"> <h3>Daten gelöscht</h3>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+        <input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+        <input type="submit" class="approve" value="OK" />
+    </form></div>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="else" -->
+<h1>MARC Teilfeldstruktur für Normdatenverwaltung <!-- TMPL_VAR NAME="tagfield" --> (Normdatensatz: <!--TMPL_VAR NAME="authtypecode" -->)</h1>
+<p>This screen shows the subfields associated with the selected tag. You can edit subfields or add a new one by clicking on edit. </p>
+<p>The column <b>Koha field</b> shows that the subfield is linked with a Koha field. Koha can manage a MARC interface, and a Koha interface. This link ensures that both DB are synchronized</p>
+
+<table>
+    <tr>
+        <th>Unterfeld</th>
+        <th>Text</th>
+        <th>Bedingungen</th>
+        <th>Löschen</th>
+    </tr>
+    <!-- TMPL_LOOP NAME="loop" -->
+    <!-- TMPL_IF NAME="toggle" --><tr class="highlighted"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+        <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+        <td>
+            <!-- TMPL_IF NAME="subfield_ignored" -->
+                    <i><!-- TMPL_VAR NAME="liblibrarian" --></i>
+            <!-- TMPL_ELSE -->
+                    <!-- TMPL_VAR NAME="liblibrarian" -->
+            <!-- /TMPL_IF -->
+        </td>
+        <td>
+            <!-- TMPL_IF NAME="subfield_ignored" -->
+                    <i>Teilfeld ignoriert</i>
+            <!-- TMPL_ELSE -->
+                <strong>Tab:</strong><!-- TMPL_VAR NAME="tab" -->,
+                <!-- TMPL_IF NAME="kohafield" --> | <strong>Koha Feld:</strong> <!-- TMPL_VAR NAME="kohafield" -->, <!--/TMPL_IF -->
+                <!-- TMPL_IF NAME="repeatable" -->wiederholbar, <!-- TMPL_ELSE -->Nicht wiederholbar
+                <!-- /TMPL_IF -->
+                        <!-- TMPL_IF NAME="mandatory" -->obligatorisch, <!-- TMPL_ELSE -->Nicht verpflichtend,
+                <!-- /TMPL_IF -->
+                        <!-- TMPL_IF NAME="hidden" -->versteckt,
+                <!-- /TMPL_IF -->
+                        <!-- TMPL_IF NAME="isurl" -->ist eine URL,
+                <!-- /TMPL_IF -->
+                        <!-- TMPL_IF NAME="authorised_value" --> | <strong>Aut. Wert:</strong><!-- TMPL_VAR NAME="authorised_value" -->,
+                <!-- /TMPL_IF -->
+                        <!-- TMPL_IF NAME="frameworkcode" --> | <strong>Normdatensatz:</strong><!-- TMPL_VAR NAME="frameworkcode" -->,
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF NAME="value_builder" --> | <strong>Plugin:</strong><!-- TMPL_VAR NAME="value_builder" -->,<!-- /TMPL_IF -->
+            <!--/TMPL_IF-->
+        </td>
+        <td><a href="<!-- TMPL_VAR NAME="delete" -->">Löschen</a></td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+</table>
+
+	<form action="<!-- TMPL_VAR NAME="script_name" -->" method="get">
+	<fieldset class="action"><input type="hidden" name="op" value="add_form" />
+	<input type="hidden" name="tagfield" value="<!-- TMPL_VAR name="edit_tagfield" -->" />
+	<input type="hidden" name="authtypecode" value="<!-- TMPL_VAR name="edit_authtypecode" -->" />
+	<input type="submit" value="Subfields bearbeiten">
+	<a class="cancel" href="auth_tag_structure.pl?searchfield=<!-- TMPl_VAR name="tagfield" -->&amp;authtypecode=<!-- TMPL_VAR name="authtypecode"-->">abbrechen</a></fieldset>
+	</form>
+
+    <!-- TMPL_IF NAME="previous" -->
+    <input type="image" src="<!-- TMPL_VAR NAME="interface" -->/<!-- TMPL_VAR NAME="theme" -->/images/1leftarrow.png" title="vorheriges" alt="vorheriges" border="0">
+    </a>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="next" -->
+        <!-- TMPL_VAR NAME="next" -->
+    <input type="image" src="<!-- TMPL_VAR NAME="interface" -->/<!-- TMPL_VAR NAME="theme" -->/images/1rightarrow.png" title="nächster" alt="nächster" border="0">
+    </a>
+    <!-- /TMPL_IF -->
+
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

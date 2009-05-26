@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UNIMARC_Ersteller Feld 126b</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Typ der Platte, des Zylinders oder des Magnetbandes: </td>
+		<td>
+			<select name="f1" size="1">
+
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>Stich</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Stich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>Industrielle Produktion</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Industrielle Produktion</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>"Master"-Band</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">"Master"-Band</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" SELECTED>Vom "Master" gezogenes Band</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Vom Master gezogenes Band</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1e" -->
+				<option value="e" SELECTED>"Vater"-Platte (negativ)</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">"Vater"-Platte (negativ)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1f" -->
+				<option value="f" SELECTED>"Mutter"-Platte (positiv)</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">"Mutter"-Platte (positiv)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1g" -->
+				<option value="g" SELECTED>Matrize (negativ)</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Matrize (negativ)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1h" -->
+				<option value="h" SELECTED>Testpressung</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Testpressung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Dokumenttyp:</td>
+		<td>
+			<select name="f2" size="1">
+
+			<!-- TMPL_IF name="f2u" -->
+				<option value="u" SELECTED>Unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2z" -->
+				<option value="z" SELECTED>Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2g" -->
+				<option value="g" SELECTED>Wachs (Direkte Gravur)</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Wachs (Direkte Gravur)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2h" -->
+				<option value="h" SELECTED>Plastik</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Plastik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" SELECTED>Lackiert</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Lackiert</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2b" -->
+				<option value="b" SELECTED>Metall</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Metall</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2c" -->
+				<option value="c" SELECTED>Lakierte Pressung</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Lakierte Pressung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2d" -->
+				<option value="d" SELECTED>Plastische Pressung</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Plastische Pressung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2e" -->
+				<option value="e" SELECTED>Metall und Plastik </option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Metall und Plastik </option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2i" -->
+				<option value="i" SELECTED>Papierrücken</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Papierrücken</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2j" -->
+				<option value="j" SELECTED>Azetat</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Azetat</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2k" -->
+				<option value="k" SELECTED>P.V.C</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">P.V.C</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2l" -->
+				<option value="l" SELECTED>Polyester</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Polyester</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr>
+		<td>Typ des Stichs:</td>
+		<td>
+			<select name="f3" size="1">
+			<!-- TMPL_IF name="f3a" -->
+				<option value="a" SELECTED>Seitlicher oder kombinierter Stich</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Seitlicher oder kombinierter Stich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3b" -->
+				<option value="b" SELECTED>Vertikaler Stich</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Vertikaler Stich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3u" -->
+				<option value="u" SELECTED>Stich unbekannt</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">Stich unbekannt</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3x" -->
+				<option value="x" SELECTED>Nicht anwendbar</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">Nicht anwendbar</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="OK"  onClick="javascript:report()"></td></tr>
+</table>
+</form>
+<script>
+	function report() {
+
+
+		var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value =  document.f_pop.f1.value+document.f_pop.f2.value+document.f_pop.f3.value ;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

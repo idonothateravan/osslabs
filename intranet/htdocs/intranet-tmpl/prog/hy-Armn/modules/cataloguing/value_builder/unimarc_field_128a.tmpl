@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UNIMARC_constructeur champ 128a</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Forme de la composition:</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1ai" -->
+				<option value="ai" SELECTED>Airs</option>
+			<!-- TMPL_ELSE -->
+				<option value="ai">Airs</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1an" -->
+				<option value="an" SELECTED>Hymnes</option>
+			<!-- TMPL_ELSE -->
+				<option value="an">Hymnes</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ar" -->
+				<option value="ar" SELECTED>Arias</option>
+			<!-- TMPL_ELSE -->
+				<option value="ar">Arias</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bt" -->
+				<option value="bt" SELECTED>Բալետ</option>
+			<!-- TMPL_ELSE -->
+				<option value="bt">Բալետ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bd" -->
+				<option value="bd" SELECTED>Բալադներ</option>
+			<!-- TMPL_ELSE -->
+				<option value="bd">Բալադներ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bg" -->
+				<option value="bg" SELECTED>Bluegrass</option>
+			<!-- TMPL_ELSE -->
+				<option value="bg">Bluegrass</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bl" -->
+				<option value="bl" SELECTED>Blues</option>
+			<!-- TMPL_ELSE -->
+				<option value="bl">Blues</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cb" -->
+				<option value="cb" SELECTED>Խորալներ (non chretien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="cb">Խորալներ (non chretien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cc" -->
+				<option value="cc" SELECTED>Խորալներ (chretien)</option>
+			<!-- TMPL_ELSE -->
+				<option value="cc">Խորալներ (chretien)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cl" -->
+				<option value="cl" SELECTED>Խորալ-պրելյուդ</option>
+			<!-- TMPL_ELSE -->
+				<option value="cl">Խորալ-պրելյուդ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cg" -->
+				<option value="cg" SELECTED>Concerto grosso</option>
+			<!-- TMPL_ELSE -->
+				<option value="cg">Concerto grosso</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ch" -->
+				<option value="ch" SELECTED>Խորալներ</option>
+			<!-- TMPL_ELSE -->
+				<option value="ch">Խորալներ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cn" -->
+				<option value="cn" SELECTED>Կանոններ</option>
+			<!-- TMPL_ELSE -->
+				<option value="cn">Կանոններ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1co" -->
+				<option value="co" SELECTED>Concertos</option>
+			<!-- TMPL_ELSE -->
+				<option value="co">Concertos</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cp" -->
+				<option value="cp" SELECTED>Շանսոններ (բազմաձայն)</option>
+			<!-- TMPL_ELSE -->
+				<option value="cp">Շանսոններ (բազմաձայն)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cr" -->
+				<option value="cr" SELECTED>Chant de noel</option>
+			<!-- TMPL_ELSE -->
+				<option value="cr">Chant de noel</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cs" -->
+				<option value="cs" SELECTED>Musique aleatoire</option>
+			<!-- TMPL_ELSE -->
+				<option value="cs">Musique aleatoire</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ct" -->
+				<option value="ct" SELECTED>Կանտատա</option>
+			<!-- TMPL_ELSE -->
+				<option value="ct">Կանտատա</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cy" -->
+				<option value="cy" SELECTED>Ժողովրդական երաժշտություն</option>
+			<!-- TMPL_ELSE -->
+				<option value="cy">Ժողովրդական երաժշտություն</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cz" -->
+				<option value="cz" SELECTED>Երաժշտական պիեսներ</option>
+			<!-- TMPL_ELSE -->
+				<option value="cz">Երաժշտական պիեսներ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1df" -->
+				<option value="df" SELECTED>Danse</option>
+			<!-- TMPL_ELSE -->
+				<option value="df">Danse</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1dv" -->
+				<option value="dv" SELECTED>Divertimentos</option>
+			<!-- TMPL_ELSE -->
+				<option value="dv">Divertimentos</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1fg" -->
+				<option value="fg" SELECTED>Fugues</option>
+			<!-- TMPL_ELSE -->
+				<option value="fg">Fugues</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1fm" -->
+				<option value="fm" SELECTED>Musique Folklorique</option>
+			<!-- TMPL_ELSE -->
+				<option value="fm">Musique Folklorique</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ft" -->
+				<option value="ft" SELECTED>Fantaisies</option>
+			<!-- TMPL_ELSE -->
+				<option value="ft">Fantaisies</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1gm" -->
+				<option value="gm" SELECTED>Աստվածաշունչ</option>
+			<!-- TMPL_ELSE -->
+				<option value="gm">Աստվածաշունչ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1hy" -->
+				<option value="hy" SELECTED>Hymnes</option>
+			<!-- TMPL_ELSE -->
+				<option value="hy">Hymnes</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1in" -->
+				<option value="in" SELECTED>Intermezzos</option>
+			<!-- TMPL_ELSE -->
+				<option value="in">Intermezzos</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1jz" -->
+				<option value="jz" SELECTED>Ջազ</option>
+			<!-- TMPL_ELSE -->
+				<option value="jz">Ջազ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1li" -->
+				<option value="li" SELECTED>Lieder</option>
+			<!-- TMPL_ELSE -->
+				<option value="li">Lieder</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1mc" -->
+				<option value="mc" SELECTED>Comedies musicales,revues</option>
+			<!-- TMPL_ELSE -->
+				<option value="mc">Comedies musicales, revues</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1md" -->
+				<option value="md" SELECTED>Madrigaux</option>
+			<!-- TMPL_ELSE -->
+				<option value="md">Madrigaux</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1mi" -->
+				<option value="mi" SELECTED>Մենուետ</option>
+			<!-- TMPL_ELSE -->
+				<option value="mi">Մենուետ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1mr" -->
+				<option value="mr" SELECTED>Marches</option>
+			<!-- TMPL_ELSE -->
+				<option value="mr">Marches</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ms" -->
+				<option value="ms" SELECTED>Messes</option>
+			<!-- TMPL_ELSE -->
+				<option value="ms">Messes</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1mo" -->
+				<option value="mo" SELECTED>Motets</option>
+			<!-- TMPL_ELSE -->
+				<option value="mo">Motets</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1mp" -->
+				<option value="mp" SELECTED>Bande originale du film</option>
+			<!-- TMPL_ELSE -->
+				<option value="mp">Bande originale du film</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1mu" -->
+				<option value="mu" SELECTED>Formes multiples</option>
+			<!-- TMPL_ELSE -->
+				<option value="mu">Formes multiples</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1mz" -->
+				<option value="mz" SELECTED>Մազուրկա</option>
+			<!-- TMPL_ELSE -->
+				<option value="mz">Մազուրկա</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1nc" -->
+				<option value="nc" SELECTED>Նոկտյուրն</option>
+			<!-- TMPL_ELSE -->
+				<option value="nc">Նոկտյուրն</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1op" -->
+				<option value="op" SELECTED>Օպերա, օպերետա</option>
+			<!-- TMPL_ELSE -->
+				<option value="op">Օպերա, օպերետա</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1or" -->
+				<option value="or" SELECTED>Օրատորիա</option>
+			<!-- TMPL_ELSE -->
+				<option value="or">Օրատորիա</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ov" -->
+				<option value="ov" SELECTED>Ouvertures</option>
+			<!-- TMPL_ELSE -->
+				<option value="ov">Ouvertures</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pf" -->
+				<option value="pf" SELECTED>Prelude et fugue</option>
+			<!-- TMPL_ELSE -->
+				<option value="pf">Prelude et fugue</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pg" -->
+				<option value="pg" SELECTED>Musique descriptive</option>
+			<!-- TMPL_ELSE -->
+				<option value="pg">Musique descriptive</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pm" -->
+				<option value="pm" SELECTED>Կրքեր</option>
+			<!-- TMPL_ELSE -->
+				<option value="pm">Կրքեր</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1po" -->
+				<option value="po" SELECTED>Polonaises</option>
+			<!-- TMPL_ELSE -->
+				<option value="po">Polonaises</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pp" -->
+				<option value="pp" SELECTED>Musique populaire</option>
+			<!-- TMPL_ELSE -->
+				<option value="pp">Musique populaire</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ps" -->
+				<option value="ps" SELECTED>Պասակալիա</option>
+			<!-- TMPL_ELSE -->
+				<option value="ps">Պասակալիա</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pt" -->
+				<option value="pt" SELECTED>Խորալներ</option>
+			<!-- TMPL_ELSE -->
+				<option value="pt">Խորալներ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pv" -->
+				<option value="pv" SELECTED>Pavanes</option>
+			<!-- TMPL_ELSE -->
+				<option value="pv">Pavanes</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1rc" -->
+				<option value="rc" SELECTED>Ժայռ</option>
+			<!-- TMPL_ELSE -->
+				<option value="rc">Ժայռ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1rd" -->
+				<option value="rd" SELECTED>Rondos</option>
+			<!-- TMPL_ELSE -->
+				<option value="rd">Rondos</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1rg" -->
+				<option value="rg" SELECTED>Ragtime</option>
+			<!-- TMPL_ELSE -->
+				<option value="rg">Ragtime</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ri" -->
+				<option value="ri" SELECTED>Ricercari</option>
+			<!-- TMPL_ELSE -->
+				<option value="ri">Ricercari</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1rp" -->
+				<option value="rp" SELECTED>Ռապսոդիա</option>
+			<!-- TMPL_ELSE -->
+				<option value="rp">Ռապսոդիա</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1rq" -->
+				<option value="rq" SELECTED>Requiem</option>
+			<!-- TMPL_ELSE -->
+				<option value="rq">Requiem</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sg" -->
+				<option value="sg" SELECTED>Շանսոններ, մելոդիաներ</option>
+			<!-- TMPL_ELSE -->
+				<option value="sg">Շանսոններ, մելոդիաներ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1si" -->
+				<option value="si" SELECTED>Sinfonias</option>
+			<!-- TMPL_ELSE -->
+				<option value="si">Sinfonias</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sn" -->
+				<option value="sn" SELECTED>Sonates</option>
+			<!-- TMPL_ELSE -->
+				<option value="sn">Sonates</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sp" -->
+				<option value="sp" SELECTED>Poemes symphoniques</option>
+			<!-- TMPL_ELSE -->
+				<option value="sp">Poemes symphoniques</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sq" -->
+				<option value="sq" SELECTED>Շրջանաձև պար</option>
+			<!-- TMPL_ELSE -->
+				<option value="sq">Շրջանաձև պար</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1st" -->
+				<option value="st" SELECTED>Etudes et exercices</option>
+			<!-- TMPL_ELSE -->
+				<option value="st">Etudes et exercices</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1su" -->
+				<option value="su" SELECTED>Suites</option>
+			<!-- TMPL_ELSE -->
+				<option value="su">Suites</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sy" -->
+				<option value="sy" SELECTED>Սիմֆոնիաներ</option>
+			<!-- TMPL_ELSE -->
+				<option value="sy">Սիմֆոնիաներ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1tc" -->
+				<option value="tc" SELECTED>Տոկատտա</option>
+			<!-- TMPL_ELSE -->
+				<option value="tc">Տոկատտա</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ts" -->
+				<option value="ts" SELECTED>Sonates en trio</option>
+			<!-- TMPL_ELSE -->
+				<option value="ts">Sonates en trio</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vr" -->
+				<option value="vr" SELECTED>Տատանումներ</option>
+			<!-- TMPL_ELSE -->
+				<option value="vr">Տատանումներ</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wz" -->
+				<option value="wz" SELECTED>Վալսեր</option>
+			<!-- TMPL_ELSE -->
+				<option value="wz">Վալսեր</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1zz" -->
+				<option value="zz" SELECTED>Տատանումներ</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">Տատանումներ</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="ԼԱՎ" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+    function report() {
+        var doc   = opener.document; 
+        var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        field.value =  document.f_pop.f1.value;
+        window.close();
+        return false;
+    }
+</script>
+</body>
+</html>

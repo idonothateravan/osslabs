@@ -1,0 +1,1110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UNIMARC_Ersteller Feld 105</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Illustration 1:</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1|" -->
+            	           <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+            	           <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f1 " -->
+				<option value=" " selected="selected">Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" selected="selected">Illustrationen</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Illustrationen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" selected="selected">Karten</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Karten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" selected="selected">Portraits</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Portraits</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" selected="selected">Meereskarten</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Meereskarten</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f1e" -->
+				<option value="e" selected="selected">Pläne</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Pläne</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f1f" -->
+				<option value="f" selected="selected">Brett</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Brett</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1g" -->
+				<option value="g" selected="selected">Gedruckte Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Gedruckte Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1h" -->
+				<option value="h" selected="selected">Faksimile</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Faksimile</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1i" -->
+				<option value="i" selected="selected">Wappen</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Wappen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1j" -->
+				<option value="j" selected="selected">Ahnentabellen</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Ahnentabellen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1k" -->
+				<option value="k" selected="selected">Formulare</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Formulare</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1l" -->
+				<option value="l" selected="selected">Exemplare</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Exemplare</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1m" -->
+				<option value="m" selected="selected">Tonaufnahme</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Tonaufnahme</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1n" -->
+				<option value="n" selected="selected">Folien</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">Folien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1o" -->
+				<option value="o" selected="selected">Buchmalereien</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Buchmalereien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1y" -->
+				<option value="y" selected="selected">Ohne Illustrationen</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Ohne Illustrationen</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+		<td>Illustration 2:</td>
+		<td>
+			<select name="f2" size="1">
+			<!-- TMPL_IF name="f2|" -->
+                            <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f2 " -->
+				<option value=" " selected="selected">Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" selected="selected">Illustrationen</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Illustrationen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2b" -->
+				<option value="b" selected="selected">Karten</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Karten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2c" -->
+				<option value="c" selected="selected">Portraits</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Portraits</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2d" -->
+				<option value="d" selected="selected">Meereskarten</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Meereskarten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2e" -->
+				<option value="e" selected="selected">Pläne</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Pläne</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2e" -->
+				<option value="e" selected="selected">Pläne</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Pläne</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2f" -->
+				<option value="f" selected="selected">Brett</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Brett</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2g" -->
+				<option value="g" selected="selected">Gedruckte Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Gedruckte Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2h" -->
+				<option value="h" selected="selected">Faksimile</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Faksimile</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2i" -->
+				<option value="i" selected="selected">Wappen</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Wappen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2j" -->
+				<option value="j" selected="selected">Ahnentabellen</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Ahnentabellen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2k" -->
+				<option value="k" selected="selected">Formulare</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Formulare</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2l" -->
+				<option value="l" selected="selected">Exemplare</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Exemplare</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2m" -->
+				<option value="m" selected="selected">Tonaufnahme</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Tonaufnahme</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2n" -->
+				<option value="n" selected="selected">Folien</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">Folien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2o" -->
+				<option value="o" selected="selected">Buchmalereien</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Buchmalereien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2y" -->
+				<option value="y" selected="selected">Ohne Illustrationen</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Ohne Illustrationen</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+		<td>Illustration 3:</td>
+		<td>
+			<select name="f3" size="1">
+			<!-- TMPL_IF name="f3|" -->
+                            <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f3 " -->
+				<option value=" " selected="selected">Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3a" -->
+				<option value="a" selected="selected">Illustrationen</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Illustrationen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3b" -->
+				<option value="b" selected="selected">Karten</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Karten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3c" -->
+				<option value="c" selected="selected">Portraits</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Portraits</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3d" -->
+				<option value="d" selected="selected">Meereskarten</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Meereskarten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3e" -->
+				<option value="e" selected="selected">Pläne</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Pläne</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3e" -->
+				<option value="e" selected="selected">Pläne</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Pläne</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3f" -->
+				<option value="f" selected="selected">Brett</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Brett</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3g" -->
+				<option value="g" selected="selected">Gedruckte Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Gedruckte Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3h" -->
+				<option value="h" selected="selected">Faksimile</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Faksimile</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3i" -->
+				<option value="i" selected="selected">Wappen</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Wappen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3j" -->
+				<option value="j" selected="selected">Ahnentabellen</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Ahnentabellen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3k" -->
+				<option value="k" selected="selected">Formulare</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Formulare</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3l" -->
+				<option value="l" selected="selected">Exemplare</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Exemplare</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3m" -->
+				<option value="m" selected="selected">Tonaufnahme</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Tonaufnahme</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3n" -->
+				<option value="n" selected="selected">Folien</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">Folien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3o" -->
+				<option value="o" selected="selected">Buchmalereien</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Buchmalereien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3y" -->
+				<option value="y" selected="selected">Ohne Illustrationen</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Ohne Illustrationen</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+		<td>Illustration 4:</td>
+		<td>
+			<select name="f4" size="1">
+			<!-- TMPL_IF name="f4|" -->
+            	<option value="|" selected="selected">|- Füllzeichen</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- Füllzeichen</option>
+            <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f4 " -->
+				<option value=" " selected="selected">Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4a" -->
+				<option value="a" selected="selected">Illustrationen</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Illustrationen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4b" -->
+				<option value="b" selected="selected">Karten</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Karten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4c" -->
+				<option value="c" selected="selected">Portraits</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Portraits</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4d" -->
+				<option value="d" selected="selected">Meereskarten</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Meereskarten</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4e" -->
+				<option value="e" selected="selected">Pläne</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Pläne</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4e" -->
+				<option value="e" selected="selected">Pläne</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Pläne</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4f" -->
+				<option value="f" selected="selected">Brett</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Brett</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4g" -->
+				<option value="g" selected="selected">Gedruckte Musik</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Gedruckte Musik</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4h" -->
+				<option value="h" selected="selected">Faksimile</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Faksimile</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4i" -->
+				<option value="i" selected="selected">Wappen</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Wappen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4j" -->
+				<option value="j" selected="selected">Ahnentabellen</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Ahnentabellen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4k" -->
+				<option value="k" selected="selected">Formulare</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Formulare</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4l" -->
+				<option value="l" selected="selected">Exemplare</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Exemplare</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4m" -->
+				<option value="m" selected="selected">Tonaufnahme</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Tonaufnahme</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4n" -->
+				<option value="n" selected="selected">Folien</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">Folien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4o" -->
+				<option value="o" selected="selected">Buchmalereien</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Buchmalereien</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4y" -->
+				<option value="y" selected="selected">Ohne Illustrationen</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Ohne Illustrationen</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>		<td>Typ des Referenzwerkes 1:</td>
+		<td>
+			<select name="f5" size="1">
+                        <!-- TMPL_IF name="f5|" -->
+                            <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f5 " -->
+				<option value=" " selected="selected">Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5a" -->
+				<option value="a" selected="selected">Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5b" -->
+				<option value="b" selected="selected">Katalog</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Katalog</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" selected="selected">Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" selected="selected">wieder aufnehmen</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">wieder aufnehmen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5e" -->
+				<option value="e" selected="selected">Wörterbuch</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Wörterbuch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5f" -->
+				<option value="f" selected="selected">Enzyklopädie</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Enzyklopädie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5g" -->
+				<option value="g" selected="selected">Repertoir</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Repertoir</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5h" -->
+				<option value="h" selected="selected">Projektbeschreibung</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Projektbeschreibung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5i" -->
+				<option value="i" selected="selected">Statistiken</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Statistiken</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5j" -->
+				<option value="j" selected="selected">Lehrhandbücher Programmieren</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Lehrhandbücher Programmieren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5k" -->
+				<option value="k" selected="selected">Diplom</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Diplom</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5l" -->
+				<option value="l" selected="selected">Norm</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Norm</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5m" -->
+				<option value="m" selected="selected">Memoire oder These</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Memoire oder These</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5n" -->
+				<option value="n" selected="selected">Gesetze und Dekrete</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">Gesetze und Dekrete</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5o" -->
+				<option value="o" selected="selected">Numerische Tabelle</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Numerische Tabelle</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5p" -->
+				<option value="p" selected="selected">Technischer Bericht</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">Technischer Bericht</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5q" -->
+				<option value="q" selected="selected">Prüfungsthema</option>
+			<!-- TMPL_ELSE -->
+				<option value="q">Prüfungsthema</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5r" -->
+				<option value="r" selected="selected">Bibliographische Synthese</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Bibliographische Synthese</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5s" -->
+				<option value="s" selected="selected">Abhandlung</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Abhandlung</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f5t" -->
+				<option value="t" selected="selected">Comic strip</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">Comic strip</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5v" -->
+				<option value="v" selected="selected">Memoiren oder Thesenreproduktion</option>
+			<!-- TMPL_ELSE -->
+				<option value="v">Memoiren oder Thesenreproduktion</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5z" -->
+				<option value="z" selected="selected">Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+		<td>Typ des Referenzwerkes 2:</td>
+		<td>
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f6|" -->
+                            <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f6 " -->
+				<option value=" " selected="selected">Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" selected="selected">Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6b" -->
+				<option value="b" selected="selected">Katalog</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Katalog</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" selected="selected">Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6d" -->
+				<option value="d" selected="selected">wieder aufnehmen</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">wieder aufnehmen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6e" -->
+				<option value="e" selected="selected">Wörterbuch</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Wörterbuch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6f" -->
+				<option value="f" selected="selected">Enzyklopädie</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Enzyklopädie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6g" -->
+				<option value="g" selected="selected">Repertoir</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Repertoir</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6h" -->
+				<option value="h" selected="selected">Projektbeschreibung</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Projektbeschreibung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6i" -->
+				<option value="i" selected="selected">Statistiken</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Statistiken</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6j" -->
+				<option value="j" selected="selected">Lehrhandbücher Programmieren</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Lehrhandbücher Programmieren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6k" -->
+				<option value="k" selected="selected">Diplom</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Diplom</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6l" -->
+				<option value="l" selected="selected">Norm</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Norm</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6m" -->
+				<option value="m" selected="selected">Memoire oder These</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Memoire oder These</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6n" -->
+				<option value="n" selected="selected">Gesetze und Dekrete</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">Gesetze und Dekrete</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6o" -->
+				<option value="o" selected="selected">Numerische Tabelle</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Numerische Tabelle</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6p" -->
+				<option value="p" selected="selected">Technischer Bericht</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">Technischer Bericht</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6q" -->
+				<option value="q" selected="selected">Prüfungsthema</option>
+			<!-- TMPL_ELSE -->
+				<option value="q">Prüfungsthema</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6r" -->
+				<option value="r" selected="selected">Bibliographische Synthese</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Bibliographische Synthese</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6s" -->
+				<option value="s" selected="selected">Abhandlung</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Abhandlung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6t" -->
+				<option value="t" selected="selected">Comic strip</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">Comic strip</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6z" -->
+				<option value="z" selected="selected">Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>		<td>Typ des Referenzwerkes 3:</td>
+		<td>
+			<select name="f7" size="1">
+			<!-- TMPL_IF name="f7|" -->
+                            <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f7 " -->
+				<option value=" " selected="selected">Wert nicht erforderlich</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">Wert nicht erforderlich</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7a" -->
+				<option value="a" selected="selected">Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7b" -->
+				<option value="b" selected="selected">Katalog</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Katalog</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7c" -->
+				<option value="c" selected="selected">Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7d" -->
+				<option value="d" selected="selected">wieder aufnehmen</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">wieder aufnehmen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7e" -->
+				<option value="e" selected="selected">Wörterbuch</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Wörterbuch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7f" -->
+				<option value="f" selected="selected">Enzyklopädie</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Enzyklopädie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7g" -->
+				<option value="g" selected="selected">Repertoir</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Repertoir</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7h" -->
+				<option value="h" selected="selected">Projektbeschreibung</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Projektbeschreibung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7i" -->
+				<option value="i" selected="selected">Statistiken</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Statistiken</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7j" -->
+				<option value="j" selected="selected">Lehrhandbücher Programmieren</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Lehrhandbücher Programmieren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7k" -->
+				<option value="k" selected="selected">Diplom</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Diplom</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7l" -->
+				<option value="l" selected="selected">Norm</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Norm</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7m" -->
+				<option value="m" selected="selected">Memoire oder These</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Memoire oder These</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7n" -->
+				<option value="n" selected="selected">Gesetze und Dekrete</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">Gesetze und Dekrete</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7o" -->
+				<option value="o" selected="selected">Numerische Tabelle</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Numerische Tabelle</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7p" -->
+				<option value="p" selected="selected">Technischer Bericht</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">Technischer Bericht</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7q" -->
+				<option value="q" selected="selected">Prüfungsthema</option>
+			<!-- TMPL_ELSE -->
+				<option value="q">Prüfungsthema</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7r" -->
+				<option value="r" selected="selected">Bibliographische Synthese</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Bibliographische Synthese</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7s" -->
+				<option value="s" selected="selected">Abhandlung</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Abhandlung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7t" -->
+				<option value="t" selected="selected">Comic strip</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">Comic strip</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7z" -->
+				<option value="z" selected="selected">Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+                  <td>Typ des Referenzwerkes 4: </td>
+		<td>
+			<select name="f8" size="1">
+                        <!-- TMPL_IF name="f8|" -->
+                            <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+                        
+                        <!-- TMPL_IF name="f8 " -->
+                            <option value=" " selected="selected">Wert nicht erforderlich</option>
+                        <!-- TMPL_ELSE -->
+                            <option value=" ">Wert nicht erforderlich</option>
+                        <!-- /TMPL_IF -->
+                        
+			<!-- TMPL_IF name="f8a" -->
+				<option value="a" selected="selected">Bibliographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Bibliographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8b" -->
+				<option value="b" selected="selected">Katalog</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Katalog</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8c" -->
+				<option value="c" selected="selected">Index</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Index</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8d" -->
+				<option value="d" selected="selected">wieder aufnehmen</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">wieder aufnehmen</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8e" -->
+				<option value="e" selected="selected">Wörterbuch</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Wörterbuch</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8f" -->
+				<option value="f" selected="selected">Enzyklopädie</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Enzyklopädie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8g" -->
+				<option value="g" selected="selected">Repertoir</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Repertoir</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8h" -->
+				<option value="h" selected="selected">Projektbeschreibung</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Projektbeschreibung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8i" -->
+				<option value="i" selected="selected">Statistiken</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Statistiken</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8j" -->
+				<option value="j" selected="selected">Lehrhandbücher Programmieren</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Lehrhandbücher Programmieren</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8k" -->
+				<option value="k" selected="selected">Diplom</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">Diplom</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8l" -->
+				<option value="l" selected="selected">Norm</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">Norm</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8m" -->
+				<option value="m" selected="selected">Memoire oder These</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">Memoire oder These</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8n" -->
+				<option value="n" selected="selected">Gesetze und Dekrete</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">Gesetze und Dekrete</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8o" -->
+				<option value="o" selected="selected">Numerische Tabelle</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">Numerische Tabelle</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8p" -->
+				<option value="p" selected="selected">Technischer Bericht</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">Technischer Bericht</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8q" -->
+				<option value="q" selected="selected">Prüfungsthema</option>
+			<!-- TMPL_ELSE -->
+				<option value="q">Prüfungsthema</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8r" -->
+				<option value="r" selected="selected">Bibliographische Synthese</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">Bibliographische Synthese</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8s" -->
+				<option value="s" selected="selected">Abhandlung</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">Abhandlung</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8t" -->
+				<option value="t" selected="selected">Comic strip</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">Comic strip</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8z" -->
+				<option value="z" selected="selected">Andere</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Andere</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+</tr>
+  <tr>
+        <td>Kolloquium oder Kongress: </td>
+                <td>
+                <select name="f9" size="1">
+               	<!-- TMPL_IF name="f1|" -->
+            		<option value="|" selected="selected">|- Füllzeichen</option>
+	            <!-- TMPL_ELSE -->
+    	        	<option value="|">|- Füllzeichen</option>
+        	    <!-- /TMPL_IF -->
+        	    
+	            <!-- TMPL_IF name="f90" -->
+    	            <option value="0" selected="selected">0- Das Dokument ist keine Kolloquiums- oder Kongressschrift</option>
+        	    <!-- TMPL_ELSE -->
+                    <option value="0">0- Das Dokument ist keine Kolloquiums- oder Kongressschrift</option>
+                <!-- /TMPL_IF -->
+                
+                <!-- TMPL_IF name="f91" -->
+                    <option value="1" selected="selected">1- Das Dokument ist eine Kolloquiums- oder Kongressschrift</option>
+                <!-- TMPL_ELSE -->
+                    <option value="1">1- Das Dokument ist eine Kolloquiums- oder Kongressschrift</option>
+                <!-- /TMPL_IF -->
+        </tr>
+        
+	    <tr>
+	    
+        <td>Vermischte Schriften</td>
+                <td>
+                <select name="f10" size="1">
+                <!-- TMPL_IF name="f10|" -->
+                    <option value="|" selected="selected">|- Füllzeichen</option>
+                <!-- TMPL_ELSE -->
+                    <option value="|">|- Füllzeichen</option>
+                <!-- /TMPL_IF -->
+                        
+                <!-- TMPL_IF name="f100" -->
+                        <option value="0" selected="selected">Dokument, das nicht aus einer Sammlung besteht</option>
+                <!-- TMPL_ELSE -->
+                        <option	value="0">Dokument, das nicht aus einer Sammlung besteht</option>
+                <!-- /TMPL_IF -->
+                
+                <!-- TMPL_IF name="f101" -->
+                        <option value="1" selected="selected">Das Dokument besteht aus gemischten Schriften</option>
+                <!-- TMPL_ELSE -->
+                        <option value="1">Das Dokument besteht aus gemischten Schriften</option>
+                <!-- /TMPL_IF -->
+        </tr>
+  <tr>
+        <td>Index</td>
+                <td>
+                        <select name="f11" size="1">
+                        <!-- TMPL_IF name="f11|" -->
+                            <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+                        
+                        <!-- TMPL_IF name="f110" -->
+                                <option value="0" selected="selected">Dokument ohne Indes</option>
+                        <!-- TMPL_ELSE -->
+                                <option	value="0">Dokument ohne Indes</option>
+                        <!-- /TMPL_IF -->
+                        
+                        <!-- TMPL_IF name="f111" -->
+                                <option value="1" selected="selected">Le document contient un index</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="1">Le document contient un index</option>
+                        <!-- /TMPL_IF -->
+        </tr>
+  <tr>
+        <td>Literarisches Genus</td>
+                <td>
+                        <select name="f12" size="1">
+                        <!-- TMPL_IF name="f12|" -->
+                        <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f12a" -->
+                                <option value="a" selected="selected">Fiktion, Roman</option>
+                        <!-- TMPL_ELSE -->
+                                <option	value="a">Fiktion, Roman</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f12b" -->
+                       <option value="b" selected="selected">Theater, Fernsehspiel</option>
+                        <!-- TMPL_ELSE -->
+                       <option value="b">Theater, Fernsehspiel</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f12c" -->
+                       <option value="c" selected="selected">Essais</option>
+                        <!-- TMPL_ELSE -->
+                       <option value="c">Essais</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f12d" -->
+                       <option value="d" selected="selected">Humor, Satire</option>
+                        <!-- TMPL_ELSE -->
+                       <option value="d">Humor, Satire</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f12e" -->
+                       <option value="e" selected="selected">Briefe</option>
+                        <!-- TMPL_ELSE -->
+                       <option value="e">Briefe</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f12f" -->
+                       <option value="f" selected="selected">Novellen</option>
+                        <!-- TMPL_ELSE -->
+                       <option value="f">Novellen</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f12g" -->
+                       <option value="g" selected="selected">Poesie</option>
+                        <!-- TMPL_ELSE -->
+                       <option value="g">Poesie</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f12h" -->
+                       <option value="h" selected="selected">Reden, Rhetorik</option>
+                        <!-- TMPL_ELSE -->
+                       <option value="h">Reden, Rhetorik</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f12y" -->
+                       <option value="y" selected="selected">Es handelt sich nicht um einen literarischen Text</option>
+                        <!-- TMPL_ELSE -->
+                       <option value="y">Es handelt sich nicht um einen literarischen Text</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f12z" -->
+                       <option value="z" selected="selected">verschiedene Formen oder andere literarische Formen</option>
+                        <!-- TMPL_ELSE -->
+                       <option value="z">verschiedene Formen oder andere literarische Formen</option>
+                        <!-- /TMPL_IF -->
+        </tr>
+
+  <tr>
+        <td>Biographie</td>
+                <td>
+                        <select name="f13" size="1">
+                        
+                        <!-- TMPL_IF name="f13|" -->
+                        <option value="|" selected="selected">|- Füllzeichen</option>
+                        <!-- TMPL_ELSE -->
+                            <option value="|">|- Füllzeichen</option>
+                        <!-- /TMPL_IF -->
+                        
+                        <!-- TMPL_IF name="f13y" -->
+                                <option value="y" selected="selected">Dies ist keine Biographie</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="y">Dies ist keine Biographie</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f13a" -->
+                                <option value="a" selected="selected">Autobiographie (eingeschlossen Korrespondenz...)</optio\
+n>
+                        <!-- TMPL_ELSE -->
+                                <option
+				value="a">Autobiographie (eingeschlossen Korrespondenz...)</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f13b" -->
+                                <option value="b" selected="selected">Individuelle Biographie</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="b">Individuelle Biographie</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f13c" -->
+                                <option value="c" selected="selected">Gesamtbiographie</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="c">Gesamtbiographie</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f13d" -->
+                                <option value="d" selected="selected">Enthält biographische Angaben</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="d">Enthält biographische Angaben</option>
+                        <!-- /TMPL_IF -->
+        </tr>
+
+	<tr><td colspan="2"><input type="button" value="OK"  onclick="report();" /></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = document.f_pop.f1.value + document.f_pop.f2.value +document.f_pop.f3.value +document.f_pop.f4.value +document.f_pop.f5.value +document.f_pop.f6.value +document.f_pop.f7.value +document.f_pop.f8.value +document.f_pop.f9.value +document.f_pop.f10.value +document.f_pop.f11.value +document.f_pop.f12.value +document.f_pop.f13.value;
+            window.close();
+            return false;
+	}
+</script>
+</body>
+</html>

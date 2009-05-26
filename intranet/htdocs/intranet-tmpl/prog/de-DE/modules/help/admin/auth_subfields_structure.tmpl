@@ -1,0 +1,35 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Verwaltung MARC-Tagstruktur</h1>
+
+<p>Koha erlaubt Ihnen festzulegen, welche MARC-Felder Sie nutzen wollen und welche Sie ignorieren möchten. Als Sie Koha heruntergeladen und installiert haben, erhielten Sie die vollständige Liste der MARC21-Felder und -Unterfelder, die zur Zeit in Gebrauch sind. Jetzt müssen Sie die Administrations-Seite nutzen, um diese Liste zu bearbeiten und Koha mitzuteilen, welche Felder Sie wie benutzen möchten.</p>
+<p>You can define as the marc tag structure for each biblio framework you have defined</p>
+
+<p>If you are CERTAIN that you will never use a MARC tag, then you can delete it, but since this will not result in any appreciable improvement in performance, it is probably better to leave it. There will be tags you want to add, however. If you are using older MARC tags that are not in the list of tags supplied with Koha, then use the MARC tag structure administration page to add them. Similarly, you will probably need to add the holdings tag you currently use, or at least check the subfield structure of the 852 tag if you use it for holdings.</p>
+
+<p>Editing the SubFields from the MARC tag structure page is very time-consuming, but also very important; be sure to click the subfield link for each tag in your MARC tag structure.</p>
+<p>Für jedes Teilfeld können Sie festlegen:</p>
+<ul>
+<li>wiederholbae: entweder kann es wiederholt werden, oder nicht. Wenn es wiederholt werden kann, trennen Sie die Werte durch ein | im MARC-Editor, wenn Sie das Unterfeld zweimal haben wollen</li>
+<li>Mandatory : whether the field is mandatory or not. If mandatory, the cataloger can't validate the biblio if the subfield is empty.</li>
+<li>Search also : a list of field that Koha will also search on when the user do a search on the subfield</li>
+<li>Koha link : <b>very important</b>. Koha is multi-MARC compliant. So, it does not know what the 245$a means, neither what 200$f (those 2 fields being both the title in MARC21 and UNIMARC !). So, in this list you can "map" a MARC subfield to it's meaning. Koha constantly maintains consistency between a subfield and it's meaning. When the user want to search on "title", this link is used to find what is searched (245 if you're MARC21, 200 if you're UNIMARC).</li>
+<li>Text for librarian : what appears before the subfield in the librarian interface</li>
+<li>Text for OPAC : what appears before the field in the OPAC. If empty, the text for librarian is used instead</li>
+<li>Managed in tab : deals with the tab where the subfield is shown. Ignore means that the subfield is not managed. </li>
+<li>hidden : allows you to select possible visibility conditions. Each section OPAC INTRANET or Editor can be set separately:</li>
+<li><b>Ist ein Verbindungsfeld: Wählen Sie dieses, wenn sie dieses Feld dazu verwenden wollen, andere Normdatensätze mit diesem Normdatensatz zu verbinden. Das kohafield sollte eingestellt sein auf auth_header.linikd in diesem Unterfeld (vorzugsweise) oder in irgend einem anderen Unterfeld dieses Feldes:</b>
+<li>URL: Wenn angewählt ist das Unterfeld eine URL und kann angeklickt werden</li>
+<li>Norm. Wert: bedeutet, dass der Wert nicht frei eingegeben werden kann, sondern in der Liste der autorisierten Werte der ausgewählten Kategorie aufgeführt sein muss.</li>
+<li>Thesaurus: Zeigt den Normdatentyp</li>
+<li>plugin : means the value is calculated or managed by a plugin. Plugins can do almost anything. For example, in UNIMARC there are plugins for every 1xx fields that are coded fields. The plugin is a huge help for cataloger ! There are also two plugins (unimarc_plugin_210c and unimarc_plugin_225a that can "magically" find the editor from an ISBN, and the collection list for the editor)</li>
+<li>
+<li><b>Beispiel MARC21 Normdaten für Sachworteintragungen </b>
+<ul><li>Use field 035$a for your auth_header.authid and 035$8 for auth_header.authtypecode. Make sure your zebra authorities index these fields</li>
+<li>Nutzen Sie Feld 150 für Ihre Schlagworteintragungen</li>
+<li>Use field 750$9 (add subfield if not present) for auth_header.linkid . Select <b>Is a linking field</b>. You may use any subfield for linking as $9 is not hardcoded
+<li>Wenn Sie einen Normdatensatz hinzufügen oder verändern, indem sie auf ... klicken, das neben 750$9 erscheint, dann können Sie irgendeinen Normdatensatz suchen und mit diesem Datensatz verbinden. Sie können Feld 750 wiederholen und so viele Verbindungen aingeben, wie Sie wollen.</li></ul>
+</li>
+</ul>
+
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

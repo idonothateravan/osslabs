@@ -1,0 +1,268 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 报表 &rsaquo; 最热门的馆藏<!-- TMPL_IF NAME="do_it" --> &rsaquo; 结果<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" -->
+<!-- TMPL_IF NAME="do_it" -->
+<script language="JavaScript" type="text/javascript">
+function Dopop(link) {
+	newin=window.open(link,'width=500,height=400,toolbar=false,scrollbars=yes');
+}
+</script>
+<!-- /TMPL_IF-->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">Reports</a> &rsaquo; <!-- TMPL_IF NAME="do_it" --><a href="/cgi-bin/koha/reports/cat_issues_top.pl">Most-Circulated Items</a> &rsaquo; Results<!-- TMPL_ELSE -->最热门馆藏<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="do_it" -->
+
+	<!-- TMPL_LOOP NAME="mainloop" -->
+		<h1>流通排名前 <!-- TMPL_VAR NAME="limit"--> 的馆藏</h1>
+		<!-- TMPL_IF NAME="loopfilter"-->
+			<p>条件</p>
+			<!-- TMPL_LOOP NAME="loopfilter" -->
+					<p><!-- TMPL_IF NAME="err" -->  <!--/TMPL_IF --> <!-- TMPL_VAR NAME="crit"--> =<!-- TMPL_VAR NAME="filter"--><!-- TMPL_IF NAME="err" -->  <!--/TMPL_IF --></p>
+			<!-- /TMPL_LOOP -->
+		<!-- /TMPL_IF-->
+		
+		<table>
+				<th>排序/馆藏号码</th>
+				<!-- TMPL_LOOP NAME="loopcol" -->
+					<th colspan="2"><!-- TMPL_VAR NAME="coltitle" --></th>
+				<!-- /TMPL_LOOP -->
+        <tr>
+				<th>&nbsp;</th>
+				<!-- TMPL_LOOP NAME="loopcol" -->
+					<th>馆藏</th>
+					<th>总计借阅</th>
+				<!-- /TMPL_LOOP -->
+			  </tr>
+				<!-- TMPL_LOOP NAME="looprow" -->
+<!-- TMPL_IF NAME="hilighted" --><tr class="highlighted"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+						<td><!-- TMPL_VAR NAME="rowtitle" --></td>
+						<!-- TMPL_LOOP NAME="loopcell" -->
+							<td>
+
+<!-- TMPL_IF NAME="reference" -->
+<!-- TMPL_IF name="BiblioDefaultViewmarc" -->
+	<a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR NAME="reference" ESCAPE="URL" -->">
+<!-- TMPL_ELSIF name="BiblioDefaultViewisbd"-->
+	<a href="/cgi-bin/koha/catalogue/ISBDdetail.pl?biblionumber=<!-- TMPL_VAR NAME="reference" ESCAPE="URL" -->">
+<!-- TMPL_ELSE -->
+	<a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="reference" ESCAPE="URL" -->">
+ <!-- /TMPL_IF -->
+ <!-- /TMPL_IF -->                                        
+								<!-- TMPL_IF NAME="value" --><!-- TMPL_VAR NAME="value" --><!-- /TMPL_IF -->
+								<!-- TMPL_IF NAME="reference" --></a><!-- /TMPL_IF -->
+							</td>
+							<td>
+								<!-- TMPL_IF NAME="count" --><!-- TMPL_VAR NAME="count" --><!-- /TMPL_IF -->
+							</td>
+						<!-- /TMPL_LOOP -->
+					</tr>
+				<!-- /TMPL_LOOP -->
+		</table>
+	<!-- /TMPL_LOOP -->
+<!-- TMPL_ELSE -->
+	<h1>最热门馆藏</h1>
+	<form method="post" action="/cgi-bin/koha/reports/cat_issues_top.pl">
+	<fieldset class="rows">
+	<ol>
+		<li><label for="from">借阅日期： </label> <input type="text" readonly="readonly" size="10" id="from" name="Filter" />
+							<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="显示日历" border="0" id="openCalendarFrom" style="cursor: pointer;">
+								<script language="JavaScript" type="text/javascript">
+									function validate1(date) {
+										var day = date.getDate();
+										var month = date.getMonth() + 1;
+										var year = date.getFullYear();
+										var weekDay = date.getDay();
+										var dayMonth = month + '-' + day;
+										var dateString = year + '-' + month + '-' + day;
+										var dateTo = document.getElementById('to').value.split("-");
+										var limitDate = new Date(dateTo[0], (dateTo[1] - 1), dateTo[2]);
+										if (date > limitDate) {
+											return true;
+										} else {
+											return false;
+										}
+									}
+					
+									Calendar.setup(
+										{
+											inputField : "from",
+											ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+											button : "openCalendarFrom",
+											disableFunc : validate1,
+											dateStatusFunc : validate1
+										}
+									);
+								</script>
+					<label for="to" class="inline">到：</label> <input readonly="readonly" size="10" id="to" name="Filter" value="" type="text" />
+						<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="显示日历" id="openCalendarTo" style="cursor: pointer;" border="0">
+							<script type="text/javascript">
+								function validate2(date) {
+									var day = date.getDate();
+									var month = date.getMonth() + 1;
+									var year = date.getFullYear();
+									var weekDay = date.getDay();
+									var dayMonth = month + '-' + day;
+									var dateString = year + '-' + month + '-' + day;
+									var dateFrom = document.getElementById('from').value.split("-");
+									var limitDate = new Date(dateFrom[0], (dateFrom[1] - 1), dateFrom[2]);
+									if (limitDate > date) {
+										return true;
+									} else {
+										return false;
+									}
+								}
+		
+								Calendar.setup(
+									{
+										inputField : "to",
+										ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+										button : "openCalendarTo",
+										disableFunc : validate2,
+										dateStatusFunc : validate2
+									}
+								);
+							</script></li>
+		<li><label for="fromRO">检查开始日期</label> <input type="text" readonly="readonly" size="10" id="fromRO" name="Filter" />
+							<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="显示日历" border="0" id="openCalendarFromRO" style="cursor: pointer;">
+								<script language="JavaScript" type="text/javascript">
+									function validate1(date) {
+										var day = date.getDate();
+										var month = date.getMonth() + 1;
+										var year = date.getFullYear();
+										var weekDay = date.getDay();
+										var dayMonth = month + '-' + day;
+										var dateString = year + '-' + month + '-' + day;
+										var dateTo = document.getElementById('toRO').value.split("-");
+										var limitDate = new Date(dateTo[0], (dateTo[1] - 1), dateTo[2]);
+										if (date > limitDate) {
+											return true;
+										} else {
+											return false;
+										}
+									}
+					
+									Calendar.setup(
+										{
+											inputField : "fromRO",
+											ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+											button : "openCalendarFromRO",
+											disableFunc : validate1,
+											dateStatusFunc : validate1
+										}
+									);
+								</script>
+					<label for="toRO" class="inline">到： </label> <input type="text" readonly="readonly" size="10" id="toRO" name="Filter" value="" />
+						<img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="显示日历" id="openCalendarToRO" style="cursor: pointer;" border="0">
+							<script type="text/javascript">
+								function validate2(date) {
+									var day = date.getDate();
+									var month = date.getMonth() + 1;
+									var year = date.getFullYear();
+									var weekDay = date.getDay();
+									var dayMonth = month + '-' + day;
+									var dateString = year + '-' + month + '-' + day;
+									var dateFrom = document.getElementById('fromRO').value.split("-");
+									var limitDate = new Date(dateFrom[0], (dateFrom[1] - 1), dateFrom[2]);
+									if (limitDate > date) {
+										return true;
+									} else {
+										return false;
+									}
+								}
+		
+								Calendar.setup(
+									{
+										inputField : "toRO",
+										ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+										button : "openCalendarToRO",
+										disableFunc : validate2,
+										dateStatusFunc : validate2
+									}
+								);
+							</script></li>
+				<li><label for="branch">图书馆： </label>
+<select name="Filter" id="branch"><option value="" > Any Library</option>
+    <!--TMPL_LOOP Name="branchloop"-->
+        <option value="<!--TMPL_VAR Name="value"-->" ><!--TMPL_VAR Name="branchname"--> </option>  
+     <!--/TMPL_LOOP --> 
+    </select>     </li>
+      <li> 
+        <label for="documenttype">馆藏类型： </label><select name="Filter" id="documenttype"><option value="" > Any item type</option>
+    <!--TMPL_LOOP Name="itemtypeloop"-->
+        <option value="<!--TMPL_VAR Name="value"-->" ><!--TMPL_VAR Name="description"--> </option>  
+     <!--/TMPL_LOOP --> 
+    </select>
+      </li>
+      <li> 
+        <label for="patroncategory">读者类别： </label><select name="Filter" id="patroncategory"><option value="" > Any Category code</option>
+    <!--TMPL_LOOP Name="borcatloop"-->
+        <option value="<!--TMPL_VAR Name="value"-->" ><!--TMPL_VAR Name="description"--> </option>  
+     <!--/TMPL_LOOP --> 
+    </select>
+        </li>
+				<li><label for="day">日： </label> <input type="text" name="Filter" id="day" value="" /></li>
+				<li><label for="month">月： </label> <input type="text" name="Filter" id="month" value="" /></li>
+				<li><label for="year">年： </label> <input type="text" name="Filter" id="year" value="" /></li>
+	</ol>
+	</fieldset>
+	
+	<fieldset class="rows">
+	<legend>限制范围</legend>
+	<ol><li><label for="numberlimit">限制范围：</label><select name="Limit" id="numberlimit">
+                        <option value ="" selected="selected">没有</option>
+						<option value="5" selected="selected"> 5</option>
+						<option value ="10">10</option>
+						<option value ="15">15</option>
+						<option value ="20">20</option>
+						<option value ="25">25</option>
+						<option value ="40">40</option>
+						<option value ="50">50</option>
+						<option value ="100">100</option>
+					</select></li>
+	<li><label for="criteria">依照： </label><select name="Criteria" id="criteria">
+						<option value ="" selected="selected">没有</option>
+						<option value ="issuingbranch">图书馆</option>
+						<option value ="categorycode">类别代码</option>
+						<option value ="itemtype">馆藏类型</option>
+						<option value ="Day">日</option>
+						<option value ="Week">周</option>
+						<option value ="Month">月</option>
+						<option value ="Year">年</option>
+					</select></li></ol>
+	</fieldset>
+	
+	<fieldset class="rows">
+	<legend>输出</legend>
+<ol><li><label for="outputscreen">使用浏览器显示： </label><input type="radio" checked="checked" name="output" id="outputscreen" value="screen" /> </li>
+<li><label for="outputfile">到文件</label> 		<input type="radio" name="output" value="file" id="outputfile" /> <label class="inline" for="basename">命名： </label><input type="text" name="basename" id="basename" value="Export" /> <label class="inline" for="MIME">进入申请  
+		</label><!-- TMPL_VAR NAME="CGIextChoice" -->
+		<!-- TMPL_VAR NAME="CGIsepChoice" --></li></ol>
+	</fieldset>
+
+	<fieldset class="action">
+	<input type="submit" value="送出">
+	<input type="hidden" name="report_name" value="<!--TMPL_VAR NAME="report_name" -->" />
+	<input type="hidden" name="do_it" value="1" />
+	</fieldset>
+	</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

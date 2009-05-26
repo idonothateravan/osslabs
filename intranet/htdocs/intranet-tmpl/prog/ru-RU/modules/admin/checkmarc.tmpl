@@ -1,0 +1,245 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration &rsaquo; MARC Check
+<!-- TMPL_IF name="total" --> :<!-- TMPL_VAR name="total" --> ошибок найдено<!-- TMPL_ELSE --> : Configuration OK!<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo; MARC Check
+<!-- TMPL_IF name="total" -->: <!-- TMPL_VAR name="total" --> ошибок найдено<!-- TMPL_ELSE --> : Configuration OK!<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>MARC Bibliographic Framework Test</h1>
+<table>
+    <tr>
+        <th>Испытание</th>
+        <th>Результат</th>
+    </tr>
+<!-- -->
+<!-- TMPL_IF name="itemnum" -->
+    <tr>
+        <td>itemnum</td>
+        <td><ul><li>Поле itemnum (номер_единицы) ДОЛЖНО быть спроектировано </li>
+            <li>The correspounding subfield MUST be in with -1 (ignore) tab</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td> itemnum: поле itemnum (номер_единицы) проектируется на поле во вкладке -1</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemfields" -->
+    <tr>
+        <td>поля единицы</td>
+        <td>ВСЕ поля единиц сохранения ДОЛЖНЫ:<br />
+            <ul><li>будут проектироваться на такой же признак,</li>
+            <li>и они должны полностью находиться в 10-той вкладке (экземпляры)</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>Все поля единицы находятся в таких же признаках и во вкладке единицы</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+    <!-- TMPL_IF NAME="itemtags" -->
+        <tr>
+            <td>Признак единицы</td>
+            <td> Более чем 1 МАРК-признак соотносится во вкладке (10) единиц сохранения: <!-- TMPL_VAR name="itemtags" --></td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>Only 1 MARC tag mapped to items</td>
+        </tr>
+    <!-- /TMPL_IF -->
+    <!--  -->
+<!-- TMPL_IF name="itemtype" -->
+    <tr>
+        <td>itemtype НЕ спроектирован</td>
+        <td> поле biblioitems.itemtype (тип_единицы_для_библиотечной_единицы) ДОЛЖНО:<br />
+            <ul><li>be mapped to a MARC subfield, </li>
+            <li>the correspounding subfield MUST have authorised_value=itemtype</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>biblioitems.itemtype (тип_единицы_для_библиотечной_единицы) определено</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branch" -->
+    <tr>
+        <td>homebranch НЕ спроектирован</td>
+        <td>полет items.homebranch (домашний_подраздел_для_единицы) ДОЛЖЕН:<br />
+            <ul><li>be mapped to a MARC subfield,</li>
+            <li>the correspounding subfield MUST have authorised value=branches</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>homebranch (домашний подраздел) определен</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="holdingbranch" -->
+    <tr>
+        <td>holdingbranch НЕ спроектирован</td>
+        <td>полет items.holdingbranch (подраздел_сохранение_для_единицы) ДОЛЖЕН:<br />
+            <ul><li>be mapped to a MARC subfield, </li>
+            <li>the correspounding subfield MUST have authorised value=branches</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>holdingbranch (подраздел хранения) определен</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemtypes_empty" -->
+    <tr>
+        <td>item type not defined</td>
+        <td>at least 1 item type must be defined</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td>at least 1 item type defined</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branches_empty" -->
+    <tr>
+        <td>branch not defined</td>
+        <td>at least 1 branch must be defined</td>
+    </tr>
+<!-- TMPL_ELSE --> 
+    <tr>
+        <td>OK</td>             
+        <td>at least 1 branch defined</td>
+    </tr>                                       
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="biblionumber" -->
+    <tr>
+        <td>biblio и biblionumber</td>
+        <td>The biblio.biblionumber and biblioitems.biblioitemnumber fields be mapped to a MARC subfield,</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>OK</td>
+        <td> biblionumber (номер_библиотечной_записи) и biblioitemnumber (номер_библиотечной_единицы) спроектированные правильно</td>
+    </tr>
+<!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="frameworknull" -->
+        <tr>
+            <td>значение структуры</td>
+            <td> есть null (недействительное значение) в frameworkcode (коде_структуры). Проверьте следующие таблицы<br />
+                <li>select * from marc_subfield_structure where frameworkcode is NULL</li>
+                <li>select * from marc_tag_structure where frameworkcode is NULL</li>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td> не есть NULL (недействительного) значения в frameworkcode (кода_структуры)</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="inconsistent_tabs" -->
+        <tr>
+            <td style="vertical-align:top;">subfields not in same tabs</td>
+            <td>Not all subfields for the following tags are in the same tab (or marked 'ignored').
+                <table>
+                    <tr>
+                        <th>Код</th>
+                        <th>Описание</th>
+                        <th>Признак</th>
+                        <th>Tabs in use</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="tab_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>Структура по умолчанию</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tabs" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>all subfields for each tag are in the same tab (or ignored)</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="invalid_authtypecodes" -->
+        <tr>
+            <td style="vertical-align:top;">invalid authority types</td>
+            <td>Not all authority types referred to by the frameworks are defined.
+                <table>
+                    <tr>
+                        <th>Framework code</th>
+                        <th>Framework description</th>
+                        <th>Признак</th>
+                        <th>Подполе</th>
+                        <th>Invalid authority type</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="authtypecode_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>Структура по умолчанию</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+                            <td><!-- TMPL_VAR NAME="authtypecode" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>OK</td>
+            <td>all authority types used in the frameworks are defined</td>
+        </tr>
+    <!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="total" -->
+    <tr>
+        <td>ИТОГ</td>
+        <td>You have <!-- TMPL_VAR name="total" --> error(s) in your MARC configuration. Please fix them before using Koha</td>
+    </tr>
+</table>
+<!-- TMPL_ELSE -->
+    </table>
+        <p><b> С конфигурацией все в порядке, нет ошибок в Вашей таблице МАРК-параметров</b></p>
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

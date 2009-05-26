@@ -1,0 +1,79 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 網頁安裝程式 &rsaquo; 步驟 1</title>
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div>
+<h1 id="logo"><img alt="Koha 圖書館自動化系統" src="/intranet-tmpl/prog/img/koha.org-logo.gif"> 網頁安裝程式 &rsaquo; 步驟 1</h1>
+<!--TMPL_UNLESS Name="language"-->
+<p>你可以準備安裝 Koha。</p>
+
+<p>Please pick your language from the following list. If your language is not
+listed, please inform your systems administrator.</p>
+<form name="language" method="post">
+<select name="language">
+<!-- TMPL_IF NAME="installer_languages_loop" -->
+        <!-- TMPL_LOOP NAME="installer_languages_loop" -->
+            <!-- TMPL_IF NAME="plural" -->
+            <optgroup label="<!-- TMPL_VAR NAME="language" -->">
+            <!-- TMPL_LOOP NAME="sublanguages_loop" -->
+                <option value="<!-- TMPL_VAR NAME="rfc4646_subtag" -->"><!-- TMPL_IF NAME="native_description" --><!-- TMPL_VAR NAME="native_description" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="rfc4646_subtag" --><!-- /TMPL_IF --></option>
+            <!-- /TMPL_LOOP -->
+            </optgroup>
+            <!-- TMPL_ELSE -->
+		<option value="<!-- TMPL_VAR NAME="rfc4646_subtag" -->"><!-- TMPL_IF NAME="native_description" --><!-- TMPL_VAR NAME="native_description" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="rfc4646_subtag" --><!-- /TMPL_IF --></option>
+            <!-- /TMPL_IF -->
+        <!-- /TMPL_LOOP -->
+<!-- /TMPL_IF -->
+</select>
+</p>
+
+<p> 繼續點選下一個步驟 <input value="下一頁 &gt;&gt;" type="submit"></p>
+</form>
+<!--/TMPL_UNLESS-->
+<!--TMPL_IF Name="language"-->
+  <!--TMPL_UNLESS Name="checkmodule"-->
+  <!--TMPL_IF Name="missing"-->
+  <p>缺少一些 perl 模組。<br />
+  <ul>
+  <!--TMPL_LOOP Name="missing"-->
+    <li><!--TMPL_VAR Name="name"-->
+    <!--TMPL_IF Name="usagemail"-->
+      <br /> 當你寄送 E-mail，就需要這個模組。
+    <!--/TMPL_IF-->
+    <!--TMPL_IF Name="usagebarcode"-->
+      <br /> 假如你列印條碼，就需要這個模組。
+    <!--/TMPL_IF-->
+    <!--TMPL_IF Name="usagespine"-->
+      <br /> 假如你列印書籤，就需要這個模組。
+    <!--/TMPL_IF-->
+    <!--TMPL_IF Name="usageLDAP"-->
+      <br /> 假如你使用 LDAP 認證，就需要這個模組。
+    <!--/TMPL_IF-->
+    </li>
+  <!--/TMPL_LOOP-->
+  在繼續前，請思考安裝這些模組
+  <pre>
+  <!--TMPL_LOOP Name="missing"-->
+    perl -MCPAN -e "install <!--TMPL_VAR Name="name"-->";
+  <!--/TMPL_LOOP-->
+  </pre>
+  <!--/TMPL_IF-->
+  <!--TMPL_IF Name="problems"-->
+  <p>遇到一些問題。</p>
+   <ul>
+    <!--TMPL_IF Name="perlversion"-->
+    <li>Your perl version seems to be obsolete.
+      Please upgrade to a newer version of Perl (at least Version 5.006001).</li>
+    <!--/TMPL_IF-->
+   </ul>
+  <!--/TMPL_IF-->
+  <!--/TMPL_UNLESS-->
+  <!--TMPL_IF Name="checkmodule"-->
+<form name="checkmodules" action="install.pl">
+<p> 所有要求模組已經被安裝。
+</p>
+<input type="hidden" name="step" value="2" />
+<p>請選擇繼續 <input value="下一頁 &gt;&gt;" type="submit"></p>
+</form>
+  <!--/TMPL_IF-->
+<!--/TMPL_IF-->
+<!-- TMPL_INCLUDE name="intranet-bottom.inc" -->

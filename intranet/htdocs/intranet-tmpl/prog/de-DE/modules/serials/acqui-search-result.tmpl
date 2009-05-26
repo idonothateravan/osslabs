@@ -1,0 +1,42 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Zeitschriften &rsaquo; Lieferanten auswählen</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" language="Javascript">
+
+function GetIt(aqbooksellerid,name)
+{
+  opener.document.f.aqbooksellerid.value = aqbooksellerid;
+  opener.document.f.aqbooksellername.value = name;
+  window.close();
+}
+</script>
+</head>
+<body>
+
+<div id="doc" class="yui-t7">
+   <div id="bd">
+	
+
+<h1>Ergebnisse Lieferantensuche</h1>
+<h2>Sie suchten nach <b> Lieferant <!-- TMPL_VAR name="supplier" -->,</b> <!-- TMPL_VAR name="count" -->  Ergebnisse gefunden</h2>
+
+<!-- TMPL_IF NAME="loop_suppliers" -->
+<table>
+	<tr>
+		<th>Lieferant</th>
+		<th>Auswählen</th>
+	</tr>
+	<!-- TMPL_LOOP name="loop_suppliers" -->
+		<tr>
+			<td><!-- TMPL_VAR name="name" --></td>
+			<td><a href="#" onclick="GetIt(<!-- TMPL_VAR NAME="aqbooksellerid" -->,'<!--  TMPL_VAR escape="URL" NAME="name" -->')">wählen</a></td>
+		</tr>
+	<!-- /TMPL_LOOP -->
+</table>
+<!-- /TMPL_IF -->
+
+    <p><a href="/cgi-bin/koha/serials/acqui-search.pl">Eine neue Suche starten</a> <a class="button" href="#" onclick="window.close()">Schließen</a></p>
+
+</div>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

@@ -1,0 +1,33 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Benutzertypen</h1>
+
+<p>This is where you define the types of users of your library and how they will be handled.</p>
+
+<h2>Kategorien, Beschreibungen und Typen</h2>
+<p>Start by assigning a Category Code and a Description to each patron category. Each Category can be one of five types:</p>
+	<ul>
+		<li>Adult Patrons: can be linked as &quot;guarantors&quot; to other patrons who are their dependents.  This is the default patron type.</li>
+		<li>Child Patrons: a patron category that has a &quot;guarantor&quot;.</li>
+		<li>Institutionelle Benutzer: Kann für institutionelle Benutzer verwendet werden, z.B. andere Bibliotheken, die bei Ihnen ausleihen. In diesem Fall erwartet Koha etwas andere Informationen über die Institution;</li>
+		<li>Professional Patrons: können mit einem Bürgen (normalerweis einer Organisation) verbunden werden.</li>
+		<li>Bibliothekspersonal: Angehörige des Bibliothekspersonals</li>
+		<li>Statistische Benutzer: eine Ausleihe an diesen Benutzer legt eine (lokalen) statistischen Datensatz an, ohne tatsächliche Ausleihe.</li>
+	</ul>
+	
+<h3>Notiz über Berechtigungen</h3>
+<p>Für alle Benutzertypen können Berechtigungen für die Dienstoberfläche vergeben werden. Der Benutzertyp Personal hat zusätzliche Sicherheitsfunktionen gegenüber den anderen Typen.</p>
+
+<h2>Gültigkeitsdauer (in Monaten)</h2>
+<p>Enrollment period is a number indicating the length in months of a patron enrollment. If enrollments never expire, set this to an impossibly high number ( &gt;= 99).</p>
+
+<h2>Höchstaltergrenze und Alter benötigt</h2>
+<p>Upper Age Limit and Age Required set the age parameters for this type of user. If you issue children's cards to users between the ages of 2 and 18, for example, then Age Required would be &quot;2&quot; and Upper Age Limit would be &quot;18.&quot; If there is no upper age limit, set this value to 999 (the highest allowed).</p>
+
+<h2>Benutzungsgebühr und Vormerkungsgebühr</h2>
+<p>Enrollment Fee and Reserve Fee (if any) should be entered either as whole numbers or with (up to) six decimal places, with no currency notation (e.g. &quot;1.250000&quot; instead of &quot;$1.25&quot;).</p>
+
+<h2>Hinweis zur Fristüberschreitung notwendig</h2>
+<p>Overdue Notice Required lets you bypass generating overdue notices for this user type.</p>
+
+<!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

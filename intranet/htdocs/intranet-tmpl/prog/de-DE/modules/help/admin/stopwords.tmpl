@@ -1,0 +1,14 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Administrationsseite Stopwörter</h1>
+
+<p>Hier sollten Sie alle Wörter eingeben, die Koha während der Katalogsuche oder beim Aufbau des Stichwortindex ignorieren soll.</p>
+<h3>Koha with Zebra</h3>
+<p>Zebra handles stopwords internally, and does so effectively and efficiently.  In normal circumstances, there should be no reason for Koha to remove stopwords prior to submitting the search query to Zebra, and in most cases doing so will actually negatively affect relevance ranking and phrase searching without giving any performance benefit.</p>
+
+<h3>Koha without Zebra</h3>
+<p>Normalerweise möchten Sie nicht, dass Koha Stichwort-Referenzen für Artikel wie "der" oder "eine" oder andere sehr allgemeine Wörter speichert. Wenn Sie Stichwort-Referenzen für diese Wörter speichern lassen, so hilft das nicht, die Suche einzugrenzen und es macht den Schlagwort-Index sehr groß und "überladen" mit Wörtern, die nicht wirklich hilfreich sind. Die "Stopwort"-Liste definiert diese unnötigen Wörter für Ihre Installation.</p>
+
+<p>(Hinweis: Wenn Sie mit MySQL umgehen können, ist es oft leichter und schnelle, wenn Sie eine existierende Stopwortliste in das entprechende Format bringen und dann die MySQL-interne Funktion "Load Data Infile" nutzen, um die Daten zu importieren. Viele wissenschaftliche Bibliotheken publizieren ihre Stopwortlisten im Internet. Oder sie fragen andere Koha-Bibliotheken, ob diese Ihnen ihre Stopwortliste zur Verfügung stellen.)</p>
+
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

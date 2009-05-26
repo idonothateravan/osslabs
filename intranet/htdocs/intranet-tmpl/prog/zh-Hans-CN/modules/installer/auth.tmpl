@@ -1,0 +1,51 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 
+    <!-- TMPL_IF NAME="nopermission" -->权限不足<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="timed_out" -->会话已超时<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="different_ip" -->IP 地址改变<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="invalid_username_or_password" -->错误的用户名和密码<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="loginprompt" -->登录Koha<!-- /TMPL_IF -->
+</title>
+
+<!-- TMPL_INCLUDE NAME="installer-doc-head-close.inc" -->
+<div id="login">
+<h1><a>Koha 3.0 安装程序</a></h1>
+<!-- TMPL_IF NAME="nopermission" -->
+<div id="login_error"><strong>错误： </strong>未授权读者<a href="/cgi-bin/koha/mainpage.pl?logout.x=1">点击注销<a></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="timed_out" -->
+<div id="login_error"><strong>错误： </strong>对不起，您的会话已超时，请重新登入。</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="different_ip" -->
+<div id="login_error"><strong>错误： </strong>IP 地址已改变，请重新登录 </div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="invalid_username_or_password" -->
+<div id="login_error"><strong>错误： </strong>错误的用户名和密码</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="loginprompt" -->
+<!-- login prompt time-->
+<form action="<!-- TMPL_VAR NAME="url" -->" method="post" name="mainform" id="mainform">
+<!-- TMPL_LOOP NAME="INPUTS" -->
+    <input type="hidden" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" />
+<!-- /TMPL_LOOP -->
+<h3>欢迎来到 Koha 网页安装程序</h3>
+<p>Before we begin, please verify you have the correct credentials to continue. Please log in
+with the username and password given to you by your systems administrator and located in your
+<code>koha-conf.xml</code> 配置文件</p>
+<p>请输入您的账号和密码：</p>
+<p><label>用户名称：<br />
+<input type="text" name="userid" id="userid" class="input" value="<!-- TMPL_VAR NAME="userid" -->" size="20" tabindex="1" /></label>
+</p>
+<p><label>密码：<br />
+<input type="password" name="password" id="password" class="input" value="" size="20" tabindex="2" /></label>
+</p>
+<p class="submit"><input id="submit" type="submit" value="登录&raquo;" tabindex="4"></p>
+</form>
+
+<!-- /TMPL_IF -->
+
+<!-- TMPL_INCLUDE name="intranet-bottom.inc" -->

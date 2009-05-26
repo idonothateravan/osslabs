@@ -1,0 +1,302 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Reports &rsaquo; Checkout statistics <!-- TMPL_IF NAME="do_it" -->&rsaquo; Ergenisse <!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_INCLUDE NAME="calendar.inc" -->
+<style type="text/css">
+	.sql {display:none;}
+</style>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">Berichte</a> <!-- TMPL_IF NAME="do_it" -->&rsaquo; <a href="/cgi-bin/koha/reports/issues_stats.pl">Ausleihstatistik</a> &rsaquo; Ergebnisse <!-- TMPL_ELSE -->&rsaquo; Ausleihstatistiik<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="do_it" -->
+    <!-- TMPL_LOOP NAME="mainloop" -->
+        <h1>Ausleihstatistiken</h1>
+        <!-- TMPL_IF NAME="loopfilter" -->
+            <p>Gefiltert nach</p>
+            <ul>
+            <!-- TMPL_LOOP NAME="loopfilter" -->
+                <!-- TMPL_IF NAME="err" --><li class="error">Error:
+				<!-- TMPL_ELSIF NAME="sql" --><li class="sql">
+				<!-- TMPL_ELSE --><li>
+				<!--/TMPL_IF -->
+					<!-- TMPL_VAR NAME="crit"--> <!-- TMPL_VAR NAME="filter"-->
+				</li>
+            <!-- /TMPL_LOOP -->
+            </ul>
+        <!-- /TMPL_IF -->
+        
+        <table> 
+            <tr>
+                <th><!-- TMPL_VAR name="line" --> / <!-- TMPL_VAR name="column" --></th>
+                <!-- TMPL_LOOP NAME="loopcol" -->
+                    <th><!-- TMPL_VAR NAME="coltitle_display" --></th>
+                <!-- /TMPL_LOOP -->
+                <th>GESAMT</th>
+                </tr>
+                <!-- TMPL_LOOP NAME="looprow" -->
+                    <tr<!-- TMPL_UNLESS NAME="__odd__" --> class="highlight"<!-- /TMPL_UNLESS -->>
+                        <td><!-- TMPL_VAR NAME="rowtitle_display" DEFAULT="UNKNOWN VALUE"--></td>
+                    <!-- TMPL_LOOP NAME="loopcell" -->
+						<td><!-- TMPL_VAR NAME="value" DEFAULT="&nbsp;" --></td>
+                    <!-- /TMPL_LOOP -->
+						<td><!-- TMPL_VAR NAME="totalrow" --></td>
+                    </tr>
+                <!-- /TMPL_LOOP -->
+            <tr>
+                <th>GESAMT</th>
+                <!-- TMPL_LOOP NAME="loopfooter" -->
+                <th><!-- TMPL_VAR NAME="totalcol" --></th>
+                <!-- /TMPL_LOOP -->
+                <th><!-- TMPL_VAR NAME="total" --></th>
+            </tr>
+        </table>
+    <!-- /TMPL_LOOP -->
+<!-- TMPL_ELSE -->
+
+    <form method="post" action="/cgi-bin/koha/reports/issues_stats.pl">
+    <fieldset class="rows">
+	<legend>Ausleihstatistiken</legend><table>
+        <thead>
+            <tr>
+                <th>Titel</th>
+                <th>Zeile</th>
+                <th>Spalte</th>
+                <th>Filter</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Periode</td>
+                <td><input type="radio" name="Line" value="datetime" /></td>
+                <td><input type="radio" name="Column" value="datetime" /></td>
+                <td><label for="from">Vom</label> <input type="text" readonly="readonly" size="10" id="from" name="Filter" />
+                    <img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="Kalender zeigen" border="0" id="openCalendarFrom" style="cursor: pointer;">
+                   <script type="text/javascript">
+				   //<![CDATA[ 
+				   function validate1(date) {
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        var weekDay = date.getDay();
+                        var dayMonth = month + '-' + day;
+                        var dateString = year + '-' + month + '-' + day;
+                        var dateTo = document.getElementById('to').value.split("-");
+                        var limitDate = new Date(dateTo[0], (dateTo[1] - 1), dateTo[2]);
+                        if (date > limitDate) {
+                             return true;
+                        } else {
+                             return false;
+                        }
+                    }
+                    Calendar.setup({
+                            inputField : "from",
+                            ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+                            button : "openCalendarFrom",
+                            disableFunc : validate1,
+                            dateStatusFunc : validate1
+                    });
+					//]]>
+					</script>
+                    <label for="to">An</label> <input readonly="readonly" size="10" id="to" name="Filter" value="" type="text" />
+                    <img src="<!-- TMPL_VAR Name="themelang" -->/lib/calendar/cal.gif" alt="Kalender zeigen" id="openCalendarTo" style="cursor: pointer;" border="0">
+                    <script type="text/javascript">
+					//<![CDATA[  
+					function validate2(date) {
+                         var day = date.getDate();
+                         var month = date.getMonth() + 1;
+                         var year = date.getFullYear();
+                         var weekDay = date.getDay();
+                         var dayMonth = month + '-' + day;
+                         var dateString = year + '-' + month + '-' + day;
+                         var dateFrom = document.getElementById('from').value.split("-");
+                         var limitDate = new Date(dateFrom[0], (dateFrom[1] - 1), dateFrom[2]);
+                         if (limitDate > date) {
+                              return true;
+                         } else {
+                              return false;
+                         }
+                     }
+                     Calendar.setup({
+                             inputField : "to",
+                             ifFormat : "<!-- TMPL_VAR NAME="DHTMLcalendar_dateformat" -->",
+                             button : "openCalendarTo",
+                             disableFunc : validate2,
+                             dateStatusFunc : validate2
+                     });
+					//]]>
+					</script>
+                    </td>
+                </tr>
+                <tr class="highlight"> 
+                <td><label for="PeriodTypeSel">Typ:</label><select name="PeriodTypeSel" id="PeriodTypeSel">
+                    <option value ="issue">Ausleihe</option>
+                    <option value ="renew">Verlängerung</option>
+                    <option value ="return">Rückgabe</option>
+                    <option value ="localuse">Lokale Nutzung</option>
+                    </select></td>
+                <td colspan="2"><label for="DisplayBy">gruppieren nach</label> <select name="DisplayBy" id="DisplayBy">
+                    <option value="">Keine</option>
+                    <option value ="1">Wochentag:</option>
+                    <option value ="2">Monat</option>
+                    <option value ="3">Jahr</option>
+                    </select>
+                </td>
+                <td>
+                    <label for="PeriodDaySel">Tag auswählen: </label><select name="PeriodDaySel" id="PeriodDaySel">
+                    <option value =""></option>
+                    <option value ="Monday">Montag</option>
+                    <option value ="Tuesday">Dienstag</option>
+                    <option value ="Wednesday">Mittwoch</option>
+                    <option value ="Thursday">Donnerstag</option>
+                    <option value ="Friday">Freitag</option>
+                    <option value ="Saturday">Samstag</option>
+                    <option value ="Sunday">Sonntag</option>
+                    </select>
+                    <label for="PeriodMonthSel">Monat wählen:</label> <select name="PeriodMonthSel" id="PeriodMonthSel">
+                    <option value =""></option>
+                    <option value ="January">Januar</option>
+                    <option value ="February">Februar</option>
+                    <option value ="March">März</option>
+                    <option value ="April">April</option>
+                    <option value ="May">Mai</option>
+                    <option value ="June">Juni</option>
+                    <option value ="July">Juli</option>
+                    <option value ="August">August</option>
+                    <option value ="September">September</option>
+                    <option value ="October">Oktober</option>
+                    <option value ="November">November</option>
+                    <option value ="December">Dezember</option>
+                    </select>
+                </td>
+        </tr>
+        <tr>
+            <td>Benutzertypen</td>
+            <td><input type="radio" name="Line" value="borrowers.categorycode" /></td>
+            <td><input type="radio" name="Column" value="borrowers.categorycode" /></td>
+           <td><select name="Filter" id="borcat">
+               <option value=""> </option>
+               <!-- TMPL_LOOP NAME="categoryloop" -->
+                 <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="categorycode" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="categorycode" -->"><!-- TMPL_VAR NAME="description" --></option><!-- /TMPL_IF -->
+               <!-- /TMPL_LOOP -->
+               </select>
+             </td> 
+        </tr>
+        <tr class="highlight">
+            <td>Exemplar Typus</td>
+            <td><input type="radio" name="Line" value="itemtype" /></td>
+            <td><input type="radio" name="Column" value="itemtype" /></td>
+           <td><select name="Filter" id="itemtype">
+               <option value=""> </option>
+               <!-- TMPL_LOOP NAME="itemtypeloop" -->
+                 <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="code" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="code" -->"><!-- TMPL_VAR NAME="description" --></option><!-- /TMPL_IF -->
+               <!-- /TMPL_LOOP -->
+               </select>
+             </td> 
+        </tr>
+        <tr>
+            <td>Bibliothek</td>
+            <td><input type="radio" name="Line" value="branch" /></td>
+            <td><input type="radio" name="Column" value="branch" /></td>
+            <td><select name="Filter" id="branch">
+               <option value=""> </option>
+               <!-- TMPL_LOOP NAME="branchloop" -->
+<!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="code" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="code" -->"><!-- TMPL_VAR NAME="description" --></option><!-- /TMPL_IF -->
+				<!-- /TMPL_LOOP -->
+               </select>
+             </td> 
+        </tr>
+        <tr class="highlight">
+            <td>Sammlung</td>
+            <td><input type="radio" name="Line"   value="items.ccode" /></td>
+            <td><input type="radio" name="Column" value="items.ccode" /></td>
+            <td><select name="Filter" id="ccode">
+                <option value=""> </option>
+                <!-- TMPL_LOOP NAME="ccodeloop" -->
+					<!-- TMPL_IF NAME="selected" --> <option value="<!-- TMPL_VAR NAME="code" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="code" -->"><!-- TMPL_VAR NAME="description" --></option><!-- /TMPL_IF -->
+                <!-- /TMPL_LOOP -->
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Standort:</td>
+            <td><input type="radio" name="Line" value="items.location" /></td>
+            <td><input type="radio" name="Column" value="items.location" /></td>
+            <td><select name="Filter" id="location">
+                <option value=""> </option>
+                <!-- TMPL_LOOP NAME="locationloop" -->
+					<!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="code" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="code" -->"><!-- TMPL_VAR NAME="description" --></option><!-- /TMPL_IF -->
+				<!-- /TMPL_LOOP -->
+               </select>
+            </td> 
+        </tr>
+        <tr class="highlight">
+            <td>Exemplarsignatur</td>
+            <td></td>
+            <td></td>
+            <td>From <input type="text" name="Filter" size="10" /> (inclusive) to <input type="text" name="Filter" size="10" /> (exclusive) </td>
+        </tr>
+        <!-- TMPL_IF Name="hassort1" -->
+        <tr><td>Benutzersortierung 1</td>
+			<td><input type="radio" name="Line" value="borrowers.sort1" /></td>
+			<td><input type="radio" name="Column" value="borrowers.sort1" /></td>
+			<td><select name="Filter" id="sort1">
+               <option value=""> </option>
+               <!-- TMPL_LOOP NAME="Bsort1" -->
+			   <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="authorised_value" -->" selected="selected"><!-- TMPL_VAR NAME="lib" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="authorised_value" -->" ><!-- TMPL_VAR NAME="lib" --></option><!-- /TMPL_IF -->
+               <!-- /TMPL_LOOP -->
+               </select>
+            </td> 
+        </tr>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF Name="hassort2" -->
+        <tr class="highlight"><td>Benutzersortierung 2</td>
+            <td><input type="radio" name="Line" value="borrowers.sort2" /></td>
+            <td><input type="radio" name="Column" value="borrowers.sort2" /></td>
+           	<td><select name="Filter" id="sort2">
+               <option value=""> </option>
+               <!-- TMPL_LOOP NAME="Bsort2" -->
+			   <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="authorised_value" -->" selected="selected"><!-- TMPL_VAR NAME="lib" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR NAME="authorised_value" -->" ><!-- TMPL_VAR NAME="lib" --></option><!-- /TMPL_IF -->
+               <!-- /TMPL_LOOP -->
+               </select>
+            </td> 
+        </tr>
+        <!-- /TMPL_IF -->
+        </tbody>
+    </table><br /></fieldset>
+
+<fieldset class="rows"><legend>Zellenwert </legend><ol><li><label for="cellvalue1">Exemplare zählen</label> <input type="radio" name="Cellvalue" value="1" id="cellvalue1" checked="checked" /> </li>
+            <li><label for="cellvalue3">Titel zählen</label> <input type="radio" name="Cellvalue" id="cellvalue3" value="3" /> </li></ol></fieldset>
+			
+	<fieldset class="rows">
+	<legend>Output</legend>
+<ol><li><label for="outputscreen">Anzeige im Browser: </label><input type="radio" checked="checked" name="output" id="outputscreen" value="screen" /> </li>
+<li><label for="outputfile">In eine Datei:</label> <input type="radio" name="output" value="file" id="outputfile" /> <label class="inline" for="basename">Genannt: </label><input type="text" name="basename" id="basename" value="Export" /> <label class="inline" for="MIME">In eine Anwendung  
+		</label><!-- TMPL_VAR NAME="CGIextChoice" -->
+		<!-- TMPL_VAR NAME="CGIsepChoice" --></li></ol>
+	</fieldset>
+
+	<fieldset class="action">
+	<input type="submit" value="Bestätigen">
+	<input type="hidden" name="report_name" value="<!--TMPL_VAR NAME="report_name" -->" />
+	<input type="hidden" name="do_it" value="1" />
+	</fieldset>
+	</form>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

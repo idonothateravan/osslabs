@@ -1,0 +1,44 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 预约报表 &rsaquo; 全部预约 </title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首页e</a> &rsaquo; <a href="/cgi-bin/koha/reports/reports-home.pl">报表</a> &rsaquo; 全部的预约情况</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<table>
+	<tr><th>名称</th><th>预约日期</th><th>题名</th><th>分类号</th></tr>
+	<!-- TMPL_LOOP Name="dataloop" -->
+		<tr>
+			<td>
+				<!-- TMPL_VAR Name="name" -->
+			</td>
+			<td>
+				<!-- TMPL_VAR Name="reservedate" -->
+			</td>
+			<td>
+				<!-- TMPL_VAR Name="title" -->
+			</td>
+			<td>
+				<!-- TMPL_VAR Name="classification" -->
+			</td>
+		</tr>
+	<!-- /TMPL_LOOP -->
+</table>
+<p><!-- TMPL_VAR Name="count" --></p>
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="reports-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

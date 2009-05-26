@@ -1,0 +1,161 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Համալրում &rsaquo; Ստացականի համառոտագրություն <!-- TMPL_VAR NAME="name" --> համար <!-- TMPL_IF NAME="invoice" -->վճարման հաշիվ, <!-- TMPL_VAR NAME="invoice" --><!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" src="<!-- TMPL_VAR NAME='themelang' -->/js/additem.js"></script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="acquisitions-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/acqui/acqui-home.pl">Acquisitions</a> &rsaquo; <a href="/cgi-bin/koha/acqui/supplier.pl?supplierid=<!-- TMPL_VAR NAME="supplierid" -->"><!-- TMPL_VAR NAME="name" --></a> &rsaquo; Receive items from : <!-- TMPL_VAR NAME="name" --> <!-- TMPL_IF NAME="invoice" -->[<!-- TMPL_VAR NAME="invoice" -->]<!-- /TMPL_IF --> (պատվեր #<!-- TMPL_VAR NAME="ordernumber" -->)</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Receive items from : <!-- TMPL_VAR NAME="name" --> <!-- TMPL_IF NAME="invoice" -->[<!-- TMPL_VAR NAME="invoice" -->] <!-- /TMPL_IF --> (պատվեր #<!-- TMPL_VAR NAME="ordernumber" -->)</h1>
+
+<!-- TMPL_IF name="count" -->
+    <form action="/cgi-bin/koha/acqui/finishreceive.pl" method="post">
+<div class="yui-g">
+<div class="yui-u first">
+    
+    <fieldset class="rows">
+    <legend>Քարտարանի մանրամասներ</legend>
+    <ul><li><span class="label">Վերնագիր։ </span><span class="title"><!-- TMPL_VAR NAME="title" --></span></li>
+    <li> <span class="label">Հեղինակ: </span>
+        <!-- TMPL_VAR NAME="author" --></li>
+    <li><span class="label">Հեղինակային իրավունք։ </span>
+        <!-- TMPL_VAR NAME="copyrightdate" --></li>
+    <li> <span class="label">ISBN: </span>
+        <!-- TMPL_VAR NAME="isbn" --></li>
+    <li> <span class="label">Մատենաշար։ </span>
+        <!-- TMPL_VAR NAME="seriestitle" --></li>
+    </ul>
+	</fieldset>
+	<fieldset class="rows">
+	<legend>Նյութի մանրամասներ (ավելացրու քարտարան)</legend>
+  <div id="outeritemblock">
+	<div id="itemblock">
+	<ol>
+	<li> <label for="volinf">Volume/Copy (for serials): </label>
+        <input type="text" size="20" name="volinf" id="volinf" /></li></ol>
+    <li> <label for="barcode">Item barcode: </label>
+        <input type="text" size="20" name="barcode" id="barcode" value="<!-- TMPL_VAR NAME="barcode" -->" /></li>
+    <li> <label for="homebranch">Home library: </label>
+            <select name="homebranch" id="homebranch">            <!-- TMPL_LOOP name="branchloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option>
+                <!-- TMPL_ELSE -->
+                <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="description" --></option>
+                <!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+            </select></li>
+    <!-- TMPL_IF NAME="locationloop" -->
+		<li> <label for="location">Shelf location: </label>
+            <select name="location" id="location">            <!-- TMPL_LOOP name="locationloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option>
+                <!-- TMPL_ELSE -->
+                <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="description" --></option>
+                <!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+            </select></li>
+   <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="itype" -->
+    <li> <label for="itemtype">Նյութի տեսակ։ </label>
+            <select name="itemtype" id="itemtype"><!-- TMPL_LOOP name="itemtypeloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option>
+                <!-- TMPL_ELSE -->
+                <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="description" --></option>
+                <!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+            </select></li>
+   <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="ccodeloop" -->
+    <li> <label for="ccode">Հավաքածու։ </label>
+            <select name="ccode" id="ccode">            <!-- TMPL_LOOP name="ccodeloop" -->
+                <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="description" --></option>
+                <!-- TMPL_ELSE -->
+                <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="description" --></option>
+                <!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP -->
+            </select></li>
+   <!-- /TMPL_IF -->
+   </ol>
+<a style="cursor: pointer; color: grey; font-size: 180%;" onclick="cloneItemBlock('itemblock<!-- TMPL_VAR name="itemBlockIndex" -->')">+</a>  <a style="display:none; cursor: pointer; color: grey; font-size: 180%;" onclick="deleteItemBlock('itemblock<!-- TMPL_VAR name="itemBlockIndex" -->')">-</a>
+    </div>
+	</div>
+	<input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->" />
+    <input type="hidden" name="ordnum" value="<!-- TMPL_VAR NAME="ordernumber" -->" />
+    <input type="hidden" name="biblioitemnumber" value="<!-- TMPL_VAR NAME="biblioitemnumber" -->" />
+    <input type="hidden" name="supplierid" value="<!-- TMPL_VAR NAME="supplierid" -->" />
+    <input type="hidden" name="datereceived" value="<!-- TMPL_VAR NAME="datereceived_iso" -->" />
+    <input type="hidden" name="freight" value="<!-- TMPL_VAR NAME="freight" -->" />
+    <input type="hidden" name="gst" value="<!-- TMPL_VAR NAME="gst" -->" />
+    </fieldset>
+	</div>
+	<div class="yui-u">
+    <fieldset class="rows">
+    <legend>Accounting details</legend>
+       <ol>
+       <li><label for="datereceived">Date received: </label><span class="label"> <!-- TMPL_VAR NAME="datereceived" --> </span></li>
+       <li><label for="quantity">Quantity ordered: </label><span class="label"> <!-- TMPL_VAR NAME="quantity" --> </span></li>
+        <li><label for="quantityrec">Quantity received: </label>
+            <!-- TMPL_IF NAME="quantityreceived" -->
+                <input id="quantityrec" READONLY type="text" size="20" name="quantityrec" value="<!-- TMPL_VAR NAME="quantityreceivedplus1" -->" />
+                <input id="origquantityrec" READONLY type="hidden" name="origquantityrec" value="<!-- TMPL_VAR NAME="quantityreceived" -->" />
+            <!-- TMPL_ELSE -->
+                <input id="quantityrec" READONLY type="text" size="20" name="quantityrec" value="1" />
+                <input id="origquantityrec" READONLY type="hidden" name="origquantityrec" value="0" />
+            <!-- /TMPL_IF -->
+		<!-- 	<input type="text" size="20" name="quantityrec" id="quantityrec" value="<!-- TMPL_VAR NAME="quantityreceived" -->" /> --></li>
+        <li><label for="rrp">Փոխարինման արժեք։ </label><input type="text" size="20" name="rrp" id="rrp" value="<!-- TMPL_VAR NAME="rrp" -->" /></li>
+        <li><label for="ecost">Բյուջետավորված ծախս : </label><input type="text" size="20" name="ecost" id="ecost" value="<!-- TMPL_VAR NAME="ecost" -->" /></li>
+        <li><label for="cost">Ընթացիկ արժեք:</label>
+        <!-- TMPL_IF name="unitprice"-->
+         <input type="text" size="20" name="cost" id="cost" value="<!-- TMPL_VAR NAME="unitprice" -->" />
+        <!-- TMPL_ELSE -->
+            <input type="text" size="20" name="cost" id="cost" value="<!-- TMPL_VAR name="ecost" -->" />
+        <!-- /TMPL_IF --></li></ol>
+        <input type="hidden" name="invoice" value="<!-- TMPL_VAR NAME="invoice" -->" />
+    </fieldset>
+
+</div>
+</div><div class="yui-g"><fieldset class="action"><!-- TMPL_IF name="catview" -->
+        <input type="button" value="Հիշել" onclick="javascript:if(check_additem()) { this.form.submit(); } else { alert( _('Duplicate barcodes detected.  Please correct the errors and resubmit.') ); return false };"> <a class="cancel" href="/cgi-bin/koha/acqui/parcel.pl?supplierid=<!-- TMPL_VAR NAME="supplierid" -->&amp;invoice=<!-- TMPL_VAR NAME="invoice" -->&amp;gst=<!-- TMPL_VAR NAME="gst" -->&amp;freight=<!-- TMPL_VAR NAME="freight" -->">Չեղյալ անել</a>
+    <!-- TMPL_ELSE -->
+        <a href="/cgi-bin/koha/acqui/neworderempty.pl?ordnum=<!-- TMPL_VAR NAME="ordernumber" -->&amp;id=<!-- TMPL_VAR NAME="booksellerid" -->">Խմբագրել</a>
+    <!-- /TMPL_IF --></fieldset></div>    </form>
+<!-- TMPL_ELSE -->
+<div id="acqui_acquire_orderlist">
+    <table>
+    <tr>
+        <th>Զամբյուղ</th>
+        <th>ISBN</th>
+        <th>Վերնագիր</th>
+        <th>Հեղինակ</th>
+        <th>Քնկ</th>
+        <th>Ստացված է</th>
+    </tr>
+    <!-- TMPL_LOOP name="loop" -->
+        <tr>
+            <td><!-- TMPL_VAR NAME="basketno" --></td>
+            <td><!-- TMPL_VAR NAME="isbn" --></td>
+         <td><a href="orderreceive.pl?datereceived=<!-- TMPL_VAR NAME="datereceived" -->&amp;receive=<!-- TMPL_VAR NAME="ordernumber" -->&amp;biblio=<!-- TMPL_VAR NAME="biblionumber" -->&amp;invoice=<!-- TMPL_VAR NAME="invoice" -->&amp;freight=<!-- TMPL_VAR NAME="freight" -->&amp;gst=<!-- TMPL_VAR NAME="gst" -->&amp;id=<!-- TMPL_VAR NAME="id" -->"><!-- TMPL_VAR NAME="title" --></a></td>
+            <td><!-- TMPL_VAR NAME="author" --></td>
+            <td><!-- TMPL_VAR NAME="quantity" --></td>
+            <td><!-- TMPL_VAR NAME="quantityreceived" --></td>
+        </tr>
+    <!-- /TMPL_LOOP -->
+    </table>
+</div>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="acquisitions-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

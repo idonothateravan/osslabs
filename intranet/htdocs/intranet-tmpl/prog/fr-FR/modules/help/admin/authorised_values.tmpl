@@ -1,0 +1,141 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Gestion des valeurs autorisées</h1>
+
+<p>Koha vous permet de militer les valeurs que les catalogueurs peuvent saisir dans certains sous-champs MARC à certaines valeurs pré-définies "autorisées". Ces valeurs autorisées sont définies ici.</p>
+	<ul>
+		<li>ASTUCE : si un sous-champ n'est pas obligatoire, Koha ajoute automatiquement une valeur vide à la liste de valeurs autorisées, qui sera sélectionnée par défaut.Si le sous-champ est obligatoire, aucune valeur vide n'est ajoutée (et vous ne devez PAS en ajouter une à la liste, car c'est une valeur interdite !)</li>
+		<li>ASTUCE 2 : dans l'éditeur MARC la liste est triée par texte et PAS par valeur. Aussi vous pouvez définir une valeur par défaut en laissant un espace avant la valeur que vous souhaitez voir en premier dans la liste. Par exemple, si votre liste concerne la langue, vous pouvez définir "ENG" comme valeur autorisée et "Anglais"comme texte. L'espace devant "ENG" comme première valeur par défaut, et l'espace n'apparaîtra pas (HTML supprime automatiquement les espaces inutiles). Conseil supplémentaire : vous pouvez mettre une première valeur avec N espaces, puis une seconde avec N-1 espaces,..., une valeur en Nième position avec 1 espace. N'abusez pas de cette fonstion, c'est plus facile de trouver une valeur par ordre alphabétique. Il devrait être seulement employé pour proposer une valeur par défaut</li>
+	</ul>
+<p>Koha installe automatiquement les catégories de valeurs autorisées pour vos types de document et les codes de sites, et vous pouvez lier ces valeurs autorisées à des sous-champs MARC quand vous établissez votre structure MARC.</p>
+<p> </p>
+<h3>Why would I want to define authorized values for MARC tags?</h3>
+<p>Les Valeurs autorisées crééent un 'vocabulaire contrôlé' pour le personnel. Par exemple, si votre installation Koha est utilisée par plusieurs bibliothèques, et que vous utilisez MARC21, pouvez vouloir resteindre le sous-champ 850a au code d'institution de ces bibliothèques. Dans ce cas, vous pouvez définir une nouvelle catégorie de valeurs autorisées (par exemple "INST") et entrer les codes des institutions comme les valeurs autorisées pour cette catégorie.</p>
+    <span style="background-color: #ffe599">
+ASTUCE: Koha installe automatiquement les catégories de valeurs autorisées pour vos types de document et les code des sites, et vous pouvez lier ces valeurs autorisées à des sous-champs MARC quand vous établissez votre grille MARC</span>.
+   
+   <strong>Valeurs autorisées actuelles</strong>
+Koha propose en standard plusieurs autres catégories et valeurs prédéfinies que votre bibliothèque utilisera certainement, par exemple 'Perdu'.
+
+	<ul>
+		<li>Asort1
+		<ul>
+			<li>attachée aux acquisitions, qui peut être utilisée pour les statistiques</li>
+		</ul></li>
+		<li>Asort2
+		<ul>
+			<li>attachée aux acquisitions, qui peut être utilisée pour les statistiques</li>
+		</ul></li>
+		<li>Bsort1
+		<ul>
+			<li>associée aux adhérents, qui peut être utilisée pour les statistiques</li>
+		</ul></li>
+		<li>Bsort2
+		<ul>
+			<li>associée aux adhérents, qui peut être utilisée pour les statistiques</li>
+		</ul></li>
+		<li>CCODE
+		<ul>
+			<li>code de collection (apparaît en modification d'un exemplaire)</li>
+		</ul></li>
+		<li>DAMAGED
+		<ul>
+			<li>desciptions des exemplaires endommagés (apparaît en modification de l'exemplaire)</li>
+		</ul></li>
+		<li>HINGS_AS
+		<ul>
+			<li>
+		    
+holdings coded value (FIXME)<strong style="color: #0000ff">??</strong></li>
+		</ul></li>
+		<li>HINGS_C
+		<ul>
+			<li>
+		    
+holdings coded value (FIXME)<strong style="color: #0000ff">??</strong></li>
+		</ul></li>
+		<li>HINGS_PF
+		<ul>
+			<li>
+		    
+holdings coded value (FIXME)<strong style="color: #0000ff">??</strong></li>
+		</ul></li>
+		<li>HINGS_RD
+		<ul>
+			<li>
+		    
+holdings coded value (FIXME)<strong style="color: #0000ff">??</strong></li>
+		</ul></li>
+		<li>HINGS_UT
+		<ul>
+			<li>
+		    
+holdings coded value (FIXME)<strong style="color: #0000ff">??</strong></li>
+		</ul></li>
+		<li>LOC
+		<ul>
+			<li>		    
+localisation (apparaît en général en modification de l'exemplaire)</li>
+		</ul></li>
+		<li>LOST
+		<ul>
+			<li>descriptions des exemplaires perdus (apparaît en modification de l'exemplaire)</li>
+		</ul></li>
+		<li>NOT_LOAN
+		<ul>
+			<li>raisons pour lesquelles le titre n'est pas prêtable</li>
+		</ul></li>
+		<li>RESTRICTED
+		<ul>
+			<li><strong style="color: #0000ff">??</strong></li>
+		</ul></li>
+		<li>STACK
+		<ul>
+			<li><strong style="color: #0000ff">??</strong></li>
+		</ul></li>
+		<li>SUGGEST
+		<ul>
+			<li>liste des motifs d'acceptation ou de rejet de suggestion des adhérents</li>
+		</ul></li>
+		<li>WITHDRAWN
+		<ul>
+			<li>description d'un exemplaire retié (apparaît en modification de l'exemplaire)</li>
+		</ul></li>
+	</ul>   
+   <strong>Voir valeurs autorisées</strong>
+
+	<ul>
+		<li>Pour voir les valeurs autorisées pour une catégorie existante, comme 'Perdu', sélectionnez 'Perdu' dans le menu déroulant.</li>
+		<li>Vous pouvez voir les valeurs définies dans la catégorie "Lost" et les modifier.</li>
+	</ul><strong>   
+   Ajouter Valeur autorisée</strong>
+
+	<ul>
+		<li>Pour ajouter une nouvelle valeur à une catégorie existante, cliquez 'Ajoutez valeur autorisée'</li>
+		<li>Entrez une valeur, une description et éventuellement une icone</li>
+		<li>Quand vous avez fini, cliquez sur 'Enregistrer'</li>
+	</ul><h1>   
+   Modifiez valeurs autorisées<br/></h1>
+	<ul>
+		<li>Sélectionnez une catégorie dans le menu déroulant 'Voir catégories'</li>
+		<li>Cliquez 'Modifier' à côté de la valeur autorisée à modifier</li>
+		<li>Faites les modifications que vous voulez et cliquez sur 'Sauvegarder'</li>
+		<li>
+	    <span style="background-color: #ffe599">
+ASTUCE : Soyez prudent quand vous modifiez les 'Valeurs autorisées' car elles peuvent être associées à des notices.</span>.</li>
+	</ul><h2></h2> <h1><strong>   
+   Ajouter une catégorie de valeur autorisée<br/></strong></h1>
+
+<h2></h2> <strong><br/></strong>
+	<ul>
+		<li>Pour ajouter une nouvelle catégorie, cliquez 'Ajouter catégorie'</li>
+		<li>Remplissuez les champs 'Catégorie', 'Valeur autorisée' et 'Description'<br/>
+		<ul>
+			<li>
+		    <span style="color: #ff0000">
+ATTENTION : le nom de catégorie peut aller jusqu'à 8 caractères. Entrez une seule valeur autorisée pour la catégorie. Vous pourrez modifier et ajouter des valeurs après avoir enregistré la catégorie.</span></li>
+		</ul></li>
+		<li>Cliquez sur 'Sauvegarder'</li>
+		<li>Vous venez d'ajouter une nouvelle catégorie et pouvez immédiatement commencer à y ajouter des valeurs autorisées en cliquant 'Ajouter valeurs autorisées'</li>
+	</ul>
+<!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

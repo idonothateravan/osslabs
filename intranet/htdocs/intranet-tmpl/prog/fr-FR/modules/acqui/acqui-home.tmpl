@@ -1,0 +1,145 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Acquisitions</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="acquisitions-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> &rsaquo; <a href="/cgi-bin/koha/acqui/acqui-home.pl">Acquisitions</a> &rsaquo; </div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_INCLUDE NAME="acquisitions-toolbar.inc" -->
+
+<h1>Acquisitions</h1>
+<div class="yui-g">
+<div class="yui-u first">
+<div id="acqui_acqui_home_order">
+    <fieldset>
+        <legend>Créer, réceptionner, modifier une commande</legend>
+    <!-- TMPL_IF name="nobudget" -->
+		<!-- TMPL_IF NAME="CAN_user_parameters" -->
+        <span class="problem">Vous devez définir <a href="/cgi-bin/koha/admin/aqbookfund.pl">un budget</a> dans les paramètres</span>
+		<!-- TMPL_ELSE -->
+		<span class="problem">Votre administrateur doit définir un budget dans le module administration</span>
+		<!-- /TMPL_IF -->
+        <form name="findsupplier" action="/cgi-bin/koha/acqui/booksellers.pl" method="post">
+            <p><label for="supplierpage">Fournisseur </label><input type="text" size="25" name="supplier" id="supplierpage" class="focus" />
+            <input type="submit" value="Rechercher">
+            </p>
+        </form>
+    <!-- TMPL_ELSE -->
+        <form name="findsupplier" action="/cgi-bin/koha/acqui/booksellers.pl" method="post">
+            <p><label for="supplierpage">Fournisseur : </label><input type="text" size="25" name="supplier" id="supplierpage" class="focus" />
+            <input type="submit" value="Rechercher">
+            </p>
+        </form>
+		
+    <!-- /TMPL_IF -->
+    </fieldset>
+</div>
+<div id="acqui_acqui_home_suggestions">
+    <fieldset>
+    <legend>Suggestions en attente</legend>
+        <!-- TMPL_IF name="suggestion" -->
+            <!--TMPL_VAR NAME="suggestion" --> suggestions en attente <a href="/cgi-bin/koha/suggestion/acceptorreject.pl">Traiter les suggestions</a>
+        <!-- TMPL_ELSE -->
+            <p>Pas de suggestions en attente</p>
+        <!-- /TMPL_IF -->
+    </fieldset>
+</div>
+</div>
+
+<div class="yui-u">
+    <!-- TMPL_IF name="nobudget" -->
+    <!-- TMPL_ELSE -->
+    <h2>Postes et budgets</h2>
+    <a href="/cgi-bin/koha/admin/aqbookfund.pl" title="[Gérer les postes budgétaires]">[ Gérer ]</a>
+    <div id="BudgetsAndFunds">
+    <table id="accounts">
+        <thead>
+        <tr>
+            <th>Budgets</th>
+            <th>Total</th>
+            <th>Dépensé</th>
+            <th>Engagé</th>
+            <th>Dispo.</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- TMPL_LOOP name="loop_budget" -->
+            <tr>
+                <td><!-- TMPL_VAR name="bookfundname" --></td>
+                <td><a href="/cgi-bin/koha/admin/aqbudget.pl?op=add_form&amp;aqbudgetid=<!--TMPL_VAR NAME="aqbudgetid"-->"><!-- TMPL_VAR name="budgetamount" --></a></td>
+                <td><a href="/cgi-bin/koha/acqui/spent.pl?bookfund=<!--TMPL_VAR NAME="bookfundid"-->&amp;start=<!--TMPL_VAR NAME="sdate"-->&amp;end=<!-- TMPL_VAR NAME="edate"-->"><!-- TMPL_VAR name="spent" --></a></td>
+                <td><a href="/cgi-bin/koha/acqui/bookfund.pl?bookfund=<!--TMPL_VAR NAME="bookfundid"-->&amp;start=<!--TMPL_VAR NAME="sdate"-->&amp;end=<!-- TMPL_VAR NAME="edate"-->"><!-- TMPL_VAR name="comtd" --></a></td>
+                <td><!-- TMPL_VAR name="avail" --></td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Total</th>
+            <th><!-- TMPL_VAR name="total" --></th>
+            <th><!-- TMPL_VAR name="totspent" --></th>
+            <th><!-- TMPL_VAR name="totcomtd" --></th>
+            <th><!-- TMPL_VAR name="totavail" --></th>
+        </tr>
+        </tfoot>
+    </table>
+    </div>
+    <p>Utilisez le bouton rafraîchir pour avoir les chiffres les plus récents.Les chiffres communiqués le sont à titre indicatif, dans la mesure où des taux de change affecteront le montant réellement payé.</p>
+    <!-- /TMPL_IF -->
+    <div id="acqui_acqui_home_currency">
+    <!-- TMPL_IF NAME="loop_currency" -->
+        <h2>Taux de change</h2>
+        <form action="/cgi-bin/koha/acqui/currency.pl">
+        <table>
+            <tr>
+                <th>Devise</th>
+                <th>Taux</th>
+                <th>&nbsp;</th>
+            </tr>
+            <!-- TMPL_LOOP name="loop_currency" -->
+                <tr>
+                    <td>
+                        <label for="<!-- TMPL_VAR name="currency" -->"><!-- TMPL_VAR name="currency" --></label>
+                    </td>
+                    <td>
+                            <input type="hidden" name="type" value="change" />
+                            <input type="text" size="10" id="<!-- TMPL_VAR name="currency" -->" name="<!-- TMPL_VAR name="currency" -->" value="<!-- TMPL_VAR name="rate" -->" />
+                    </td>
+                    <td><input type="submit" value="Enregistrer"></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        </table>
+        </form>
+    <!-- TMPL_ELSE -->
+        <a href="/cgi-bin/koha/admin/currency.pl?op=add_form" class="button">
+        Ajouter une devise
+        </a>
+    <!-- /TMPL_IF -->
+    </div>
+</div>
+    
+</div>
+
+<div id="acqui_acqui_home_hints">
+    <h2>Aide</h2>
+    <p>Pour commencer une commande, achat ou don, cherchez le fournisseur ou le donateur, et créez un nouveau panier.</p>
+    <p>Un panier est un regroupement de lignes de commandes.</p>
+    <p>Pour commander un document, vous devez créer un exemplaire soit à une notice déjà existante, soit à une nouvelle notice.</p>
+</div>
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="acquisitions-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

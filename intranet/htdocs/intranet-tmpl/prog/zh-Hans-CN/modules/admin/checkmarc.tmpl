@@ -1,0 +1,245 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 管理 &rsaquo; MARC 检查
+<!-- TMPL_IF name="total" --> 总共找到 <!-- TMPL_VAR name="total" --> 个错误<!-- TMPL_ELSE --> ：设定没问题！<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首页</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">管理</a> &rsaquo; 检查 MARC
+<!-- TMPL_IF name="total" -->总共找到 <!-- TMPL_VAR name="total" --> 个错误<!-- TMPL_ELSE --> ：设定没问题！<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>MARC 书目架构测试</h1>
+<table>
+    <tr>
+        <th>测试</th>
+        <th>结果</th>
+    </tr>
+<!-- -->
+<!-- TMPL_IF name="itemnum" -->
+    <tr>
+        <td>索书号</td>
+        <td><ul><li>馆藏号码（itemnum）字段必须对应 </li>
+            <li>对应的分栏必须在第 -1 格（即「忽略」）</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>完成</td>
+        <td>索书号：itemnumber 字段连结至第「-1」格（即不显示）</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemfields" -->
+    <tr>
+        <td>馆藏字段</td>
+        <td>馆藏的所有字段都必要：<br />
+            <ul><li>对应到相同字段，</li>
+            <li>而且它们必须全部在第（10）分页  (「馆藏」)</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>完成</td>
+        <td>所有馆藏字段在相同字段以及分页</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+    <!-- TMPL_IF NAME="itemtags" -->
+        <tr>
+            <td>馆藏标签</td>
+            <td>超过 1 个以上的机读格式（MARC）字段有关馆藏分页（10）：<!-- TMPL_VAR name="itemtags" --></td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>完成</td>
+            <td>只有 1 个机读格式（MARC）字段对应到馆藏</td>
+        </tr>
+    <!-- /TMPL_IF -->
+    <!--  -->
+<!-- TMPL_IF name="itemtype" -->
+    <tr>
+        <td>馆藏类型没有对应</td>
+        <td>biblioitems.itemtype 为必要字段：<br />
+            <ul><li>对应到一个机读格式（MARC）分栏， </li>
+            <li>对应的分栏必须设定容许值为「itemtype」</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>完成</td>
+        <td>biblioitems.itemtype 已设定</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branch" -->
+    <tr>
+        <td>所属分馆字段没有对应</td>
+        <td>iitems.homebranch 为必要字段<br />
+            <ul><li>对应到一个机读格式（MARC）分栏，</li>
+            <li>对应的分栏必须设定容许值为「branches」</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>完成</td>
+        <td>所属分馆设定</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="holdingbranch" -->
+    <tr>
+        <td>所属分馆字段没有对应</td>
+        <td>items.holdingbranch 为必要字段：<br />
+            <ul><li>对应到一个机读格式（MARC）分栏， </li>
+            <li>对应的分栏必须设定容许值为「branches」</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>完成</td>
+        <td>所属分馆设定</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemtypes_empty" -->
+    <tr>
+        <td>没有设定馆藏类型</td>
+        <td>至少要设定1个馆藏类型</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>完成</td>
+        <td>至少要设定1个馆藏类型</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branches_empty" -->
+    <tr>
+        <td>分馆未设定</td>
+        <td>至少要设定 1 个分馆</td>
+    </tr>
+<!-- TMPL_ELSE --> 
+    <tr>
+        <td>完成</td>             
+        <td>至少要设定 1 个分馆</td>
+    </tr>                                       
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="biblionumber" -->
+    <tr>
+        <td>书目记录以及书目记录编号</td>
+        <td>The biblio.biblionumber and biblioitems.biblioitemnumber fields be mapped to a MARC subfield,</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>完成</td>
+        <td>biblionumber 及 biblioitemnumber 对应正确</td>
+    </tr>
+<!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="frameworknull" -->
+        <tr>
+            <td>框架值</td>
+            <td>书目记录代码是空的，检查下面表格。<br />
+                <li>从frameworkcode为空的marc_subfield_structure中选择＊</li>
+                <li>从frameworkcode为空的marc_subfield_structure中选择＊</li>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>完成</td>
+            <td>书目记录的机读格式（MARC）代码没有空值</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="inconsistent_tabs" -->
+        <tr>
+            <td style="vertical-align:top;">subfields not in same tabs</td>
+            <td>Not all subfields for the following tags are in the same tab (or marked 'ignored').
+                <table>
+                    <tr>
+                        <th>代码</th>
+                        <th>描述</th>
+                        <th>字段</th>
+                        <th>Tabs in use</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="tab_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>预设书目架构</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tabs" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>完成</td>
+            <td>all subfields for each tag are in the same tab (or ignored)</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="invalid_authtypecodes" -->
+        <tr>
+            <td style="vertical-align:top;">invalid authority types</td>
+            <td>Not all authority types referred to by the frameworks are defined.
+                <table>
+                    <tr>
+                        <th>Framework code</th>
+                        <th>Framework description</th>
+                        <th>字段</th>
+                        <th>分栏</th>
+                        <th>Invalid authority type</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="authtypecode_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>预设书目架构</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+                            <td><!-- TMPL_VAR NAME="authtypecode" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>完成</td>
+            <td>all authority types used in the frameworks are defined</td>
+        </tr>
+    <!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="total" -->
+    <tr>
+        <td>总计</td>
+        <td>You have <!-- TMPL_VAR name="total" --> error(s) in your MARC configuration. Please fix them before using Koha</td>
+    </tr>
+</table>
+<!-- TMPL_ELSE -->
+    </table>
+        <p><b>设定完成，你的 MARC 参数没有问题</b></p>
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

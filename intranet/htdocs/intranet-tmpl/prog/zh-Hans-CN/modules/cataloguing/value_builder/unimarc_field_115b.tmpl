@@ -1,0 +1,658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立 UNIMARC 字段 115b</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>复本（胶卷版类别）</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>摄制原片</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">摄制原片</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>Master</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Master</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1c" -->
+				<option value="c" SELECTED>复本</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">复本</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1d" -->
+				<option value="d" SELECTED>参阅版</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">参阅版</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1x" -->
+				<option value="x" SELECTED>如不适用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不适用</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+	
+			<!-- /TMPL_IF -->
+
+				</select>
+		</td>
+	</tr>
+	<tr>
+		<td>工作片性质</td>
+		<td>
+			<select name="f2" size="1">
+			<!-- TMPL_IF name="f2|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+            
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" SELECTED>Epreuve</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Epreuve</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2b" -->
+				<option value="b" SELECTED>识字课本</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">识字课本</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2c" -->
+				<option value="c" SELECTED>导槽</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">导槽</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2d" -->
+				<option value="d" SELECTED>样片</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">样片</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2e" -->
+				<option value="e" SELECTED>Pistes de mixage</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Pistes de mixage</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2g" -->
+				<option value="g" SELECTED>tite bands/inter-title rolls</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">tite bands/inter-title rolls</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2h" -->
+				<option value="h" SELECTED>production rolls</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">production rolls</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2x" -->
+				<option value="x" SELECTED>如不适用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不适用</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+	
+			<!-- /TMPL_IF -->
+
+				</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>色彩</td>
+		<td>
+	<select name="f3" size="1">
+			<!-- TMPL_IF name="f3|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f3a" -->
+				<option value="a" SELECTED>Trois couches de pigment</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Trois couches de pigment</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f3b" -->
+				<option value="b" SELECTED>二层卷色</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">二层卷色</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f3c" -->
+				<option value="c" SELECTED>未明二色</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">未明二色</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f3d" -->
+				<option value="d" SELECTED>未明三色</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">未明三色</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f3e" -->
+				<option value="e" SELECTED>Trois bandes de couleur</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">Trois bandes de couleur</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3f" -->
+				<option value="f" SELECTED>二卷片色</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">二卷片色</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3g" -->
+				<option value="g" SELECTED>蓝绿卷片</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">蓝绿卷片</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3h" -->
+				<option value="h" SELECTED>靛卷片</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">靛卷片</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3i" -->
+				<option value="i" SELECTED>紫红色的细长片</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">紫红色的细长片</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3j" -->
+				<option value="j" SELECTED>紫红色的细长片</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">紫红色的细长片</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3k" -->
+				<option value="k" SELECTED>黄色的细长片</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">黄色的细长片</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3l" -->
+				<option value="l" SELECTED>SEN 2</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">SEN 2</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3m" -->
+				<option value="m" SELECTED>SEN 3</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">SEN 3</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3n" -->
+				<option value="n" SELECTED>调棕色</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">调棕色</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3o" -->
+				<option value="o" SELECTED>权威记录</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">权威记录</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3p" -->
+				<option value="p" SELECTED>颜色</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">颜色</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3q" -->
+				<option value="q" SELECTED>淡调色及染色</option>
+			<!-- TMPL_ELSE -->
+				<option value="q">淡调色及染色</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3r" -->
+				<option value="r" SELECTED>印刷版色</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">印刷版色</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3s" -->
+				<option value="s" SELECTED>手工调色</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">手工调色</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3x" -->
+				<option value="x" SELECTED>如不适用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不适用</option>
+	
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+	</tr>
+
+
+	<tr>
+		<td>电影片感光乳剂性质</td>
+		<td>
+			<select name="f4" size="1">
+			<!-- TMPL_IF name="f4|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4a" -->
+				<option value="a" SELECTED>Positif</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Positif</option>
+	
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4b" -->
+				<option value="b" SELECTED>负片</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">负片</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f4x" -->
+				<option value="x" SELECTED>如不适用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不适用</option>
+
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>Support de film</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5a" -->
+				<option value="a" SELECTED>Securite (triacetate)</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Securite (triacetate)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5b" -->
+				<option value="b" SELECTED>硝酸盐基</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">硝酸盐基</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>Securite (diacetate)</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Securite (diacetate)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>Polyester</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Polyester</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5x" -->
+				<option value="x" SELECTED>支持合成</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">支持合成</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+        </tr>
+
+	<tr>
+		<td>配音类型</td>
+		<td>
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f6|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>声音在媒体上</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">声音在媒体上</option>
+	
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6b" -->
+				<option value="b" SELECTED>Stereophonique</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Stereophonique</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" SELECTED>多音道，环音系统</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">多音道，环音系统</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6v" -->
+				<option value="v" SELECTED>电影片声音种类</option>
+			<!-- TMPL_ELSE -->
+				<option value="v">电影片声音种类</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f6x" -->
+				<option value="x" SELECTED>如不适用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不适用</option>
+
+			<!-- /TMPL_IF -->
+
+
+			<!-- TMPL_IF name="f6z" -->
+				<option value="z" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">其他</option>
+
+			<!-- /TMPL_IF -->
+
+				</select>
+		</td>
+
+        </tr>
+
+
+	<tr>
+		<td>发声媒体</td>
+		<td>
+			<select name="f7" size="1">
+			<!-- TMPL_IF name="f7|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7a" -->
+				<option value="a" SELECTED>Procede par imbibition</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Procede par imbibition</option>
+	
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7b" -->
+				<option value="b" SELECTED>Procede tricouches</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Procede tricouches</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7c" -->
+				<option value="c" SELECTED>Procede tricouches (faible contraste)</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Procede tricouches (faible contraste)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7d" -->
+				<option value="d" SELECTED>Pellicule positive par duplication</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">Pellicule positive par duplication</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7x" -->
+				<option value="x" SELECTED>如不适用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不适用</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f7z" -->
+				<option value="z" SELECTED>权威记录</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">权威记录</option>
+
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+
+        </tr>
+
+	<tr>
+		<td>Etat de la copie (deterioration)</td>
+		<td>
+			<select name="f8" size="1">
+			<!-- TMPL_IF name="f8|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8a" -->
+				<option value="a" SELECTED>硝酸盐基──有异味</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">硝酸盐基──有异味</option>
+	
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8c" -->
+				<option value="c" SELECTED>硝酸盐基──有辛辣味</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">硝酸盐基──有辛辣味</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8d" -->
+				<option value="d" SELECTED>硝酸盐基──变褐色</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">硝酸盐基──变褐色</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8e" -->
+				<option value="e" SELECTED>硝酸盐基──有黏性</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">硝酸盐基──有黏性</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8f" -->
+				<option value="f" SELECTED>硝酸盐基──起泡沫</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">硝酸盐基──起泡沫</option>
+
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8g" -->
+				<option value="g" SELECTED>硝酸盐基──成块状</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">硝酸盐基──成块状</option>
+
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8h" -->
+				<option value="h" SELECTED>硝酸盐基──成粉状</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">硝酸盐基──成粉状</option>
+
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8k" -->
+				<option value="k" SELECTED>非硝酸盐基──稍有破损</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">非硝酸盐基──稍有破损</option>
+
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8l" -->
+				<option value="l" SELECTED>非硝酸盐基──严重破损</option>
+			<!-- TMPL_ELSE -->
+				<option value="l">非硝酸盐基──严重破损</option>
+
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8m" -->
+				<option value="m" SELECTED>非硝酸盐基──完全破损</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">非硝酸盐基──完全破损</option>
+
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8y" -->
+				<option value="y" SELECTED>Pas de deterioration</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Pas de deterioration</option>
+
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+
+        </tr>
+
+	<tr>
+		<td>投影资料、电影片发行形式</td>
+		<td>
+			<select name="f9" size="1">
+			<!-- TMPL_IF name="f9|" -->
+            	<option value="|" SELECTED>|- 数据单元代码</option>
+            <!-- TMPL_ELSE -->
+            	<option value="|">|- 数据单元代码</option>
+            <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9a" -->
+				<option value="a" SELECTED>不完整</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">不完整</option>
+	
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9b" -->
+				<option value="b" SELECTED>完整</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">完整</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9u" -->
+				<option value="u" SELECTED>不详</option>
+			<!-- TMPL_ELSE -->
+				<option value="u">不详</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9x" -->
+				<option value="x" SELECTED>如不适用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不适用</option>
+
+			<!-- /TMPL_IF -->
+				</select>
+		</td>
+        </tr>
+
+   		<tr>
+                <td>记录日期</td>
+                <td>Annee <input type="text" name="f10" maxlength=4 size=5 value="<!-- TMPL_VAR name="f10" -->"></td>
+                <td>mois <input type="text" name="f11" maxlength=2 size=3 value="<!-- TMPL_VAR name="f11" -->"></td>
+        </tr>
+	
+	<tr><td colspan=2><input type="button" value="完成" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+            document.f_pop.f10.value=document.f_pop.f10.value+'    ';
+            document.f_pop.f10.value=document.f_pop.f10.value.substring(0,4);
+            document.f_pop.f11.value=document.f_pop.f11.value+'  ';
+            document.f_pop.f11.value=document.f_pop.f11.value.substring(0,2);
+
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value =  document.f_pop.f1.value +document.f_pop.f2.value+document.f_pop.f3.value+document.f_pop.f4.value+document.f_pop.f5.value+document.f_pop.f6.value+document.f_pop.f7.value+document.f_pop.f8.value+document.f_pop.f9.value+document.f_pop.f10.value+document.f_pop.f11.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

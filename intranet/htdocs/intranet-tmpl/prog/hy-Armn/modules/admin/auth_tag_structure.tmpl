@@ -1,0 +1,242 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Կառավարում &rsaquo; Հեղինակավոր MARC կառուցվածք <!-- TMPL_IF NAME="add_form" --><!-- TMPL_IF NAME="use-heading-flags-p" -->
+    <!-- TMPL_IF NAME="heading-modify-tag-p" -->&rsaquo; <!-- TMPL_IF NAME="authtypecode" --><!-- TMPL_VAR NAME="authtypecode" --> Կառուցվածք<!-- TMPL_ELSE -->Լռակյաց Կառուցվածք<!-- /TMPL_IF --> &rsaquo; Ձևափոխիր ցուցիչը<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="heading-add-tag-p" -->&rsaquo; <!-- TMPL_IF NAME="authtypecode" --><!-- TMPL_VAR NAME="authtypecode" --> Կառուցվածք<!-- TMPL_ELSE -->Լռակյաց Կառուցվածք<!-- /TMPL_IF --> &rsaquo; Նոր ցուցիչ<!-- /TMPL_IF -->
+    <!-- TMPL_ELSE -->&rsaquo; <!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF --><!-- /TMPL_IF --><!-- TMPL_IF NAME="delete_confirm" -->&rsaquo; <!-- TMPL_IF NAME="authtypecode" --><!-- TMPL_VAR NAME="authtypecode" --> Կառուցվածք<!-- TMPL_ELSE -->Լռակյաց Կառուցվածք<!-- /TMPL_IF --> &rsaquo; Հաստատիր Ջնջումը<!-- /TMPL_IF --><!-- TMPL_IF NAME="delete_confirmed" -->&rsaquo; <!-- TMPL_IF NAME="authtypecode" --><!-- TMPL_VAR NAME="authtypecode" --> Կառուցվածք<!-- TMPL_ELSE -->Լռակյաց Կառուցվածք<!-- /TMPL_IF --> &rsaquo; Տվյալը ջնջված է<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isNotNull(f,noalert) {
+        if (f.value.length ==0) {
+return false;
+        }
+        return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function toUC(f) {
+        var x=f.value.toUpperCase();
+        f.value=x;
+        return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isNum(v,maybenull) {
+    var n = new Number(v.value);
+    if (isNaN(n)) {
+        return false;
+        }
+    if (maybenull==0 && v.value=='') {
+        return false;
+    }
+    return true;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function isDate(f) {
+        var t = Date.parse(f.value);
+        if (isNaN(t)) {
+            return false;
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function Check(f) {
+        var ok=1;
+        var _alertString="";
+        var alertString2;
+        if (f.tagfield.value.length==0) {
+            _alertString += "\n- " + _("ցուցիչի համարը բացակա է");
+        }
+        if (_alertString.length==0) {
+            document.Aform.submit();
+        } else {
+            alertString2  = _("Ձևը չի գրանցված, հետևյալ պրոբլեմների պատճարով");
+            alertString2 += "\n------------------------------------------------------------------------------------\n";
+            alertString2 += _alertString;
+            alert(alertString2);
+        }
+    }
+    //]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Տուն</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Կառավարում</a> &rsaquo; <!-- TMPL_IF NAME="add_form" --><!-- TMPL_IF NAME="use-heading-flags-p" -->
+    <!-- TMPL_IF NAME="heading-modify-tag-p" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Հեղինակավոր MARC կառուցվածք</a> &rsaquo; <!-- TMPL_IF NAME="authtypecode" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->"><!-- TMPL_VAR NAME="authtypecode" --> Կառուցվածք</a><!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Լռակյաց Կառուցվածք</a><!-- /TMPL_IF --> &rsaquo; Ձևափոխիր ցուցիչը<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="heading-add-tag-p" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Հեղինակավոր MARC կառուցվածք</a> &rsaquo; <!-- TMPL_IF NAME="authtypecode" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->"><!-- TMPL_VAR NAME="authtypecode" --> Կառուցվածք</a><!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Լռակյաց Կառուցվածք</a><!-- /TMPL_IF --> &rsaquo; Նոր ցուցիչ<!-- /TMPL_IF -->
+    <!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Հեղինակավոր MARC կառուցվածք</a> &rsaquo; <!-- TMPL_VAR NAME="action" -->
+    <!-- /TMPL_IF -->
+    <!-- TMPL_ELSE -->
+    <!-- TMPL_IF NAME="delete_confirm" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Հեղինակավոր MARC կառուցվածք</a> &rsaquo;
+    <!-- TMPL_IF NAME="authtypecode" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->"><!-- TMPL_VAR NAME="authtypecode" --> Կառուցվածք</a>
+    <!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Լռակյաց Կառուցվածք</a><!-- /TMPL_IF --> &rsaquo; Հաստատիր Ջնջումը
+    <!-- TMPL_ELSE -->
+    <!-- TMPL_IF NAME="delete_confirmed" --><a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Հեղինակավոր MARC կառուցվածք</a> &rsaquo; Տվյալը ջնջված է
+    <!-- TMPL_ELSE -->Հեղինակավոր MARC շրջանակ։ <!-- TMPL_IF NAME="authtypecode" --><!-- TMPL_VAR NAME="authtypecode" --> Կառուցվածք
+    <!-- TMPL_ELSE -->Լռակյաց Կառուցվածք<!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+</div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>Հեղինակավոր MARC շրջանակ համար <!-- TMPL_IF NAME="authtypecode" --><!-- TMPL_VAR NAME="authtypecode" --><!-- TMPL_ELSE -->լռակյաց կառուցվածք<!-- /TMPL_IF --></h1>
+
+
+<!-- TMPL_IF NAME="add_form" -->
+
+    <h2>
+    <!-- TMPL_IF NAME="use-heading-flags-p" -->
+    <!-- TMPL_IF NAME="heading-modify-tag-p" -->Ձևափոխիր ցուցիչը<!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="heading-add-tag-p" -->Նոր ցուցիչ<!-- /TMPL_IF -->
+    <!-- TMPL_ELSE --><!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF -->
+    </h2>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+        <input type="hidden" name="op" value="add_validate" />
+        <!-- TMPL_IF NAME="heading-modify-tag-p" --><input type="hidden" name="modif" value="1" /><!-- /TMPL_IF -->
+        <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR NAME="authtypecode" -->" />
+        <fieldset class="rows"><ol>
+		<li><span class="label">Ցուցիչ</span><!-- TMPL_VAR NAME="searchfield" --></li>
+        <li><label for="liblibrarian">Տեքստ գրադարանավարների համար։</label><input type="text" name="liblibrarian" id="liblibrarian" value="<!-- TMPL_VAR NAME="liblibrarian" escape="HTML" -->" size="40" maxlength="100" /></li>
+        <li><label for="libopac">Տեքստ ՀՕԱՔի համար</label><input type="text" name="libopac" id="libopac" value="<!-- TMPL_VAR NAME="libopac" escape="HTML" -->" size="40" maxlength="100" /></li>
+        <li><label for="repeatable">Կրկնվող</label>
+            <!-- TMPL_IF NAME="repeatable" -->
+                <input type="checkbox" name="repeatable" id="repeatable" value="1" checked="checked" />
+            <!-- TMPL_ELSE -->
+                <input type="checkbox" name="repeatable" id="repeatable" value="1" />
+            <!-- /TMPL_IF -->
+        </li>
+        <li><label for="mandatory">Պարտադիր</label>
+            <!-- TMPL_IF NAME="mandatory" -->
+                <input type="checkbox" name="mandatory" id="mandatory" value="1" checked="checked" />
+            <!-- TMPL_ELSE -->
+                <input type="checkbox" name="mandatory" id="mandatory" value="1" />
+            <!-- /TMPL_IF -->
+            </li>
+        <li><label for="authorised_value">Լիազորված արժեք</label><!-- TMPL_VAR NAME="authorised_value" --> (if you select a value here, the indicators will be limited to the authorised value list)</li>
+</ol></fieldset>
+        <p><input type="button" value="Հաստատել" class="button" onclick="Check(this.form)"></p>
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+		<div class="dialog alert">
+		<h3>Հաստատիր ջնջումը</h3>
+		<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+		<table>
+			<tr><th scope="row">Ցուցիչ։ </th><td><!-- TMPL_VAR NAME="searchfield" --> <!-- TMPL_VAR NAME="liblibrarian" --></td></tr>
+		</table>
+        <input type="hidden" name="op" value="delete_confirmed" />
+        <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR name="authtypecode" -->" />
+        <input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+		<input type="submit" value="Այո, ջնջիր" class="approve"></form>
+		<form action="<!-- TMPL_VAR NAME="script_name" -->" method="get"><input type="submit" class="deny" value="Ոչ, մի հեռացրու"></form>
+		</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirmed" -->
+
+  <div class="dialog message">  <h3>Տվյալը ջնջված է</h3>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+    <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR name="authtypecode" -->" />
+    <input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+    <input type="submit" value="ԼԱՎ" class="submit">
+    </form></div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="authtype_create" -->
+
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+        <input type="hidden" name="op" value="authtype_create_confirm" />
+        <input type="hidden" name="authtypecode" value="<!-- TMPL_VAR NAME="authtypecode" -->" />
+        Ստեղծիր հեղինակավոր կառուցվածք <!-- TMPL_VAR NAME="authtypecode" --> օգտագործման համար
+        <select name="existingauthtypecode">
+            <option value="">լռակյաց</option>
+        <!-- TMPL_LOOP NAME="existingauthtypeloop" -->
+            <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="authtypetext" --></option>
+        <!-- /TMPL_LOOP -->
+        </select>
+        <input type="submit" value="ԼԱՎ" class="submit">
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="else" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+	// prepare DOM for YUI Toolbar
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+	// YUI Toolbar Functions
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("newtag");
+	}	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="newtag" href="/cgi-bin/koha/admin/auth_tag_structure.pl?op=add_form&amp;authtypecode=<!-- TMPL_VAR NAME="authtypecode" -->">Նոր ցուցիչ</a></li>
+</ul></div>
+
+<h2>Ընտրիր հեղինակավորի կառուցվածքը</h2>
+<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+    <select name="authtypecode">
+        <option value="">լռակյաց</option>
+    <!-- TMPL_LOOP NAME="authtypeloop" -->
+		<!-- TMPL_IF NAME="selected" -->
+        <option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="authtypetext" --></option>
+		<!-- TMPL_ELSE -->
+        <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="authtypetext" --></option>
+		<!-- /TMPL_IF -->
+            
+    <!-- /TMPL_LOOP -->
+    </select>
+    <input type="text" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+    <input type="submit" value="ԼԱՎ" class="submit">
+</form>
+<table>
+    <tr>
+        <th>Ցուցիչ</th>
+        <th>Lib</th>
+        <th>Կրկնվող</th>
+        <th>Պարտադիր</th>
+        <th>Լիազորված<br />արժեք</th>
+        <th>Ենթադաշտեր</th>
+        <th>Խմբագրել</th>
+        <th>Ջնջել</th>
+	</tr>
+    <!-- TMPL_LOOP NAME="loop" -->
+		<!-- TMPL_IF NAME="toggle" --><tr class="highlight"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+        <td><b><!-- TMPL_VAR NAME="tagfield" --></b></td>
+        <td><!-- TMPL_VAR NAME="liblibrarian" --></td>
+        <td><!-- TMPL_IF NAME="repeatable" -->Այո<!-- TMPL_ELSE -->Ոչ<!-- /TMPL_IF --></td>
+        <td><!-- TMPL_IF NAME="mandatory" -->Այո<!-- TMPL_ELSE -->Ոչ<!-- /TMPL_IF --></td>
+        <td><!-- TMPL_VAR NAME="authorised_value" --></td>
+        <td><a href="<!-- TMPL_VAR NAME="subfield_link" -->" class="button">ենթադաշտեր</a></td>
+        <td><a href="<!-- TMPL_VAR NAME="edit" -->">Խմբագրել</a></td>
+        <td><a href="<!-- TMPL_VAR NAME="delete" -->">Ջնջել</a></td>
+    </tr>
+    <!-- /TMPL_LOOP -->
+    </table>
+
+        <div class="pages"><!-- TMPL_IF NAME="isprevpage" -->
+            <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="prevpage" -->&amp;searchfield=<!-- TMPL_VAR NAME="searchfield" -->&amp;authtypecode=<!-- TMPL_VAR NAME="authtypecode" --> ">&lt;&lt; Previous Page</a>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="nextpage" -->
+            <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="nextpage" -->&amp;searchfield=<!-- TMPL_VAR NAME="searchfield" -->&amp;authtypecode=<!-- TMPL_VAR NAME="authtypecode" --> ">Հաջորդ էջ &gt;&gt;</a>
+        <!-- /TMPL_IF --></div>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

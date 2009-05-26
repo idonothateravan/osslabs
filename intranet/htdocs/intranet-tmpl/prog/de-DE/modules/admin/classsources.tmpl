@@ -1,0 +1,338 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration &rsaquo; Klassifikationsquellen
+<!-- TMPL_IF name="class_source_form" -->
+  <!-- TMPL_IF name="edit_class_source" -->
+    &rsaquo; Klassifikationsquelle ändern
+  <!-- TMPL_ELSE -->
+    &rsaquo; Klassifikationsquelle hinzufügen
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="sort_rule_form" -->
+  <!-- TMPL_IF name="edit_sort_rule" -->
+    &rsaquo; Ändern der Einreihungsregel
+  <!-- TMPL_ELSE -->
+    &rsaquo; Füge Einordnungsregel ein
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_class_source_form" -->
+  &rsaquo; Löschung der Klassifikationsquelle <!-- TMPL_VAR name="class_source" --> bestätigen
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_sort_rule_form" -->
+  &rsaquo; Bestätigen Sie das Löschen der Einordnungregel <!-- TMPL_VAR name="sort_rule" -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_sort_rule_impossible" -->
+  &rsaquo; Kann Einordnungsregel <!-- TMPL_VAR name="sort_rule" --> nicht löschen
+<!-- /TMPL_IF -->
+</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+
+<script type="text/javascript">
+//<![CDATA[
+
+function CheckSourceForm(f) {
+    var ok=1;
+    var _alertString="";
+    var alertString2;
+    if (f.class_source.value.length==0) {
+        _alertString += "\n- " + _("Klassifikation Quellcode fehlt");
+    }
+    if (f.sort_rule.value.length==0) {
+        _alertString += "\n- " + _("Code für Einreihungsregel fehlt");
+    }
+    if (f.description.value.length==0) {
+        _alertString += "\n- " + _("Beschreibung fehlt");
+    }
+    if (_alertString.length==0) {
+        document.Aform.submit();
+    } else {
+        alertString2  = _("Form wegen der folgenden Probleme nicht eingefügt");
+        alertString2 += "\n------------------------------------------------------------------------------------\n";
+        alertString2 += _alertString;
+        alert(alertString2);
+    }
+}
+
+function CheckRuleForm(f) {
+    var ok=1;
+    var _alertString="";
+    var alertString2;
+    if (f.sort_rule.value.length==0) {
+        _alertString += "\n- " + _("Code für Einreihungsregel fehlt");
+    }
+    if (f.description.value.length==0) {
+        _alertString += "\n- " + _("Beschreibung fehlt");
+    }
+    if (f.sort_routine.value.length==0) {
+        _alertString += "\n- " + _("Sortierroutine fehlt");
+    }
+    if (_alertString.length==0) {
+        document.Aform.submit();
+    } else {
+        alertString2  = _("Form wegen der folgenden Probleme nicht eingefügt");
+        alertString2 += "\n------------------------------------------------------------------------------------\n";
+        alertString2 += _alertString;
+        alert(alertString2);
+    }
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo; <!-- TMPL_IF name="display_lists" -->Klassifikationsquelle<!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/classsources.pl">Klassifikationsquelle</a><!-- /TMPL_IF -->
+<!-- TMPL_IF name="class_source_form" -->
+  <!-- TMPL_IF name="edit_class_source" -->
+    &rsaquo; Klassifikationsquelle ändern
+  <!-- TMPL_ELSE -->
+    &rsaquo; Klassifikationsquelle hinzufügen
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="sort_rule_form" -->
+  <!-- TMPL_IF name="edit_sort_rule" -->
+    &rsaquo; Ändern der Einreihungsregel
+  <!-- TMPL_ELSE -->
+    &rsaquo; Füge Einordnungsregel ein
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_class_source_form" -->
+  &rsaquo; Löschung der Klassifikationsquelle bestätigen <span class="ex">'<!-- TMPL_VAR name="class_source" -->'</span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_sort_rule_form" -->
+  &rsaquo; Bestätigen Sie das Löschen der Einordnungregel <span class="ex">'<!-- TMPL_VAR name="sort_rule" -->'</span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_sort_rule_impossible" -->
+  &rsaquo; Kann die Einordnungsregel nicht löschen \t <span class="ex">'<!-- TMPL_VAR name="sort_rule" -->'</span>
+<!-- /TMPL_IF -->
+</div>
+
+<div id="doc3" class="yui-t2">
+
+   <div id="bd">
+    <div id="yui-main">
+    <div class="yui-b">
+
+<!-- TMPL_IF name="class_source_form" -->
+  <!-- TMPL_IF name="edit_class_source" -->
+<h2>&rsaquo; Klassifikationsquelle ändern</h2>
+  <!-- TMPL_ELSE -->
+<h2>&rsaquo; Klassifikationsquelle hinzufügen</h2>
+  <!-- /TMPL_IF -->
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <fieldset class="rows">
+    <ol>
+      <li>
+          <!-- TMPL_IF name="edit_class_source" -->
+		  <span class="label">Klassifikation Quellcode: </span>
+            <input type="hidden" name="class_source" value="<!-- TMPL_VAR name="class_source" -->" />
+            <!-- TMPL_VAR name="class_source" -->
+          <!-- TMPL_ELSE -->
+		  <label for="class_source">Klassifikation Quellcode: </label>
+            <input type="text" id="class_source" name="class_source"  size="10" maxlength="10" />
+          <!-- /TMPL_IF -->
+       </li>
+       <li><label for="description">Beschreibung: </label>
+           <input type="text" id="description" name="description" size="50" maxlength="250" 
+                  value="<!-- TMPL_VAR name="description" escape="HTML" -->" />
+       </li>
+       <li><label for="used">Quelle in Gebrauch? </label>
+           <!-- TMPL_IF NAME="used" --><input type="checkbox" id="used" name="used" value="gebraucht" checked="checked"><!-- TMPL_ELSE -->
+		  <input type="checkbox" id="used" name="used" value="gebraucht"><!-- /TMPL_IF -->
+       </li>
+       <li><label for="sort_rule">Einreihungsregel: </label>
+           <select id="sort_rule" name="sort_rule">
+           <!-- TMPL_LOOP name="rules_dropdown" -->
+             <!-- TMPL_IF name="selected" -->
+             <option value="<!-- TMPL_VAR name="rule" -->" selected="selected"><!-- TMPL_VAR name="description" --> (<!-- TMPL_VAR name="rule" -->)</option>
+             <!-- TMPL_ELSE -->
+             <option value="<!-- TMPL_VAR name="rule" -->"><!-- TMPL_VAR name="description" --> (<!-- TMPL_VAR name="rule" -->)</option>
+             <!-- /TMPL_IF -->
+           <!-- /TMPL_LOOP -->
+           </select>
+       </li>    
+    </ol>
+  </fieldset>
+  <fieldset class="action">
+    <!-- TMPL_IF name="edit_class_source" -->
+    <input type="button" value="speichern" onclick="CheckSourceForm(this.form)">
+    <!-- TMPL_ELSE -->
+    <input type="button" value="speichern" onclick="CheckSourceForm(this.form)">
+    <!-- /TMPL_IF-->
+    <a class="cancel" href="/cgi-bin/koha/admin/classsources.pl">abbrechen</a>
+  </fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="sort_rule_form" -->
+  <!-- TMPL_IF name="edit_sort_rule" -->
+<h2>&rsaquo; Ändern der Einreihungsregel</h2>
+  <!-- TMPL_ELSE -->
+<h2>&rsaquo; Füge Einordnungsregel ein</h2>
+  <!-- /TMPL_IF -->
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <fieldset class="rows">
+    <ol>
+      <li>
+          <!-- TMPL_IF name="edit_sort_rule" -->
+		  <span class="label">Code für Einreihungsregel: </span>
+            <input type="hidden" name="sort_rule" value="<!-- TMPL_VAR name="sort_rule" -->" />
+            <!-- TMPL_VAR name="sort_rule" -->
+          <!-- TMPL_ELSE -->
+		  <label for="sort_rule">Code für Einreihungsregel: </label>
+            <input type="text" id="sort_rule" name="sort_rule"  size="10" maxlength="10" />
+          <!-- /TMPL_IF -->
+       </li>
+       <li><label for="description">Beschreibung: </label>
+           <input type="text" id="description" name="description" size="50" maxlength="250" 
+                  value="<!-- TMPL_VAR name="description" escape="HTML" -->" />
+       </li>
+       <li><label for="sort_routine">Einreihungsprogramm: </label>
+           <select id="sort_routine" name="sort_routine">
+           <!-- TMPL_LOOP name="routines_dropdown" -->
+             <!-- TMPL_IF name="selected" -->
+             <option value="<!-- TMPL_VAR name="routine" -->" selected="selected"><!-- TMPL_VAR name="routine" --></option>
+             <!-- TMPL_ELSE -->
+             <option value="<!-- TMPL_VAR name="routine" -->"><!-- TMPL_VAR name="routine" --></option>
+             <!-- /TMPL_IF -->
+           <!-- /TMPL_LOOP -->
+           </select>
+       </li>
+    </ol>
+  </fieldset>
+  <fieldset class="action">
+  <!-- TMPL_IF name="edit_sort_rule" -->
+        <input type="button" value="speichern" onclick="CheckRuleForm(this.form)">
+    <!-- TMPL_ELSE -->
+        <input type="button" value="speichern" onclick="CheckRuleForm(this.form)">    <!-- /TMPL_IF-->
+    	<a class="cancel" href="/cgi-bin/koha/admin/classsources.pl">abbrechen</a>
+  </fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="delete_class_source_form" -->
+<div class="dialog alert"><h3>Löschen der Klassifikationsquelle bestätigen <span class="ex">'<!-- TMPL_VAR name="class_source" -->'</span>?</h3>
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <input type="hidden" name="class_source" value="<!-- TMPL_VAR name="class_source" -->" />
+  <input type="submit" value="Klassifikationsquelle löschen" class="approve"></form>
+  <form action="<!-- TMPL_VAR name="script_name" -->" method="get"><input type="submit" value="Nein, nicht löschen" class="deny">
+</form>
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="delete_sort_rule_form" -->
+<div class="dialog alert"><h3>Löschen der Einreihungsregeln bestätigen <span class="ex">'<!-- TMPL_VAR name="sort_rule" -->'</span>?</h3>
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <input type="hidden" name="sort_rule" value="<!-- TMPL_VAR name="sort_rule" -->" />
+    <input type="submit" value="Einreihungsregel löschen" class="approve">
+</form>
+<form action="<!-- TMPL_VAR name="script_name" -->" method="get">    <input type="submit" value="Nein, nicht löschen" class="deny"></form></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="delete_sort_rule_impossible" -->
+<div class="dialog message"><h3>Kann Einreihungsregel nicht löschen <span class="ex">'<!-- TMPL_VAR name="sort_rule" -->'</span></h3>
+<p>The filing rule <!-- TMPL_VAR name="sort_rule" --> is used by at least one classification source. Please remove it from all classification source definitions before trying again.
+</p>
+<form action="<!-- TMPL_VAR name="script_name" -->" method="get">
+    <input type="button" value="OK" class="approve" /></form>
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="display_lists" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+	// prepare DOM for YUI Toolbar
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+	// YUI Toolbar Functions
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("newsource");
+	    new YAHOO.widget.Button("newrule");
+	}	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="newsource" href="<!-- TMPL_VAR name="script_name" -->?op=add_source">Neue Klassifikationsquelle</a></li>
+	<li><a id="newrule" href="<!-- TMPL_VAR name="script_name" -->?op=add_sort_rule">Neue Einreihungsregeln</a></li>
+</ul></div>
+
+<h2>Klassifikationsquelle</h2>
+<!-- TMPL_IF name="added_source" -->
+<span class="problem">Klassifikationsquelle <!-- TMPL_VAR name="added_source" --> hinzugefügt</span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="edited_source" -->
+<span class="problem">Änder Klassifikationsquelle <!-- TMPL_VAR name="edited_source" --></span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="deleted_source" -->
+<span class="problem">Klassifikationsquelle <!-- TMPL_VAR name="deleted_source" --> löschen</span>
+<!-- /TMPL_IF -->
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Beschreibung</th>
+    <th>In Gebrauch</th>
+    <th>Einreihungsregel</th>
+    <th>Aktionen</th>
+  </tr>
+  <!-- TMPL_LOOP name="class_sources" -->
+  <tr>
+    <td><!-- TMPL_VAR name="code" --></td>
+    <td><!-- TMPL_VAR name="description" --></td>
+    <td><!-- TMPL_IF name="used" -->Ja<!-- TMPL_ELSE -->Nein<!-- /TMPL_IF --></td>
+    <td><!-- TMPL_VAR name="sortrule" --></td>
+    <td>
+      <a href="<!-- TMPL_VAR name="script_name" -->?op=edit_source&amp;class_source=<!-- TMPL_VAR name="code" escape="HTML" -->">Bearbeiten</a> <a href="<!-- TMPL_VAR name="script_name" -->?op=delete_source&amp;class_source=<!-- TMPL_VAR name="code" escape="HTML" -->">Löschen</a>
+    </td>
+  </tr>
+  <!-- /TMPL_LOOP -->
+</table>
+
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+<h2>Klassifikation Einreihungsregeln</h2>
+<!-- TMPL_IF name="added_rule" -->
+<span class="problem">Einreihungsregel <!-- TMPL_VAR name="added_rule" --> hinzugefügt</span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="edited_rule" -->
+<span class="problem">Modifizierte Einreihungsregel <!-- TMPL_VAR name="edited_rule" --></span>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="deleted_rule" -->
+<span class="problem">Einreihungsregel <!-- TMPL_VAR name="deleted_rule" --> löschen</span>
+<!-- /TMPL_IF -->
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Beschreibung</th>
+    <th>Sortierroutine</th>
+    <th>Aktionen</th>
+  </tr>
+  <!-- TMPL_LOOP name="class_sort_rules" -->
+  <tr>
+    <td><!-- TMPL_VAR name="rule" --></td>
+    <td><!-- TMPL_VAR name="description" --></td>
+    <td><!-- TMPL_VAR name="sort_routine" --></td>
+    <td>
+      <a href="<!-- TMPL_VAR name="script_name" -->?op=edit_sort_rule&amp;sort_rule=<!-- TMPL_VAR name="rule" escape="HTML" -->">Bearbeiten</a> <a href="<!-- TMPL_VAR name="script_name" -->?op=delete_sort_rule&amp;sort_rule=<!-- TMPL_VAR name="rule" escape="HTML" -->">Löschen</a>
+    </td>
+  </tr>
+  <!-- /TMPL_LOOP -->
+</table>
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

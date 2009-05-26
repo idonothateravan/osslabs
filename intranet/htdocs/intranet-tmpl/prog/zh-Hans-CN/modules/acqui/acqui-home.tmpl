@@ -1,0 +1,146 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo;采购</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="acquisitions-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首页</a> &rsaquo; <a href="/cgi-bin/koha/acqui/acqui-home.pl">采购</a> &rsaquo; </div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_INCLUDE NAME="acquisitions-toolbar.inc" -->
+
+<h1>采购</h1>
+<div class="yui-g">
+<div class="yui-u first">
+<div id="acqui_acqui_home_order">
+    <fieldset>
+        <legend>开始、收到或是修改订单</legend>
+    <!-- TMPL_IF name="nobudget" -->
+		<!-- TMPL_IF NAME="CAN_user_parameters" -->
+        <span class="problem">你必须在【管理】 <a href="/cgi-bin/koha/admin/aqbookfund.pl">设定一个预算</a></span>
+		<!-- TMPL_ELSE -->
+		<span class="problem">在管理里，你必须设定一个预算</span>
+		<!-- /TMPL_IF -->
+        <form name="findsupplier" action="/cgi-bin/koha/acqui/booksellers.pl" method="post">
+            <p><label for="supplierpage">供货商 </label><input type="text" size="25" name="supplier" id="supplierpage" class="focus" />
+            <input type="submit" value="查询">
+            </p>
+        </form>
+    <!-- TMPL_ELSE -->
+        <form name="findsupplier" action="/cgi-bin/koha/acqui/booksellers.pl" method="post">
+            <p><label for="supplierpage">供货商： </label><input type="text" size="25" name="supplier" id="supplierpage" class="focus" />
+            <input type="submit" value="查询">
+            </p>
+        </form>
+		
+    <!-- /TMPL_IF -->
+    </fieldset>
+</div>
+<div id="acqui_acqui_home_suggestions">
+    <fieldset>
+    <legend>采购建议处理中</legend>
+        <!-- TMPL_IF name="suggestion" -->
+            <!--TMPL_VAR NAME="suggestion" --> 个建议处理中　<a href="/cgi-bin/koha/suggestion/acceptorreject.pl">管理建议</a>
+        <!-- TMPL_ELSE -->
+            <p>没有建议需要处理</p>
+        <!-- /TMPL_IF -->
+    </fieldset>
+</div>
+</div>
+
+<div class="yui-u">
+    <!-- TMPL_IF name="nobudget" -->
+    <!-- TMPL_ELSE -->
+    <h2>基金和预算</h2>
+    <a href="/cgi-bin/koha/admin/aqbookfund.pl" title="[ 管理基金 ]">[ 管理 ]</a>
+    <div id="BudgetsAndFunds">
+    <table id="accounts">
+        <thead>
+        <tr>
+            <th>预算</th>
+            <th>全部</th>
+            <th>花费</th>
+            <th>已承担</th>
+            <th>可取得</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- TMPL_LOOP name="loop_budget" -->
+            <tr>
+                <td><!-- TMPL_VAR name="bookfundname" --></td>
+                <td><a href="/cgi-bin/koha/admin/aqbudget.pl?op=add_form&amp;aqbudgetid=<!--TMPL_VAR NAME="aqbudgetid"-->"><!-- TMPL_VAR name="budgetamount" --></a></td>
+                <td><a href="/cgi-bin/koha/acqui/spent.pl?bookfund=<!--TMPL_VAR NAME="bookfundid"-->&amp;start=<!--TMPL_VAR NAME="sdate"-->&amp;end=<!-- TMPL_VAR NAME="edate"-->"><!-- TMPL_VAR name="spent" --></a></td>
+                <td><a href="/cgi-bin/koha/acqui/bookfund.pl?bookfund=<!--TMPL_VAR NAME="bookfundid"-->&amp;start=<!--TMPL_VAR NAME="sdate"-->&amp;end=<!-- TMPL_VAR NAME="edate"-->"><!-- TMPL_VAR name="comtd" --></a></td>
+                <td><!-- TMPL_VAR name="avail" --></td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>全部</th>
+            <th><!-- TMPL_VAR name="total" --></th>
+            <th><!-- TMPL_VAR name="totspent" --></th>
+            <th><!-- TMPL_VAR name="totcomtd" --></th>
+            <th><!-- TMPL_VAR name="totavail" --></th>
+        </tr>
+        </tfoot>
+    </table>
+    </div>
+    <p>Use your reload button [ctrl + r] to get the most recent figures.
+    Committed figures are approximate only, as exchange rates will affect the amount actually paid.</p>
+    <!-- /TMPL_IF -->
+    <div id="acqui_acqui_home_currency">
+    <!-- TMPL_IF NAME="loop_currency" -->
+        <h2>汇率</h2>
+        <form action="/cgi-bin/koha/acqui/currency.pl">
+        <table>
+            <tr>
+                <th>货币</th>
+                <th>汇率</th>
+                <th>&nbsp;</th>
+            </tr>
+            <!-- TMPL_LOOP name="loop_currency" -->
+                <tr>
+                    <td>
+                        <label for="<!-- TMPL_VAR name="currency" -->"><!-- TMPL_VAR name="currency" --></label>
+                    </td>
+                    <td>
+                            <input type="hidden" name="type" value="change" />
+                            <input type="text" size="10" id="<!-- TMPL_VAR name="currency" -->" name="<!-- TMPL_VAR name="currency" -->" value="<!-- TMPL_VAR name="rate" -->" />
+                    </td>
+                    <td><input type="submit" value="保存"></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        </table>
+        </form>
+    <!-- TMPL_ELSE -->
+        <a href="/cgi-bin/koha/admin/currency.pl?op=add_form" class="button">
+        新增货币
+        </a>
+    <!-- /TMPL_IF -->
+    </div>
+</div>
+    
+</div>
+
+<div id="acqui_acqui_home_hints">
+    <h2>帮助</h2>
+    <p>To begin an order, local purchase or donation, search for the vendor or benefactor, and then you can create a new Basket.</p>
+    <p>购物栏是一批订单。</p>
+    <p>To order an item you need to establish whether a biblio already exists for it, and either add an item, or set up a new biblio and then add the item.</p>
+</div>
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="acquisitions-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

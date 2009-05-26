@@ -1,0 +1,472 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立 UNIMARC 欄位 128c</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Instruments ou voix dans un ensemble:</td>
+		<td>
+			<select name="f1" size="1">
+	
+			<!-- TMPL_IF name="f1ba" -->
+				<option value="ba" SELECTED>Cor</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">Cor</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bb" -->
+				<option value="bb" SELECTED>小號</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">小號</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bc" -->
+				<option value="bc" SELECTED>短號</option>
+			<!-- TMPL_ELSE -->
+				<option value="bc">短號</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bd" -->
+				<option value="bd" SELECTED>長號</option>
+			<!-- TMPL_ELSE -->
+				<option value="bd">長號</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1be" -->
+				<option value="be" SELECTED>低音號</option>
+			<!-- TMPL_ELSE -->
+				<option value="be">低音號</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bf" -->
+				<option value="bf" SELECTED>Saxophone</option>
+			<!-- TMPL_ELSE -->
+				<option value="bf">Saxophone</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bt" -->
+				<option value="bt" SELECTED>民族音樂</option>
+			<!-- TMPL_ELSE -->
+				<option value="bt">民族音樂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bu" -->
+				<option value="bu" SELECTED>Non precise (Cuivre)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bu">Non precise (Cuivre)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1bz" -->
+				<option value="bz" SELECTED>Autre cuivre</option>
+			<!-- TMPL_ELSE -->
+				<option value="bz">Autre cuivre</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ca" -->
+				<option value="ca" SELECTED>混聲</option>
+			<!-- TMPL_ELSE -->
+				<option value="ca">混聲</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cb" -->
+				<option value="cb" SELECTED>女 </option>
+			<!-- TMPL_ELSE -->
+				<option value="cb">女</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cc" -->
+				<option value="cc" SELECTED>男聲</option>
+			<!-- TMPL_ELSE -->
+				<option value="cc">男聲</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cd" -->
+				<option value="cd" SELECTED>兒童</option>
+			<!-- TMPL_ELSE -->
+				<option value="cd">兒童</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ct" -->
+				<option value="ct" SELECTED>民族音樂</option>
+			<!-- TMPL_ELSE -->
+				<option value="ct">民族音樂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1cu" -->
+				<option value="cu" SELECTED>Non precise (Choeurs)</option>
+			<!-- TMPL_ELSE -->
+				<option value="cu">Non precise (Choeurs)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1oa" -->
+				<option value="oa" SELECTED>Orchestre symphonique</option>
+			<!-- TMPL_ELSE -->
+				<option value="oa">Orchestre symphonique</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ob" -->
+				<option value="ob" SELECTED>Orchestre de chambre</option>
+			<!-- TMPL_ELSE -->
+				<option value="ob">Orchestre de chambre</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1oc" -->
+				<option value="oc" SELECTED>Orchestres a cordes</option>
+			<!-- TMPL_ELSE -->
+				<option value="oc">Orchestres a cordes</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1od" -->
+				<option value="od" SELECTED>銅管樂隊</option>
+			<!-- TMPL_ELSE -->
+				<option value="od">銅管樂隊</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1oe" -->
+				<option value="oe" SELECTED>Orchestre de danse</option>
+			<!-- TMPL_ELSE -->
+				<option value="oe">Orchestre de danse</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1of" -->
+				<option value="of" SELECTED>Grand ensemble - orchestre de cuivres</option>
+			<!-- TMPL_ELSE -->
+				<option value="of">Grand ensemble - orchestre de cuivres</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ot" -->
+				<option value="ot" SELECTED>民族音樂</option>
+			<!-- TMPL_ELSE -->
+				<option value="ot">民族音樂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ou" -->
+				<option value="ou" SELECTED>Non precise (orchestre)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ou">Non precise (orchestre)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1oz" -->
+				<option value="oz" SELECTED>Autre orchestre</option>
+			<!-- TMPL_ELSE -->
+				<option value="oz">Autre orchestre</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pa" -->
+				<option value="pa" SELECTED>Tympanon</option>
+			<!-- TMPL_ELSE -->
+				<option value="pa">Tympanon</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pb" -->
+				<option value="pb" SELECTED>木琴</option>
+			<!-- TMPL_ELSE -->
+				<option value="pb">木琴</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pc" -->
+				<option value="pc" SELECTED>馬林巴木琴</option>
+			<!-- TMPL_ELSE -->
+				<option value="pc">馬林巴木琴</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pd" -->
+				<option value="pd" SELECTED>Tambour, batterie</option>
+			<!-- TMPL_ELSE -->
+				<option value="pd">Tambour, batterie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pt" -->
+				<option value="pt" SELECTED>民族音樂</option>
+			<!-- TMPL_ELSE -->
+				<option value="pt">民族音樂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pu" -->
+				<option value="pu" SELECTED>Non precise (percussion)</option>
+			<!-- TMPL_ELSE -->
+				<option value="pu">Non precise (percussion)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1pz -->
+				<option value="pz" SELECTED>Autre percussions</option>
+			<!-- TMPL_ELSE -->
+				<option value="pz">Autre percussions</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sa" -->
+				<option value="sa" SELECTED>小提琴</option>
+			<!-- TMPL_ELSE -->
+				<option value="sa">小提琴</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sb" -->
+				<option value="sb" SELECTED>女低音</option>
+			<!-- TMPL_ELSE -->
+				<option value="sb">女低音</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sc" -->
+				<option value="sc" SELECTED>大提琴</option>
+			<!-- TMPL_ELSE -->
+				<option value="sc">大提琴</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sd" -->
+				<option value="sd" SELECTED>低音提琴</option>
+			<!-- TMPL_ELSE -->
+				<option value="sd">低音提琴</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1se" -->
+				<option value="se" SELECTED>Viole</option>
+			<!-- TMPL_ELSE -->
+				<option value="se">Viole</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sf" -->
+				<option value="sf" SELECTED>Viole d'amour</option>
+			<!-- TMPL_ELSE -->
+				<option value="sf">Viole d'amour</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sg" -->
+				<option value="sg" SELECTED>Viole de gambe</option>
+			<!-- TMPL_ELSE -->
+				<option value="sg">Viole de gambe</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1st" -->
+				<option value="st" SELECTED>民族音樂</option>
+			<!-- TMPL_ELSE -->
+				<option value="st">民族音樂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1su" -->
+				<option value="su" SELECTED>Non precise (Corde frottee)</option>
+			<!-- TMPL_ELSE -->
+				<option value="su">Non precise (Corde frottee)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1sz" -->
+				<option value="sz" SELECTED>Autre (Corde frottee)</option>
+			<!-- TMPL_ELSE -->
+				<option value="sz">Autre (Corde frottee)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1uu" -->
+				<option value="uu" SELECTED>Non precise (Non precise)</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">Non precise (Non precise)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ea" -->
+				<option value="ea" SELECTED>Synthetiseur</option>
+			<!-- TMPL_ELSE -->
+				<option value="ea">Synthetiseur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1eb" -->
+				<option value="eb" SELECTED>不褐色</option>
+			<!-- TMPL_ELSE -->
+				<option value="eb">不褐色</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ec" -->
+				<option value="ec" SELECTED>Ordinateur</option>
+			<!-- TMPL_ELSE -->
+				<option value="ec">Ordinateur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ed" -->
+				<option value="ed" SELECTED>Ondes Martenot</option>
+			<!-- TMPL_ELSE -->
+				<option value="ed">Ondes Martenot</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1eu" -->
+				<option value="eu" SELECTED>Non precise (Electronique)</option>
+			<!-- TMPL_ELSE -->
+				<option value="eu">Non precise (Electronique)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ez" -->
+				<option value="ez" SELECTED>s- 電子資源</option>
+			<!-- TMPL_ELSE -->
+				<option value="ez">s- 電子資源</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ka" -->
+				<option value="ka" SELECTED>鋼琴</option>
+			<!-- TMPL_ELSE -->
+				<option value="ka">鋼琴</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1kb" -->
+				<option value="kb" SELECTED>Orgue</option>
+			<!-- TMPL_ELSE -->
+				<option value="kb">Orgue</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1kc" -->
+				<option value="kc" SELECTED>大鍵琴</option>
+			<!-- TMPL_ELSE -->
+				<option value="kc">大鍵琴</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1kd" -->
+				<option value="kd" SELECTED>古鋼琴</option>
+			<!-- TMPL_ELSE -->
+				<option value="kd">古鋼琴</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ke" -->
+				<option value="ke" SELECTED>彈數字低音樂器</option>
+			<!-- TMPL_ELSE -->
+				<option value="ke">彈數字低音樂器</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1kf" -->
+				<option value="kf" SELECTED>Celesta</option>
+			<!-- TMPL_ELSE -->
+				<option value="kf">Celesta</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1kt" -->
+				<option value="kt" SELECTED>民族音樂</option>
+			<!-- TMPL_ELSE -->
+				<option value="kt">民族音樂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ku" -->
+				<option value="ku" SELECTED>Non precise (clavier)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ku">Non precise (clavier)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1kz" -->
+				<option value="kz" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="kz">其他</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1va" -->
+				<option value="va" SELECTED>Soprano</option>
+			<!-- TMPL_ELSE -->
+				<option value="va">Soprano</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vb" -->
+				<option value="vb" SELECTED>女中音</option>
+			<!-- TMPL_ELSE -->
+				<option value="vb">女中音</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vc" -->
+				<option value="vc" SELECTED>女低音</option>
+			<!-- TMPL_ELSE -->
+				<option value="vc">女低音</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vd" -->
+				<option value="vd" SELECTED>Tenor</option>
+			<!-- TMPL_ELSE -->
+				<option value="vd">Tenor</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ve" -->
+				<option value="ve" SELECTED>Baryton</option>
+			<!-- TMPL_ELSE -->
+				<option value="ve">Baryton</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vf" -->
+				<option value="vf" SELECTED>Basse</option>
+			<!-- TMPL_ELSE -->
+				<option value="vf">Basse</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vg" -->
+				<option value="vg" SELECTED>聲部—高音</option>
+			<!-- TMPL_ELSE -->
+				<option value="vg">聲部—高音</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vh" -->
+				<option value="vh" SELECTED>Voix aigues</option>
+			<!-- TMPL_ELSE -->
+				<option value="vh">Voix aigues</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vi" -->
+				<option value="vi" SELECTED>Voix medium</option>
+			<!-- TMPL_ELSE -->
+				<option value="vi">Voix medium</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vj" -->
+				<option value="vj" SELECTED>Voix graves</option>
+			<!-- TMPL_ELSE -->
+				<option value="vj">Voix graves</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vt" -->
+				<option value="vt" SELECTED>民族音樂</option>
+			<!-- TMPL_ELSE -->
+				<option value="vt">民族音樂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1vu" -->
+				<option value="vu" SELECTED>Non precise (Voix precise)</option>
+			<!-- TMPL_ELSE -->
+				<option value="vu">Non precise (Voix precise)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1ta" -->
+				<option value="ta" SELECTED>Harpe</option>
+			<!-- TMPL_ELSE -->
+				<option value="ta">Harpe</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1tb" -->
+				<option value="tb" SELECTED>Famille de la guitare</option>
+			<!-- TMPL_ELSE -->
+				<option value="tb">Famille de la guitare</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1tc" -->
+				<option value="tc" SELECTED>Famille du luth</option>
+			<!-- TMPL_ELSE -->
+				<option value="tc">Famille du luth</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1td" -->
+				<option value="td" SELECTED>曼陀林琴</option>
+			<!-- TMPL_ELSE -->
+				<option value="td">曼陀林琴</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1tt" -->
+				<option value="tt" SELECTED>民族音樂</option>
+			<!-- TMPL_ELSE -->
+				<option value="tt">民族音樂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1tu" -->
+				<option value="tu" SELECTED>Non precise (Cordes pincees)</option>
+			<!-- TMPL_ELSE -->
+				<option value="tu">Non precise (Cordes pincees)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1tz" -->
+				<option value="tz" SELECTED>Autre corde pincee</option>
+			<!-- TMPL_ELSE -->
+				<option value="tz">Autre corde pincee</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wa" -->
+				<option value="wa" SELECTED>長笛</option>
+			<!-- TMPL_ELSE -->
+				<option value="wa">長笛</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wb" -->
+				<option value="wb" SELECTED>雙簧管</option>
+			<!-- TMPL_ELSE -->
+				<option value="wb">雙簧管</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wc" -->
+				<option value="wc" SELECTED>豎笛</option>
+			<!-- TMPL_ELSE -->
+				<option value="wc">豎笛</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wd" -->
+				<option value="wd" SELECTED>Basson</option>
+			<!-- TMPL_ELSE -->
+				<option value="wd">Basson</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1we" -->
+				<option value="we" SELECTED>Piccolo</option>
+			<!-- TMPL_ELSE -->
+				<option value="we">Piccolo</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wf" -->
+				<option value="wf" SELECTED>Cor anglais</option>
+			<!-- TMPL_ELSE -->
+				<option value="wf">Cor anglais</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wg" -->
+				<option value="wg" SELECTED>低音豎笛</option>
+			<!-- TMPL_ELSE -->
+				<option value="wg">低音豎笛</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wh" -->
+				<option value="wh" SELECTED>古爭器 </option>
+			<!-- TMPL_ELSE -->
+				<option value="wh">古爭器</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wi" -->
+				<option value="wi" SELECTED>Saxophone</option>
+			<!-- TMPL_ELSE -->
+				<option value="wi">Saxophone</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wt" -->
+				<option value="wt" SELECTED>民族音樂</option>
+			<!-- TMPL_ELSE -->
+				<option value="wt">民族音樂</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wu" -->
+				<option value="wu" SELECTED>Non precise</option>
+			<!-- TMPL_ELSE -->
+				<option value="wu">Non precise</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1wz" -->
+				<option value="wz" SELECTED>容許</option>
+			<!-- TMPL_ELSE -->
+				<option value="wz">容許</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+	<tr><td colspan=2><input type="button" value="完成" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value =  document.f_pop.f1.value;
+	    window.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

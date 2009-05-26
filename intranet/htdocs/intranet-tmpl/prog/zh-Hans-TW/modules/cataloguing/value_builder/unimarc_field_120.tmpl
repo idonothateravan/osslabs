@@ -1,0 +1,1217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>建立 UNIMARC 欄位 120</title>
+</head>
+<body>
+<form name="f_pop">
+<table>
+	<tr>
+		<td>Indicateur de couleur:</td>
+		<td>
+			<select name="f1" size="1">
+			<!-- TMPL_IF name="f1a" -->
+				<option value="a" SELECTED>單色</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">單色</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f1b" -->
+				<option value="b" SELECTED>Polychrome</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Polychrome</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+		<td>Indicateur d'index:</td>
+		<td>
+			<select name="f2" size="1">
+			<!-- TMPL_IF name="f2a" -->
+				<option value="a" SELECTED>Index ou
+				liste present dans le document
+				cartographique meme</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Index ou liste
+				present dans le document
+				cartographique meme</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2b" -->
+				<option value="b" SELECTED>Index ou
+				liste accompagnant le document
+				cartographique sous forme de livret...</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Index ou liste
+				accompagnant le document
+				cartographique sous forme de livret...</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2c" -->
+				<option value="c" SELECTED>Index ou
+				liste present sans localisation</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Index ou liste
+				present sans localisation</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f2y" -->
+				<option value="y" SELECTED>Pas d'index
+				ou de liste de noms</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Pas d'index ou de
+				liste de noms</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+		<td>Indicateur de texte:</td>
+		<td>
+			<select name="f3" size="1">
+
+			<!-- TMPL_IF name="f3a" -->
+				<option value="a" SELECTED>Texte sur
+				le document meme</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Texte sur le
+				document meme</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3b" -->
+				<option value="b" SELECTED>Texte
+				accompagnant le document
+				cartographique sous forme de livret, opuscule</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Texte accompagnant
+				le document cartographique sous forme
+				de livret, opuscule</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f3y" -->
+				<option value="y" SELECTED>Pas de texte</option>
+			<!-- TMPL_ELSE -->
+				<option value="y">Pas de texte</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr><tr>
+		<td>其他代碼 1：</td>
+		<td>
+			<select name="f4" size="1">
+			<!-- TMPL_IF name="f4 " -->
+				<option value=" " SELECTED>無需填寫</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">無需填寫</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4a" -->
+				<option value="a" SELECTED>Courbes de niveau</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Courbes de niveau</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4b" -->
+				<option value="b" SELECTED>Relief par estompage</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Relief par estompage</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4c" -->
+				<option value="c" SELECTED>Teintes
+				hypsometriques - procede par couches</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Teintes
+				hypsometriques - procede par couches</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4d" -->
+				<option value="d" SELECTED>暈滃法</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">暈滃法</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4e" -->
+				<option value="e" SELECTED>海深圖──以點表示</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">海深圖──以點表示</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4f" -->
+				<option value="f" SELECTED>Courbes figuratives</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Courbes figuratives</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4g" -->
+				<option value="g" SELECTED>Points cotes</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Points cotes</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4h" -->
+				<option value="h" SELECTED>Autres
+				procedes en couleur</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Autres procedes en couleur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4i" -->
+				<option value="i" SELECTED>Images en
+				elevation ou en perspective</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Images en elevation
+				ou en perspective</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4j" -->
+				<option value="j" SELECTED>Morphographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Morphographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4k" -->
+				<option value="k" SELECTED>海深圖──以等深線表示</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">海深圖──以等深線表示</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4x" -->
+				<option value="x" SELECTED>如不適用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不適用</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f4z" -->
+				<option value="z"
+				SELECTED>Autre procede de presentation
+				du relief</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Autre procede de
+				presentation du relief</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr><tr>
+		<td>其他代碼 2：</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5 " -->
+				<option value=" " SELECTED>無需填寫</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">無需填寫</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5a" -->
+				<option value="a" SELECTED>Courbes de niveau</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Courbes de niveau</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5b" -->
+				<option value="b" SELECTED>Relief par estompage</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Relief par estompage</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>Teintes
+				hypsometriques - procede par couches</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Teintes
+				hypsometriques - procede par couches</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>暈滃法</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">暈滃法</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5e" -->
+				<option value="e" SELECTED>海深圖──以點表示</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">海深圖──以點表示</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5f" -->
+				<option value="f" SELECTED>Courbes figuratives</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Courbes figuratives</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5g" -->
+				<option value="g" SELECTED>Points cotes</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Points cotes</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5h" -->
+				<option value="h" SELECTED>Autres
+				procedes en couleur</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Autres procedes en couleur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5i" -->
+				<option value="i" SELECTED>Images en
+				elevation ou en perspective</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Images en elevation
+				ou en perspective</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5j" -->
+				<option value="j" SELECTED>Morphographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Morphographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5k" -->
+				<option value="k" SELECTED>海深圖──以等深線表示</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">海深圖──以等深線表示</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5x" -->
+				<option value="x" SELECTED>如不適用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不適用</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5z" -->
+				<option value="z"
+				SELECTED>Autre procede de presentation
+				du relief</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Autre procede de
+				presentation du relief</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr><tr>
+		<td>其他代碼 3：</td>
+		<td>
+			<select name="f6" size="1">
+                        
+                        <!-- TMPL_IF name="f6 " -->
+                                <option value=" " SELECTED>無需填寫</option>
+                        <!-- TMPL_ELSE -->
+                                <option value=" ">無需填寫</option>
+                        <!-- /TMPL_IF -->
+                        
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>Courbes de niveau</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Courbes de niveau</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6b" -->
+				<option value="b" SELECTED>Relief par estompage</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Relief par estompage</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" SELECTED>Teintes
+				hypsometriques - procede par couches</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Teintes
+				hypsometriques - procede par couches</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6d" -->
+				<option value="d" SELECTED>暈滃法</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">暈滃法</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6e" -->
+				<option value="e" SELECTED>海深圖──以點表示</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">海深圖──以點表示</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6f" -->
+				<option value="f" SELECTED>Courbes figuratives</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Courbes figuratives</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6g" -->
+				<option value="g" SELECTED>Points cotes</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Points cotes</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6h" -->
+				<option value="h" SELECTED>Autres
+				procedes en couleur</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Autres procedes en couleur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6i" -->
+				<option value="i" SELECTED>Images en
+				elevation ou en perspective</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Images en elevation
+				ou en perspective</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6j" -->
+				<option value="j" SELECTED>Morphographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Morphographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6k" -->
+				<option value="k" SELECTED>海深圖──以等深線表示</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">海深圖──以等深線表示</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6x" -->
+				<option value="x" SELECTED>如不適用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不適用</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6z" -->
+				<option value="z"
+				SELECTED>Autre procede de presentation
+				du relief</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Autre procede de
+				presentation du relief</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr><tr>
+		<td>其他代碼 4：</td>
+		<td>
+			<select name="f7" size="1">
+                        <!-- TMPL_IF name="f7 " -->
+                                <option value=" " SELECTED>無需填寫</option>
+                        <!-- TMPL_ELSE -->
+                                <option value=" ">無需填寫</option>
+                        <!-- /TMPL_IF -->
+                        
+			<!-- TMPL_IF name="f7a" -->
+				<option value="a" SELECTED>Courbes de niveau</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">Courbes de niveau</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7b" -->
+				<option value="b" SELECTED>Relief par estompage</option>
+			<!-- TMPL_ELSE -->
+				<option value="b">Relief par estompage</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7c" -->
+				<option value="c" SELECTED>Teintes
+				hypsometriques - procede par couches</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">Teintes
+				hypsometriques - procede par couches</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7d" -->
+				<option value="d" SELECTED>暈滃法</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">暈滃法</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7e" -->
+				<option value="e" SELECTED>海深圖──以點表示</option>
+			<!-- TMPL_ELSE -->
+				<option value="e">海深圖──以點表示</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7f" -->
+				<option value="f" SELECTED>Courbes figuratives</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">Courbes figuratives</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7g" -->
+				<option value="g" SELECTED>Points cotes</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">Points cotes</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7h" -->
+				<option value="h" SELECTED>Autres
+				procedes en couleur</option>
+			<!-- TMPL_ELSE -->
+				<option value="h">Autres procedes en couleur</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7i" -->
+				<option value="i" SELECTED>Images en
+				elevation ou en perspective</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">Images en elevation
+				ou en perspective</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7j" -->
+				<option value="j" SELECTED>Morphographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">Morphographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7k" -->
+				<option value="k" SELECTED>海深圖──以等深線表示</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">海深圖──以等深線表示</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7x" -->
+				<option value="x" SELECTED>如不適用</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">如不適用</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f7z" -->
+				<option value="z"
+				SELECTED>Autre procede de presentation
+				du relief</option>
+			<!-- TMPL_ELSE -->
+				<option value="z">Autre procede de
+				presentation du relief</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>		<td>Projection:</td>
+		<td>
+			<select name="f8" size="1">
+
+			<!-- TMPL_IF name="f8aa" -->
+				<option value="aa" SELECTED>Aitoff 投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">Aitoff 投影</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8bb" -->
+				<option value="bb" SELECTED>日晷投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">日晷投影</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ac" -->
+				<option value="ac" SELECTED>蘭伯特正方位等面積投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">蘭伯特正方位等面積投影</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ad" -->
+				<option value="ad" SELECTED>Orthographique</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">Orthographique</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ae" -->
+				<option value="ae" SELECTED>等距離的</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">等距離的</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8af" -->
+				<option value="af" SELECTED>Stereographie</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">Stereographie</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ag" -->
+				<option value="ag" SELECTED>等積方位投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">等積方位投影</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8au" -->
+				<option value="au" SELECTED>未知特性之正方位投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="au">未知特性之正方位投影</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8az" -->
+				<option value="az" SELECTED>已知特性之正方位投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="az">已知特性之正方位投影</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ba" -->
+				<option value="ba" SELECTED>高爾投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">高爾投影</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8bb" -->
+				<option value="bb"
+				SELECTED>Homolographique de Goode</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">Homolographique de Goode</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ca" -->
+				<option value="ca" SELECTED>阿爾伯斯投影（雙標準緯線等積圓錐投影）</option>
+			<!-- TMPL_ELSE -->
+				<option value="ca">阿爾伯斯投影（雙標準緯線等積圓錐投影）</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8cb" -->
+				<option value="cb"
+				SELECTED>好</option>
+			<!-- TMPL_ELSE -->
+				<option value="cb">好</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cc" -->
+				<option value="cc" SELECTED>蘭伯特正形圓錐投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="cc">蘭伯特正形圓錐投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cd" -->
+				<option value="cd" SELECTED>簡單圓錐投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="cd">簡單圓錐投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8ce" -->
+				<option value="ce" SELECTED>米勒雙極式投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="ce">米勒雙極式投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cf" -->
+				<option value="cf" SELECTED>De Lisle</option>
+			<!-- TMPL_ELSE -->
+				<option value="cf">De Lisle</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cg" -->
+				<option value="cg"
+				SELECTED>Polyconique modifiee de la
+				Carte internationale du monde</option>
+			<!-- TMPL_ELSE -->
+				<option value="cg">Polyconique
+				modifiee de la Carte internationale du
+				monde</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8ch" -->
+				<option value="ch" SELECTED>底索正形圓錐投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="ch">底索正形圓錐投影</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f8cp" -->
+				<option value="cp" SELECTED>Polyconique</option>
+			<!-- TMPL_ELSE -->
+				<option value="cp">Polyconique</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cu" -->
+				<option value="cu" SELECTED>未知特性之圓錐投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="cu">未知特性之圓錐投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8cz" -->
+				<option value="cz" SELECTED>已知特性之圓錐投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="cz">已知特性之圓錐投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8da" -->
+				<option value="da" SELECTED>蟾蜍狀投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="da">蟾蜍狀投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8db" -->
+				<option value="db" SELECTED>蝶狀投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="db">蝶狀投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bc" -->
+				<option value="bc" SELECTED>蘭伯特正方位等面積投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="bc">蘭伯特正方位等面積投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bd" -->
+				<option value="bd" SELECTED>麥卡托投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="bd">麥卡托投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8be" -->
+				<option value="be" SELECTED>米勒投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="be">米勒投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bf" -->
+				<option value="bf" SELECTED>摩爾外德投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="bf">摩爾外德投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bg" -->
+				<option value="bg" SELECTED>Sinusoidale</option>
+			<!-- TMPL_ELSE -->
+				<option value="bg">Sinusoidale</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bh" -->
+				<option value="bh" SELECTED>麥卡托投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="bh">麥卡托投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bi" -->
+				<option value="bi" SELECTED>高斯投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="bi">高斯投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bj" -->
+				<option value="bj" SELECTED>Plate Carree</option>
+			<!-- TMPL_ELSE -->
+				<option value="bj">Plate Carree</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bk" -->
+				<option value="bk" SELECTED>De Cassini</option>
+			<!-- TMPL_ELSE -->
+				<option value="bk">De Cassini</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bl" -->
+				<option value="bl" SELECTED>拉伯得投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="bl">拉伯得投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bm" -->
+				<option value="bm" SELECTED>Oblique de
+				Mercator</option>
+			<!-- TMPL_ELSE -->
+				<option value="bm">Oblique de Mercator</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bu" -->
+				<option value="bu"
+				SELECTED>未知特性之圓柱投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="bu">未知特性之圓柱投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8bz" -->
+				<option value="bz"
+				SELECTED>已知特性之圓柱投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="bz">已知特性之圓柱投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8dc" -->
+				<option value="dc" SELECTED>Eckert</option>
+			<!-- TMPL_ELSE -->
+				<option value="dc">Eckert</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8dd" -->
+				<option value="dd" SELECTED>Homolosine
+				de Goode</option>
+			<!-- TMPL_ELSE -->
+				<option value="dd">Homolosine de Goode</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8de" -->
+				<option value="de" SELECTED>米勒雙極式投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="de">米勒雙極式投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8df" -->
+				<option value="df" SELECTED>Van der Griten</option>
+			<!-- TMPL_ELSE -->
+				<option value="df">Van der Griten</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8dg" -->
+				<option value="dg" SELECTED>Dymaxion</option>
+			<!-- TMPL_ELSE -->
+				<option value="dg">Dymaxion</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8dh" -->
+				<option value="dh" SELECTED>心狀投影</option>
+			<!-- TMPL_ELSE -->
+				<option value="dh">心狀投影</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8di" -->
+				<option value="di" SELECTED>Polyhedrique</option>
+			<!-- TMPL_ELSE -->
+				<option value="di">Polyhedrique</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8uu" -->
+				<option value="uu" SELECTED>不明型式</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">不明型式</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8xx" -->
+				<option value="xx" SELECTED>如不適用</option>
+			<!-- TMPL_ELSE -->
+				<option value="xx">如不適用</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f8zz" -->
+				<option value="zz" SELECTED>權威記錄類別管理</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">權威記錄類別管理</option>
+			<!-- /TMPL_IF -->
+
+			</select>
+
+		</td></tr><tr><td>Meridien de reference 1:</td>
+		<td>
+			<select name="f9" size="1">
+			<!-- TMPL_IF name="f9  " -->
+				<option value="  " SELECTED>無需填寫</option>
+			<!-- TMPL_ELSE -->
+				<option value="  ">無需填寫</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9aa" -->
+				<option value="aa"
+				SELECTED>英國‧格林威治</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">英國‧格林威治</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ab" -->
+				<option value="ab" SELECTED>荷蘭‧阿姆斯特丹</option>
+			<!-- TMPL_ELSE -->
+				<option value="ab">荷蘭‧阿姆斯特丹</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ac" -->
+				<option value="ac" SELECTED>希臘‧雅典</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">希臘‧雅典</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ad" -->
+				<option value="ad" SELECTED>印尼‧雅加達</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">印尼‧雅加達</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ae" -->
+				<option value="ae" SELECTED>瑞士‧伯恩</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">瑞士‧伯恩</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9af" -->
+				<option value="af" SELECTED>哥倫比亞‧波哥大</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">哥倫比亞‧波哥大</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ag" -->
+				<option value="ag" SELECTED>印度‧孟買</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">印度‧孟買</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ah" -->
+				<option value="ah" SELECTED>Bruxelles (Belgique)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ah">Bruxelles (Belgique)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ai" -->
+				<option value="ai" SELECTED>西班牙‧加地斯</option>
+			<!-- TMPL_ELSE -->
+				<option value="ai">西班牙‧加地斯</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9aj" -->
+				<option value="aj" SELECTED>南非‧開普敦</option>
+			<!-- TMPL_ELSE -->
+				<option value="aj">南非‧開普敦</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ak" -->
+				<option value="ak" SELECTED>委內瑞拉‧加拉卡斯</option>
+			<!-- TMPL_ELSE -->
+				<option value="ak">委內瑞拉‧加拉卡斯</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9al" -->
+				<option value="al" SELECTED>丹麥‧哥本哈根</option>
+			<!-- TMPL_ELSE -->
+				<option value="al">丹麥‧哥本哈根</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9am" -->
+				<option value="am"
+				SELECTED>阿根廷‧哥多華</option>
+			<!-- TMPL_ELSE -->
+				<option value="am">阿根廷‧哥多華</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9an" -->
+				<option value="an" SELECTED>Ile de Fer
+				(Iles Canaries)</option>
+			<!-- TMPL_ELSE -->
+				<option value="an">Ile de Fer (Iles Canaries)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9ao" -->
+				<option value="ao" SELECTED>芬蘭‧赫爾辛基</option>
+			<!-- TMPL_ELSE -->
+				<option value="ao">芬蘭‧赫爾辛基</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9ap" -->
+				<option value="ap" SELECTED>土耳其‧伊斯坦堡</option>
+			<!-- TMPL_ELSE -->
+				<option value="ap">土耳其‧伊斯坦堡</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9aq" -->
+				<option value="aq"
+				SELECTED>格陵蘭‧猶連哈</option>
+			<!-- TMPL_ELSE -->
+				<option value="aq">格陵蘭‧猶連哈</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9ar" -->
+				<option value="ar" SELECTED>葡萄牙‧里斯本</option>
+			<!-- TMPL_ELSE -->
+				<option value="ar">葡萄牙‧里斯本</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9as" -->
+				<option value="as" SELECTED>英國‧倫敦</option>
+			<!-- TMPL_ELSE -->
+				<option value="as">英國‧倫敦</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f9at" -->
+				<option value="at" SELECTED>印度‧馬德拉斯</option>
+			<!-- TMPL_ELSE -->
+				<option value="at">印度‧馬德拉斯</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9ba" -->
+				<option value="ba" SELECTED>西班牙‧馬德里</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">西班牙‧馬德里</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bb" -->
+				<option value="bb" SELECTED>墨西哥‧墨西哥城</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">墨西哥‧墨西哥城</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bc" -->
+				<option value="bc" SELECTED>蘇聯‧莫斯科</option>
+			<!-- TMPL_ELSE -->
+				<option value="bc">蘇聯‧莫斯科</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bd" -->
+				<option value="bd" SELECTED>德國‧慕尼黑</option>
+			<!-- TMPL_ELSE -->
+				<option value="bd">德國‧慕尼黑</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9be" -->
+				<option value="be" SELECTED>義大利‧那不勒斯</option>
+			<!-- TMPL_ELSE -->
+				<option value="be">義大利‧那不勒斯</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bf" -->
+				<option value="bf" SELECTED>Oslo
+				(Christiana) (Norvege)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bf">Oslo (Christiana) (Norvege)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bg" -->
+				<option value="bg" SELECTED>法國‧巴黎</option>
+			<!-- TMPL_ELSE -->
+				<option value="bg">法國‧巴黎</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bh" -->
+				<option value="bh" SELECTED>中國‧北平</option>
+			<!-- TMPL_ELSE -->
+				<option value="bh">中國‧北平</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bi" -->
+				<option value="bi"
+				SELECTED>費城（美國）</option>
+			<!-- TMPL_ELSE -->
+				<option value="bi">費城（美國）</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bj" -->
+				<option value="bj" SELECTED>Pulkova
+				(St Petersbourg) (Russie)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bj">Pulkova (St
+				Petersbourg) (Russie)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bk" -->
+				<option value="bk" SELECTED>Rio de
+				Janeiro (Bresil)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bk">Rio de Janeiro (Bresil)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bl" -->
+				<option value="bl" SELECTED>Rome (Italie)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bl">Rome (Italie)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bm" -->
+				<option value="bm" SELECTED>Santiago (Chili)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bm">Santiago (Chili)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bn" -->
+				<option value="bn" SELECTED>Stockholm (Suede)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bn">Stockholm (Suede)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bo" -->
+				<option value="bo" SELECTED>澳洲˙雪梨</option>
+			<!-- TMPL_ELSE -->
+				<option value="bo">澳洲˙雪梨</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bp" -->
+				<option value="bp" SELECTED>阿爾巴尼亞‧地拉那</option>
+			<!-- TMPL_ELSE -->
+				<option value="bp">阿爾巴尼亞‧地拉那</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9bq" -->
+				<option value="bq" SELECTED>日本‧東京</option>
+			<!-- TMPL_ELSE -->
+				<option value="bq">日本‧東京</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9br" -->
+				<option value="br" SELECTED>美國‧華盛頓</option>
+			<!-- TMPL_ELSE -->
+				<option value="br">美國‧華盛頓</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9uu" -->
+				<option value="uu" SELECTED>不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">不詳</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f9zz" -->
+				<option value="zz" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">其他</option>
+			<!-- /TMPL_IF -->
+
+			</select>
+
+		</td></tr><tr>		<td>Meridien de reference 2:</td>
+		<td>
+			<select name="f10" size="1">
+            
+			<!-- TMPL_IF name="f10  " -->
+				<option value="  " SELECTED>無需填寫</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">無需填寫</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10aa" -->
+				<option value="aa"
+				SELECTED>英國‧格林威治</option>
+			<!-- TMPL_ELSE -->
+				<option value="aa">英國‧格林威治</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ab" -->
+				<option value="ab" SELECTED>荷蘭‧阿姆斯特丹</option>
+			<!-- TMPL_ELSE -->
+				<option value="ab">荷蘭‧阿姆斯特丹</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ac" -->
+				<option value="ac" SELECTED>希臘‧雅典</option>
+			<!-- TMPL_ELSE -->
+				<option value="ac">希臘‧雅典</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ad" -->
+				<option value="ad" SELECTED>印尼‧雅加達</option>
+			<!-- TMPL_ELSE -->
+				<option value="ad">印尼‧雅加達</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ae" -->
+				<option value="ae" SELECTED>瑞士‧伯恩</option>
+			<!-- TMPL_ELSE -->
+				<option value="ae">瑞士‧伯恩</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10af" -->
+				<option value="af" SELECTED>哥倫比亞‧波哥大</option>
+			<!-- TMPL_ELSE -->
+				<option value="af">哥倫比亞‧波哥大</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ag" -->
+				<option value="ag" SELECTED>印度‧孟買</option>
+			<!-- TMPL_ELSE -->
+				<option value="ag">印度‧孟買</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ah" -->
+				<option value="ah" SELECTED>Bruxelles (Belgique)</option>
+			<!-- TMPL_ELSE -->
+				<option value="ah">Bruxelles (Belgique)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ai" -->
+				<option value="ai" SELECTED>西班牙‧加地斯</option>
+			<!-- TMPL_ELSE -->
+				<option value="ai">西班牙‧加地斯</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10aj" -->
+				<option value="aj" SELECTED>南非‧開普敦</option>
+			<!-- TMPL_ELSE -->
+				<option value="aj">南非‧開普敦</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ak" -->
+				<option value="ak" SELECTED>委內瑞拉‧加拉卡斯</option>
+			<!-- TMPL_ELSE -->
+				<option value="ak">委內瑞拉‧加拉卡斯</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10al" -->
+				<option value="al" SELECTED>丹麥‧哥本哈根</option>
+			<!-- TMPL_ELSE -->
+				<option value="al">丹麥‧哥本哈根</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10am" -->
+				<option value="am"
+				SELECTED>阿根廷‧哥多華</option>
+			<!-- TMPL_ELSE -->
+				<option value="am">阿根廷‧哥多華</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10an" -->
+				<option value="an" SELECTED>Ile de Fer
+				(Iles Canaries)</option>
+			<!-- TMPL_ELSE -->
+				<option value="an">Ile de Fer (Iles Canaries)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10ao" -->
+				<option value="ao" SELECTED>芬蘭‧赫爾辛基</option>
+			<!-- TMPL_ELSE -->
+				<option value="ao">芬蘭‧赫爾辛基</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10ap" -->
+				<option value="ap" SELECTED>土耳其‧伊斯坦堡</option>
+			<!-- TMPL_ELSE -->
+				<option value="ap">土耳其‧伊斯坦堡</option>
+			<!-- /TMPL_IF -->
+			
+			<!-- TMPL_IF name="f10aq" -->
+				<option value="aq"
+				SELECTED>格陵蘭‧猶連哈</option>
+			<!-- TMPL_ELSE -->
+				<option value="aq">格陵蘭‧猶連哈</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10ar" -->
+				<option value="ar" SELECTED>葡萄牙‧里斯本</option>
+			<!-- TMPL_ELSE -->
+				<option value="ar">葡萄牙‧里斯本</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10as" -->
+				<option value="as" SELECTED>英國‧倫敦</option>
+			<!-- TMPL_ELSE -->
+				<option value="as">英國‧倫敦</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f10at" -->
+				<option value="at" SELECTED>印度‧馬德拉斯</option>
+			<!-- TMPL_ELSE -->
+				<option value="at">印度‧馬德拉斯</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10ba" -->
+				<option value="ba" SELECTED>西班牙‧馬德里</option>
+			<!-- TMPL_ELSE -->
+				<option value="ba">西班牙‧馬德里</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bb" -->
+				<option value="bb" SELECTED>墨西哥‧墨西哥城</option>
+			<!-- TMPL_ELSE -->
+				<option value="bb">墨西哥‧墨西哥城</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bc" -->
+				<option value="bc" SELECTED>蘇聯‧莫斯科</option>
+			<!-- TMPL_ELSE -->
+				<option value="bc">蘇聯‧莫斯科</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bd" -->
+				<option value="bd" SELECTED>德國‧慕尼黑</option>
+			<!-- TMPL_ELSE -->
+				<option value="bd">德國‧慕尼黑</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10be" -->
+				<option value="be" SELECTED>義大利‧那不勒斯</option>
+			<!-- TMPL_ELSE -->
+				<option value="be">義大利‧那不勒斯</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bf" -->
+				<option value="bf" SELECTED>Oslo
+				(Christiana) (Norvege)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bf">Oslo (Christiana) (Norvege)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bg" -->
+				<option value="bg" SELECTED>法國‧巴黎</option>
+			<!-- TMPL_ELSE -->
+				<option value="bg">法國‧巴黎</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bh" -->
+				<option value="bh" SELECTED>中國‧北平</option>
+			<!-- TMPL_ELSE -->
+				<option value="bh">中國‧北平</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bi" -->
+				<option value="bi"
+				SELECTED>費城（美國）</option>
+			<!-- TMPL_ELSE -->
+				<option value="bi">費城（美國）</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bj" -->
+				<option value="bj" SELECTED>Pulkova
+				(St Petersbourg) (Russie)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bj">Pulkova (St
+				Petersbourg) (Russie)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bk" -->
+				<option value="bk" SELECTED>Rio de
+				Janeiro (Bresil)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bk">Rio de Janeiro (Bresil)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bl" -->
+				<option value="bl" SELECTED>Rome (Italie)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bl">Rome (Italie)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bm" -->
+				<option value="bm" SELECTED>Santiago (Chili)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bm">Santiago (Chili)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bn" -->
+				<option value="bn" SELECTED>Stockholm (Suede)</option>
+			<!-- TMPL_ELSE -->
+				<option value="bn">Stockholm (Suede)</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bo" -->
+				<option value="bo" SELECTED>澳洲˙雪梨</option>
+			<!-- TMPL_ELSE -->
+				<option value="bo">澳洲˙雪梨</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bp" -->
+				<option value="bp" SELECTED>阿爾巴尼亞‧地拉那</option>
+			<!-- TMPL_ELSE -->
+				<option value="bp">阿爾巴尼亞‧地拉那</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10bq" -->
+				<option value="bq" SELECTED>日本‧東京</option>
+			<!-- TMPL_ELSE -->
+				<option value="bq">日本‧東京</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10br" -->
+				<option value="br" SELECTED>美國‧華盛頓</option>
+			<!-- TMPL_ELSE -->
+				<option value="br">美國‧華盛頓</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10uu" -->
+				<option value="uu" SELECTED>不詳</option>
+			<!-- TMPL_ELSE -->
+				<option value="uu">不詳</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f10zz" -->
+				<option value="zz" SELECTED>其他</option>
+			<!-- TMPL_ELSE -->
+				<option value="zz">其他</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td></tr>
+
+	<tr><td colspan=2><input type="button" value="完成" onclick="javascript:report()"></td></tr>
+</table>
+</form>
+<script type="text/javascript">
+	function report() {
+	    var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+            field.value =  document.f_pop.f1.value + document.f_pop.f2.value +document.f_pop.f3.value +document.f_pop.f4.value +document.f_pop.f5.value +document.f_pop.f6.value +document.f_pop.f7.value +document.f_pop.f8.value +document.f_pop.f9.value +document.f_pop.f10.value;
+	    self.close();
+	    return false;
+	}
+</script>
+</body>
+</html>

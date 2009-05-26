@@ -1,0 +1,11 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+	
+	<h1>Online Hilfe</h1>
+	<p>Sorry, hierzu gibt es keine Hilfe</p>
+<form action="/cgi-bin/koha/edithelp.pl" method="post">
+<input type="hidden" name="referer" value="<!-- TMPL_VAR NAME="referer" -->" />
+<input type="hidden" name="type" value="addnew" />
+<input type="submit" name="submit" class="submit" value="Hilfe hinzufügen">
+</form>
+	
+<!-- TMPL_INCLUDE name="help-bottom.inc" -->

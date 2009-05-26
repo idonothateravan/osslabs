@@ -1,0 +1,305 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 馆藏目录 &rsaquo; 高级检索</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/JavaScript" language="JavaScript">
+	/**
+	 *  Function add_field();
+	 *  This function allows to display a new field to search.
+	 */
+	function add_field() {
+	    var ButtonPlus = document.getElementById("ButtonPlus");
+		var line = ButtonPlus.parentNode;
+		var dad  = line.parentNode;
+		dad.appendChild(line.cloneNode(true));
+		line.removeChild(ButtonPlus);
+	}
+	$(document).ready(function() {
+		$("input[@name='q']:eq(0)").focus();
+	});
+</script>
+</head>
+<body>
+
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; Advanced Search</div>
+
+<div id="doc" class="yui-t7">
+   <div id="bd">
+	
+<form action="search.pl" method="get">
+<div id="advanced-search">
+<h1>高级查询</h1>
+
+<!-- TMPL_IF NAME="outer_servers_loop" -->
+<!-- DATABASES -->
+
+<fieldset>
+        <legend>选择当地数据库</legend>
+                <!-- TMPL_LOOP NAME="local_servers_loop" -->
+<!-- TMPL_IF NAME="checked" --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" checked="checked" value="<!-- TMPL_VAR NAME="value" -->" /><!-- TMPL_ELSE --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" /><!-- /TMPL_IF --><label for="<!-- TMPL_VAR NAME="id" -->"><img width="16" height="16" alt="<!-- TMPL_VAR NAME="id" -->" src="<!-- TMPL_VAR NAME="themelang" -->/img/<!-- TMPL_VAR NAME="icon" -->" /> <!-- TMPL_VAR NAME="label" --></label><!-- /TMPL_LOOP -->
+</fieldset>
+<!-- /DATABASES -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="outer_servers_loop" -->
+<!-- REMOTE DATABASES -->
+<fieldset>
+    <legend>选择远程数据库：</legend>
+                <!-- TMPL_LOOP NAME="outer_servers_loop" -->
+                <!-- TMPL_IF NAME="checked" --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" checked="checked" value="<!-- TMPL_VAR NAME="value" -->" /><!-- TMPL_ELSE --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" /><!-- /TMPL_IF -->
+<label for="<!-- TMPL_VAR NAME="id" -->"><img alt="<!-- TMPL_VAR NAME="id" -->" src="<!-- TMPL_VAR NAME="themelang" -->/images/<!-- TMPL_VAR NAME="icon" -->" /><!-- TMPL_VAR NAME="label" --></label>
+                <!-- /TMPL_LOOP -->
+    </fieldset>
+<!-- /REMOTE DATABASES -->
+<!-- /TMPL_IF -->
+
+<!-- BOOLEAN SEARCH OPTIONS -->
+    <fieldset>
+    <legend>查询： </legend>
+    <!-- TMPL_LOOP NAME="search_boxes_loop" -->
+        <!-- TMPL_IF NAME="search_boxes_label" --><div style="text-indent: 4.5em;"><!-- TMPL_ELSE --><div><!-- /TMPL_IF -->
+			<!-- TMPL_IF NAME="expanded_options" -->
+            <!-- TMPL_IF NAME="boolean" -->
+                <select name="op">
+                    <option value="and" selected="selected">和</option>
+                    <option value="or">或</option>
+                    <option value="not">不是</option>
+                </select>
+            <!-- /TMPL_IF --> 
+			<!-- /TMPL_IF -->
+			<!-- TMPL_INCLUDE NAME="search_indexes.inc" -->
+			<input type="text" size="30" name="q" title="输入查询词" value="">
+            <!-- TMPL_IF NAME="expanded_options" -->
+                <!-- TMPL_IF NAME="add_field" -->
+                    <a href="JavaScript:add_field();" id="ButtonPlus" title="新增其他字段">[+]</a>
+				<!-- /TMPL_IF -->
+            	<!-- TMPL_IF NAME="scan_index" -->
+                	<label for="scan">扫描索引：</label><input type="checkbox" name="scan" id="scan" value="1" />
+            	<!-- /TMPL_IF -->
+            <!-- /TMPL_IF -->
+		</div>
+    <!-- /TMPL_LOOP -->
+    </fieldset>
+<!-- /BOOLEAN SEARCH OPTIONS -->
+
+<!-- ITEMTYPE LIMITS -->
+    <div id="itemtypelist">
+	<fieldset>
+     <legend>限制类型为：对应下面任何一个：</legend>
+    <table>
+        <tr>
+      <!--TMPL_LOOP Name="itemtypeloop"-->
+        <td>
+        <!-- TMPL_IF name="imageurl"--><img border="0" src="<!--TMPL_VAR Name="imageurl" -->" alt="<!--TMPL_VAR Name="description" -->" /><!-- /TMPL_IF -->
+		<input type="checkbox" id="<!-- TMPL_VAR NAME="ccl" -->-<!--TMPL_VAR Name="number" -->" name="limit" value="mc-<!-- TMPL_VAR NAME="ccl" -->:<!--TMPL_VAR Name="code" -->" />&nbsp;
+        <label for="<!-- TMPL_VAR NAME="ccl" -->-<!--TMPL_VAR Name="number" -->"><!--TMPL_VAR Name="description" --></label></td>
+        <!-- TMPL_UNLESS name="count5" --></tr><tr><!-- /TMPL_UNLESS -->
+      <!--/TMPL_LOOP-->
+	  <!-- FIXME: for validation, avoid generating empty row -->
+      </tr>
+    </table>
+	</fieldset>
+    </div>
+<!-- /ITEMTYPE LIMITS -->
+
+<!-- TMPL_IF NAME="expanded_options" -->
+<!-- BASIC LIMITS -->
+ <fieldset>
+	<legend>限制范围：</legend>
+<!-- PUB / COPY YEAR LIMIT --><!-- FIXME: add publication,copyright,acquisition options -->
+	<p><label for="limit-yr">年： </label>
+		<input size="15" name="limit-yr" id="" value=""/>&nbsp;&nbsp;（格式：yyyy-yyyy）</p>
+<!-- /PUB / COPY YEAR LIMIT -->
+
+<!-- LANGUAGE LIMIT -->
+		<p><label for="language-limit">语言： </label>                                        
+		<select name="limit">
+		<option value="">没有限制</option>
+		<!-- TMPL_LOOP NAME="search_languages_loop" -->
+		<!-- TMPL_IF NAME="selected" -->
+		<option value="ln:<!-- TMPL_VAR NAME="iso639_2_code" -->" selected="selected"><!-- TMPL_VAR NAME="language_description" --></option>
+		<!-- TMPL_ELSE -->
+		<option value="ln:<!-- TMPL_VAR NAME="iso639_2_code" -->"><!-- TMPL_VAR NAME="language_description" --></option>
+		<!-- /TMPL_IF -->
+		
+		<!-- /TMPL_LOOP -->
+		</select></p><!-- <a href="">Show all languages</a>-->
+<!-- /LANGUAGE LIMIT -->
+</fieldset>
+<!-- /BASIC LIMITS -->
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="UNIMARC" -->
+<!-- TMPL_INCLUDE NAME="subtypes_unimarc.inc" -->
+<!-- TMPL_ELSE -->
+<!-- SUBTYPE LIMITS -->
+        <fieldset>
+        <legend>限制次类别：</legend><p>
+        
+        <select name="limit" class="subtype">
+            <option value="" selected="selected" class="menuheader">任何读者</option>
+			<option value="aud:a">Preschool</option>
+			<option value="aud:b">Primary</option>
+			<option value="aud:c">Pre-adolescent</option>
+			<option value="aud:d">Adolescent</option>
+			<option value="aud:e">成人</option>
+			<option value="aud:f">Specialized</option>
+			<option value="aud:g">General</option>
+			<option value="aud:j">青少年</option>
+        </select>
+        
+        <select name="limit" class="subtype">
+            <option value="" selected="selected" class="menuheader">任何内容</option>
+            <option value="fic:1" >小说</option>
+            <option value="fic:0" >非小说</option>
+            <option value="bio:b" >传记</option>
+            <option value="mus:j" >录音数据</option>
+            <option value="mus:i" >非录音数据</option>
+        </select>
+
+        
+        <select name="limit" class="subtype">
+            <option value="" selected="selected" class="menuheader">任何格式</option>
+            <option value="l-format:ta" >规则印刷</option>
+            <option value="l-format:tb" >大字体印刷数据</option>
+            <option value="l-format:fk" >点字本</option>
+            <option value="" >-----------</option>
+            <option value="l-format:sd" >音乐光盘</option>
+            <option value="l-format:ss" >卡式录音带</option>
+            <option value="l-format:vf" >VHS 卡式录像带</option>
+            <option value="l-format:vd" >DVD 影片 / 影碟</option>
+            <option value="l-format:co" >软件光盘</option>
+            <option value="l-format:cr" >网站</option>
+        </select>
+        
+        <select name="limit" class="subtype">
+            <option value="" >其他内容型式</option>
+            <option value="ctype:a" >摘要</option>
+            <option value="ctype:b" >书目</option>
+            <option value="ctype:c" >馆藏目录</option>
+            <option value="ctype:d" >字典</option>
+            <option value="ctype:e" >百科全书 </option>
+            <option value="ctype:f" >手册</option>
+            <option value="ctype:g" >法律论文</option>
+            <option value="ctype:i" >索引</option>
+            <option value="ctype:j" >专利文件</option>
+            <option value="ctype:k" >（音乐）主题目录</option>
+            <option value="ctype:l" >法规</option>
+            <option value="ctype:m" >硕士论文（Theses）</option>
+            <option value="ctype:n" >文献评析</option>
+            <option value="ctype:o" >续借</option>
+            <option value="ctype:p" >编排好的文本</option>
+            <option value="ctype:q" >影片目录</option>
+            <option value="ctype:r" >字典</option>
+            <option value="ctype:s" >统计</option>
+            <option value="ctype:t" >技术报告</option>
+            <option value="ctype:v" >法律案例及案例批注</option>
+            <option value="ctype:w" >法律报道及摘要</option>
+            <option value="ctype:z" >条约、协议 </option>
+        </select>
+       </p>
+
+</fieldset>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="template-defined-limits" -->
+<!-- TYPE LIMITS -->
+    <fieldset>
+
+    <legend>限制类型为：对应下面任何一个</legend>
+    <table class="itemtypes">
+            <tr>
+            <td><input type="checkbox" id="mc-bks" name="limit" value="mc:t" />
+			<label for="mc-bks" title="Books, Pamphlets, Technical reports, Manuscripts, Legal papers, Theses and dissertations">
+			<img border="0" src="/intranet-tmpl/prog/img/AF.gif" alt="书">书</label></td>
+			<td><input type="checkbox" id="mc-vis" name="limit" value="mc:v" />
+			<label for="mc-vis" title="Motion pictures, Videorecordings, Filmstrips, Slides, Transparencies, Photos, Cards, Charts, Drawings">
+			<img border="0" src="/intranet-tmpl/prog/en/images/AV Aids.gif" alt="视听资料">视听资料</label></td>
+            <td><input type="checkbox" id="mc-sr" name="limit" value="mc-rtype:i" />
+			<label for="mc-sr" title="演讲、有声书、录音带">
+			<img border="0" src="/intranet-tmpl/prog/en/images/AF.gif" alt="有声书">有声书</label></td>
+            </tr>
+
+            <tr>
+            <td><input type="checkbox" id="mc-cf" name="limit" value="mc:c" />
+			<label for="mc-cf" title="计算机档案、数据、软件">
+			<img border="0" src="/intranet-tmpl/prog/en/images/CD-ROM software.gif" alt="计算机档案">计算机档案</label></td>
+            <td><input type="checkbox" id="mc-lh" name="limit" value="mc-收藏:LH">
+			<label for="mc-lh" title="本地历史文献">
+			<img border="0" src="/intranet-tmpl/prog/en/images/Local history.gif" alt="本地历史文献">本地历史文献</label></td>
+            <td><input type="checkbox" id="mc-map" name="limit" value="mc:a" />
+			<label for="mc-map" title="地图，地球仪">
+			<img border="0" src="/intranet-tmpl/prog/en/images/PF.gif " alt="地图">地图</label></td>
+            </tr>
+
+            <tr>
+            <td><input type="checkbox" id="mc-mus" name="limit" value="mc-rtype:j" />
+			<label for="mc-mus" title="音乐">
+			<img border="0" src="/intranet-tmpl/prog/en/images/CDM.gif" alt="音乐">音乐</label></td>
+            <td><input type="checkbox" id="mc-kit" name="limit" value="mc-rtype:o" />
+			<label for="mc-kit" title="工具箱"><img border="0" src="/intranet-tmpl/prog/en/images/KIT.gif" alt="工具箱">工具箱</label></td>
+            <td><input type="checkbox" id="mc-ref" name="limit" value="mc-收藏:REF">
+			<label for="mc-ref" title="参考文献">
+			<img border="0" src="/intranet-tmpl/prog/en/images/REF.gif" alt="参考文献">参考文献</label></td>
+            </tr>
+            
+            </table>
+</fieldset>
+<!-- /TMPL_IF -->
+<!-- /TYPE LIMITS -->
+
+<!-- AVAILABILITY LIMITS -->
+    <fieldset><legend>馆藏地以及借阅状况： </legend>
+        <p>
+        <label for="available-items">目前只有一个馆藏可以借阅</label> <input type="checkbox" id="available-items" name="limit" value="可取得"></p>
+        <p>
+        <label for="branchloop">各别图书馆：</label><select name="limit" id="branchloop" onchange='if(this.value != ""){document.getElementById("categoryloop").disabled=true;} else {document.getElementById("categoryloop").disabled=false;}'>
+        <option value="">所有图书馆</option>
+        <!-- TMPL_LOOP NAME="branchloop" -->
+        <option value="branch:<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branchname" --></option>
+        <!-- /TMPL_LOOP -->
+        </select>
+    <!-- <input type="hidden" name="limit" value="branch: MAIN" /> -->
+        </p>
+        <!-- TMPL_IF NAME="searchdomainloop" -->
+    <p>或<p> <!-- should addjs to grey out group pulldown if a library is selected. -->
+    <p>
+        <label for="categoryloop">图书馆群组</label><select name="multibranchlimit" id="categoryloop">
+        <option value=""> -- 没有 -- </option>
+        <!-- TMPL_LOOP NAME="searchdomainloop" -->
+        <option value="<!-- TMPL_VAR NAME="categorycode" -->"><!-- TMPL_VAR NAME="categoryname" --></option>
+        <!-- /TMPL_LOOP -->
+        </select>
+        </p>
+    <!-- /TMPL_IF -->
+    </fieldset>
+<!-- /AVAILABILITY LIMITS -->
+
+<!-- RANK LIMITS -->
+
+<fieldset><legend>排序依照： </legend>
+    <p><select id="sort_by" name="sort_by">
+  <!-- TMPL_INCLUDE NAME="resort_form.inc" -->
+    </select>
+        </p>
+</fieldset>
+<!-- RANK LIMITS -->
+
+</div>
+
+
+<!-- SEARCH BUTTONS -->
+            <p><input class="submit" type="submit" accesskey="s" value="查询">
+            <!-- TMPL_IF NAME="expanded_options" -->
+            <a href="/cgi-bin/koha/catalogue/search.pl?expanded_options=0">[减少选项]</a>
+            <!-- TMPL_ELSE -->
+            <a href="/cgi-bin/koha/catalogue/search.pl?expanded_options=1">[增加选项]</a>
+            <!-- /TMPL_IF -->
+            <a href="/cgi-bin/koha/catalogue/search.pl?do=Clear">[新查询]</a> 
+            </p>
+<!-- /SEARCH BUTTONS -->
+</form>
+</div>
+
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

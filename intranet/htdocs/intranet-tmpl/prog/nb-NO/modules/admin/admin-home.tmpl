@@ -1,0 +1,86 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administrasjon</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Hjem</a> &rsaquo; Administrasjon</div>
+
+<div id="doc" class="yui-t7">
+   
+   <div id="bd">
+	<div id="yui-main" class="sysprefs">
+	<div class="yui-g"><h1>Systeminnstillinger</h1></div>
+	<div class="yui-g">
+
+<div class="yui-u first">
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/systempreferences.pl">Generelle systeminnstillinger</a></dt>
+	<dd>Manage global system preferences like MARC flavor, date format, administrator e-mail, and templates.</dd>
+</dl>
+
+
+<div class="hint"><h4>Tips:</h4><p>Sett opp disse parametrene i den rekkefølgen de opptrer i.</p></div>
+<h3>Grunnleggende parametere</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/branches.pl">Biblioteker, filialer og grupper</a></dt>
+	<dd>Angi biblioteker, filialer og grupper.</dd>
+	<dt><a href="/cgi-bin/koha/admin/aqbookfund.pl">Funds and budgets</a></dt>
+	<dd>Funds and budgets administration for acquisitions.</dd>
+	<dt><a href="/cgi-bin/koha/admin/currency.pl">Valutaer og vekslingskurser</a></dt>
+	<dd>Angi valutaer og valutakurser for innkjøp.</dd>
+	<dt><a href="/cgi-bin/koha/admin/itemtypes.pl">Materialtyper og utlånskoder</a></dt>
+	<dd>Angi eksemplartyper og lånekoder for utlånsregler.</dd>
+</dl>
+
+<h3>Patrons and circulation</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/categorie.pl">Patron categories</a></dt>
+	<dd>Angi lånerkategorier</dd>
+	<dt><a href="/cgi-bin/koha/admin/cities.pl">Byer og tettsteder</a></dt>
+	<dd>Angi byer og tettsteder lånerne bor i.</dd>
+	<dt><a href="/cgi-bin/koha/admin/roadtype.pl" >Veityper</a>
+	</dt>
+	<dd>Define road types (street, avenue, way, etc.). Road types display as authorized values when adding/editing patrons and can be used in geographic statistics.</dd>
+	<dt><a href="/cgi-bin/koha/admin/patron-attr-types.pl">Patron attribute types</a></dt>
+	<dd>Define extended attributes (identifiers and statistical categories) for patron records</dd>
+    <dt><a href="/cgi-bin/koha/admin/smart-rules.pl">Circulation and fines rules</a></dt>
+    <dd>Define circulation and fines rules for combinations of libraries, patron categories, and item types</dd>
+</dl>
+</div>
+<div class="yui-u">
+<h3>Samling</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/authorised_values.pl">Godkjente verdier</a></dt>
+	<dd>Angi kategorier og de godkjente verdiene for dem.</dd>
+	<dt><a href="/cgi-bin/koha/admin/biblio_framework.pl">MARC Bibliographic framework</a></dt>
+	<dd>Create and manage Bibliographic frameworks that define the characteristics of your MARC Records (field and subfield definitions) as well as templates for the MARC editor.</dd>
+	<dt><a href="/cgi-bin/koha/admin/koha2marclinks.pl">Koha to MARC mapping</a></dt>
+	<dd>Define the mapping between the Koha transactional database (SQL) and the MARC Bibliographic records. Note that the mapping can be defined through MARC Bibliographic Framework. This tool is just a shortcut to speed up linkage.</dd>
+	<dt><a href="/cgi-bin/koha/admin/checkmarc.pl">MARC Bibliographic framework test</a></dt>
+	<dd>Checks the MARC structure. If you change your MARC Bibliographic framework it's recommended that you run this tool to test for errors in your definition.</dd>
+    <dt><a href="/cgi-bin/koha/admin/authtypes.pl">Kildetyper</a></dt>
+    <dd>Create and manage Authorities frameworks that define the characteristics of your MARC Records (field and subfield definitions).</dd>
+    <dt><a href="/cgi-bin/koha/admin/classsources.pl">Klassifiseringskilde</a></dt>
+    <dd>Define classification sources (i.e., call number schemes) used by your collection.  Also define filing rules used for sorting call numbers.</dd>
+    <dt><a href="/cgi-bin/koha/admin/matching-rules.pl">Record matching rules</a></dt>
+    <dd>Manage rules for automatically matching MARC records during record imports.</dd>
+</dl>
+
+<h3>Ekstraparametre</h3>
+<dl>
+	<dt><a href="/cgi-bin/koha/admin/stopwords.pl">Stoppord</a></dt>
+	<dd>Ord som ble ignorert under søket.</dd>
+	<!-- <dt><a href="/cgi-bin/koha/admin/printers.pl">Network Printers</a></dt>
+	<dd>Printers (UNIX paths).</dd> -->
+	<dt><a href="/cgi-bin/koha/admin/z3950servers.pl">Z39.50 Client Targets</a></dt>
+	<dd>Define which servers to query for MARC data in the integrated Z39.50 client.</dd>
+</dl>
+</div>
+
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

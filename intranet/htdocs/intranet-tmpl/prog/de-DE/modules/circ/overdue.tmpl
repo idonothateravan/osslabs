@@ -1,0 +1,112 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Ausleihe &rsaqo; Ausleihen überfällig seit <!-- TMPL_VAR NAME="todaysdate" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="circ-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/circ/circulation-home.pl">Ausleihe</a> &rsaquo; Überfällige Ausleihen seit <!-- TMPL_VAR NAME="todaysdate" --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h2>Exemplare überfällig seit <!-- TMPL_VAR NAME="todaysdate" --></h2>
+<p><a href="overdue.pl?op=csv&amp;branch=<!-- TMPL_VAR name="branchfilter" -->">Liste aller überfälligen Medien herunterladen</a> (um <!-- TMPL_IF name="branchfilter" -->Bibliothek <!-- TMPL_VAR name="branchfilter" --><!-- TMPL_ELSE -->alle Bibliotheken<!-- /TMPL_IF -->. andere Filter werden ignoriert)</p>
+<div class="searchresults">
+<table id="overduest">
+<thead><tr>
+    <th>Rückgabedatum</th>
+    <th>Benutzer</th>
+    <th>Bibliothek</th>
+    <th>Titel</th>
+</tr></thead>
+
+<tbody><!-- TMPL_LOOP NAME="overdueloop" -->
+    <tr>
+        <td><!-- TMPL_VAR NAME="duedate" --></td>
+        <!-- TMPL_IF NAME="email" -->
+        <td><a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR name="borrowernumber"-->"><!-- TMPL_VAR NAME="name" --></a> <a href="mailto:<!-- TMPL_VAR NAME="email" -->?subject=Overdue: <!-- TMPL_VAR NAME="title" -->">[E-Mail]</a> (<!-- TMPL_VAR NAME="phone" -->)</td>
+        <!-- TMPL_ELSE -->
+        <td><a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=<!-- TMPL_VAR name="borrowernumber"-->"><!-- TMPL_VAR NAME="name" --></a> (<!--TMPL_IF NAME="phone" --><!-- TMPL_VAR NAME="phone" --><!-- TMPL_ELSE -->
+    <!--TMPL_IF NAME="mobile" --><!-- TMPL_VAR NAME="mobile" --><!-- TMPL_ELSE --><!--TMPL_IF NAME="phonepro" -->       <!-- TMPL_VAR NAME="phonepro" --><!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_IF -->)</td>
+        <!-- /TMPL_IF -->
+        <td><!-- TMPL_VAR name="branchcode" --></td>
+        <td><!-- TMPL_IF name="BiblioDefaultViewmarc" -->
+<a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->"><!-- TMPL_VAR NAME="title" --></a>
+<!-- TMPL_ELSIF NAME="BiblioDefaultViewisbd" -->
+<a href="/cgi-bin/koha/catalogue/ISBDdetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->"><!-- TMPL_VAR NAME="title" --></a>
+<!-- TMPL_ELSE -->
+<a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->"><!-- TMPL_VAR NAME="title" -->  <!-- TMPL_VAR NAME="subtitle" --></a><!-- /TMPL_IF --> <!-- TMPL_IF NAME="author" -->, von <!-- TMPL_VAR NAME="author" --><!-- /TMPL_IF -->
+        </td>
+    </tr>
+<!-- /TMPL_LOOP --></tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="yui-b">
+<form method="post" action="/cgi-bin/koha/circ/overdue.pl">
+  <fieldset class="brief">
+<h4>Filtern nach: </h4>
+	<ol>
+    <li><label>Name oder Ausweisnummer:</label><input type="text" name="borname" value="<!--TMPL_VAR Name="borname"-->" /></li>
+    <li><label>Benutzertyp:</label><select name="borcat" id="borcat"><option value="">Beliebig</option>
+      <!-- TMPL_LOOP name="borcatloop" -->
+        <!-- TMPL_IF NAME="selected" --><option value="<!-- TMPL_VAR name="value" -->" selected="selected"><!-- TMPL_VAR name="catname" --></option><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR name="value" -->"><!-- TMPL_VAR name="catname" --></option><!-- /TMPL_IF -->
+      <!-- /TMPL_LOOP -->
+      </select>
+    </li>
+    <li><label>Benutzerflags:</label>
+        <select name="borflags" size="1" id="borflags">
+            <option value=" "> </option>
+            <option value="gonenoaddress">Adresse fraglich</option>
+            <option value="debarred">Gesperrt</option>
+            <option value="lost">Ausweis verloren</option>
+        </select>
+    </li>
+    <li><label>Medientyp:</label><select name="itemtype" id="itemtype"><option value="">Beliebig</option>
+      <!-- TMPL_LOOP name="itemtypeloop" --><!-- TMPL_IF NAME="selected" -->
+        <option value="<!-- TMPL_VAR name="value" -->" selected="selected"><!-- TMPL_VAR name="itemtypename" --></option><!-- TMPL_ELSE -->
+        <option value="<!-- TMPL_VAR name="value" -->"><!-- TMPL_VAR name="itemtypename" --></option><!-- /TMPL_IF -->
+      <!-- /TMPL_LOOP -->
+      </select>
+    </li>
+    <li>
+    <label>Bibliothek des Benutzers:</label><select name="branch" id="branch">
+        <option value="">Beliebig</option>
+      <!-- TMPL_LOOP name="branchloop" -->
+        <!-- TMPL_IF NAME="selected" -->
+        <option value="<!-- TMPL_VAR name="value" -->" selected="selected"><!-- TMPL_VAR name="branchname" --></option><!-- TMPL_ELSE -->
+        <option value="<!-- TMPL_VAR name="value" -->"><!-- TMPL_VAR name="branchname" --></option><!-- /TMPL_IF -->
+      <!-- /TMPL_LOOP -->
+      </select>
+    </li>
+   
+    <li><label for="order">Sortieren nach:</label> <select name="order" id="order">
+<!-- TMPL_IF NAME="order" -->
+<option value="">Rückgabedatum</option>
+<!-- TMPL_ELSE --><option value="" selected="selected">Rückgabedatum</option><!-- /TMPL_IF -->
+<option value="borrower">Benutzer</option>
+<option value="title">Titel</option>
+<option value="barcode">Barcode</option>
+<option value="date_due desc">Rüchgabedatum (absteigend)</option>
+<option value="borrower desc">Benutzer absteigend</option>
+<option value="title desc">Titelbeschreibung</option>
+<option value="barcode desc">Barcode</option>
+</select></li>
+<li class="radio"><label for="showall">Alle zur Zeit ausgeliehenen Medien zeigen:</label> 
+	<!-- TMPL_IF NAME="showall" --><input type="checkbox" id="showall" name="showall" value="zeigen" checked="checked"><!-- TMPL_ELSE --><input type="checkbox" id="showall" name="showall" value="zeigen"><!-- /TMPL_IF -->
+</li>
+</ol>
+   <fieldset class="action">
+      <input type="submit" value="Filter anwenden" class="submit">
+   </fieldset>   
+   </fieldset>   
+  </form>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

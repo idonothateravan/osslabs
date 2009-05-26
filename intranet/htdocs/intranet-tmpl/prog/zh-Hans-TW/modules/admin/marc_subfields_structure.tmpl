@@ -1,0 +1,225 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 管理 &rsaquo;<!-- TMPL_IF name="add_form" --><!-- TMPL_IF NAME="use-heading-flags-p" --><!-- TMPL_IF NAME="heading-edit-subfields-p" --> MARC 分欄結構 &rsaquo; 編輯 MARC 分欄 %s 限制<!-- /TMPL_IF --><!-- TMPL_ELSE --> 機讀格式（MARC）的分欄結構 &rsaquo; <!-- TMPL_VAR NAME="action" --><!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" --> MARC 分欄結構 &rsaquo; 確認刪除分欄 <!-- TMPL_VAR NAME="tagsubfield" --><!-- /TMPL_IF --><!-- TMPL_IF name="delete_confirmed" --> MARC 分欄結構 &rsaquo; 刪除分欄<!-- /TMPL_IF --><!-- TMPL_IF name="else" -->機讀格式（MARC）分欄結構<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+//<![CDATA[
+
+	 $(document).ready(function() {
+ 		$('#subfieldtabs > ul').tabs();
+	 });
+
+function displayMoreConstraint(numlayer){
+    var thisdiv = document.getElementById(numlayer);
+    if(thisdiv.getAttribute("class") == "content_hidden"){
+        thisdiv.removeAttribute('class');
+        thisdiv.setAttribute("class","content_visible");
+    } else {
+        thisdiv.removeAttribute('class');
+        thisdiv.setAttribute("class","content_hidden");
+    }
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs">
+  <a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo; <a href="/cgi-bin/koha/admin/biblio_framework.pl">MARC Frameworks</a> &rsaquo; <a href="/cgi-bin/koha/admin/marctagstructure.pl?frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->&searchfield=<!-- TMPL_VAR name="tagfield" -->"><!-- TMPL_VAR NAME="frameworkcode" --> Framework Structure</a> &rsaquo;
+  <!-- TMPL_IF name="add_form" -->
+  <!-- TMPL_IF NAME="use-heading-flags-p" -->
+  <!-- TMPL_IF NAME="heading-edit-subfields-p" --> <a href="/cgi-bin/koha/admin/marc_subfields_structure.pl?tagfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">欄位 <!-- TMPL_VAR NAME="tagfield" --> 分欄架構</a> &rsaquo; 編輯分欄限制
+  <!-- /TMPL_IF -->
+  <!-- TMPL_ELSE --> <a href="/cgi-bin/koha/admin/marc_subfields_structure.pl?tagfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">欄位 <!-- TMPL_VAR NAME="tagfield" --> 分欄架構</a> &rsaquo; <!-- TMPL_VAR NAME="action" -->
+  <!-- /TMPL_IF -->
+  <!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirm" --> <a href="/cgi-bin/koha/admin/marc_subfields_structure.pl?tagfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">Tag <!-- TMPL_VAR NAME="tagfield" --> Subfield Structure</a> &rsaquo; Confirm Deletion of Subfield <!-- TMPL_VAR NAME="tagsubfield" -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_confirmed" --> <a href="/cgi-bin/koha/admin/marc_subfields_structure.pl?tagfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">欄位 <!-- TMPL_VAR NAME="tagfield" --> 分欄架構</a> &rsaquo; 分欄被刪除
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="else" -->欄位 <!-- TMPL_VAR NAME="tagfield" --> 的分欄架構<!-- /TMPL_IF -->
+</div>
+
+<div id="doc" class="yui-t7">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-g">
+
+<!-- TMPL_IF NAME="add_form" -->
+    <h1>
+        <!-- TMPL_IF NAME="use-heading-flags-p" -->
+            <!-- TMPL_IF NAME="heading-edit-subfields-p" -->欄位 <!-- TMPL_VAR NAME="tagfield" --> 的分欄被限制<!-- /TMPL_IF -->
+        <!-- TMPL_ELSE -->
+            <!-- TMPL_VAR NAME="action" -->
+        <!-- /TMPL_IF -->
+    </h1>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+    <input type="hidden" name="op" value="add_validate" />
+	<input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+    <input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+    <input type="submit" value="儲存改變">
+    
+    <div id="subfieldtabs" class="toptabs numbered">
+   <ul>
+        <!-- TMPL_LOOP NAME="loop" -->
+            <!-- TMPL_IF NAME="new_subfield" -->
+                <!-- TMPL_IF EXPR="tagfield >=10" --><!-- display new only for > 10 fields -->
+                <li><a href="/cgi-bin/koha/admin/marc_subfields_structure.pl#sub<!-- TMPL_VAR NAME="urisubfieldcode" -->field" title="<!-- TMPL_VAR NAME="liblibrarian" -->">新增</a></li>
+                <!-- /TMPL_IF -->
+            <!-- TMPL_ELSE -->
+                <li><a href="/cgi-bin/koha/admin/marc_subfields_structure.pl#sub<!-- TMPL_VAR NAME="urisubfieldcode" -->field" title="<!-- TMPL_VAR NAME="liblibrarian" -->">
+                    <!-- TMPL_VAR NAME="subfieldcode" -->
+               </a></li>
+            <!-- /TMPL_IF --></li>
+        <!-- /TMPL_LOOP -->
+    </ul>
+    
+    <!-- TMPL_LOOP NAME="loop" --> 
+        <div id="sub<!-- TMPL_VAR NAME="urisubfieldcode" -->field">
+        
+               <fieldset class="rows"><legend>基本限制</legend>
+                	<ol>
+                		<!-- TMPL_IF EXPR="subfieldcode eq 0 || subfieldcode" --> 
+                		<li><span class="label">分欄代碼：</span> <!-- TMPL_VAR NAME="subfieldcode" --> <input type="hidden" name="tagsubfield" value="<!-- TMPL_VAR NAME="subfieldcode" -->" /></li>
+                		<!-- TMPL_ELSE -->
+                		<li><span class="label">分欄代碼：</span> <input type="text" name="tagsubfield" value="<!-- TMPL_VAR NAME="subfieldcode" -->" /></li>
+                		<!-- /TMPL_IF -->
+                		<li><label for="liblibrarian<!-- TMPL_VAR NAME="row" -->">圖書館員說明： </label><input id="liblibrarian<!-- TMPL_VAR NAME="row" -->" type="text" name="liblibrarian" value="<!-- TMPL_VAR NAME="liblibrarian" -->" size="40" maxlength="80" /></li>
+                		<li><label for="libopac<!-- TMPL_VAR NAME="row" -->">OAPC 說明： </label><input type="text" id="libopac<!-- TMPL_VAR NAME="row" -->" name="libopac" value="<!-- TMPL_VAR NAME="libopac" -->" size="40" maxlength="80" /></li>
+                		<li><label for="repeatable<!-- TMPL_VAR NAME="row" -->">可重複： </label><!-- TMPL_VAR NAME="repeatable" --></li>
+                		<li><label for="mandatory<!-- TMPL_VAR NAME="row" -->">必要： </label><!-- TMPL_VAR NAME="mandatory" --></li>
+                		<li><label for="tab<!-- TMPL_VAR NAME="row" -->">管理第幾頁顯示： </label><!-- TMPL_VAR NAME="tab" --> (ignore means that the subfield does not display in the record editor)</li>
+                	</ol>
+            </fieldset>
+			
+            <a href="javascript:displayMoreConstraint('more<!-- TMPL_VAR NAME="urisubfieldcode" -->')">更多顯示限制</a>
+            <div id="more<!-- TMPL_VAR NAME="urisubfieldcode" -->" class="content_hidden" style="clear: both">
+             <fieldset class="rows" id="advanced-constraints">
+				<legend>進階限制：</legend>
+                <ol><li><label for="defaultvalue">預設值：</label>
+                    <input type="text" name="defaultvalue" id="defaultvalue" value="<!-- TMPL_VAR NAME="defaultvalue" -->" /></li>
+                <li><label for="hidden<!-- TMPL_VAR NAME="row" -->">隱藏，</label><input type="text" id="hidden<!-- TMPL_VAR NAME="row" -->" name="hidden" value="<!-- TMPL_VAR name="hidden" -->" size="2" /> (see online help)</li>
+                <li><label for="isurl<!-- TMPL_VAR NAME="row" -->">網址嗎：</label><!-- TMPL_VAR NAME="isurl" --> 網址 (如被點選，即表示此分欄為可點選的網址）</li>
+                <li><label for="link">連結：</label><input type="text" id="link" name="link" value="<!-- TMPL_VAR NAME="link" -->" size="10" maxlength="80" /> (e.g., Title or Local-Number) <span class="error"><em>Warning: This value should not change after data has been added to your catalog</em></span></li>
+                <li><span class="label">其他選項：</span> （選擇一個）
+                    	<ol>
+                    		<li><label for="authorised_value">容許值：</label><!-- TMPL_VAR NAME="authorised_value" --></li>
+                    		<li><label for="authtypecode">索引典：</label><!-- TMPL_VAR NAME="authtypes" --></li>
+                    		<li><label for="value_builder">外掛程式：</label><!-- TMPL_VAR NAME="value_builder" --></li>
+                    	</ol>
+                </li>
+                <li><label for="kohafield<!-- TMPL_VAR NAME="row" -->">Koha 連結：</label><!-- TMPL_VAR NAME="kohafield" --></li>
+				</ol>
+				</fieldset>
+            </div><br class="clear" /><!-- /more  -->
+        </div><!-- /content_sub -->
+        <!-- /TMPL_LOOP -->
+		</div><!-- /content -->
+    </form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+
+<h3>確認刪除 <!-- TMPL_VAR NAME="tagsubfield" --> 分欄？</h3>
+    <p>分欄：<!-- TMPL_VAR NAME="tagsubfield" --></p>
+    <p><!-- TMPL_VAR NAME="liblibrarian" --> 描述</p>
+
+            <form action="<!-- TMPL_VAR NAME="delete_link" -->" method="post"><input type="hidden" name="op" value="delete_confirmed" />
+                <input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+                <input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+				<input type="hidden" name="tagsubfield" value="<!-- TMPL_VAR NAME="tagsubfield" -->" />
+				<input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+				<input type="submit" value="是，刪除這個分欄">
+            </form>
+			
+			<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+			<input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+			<input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+			<input type="hidden" name="tagsubfield" value="<!-- TMPL_VAR NAME="tagsubfield" -->" />
+			<input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="frameworkcode" -->" />
+			<input type="submit" value="否, 不要刪除">
+            </form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirmed" -->
+
+    <h3>資料被刪除</h3>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+	<input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="tagfield" -->" />
+    <input type="submit" value="完成">
+    </form>
+<!-- /TMPL_IF -->
+
+
+<!-- TMPL_IF NAME="else" -->
+<h1><!--TMPL_VAR NAME="frameworkcode" --> 機讀格式（MARC）架構的 <!-- TMPL_VAR NAME="tagfield" --> 分欄結構管理</h1>
+<p>This screen shows the subfields associated with the selected tag. You can edit subfields or add a new one by clicking on edit. </p>
+<p>The column Koha field shows that the subfield is linked with a Koha field. Koha can manage a MARC interface, or a Koha interface. This link ensures that both DB are synchronized, thus you can change from a MARC to a Koha interface easily.</p>
+
+<table>
+<tr>
+    <th>分欄</th>
+    <th>說明</th>
+    <th>限制</th>
+    <th>刪除</th>
+</tr>
+<!-- TMPL_LOOP NAME="loop" -->
+<!-- TMPL_IF NAME="toggle" --><tr class="highlighted"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+    <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+    <td>
+        <!-- TMPL_IF NAME="subfield_ignored" -->
+            <i><!-- TMPL_VAR NAME="liblibrarian" --></i>
+        <!-- TMPL_ELSE -->
+            <!-- TMPL_VAR NAME="liblibrarian" -->
+        <!-- /TMPL_IF -->
+    </td>
+    <td>
+        <!-- TMPL_IF NAME="subfield_ignored" -->
+            <i>忽略分欄</i>
+        <!-- TMPL_ELSE -->
+            分頁：<!-- TMPL_VAR NAME="tab" -->，
+            <!-- TMPL_IF NAME="kohafield" --> | Koha 欄位：<!-- TMPL_VAR NAME="kohafield" -->， <!--/TMPL_IF -->
+            <!-- TMPL_IF NAME="repeatable" -->可重複， <!-- TMPL_ELSE -->不可重複，<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="mandatory" -->必要, <!-- TMPL_ELSE -->不必要，<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="seealso" --> | 參見：<!-- TMPL_VAR NAME="seealso" -->，<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="hidden" -->隱藏，<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="isurl" -->是一個網址嗎：<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="authorised_value" --> | 容許值：<!-- TMPL_VAR NAME="authorised_value" -->，<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="authtypecode" --> | 權威記錄：<!-- TMPL_VAR NAME="authtypecode" -->，<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="value_builder" --> | 外掛程式：<!-- TMPL_VAR NAME="value_builder" -->，<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="link" --> | 連結：<!-- TMPL_VAR NAME="link" -->，<!-- /TMPL_IF -->
+        <!-- /TMPL_IF -->
+    </td>
+    <td><a href="<!-- TMPL_VAR NAME="delete" -->">刪除</a></td>
+</tr>
+<!-- /TMPL_LOOP -->
+</table>
+
+<form action="<!-- TMPL_VAR NAME="script_name" -->" method="get">
+    <fieldset class="action"><input type="hidden" name="op" value="add_form" />
+    <input type="hidden" name="tagfield" value="<!-- TMPL_VAR NAME="edit_tagfield" -->" />
+    <input type="hidden" name="frameworkcode" value="<!-- TMPL_VAR NAME="edit_frameworkcode" -->" />
+    <input type="submit" value="編輯分欄">
+	<a class="cancel" href="marctagstructure.pl?searchfield=<!-- TMPL_VAR NAME="tagfield" -->&amp;frameworkcode=<!-- TMPL_VAR NAME="frameworkcode" -->">取消</a>
+	</fieldset>
+</form>
+
+<!-- TMPL_IF NAME="previous" -->
+    <input type="image" src="<!-- TMPL_VAR NAME="interface" -->/<!-- TMPL_VAR NAME="theme" -->/images/1leftarrow.png" title="前一頁" alt="前一頁" border="0">
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="next" -->
+    <!-- TMPL_VAR NAME="next" -->
+        <input type="image" src="<!-- TMPL_VAR NAME="interface" -->/<!-- TMPL_VAR NAME="theme" -->/images/1rightarrow.png" title="下一頁" alt="下一頁" border="0">
+<!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

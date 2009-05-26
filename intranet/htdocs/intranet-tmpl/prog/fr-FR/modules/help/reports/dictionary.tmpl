@@ -1,0 +1,41 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Dictionnaire des rapports - Aide</h1>
+
+<h2>Qu'est-ce que le dictionnaire des rapports</h2>
+<p>Ce dictionnaire propose une méthode pour définir des critères personnalisés pour un rapport combinant plusieurs critères  déjà existants.</p>
+
+<h2>Ajouter une nouvelle définition</h2>
+<h3>Etape 1 sur 4 Nom</h3>
+<p>Dans cette étape vous devez préciser les élements suivants :</p>
+	<ol>
+		<li>
+<p>Nom de la définition : libellé qui est utilisé pour l'affichage et la sélection</p></li>
+		<li>
+<p>Description Définition: utilisé dans le dictionnaire uniquement pour fournir plus d'informations sur la définition</p></li>
+	</ol>
+	
+	<h3>Etape 2 sur 4 : table</h3>
+<p>Maitnenant, vous devez définir la table sur laquelle la définition va s'appliquer. Les définitions ne peuvent s'appliquer qu'à une table. Si vous voulez créer des défnitions semblable, par exemple pour les adhérents et la circulation, vous devez créer 2 définitions, une dans chaque table.</p>
+
+<h3>Etape 3 sur 4 Colonnes</h3>
+<p>Maintenant, sélectionnez le critère sur lequel vous voulez construire votre définition. Cliquez sur le nom de la colonne de la base, et appuyez sur le bouton d'ajout. Lorsque vous avez sélectionné toutes les colonnes que vous souhaitez, appuyez sur Suivant.</p>
+<p>Note : les définitions peuvent être supprimées aisément, et si vous êtes en cours d'apprentissage de la structure de Koha, cela va vous prendre du temps pour découvrir quel champ vous intéresse. Des essais et des erreurs sont probablement à prévoir !</p>
+
+<h3>Etape 4 sur 4 Valeurs</h3>
+<p>Maintenant, vous devez définir les critères pour chaque colonne. Il y a différentes manières de définir les valeurs, en fonction de la colonne que vous avez sélectionné</p>
+	<ul>
+		<li><strong>Chercher les concordances de chaîne</strong> Pour les champs de texte dans la base, saisissez une chaine de caractère sur laquelle faire le critère</li>
+		<li><strong>Date</strong> Pour les champs de date, vous pourrez choisir :
+		<ol>
+			<li>Limites de date : entrer des valeurs dans les deux champs</li>
+			<li>All Data Before A Given Date: enter a value in the field only</li>
+			<li>All Data After A Given Date: enter a value in the field only</li>
+		</ol></li>
+		<li><strong>Sélectionner à partir des valeurs de la base</strong> Pour les valeurs qui correspondent à des valeurs autorisées dans la base de données, vous aurez une liste déroulante pour choisir une valeur.</li>
+	</ul>
+	
+<h2>Utiliser une définition</h2>
+<p>Lorsque vous avez créé votre nouvelle définition et qu'elle apparait dans le dictionnaire, vous pouvez l'utiliser pour les rapports. Lorsque vous créez un nouveau rapport, les critères pour la table sur laquelle vous faites le rapport sont automatiquement affichés dans l'assistant.</p>
+
+<!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

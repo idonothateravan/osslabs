@@ -1,0 +1,245 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Կառավարում &rsaquo; MARC ստուգում
+<!-- TMPL_IF name="total" --> :<!-- TMPL_VAR name="total" --> սխալներ են գտնված<!-- TMPL_ELSE --> : Կարգաբերումը լավ է!<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Տուն</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Կառավարում</a> &rsaquo; MARC ստուգում
+<!-- TMPL_IF name="total" -->: <!-- TMPL_VAR name="total" --> սխալներ են գտնված<!-- TMPL_ELSE --> : Կարգաբերումը լավ է!<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<h1>MARC մատենագիտական կառուցվածքի Տեստ</h1>
+<table>
+    <tr>
+        <th>Թեստ</th>
+        <th>Արդյունք</th>
+    </tr>
+<!-- -->
+<!-- TMPL_IF name="itemnum" -->
+    <tr>
+        <td>itemnum</td>
+        <td><ul><li>itemnum դաշտը ՊԵՏՔ Է միացված լինի։ </li>
+            <li>Համապատասխանող ենթադաշտը պետք է լինի ըստ -1(անտեսիր) տաբի։</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ԼԱՎ</td>
+        <td>itemnum : itemnumber դաշտը քարտեզված է tab -1 եղած դաշտին</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemfields" -->
+    <tr>
+        <td>նյութի դաշտեր</td>
+        <td>Բոլոր նյութերի դաշտերը ՊԵՏՔ Է :<br />
+            <ul><li>քարտեզել նույն ցուցչին,</li>
+            <li>և նրանք բոլորը պետք է լինեն 10 (նյութ) տաբ</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ԼԱՎ</td>
+        <td>Բոլոր նյութի դաշտերը նույն ցուցիչում են և նյութի նույն տաբում</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+    <!-- TMPL_IF NAME="itemtags" -->
+        <tr>
+            <td>Նյութի ցուցիչ</td>
+            <td>Կա առնվազն մեկ MARC ցուցիչ, կապված նյութի տաբին (10) : <!-- TMPL_VAR name="itemtags" --></td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>ԼԱՎ</td>
+            <td>Միայն 1 MARC ցուցիչ է կապված այս նյութին</td>
+        </tr>
+    <!-- /TMPL_IF -->
+    <!--  -->
+<!-- TMPL_IF name="itemtype" -->
+    <tr>
+        <td>itemtype ՉԻ քարտեզված</td>
+        <td>biblioitems.itemtype դաշտը պետք է :<br />
+            <ul><li>քարտեզել MARC ենթադաշտին, </li>
+            <li>կապված ենթադաշտը ՊԵՏՔ Է ունենա authorised_value=itemtype</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ԼԱՎ</td>
+        <td>biblioitems.itemtype սահմանված</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branch" -->
+    <tr>
+        <td>homebranch NOT mapped</td>
+        <td>items.homebranch դաշտը ՊԵՏՔ Է :<br />
+            <ul><li>քարտեզել MARC ենթադաշտին,</li>
+            <li>կապված ենթադաշտը ՊԵՏՔ Է ունենա ստուգված արժեք=մասնաճյուղեր</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ԼԱՎ</td>
+        <td>homebranch սահմանված</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="holdingbranch" -->
+    <tr>
+        <td>holdingbranch NOT mapped</td>
+        <td>items.holdingbranch դաշտը ՊԵՏՔ Է :<br />
+            <ul><li>քարտեզել MARC ենթադաշտին, </li>
+            <li>կապված ենթադաշտը ՊԵՏՔ Է ունենա ստուգված արժեք=մասնաճյուղեր</li></ul></td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ԼԱՎ</td>
+        <td>holdingbranch սահմանված</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="itemtypes_empty" -->
+    <tr>
+        <td>նյութի տեսակը սահմանված չէ</td>
+        <td>առնվազն մեկ նյութի տեսակ պետք է սահմանված լինի</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ԼԱՎ</td>
+        <td>առնվազն մեկ նյութի տեսակ է սահմանված</td>
+    </tr>
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="branches_empty" -->
+    <tr>
+        <td>մասնաճյուղը սահմանված չէ</td>
+        <td>առնվազն մեկ մասնաճյուղ է սահմանված</td>
+    </tr>
+<!-- TMPL_ELSE --> 
+    <tr>
+        <td>ԼԱՎ</td>             
+        <td>at least 1 branch defined</td>
+    </tr>                                       
+<!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="biblionumber" -->
+    <tr>
+        <td>բիբլիո և բիբլիոհամար</td>
+        <td>The biblio.biblionumber and biblioitems.biblioitemnumber fields be mapped to a MARC subfield,</td>
+    </tr>
+<!-- TMPL_ELSE -->
+    <tr>
+        <td>ԼԱՎ</td>
+        <td>biblionumber and biblioitemnumber ճիշտ են քարտեզագրված</td>
+    </tr>
+<!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="frameworknull" -->
+        <tr>
+            <td>կառուցվածքի արժեքներ</td>
+            <td>frameworkcode-ում կա դատարկ արժեք։ Ստուգիր հետևյալ աղյուսակները<br />
+                <li> ընտրիր * marc_subfield_structure ից որտեղ frameworkcode iհավասար է NULL</li>
+                <li>ընտրիր * marc_tag_structure ից որտեղ frameworkcode հավասար է NULL</li>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>ԼԱՎ</td>
+            <td>no NULL value in frameworkcode</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="inconsistent_tabs" -->
+        <tr>
+            <td style="vertical-align:top;">subfields not in same tabs</td>
+            <td>Not all subfields for the following tags are in the same tab (or marked 'ignored').
+                <table>
+                    <tr>
+                        <th>Կոդ</th>
+                        <th>Նկարագրություն</th>
+                        <th>Ցուցիչ</th>
+                        <th>Tabs in use</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="tab_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>Լռակյաց կառուցվածք</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tabs" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>ԼԱՎ</td>
+            <td>all subfields for each tag are in the same tab (or ignored)</td>
+        </tr>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="invalid_authtypecodes" -->
+        <tr>
+            <td style="vertical-align:top;">invalid authority types</td>
+            <td>Not all authority types referred to by the frameworks are defined.
+                <table>
+                    <tr>
+                        <th>Framework code</th>
+                        <th>Framework description</th>
+                        <th>Ցուցիչ</th>
+                        <th>Ենթադաշտ</th>
+                        <th>Invalid authority type</th>
+                    </tr>
+                    <!-- TMPL_LOOP NAME="authtypecode_info" -->
+                        <tr>
+                            <td><!-- TMPL_VAR NAME="frameworkcode" --></td>
+                            <!-- TMPL_IF NAME="frameworkcode" -->
+                                <td><!-- TMPL_VAR NAME="frameworktext" --></td>
+                            <!-- TMPL_ELSE -->
+                                <td>Լռակյաց կառուցվածք</td>
+                            <!-- /TMPL_IF -->
+                            <td><!-- TMPL_VAR NAME="tagfield" --></td>
+                            <td><!-- TMPL_VAR NAME="tagsubfield" --></td>
+                            <td><!-- TMPL_VAR NAME="authtypecode" --></td>
+                        </tr>
+                    <!-- /TMPL_LOOP -->
+                </table>
+            </td>
+        </tr>
+    <!-- TMPL_ELSE -->
+        <tr>
+            <td>ԼԱՎ</td>
+            <td>all authority types used in the frameworks are defined</td>
+        </tr>
+    <!-- /TMPL_IF -->
+<!-- -->
+<!-- TMPL_IF name="total" -->
+    <tr>
+        <td>ԸՆԴԱՄԵՆԸ</td>
+        <td>You have <!-- TMPL_VAR name="total" --> error(s) in your MARC configuration. Please fix them before using Koha</td>
+    </tr>
+</table>
+<!-- TMPL_ELSE -->
+    </table>
+        <p><b>Ձևավորումը լավ է, քո MARC պարամետրերի աղյուսակում սխալներ չունես</b></p>
+<!-- /TMPL_IF -->
+
+
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

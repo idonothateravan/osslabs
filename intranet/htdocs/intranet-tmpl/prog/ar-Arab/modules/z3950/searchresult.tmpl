@@ -1,0 +1,45 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo; Z39.50 نتائج بحث</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script language="javascript" type="text/javascript">
+//<![CDATA[
+    function Import(GetThisOne) {
+        opener.document.location= "../cataloguing/addbiblio.pl?z3950=1&oldbiblionumber=<!-- TMPL_VAR NAME="oldbiblionumber" -->&breedingid="+GetThisOne;
+        self.close();
+        return false;
+    }
+//]]>
+</script>
+</head>
+<body>
+
+    <h2>Z3950نتائج بحث</h2>
+    
+    <!-- TMPL_IF NAME="breeding_loop" -->
+<table>
+    <tr>
+        <th>عنوان</th>
+        <th>مؤلف</th>
+        <th>تدمك</th>
+        <th>يأتى من</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+                <!-- TMPL_LOOP NAME="breeding_loop" -->
+        <tr bgcolor="<!-- TMPL_VAR NAME="toggle" -->">
+                        <td><!-- TMPL_VAR NAME="title" --></td>
+            <td><!-- TMPL_VAR NAME="author" --></td>
+            <td><!-- TMPL_VAR NAME="isbn" --></td>
+            <td><!-- TMPL_VAR NAME="file" --></td>
+            <td><a href="javascript:Import(<!-- TMPL_VAR NAME="id" -->)">لإستيراد هذه التسجيلة</a></td>
+        </tr>
+    <!-- /TMPL_LOOP -->
+        </table>
+    <!-- TMPL_ELSE -->
+                <p>لا يوجد شئ</p>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="numberpending" --><h1>مازال<!-- TMPL_VAR NAME="numberpending" -->طلبات للذهاب </h1><!-- /TMPL_IF -->
+    
+
+</body>
+</html>

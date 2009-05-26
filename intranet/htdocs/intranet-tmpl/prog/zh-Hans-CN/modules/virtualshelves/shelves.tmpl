@@ -1,0 +1,389 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; <!-- TMPL_IF NAME="viewshelf" -->虚拟书架 &rsaquo; <!-- TMPL_VAR NAME="shelfname" --> 的内容<!-- TMPL_ELSE -->虚拟书架<!-- /TMPL_IF --><!-- TMPL_IF NAME="shelves" --> &rsaquo; 新增虚拟书架<!-- /TMPL_IF --><!-- TMPL_IF NAME="edit" --> &rsaquo; 编辑 <!-- TMPL_VAR name="shelfname"--> 虚拟书架<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" src="<!-- TMPL_VAR name="themelang" -->/lib/jquery/plugins/jquery.checkboxes.pack.js"></script>
+<script type="text/javascript">
+//<![CDATA[ 
+
+$(document).ready(function(){
+	$("#addbarcode").focus();
+	$("span.clearall").html("<a id=\"CheckNone\" href=\"/cgi-bin/koha/shelves.pl\">Clear All</a>");
+	$("span.checkall").html("<a id=\"CheckAll\" href=\"/cgi-bin/koha/shelves.pl\">Select All</a>");
+    $("#CheckAll").click(function(){
+        $(".checkboxed").checkCheckboxes();
+        return false;
+    });
+    $("#CheckNone").click(function(){
+        $(".checkboxed").unCheckCheckboxes();
+        return false;
+    });
+});
+
+	function confirmDelete(message){
+		if (window.confirm(message)) {
+			location.href="/cgi-bin/koha/virtualshelves/shelves.pl?shelves=1&amp;DEL-<!-- TMPL_VAR NAME="shelfnumber" -->=1";
+		} else { 
+			return false;
+		}
+	}
+    /**
+     * This function checks all checkboxes if all are empty,
+     * or unchecks all if any already checked.
+     */
+    function CheckAll(){
+        var checkboxes = document.getElementsByTagName('input');
+        var nbCheckbox = checkboxes.length;
+        var check = areAllChecked();
+        for(var i=0;i<nbCheckbox;i++){
+            if(checkboxes[i].getAttribute('type') == "checkbox" ){
+                checkboxes[i].checked = (check) ? 0 : 1;
+            }
+        }
+    }
+    /**
+     * This function returns true if ALL checkboxes are checked
+     */
+    function areAllChecked(){
+        var checkboxes = document.getElementsByTagName('input');
+        var nbCheckbox = checkboxes.length;
+        for(var i=0;i<nbCheckbox;i++){
+            if(checkboxes[i].getAttribute('type') == "checkbox" ){
+                if(checkboxes[i].checked == 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    //]]>
+</script>
+<style type="text/css">
+	input.confirm {
+		background:lightblue url(../../img/button-bg.gif) repeat-x scroll left top;
+		border-width:2pt;
+	}
+</style>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/virtualshelves/shelves.pl">Lists</a>
+<!-- TMPL_IF NAME="viewshelf" -->&rsaquo; Contents of <i><!-- TMPL_VAR NAME="shelfname" --></i><!-- /TMPL_IF --><!-- TMPL_IF NAME="shelves" --> &rsaquo; 新增虚拟书架<!-- /TMPL_IF --><!-- TMPL_IF NAME="edit" --> &rsaquo; Edit List <i><!-- TMPL_VAR name="shelfname"--></i><!-- /TMPL_IF --></div>
+
+<div id="doc" class="yui-t7">
+ <div id="bd">
+  <div id="yui-main">
+   <div class="yui-g"><!-- TMPL_INCLUDE NAME="virtualshelves-toolbar.inc" -->
+   </div>
+<!-- TMPL_IF NAME="paramsloop" -->
+<!-- TMPL_LOOP NAME="paramsloop" -->
+<div class="yui-ge">
+    <div class="yui-u first">
+        <!-- TMPL_IF NAME="already" --><div class="dialog alert">A List named <!-- TMPL_VAR NAME="already" --> already exists!</div><!-- /TMPL_IF -->
+		<!-- TMPL_IF NAME="status" --><div class="dialog alert"><!-- TMPL_VAR NAME="string" --></div><!-- /TMPL_IF -->
+		<!-- TMPL_IF NAME="nobarcode" --><div class="dialog alert">错误: 没有给出条形码。</div><!-- /TMPL_IF --> 
+		<!-- TMPL_IF NAME="noshelfnumber" --><div class="dialog alert">错误: 没有给书架号码。</div><!-- /TMPL_IF --> 
+		<!-- TMPL_IF NAME="need_confirm" -->
+		<div class="dialog alert">列表<i><!-- TMPL_VAR NAME="need_confirm" --></i>不为空。
+			<br />包括<b><!-- TMPL_VAR NAME="count" --></b>条条目。
+			<br />使用“确认”按钮来确定删除。
+		</div>
+		<!-- /TMPL_IF -->
+		<!-- TMPL_IF NAME="nopermission" -->
+		<div class="dialog alert">错误：你没有合适的权限在<!-- TMPL_VAR NAME="nopermission" -->表上采取行动。</div>
+		<!-- /TMPL_IF -->
+		<!-- TMPL_IF NAME="failgetitem" -->
+		<div class="dialog alert">ERROR: No item found with barcode <!-- TMPL_VAR NAME="failgetitem" -->.</div>
+		<!-- /TMPL_IF --> 
+		<!-- TMPL_IF NAME="duplicatebiblio" -->
+		<div class="dialog alert">A record matching barcode <b><!-- TMPL_VAR NAME="duplicatebiblio" --></b> has already been added.</div>
+		<!-- /TMPL_IF --> 
+	</div>
+</div>
+<!-- /TMPL_LOOP -->
+<!-- /TMPL_IF --> 
+
+<!-- TMPL_IF NAME="viewshelf" -->
+   <div class="yui-g">
+    <!-- TMPL_IF NAME="itemsloop" -->
+
+<form action="/cgi-bin/koha/virtualshelves/shelves.pl" method="post" class="checkboxed">
+        <input type="hidden" name="viewshelf" value="<!-- TMPL_VAR NAME="shelfnumber" -->" />
+        <input type="hidden" name="modifyshelfcontents" value="1" />
+ <fieldset>
+  <legend><em><!-- TMPL_VAR NAME="shelfname" --></em> 的内容</legend>
+ <!--TMPL_IF NAME="manageshelf" --><p><span class="checkall"></span><span class="clearall"></span></p><!-- /TMPL_IF -->
+ <!-- TMPL_VAR name='pagination_bar'-->
+    <table>
+            <tr>
+                <!--TMPL_IF NAME="manageshelf" --><th class="checkall">&nbsp;</th><!-- /TMPL_IF -->
+                <!-- TMPL_UNLESS NAME="item-level_itypes" --><th>馆藏类型</th><!-- /TMPL_UNLESS -->
+                <th>题名</th>
+                <th>作者</th>
+                <th>Date Added</th>
+                <th>&nbsp;</th>
+            </tr>
+		<!-- TMPL_LOOP NAME="itemsloop" -->
+			<!-- TMPL_IF NAME="toggle" -->
+			<tr class="highlight">
+			<!-- TMPL_ELSE -->
+			<tr>
+			<!-- /TMPL_IF -->
+			<!--TMPL_IF NAME="manageshelf" -->
+			<td>
+				<!-- TMPL_IF NAME="confirm" -->
+				<input type="hidden"   name="CONFIRM-<!-- TMPL_VAR NAME="confirm" -->" />
+				<input type="checkbox" name="REM-<!-- TMPL_VAR NAME="biblionumber" -->" checked />
+				<!-- TMPL_ELSE -->
+				<input type="checkbox" name="REM-<!-- TMPL_VAR NAME="biblionumber" -->" />
+				<!-- /TMPL_IF -->
+			</td>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_UNLESS NAME="item-level_itypes" --><td>
+                <img src="<!-- TMPL_VAR NAME="imageurl" -->" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->" /><!-- TMPL_VAR NAME="description" -->
+			<!-- /TMPL_UNLESS --></td>
+			<td>
+			<!-- TMPL_IF name="BiblioDefaultViewmarc" -->
+				<a class="title" href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->">
+			<!-- TMPL_ELSE -->
+				<!-- TMPL_IF name="BiblioDefaultViewisbd" -->
+				<a class="title" href="/cgi-bin/koha/catalogue/ISBDdetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->">
+				<!-- TMPL_ELSE -->
+				<a class="title" href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->">
+				<!-- /TMPL_IF -->
+			<!-- /TMPL_IF -->
+			<!-- TMPL_VAR NAME="title" --> <!-- TMPL_VAR NAME="subtitle" --></a>
+			</td>
+			<td><!-- TMPL_VAR NAME="author" --></td>
+			<td><!-- TMPL_VAR NAME="dateadded" --></td>
+			<td>
+			<!-- TMPL_UNLESS name="notforloan" -->
+			<a href="/cgi-bin/koha/reserve/request.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">预约</a>
+			<!-- /TMPL_UNLESS -->
+			</td>
+			</tr>
+		<!-- /TMPL_LOOP --><!-- /itemsloop -->
+    </table>
+ </fieldset>
+ <fieldset class="action">
+        <!-- TMPL_IF name="manageshelf" -->
+            <input type="submit" value="移除选择馆藏" onclick='return confirm(_("Are you sure you want to remove these items from the shelf?"))'>
+        <!-- /TMPL_IF -->
+ </fieldset>
+</form>
+	<!-- /TMPL_IF -->
+   </div>
+<!-- /TMPL_IF --><!-- /viewshelf -->
+
+<!-- TMPL_IF name="manageshelf" -->
+<div class="yui-g">
+<form action="/cgi-bin/koha/virtualshelves/shelves.pl" method="post">
+ <fieldset class="brief">
+    <legend>新增馆藏到 <i><!-- TMPL_VAR NAME="shelfname" --></i></legend>
+        <ol>
+            <li>
+                <label for="addbarcode">登录号：</label>
+                <input name="addbarcode" type="text" id="addbarcode" size="14" />
+                <input type="hidden" name="viewshelf" value="<!-- TMPL_VAR NAME="shelfnumber" -->" />
+                <input type="hidden" name="modifyshelfcontents" value="1" />
+                <input type="submit" value="新增">
+            </li>
+        </ol>
+ </fieldset>
+</form>
+</div>
+<!-- /TMPL_IF --><!-- /manageshelf -->
+
+<!-- TMPL_IF name="debug" -->
+  <!-- TMPL_IF name="edit" --><div>Edit is on (<!-- TMPL_VAR name="shelfname" -->)</div><!-- /TMPL_IF -->
+  <!-- TMPL_IF NAME="seflag" --><div>seflag is on (<!-- TMPL_VAR name="seflag" -->)</div><!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="seflag" -->
+<div class="yui-ge">
+    <div class="yui-u first">
+    <form method="post" action="/cgi-bin/koha/virtualshelves/shelves.pl">
+        <fieldset class="rows">
+
+    <!-- TMPL_IF NAME="shelves" -->
+        <input type="hidden" name="shelves" value="1" />
+        <legend>新增虚拟书架</legend>
+        <ol>
+        <li><label for="addshelf">名称： </label><input id="addshelf" type="text" name="addshelf" size="25" /></li>
+        <li><span class="label">所有者： </span><input type="hidden" name="owner" id="owner" value="<!-- TMPL_VAR name="loggedinuser" -->" /><!-- TMPL_VAR name="loggedinusername" --></li>
+		<li><label for="sortfield" >Sort this list by: </label>
+		<select name="sortfield">
+		<!-- TMPL_IF NAME="sort_title" --><option value="title" selected="selected">题名</option><!-- TMPL_ELSE --><option value="title">题名</option><!-- /TMPL_IF -->
+		<!-- TMPL_IF NAME="sort_author" --><option value="author" selected="selected">作者</option><!-- TMPL_ELSE --><option value="author">作者</option><!-- /TMPL_IF -->
+		<!-- TMPL_IF NAME="sort_copyrightdate" --><option value="copyrightdate" selected="selected">Copyrightdate</option><!-- TMPL_ELSE --><option value="copyrightdate">Copyrightdate</option><!-- /TMPL_IF -->
+		</select></li>
+        <li><label for="category">类别： </label>
+			<select name="category" id="category">
+                  <option value="1">私人</option>
+                  <option value="2">公开</option>
+                  <option value="3">自由</option>
+			</select></li></ol>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF name="edit" -->
+		<input type="hidden" name="op" value="modifsave" />
+		<input type="hidden" name="shelfnumber" value="<!-- TMPL_VAR name="shelfnumber" -->" />
+		<legend>编辑虚拟书架 <i><!-- TMPL_VAR name="shelfname" --></i></legend>
+		<ol>
+		<li><label for="shelfname">名称： </label><input type="text" id="shelfname" name="shelfname" size="25" value='<!-- TMPL_VAR name="shelfname" ESCAPE="HTML" -->' /></li>
+		<li><label for="owner">所有者： </label><input type="hidden" id="owner" name="owner" value="<!-- TMPL_IF NAME="owner" --><!-- TMPL_VAR NAME="ownername" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="loggedinusername" --><!-- /TMPL_IF -->" /><!-- TMPL_IF NAME="owner" --><!-- TMPL_VAR NAME="ownername" --><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="loggedinusername" --><!-- /TMPL_IF --></li>
+		<li><label for="sortfield" >Sort this list by: </label>
+		<select name="sortfield">
+		<!-- TMPL_IF NAME="sort_title" --><option value="title" selected="selected">题名</option><!-- TMPL_ELSE --><option value="title">题名</option><!-- /TMPL_IF -->
+		<!-- TMPL_IF NAME="sort_author" --><option value="author" selected="selected">作者</option><!-- TMPL_ELSE --><option value="author">作者</option><!-- /TMPL_IF -->
+		<!-- TMPL_IF NAME="sort_copyrightdate" --><option value="copyrightdate" selected="selected">Copyrightdate</option><!-- TMPL_ELSE --><option value="copyrightdate">Copyrightdate</option><!-- /TMPL_IF -->
+		</select></li>
+		<li><label for="category">类别： </label>
+			<select id="category" name="category">
+			<!-- TMPL_IF name="category1" -->
+				<option value="1" selected="selected">私人</option>
+			<!-- TMPL_ELSE -->
+				<option value="1">私人</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="category2" -->
+				<option value="2" selected="selected">公开</option>
+			<!-- TMPL_ELSE -->
+				<option value="2">公开</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF NAME="category3" -->
+				<option value="3" selected="selected">自由</option>
+			<!-- TMPL_ELSE -->
+				<option value="3">自由</option>
+			<!-- /TMPL_IF -->
+			</select></li></ol>
+	<!-- /TMPL_IF -->
+
+		</fieldset>
+		<fieldset class="action"><input type="submit" value="保存"><a href="/cgi-bin/koha/virtualshelves/shelves.pl" class="cancel">取消</a></fieldset>
+    </form>
+    </div>
+    <div class="yui-u">
+        <div class="help"><ul>
+            <li><b>私人虚拟书架</b> 只有你可以管理和看到</li>
+            <li> <b>公共虚拟书架</b> 任何人都可以看，但只有您才有权修改。</li>
+            <li> A <b>Open</b> List can be seen and managed by everybody.</li>
+        </ul></div>
+    </div>
+</div>
+<!-- /TMPL_IF --><!-- /seflag -->
+
+<!-- TMPL_UNLESS NAME="vseflag" -->
+        <h2>虚拟书架</h2>
+		<div class="toptabs">
+        <ul class="ui-tabs-nav">
+        <!-- TMPL_IF NAME="showprivateshelves" -->
+            <li id="privateshelves_tab" class="ui-tabs-selected"><a href="/cgi-bin/koha/virtualshelves/shelves.pl?display=privateshelves">Your Lists</a></li>
+        <!-- TMPL_ELSE -->
+            <li id="privateshelves_tab" class=""><a href="/cgi-bin/koha/virtualshelves/shelves.pl?display=privateshelves">Your Lists</a></li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="showpublicshelves" -->
+            <li id="publicshelves_tab" class="ui-tabs-selected"><a href="/cgi-bin/koha/virtualshelves/shelves.pl?display=publicshelves">Public Lists</a></li>
+        <!-- TMPL_ELSE -->
+            <li id="publicshelves_tab" class=""><a href="/cgi-bin/koha/virtualshelves/shelves.pl?display=publicshelves">Public Lists</a></li>
+        <!-- /TMPL_IF -->
+        </ul>
+        <!-- TMPL_IF NAME="showprivateshelves" -->
+		<div id="privateshelves" class="ui-tabs-panel" style="display:block;">
+		<!-- TMPL_ELSE -->
+		<div id="privateshelves" class="ui-tabs-panel" style="display:none;">
+		<!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="shelveslooppriv" -->
+			<!-- TMPL_VAR name='pagination_bar'-->
+        		<table>
+        		<tr><th>List Name</th><th>Contents</th><th>排序依照</th><th>类型</th><th>选项</th></tr>
+                <!-- TMPL_LOOP NAME="shelveslooppriv" -->
+                    <!-- TMPL_IF NAME="toggle" --><tr class="highlight"><!--TMPL_ELSE--><tr><!-- /TMPL_IF -->
+        <td><a href="shelves.pl?viewshelf=<!-- TMPL_VAR NAME="shelf" -->"><!-- TMPL_VAR NAME="shelfname" ESCAPE="html"  --></a></td>
+        <td><!-- TMPL_VAR NAME="count" --> item(s)</td>
+        <td><!-- TMPL_VAR NAME="sortfield" --></td>
+        <td><!-- TMPL_IF NAME="viewcategory1" -->私人<!-- /TMPL_IF -->
+			<!-- TMPL_IF NAME="viewcategory2" -->公开<!-- /TMPL_IF -->
+			<!-- TMPL_IF NAME="viewcategory3" -->自由<!-- /TMPL_IF -->
+		</td>
+        <td>
+            <!-- TMPL_IF NAME="mine" -->
+				<form action="shelves.pl" method="get">
+					<input type="hidden" name="shelfnumber" value="<!-- TMPL_VAR NAME="shelf" -->" />
+					<input type="hidden" name="op" value="modif" />
+					<input type="submit" class="editshelf" value="编辑">
+				</form>
+				<form action="shelves.pl" method="post">
+					<input type="hidden" name="shelves" value="1" />
+					<input type="hidden" name="DEL-<!-- TMPL_VAR NAME="shelf" -->" value="1" />
+					<!-- TMPL_IF NAME="confirm" -->
+					<input type="hidden" name="CONFIRM-<!-- TMPL_VAR NAME="confirm" -->" value="1" />
+					<input type="submit" class="confirm" value="确认">
+					<!-- TMPL_ELSE -->
+					<input type="submit" class="deleteshelf" onclick="return confirmDelete(_('Are you sure you want to remove this List?'));" value="删除">
+					<!-- /TMPL_IF -->
+				</form>
+			<!-- TMPL_ELSE -->
+				没有
+			<!-- /TMPL_IF -->
+		</td>
+		</tr>
+                <!-- /TMPL_LOOP -->
+            <!-- TMPL_ELSE -->
+            <tr><td colspan="4">No Private Lists.</td></tr>
+            <!-- /TMPL_IF --><!-- /shelveslooppriv -->
+        </table>
+		</div><!-- /privateshelves -->
+
+        <!-- TMPL_IF NAME="showpublicshelves" -->
+		<div id="publicshelves" class="ui-tabs-panel" style="display:block;">
+		<!-- TMPL_ELSE -->
+		<div id="publicshelves" class="ui-tabs-panel" style="display:none;">
+		<!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="shelvesloop" -->
+		<!-- TMPL_VAR name='pagination_bar'-->
+        <table>
+        <tr><th>List Name</th><th>Contents</th><th>排序依照</th><th>类型</th><th>选项</th></tr>
+            <!-- TMPL_LOOP NAME="shelvesloop" -->
+                <!-- TMPL_IF NAME="toggle" --><tr class="highlight"><!--TMPL_ELSE--><tr><!-- /TMPL_IF -->
+		<td><a href="shelves.pl?viewshelf=<!-- TMPL_VAR NAME="shelf" -->"><!-- TMPL_VAR NAME="shelfname" ESCAPE="html"  --></a></td>
+		<td><!-- TMPL_VAR NAME="count" --> item(s)</td>
+        <td><!-- TMPL_VAR NAME="sortfield" --></td>
+        <td><!-- TMPL_IF NAME="viewcategory1" -->私人<!-- /TMPL_IF -->
+			<!-- TMPL_IF NAME="viewcategory2" -->公开<!-- /TMPL_IF -->
+			<!-- TMPL_IF NAME="viewcategory3" -->自由<!-- /TMPL_IF -->
+		</td>
+        <td>
+            <!-- TMPL_IF NAME="manageshelf" -->
+				<form action="shelves.pl" method="get">
+					<input type="hidden" name="shelfnumber" value="<!-- TMPL_VAR NAME="shelf" -->" />
+					<input type="hidden" name="op" value="modif" />
+					<input type="submit" class="editshelf" value="编辑">
+				</form>
+				<form action="shelves.pl" method="post">
+					<input type="hidden" name="shelves" value="1" />
+					<input type="hidden" name="DEL-<!-- TMPL_VAR NAME="shelf" -->" value="1" />
+					<!-- TMPL_IF NAME="confirm" -->
+					<input type="hidden" name="CONFIRM-<!-- TMPL_VAR NAME="confirm" -->" value="1" />
+					<input type="submit" class="confirm" value="确认">
+					<!-- TMPL_ELSE -->
+					<input type="submit" class="deleteshelf" onclick="return confirmDelete(_('Are you sure you want to remove this List?'));" value="删除">
+					<!-- /TMPL_IF -->
+				</form>
+			<!-- TMPL_ELSE -->
+				没有
+			<!-- /TMPL_IF -->
+		</td>
+		</tr>
+            <!-- /TMPL_LOOP -->
+        </table>
+        <!-- TMPL_ELSE -->
+        	<!-- TMPL_IF NAME="showpublicshelves" -->No Public Lists.<!-- /TMPL_IF -->
+        <!-- /TMPL_IF --><!-- /shelvesloop -->
+        </div><!-- /publicshelves -->
+		</div>
+<!-- /TMPL_UNLESS -->
+
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

@@ -1,0 +1,172 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; 系統管理 &rsaquo; <!-- TMPL_IF NAME="else" -->停用字<!-- /TMPL_IF --><!-- TMPL_IF NAME="add_form" --> 停用字 &rsaquo; <!-- TMPL_IF NAME="searchfield" -->修改停用字<!-- TMPL_ELSE -->新增停用字<!-- /TMPL_IF --><!-- /TMPL_IF --><!-- TMPL_IF NAME="add_validate" --> 停用字 &rsaquo; 記錄資料<!-- /TMPL_IF --><!-- TMPL_IF NAME="delete_confirm" --> 停用字 &rsaquo; 刪除 '<!-- TMPL_VAR NAME="searchfield" -->' 停用字？<!-- /TMPL_IF --><!-- TMPL_IF NAME="delete_confirmed" --> 停用字 &rsaquo; 刪除資料<!-- /TMPL_IF --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<!-- TMPL_IF NAME="add_form" -->
+        <script language="javascript" type="text/javascript">
+		//<![CDATA[
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            function isNotNull(f,noalert) {
+                if (f.value.length ==0) {
+                    return false;
+                }
+                return true;
+            }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            function toUC(f) {
+                var x=f.value.toUpperCase();
+                f.value=x;
+                return true;
+            }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            function isNum(v,maybenull) {
+            var n = new Number(v.value);
+            if (isNaN(n)) {
+                return false;
+            }
+            if (maybenull==0 && v.value=='') {
+                return false;
+            }
+            return true;
+            }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            function isDate(f) {
+                var t = Date.parse(f.value);
+                if (isNaN(t)) {
+                    return false;
+                }
+            }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            function Check(f) {
+                var ok=1;
+                var _alertString="";
+                var alertString2;
+                if (f.word.value.length==0) {
+                    _alertString += "\n- " + _("沒有停用字");
+                }
+                if (_alertString.length==0) {
+                    document.Aform.submit();
+                } else {
+                    alertString2  = _("表格無法寄送，因為發現以下問題：");
+                    alertString2 += "\n------------------------------------------------------------------------------------\n";
+                    alertString2 += _alertString;
+                    alert(alertString2);
+                }
+            }  //]]>
+        </script>
+	<!-- /TMPL_IF -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="stopwords-admin-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">首頁</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">管理</a> &rsaquo; <!-- TMPL_IF NAME="else" -->停用字<!-- /TMPL_IF --><!-- TMPL_IF NAME="add_form" --><a href="/cgi-bin/koha/admin/stopwords.pl">停用字</a> &rsaquo; <!-- TMPL_IF NAME="searchfield" -->修改停用字<!-- TMPL_ELSE -->新增停用字<!-- /TMPL_IF --><!-- /TMPL_IF --><!-- TMPL_IF NAME="add_validate" --> <a href="/cgi-bin/koha/admin/stopwords.pl">停用字</a> &rsaquo; 資料被記錄<!-- /TMPL_IF --><!-- TMPL_IF NAME="delete_confirm" --> <a href="/cgi-bin/koha/admin/stopwords.pl">停用字</a> &rsaquo; 刪除 '<!-- TMPL_VAR NAME="searchfield" -->' 停用字？<!-- /TMPL_IF --><!-- TMPL_IF NAME="delete_confirmed" --> <a href="/cgi-bin/koha/admin/stopwords.pl">停用字</a> &rsaquo; 資料被刪除<!-- /TMPL_IF --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_IF NAME="add_form" -->
+        
+        <!-- TMPL_IF NAME="searchfield" -->
+            <h1>修改停用字</h1>
+        <!-- TMPL_ELSE -->
+            <h1>新增停用字</h1>
+        <!-- /TMPL_IF -->
+        <form action="<!-- TMPL_VAR NAME="script_name" -->" name="Aform" method="post">
+            <input type="hidden" name="op" value="add_validate" />
+         <fieldset class="rows">  <ol> <!-- TMPL_IF NAME="searchfield" -->
+                <li>
+                    <span class="label">停用字</span>
+                        <input type="hidden" name="word" value="<!-- TMPL_VAR NAME="searchfield" -->" /><!-- TMPL_VAR NAME="searchfield" -->
+                </li>
+            <!-- TMPL_ELSE -->
+                <li>
+                    <label for="word">停用字</label>
+                    <input type="text" name="word" id="word" size="50" maxlength="250" onblur="toUC(this)" />
+                </li>
+            <!-- /TMPL_IF --></ol></fieldset>
+            <fieldset class="action">
+                <input type="button" value="儲存" onclick="Check(this.form)"> <a class="cancel" href="/cgi-bin/koha/admin/stopwords.pl">取消</a>
+            </fieldset>
+        </form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="add_validate" -->
+   <div class="dialog message"> <h3>資料被紀錄</h3>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+        <input type="submit" value="完成" class="approve">
+    </form></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirm" -->
+    <div class="dialog alert">
+	<h3>刪除停用字 <span class="ex">'<!-- TMPL_VAR NAME="searchfield" -->'</span></h3>
+	<form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+       <input type="hidden" name="op" value="delete_confirmed" />
+        <input type="hidden" name="searchfield" value="<!-- TMPL_VAR NAME="searchfield" -->" />
+       <input type="submit" value="是，刪除" class="approve"></form>
+	   <form action="<!-- TMPL_VAR NAME="script_name" -->" method="get"><input type="submit" class="deny" value="否, 不要刪除"> </form></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="delete_confirmed" -->
+   <div class="dialog message"> <h3>資料被刪除</h3>
+    <form action="<!-- TMPL_VAR NAME="script_name" -->" method="post">
+        <input type="submit" value="完成" class="approve">
+    </form></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="else" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+	// prepare DOM for YUI Toolbar
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+	// YUI Toolbar Functions
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("newstopword");
+	}	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="newstopword" href="/cgi-bin/koha/admin/stopwords.pl?op=add_form">新增停用字</a></li>
+</ul></div>
+
+    <h1>停用字</h1>
+    <p class="message">NOTE : if you change something in this table, ask your administrator to run misc/rebuildnonmarc.pl script.</p>
+
+
+    <!-- TMPL_IF NAME="searchfield" -->
+                    您查詢 <b><!-- TMPL_VAR NAME="searchfield" --></b>
+    <!-- /TMPL_IF -->
+
+    <table>
+            <tr>
+                    <th>停用字</th>
+                    <th> </th>
+            </tr>
+            <!-- TMPL_LOOP NAME="loop" -->
+               <!-- TMPL_IF NAME="toggle" --> <tr><!-- TMPL_ELSE --><tr class="highlight"><!-- /TMPL_IF -->
+                    <td><!-- TMPL_VAR NAME="word" --></td>
+                    <td><a href="<!-- TMPL_VAR NAME="script_name" -->?op=delete_confirm&amp;searchfield=<!-- TMPL_VAR NAME="word" -->">刪除</a></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+    </table>
+           <div class="pages"> <!-- TMPL_IF NAME="offsetgtzero" -->
+                <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="prevpage" -->">&lt;&lt; 前一頁</a>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="ltcount" -->
+                <a href="<!-- TMPL_VAR NAME="script_name" -->?offset=<!-- TMPL_VAR NAME="nextpage" -->">下一頁 &gt;&gt;</a>
+            <!-- /TMPL_iF --></div>
+<!-- /TMPL_IF -->
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

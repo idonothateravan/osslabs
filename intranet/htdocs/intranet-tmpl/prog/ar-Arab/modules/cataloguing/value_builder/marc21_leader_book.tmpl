@@ -1,0 +1,332 @@
+<html>
+<head>
+<title>Leader builder</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_leader_book.pl">
+<table>
+	<tr>
+		<td>1-4حجم السجل</td>
+		<td>(ملئ آلى)</td>
+	</tr>
+	<tr>
+		<td>5-حالة التسجيلة</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5a" -->
+				<option value=" " SELECTED>a-زيادة في مستوى التشفير</option>
+			<!-- TMPL_ELSE -->
+				<option value=" ">a-زيادة في مستوى التشفير</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>c- صحّح أو روجع </option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- صحّح أو روجع </option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>d-تم حذفة</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d-تم حذفة</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5n" -->
+				<option value="n" SELECTED>n-جديد</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">n-جديد</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5p" -->
+				<option value="p" SELECTED>p-زيادة في تشفير المستوى من قبل إعادة النشر</option>
+			<!-- TMPL_ELSE -->
+				<option value="p">p-زيادة في تشفير المستوى من قبل إعادة النشر</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>6-نوع التسجيلة</td>
+		<td>
+			<select name="f6" size="1">
+			<!-- TMPL_IF name="f6a" -->
+				<option value="a" SELECTED>a- مادة لغة (monography)</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">a- مادة لغة (monography)</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6c" -->
+				<option value="c" SELECTED>c- Notated music</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- Notated music</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6d" -->
+				<option value="d" SELECTED>d- Manuscript notated music</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- Manuscript notated music</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6e" -->
+				<option value="e" SELECTED>e- المادّة الخرائطية </option>
+			<!-- TMPL_ELSE -->
+				<option value="e">e- المادّة الخرائطية </option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6f" -->
+				<option value="f" SELECTED>f - Manuscript cartographic material</option>
+			<!-- TMPL_ELSE -->
+				<option value="f">f - Manuscript cartographic material</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6g" -->
+				<option value="g" SELECTED>g - Projected medium</option>
+			<!-- TMPL_ELSE -->
+				<option value="g">g - Projected medium</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6i" -->
+				<option value="i" SELECTED>i - تسجيل صوتى غير موسيقى</option>
+			<!-- TMPL_ELSE -->
+				<option value="i">i - تسجيل صوتى غير موسيقى</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6j" -->
+				<option value="j" SELECTED>j -تسجيل صوتى موسيقى</option>
+			<!-- TMPL_ELSE -->
+				<option value="j">j -تسجيل صوتى موسيقى</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6k" -->
+				<option value="k" SELECTED>k - Two-dimensional nonprojectable graphic</option>
+			<!-- TMPL_ELSE -->
+				<option value="k">k - Two-dimensional nonprojectable graphic</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6m" -->
+				<option value="m" SELECTED>m - ملف الحاسب</option>
+			<!-- TMPL_ELSE -->
+				<option value="m">m - ملف الحاسب</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6o" -->
+				<option value="o" SELECTED>o - Kit</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">o - Kit</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6r" -->
+				<option value="r" SELECTED>r - مصنوعة يدوية ثلاثية الأبعاد أو تسبب طبيعيا object</option>
+			<!-- TMPL_ELSE -->
+				<option value="r">r - مصنوعة يدوية ثلاثية الأبعاد أو تسبب طبيعيا object</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f6t" -->
+				<option value="t" SELECTED>t - مادّة لغة مخطوطة</option>
+			<!-- TMPL_ELSE -->
+				<option value="t">t - مادّة لغة مخطوطة</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>7-المستوى الببليوجرافى</td>
+		<td>
+			<select name="f7" size="1">
+				<!-- TMPL_IF name="f7a" -->
+					<option value="a" SELECTED>a- أجزاء منفردات</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- أجزاء منفردات</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7b" -->
+					<option value="b" SELECTED>b-جزء مكوّن الدورية </option>
+				<!-- TMPL_ELSE -->
+					<option value="b">a- جزء مكوّن الدورية </option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7c" -->
+					<option value="c" SELECTED>c- مجموعة</option>
+				<!-- TMPL_ELSE -->
+					<option value="c">c- مجموعة</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7d" -->
+					<option value="d" SELECTED>d- وحدة فرعية</option>
+				<!-- TMPL_ELSE -->
+					<option value="d">d- وحدة فرعية</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7i" -->
+					<option value="i" SELECTED>i- Integrating resource</option>
+				<!-- TMPL_ELSE -->
+					<option value="i">i- Integrating resource</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7m" -->
+					<option value="m" SELECTED>m- منفرد/ مادة </option>
+				<!-- TMPL_ELSE -->
+					<option value="m">m- منفرد/ مادة </option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f7s" -->
+					<option value="s" SELECTED>s- دورية</option>
+				<!-- TMPL_ELSE -->
+					<option value="s">s- دورية</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>8- المستوى الهرمى</td>
+		<td>
+			<select name="f8" size="1">
+				<!-- TMPL_IF name="f8 " -->
+					<option value=" " SELECTED>نوع غير محدد</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">نوع غير محدد</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f8a" -->
+					<option value="a" SELECTED>a- أرشيفي</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- أرشيفي</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>9- التشفير</td>
+		<td>
+			<select name="f9" size="1">
+				<!-- TMPL_IF name="f9 " -->
+					<option value=" " SELECTED>مارك-8</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">مارك-8</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f9a" -->
+					<option value="a" SELECTED>a- UCS/Unicode</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- UCS/Unicode</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>10-16 مؤشر/الحقول الفرعية/حجم</td>
+		<td>(ملئ آلى)</td>
+	<tr>
+		<td>17- تشفير</td>
+		<td>
+			<select name="f17" size="1">
+				<!-- TMPL_IF name="f17 " -->
+					<option value=" " SELECTED>مستوى كامل</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">المستوى الكامل</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f171" -->
+					<option value="1" SELECTED>1-المستوى الكامل، مادّة ليست مفحوصة</option>
+				<!-- TMPL_ELSE -->
+					<option value="1">1-المستوى الكامل، مادّة ليست مفحوصة</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f172" -->
+					<option value="2" SELECTED>2 -أقل-من-المستوى الكامل, مادة غير مفحوصة</option>
+				<!-- TMPL_ELSE -->
+					<option value="2">2 -أقل-من-المستوى الكامل, مادة غير مفحوصة</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f173" -->
+					<option value="3" SELECTED>3- المستوى المختصرl</option>
+				<!-- TMPL_ELSE -->
+					<option value="3">3- المستوى المختصرl</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f174" -->
+					<option value="4" SELECTED>4-لمستوى الرئيسىl</option>
+				<!-- TMPL_ELSE -->
+					<option value="4">4-لمستوى الرئيسىl</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f175" -->
+					<option value="5" SELECTED>5-المستوى الجزئى (التمهيدى)</option>
+				<!-- TMPL_ELSE -->
+					<option value="5">5-المستوى الجزئى (التمهيدى)</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f177" -->
+					<option value="7" SELECTED>7- المستوى الأدنى</option>
+				<!-- TMPL_ELSE -->
+					<option value="7">7- المستوى الأدنى</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f178" -->
+					<option value="8" SELECTED>8- مستوى قبل النشر</option>
+				<!-- TMPL_ELSE -->
+					<option value="8">8- مستوى قبل النشر</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f17u" -->
+					<option value="u" SELECTED>غير محدد</option>
+				<!-- TMPL_ELSE -->
+					<option value="u">غير محدد</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f17z" -->
+					<option value="z" SELECTED>z- غير قابل للتطبيق</option>
+				<!-- TMPL_ELSE -->
+					<option value="z">z- غير قابل لتطبيق مستوى كامل </option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>18 -شكل الفهرسة الوصفي</td>
+		<td>
+			<select name="f18" size="1">
+				<!-- TMPL_IF name="f18 " -->
+					<option value=" " SELECTED>بدون-ISBD</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">بدون-ISBD</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18a" -->
+					<option value="a" SELECTED>a- AACR 2</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- AACR 2</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18i" -->
+					<option value="i" SELECTED>i- ISBD</option>
+				<!-- TMPL_ELSE -->
+					<option value="i">i- ISBD</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18u" -->
+					<option value="u" SELECTED>u-غير معروف</option>
+				<!-- TMPL_ELSE -->
+					<option value="u">u-غير معروف</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>19 - متطلبات السجل المرتبط</td>
+		<td>
+			<select name="f19" size="1">
+				<!-- TMPL_IF name="f19 " -->
+					<option value=" " SELECTED>التسجيلة ذو العلاقة ليست مطلوبة</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">التسجيلة ذو العلاقة ليست مطلوبة</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f18r" -->
+					<option value="r" SELECTED>r-السجل ذو العلاقة تطلّب</option>
+				<!-- TMPL_ELSE -->
+					<option value="r">r-السجل ذو العلاقة تطلّب</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>20-24 مدخل خريطة وأطوال</td>
+		<td>(ملئ آلى)</td>
+	<tr>
+
+	<tr><td colspan=2><input type="submit" value="نعم"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			'     '+
+            document.f_pop.f5.value+
+			document.f_pop.f6.value+
+            document.f_pop.f7.value+
+			document.f_pop.f8.value+
+            document.f_pop.f9.value+
+            '22     '+
+			document.f_pop.f17.value+
+            document.f_pop.f18.value+
+            document.f_pop.f19.value+
+            '4500';
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

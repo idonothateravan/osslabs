@@ -1,0 +1,453 @@
+<html>
+<head>
+<title>Leader builder</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_field_006.pl">
+<table>
+	<tr>
+		<td>0 Art des Materials</td>
+                <td>
+                        <select name="f0" size="1">
+                        <!-- TMPL_IF name="f0a" -->
+                                <option value="a" SELECTED>a- Sprachmaterial</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="a">a- Sprachmaterial</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f0b" -->
+                                <option value="b" SELECTED>b- Handschriftliches Sprachmaterial</option>
+                        <!-- TMPL_ELSE -->
+                                <option value="b">b- Handschriftliches Sprachmaterial</option>
+                        <!-- /TMPL_IF -->
+        		</select>
+		</td>
+	</tr>
+	<tr>
+                <td>01-04 Illustrationen </td>
+                <td>(automatisch eingetragen von 300)<input type="hidden" name="f014" size="4"  maxlength="4" value="<!-- TMPL_VAR NAME="f014" -->"/></td>
+        </tr>
+	        <tr>
+                <!-- 5 Target Audience -->
+                <td>5- Zielpublikum</td>
+                <td>
+                <select name="f5" size="1">
+
+                        <!-- TMPL_IF name="f5|" -->
+                        <option value="|" SELECTED>|- Standard</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- Standard</option>
+                        <!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f50" -->
+                        <option value=" " SELECTED>#- Unbekannt oder nicht spezifiziert</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- Unbekannt oder nicht spezifiziert</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5a" -->
+                         <option value="a" SELECTED>a- Vorschul</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- Vorschul</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5b" -->
+                         <option value="b" SELECTED>b- Primar</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="b">b- Primar</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5c" -->
+                         <option value="c" SELECTED>c- Primar und Junior High</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- Primar und Junior High</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5d" -->
+                         <option value="d" SELECTED>d- Sekundarstufte (senior high)</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- Sekundarstufte (senior high)</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5e" -->
+                         <option value="e" SELECTED>e- Erwachsene</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="e">e- Erwachsene</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5f" -->
+                         <option value="f" SELECTED>f- Spezialisiert</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- Spezialisiert</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5g" -->
+                         <option value="g" SELECTED>g- Allgemein</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="g">g- Allgemein</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f5j" -->
+                         <option value="j" SELECTED>j- Jugendliche</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="j">j- Jugendliche</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        <tr>
+	 <tr>
+                <!-- 06 Form of an item -->
+                <td>06- Exemplarart</td>
+                <td>
+                <select name="f6" size="1">
+
+                        <!-- TMPL_IF name="f60" -->
+                        <option value=" " SELECTED># - Keines der Folgenden</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" "># - Keines der Folgenden</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6a" -->
+                        <option value="a" SELECTED>a- Microfilm</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- Microfilm</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6b" -->
+                        <option value="b" SELECTED>b- Microfiche</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="b">b- Microfiche</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6c" -->
+                        <option value="c" SELECTED>a- Microopaque</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">a- Microopaque</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6d" -->
+                        <option value="d" SELECTED>d- Großdruck</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- Großdruck</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6f" -->
+                        <option value="f" SELECTED>f- Braille</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- Braille</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6r" -->
+                        <option value="r" SELECTED>r- Reguläre gedruckte Reproduktion</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="r">r- Reguläre gedruckte Reproduktion</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6s" -->
+                        <option value="s" SELECTED>s- Elektronisch</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- Elektronisch</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f6!" -->
+                        <option value="!" SELECTED>!- Kein Kodierungsversuch</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="!">!- Kein Kodierungsversuch</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+       <tr>
+                <td>7-10 Inhaltstyp </td>
+                <td>(abgeleiteter Wert)
+                        <input type="hidden" name="f710" size="4" maxlength="4" value="<!-- TMPL_VAR NAME="f710" -->"/>                </td>
+        </tr>
+        <tr>
+                <td>11- Amtsdrucksache</td>
+                <td>
+                <select name="f11" size="1">
+		
+                        <!-- TMPL_IF name="f11|" -->
+                        <option value="|" SELECTED>|- Standard</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- Standard</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f110" -->
+                        <option value=" " SELECTED>#- Kein Amtsdrucksache</option>
+                        <!-- TMPL_ELSE -->
+                        <option value=" ">#- Kein Amtsdrucksache</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11a" -->
+                        <option value="a" SELECTED>a- Autonome oder halb-autonome Komponente</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- Autonome oder halb-autonome Komponente</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11c" -->
+                        <option value="c" SELECTED>c- Vielörtig</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- Vielörtig</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11f" -->
+                        <option value="f" SELECTED>f- Bund-/national</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- Bund-/national</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f11i" -->
+                        <option value="i" SELECTED>i- International, zwischenstaatlich</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="i">i- International, zwischenstaatlich</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f11l" -->
+                        <option value="l" SELECTED>l- Lokal</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="l">l- Lokal</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f11m" -->
+                        <option value="m" SELECTED>m- In mehreren Staaten</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="m">m- In mehreren Staaten</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11o" -->
+                        <option value="o" SELECTED>o- Regierungspublikation - unbestimmte Ebene</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="o">o- Regierungspublikation - unbestimmte Ebene</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11s" -->
+                        <option value="s" SELECTED>s- Staat, provinziell, territorial, abhängig, usw.</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- Staat, provinziell, territorial, abhängig, usw.</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11u" -->
+                        <option value="u" SELECTED>u- Nicht bekannt, ob der Titel eine Regierungspublikation ist</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="u">u- Nicht bekannt, ob der Titel eine Regierungspublikation ist</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f11z" -->
+                        <option value="z" SELECTED>z- Anderer</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="z">z- Anderer</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+        <tr>
+                <td>12- Konferenzveröffentlichung</td>
+                <td>
+                <select name="f12" size="1">
+                        <!-- TMPL_IF name="f120" -->
+                        <option value="0" SELECTED>0- Keine Kongressveröffentlichung</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- Keine Kongressveröffentlichung</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f121" -->
+                        <option value="1" SELECTED>1- Konferenzschrift</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- Konferenzschrift</option>
+                        <!-- /TMPL_IF -->
+
+		</select>
+		</td>
+	</tr>
+	<tr>
+                <td>13- Festschrift</td>
+                <td>
+                <select name="f13" size="1">
+                        <!-- TMPL_IF name="f130" -->
+                        <option value="0" SELECTED>0- Keine Festschrift</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- Keine Festschrift</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f131" -->
+                        <option value="1" SELECTED>1- Festschrift</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- Festschrift</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+
+        <tr>
+                <td>14- Index</td>
+                <td>
+                <select name="f14" size="1">
+                        <!-- TMPL_IF name="f14|" -->
+                        <option value="|" SELECTED>|- Standard</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="|">|- Standard</option>
+                        <!-- /TMPL_IF -->
+	
+                        <!-- TMPL_IF name="f140" -->
+                        <option value="0" SELECTED>0- Kein Index</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- Kein Index</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f141" -->
+                        <option value="1" SELECTED>1- Index vorhanden</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- Index vorhanden</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        	</tr>
+		<tr><td>15 Nicht definiert</td><td></td>
+		</tr>
+		<tr>
+                <td>16- Literarische Form</td>
+                <td>
+                <select name="f16" size="1">
+                        <!-- TMPL_IF name="f160" -->
+                        <option value="0" SELECTED>0- Keine Belletristik</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="0">0- Keine Belletristik</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f161" -->
+                        <option value="1" SELECTED>1- Belletristik</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="1">1- Belletristik</option>
+                        <!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f16c" -->
+                        <option value="c" SELECTED>c- Comic Strips</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="c">c- Comic Strips</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16d" -->
+                        <option value="d" SELECTED>d- Dramen</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="d">d- Dramen</option>
+                        <!-- /TMPL_IF -->
+
+
+                        <!-- TMPL_IF name="f16e" -->
+                        <option value="e" SELECTED>e- Essays</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="e">e- Essays</option>
+                        <!-- /TMPL_IF -->
+
+			
+                        <!-- TMPL_IF name="f16f" -->
+                        <option value="f" SELECTED>f- Roman</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="f">f- Roman</option>
+                        <!-- /TMPL_IF -->
+
+			
+                        <!-- TMPL_IF name="f16h" -->
+                        <option value="h" SELECTED>h- Humor, Satire, ect.</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="h">h- Humor, Satire, ect.</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16i" -->
+                        <option value="i" SELECTED>i- Briefe</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="i">i- Briefe</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16j" -->
+                        <option value="j" SELECTED>j- Kurzgeschichten</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="j">j- Kurzgeschichten</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16m" -->
+                        <option value="m" SELECTED>m- Durchmischte Formen</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="m">m- Durchmischte Formen</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f16p" -->
+                        <option value="p" SELECTED>p- Poesie</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="p">p- Poesie</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f16s" -->
+                        <option value="s" SELECTED>s- Reden</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="s">s- Reden</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f16u" -->
+                        <option value="u" SELECTED>u- Unbekannt</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="u">u- Unbekannt</option>
+                        <!-- /TMPL_IF -->
+
+                </select>
+                </td>
+        </tr>
+	<tr>
+                <td>17- Biografie</td>
+                <td>
+                <select name="f17" size="1">
+                        <!-- TMPL_IF name="f170" -->
+                        <option value=" " SELECTED>#- Kein biografisches Material</option>                              <!-- TMPL_ELSE -->
+                        <option value=" ">#- Kein biografisches Material</option>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="f17a" -->
+                        <option value="a" SELECTED>a- Autobiographie</option>
+                        <!-- TMPL_ELSE -->
+                        <option value="a">a- Autobiographie</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f17b" -->
+                        <option value="b" SELECTED>b- persönliche Biographie</option>                              <!-- TMPL_ELSE -->
+                        <option value="b">b- persönliche Biographie</option>
+                        <!-- /TMPL_IF -->
+
+                        <!-- TMPL_IF name="f17c" -->
+                        <option value="c" SELECTED>c- Sammelbiographie</option>                              <!-- TMPL_ELSE -->
+                        <option value="c">c- Sammelbiographie</option>
+                        <!-- /TMPL_IF -->
+			
+                        <!-- TMPL_IF name="f17d" -->
+                        <option value="d" SELECTED>d- enthält bibliographische Informationen</option>                              <!-- TMPL_ELSE -->
+                        <option value="d">d- enthält bibliographische Informationen</option>
+                        <!-- /TMPL_IF -->
+                </select>
+                </td>
+        </tr>
+
+	<tr><td colspan=2><input type="submit" value="OK"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			'<!-- TMPL_VAR NAME="dateentered" -->'+
+			document.f_pop.f0.value+
+			document.f_pop.f014.value+
+			document.f_pop.f5.value+
+			document.f_pop.f6.value+
+			document.f_pop.f710.value+
+			document.f_pop.f11.value+
+			document.f_pop.f12.value+
+			document.f_pop.f13.value+
+			document.f_pop.f14.value+ ' '+
+			document.f_pop.f16.value+
+			document.f_pop.f17.value;
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>

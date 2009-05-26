@@ -1,0 +1,331 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Zeitschriften &rsaquo; Einzelheiten für Abonnement #<!-- TMPL_VAR name="subscriptionid" --></title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" language="javascript">
+<!--
+
+// the english words used in display purposes
+var text = new Array(_("Nummer"),_("Band"),_("Ausgabe"),_("Monat"),_("Woche"),_("beginnen mit:"),_("Verlängert bis:"),_("Wähle Hemisphäre:"),_("Nördlich"),_("Southern",
+"Autumn"),_("Winter"),_("Frühling"),_("Sommer"),_("Herbst"),_("Saison"),_("Jahr"));
+
+
+// to display the options section
+function options(x,y,z){
+var textbox = '';
+    // alert("X: "+x+"Y: "+y+"Z: "+z);
+    if(x){
+        document.f.xfield.value = x;
+        if(y){
+            document.f.yfield.value = y;
+            if(z){
+                document.f.zfield.value = z;
+            }
+        }
+    }
+}
+
+function confirm_deletion() {
+    var is_confirmed = confirm(_("Sind Sie sicher daß Sie dieses Abonnement löschen wollen?"));
+    if (is_confirmed) {
+        window.location="subscription-detail.pl?subscriptionid=<!-- TMPL_VAR name="subscriptionid" -->&op=del";
+    }
+}
+function popup(subscriptionid) {
+    newin=window.open("subscription-renew.pl?mode=popup&subscriptionid="+subscriptionid,'popup','width=590,height=440,toolbar=false,scrollbars=yes');
+}
+
+-->
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="serials-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/serials/serials-home.pl">Zeitschriften</a> &rsaquo; Details für Abonnement Nr.<!-- TMPL_VAR name="subscriptionid" --></div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+	<!-- TMPL_INCLUDE NAME="serials-toolbar.inc" -->
+
+    <h1>Abonnement für <!-- TMPL_VAR name="bibliotitle" --> </h1>
+    <!--TMPL_IF Name="abouttoexpire"--><div class="problem">Das Abonnement läuft bald ab. Es sollte jetzt verlängert werden.</div><!--/TMPL_IF-->
+    
+    <div id="subscription_info">
+        <h2>Informationen zum Abonnement</h2>
+		<ul>
+		<li><span class="label">Abo ID: </span><!--TMPL_VAR name="subscriptionid"--></li>
+        <li><span class="label">Bibliothekar Identität: </span> <!-- TMPL_VAR name="librarian" --></li>
+        <li><span class="label">Lieferant:</span> <a href="/cgi-bin/koha/acqui/supplier.pl?supplierid=<!-- TMPL_VAR name="aqbooksellerid"-->"><!-- TMPL_VAR name="aqbooksellername" -->&nbsp;</a></li>
+        <li><span class="label">Biblio:</span> <i>(<!-- TMPL_VAR name="bibnum" -->)</i> <a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=<!-- TMPL_VAR name="bibnum" -->"><!-- TMPL_VAR name="bibliotitle" --></a></li><br />
+<!-- TMPL_IF name="branchcode" --><li><span class="label">Bibliothek:</span> <!-- TMPL_VAR name="branchcode" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="serialsadditems" -->
+            <li>Serial receipt creates an item record.</li>
+        <!-- TMPL_ELSE -->
+            <li>Serial receipt does not create an item record.</li>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="callnumber" --><li><span class="label">Signatur:</span> <!-- TMPL_VAR name="callnumber" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="letter" --><li><span class="label">Benutzeralarm mit:</span> <!-- TMPL_VAR name="letter" -->&nbsp;</li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="notes" --><li><span class="label">Hinweise:</span> <!-- TMPL_VAR name="notes" --></li><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="internalnotes" --><li><span class="label">Verwaltungsnotizen:</span> <!-- TMPL_VAR name="internalnotes" --></li><!-- /TMPL_IF -->
+        
+    </div>
+    <div id="subscription_planning">
+        <h2>Geplant</h2>
+            <p><label>Startdatum:</label> <!-- TMPL_VAR name="startdate" -->
+            </p>
+            <p><label>Frequenz (*):</label>
+                <!--TMPL_IF name="periodicity16" -->
+                        Ohne regelmäßiges Erscheinen
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity32" -->
+                        Regelwidrig
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity0" -->
+                        Unbekannt
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity12" -->
+                        2/Tag
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity1" -->
+                        1/Tag
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity13" -->
+                        3/Woche
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity2" -->
+                        1/Woche
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity3" -->
+                        1/2 Wochen
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity4" -->
+                        1/3 Wochen
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity5" -->
+                        1/Monat
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity6" -->
+                        1/2 Monate (6/Jahr)
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity7" -->
+                        1/Quartal
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity8" -->
+                        1/Quartal
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity9" -->
+                        2/Jahr
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity10" -->
+                        1/Jahr
+                <!-- /TMPL_IF -->
+                <!--TMPL_IF name="periodicity11" -->
+                        1/2 Jahre
+                <!-- /TMPL_IF -->
+              Anleitung Verlauf:
+                <!--TMPL_IF Name="manualhistory"-->
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                <!-- TMPL_ELSE -->
+                    <input type="checkbox" disabled="disabled" />
+                <!--/TMPL_IF-->
+            </p>
+            <p><label>Nummernschablone:</label>
+                <!-- TMPL_IF name="numberpattern1" -->
+                    Nur Ziffern
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern2" -->
+                    Band, Nummer, Ausgabe
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern3" -->
+                    Band, Naummer
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern4" -->
+                    Band, Ausgabe
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern5" -->
+                    Nummer, Ausgabe
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern8" -->
+                    Jahr/Nummer
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern6" -->
+                    nur saisonal
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="numberpattern7" -->
+                    keine der obigen
+                <!-- /TMPL_IF -->
+            </p>
+            <table>
+            <tr><td><p>beginnen mit:</p></td>
+                <td align="center"><!--TMPL_VAR NAME="lastvalue1"--></td>
+            <!--TMPL_IF NAME="lastvalue2"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="lastvalue2"-->
+                </td>
+            <!--/TMPL_IF-->
+            <!--TMPL_IF NAME="lastvalue3"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="lastvalue3"-->
+                </td>
+            <!--/TMPL_IF-->
+            </tr>
+            <tr><td><p>Verlängerung:</p></td>
+                <td align="center">&nbsp;</td>
+            <!--TMPL_IF NAME="whenmorethan2"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="whenmorethan2"-->
+                </td>
+            <!--/TMPL_IF-->
+            <!--TMPL_IF NAME="whenmorethan3"-->
+                <td align="center">&nbsp; 
+                    <!--TMPL_VAR NAME="whenmorethan3"-->
+                </td>
+            <!--/TMPL_IF-->
+            </tr>
+            </table>
+            <!-- TMPL_IF NAME="irregular_issues" -->
+            <p><label>Regelwidrigkeit:</label> <!-- TMPL_VAR name="irregular_issues" --> Ausleihen
+            </p>
+            <!-- /TMPL_IF -->
+            <p><label>Erste Ankunft:</label> <!--TMPL_VAR name="firstacquidate" -->
+            </p>
+        <!-- TMPL_IF name="numberlength" --><p><label>Anzahl Ausgaben:</label> <!-- TMPL_VAR name="numberlength" --></p><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="weeklength" --><p><label>Anzahl der Wochen:</label> <!-- TMPL_VAR name="weeklength" --></p><!-- /TMPL_IF -->
+        <!-- TMPL_IF name="monthlength" --><p><label>Anzahl der Monate:</label> <!-- TMPL_VAR name="monthlength" --></p><!-- /TMPL_IF -->
+    </div>
+    <div id="subscription_numbering" style="display:none;">
+        <h3>Berechnung der Nummerierung</h3>
+        <p><label>Nummerierungsformel:</label> <!-- TMPL_VAR name="numberingmethod" --></p>
+        <table>
+            <tr>
+                <th>&nbsp;</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Z</th>
+                </tr>
+                <tr>
+                    <td>Hinzufügen</td>
+                    <td>
+                        <!-- TMPL_VAR name="add1" -->
+                    </td>
+                    <td>
+                        <!-- TMPL_VAR name="add2" -->
+                    </td>
+                    <td>
+                        <!-- TMPL_VAR name="add3" -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>einmal jede</td>
+                    <td><!-- TMPL_VAR name="every1" --></td>
+                    <td><!-- TMPL_VAR name="every2" --></td>
+                    <td><!-- TMPL_VAR name="every3" --></td>
+                </tr>
+                <tr>
+                    <td>Wenn mehr als</td>
+                    <td><!-- TMPL_VAR name="whenmorethan1" --> <!-- TMPL_IF name="innerloop1" --><br />
+                        <i>(ist <!-- TMPL_VAR name="innerloop1" -->)</i><!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_VAR name="whenmorethan2" --> <!-- TMPL_IF name="innerloop2" --><br />
+                        <i>(ist <!-- TMPL_VAR name="innerloop2" -->)</i><!-- /TMPL_IF --></td>
+                    <td><!-- TMPL_VAR name="whenmorethan3" --> <!-- TMPL_IF name="innerloop3" --><br />
+                        <i>(ist <!-- TMPL_VAR name="innerloop3" -->)</i><!-- /TMPL_IF --></td>
+                </tr>
+                <tr>
+                    <td>zurücksetzen auf</td>
+                    <td><!-- TMPL_VAR name="setto1" --></td>
+                    <td><!-- TMPL_VAR name="setto2" --></td>
+                    <td><!-- TMPL_VAR name="setto3" --></td>
+                </tr>
+                <tr>
+                    <td>
+                            Innerer Zähler
+                    </td>
+                    <td><!-- TMPL_VAR name="innerloop1" --></td>
+                    <td><!-- TMPL_VAR name="innerloop2" --></td>
+                    <td><!-- TMPL_VAR name="innerloop3" --></td>
+                </tr>
+                <tr>
+                    <td>
+                            Letzter Wert
+                    </td>
+                    <td><!-- TMPL_VAR name="lastvalue1" --></td>
+                    <td><!-- TMPL_VAR name="lastvalue2" --></td>
+                    <td><!-- TMPL_VAR name="lastvalue3" --></td>
+                </tr>
+            </table>
+    </div>
+    <div id="subscription_issues">
+        <h2>Reihe Ausgabe</h2>
+        <table>
+        <tr>
+            <th>Ausgabennummer</th>
+            <th>Voraussichtliches Datum</th>
+            <th>Erschienen am</th>
+            <th>Status</th>
+        </tr>
+        <!-- TMPL_LOOP name="serialslist" -->
+            <tr>
+                <td>
+                    <!-- TMPL_VAR name="serialseq" -->
+                </td>
+                <td>
+                    <!-- TMPL_VAR name="planneddate" -->
+                </td>
+                <td>
+                    <!-- TMPL_VAR name="publisheddate" -->
+                </td>
+                <td>
+                        <!--TMPL_IF name="status1" -->
+                            Erwartet
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status2" -->
+                            Eingetroffen
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status3" -->
+                            Verspätet
+                        <!-- /TMPL_IF -->
+                        <!--TMPL_IF name="status4" -->
+                            vermisst
+                        <!-- /TMPL_IF -->
+                </td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+        </table>
+    </div>
+    <div id="subscription_summary">
+        <h2>Abo-Beschreibung</h2>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td><label>Anfangsdatum</label></td>
+                <td> <!-- TMPL_VAR name="startdate" --> </td>
+            </tr>
+            <tr>
+                <td><label>Enddatum</label></td>
+                <td> <!-- TMPL_VAR name="enddate" --></td>
+            </tr>
+            <tr>
+                <td><label>Anfangsdatum der Historie</label></td>
+                <td> <!-- TMPL_VAR name="histstartdate" --> </td>
+            </tr>
+            <tr>
+                <td><label>Enddatum der Historie</label></td>
+                <td> <!-- TMPL_VAR name="histenddate" --></td>
+            </tr>
+            <tr><td><label>Erhaltene Exemplare</label></td><td><!-- TMPL_VAR name="recievedlist" --></td></tr>
+            <tr><td><label>Vermisste Medien</label></td><td><!-- TMPL_VAR name="missinglist" --></td></tr>
+            <tr><td><label>Nichtöffentlicher Hinweis</label></td><td><!-- TMPL_VAR name="librariannote" --></td></tr>
+            <tr><td><label>Öffentliche Nachricht</label></td><td><!-- TMPL_VAR name="opacnote" --></td></tr>
+        </table>
+    </div>
+
+</div>
+</div>
+
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="serials-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

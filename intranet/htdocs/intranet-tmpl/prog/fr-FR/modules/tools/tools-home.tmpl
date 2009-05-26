@@ -1,0 +1,109 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Outils</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Accueil</a> &rsaquo;  Outils</div>
+
+<div id="doc3">
+<div id="bd">
+	<div class="yui-gb">
+
+<div class="yui-u first">
+<dl>
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_news" -->
+    <dt><a href="/cgi-bin/koha/tools/koha-news.pl">Nouvelles</a></dt>
+    <dd>Rédiger des nouvelles  pour les interfaces OPAC et bibliothécaire</dd>
+    <!-- /TMPL_IF -->
+	
+    <!-- TMPL_IF NAME="CAN_user_tools_label_creator" -->
+    <dt><a href="/cgi-bin/koha/labels/label-home.pl">Créateur d'étiquettes exemplaires et adhérents</a></dt>
+    <dd>Créer des étiquettes et des code-barres imprimables à partir des données du catalogue et créer des cartes adhérents à partir des informations adhérent</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_calendar" -->
+    <dt><a href="/cgi-bin/koha/tools/holidays.pl">Calendrier</a></dt>
+    <dd>Définir les jours de fermeture de la bibliothèque</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_moderate_comments" -->
+    <dt><a href="/cgi-bin/koha/reviews/reviewswaiting.pl">Commentaires</a></dt>
+	<dd>Modérer les commentaires des lecteurs</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_moderate_comments" --><!-- FIXME: Update here when Tag specific permission is created. -->
+    <dt><a href="/cgi-bin/koha/tags/review.pl">Tags</a></dt>
+	<dd>Modérer les tags des lecteurs</dd>
+    <!-- /TMPL_IF -->
+	</dl>
+</div>
+<div class="yui-u">
+	<dl>
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_notices" -->
+    <dt><a href="/cgi-bin/koha/tools/letter.pl">Messages</a></dt>
+    <dd>Définir les messages (impression et envoi de messages de notification pour retard...)</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_edit_notice_status_triggers" -->
+    <dt><a href="/cgi-bin/koha/tools/overduerules.pl">Déclencheur de notification</a></dt>
+    <dd>Définir les règles de suspension et notifications sur retard</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_view_system_logs" -->
+	<dt><a href="/cgi-bin/koha/tools/viewlog.pl">Visualiseur des logs</a></dt>
+    <dd>Consulter les logs du système</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_inventory" -->
+    <dt><a href="/cgi-bin/koha/tools/inventory.pl">Inventaire/récolement</a></dt>
+    <dd>Réaliser l'inventaire (récolement) de votre catalogue</dd>
+    <!-- /TMPL_IF -->
+	
+	</dl>
+</div>
+<div class="yui-u">
+<dl>
+    <!-- TMPL_IF NAME="CAN_user_tools_stage_marc_import" -->
+    <dt><a href="/cgi-bin/koha/tools/stage-marc-import.pl">Préparation des notices MARC à l'import</a></dt>
+    <dd>Traiter des notices MARC dans le réservoir</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_manage_staged_marc" -->
+    <dt><a href="/cgi-bin/koha/tools/manage-marc-import.pl">Gestion des notices MARC traitées</a></dt>
+    <dd>Gérer les notices MARC préparées, y compris compléter et reverser les imports.</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_export_catalog" -->
+    <dt><a href="/cgi-bin/koha/tools/export.pl">Exportation notices biblio et exemplaires</a></dt>
+    <dd>Exporter données notices et d'exemplaire(s)</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_import_patrons" -->
+    <dt><a href="/cgi-bin/koha/tools/import_borrowers.pl">Importation des données adhérents</a></dt>
+    <dd>Importer données adhérents</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_delete_anonymize_patrons" -->
+    <dt><a href="/cgi-bin/koha/tools/cleanborrowers.pl">Adhérent (anonymiser et supprimer)</a></dt>
+    <dd>Supprimer des adhérents anciens/rendre anonyme l' historique de prêt (supression de  l'historique de lectures des lecteurs)</dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_batch_upload_patron_images" -->
+    <dt><a href="/cgi-bin/koha/tools/picture-upload.pl">Chargement photos d'adhérents</a></dt>
+	<dd>Télécharger les photos des adhérents en lot ou une à une  </dd>
+    <!-- /TMPL_IF -->
+
+    <!-- TMPL_IF NAME="CAN_user_tools_schedule_tasks" -->
+    <dt><a href="/cgi-bin/koha/tools/scheduler.pl">Planificateur de tâches</a></dt>
+    <dd>Planifier les tâches à exécuter</dd>
+    <!-- /TMPL_IF -->
+	
+</dl>
+</div>
+
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

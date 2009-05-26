@@ -1,0 +1,38 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>كوها &rsaquo; الاستناد</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+function Help() {
+    newin=window.open("/cgi-bin/koha/help.pl","Koha Help",'width=600,height=600,toolbar=false,scrollbars=yes');
+}
+
+function addauthority() {
+    X = document.forms[0].authtype.value;
+    window.location="/cgi-bin/koha/authorities/authorities.pl?authtypecode="+X;
+}
+function searchauthority() {
+    X = document.forms[0].authtype2.value;
+    Y = document.forms[0].value.value;
+    window.location="/cgi-bin/koha/authorities/authorities-home.pl?op=do_search&type=intranet&authtypecode="+X+"&value="+Y+"&marclist=&and_or=and&excluding=&operator=contains";
+}
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="authorities-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">الصفحة الرئيسية</a> &rsaquo; صلاحيات</div>
+
+<div id="doc" class="yui-t7">
+  <div id="bd">
+    <div id="yui-main">
+    <div class="yui-g">
+    
+    <!-- TMPL_INCLUDE NAME="authorities-toolbar.inc" -->
+
+    </div>
+    </div>
+  </div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

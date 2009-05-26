@@ -1,0 +1,224 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Administration &rsaquo; Benutzerattribute
+<!-- TMPL_IF name="attribute_type_form" -->
+  <!-- TMPL_IF name="edit_attribute_type" -->
+    &rsaquo; Benutzerattribut ändern
+  <!-- TMPL_ELSE -->
+    &rsaquo; Benutzerattribut hinzufügen
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_attribute_type_form" -->
+  &rsaquo; Löschen des Benutzerattributs bestätigen &quot;<!-- TMPL_VAR name="code" -->&quot;
+<!-- /TMPL_IF -->
+</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+
+<script type="text/javascript">
+//<![CDATA[
+
+function DoCancel(f) {
+  f.op.value='';
+  document.Aform.submit();
+}
+
+function CheckAttributeTypeForm(f) {
+    var ok=1;
+    var _alertString="";
+    var alertString2;
+    if (f.code.value.length==0) {
+        _alertString += "\n- " + _("Benutzerattribut fehlt");
+    }
+    if (f.description.value.length==0) {
+        _alertString += "\n- " + _("Beschreibung fehlt");
+    }
+    if (_alertString.length==0) {
+        document.Aform.submit();
+    } else {
+        alertString2  = _("Form wegen der folgenden Probleme nicht eingefügt");
+        alertString2 += "\n------------------------------------------------------------------------------------\n";
+        alertString2 += _alertString;
+        alert(alertString2);
+    }
+}
+
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="cat-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Start</a> &rsaquo; <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a> &rsaquo; <!-- TMPL_IF name="display_list" -->Benutzerattribut<!-- TMPL_ELSE --><a href="/cgi-bin/koha/admin/patron-attr-types.pl">Benutzerattribut</a><!-- /TMPL_IF -->
+<!-- TMPL_IF name="attribute_type_form" -->
+  <!-- TMPL_IF name="edit_attribute_type" -->
+    &rsaquo; Benutzerattribut ändern
+  <!-- TMPL_ELSE -->
+    &rsaquo; Benutzerattribut hinzufügen
+  <!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="delete_attribute_type_form" -->
+  &rsaquo; Löschen des Benutzerattributs bestätigen &quot;<!-- TMPL_VAR name="code" -->&quot;
+<!-- /TMPL_IF -->
+</div>
+
+<div id="doc3" class="yui-t2">
+
+   <div id="bd">
+    <div id="yui-main">
+    <div class="yui-b">
+
+<!-- TMPL_IF name="WARNING_extended_attributes_off" -->
+<div class="dialog message">Da die Systemeinstellung 'ExtendedPatronAttributes` zur Zeit AUS ist, können keine erweiterten Benutzerattribute zu Benutzerdatensätzen hinzugefügt werden. <a href="/cgi-bin/koha/admin/systempreferences.pl?op=add_form&amp;searchfield=ExtendedPatronAttributes">Hier</a> können Sie dieses Feature einschalten.</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="attribute_type_form" -->
+  <!-- TMPL_IF name="edit_attribute_type" -->
+<h2>Modify patron attribute type</h2>
+  <!-- TMPL_ELSE -->
+<h2>Benutzerattribut hinzufügen</h2>
+  <!-- /TMPL_IF -->
+<!-- TMPL_IF name="duplicate_code_error" -->
+<div class="dialog message">Konnte Benutzerattribut &quot;<!-- TMPL_VAR name="duplicate_code_error" -->&quot; nicht hinzufügen&mdash; einer mit diesem Code existiert bereits.
+</div>
+<!-- /TMPL_IF -->
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <fieldset class="rows">
+    <ol>
+      <li>
+          <!-- TMPL_IF name="edit_attribute_type" -->
+		  <span class="label">Benutzerattributscode: </span>
+            <input type="hidden" name="code" value="<!-- TMPL_VAR name="code" -->" />
+            <!-- TMPL_VAR name="code" -->
+          <!-- TMPL_ELSE -->
+		  <label for="code">Benutzerattributscode: </label>
+            <input type="text" id="code" name="code"  size="10" maxlength="10" />
+          <!-- /TMPL_IF -->
+       </li>
+       <li><label for="description">Beschreibung: </label>
+           <input type="text" id="description" name="description" size="50" maxlength="250" 
+                  value="<!-- TMPL_VAR name="description" escape="HTML" -->" />
+       </li>
+       <li><label for="repeatable">Wiederholbar: </label>
+            <input type="checkbox" id="repeatable" name="repeatable" <!-- TMPL_VAR name="repeatable_checked" --> <!-- TMPL_VAR name="repeatable_disabled" --> />
+            <span>Ankreuzen, damit ein Benutzerdatensatz mehrere Werte für dieses Attribut haben kann. Die Einstellung kann nicht mehr geändert werden, nachdem ein Feld definiert wurde.</span>
+       </li>
+       <li><label for="unique_id">Eindeutige Kennung: </label>
+            <input type="checkbox" id="unique_id" name="unique_id" <!-- TMPL_VAR name="unique_id_checked" --> <!-- TMPL_VAR name="unique_id_disabled" --> />
+            <span>Wenn angehakt, wird die Eigenschaft zur einzigartigen Kennung %mdash; Wenn ein Wert einmal in einem Benutzerdatensatz eingetragen wurde, kann er in keinem weiteren eingetragen werden. Diese Einstellung kann nicht mehr verändert werden, nachdem eine Eigenschaft definiert wurde.</span>
+       </li>
+       <li><label for="password_allowed">Passwort erlauben: </label>
+            <input type="checkbox" id="password_allowed" name="password_allowed" <!-- TMPL_VAR name="password_allowed_checked" --> />
+            <span>Check to make it possible to associate a password with this attribute.</span>
+       </li>
+       <li><label for="opac_display">Im OPAC anzeigen: </label>
+            <input type="checkbox" id="opac_display" name="opac_display" <!-- TMPL_VAR name="opac_display_checked" --> />
+            <span>Ankreuzen, um dieses Attribut dem Benutzer im OPAC anzuzeigen.</span>
+       </li>
+       <li><label for="staff_searchable">Suchbar: </label>
+            <input type="checkbox" id="staff_searchable" name="staff_searchable" <!-- TMPL_VAR name="staff_searchable_checked" --> />
+            <span>Ankreuzen, um dieses Attribut für das Personal suchbar zu machen.</span>
+       </li>
+        <li><label for="authorised_value_category">Kategorie für autorisierte Werte: </label>
+            <select name="authorised_value_category" id="authorised_value_category">
+                <option value="" />
+                <!-- TMPL_LOOP name="authorised_value_categories" -->
+                    <!-- TMPL_IF name="selected" -->
+                        <option value="<!-- TMPL_VAR name="category" -->" selected="selected">
+                            <!-- TMPL_VAR name="category" -->
+                        </option>
+                    <!-- TMPL_ELSE -->
+                        <option value="<!-- TMPL_VAR name="category" -->">
+                            <!-- TMPL_VAR name="category" -->
+                        </option>
+                    <!-- /TMPL_IF -->
+                <!-- /TMPL_LOOP -->
+            </select>
+            <span>Kategorie für autorisierte Werte; wenn eine ausgewählt ist, dann können in den Benutzerdatensätzen nur Werte aus der Liste der normierten Werte ausgewählt werden. Allerdings wird die Liste der normierten Werte während des Benuterdatenimports nicht beachtet.</span>
+        </li>
+    </ol>
+  </fieldset>
+  <fieldset class="action">
+    <!-- TMPL_IF name="edit_attribute_type" -->
+    <input type="button" value="speichern" onclick="CheckAttributeTypeForm(this.form)">
+    <!-- TMPL_ELSE -->
+    <input type="button" value="speichern" onclick="CheckAttributeTypeForm(this.form)">
+    <!-- /TMPL_IF-->
+    <a class="cancel" href="/cgi-bin/koha/admin/patron-attr-types.pl">abbrechen</a>
+  </fieldset>
+</form>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="delete_attribute_type_form" -->
+<div class="dialog alert"><h3>Löschen des Benutzerattributes bestätigen <span class="ex">'<!-- TMPL_VAR name="code" -->' (<!-- TMPL_VAR name="description" -->)</span>?</h3>
+<form action="<!-- TMPL_VAR name="script_name" -->" name="Aform" method="post">
+  <input type="hidden" name="op" value="<!-- TMPL_VAR name="confirm_op"-->" />
+  <input type="hidden" name="code" value="<!-- TMPL_VAR name="code" -->" />
+    <input type="submit" value="Benutzerattribut löschen" class="approve"></form>
+	<form action="<!-- TMPL_VAR name="script_name" -->" method="get">
+    <input type="submit" value="Nein, nicht löschen" class="deny">
+</form></div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="display_list" -->
+
+<div id="toolbar">
+	<script type="text/javascript">
+	//<![CDATA[
+	// prepare DOM for YUI Toolbar
+	 $(document).ready(function() {
+	    yuiToolbar();
+	 });
+	// YUI Toolbar Functions
+	function yuiToolbar() {
+	    new YAHOO.widget.Button("newrule");
+	}	//]]>
+	</script>
+	<ul class="toolbar">
+	<li><a id="newrule" href="<!-- TMPL_VAR name="script_name" -->?op=add_attribute_type">Neues Benutzerattribut</a></li>
+</ul></div>
+
+<h2>Benutzerattribut</h2>
+<!-- TMPL_IF name="added_attribute_type" -->
+<div class="dialog message">Benutzerattribut &quot;<!-- TMPL_VAR name="added_attribute_type" -->&quot; hinzugefügt</div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="edited_attribute_type" -->
+<div class="dialog message">Modified patron attribute type &quot;<!-- TMPL_VAR name="edited_attribute_type" -->&quot;</div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="deleted_attribute_type" -->
+<div class="dialog message">Benutzerattribut  &quot;<!-- TMPL_VAR name="deleted_attribute_type" -->&quot; gelöscht.</div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="ERROR_delete_in_use" -->
+<div class="dialog message">Dieses Benutzerattribut &quot;<!-- TMPL_VAR name="ERROR_delete_in_use" -->&quot; konnte nicht gelöscht werden, da es in <!-- TMPL_VAR name="ERROR_num_patrons" --> Benutzerdatensätzen verwendet wird.</div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF name="ERROR_delete_not_found" -->
+<div class="dialog message">Konnte Benutzertattribut &quot;<!-- TMPL_VAR name="ERROR_delete_not_found" -->&quot; nicht löschen &mdash; es war bereits nicht mehr in der Datenbank vorhanden.</div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="available_attribute_types" --><table>
+  <tr>
+    <th>Code</th>
+    <th>Beschreibung</th>
+    <th>Aktionen</th>
+  </tr>
+  <!-- TMPL_LOOP name="available_attribute_types" -->
+  <tr>
+    <td><!-- TMPL_VAR name="code" --></td>
+    <td><!-- TMPL_VAR name="description" --></td>
+    <td>
+      <a href="<!-- TMPL_VAR name="script_name" -->?op=edit_attribute_type&amp;code=<!-- TMPL_VAR name="code" escape="HTML" -->">Bearbeiten</a> <a href="<!-- TMPL_VAR name="script_name" -->?op=delete_attribute_type&amp;code=<!-- TMPL_VAR name="code" escape="HTML" -->">Löschen</a>
+    </td>
+  </tr>
+  <!-- /TMPL_LOOP -->
+</table><!-- TMPL_ELSE --><p>There are no saved patron attribute types.</p><!-- /TMPL_IF -->
+
+<div class="paginationBar"><!-- TMPL_VAR NAME="pagination_bar" --></div>
+
+<!-- /TMPL_IF -->
+ 
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="admin-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

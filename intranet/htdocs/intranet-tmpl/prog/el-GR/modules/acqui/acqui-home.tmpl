@@ -1,0 +1,146 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<title>Koha &rsaquo; Προσκτήσεις</title>
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE NAME="header.inc" -->
+<!-- TMPL_INCLUDE NAME="acquisitions-search.inc" -->
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Αρχική</a> &rsaquo; <a href="/cgi-bin/koha/acqui/acqui-home.pl">Προσκτήσεις</a> &rsaquo; </div>
+
+<div id="doc3" class="yui-t2">
+   
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
+
+<!-- TMPL_INCLUDE NAME="acquisitions-toolbar.inc" -->
+
+<h1>Προσκτήσεις</h1>
+<div class="yui-g">
+<div class="yui-u first">
+<div id="acqui_acqui_home_order">
+    <fieldset>
+        <legend>Έναρξη, παραλαβή ή τροποποίηση οποιασδήποτε παραγγελίας</legend>
+    <!-- TMPL_IF name="nobudget" -->
+		<!-- TMPL_IF NAME="CAN_user_parameters" -->
+        <span class="problem">Πρέπει να <a href="/cgi-bin/koha/admin/aqbookfund.pl">ορίσετε ένα κονδύλι</a> στη Διαχείριση</span>
+		<!-- TMPL_ELSE -->
+		<span class="problem">Ο διαχειριστής σας πρέπει να ορίσει ένα κονδύλιο στην Διαχείριση</span>
+		<!-- /TMPL_IF -->
+        <form name="findsupplier" action="/cgi-bin/koha/acqui/booksellers.pl" method="post">
+            <p><label for="supplierpage">Προμηθευτής </label><input type="text" size="25" name="supplier" id="supplierpage" class="focus" />
+            <input type="submit" value="Αναζήτηση">
+            </p>
+        </form>
+    <!-- TMPL_ELSE -->
+        <form name="findsupplier" action="/cgi-bin/koha/acqui/booksellers.pl" method="post">
+            <p><label for="supplierpage">Προμηθευτής: </label><input type="text" size="25" name="supplier" id="supplierpage" class="focus" />
+            <input type="submit" value="Αναζήτηση">
+            </p>
+        </form>
+		
+    <!-- /TMPL_IF -->
+    </fieldset>
+</div>
+<div id="acqui_acqui_home_suggestions">
+    <fieldset>
+    <legend>Εκκρεμείς προτάσεις</legend>
+        <!-- TMPL_IF name="suggestion" -->
+            <!--TMPL_VAR NAME="suggestion" --> προτάσεις σε αναμονή <a href="/cgi-bin/koha/suggestion/acceptorreject.pl">Διαχείριση προτάσεων</a>
+        <!-- TMPL_ELSE -->
+            <p>Δεν υπάρχουν προτάσεις σε αναμονή</p>
+        <!-- /TMPL_IF -->
+    </fieldset>
+</div>
+</div>
+
+<div class="yui-u">
+    <!-- TMPL_IF name="nobudget" -->
+    <!-- TMPL_ELSE -->
+    <h2>Κεφάλαια και Κονδύλια</h2>
+    <a href="/cgi-bin/koha/admin/aqbookfund.pl" title="[ Διαχείριση κεφαλαίων ]">[ Διαχείριση ]</a>
+    <div id="BudgetsAndFunds">
+    <table id="accounts">
+        <thead>
+        <tr>
+            <th>Κονδύλια</th>
+            <th>Σύνολο</th>
+            <th>Δαπανημένο</th>
+            <th>Comtd</th>
+            <th>Διαθέσιμο</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- TMPL_LOOP name="loop_budget" -->
+            <tr>
+                <td><!-- TMPL_VAR name="bookfundname" --></td>
+                <td><a href="/cgi-bin/koha/admin/aqbudget.pl?op=add_form&amp;aqbudgetid=<!--TMPL_VAR NAME="aqbudgetid"-->"><!-- TMPL_VAR name="budgetamount" --></a></td>
+                <td><a href="/cgi-bin/koha/acqui/spent.pl?bookfund=<!--TMPL_VAR NAME="bookfundid"-->&amp;start=<!--TMPL_VAR NAME="sdate"-->&amp;end=<!-- TMPL_VAR NAME="edate"-->"><!-- TMPL_VAR name="spent" --></a></td>
+                <td><a href="/cgi-bin/koha/acqui/bookfund.pl?bookfund=<!--TMPL_VAR NAME="bookfundid"-->&amp;start=<!--TMPL_VAR NAME="sdate"-->&amp;end=<!-- TMPL_VAR NAME="edate"-->"><!-- TMPL_VAR name="comtd" --></a></td>
+                <td><!-- TMPL_VAR name="avail" --></td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Σύνολο</th>
+            <th><!-- TMPL_VAR name="total" --></th>
+            <th><!-- TMPL_VAR name="totspent" --></th>
+            <th><!-- TMPL_VAR name="totcomtd" --></th>
+            <th><!-- TMPL_VAR name="totavail" --></th>
+        </tr>
+        </tfoot>
+    </table>
+    </div>
+    <p>Use your reload button [ctrl + r] to get the most recent figures.
+    Committed figures are approximate only, as exchange rates will affect the amount actually paid.</p>
+    <!-- /TMPL_IF -->
+    <div id="acqui_acqui_home_currency">
+    <!-- TMPL_IF NAME="loop_currency" -->
+        <h2>Συναλλαγματικές ισοτιμίες</h2>
+        <form action="/cgi-bin/koha/acqui/currency.pl">
+        <table>
+            <tr>
+                <th>Νόμισμα</th>
+                <th>Ποσοστό</th>
+                <th>&nbsp;</th>
+            </tr>
+            <!-- TMPL_LOOP name="loop_currency" -->
+                <tr>
+                    <td>
+                        <label for="<!-- TMPL_VAR name="currency" -->"><!-- TMPL_VAR name="currency" --></label>
+                    </td>
+                    <td>
+                            <input type="hidden" name="type" value="change" />
+                            <input type="text" size="10" id="<!-- TMPL_VAR name="currency" -->" name="<!-- TMPL_VAR name="currency" -->" value="<!-- TMPL_VAR name="rate" -->" />
+                    </td>
+                    <td><input type="submit" value="Αποθήκευση"></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        </table>
+        </form>
+    <!-- TMPL_ELSE -->
+        <a href="/cgi-bin/koha/admin/currency.pl?op=add_form" class="button">
+        Προσθήκη Νομίσματος
+        </a>
+    <!-- /TMPL_IF -->
+    </div>
+</div>
+    
+</div>
+
+<div id="acqui_acqui_home_hints">
+    <h2>Βοήθεια</h2>
+    <p>To begin an order, local purchase or donation, search for the vendor or benefactor, and then you can create a new Basket.</p>
+    <p>Ένα Καλάθι είναι μία συλλογή από παραγγελίες.</p>
+    <p>To order an item you need to establish whether a biblio already exists for it, and either add an item, or set up a new biblio and then add the item.</p>
+</div>
+
+</div>
+</div>
+<div class="yui-b">
+<!-- TMPL_INCLUDE NAME="acquisitions-menu.inc" -->
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="intranet-bottom.inc" -->

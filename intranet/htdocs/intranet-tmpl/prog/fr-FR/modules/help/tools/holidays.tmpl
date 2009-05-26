@@ -1,0 +1,47 @@
+<!-- TMPL_INCLUDE NAME="help-top.inc" -->
+
+<h1>Aide sur le calendrier des jours de fermeture</h1><h2>Le Calendrier des Jours de fermeture, qu'est-ce que c'est ?</h2>
+<p>Le Calendrier des jours de fermeture permet à la bibliothèque de définir les jours où la bibliothèque est fermée.Les règles de prêt sont alors recalculées pour prendre en compte les fermetures de la bibliothèque et où il n'y aura personne de présent pour enregistrer les retours.</p>
+<p>Il y a 2 types de jours de fermeture :</p>
+	<ol>
+		<li><strong>Jour de fermeture unique</strong>: Fermeture et congés.</li>
+		<li><strong>Jours de fermeture répétables</strong>: Jour de fermeture répété chaque année à la même date, ou chaque semaine au même jour.</li>
+	</ol>	Les jours de fermeture sont définis par bibliothèque et le planning doit être défini pour tous les sites du système.
+<h2>Mettre à jour le calendrier:</h2>
+	<ul>
+		<li>Aller dans le module 'Outils' (sous 'Plus' dans la navigation globale)</li>
+		<li>Sélectionnez 'calendrier'</li>
+		<li>Vous pouvez choisir à quel site s'appliquent ces fermetures dans le menu déroulant.
+		<ul>
+			<li>
+		    <span style="background-color: #ffff99">
+ASTUCE : Vous devez entrer les dates de fermeture pour chaque site, vous ne pouvez pas appliquer les fermetures à tous les sites d'un coup.</span></li>
+		</ul></li>
+		<li>Pour ajouter une nouvelle fermeture, cliquez sur une date du calendrier
+		<ul>
+			<li>Exemple: le 18 février est la journée du Maire et la bibliothèque est fermée.</li>
+		</ul></li>
+		<li>Cliquez sur le 18 février et remplissez les champs nécessaires pour votre bibliothèque.</li>
+		<li>Sélectionnez: jour de fermeture répétable, hebdomadaire ou annuel.
+		<ul>
+			<li>Dans le cas du jour du Maire, il n'est pas répétable.</li>
+			<li>
+		    <span style="background-color: #ffff99">
+ASTUCE : Un exemple de fermeture répétable serait Noël, ou le jour de l'an.</span></li>
+		</ul></li>
+		<li>Quand vous avez saisi les données utiles, cliquez 'Sauvegarder'</li>
+		<li>une fois saisies, les fermetures apparaîtront dans le calendrier selon un code-couleur</li>
+	</ul><h3><strong>Pourquoi ajouter des dates de fermeture à un site ?</strong></h3>Une fois le calendrier des fermetures saisi, les règles de circulation sont recalculées pour prendre en compte les fermetures de la bibliothèque.
+<h3>Comment activer le calendrier des fermetures ? </h3>
+<p>Vous pouvez utiliser le calendrier des fermetures en activant les préférences systèmes requises</p>
+	<ul>
+		<li><em>Allez à:</em> Plus &gt; Administration &gt; Préférences système &gt; Circulation &gt; useDaysMode
+		<ul>
+			<li>Sélectionnez la méthode de calcul des dates de retour: sélectionnez Calendar pour utiliser le calendrier de fermetures, et Days pour ignorer le calendrier de fermetures</li>
+		</ul></li>
+		<li><em>Allez à:</em> Plus &gt; Administration &gt; Préférences système &gt; Circulation &gt; finescalendar
+		<ul>
+			<li>Le calendrier des fermetures est utilisé pour le calcul des amendes.</li>
+		</ul></li>
+	</ul>
+<p> </p><!-- TMPL_INCLUDE NAME="help-bottom.inc" -->

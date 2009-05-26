@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>建立指标</title>
+</head>
+<body>
+<form name="f_pop" onSubmit="javascript:report()">
+<input type="hidden" name="plugin_name" value="marc21_leader_authorities.pl">
+<table>
+	<tr>
+		<td>1-4 记录长度</td>
+		<td>（自动填上）</td>
+	</tr>
+	<tr>
+		<td>5- 记录状态</td>
+		<td>
+			<select name="f5" size="1">
+			<!-- TMPL_IF name="f5a" -->
+				<option value="a" SELECTED>a- 编码层次上增加</option>
+			<!-- TMPL_ELSE -->
+				<option value="a">a- 编码层次上增加</option>
+			<!-- /TMPL_IF -->
+
+			<!-- TMPL_IF name="f5c" -->
+				<option value="c" SELECTED>c- 已修正或修订</option>
+			<!-- TMPL_ELSE -->
+				<option value="c">c- 已修正或修订</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5d" -->
+				<option value="d" SELECTED>d- 删除</option>
+			<!-- TMPL_ELSE -->
+				<option value="d">d- 删除</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5n" -->
+				<option value="n" SELECTED>n- 新记录</option>
+			<!-- TMPL_ELSE -->
+				<option value="n">n- 新记录</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5o" -->
+				<option value="o" SELECTED>o- 荒废、遗弃</option>
+			<!-- TMPL_ELSE -->
+				<option value="o">o- 荒废、遗弃</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5s" -->
+				<option value="s" SELECTED>s- 已删除；标题被分为两个或更多标题</option>
+			<!-- TMPL_ELSE -->
+				<option value="s">s- 已删除；标题被分为两个或更多标题</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="f5x" -->
+				<option value="x" SELECTED>x-删除；此题名被别的题名取代</option>
+			<!-- TMPL_ELSE -->
+				<option value="x">x-删除；此题名被别的题名取代</option>
+			<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>6- 纪录类型</td>
+		<td>
+            <input name="f6" value="z" type="hidden" />
+            z- 权威数据
+		</td>
+	</tr>
+	<tr>
+		<td>7-8 没有定义</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td>9- 机读格式（MARC）</td>
+		<td>
+			<select name="f9" size="1">
+				<!-- TMPL_IF name="f9 " -->
+					<option value=" " SELECTED>MARC-8</option>
+				<!-- TMPL_ELSE -->
+					<option value=" ">MARC-8</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f9a" -->
+					<option value="a" SELECTED>a- UCS/Unicode</option>
+				<!-- TMPL_ELSE -->
+					<option value="a">a- UCS/Unicode</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>10-16 指标/分栏/长度</td>
+		<td>（自动填上）</td>
+	<tr>
+		<td>17- 著录依据及层次</td>
+		<td>
+			<select name="f17" size="1">
+				<!-- TMPL_IF name="f17n" -->
+					<option value="n" SELECTED>n- 完整权威记录</option>
+				<!-- TMPL_ELSE -->
+					<option value="n">n- 完整权威记录</option>
+				<!-- /TMPL_IF -->
+				<!-- TMPL_IF name="f17o" -->
+					<option value="o" SELECTED>o- 不完整权威记录</option>
+				<!-- TMPL_ELSE -->
+					<option value="o">o- 不完整权威记录</option>
+				<!-- /TMPL_IF -->
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>18-19 没有定义</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td>20-24 款目格局和长度</td>
+		<td>（自动填上）</td>
+	<tr>
+
+	<tr><td colspan=2><input type="submit" value="完成"></td></tr>
+</table>
+</form>
+<script>
+function report() {
+            var doc   = opener.document; 
+            var field = doc.getElementById("<!-- TMPL_VAR NAME='index'-->");
+        
+            field.value = 
+			'     '+
+			document.f_pop.f5.value+
+			document.f_pop.f6.value+
+			'  '+
+			document.f_pop.f9.value+ 
+			'22     '+
+			document.f_pop.f17.value+
+			'  '+
+			'4500';
+		self.close();
+		return false;
+	}
+</script>
+</body>
+</html>
