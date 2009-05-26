@@ -1,0 +1,103 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha på nettet<!-- /TMPL_IF --><!-- TMPL_ELSE -->Koha på nettet<!-- /TMPL_IF --> Catalog &rsaquo;  Updating Details for <!-- TMPL_LOOP name="BORROWER_INFO" --><!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" --><!-- /TMPL_LOOP -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g" id="userupdate">
+
+<div class="container" style="overflow:auto;">
+<!-- TMPL_LOOP name="BORROWER_INFO" -->
+<h3><a href="/cgi-bin/koha/opac-user.pl"><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" -->'s konto</a> <img src="<!-- TMPL_VAR NAME="themelang" -->../../images/caret.gif" width="16" height="16" alt="&gt;" border="0" /> Personlig information</h3>
+
+<form action="/cgi-bin/koha/opac-userupdate.pl" method="get">
+<div class="yui-u first">
+
+<input type="hidden" name="modify" value="yes" />
+<fieldset class="brief"><legend>Navn</legend><ol>
+<li><label for="firstname">Fornavn:</label> <input id="firstname" type="text" value="<!-- TMPL_VAR name="firstname" -->"  name="firstname" /></li>
+<li><label for="surname">Efternavn:</label> <input id="surname" type="text" value="<!-- TMPL_VAR name="surname" -->"  name="surname" /></li>
+</ol>
+</fieldset>
+
+<fieldset class="brief"><legend>Kontaktinformation</legend>
+<ol>
+<li>
+    <label for="address">Adresse:</label>
+	<input type="text" name="address" value="<!-- TMPL_VAR NAME="address" -->" id="address" />
+	<input type="text" name="address2" value="<!-- TMPL_VAR NAME="address2" -->" id="address2" /></li>
+<li><label for="city">By, område:</label> <input id="city" type="text" value="<!-- TMPL_VAR name="city" -->"  name="city" /></li>
+<li><label for="zipcode">Postnummer: </label><input id="zipcode" name="zipcode" value="<!-- TMPL_VAR NAME="zipcode" -->" /></li>
+<li><label for="phone">Hjemmetelefon:</label> <input id="phone" type="text" value="<!-- TMPL_VAR name="phone" -->"  name="phone" /></li>
+<li><label for="mobile">Mobiltelefon:</label> <input id="mobile" type="text" value="<!-- TMPL_VAR name="mobile" -->"  name="mobile" /></li>
+<li><label for="fax">Fax:</label> <input id="fax" type="text" value="<!-- TMPL_VAR name="fax" -->"  name="fax" /></li>
+
+<li><label for="phonepro">Arbejdstelefon</label> <input id="phonepro"  type="text" value="<!-- TMPL_VAR name="phonepro" -->"  name="phonepro" /></li>
+
+<li><label for="emailaddress">Email:</label> <input id="emailaddress" type="text" value="<!-- TMPL_VAR name="email" -->"  name="emailaddress" /></li>
+</ol>
+</fieldset>
+</div>
+<div class="yui-u">
+<fieldset class="brief">
+<legend>Fast adresse</legend>
+<ol>
+<li>
+    <label for="B_streetaddress">Fast adresse eller anden adresse:</label>
+        <textarea id="B_streetaddress" cols="25" rows="2" name="B_streetaddress"><!--TMPL_VAR NAME="B_streetnumber"--> <!-- TMPL_VAR name="B_address" --></textarea>
+</li>
+
+<li><label for="B_city">By, område:</label> <input id="B_city" type="text" value="<!-- TMPL_VAR name="B_city" -->"  name="B_city" /></li>
+<li><label for="B_zipcode">Postnummer</label> <input type="text" id="B_zipcode" name="B_zipcode" value="<!-- TMPL_VAR NAME="B_zipcode" -->" /></li>
+</ol>
+</fieldset>
+<fieldset class="brief">
+<ol>
+<li><label for="dob">Fødselsdato og -år: </label> <input id="dob" type="text" size="10" value="<!-- TMPL_VAR NAME="dateofbirth" -->" name="dateofbirth" /></li>
+<li><label for="sex">Køn: </label> <select name="sex" id="sex"><option></option>
+<!-- TMPL_IF EXPR="sex eq 'F'" --><option value="F" selected="selected">Kvinde</option><!-- TMPL_ELSE --><option value="F">Kvinde</option><!-- /TMPL_IF -->
+<!-- TMPL_IF EXPR="sex eq 'M'" --><option value="M" selected="selected">Mand</option><!-- TMPL_ELSE --><option value="M">Mand</option><!-- /TMPL_IF -->
+</select></li>
+</ol></fieldset>
+<fieldset class="brief">
+<legend>Biblioteksbruger:</legend>
+<ol>
+	<li><label for="borrowernumber">Lånernummer:</label><input type="text" id="borrowernumber" disabled="disabled" readonly="readonly" value="<!-- TMPL_VAR NAME="borrowernumber" -->" /></li>
+	<li><label for="categorycode">Lånerkategori:</label><input type="text" id="categorycode" disabled="disabled" readonly="readonly" value="<!-- TMPL_VAR NAME="categorycode" -->" /></li>
+	<li><label for="dateenrolled">Indlemmet: </label><input type="text" id="dateenrolled" disabled="disabled" readonly="readonly" value="<!-- TMPL_VAR NAME="dateenrolled" -->" /></li>
+	<li><label for="dateexpiry">Udløber: </label><input type="text" id="dateexpiry" disabled="disabled" readonly="readonly" value="<!-- TMPL_VAR NAME="dateexpiry" -->" /></li>
+   <!-- TMPL_IF NAME="ExtendedPatronAttributes" -->
+    <!-- TMPL_LOOP NAME="patron_attributes" -->
+        <li><label><!-- TMPL_VAR NAME="description" --></label>
+        <!-- TMPL_IF NAME="value_description" -->
+            <input type="text"  disabled="disabled" readonly="readonly" value="<!-- TMPL_VAR NAME="value_description" -->" />
+        <!-- TMPL_ELSE -->
+            <input type="text"  disabled="disabled" readonly="readonly" value="<!-- TMPL_VAR NAME="value" -->" />
+        <!-- /TMPL_IF -->
+        </li>
+    <!-- /TMPL_LOOP -->
+   <!-- /TMPL_IF  -->
+</ol>
+</fieldset>
+<fieldset class="action">
+<p>Please make any necessary changes to your record.  Submitting the form will notify a library staff member, who will make the changes permanent.</p>
+<input type="submit" value="Indsend ændringer"> <a class="cancel" href="/cgi-bin/koha/opac-user.pl">Afbryd</a></fieldset>
+</div>
+
+</form>
+<!-- /TMPL_LOOP -->
+</div>
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

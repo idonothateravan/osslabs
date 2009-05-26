@@ -1,0 +1,144 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->\t<!-- TMPL_VAR NAME="LibraryName" --> -- معاینه خودکار 
+<script type="text/javascript" src="<TMPL_VAR NAME="themelang">/js/sco.js"></script>
+<link rel="stylesheet" type="text/css" href="<!-- TMPL_VAR name="themelang" -->/css/sco.css" />
+<body <!-- TMPL_IF NAME="redirect" -->  onload="openWindow('<!-- TMPL_VAR NAME ="redirect" -->')"<!-- TMPL_ELSE --> onload="sco_init(1);"<!-- /TMPL_IF -->>
+<br />
+<div id="masthead"><h1><!-- TMPL_IF NAME="opacsmallimage" --><img alt="<!-- TMPL_VAR NAME="LibraryName" -->" src="<!-- TMPL_VAR NAME='opacsmallimage' -->" /><!-- /TMPL_IF -->
+\t<!-- TMPL_VAR NAME="LibraryName" --> سیستم معاینه خود کار </h1>
+<br />
+</div>
+<div id="main">
+
+<!-- TMPL_IF NAME="impossible" --><!-- We tried to issue, but failed. -->
+<div class="error"><h3>የማይዋስ አይነት ነው.</h3><p>ይቅርታ፣ ይህ ዓይነት ከዚህ ጣቢያ መዋስ አይቻልም፡፡  </p>
+<p><em>ርዕስ:</em> <!-- TMPL_VAR NAME="title" --> </p>
+<p><em>የስህተት ዓይነት:</em> <!-- TMPL_VAR NAME="impossible" --></p>
+<form action="/cgi-bin/koha/sco/sco-main.pl" name="errorForm" method="post">
+<input type="hidden" name="op" value="login" />
+<input type="hidden" name="userid" value='<!-- TMPL_VAR NAME="userid" -->' />
+<!-- TMPL_IF NAME="returnitem" -->
+<input type="hidden" name="barcode" value='<!-- TMPL_VAR NAME="barcode" -->' />
+<input type="button" name="returnbook" value="ይህንን ውሰት ይመለስ" class="submit" onclick="this.form.op.value='returnbook';this.form.submit();">
+<!-- /TMPL_IF -->
+<input type="submit" name="confirm" value="ወደ መለያ ማጠቃለያ ይመለስ" class="submit">
+</div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="confirm" --><!-- We need to confirm the issue.. -->
+<div class="error"><h3>እባክዎን መዋስዎን ያረጋግጡ</h3>
+<p><em><!-- TMPL_VAR NAME="confirm" --></em></p>
+<br />
+<form action="/cgi-bin/koha/sco/sco-main.pl" name="confirmForm" method="post">
+<input type="hidden" id="op" name="op" value="checkout" />
+<input type="hidden" name="userid" value='<!-- TMPL_VAR NAME="userid" -->' />
+<input type="hidden" name="barcode" value='<!-- TMPL_VAR NAME="barcode" -->' />
+<input type="hidden" id="confirmation"  name="confirmed" value=""  />
+<!-- TMPL_IF NAME="renew" -->
+<input type="button" value="የተዋሰው መመለስ" name="confirm" class="submit" onclick="this.form.op.value='returnbook';this.form.submit();">
+<!-- /TMPL_IF -->
+<input type="button" value="አይነቱን አድስ" =<!-- TMPL_UNLESS NAME="renew" --> name="confirm" class="submit" onclick="this.form.confirmed.value='1';this.form.submit();">
+<input type="button" value="ሰርዝ" class="submit" onclick="this.form.op.value='';this.form.submit();return true;">
+</form>
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="nopermission" --><!-- This is what is displayed if user doesnt have permission --><div class="error"><h3>የተከለከለ</h3>
+Sorry, This Self-Checkout Station has lost authentication.  Please contact the administrator to resolve this problem. </div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="timed_out" --><!-- This is what is displayed if login has timed out -->
+<div class="error"><h3>Session timed out</h3>ይቅርታ፣ የርስዎ ክፍለ ጊዜ አብቅቷል፣ እባክዎን እንደገና ይግቡ፡፡</div><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="different_ip" --><!-- This is what is displayed if user doesnt have permission --><div class="error"><h3>የጠፋው ክፍለ ጊዜ</h3>You are accessing koha from a different ip address! please login again.</div><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="invalid_username_or_password" -->
+<!-- This is what is displayed if user doesnt have permission --><div class="error"><h3>መዝገቡ አልተገኘም</h3><p>Your Userid was not found in the database.  Please try again.</p></div><!-- /TMPL_IF -->
+
+
+<!-- TMPL_UNLESS NAME="hide_main" -->
+	<div id="content-block">
+	<div class="sco_head">
+	<!-- TMPL_UNLESS NAME="validuser" --> 
+	<h3> \t<!-- TMPL_VAR NAME="libraryname" --> معاینه خود کار </h3>
+	<!-- /TMPL_UNLESS -->
+	<div id="checkouthelp">
+		<p><a href="/cgi-bin/koha/sco/help.pl">እገዛ</a> በግል የመዋስ ዘዴ</p>
+	</div>
+
+	<!-- TMPL_IF NAME="userid" -->
+	<!-- TMPL_IF NAME="validuser" -->
+	<h3 class="warning">You are logged in as <!-- TMPL_VAR NAME="borrowername" -->.</h3>
+	<!-- /TMPL_IF -->
+	</div>
+	<!-- TMPL_IF NAME="nouser" -->
+	<div class="error"><h4>ይቅርታ</h4><p>የመታወቂያ ቁጥሩ <!-- TMPL_VAR NAME="userid" --> በውሂብ ጎታው አልተገኘም፡፡ እባክዎን ደግመው ይሞክሩ፡፡</p></div>
+	<br />
+	<!-- /TMPL_IF -->
+	<!-- /TMPL_IF -->
+	<!-- TMPL_IF NAME="timedout" -->
+	<div class="error"><h4>ይቅርታ</h4><p>Your session has timed out due to inactivity.  Please sign in.</p></div>
+	<br />
+	<!-- /TMPL_IF -->
+	<!-- TMPL_UNLESS NAME="validuser" -->
+	<div class="sco_entry" >
+	<form id="mainform" action="/cgi-bin/koha/sco/sco-main.pl" name="myForm" method="post">
+      <input type="hidden" name="koha_login_context" value="sco" />
+	<p class="checkout"><label for="userid">እባክዎን የመለያ ቁጥሮን ያስገቡ፤</label> 
+	<input type="text" id="userid" class="firstField" size="10" name="userid" onblur="ValidateCode();" />
+ 	<!-- TMPL_LOOP NAME="INPUTS" --><input type="hidden" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->"><!-- /TMPL_LOOP -->
+	<input type="hidden" name="op" value="login" />
+ 	<input type="submit" value="ያስገቡ" class="submit"></p></form>
+	</div>
+	<!-- /TMPL_UNLESS -->
+	<!-- TMPL_IF NAME="validuser" -->
+	<div id="newcheckout" class="sco_entry">
+	<form id='mainform' name="scan_form" method="post" action="/cgi-bin/koha/sco/sco-main.pl" onsubmit=" if(this.valid_session == 0) { if(confirm('Session has expired.  Click \'OK\' to continue processing this item.  Click Cancel if you are not <!-- TMPL_VAR NAME="userid" -->.')){ this.op.value='logout'; this.userid.value=''; } return true;}; " >
+	<h4> አውጣ ወይም አይነቱን መልስ </h4>
+	<label for="barcode">አዲሱን ዓይነት ለማየት ወይም ባርኮዱን ለማስገባት፤</label>
+	<input id="barcode" name="barcode" size="14" maxlength="14" class="unfocus" onfocus="this.className='focus';" onblur="this.className='unfocus';" />
+	<input type="hidden" name="op" value="checkout" />
+	<input type="hidden" name="userid" value="<!-- TMPL_VAR name="userid" -->" />
+	<input type="hidden" name="valid_session" value="1">
+	<input type="submit" value="ያስገቡ" class="submit">
+	</form>
+	<p class='alert'><form method="post" action="/cgi-bin/koha/sco/sco-main.pl?op=logout" >የሚቀጥለው ዓይነት ለማየት, ወይም <input type="submit" value="ከተሰራ እዚህ ጠቅ አድርግ፡፡" class="submit"></form></p>
+	</div> <!-- sco_entry -->
+	</div> <!-- newcheckout -->
+
+	<div id="borrowerdetails">
+	<h2>ውሰቶች የ <!-- TMPL_VAR NAME='borrowername' --></h2>
+	<!-- TMPL_IF NAME="issues_count" -->
+	<div class="table"><table><caption>ውሰቶች <span class="count">(<!-- TMPL_VAR NAME="issues_count" --> ድምር)</span></caption>
+	<!-- ISSUES TABLE ROWS -->
+	<tr><th colspan="2">ርዕስ</th><th>የመጥሪያ ቁጥር</th><th>የተጠበቀ ዕዳ</th><th>አድስ</th><!-- TMPL_UNLESS NAME="nofines" --><th>ክፍያዎች</th><!-- /TMPL_UNLESS --></tr>
+	<!-- TMPL_LOOP NAME="ISSUES" -->
+	<!-- TMPL_IF NAME="overdue" --><tr class="overdue"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+	<td><!-- TMPL_IF NAME="itemtypeimages" --> <img src="<!-- TMPL_VAR NAME="themelang" -->/images/<!-- TMPL_VAR NAME="itemtype" -->.gif" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->" /><!-- /TMPL_IF --></td>
+	<td><!-- TMPL_IF NAME="amazonimages" --> <!-- TMPL_IF NAME="isbn" --><a href="/cgi-bin/koha/opac-detail.pl?bib=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->"><img src="http://images.amazon.com/images/P/<!-- TMPL_VAR name="isbn" -->.01.THUMBZZZ.jpg" alt="የመፃሀፍት ሽፋን ምስል" class="thumbnail"></a><!-- /TMPL_IF --> <!-- /TMPL_IF --><!-- TMPL_UNLESS NAME="noitemlinks" --><a href="/cgi-bin/koha/opac-detail.pl?bib=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="title" --><!-- /TMPL_UNLESS --><span class="item-details">
+	<!-- TMPL_VAR NAME="author" --></span></td>
+	<td><!-- TMPL_VAR NAME="classification" --></td>
+	<!-- TMPL_IF NAME="overdue" --><td class="overdue"><!-- TMPL_VAR NAME="date_due" --></td><!-- TMPL_ELSE --><td><!-- TMPL_VAR NAME="date_due" --></td><!-- /TMPL_IF -->
+	<td>
+	<!-- TMPL_IF NAME="status" -->
+	<a href="/cgi-bin/koha/opac-renew.pl?from=opac_user&amp;item=<!-- TMPL_VAR NAME="itemnumber" -->&amp;bornum=<!-- TMPL_VAR NAME="borrowernumber" -->">አድስ</a>
+	<!-- TMPL_ELSE -->
+	የማይታደስ<!-- /TMPL_IF -->
+	</td>
+	<!-- TMPL_UNLESS NAME="nofines" --><td><!-- TMPL_IF NAME="charges" -->አዎ<!-- TMPL_ELSE -->አይሆንም<!-- /TMPL_IF --></td><!-- /TMPL_UNLESS --></tr>
+	<!-- /TMPL_LOOP -->
+	</table>
+	</div>
+	<!-- TMPL_ELSE -->
+	<h3>You currently have nothing checked out.</h3>
+	<!-- /TMPL_IF -->
+	</div> <!-- borrowerdetails -->
+	<!-- /TMPL_IF -->
+<!-- /TMPL_UNLESS --> <!-- ( / hide main) -->	
+	
+	<div id="checkoutfooter">
+
+	</div>
+
+</div>
+</body>
+</html>
+
+
+
+

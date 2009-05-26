@@ -1,0 +1,47 @@
+<SUBJECT>
+Il tuo scaffale
+<END_SUBJECT>
+
+<HEADER>
+Salve, questo è il tuo scaffale, inviato dal tuo Opac. Il file allegato come attach è in formato MARC e può essere importato nei  diversi Personal Bibliographic Software come EndNote, Reference Manager o ProCite.
+<END_HEADER>
+
+<MESSAGE>
+---------------------------------------------
+
+<!-- TMPL_IF NAME="comment" -->
+    <!-- TMPL_VAR NAME="comment" -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_LOOP NAME="BIBLIO_RESULTS" -->
+    <!-- TMPL_VAR NAME="title" -->
+    <!-- TMPL_IF name="subtitle" -->
+       <!-- TMPL_VAR NAME="subtitle" -->
+    <!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="MARCAUTHORS" -->
+<!-- TMPL_LOOP NAME="MARCAUTHORS"-->
+    Autori: <!-- TMPL_VAR NAME="value" -->
+<!-- /TMPL_LOOP -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="publishercode" -->
+
+ISBN: <!-- TMPL_VAR NAME="ISBN" --><!-- /TMPL_IF --><!-- TMPL_IF name="author" -->
+Pubblicato da: <!-- TMPL_VAR NAME="publishercode" --><!-- /TMPL_IF --><!-- TMPL_IF name="publicationyear" --> nel <!-- /TMPL_IF --><!-- TMPL_VAR NAME="publicationyear" --><!-- TMPL_IF name="pages" -->, <!-- /TMPL_IF --><!-- TMPL_VAR name="pages" --><!-- TMPL_IF name="size" -->, <!-- /TMPL_IF --><!-- TMPL_VAR name="size" --><!-- TMPL_IF name="collection" -->
+Collezione: <!-- TMPL_VAR NAME="seriestitle" --><!-- /TMPL_IF --><!-- TMPL_IF name="subject" -->
+Soggetto: <!-- TMPL_VAR NAME="subject" --><!-- /TMPL_IF --><!-- TMPL_IF name="copyrightdate" -->
+Copyright (anno): <!-- TMPL_VAR NAME="copyrightdate" --><!-- /TMPL_IF --><!-- TMPL_IF name="notes" -->
+Note : <!-- TMPL_VAR NAME="notes" --><!-- /TMPL_IF --><!-- TMPL_IF name="unititle" -->
+Titolo uniforme: <!-- TMPL_VAR NAME="unititle" --><!-- /TMPL_IF --><!-- TMPL_IF name="serial" -->
+Seriale: <!-- TMPL_VAR NAME="serial" --><!-- /TMPL_IF --><!-- TMPL_IF name="dewey" -->
+Dewey: <!-- TMPL_VAR name="dewey" --><!-- /TMPL_IF --><!-- TMPL_IF name="classification" -->
+Classificazione: <!-- TMPL_VAR name="classification" --><!-- /TMPL_IF --><!-- TMPL_IF name="lccn" -->
+LCCN: <!-- TMPL_VAR name="lccn" --><!-- /TMPL_IF --><!-- TMPL_IF name="url" -->
+Url : <!-- TMPL_VAR NAME="url" --><!-- /TMPL_IF -->
+Copie: <!-- TMPL_LOOP NAME="ITEM_RESULTS" -->
+	<!-- TMPL_VAR NAME="branchname" --> <!-- TMPL_VAR NAME="location" --> <!-- TMPL_IF name="itemcallnumber" -->(<!-- TMPL_VAR NAME="itemcallnumber" -->)<!-- /TMPL_IF --> <!-- TMPL_VAR NAME="barcode" -->
+<!-- /TMPL_LOOP -->
+---------------------------------------------
+<!-- /TMPL_LOOP -->
+<END_MESSAGE>

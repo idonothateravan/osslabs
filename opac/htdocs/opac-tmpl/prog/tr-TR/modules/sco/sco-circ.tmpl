@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Koha Otomatik Ödünç & İade Sistemi</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="<!-- TMPL_VAR name="themelang" -->/css/sco.css" />
+<script type="text/javascript" language="JavaScript">
+    <!-- Hide from old browsers
+    function openWindow(targeturl, windowname) {
+        newwin =
+        window.open(targeturl,windowname,"height=480,width=640,scrollbars,resizable")
+    }
+    function focusOnFirst (){
+        document.forms[1].elements[0].focus();
+    }
+
+    function abort(){
+        window.open("/cgi-bin/koha/sco/abort.pl","aborting","height=5,width=5");
+    }
+    // end hiding -->
+</script>
+</head>
+<body onload="focusOnFirst();" onblur="self.focus();">
+
+<!-- TMPL_IF name="loggedinusername" -->
+<h3><!-- TMPL_VAR NAME="libraryname" --> Kendin Al Sistemi</h3>
+
+<div id="main">
+<div class="form">
+<!-- TMPL_IF NAME="dbarred" -->
+<div class="error"><h3>Üzgünüz, ödünç alma işlemi tamamlanamamaktadır.</h3>
+There is a problem with your account.  Please ask for help at the circulation desk.
+<div id="abort"><form method="get" action="#">
+<input type="submit" value="Çıkmak İçin Lütfen Burayı Tıklayın" class="complete" onclick="self.close();"></form></div>
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="confirm" -->
+	<div class="error">
+		<h3>Uyarı:</h3>
+		<p><!-- TMPL_VAR name="title" --> ödünç verilmeye çalışılıyor <br />
+			<!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" --> için.</p>
+		<p><!-- TMPL_VAR name="confirm" --></p>
+		<form action="/cgi-bin/koha/sco/sco-circ.pl" method="get">
+		  <input type="hidden" name="borrnumber" value="<!-- TMPL_VAR name="borrowernumber" -->" />
+		  <input type="hidden" name="barcode" value="<!-- TMPL_VAR name="barcode" -->" />
+		  <input type="button" name="confirmed" value="Onaylansın mı?">
+		  <input type="button" name="cancel" value="İptal et">
+		</form>
+	</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="impossible" -->
+	<div class="error">
+		<h3>Ödünç Vermede Hata Oluşuyor</h3>
+		<!-- TMPL_VAR name="impossible" -->
+	</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="message" -->
+	<div class="error">
+		<h3><!-- TMPL_VAR name="message" --> ile eşleşen üye yok</h3>
+	</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_UNLESS NAME="dbarred" -->
+<div id="complete">
+<form method="get" action="/cgi-bin/koha/sco/abort.pl"><input type="submit" value="İşlemi Tamamlamak İçin Buraya Tıklayın" class="complete" onclick="self.close();">
+</form>
+</div>
+<form method="post" action="/cgi-bin/koha/sco/sco-circ.pl">
+<h4>Ödünç verilen kullanıcı: <!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" --> (<!-- TMPL_VAR name="cardnumber" -->) </h4>
+<label for="barcode">Yeni bir materyalin barkodunu tara ya da elle gir:</label> 
+<input id="barcode" name="barcode" size="14" maxlength="14" class="unfocus" onfocus="this.className='focus';" onblur="this.className='unfocus';" /> 
+<input type="submit" value="Gönder" class="submit">
+<input type="hidden" name="borrnumber" value="<!-- TMPL_VAR name="borrowernumber" -->" />
+</form>
+<!-- /TMPL_UNLESS -->
+<!-- /TMPL_IF -->
+
+<div id="borrowerdetails">
+<!-- TMPL_IF NAME="issues_count" -->
+<div class="table"><table><caption>Sayılar <span class="count">(<!-- TMPL_VAR NAME="issues_count" --> toplam)</span></caption>
+<!-- ISSUES TABLE ROWS -->
+<tr><th colspan="2">Eser Adı</th><th>Yer No.</th><th>İade Tarihi</th><th>Süreyi uzat</th><th>Cezalar</th></tr>
+<!-- TMPL_LOOP NAME="ISSUES" -->
+<!-- TMPL_IF NAME="overdue" --><tr class="overdue"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+<td><!-- TMPL_IF NAME="itemtypeimages" --> <img src="<!-- TMPL_VAR NAME="themelang" -->/images/<!-- TMPL_VAR NAME="itemtype" -->.gif" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->" /><!-- /TMPL_IF --></td>
+<td><!-- TMPL_IF NAME="amazonimages" --> <!-- TMPL_IF NAME="isbn" --><a href="/cgi-bin/koha/opac-detail.pl?bib=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->"><img src="http://images.amazon.com/images/P/<!-- TMPL_VAR name="isbn" -->.01.THUMBZZZ.jpg" alt="Kitap Kapak Resmi" class="thumbnail"></a><!-- /TMPL_IF --> <!-- /TMPL_IF --><a href="/cgi-bin/koha/opac-detail.pl?bib=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a><span class="item-details">
+<!-- TMPL_VAR NAME="author" --></span></td>
+<td><!-- TMPL_VAR NAME="classification" --></td>
+<!-- TMPL_IF NAME="overdue" --><td class="overdue"><!-- TMPL_VAR NAME="date_due" --></td><!-- TMPL_ELSE --><td><!-- TMPL_VAR NAME="date_due" --></td><!-- /TMPL_IF -->
+<td>
+<!-- TMPL_IF NAME="status" -->
+<a href="/cgi-bin/koha/opac-renew.pl?from=opac_user&amp;item=<!-- TMPL_VAR NAME="itemnumber" -->&amp;bornum=<!-- TMPL_VAR NAME="borrowernumber" -->">Süreyi uzat</a>
+<!-- TMPL_ELSE -->
+Yenilenemez<!-- /TMPL_IF -->
+</td>
+<td><!-- TMPL_IF NAME="charges" -->Evet<!-- TMPL_ELSE -->Hayır<!-- /TMPL_IF --></td></tr>
+<!-- /TMPL_LOOP -->
+</table>
+</div>
+</div> <!-- borrowerdetails -->
+
+</div>
+<!-- /TMPL_IF -->
+</body>
+</html>

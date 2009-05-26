@@ -1,0 +1,144 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_VAR NAME="LibraryName" --> &ndash; Selvbetjent udlån 
+<script type="text/javascript" src="<TMPL_VAR NAME="themelang">/js/sco.js"></script>
+<link rel="stylesheet" type="text/css" href="<!-- TMPL_VAR name="themelang" -->/css/sco.css" />
+<body <!-- TMPL_IF NAME="redirect" -->  onload="openWindow('<!-- TMPL_VAR NAME ="redirect" -->')"<!-- TMPL_ELSE --> onload="sco_init(1);"<!-- /TMPL_IF -->>
+<br />
+<div id="masthead"><h1><!-- TMPL_IF NAME="opacsmallimage" --><img alt="<!-- TMPL_VAR NAME="LibraryName" -->" src="<!-- TMPL_VAR NAME='opacsmallimage' -->" /><!-- /TMPL_IF -->
+<!-- TMPL_VAR NAME="LibraryName" --> System til selvbetjent udlån </h1>
+<br />
+</div>
+<div id="main">
+
+<!-- TMPL_IF NAME="impossible" --><!-- We tried to issue, but failed. -->
+<div class="error"><h3>Kan ikke lånes ud.</h3><p>Beklager, dette emne kan ikke udlånes her fra.  </p>
+<p><em>Titel:</em> <!-- TMPL_VAR NAME="title" --> </p>
+<p><em>Fejltype:</em> <!-- TMPL_VAR NAME="impossible" --></p>
+<form action="/cgi-bin/koha/sco/sco-main.pl" name="errorForm" method="post">
+<input type="hidden" name="op" value="login" />
+<input type="hidden" name="userid" value='<!-- TMPL_VAR NAME="userid" -->' />
+<!-- TMPL_IF NAME="returnitem" -->
+<input type="hidden" name="barcode" value='<!-- TMPL_VAR NAME="barcode" -->' />
+<input type="button" name="returnbook" value="Returner dette emne" class="submit" onclick="this.form.op.value='returnbook';this.form.submit();">
+<!-- /TMPL_IF -->
+<input type="submit" name="confirm" value="Tilbage til kontooversigt" class="submit">
+</div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="confirm" --><!-- We need to confirm the issue.. -->
+<div class="error"><h3>Bekræft bestillingen:</h3>
+<p><em><!-- TMPL_VAR NAME="confirm" --></em></p>
+<br />
+<form action="/cgi-bin/koha/sco/sco-main.pl" name="confirmForm" method="post">
+<input type="hidden" id="op" name="op" value="checkout" />
+<input type="hidden" name="userid" value='<!-- TMPL_VAR NAME="userid" -->' />
+<input type="hidden" name="barcode" value='<!-- TMPL_VAR NAME="barcode" -->' />
+<input type="hidden" id="confirmation"  name="confirmed" value=""  />
+<!-- TMPL_IF NAME="renew" -->
+<input type="button" value="Returner udlånet" name="confirm" class="submit" onclick="this.form.op.value='returnbook';this.form.submit();">
+<!-- /TMPL_IF -->
+<input type="button" value="Forlæng udlån" =<!-- TMPL_UNLESS NAME="renew" --> name="confirm" class="submit" onclick="this.form.confirmed.value='1';this.form.submit();">
+<input type="button" value="Afbryd" class="submit" onclick="this.form.op.value='';this.form.submit();return true;">
+</form>
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="nopermission" --><!-- This is what is displayed if user doesnt have permission --><div class="error"><h3>Nægtet adgang</h3>
+Sorry, This Self-Checkout Station has lost authentication.  Please contact the administrator to resolve this problem. </div>
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="timed_out" --><!-- This is what is displayed if login has timed out -->
+<div class="error"><h3>Session udløbet</h3>Beklager, din session er udløbet, du skal logge på igen.</div><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="different_ip" --><!-- This is what is displayed if user doesnt have permission --><div class="error"><h3>Session mistet</h3>Du kobler dig op mod Koha fra en anden IP-adresse. Log på igen.</div><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="invalid_username_or_password" -->
+<!-- This is what is displayed if user doesnt have permission --><div class="error"><h3>Fandt ikke posten</h3><p>Brugeridentiteten blev ikke fundet i databasen. Prøv igjen.</p></div><!-- /TMPL_IF -->
+
+
+<!-- TMPL_UNLESS NAME="hide_main" -->
+	<div id="content-block">
+	<div class="sco_head">
+	<!-- TMPL_UNLESS NAME="validuser" --> 
+	<h3> <!-- TMPL_VAR NAME="libraryname" --> Selvbetjent udlån </h3>
+	<!-- /TMPL_UNLESS -->
+	<div id="checkouthelp">
+		<p><a href="/cgi-bin/koha/sco/help.pl">HJÆLP</a> til selvbetjent udlån</p>
+	</div>
+
+	<!-- TMPL_IF NAME="userid" -->
+	<!-- TMPL_IF NAME="validuser" -->
+	<h3 class="warning">Du er logget inn som <!-- TMPL_VAR NAME="borrowername" -->.</h3>
+	<!-- /TMPL_IF -->
+	</div>
+	<!-- TMPL_IF NAME="nouser" -->
+	<div class="error"><h4>Beklager</h4><p>Brukeridentiteten <!-- TMPL_VAR NAME="userid" --> ble ikke funnet i databasen. Prøv igjen.</p></div>
+	<br />
+	<!-- /TMPL_IF -->
+	<!-- /TMPL_IF -->
+	<!-- TMPL_IF NAME="timedout" -->
+	<div class="error"><h4>Beklager</h4><p>Din session er udløbet grundet inaktivitet. Du skal logge på igen.</p></div>
+	<br />
+	<!-- /TMPL_IF -->
+	<!-- TMPL_UNLESS NAME="validuser" -->
+	<div class="sco_entry" >
+	<form id="mainform" action="/cgi-bin/koha/sco/sco-main.pl" name="myForm" method="post">
+      <input type="hidden" name="koha_login_context" value="sco" />
+	<p class="checkout"><label for="userid">Indtast dit kortnummer:</label> 
+	<input type="text" id="userid" class="firstField" size="10" name="userid" onblur="ValidateCode();" />
+ 	<!-- TMPL_LOOP NAME="INPUTS" --><input type="hidden" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->"><!-- /TMPL_LOOP -->
+	<input type="hidden" name="op" value="login" />
+ 	<input type="submit" value="Indsend" class="submit"></p></form>
+	</div>
+	<!-- /TMPL_UNLESS -->
+	<!-- TMPL_IF NAME="validuser" -->
+	<div id="newcheckout" class="sco_entry">
+	<form id='mainform' name="scan_form" method="post" action="/cgi-bin/koha/sco/sco-main.pl" onsubmit=" if(this.valid_session == 0) { if(confirm('Session has expired.  Click \'OK\' to continue processing this item.  Click Cancel if you are not <!-- TMPL_VAR NAME="userid" -->.')){ this.op.value='logout'; this.userid.value=''; } return true;}; " >
+	<h4> Udlån eller returner et medie: </h4>
+	<label for="barcode">Skan et nyt udlån eller opgiv stregkoden:</label>
+	<input id="barcode" name="barcode" size="14" maxlength="14" class="unfocus" onfocus="this.className='focus';" onblur="this.className='unfocus';" />
+	<input type="hidden" name="op" value="checkout" />
+	<input type="hidden" name="userid" value="<!-- TMPL_VAR name="userid" -->" />
+	<input type="hidden" name="valid_session" value="1">
+	<input type="submit" value="Indsend" class="submit">
+	</form>
+	<p class='alert'><form method="post" action="/cgi-bin/koha/sco/sco-main.pl?op=logout" >Skan næste udlån, eller <input type="submit" value="Klik her, hvis du er færdig" class="submit"></form></p>
+	</div> <!-- sco_entry -->
+	</div> <!-- newcheckout -->
+
+	<div id="borrowerdetails">
+	<h2>numre til <!-- TMPL_VAR NAME='borrowername' --></h2>
+	<!-- TMPL_IF NAME="issues_count" -->
+	<div class="table"><table><caption>Numre <span class="count">(<!-- TMPL_VAR NAME="issues_count" --> totalt)</span></caption>
+	<!-- ISSUES TABLE ROWS -->
+	<tr><th colspan="2">Titel</th><th>Hyldeplads</th><th>Utlånt til</th><th>Forlæng</th><!-- TMPL_UNLESS NAME="nofines" --><th>Bøder</th><!-- /TMPL_UNLESS --></tr>
+	<!-- TMPL_LOOP NAME="ISSUES" -->
+	<!-- TMPL_IF NAME="overdue" --><tr class="overdue"><!-- TMPL_ELSE --><tr><!-- /TMPL_IF -->
+	<td><!-- TMPL_IF NAME="itemtypeimages" --> <img src="<!-- TMPL_VAR NAME="themelang" -->/images/<!-- TMPL_VAR NAME="itemtype" -->.gif" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->" /><!-- /TMPL_IF --></td>
+	<td><!-- TMPL_IF NAME="amazonimages" --> <!-- TMPL_IF NAME="isbn" --><a href="/cgi-bin/koha/opac-detail.pl?bib=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->"><img src="http://images.amazon.com/images/P/<!-- TMPL_VAR name="isbn" -->.01.THUMBZZZ.jpg" alt="Billede af omslaget" class="thumbnail"></a><!-- /TMPL_IF --> <!-- /TMPL_IF --><!-- TMPL_UNLESS NAME="noitemlinks" --><a href="/cgi-bin/koha/opac-detail.pl?bib=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a><!-- TMPL_ELSE --><!-- TMPL_VAR NAME="title" --><!-- /TMPL_UNLESS --><span class="item-details">
+	<!-- TMPL_VAR NAME="author" --></span></td>
+	<td><!-- TMPL_VAR NAME="classification" --></td>
+	<!-- TMPL_IF NAME="overdue" --><td class="overdue"><!-- TMPL_VAR NAME="date_due" --></td><!-- TMPL_ELSE --><td><!-- TMPL_VAR NAME="date_due" --></td><!-- /TMPL_IF -->
+	<td>
+	<!-- TMPL_IF NAME="status" -->
+	<a href="/cgi-bin/koha/opac-renew.pl?from=opac_user&amp;item=<!-- TMPL_VAR NAME="itemnumber" -->&amp;bornum=<!-- TMPL_VAR NAME="borrowernumber" -->">Forlæng</a>
+	<!-- TMPL_ELSE -->
+	Kan ikke forlænges<!-- /TMPL_IF -->
+	</td>
+	<!-- TMPL_UNLESS NAME="nofines" --><td><!-- TMPL_IF NAME="charges" -->Ja<!-- TMPL_ELSE -->Nej<!-- /TMPL_IF --></td><!-- /TMPL_UNLESS --></tr>
+	<!-- /TMPL_LOOP -->
+	</table>
+	</div>
+	<!-- TMPL_ELSE -->
+	<h3>Du har ikke lånt noget endnu.</h3>
+	<!-- /TMPL_IF -->
+	</div> <!-- borrowerdetails -->
+	<!-- /TMPL_IF -->
+<!-- /TMPL_UNLESS --> <!-- ( / hide main) -->	
+	
+	<div id="checkoutfooter">
+
+	</div>
+
+</div>
+</body>
+</html>
+
+
+
+

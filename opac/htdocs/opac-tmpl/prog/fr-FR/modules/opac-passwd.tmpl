@@ -1,0 +1,62 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha en ligne<!-- /TMPL_IF --> Catalogue &rsaquo; Compte de <!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+	<div class="container">
+	<h3><a href="/cgi-bin/koha/opac-user.pl">Compte adhérent de <!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --></a> <img src="<!-- TMPL_VAR NAME="themelang" -->l../../images/caret.gif" width="16" height="16" alt="&gt;" border="0" /> Modifier mon mot de passe </h3>
+
+    <!-- TMPL_IF NAME= "Error_messages" -->
+<div class="dialog error">        <h3>Il y a eu un problème avec votre validation</h3>
+        <p>
+            <!-- TMPL_IF NAME= "PassMismatch" -->
+            Les mots de passe ne correspondent pas.Prière de confirmer votre nouveau mot de passe.
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME= "ShortPass" -->
+            Le nouveau mot de passe doit avoir au moins <!-- TMPL_VAR NAME="minpasslen" --> caractères
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME= "WrongPass" -->
+            Votre mot de passe actuel a été mal saisi. Si le problème persiste, contactez un bibliothécaire, qui modifiera votre mot de passe à votre place.	
+            <!-- /TMPL_IF -->
+        </p></div>
+    <!-- /TMPL_IF -->
+    
+    <!-- TMPL_IF NAME= "Ask_data" -->
+        <!-- TMPL_IF NAME="OpacPasswordChange" -->
+        <form action="/cgi-bin/koha/opac-passwd.pl" name="mainform" id="mainform" method="post"><fieldset class="brief">
+			<!-- TMPL_UNLESS NAME= "ShortPass" --><div class="hint">Votre mot de passe doit avoir au moins <!-- TMPL_VAR NAME="minpasslen" --> caractères.</div><!-- /TMPL_UNLESS -->
+          <ol>  <li><label for="password">Mot de passe actuel :</label> <input type="password" id="Oldkey" size="25"  name="Oldkey" /></li>
+            <li><label for="Newkey">Nouveau mot de passe :</label> <input type="password" id="Newkey"  size="25"  name="Newkey" /></li>
+            <li><label for="Confirm">Confirmer votre nouveau mot de passe :</label> <input type="password"  id="Confirm" size="25" name="Confirm" /></li></ol></fieldset>
+            <fieldset class="action"><input type="submit" value="Proposer les modifications à la bibliothèque" class="submit"> <a href="/cgi-bin/koha/opac-user.pl" class="cancel">Annuler</a></fieldset>
+    </form>
+        <!-- TMPL_ELSE -->
+            <div class="dialog alert">Vous ne pouvez pas changer votre mot de passe.</div>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+    
+    <!-- TMPL_IF NAME= "password_updated" -->
+        <div class="dialog message"><h1>Mot de passe mis à jour</h1>
+        Votre mot de passe a été modifié</div>
+        <form action="/cgi-bin/koha/opac-user.pl" method="post">
+            <input type="hidden" name="borrowernumber" value="<!-- TMPL_VAR NAME="borrowernumber" -->" />
+            <p><input type="submit" class="icon back" value="Retour à mes informations"></p>
+        </form>
+    <!-- /TMPL_IF -->
+</div>
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

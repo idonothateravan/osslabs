@@ -1,0 +1,350 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha en ligne<!-- /TMPL_IF --> Catalogue &rsaquo; Accueil bibliothèque de
+<!-- TMPL_LOOP name="BORROWER_INFO" -->
+    <!-- TMPL_VAR name="firstname" --><!-- TMPL_VAR name="surname" -->
+<!-- /TMPL_LOOP -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" src="<!-- TMPL_VAR name="themelang" -->/lib/jquery/plugins/jquery.tablesorter.min.js"></script>
+<script type="text/JavaScript" language="JavaScript">
+//<![CDATA[
+$.tablesorter.addParser({
+    id: 'articles', 
+    is: function(s) {return false;  }, 
+    format: function(s) { return s.toLowerCase().replace(/^(the|an|a) /,''); }, 
+    type: 'text' 
+});
+            $(function() {
+            $('#opac-user-views > ul').tabs();
+			$("#holdst").tablesorter({<!-- TMPL_IF EXPR="dateformat eq 'metric'" -->
+		dateFormat: 'uk',<!-- /TMPL_IF -->
+				widgets : ['zebra'],
+				sortList: [[0,0]],
+		        headers: { 0: { sorter: 'articles' },4: { sorter: false }
+				}
+			}); 
+			$("#checkoutst").tablesorter({<!-- TMPL_IF EXPR="dateformat eq 'metric'" -->
+		dateFormat: 'uk',<!-- /TMPL_IF -->
+				widgets : ['zebra'],
+				<!-- TMPL_IF NAME="JacketImages" -->
+					sortList: [[3,0]],
+						<!-- TMPL_IF NAME="item-level_itypes" -->
+							headers: { 0: { sorter: false }, 1: { sorter: 'articles' },4: { sorter: false },5: { sorter: false }}
+						<!-- TMPL_ELSE -->
+							headers: { 0: { sorter: false }, 1: { sorter: 'articles' },5: { sorter: false },6: { sorter: false }}
+						<!-- /TMPL_IF -->
+				<!-- TMPL_ELSE -->
+						<!-- TMPL_IF NAME="item-level_itypes" -->
+							sortList: [[2,0]],
+							headers: { 0: { sorter: 'articles' },3: { sorter: false },4: { sorter: false }}
+						<!-- TMPL_ELSE -->
+							sortList: [[3,0]],
+							headers: { 0: { sorter: 'articles' },4: { sorter: false },5: { sorter: false }}
+					<!-- /TMPL_IF -->
+				<!-- /TMPL_IF -->
+			}); 
+<!-- TMPL_IF NAME="GoogleJackets" -->KOHA.Google.GetCoverFromIsbn();<!-- /TMPL_IF -->
+            });
+//]]>
+</script>
+</head>
+<body>
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+<!-- TMPL_INCLUDE NAME="masthead.inc" -->
+
+    <div id="yui-main">
+    <div class="yui-b"><div class="yui-g">
+	<div id="userdetails" class="container">
+    <!-- TMPL_LOOP NAME="BORROWER_INFO" -->
+        <h2>Bonjour <!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --> <span class="hint">(<a href="/cgi-bin/koha/opac-main.pl?logout.x=1">Cliquer ici</a> si vous n'êtes pas <!-- TMPL_VAR NAME="title" --> <!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" -->)</span></h2>
+        
+		<!-- TMPL_IF NAME="patronupdate" --><div class="dialog message"><h3>Merci !</h3><p>Vos corrections ont été soumises à la bibliothèque et un membre du personnel mettra votre compte à jour dès que possible.</p></div><!-- /TMPL_IF -->
+		
+        <!-- TMPL_IF NAME="opacnote"-->
+		<div class="dialog message">
+            <h3>Message de la bibliothèque</h3>
+            <p><!-- TMPL_VAR name="opacnote" --></p>
+		</div>
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="flagged" -->
+		<div class="dialog alert">
+        <ul>
+            <!-- TMPL_IF NAME="debarred" -->
+                <li><strong>Merci de noter :</strong> Votre compte a été suspendu. Habituellement, la suspension est due à des anciens retards  ou à des pénalités pour détérioration. Si <a href="/cgi-bin/koha/opac-user.pl">votre page personnelle</a> montre que votre compte est à jour, contactez un bibliothécaire.</li>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="gonenoaddress" -->
+                <li><strong>Merci de noter :</strong> D'après nos fichiers <a href="/cgi-bin/koha/opac-userdetails.pl">vos coordonnées</a> ne sont plus à jour. Merci de nous contacter ou d'utiliser <a href="/cgi-bin/koha/opac-userupdate.pl">la mise à jour en ligne</a> pour nous transmettre vos nouvelles coordonnées (<em>Attention :</em> si vous utilisez la mise à jour en ligne, il y a un délai pour la réactivation de votre compte)</li>
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="lost" -->
+                <li><strong>Merci de noter : </strong> Votre carte de bibliothèque a été signalée comme perdue ou volée. Si c'est une erreur, prière d'apporter votre carte à la banque de prêt de votre bibliothèque et l'erreur sera corrigée.</li>
+            <!-- /TMPL_IF -->
+        </ul></div>
+        <!-- /TMPL_IF -->
+        
+<div id="opac-user-views" class="toptabs">
+        <ul>
+            <li><a href="/cgi-bin/koha/opac-user.pl#opac-user-checkouts">En prêt</a></li>
+            <!-- TMPL_IF NAME="overdues_count" --><li><a href="/cgi-bin/koha/opac-user.pl#opac-user-overdues">Retard</a></li><!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="amountoverfive" --><li><a href="/cgi-bin/koha/opac-user.pl#opac-user-fines">Amendes</a></li><!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="amountoverzero" --><li><a href="/cgi-bin/koha/opac-user.pl#opac-user-fines">Amendes</a></li><!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="amountlessthanzero" --><li><a href="/cgi-bin/koha/opac-user.pl#opac-user-fines">Crédits</a></li><!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="waiting_count" --><!-- TMPL_IF NAME="atdestination" --><li><a href="/cgi-bin/koha/opac-user.pl#opac-user-waiting">En attente</a></li><!-- /TMPL_IF --><!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME="reserves_count" --><li><a href="/cgi-bin/koha/opac-user.pl#opac-user-holds">Réservations</a></li><!-- /TMPL_IF -->
+        </ul>
+        
+        <!-- FINES BOX -->
+        <!-- TMPL_IF NAME="amountoverfive" -->
+            <div id="opac-user-fines"> <h3>Amendes et frais</h3>
+            <table>
+                <tr><th colspan="2">Montant</th></tr>
+                <tr>
+                    <td>Vous devez actuellement des amendes et des frais s'élevant à : :</td>
+                    <td><a href="/cgi-bin/koha/opac-account.pl"><!-- TMPL_VAR NAME="amountoutstanding" --></a></td>
+                </tr>
+            </table></div>
+        <!-- /TMPL_IF -->
+
+        <!-- TMPL_IF NAME="amountoverzero" -->
+           <div id="opac-user-fines"> <h3>Amendes et frais</h3>
+            <table>
+                <tr><th colspan="2">Montant</th></tr>
+                <tr><td>Vous devez actuellement des amendes et des frais s'élevant à : :</td>
+                <td><a href="/cgi-bin/koha/opac-account.pl"><!-- TMPL_VAR NAME="amountoutstanding" --></a></td></tr>
+            </table></div>
+        <!-- /TMPL_IF -->
+
+        <!-- TMPL_IF NAME="amountlessthanzero" -->
+          <div id="opac-user-fines">  <h3>Crédits</h3>
+            <table>
+            <tr><th colspan="2">Montant</th></tr>
+            <tr><td>Vous avez un crédit de:</td><td><a href="/cgi-bin/koha/opac-account.pl"><!-- TMPL_VAR NAME="amountoutstanding" --></a></td></tr>
+            </table></div>
+        <!-- /TMPL_IF -->
+    
+    <!-- /TMPL_LOOP -->
+
+    <!-- TMPL_IF NAME="waiting_count" -->
+    <!-- TMPL_IF NAME="atdestination" -->
+    <div id="opac-user-waiting">
+        <table id="waitingt">
+            <caption>Réservations disponibles</caption>
+            <tr>
+                <th colspan="2">Titre</th>
+                <th>Réservé le</th>
+                <th>Site de retrait</th>
+            </tr>
+            <!-- TMPL_LOOP NAME="WAITING" -->
+                <tr>
+                    <td><img src="<!-- TMPL_VAR NAME="themelang" -->/images/<!-- TMPL_VAR NAME="itemtype" -->.gif" alt="<!-- TMPL_VAR NAME="itemtype" -->" title="<!-- TMPL_VAR NAME="itemtype" -->" /></td>
+                    <td><a href="opac-detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">
+                            <!-- TMPL_VAR NAME="waiting_title" -->
+                        </a><span class="item-details">
+                            <!-- TMPL_VAR NAME="author" -->
+                        </span></td>
+                    <td><!-- TMPL_VAR NAME="reservedate" --></td>
+                    <td><!-- TMPL_IF NAME="atdestination" --><strong>En attente</strong> à <!-- TMPL_VAR NAME="branch" -->
+                        <!-- TMPL_ELSE -->
+                        En transit de <!-- TMPL_VAR NAME="holdingbranch" --> vers <!-- TMPL_VAR NAME="branch" -->
+                        <!-- /TMPL_IF --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        </table></div>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+
+    <div id="opac-user-checkouts"><!-- TMPL_IF NAME="issues_count" -->
+        <table id="checkoutst">
+        <caption><!-- TMPL_VAR NAME="issues_count" --> documents en prêt</caption>
+       <thead><tr>
+        <th colspan="2">Titre</th>
+		<!-- TMPL_UNLESS NAME="item-level_itypes" --><th>Type de document</th> <!-- /TMPL_UNLESS -->
+        <th>Cote</th>
+        <th>Retour le</th>
+        <!-- TMPL_IF name="OpacRenewalAllowed" -->
+        <!-- TMPL_UNLESS name="patron_flagged" --><th>Renouveler</th><!-- /TMPL_UNLESS -->
+        <!-- /TMPL_IF -->
+        <th>Amendes</th>
+        </tr></thead>
+        <tbody>
+		<!-- FIXME: the styling for highlight overrides the overdue red background,
+				so currently we don't use this conditional as the first thing inside the LOOP:
+        <!-- TMPL_UNLESS NAME="__odd__" -->
+           <tr<!-- TMPL_IF NAME="overdue" --> class="overdue"<!-- /TMPL_IF -->>
+        <!-- TMPL_ELSE -->
+           <tr class="<!-- TMPL_IF NAME="overdue" -->overdue <!-- /TMPL_IF -->highlight">
+        <!-- /TMPL_UNLESS -->
+		-->
+		<!-- TMPL_LOOP NAME="ISSUES" -->
+        <tr<!-- TMPL_IF NAME="overdue" --> class="overdue"<!-- /TMPL_IF -->>
+
+<td class="jacketcell">
+<!-- TMPL_UNLESS NAME="JacketImages" --><img src="<!-- TMPL_VAR NAME="imageurl" -->" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->" /><!-- /TMPL_UNLESS -->
+
+<!-- TMPL_IF NAME="AmazonContent" --><a href="http://www.amazon.com/gp/reader/<!-- TMPL_VAR NAME="amazonisbn" -->/ref=sib_dp_pt/002-7879865-0184864#reader-link"><img border="0" src="http://images.amazon.com/images/P/<!-- TMPL_VAR name="amazonisbn" -->.01.THUMBZZZ.jpg" alt="Image de couverture"></a><!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="GoogleJackets" --><div style="block" title="<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->" id="<!-- TMPL_VAR NAME="amazonisbn" -->" class="gbs-thumbnail"></div><!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="BakerTaylorEnabled" --><!-- TMPL_IF NAME="clean_isbn" --><a href="https://<!-- TMPL_VAR NAME="BakerTaylorBookstoreURL" ESCAPE="HTML" --><!-- TMPL_VAR NAME="clean_isbn" -->"><img alt="Voir Baker &amp; Taylor" src="<!-- TMPL_VAR NAME="BakerTaylorImageURL" ESCAPE="HTML" --><!-- TMPL_VAR NAME="clean_isbn" -->"></a><!-- TMPL_ELSE --><!-- BakerTaylor needs clean_isbn! --><!-- /TMPL_IF --><!-- /TMPL_IF -->
+</td>
+
+                <td><a href="/cgi-bin/koha/opac-detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a><span class="item-details">
+                        <!-- TMPL_VAR NAME="author" -->
+                    </span></td>
+                <!-- TMPL_UNLESS NAME="item-level_itypes" --><td><!-- TMPL_IF NAME="imageurl" --><img src="<!-- TMPL_VAR NAME="imageurl" -->" title="<!-- TMPL_VAR name="description" -->" alt="<!-- TMPL_VAR NAME="description" -->" /><!-- /TMPL_IF --> <!-- TMPL_VAR name="description" --></td><!-- /TMPL_UNLESS -->
+                <td><!-- TMPL_VAR NAME="itemcallnumber" --></td>
+                <!-- TMPL_IF NAME="overdue" -->
+                    <td class="overdue"><!-- TMPL_VAR NAME="date_due" --></td>
+                <!-- TMPL_ELSE -->
+                    <td><!-- TMPL_VAR NAME="date_due" --></td>
+                <!-- /TMPL_IF -->
+                <!-- TMPL_IF name="OpacRenewalAllowed" -->
+                    <!-- TMPL_UNLESS name="patron_flagged" -->
+                    <td><!-- TMPL_IF NAME="status" --><a href="/cgi-bin/koha/opac-renew.pl?from=opac_user&amp;item=<!-- TMPL_VAR NAME="itemnumber" -->&amp;borrowernumber=<!-- TMPL_VAR NAME="borrowernumber" -->">Renouveler</a> <span class="renewals">(<!-- TMPL_VAR NAME="renewsleft" --> sur <!-- TMPL_VAR NAME="renewsallowed" --> renouvellements possibles)</span>
+                        <!-- TMPL_ELSE -->
+                            Pas renouvelable
+                        <!-- /TMPL_IF --></td>
+                    <!-- /TMPL_UNLESS -->
+                <!-- /TMPL_IF -->
+                <td><!-- TMPL_IF NAME="charges" -->Oui<!-- TMPL_ELSE -->Non<!-- /TMPL_IF --></td>
+            </tr>
+        <!-- /TMPL_LOOP --></tbody>
+        </table>
+        <!-- FIXME: See bug 1101 <!--TMPL_IF Name="OpacRenewalAllowed"-->
+            <form action="/cgi-bin/koha/opac-renew.pl" method="post">
+                <input type="hidden" name="from" value="opac_user" />
+                <input type="hidden" name="borrowernumber" value="<!-- TMPL_VAR NAME="borrowernumber" -->" />
+                <!-- TMPL_LOOP NAME="ISSUES" -->
+                <input type="hidden" name="item" value="<!-- TMPL_VAR NAME="itemnumber" -->" />
+                <!-- /TMPL_LOOP -->
+                <input type="submit" value="Renew All" />
+            </form>
+        <!--/TMPL_IF--> -->
+    <!-- TMPL_ELSE -->
+        <table>
+            <tr><td>Vous n'avez aucun prêt en cours</td></tr>
+        </table>
+    <!-- /TMPL_IF --></div>
+    
+    
+<!-- TMPL_IF NAME="overdues_count" -->
+<div id="opac-user-overdues"><table id="overduest">
+<caption>Retards <span class="count">(<!-- TMPL_VAR NAME="overdues_count" --> en tout)</span></caption>
+<!-- OVERDUES TABLE ROWS -->
+<tr>
+<th colspan="2">Titre</th>
+<!-- TMPL_UNLESS NAME="item-level_itypes" --><th>Type de document</th> <!-- /TMPL_UNLESS -->
+<th>Cote</th>
+<th>Retour le</th>
+<th>Renouveler</th>
+<!-- <th>Fine to Date</th> -->
+</tr>
+
+<!-- TMPL_LOOP NAME="OVERDUES" -->
+<tr>
+<td class="jacketcell">
+
+<!-- TMPL_UNLESS NAME="JacketImages" --><img src="<!-- TMPL_VAR NAME="imageurl" -->" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->" /><!-- /TMPL_UNLESS -->
+
+<!-- TMPL_IF NAME="AmazonContent" --><!-- TMPL_IF NAME="amazonisbn" --><a href="/cgi-bin/koha/opac-detail.pl?bib=<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->"><img src="http://images.amazon.com/images/P/<!-- TMPL_VAR name="amazonisbn" -->.01.THUMBZZZ.jpg" alt="" class="thumbnail" /></a><!-- /TMPL_IF --><!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="GoogleJackets" --><div style="block" title="<!-- TMPL_VAR NAME="biblionumber" ESCAPE="URL" -->" id="<!-- TMPL_VAR NAME="amazonisbn" -->" class="gbs-thumbnail"></div><!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="BakerTaylorEnabled" --><!-- TMPL_IF NAME="clean_isbn" --><a href="https://<!-- TMPL_VAR NAME="BakerTaylorBookstoreURL" ESCAPE="HTML" --><!-- TMPL_VAR NAME="clean_isbn" -->"><img alt="Voir Baker &amp; Taylor" src="<!-- TMPL_VAR NAME="BakerTaylorImageURL" ESCAPE="HTML" --><!-- TMPL_VAR NAME="clean_isbn" -->"></a><!-- TMPL_ELSE --><!-- BakerTaylor needs clean_isbn! --><!-- /TMPL_IF --><!-- /TMPL_IF -->
+</td>
+<td><a href="/cgi-bin/koha/opac-detail.pl?bib=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a><span class="item-details"><!-- TMPL_VAR NAME="author" --></span></td>
+
+<!-- TMPL_UNLESS NAME="item-level_itypes" --><td><!-- TMPL_IF NAME="imageurl" --><img src="<!-- TMPL_VAR NAME="imageurl" -->" title="<!-- TMPL_VAR name="description" -->" alt="<!-- TMPL_VAR NAME="description" -->" /><!-- /TMPL_IF --> <!-- TMPL_VAR name="description" --></td><!-- /TMPL_UNLESS -->
+<td><!-- TMPL_VAR NAME="itemcallnumber" --></td>
+<td><!-- TMPL_VAR NAME="date_due" --></td>
+<td>
+<!-- TMPL_IF NAME="debarred" -->Compte bloqué
+<!-- TMPL_ELSIF NAME="status" -->
+<a href="/cgi-bin/koha/opac-renew.pl?from=opac_user&amp;item=<!-- TMPL_VAR NAME="itemnumber" -->&amp;bornum=<!-- TMPL_VAR NAME="borrowernumber" -->">Renouveler</a> <span class="renewals">(<!-- TMPL_VAR NAME="renewsleft" --> sur <!-- TMPL_VAR NAME="renewsallowed" --> renouvellements possibles)</span>
+<!-- TMPL_ELSIF NAME="onreserve" -->Réservé
+<!-- TMPL_ELSE -->Pas renouvelable
+<!-- /TMPL_IF -->
+</td>
+<!-- <td><!-- TMPL_VAR NAME="charges" --></td> -->
+</tr>
+<!-- /TMPL_LOOP -->
+</table></div>
+<!-- /TMPL_IF -->
+    
+
+    <!-- TMPL_IF NAME="reserves_count" -->
+        <div id="opac-user-holds">
+        <table id="holdst">
+        <caption>Réservations <span class="count">(<!-- TMPL_VAR NAME="reserves_count" --> en tout)</span></caption>
+            <!-- RESERVES TABLE ROWS -->
+            <thead><tr>
+                <th>Titre</th>
+                <th>Passé</th>
+                <th>Lieu de retrait</th>
+                <th>Situation</th>
+		<th>Modifier</th>
+            </tr></thead>
+			<tbody>
+            <!-- TMPL_LOOP NAME="RESERVES" -->
+           <!-- TMPL_IF NAME="wait" -->
+                        <!-- TMPL_IF NAME="atdestination" -->
+                            <!-- TMPL_IF NAME="found" -->
+                            <tr class="reserved">
+                            <!-- TMPL_ELSE -->
+                            <tr>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_ELSE -->
+                            <tr class="transfered">
+                        <!-- /TMPL_IF -->
+                    <!-- TMPL_ELSE -->
+                            <tr>
+                    <!-- /TMPL_IF -->
+                <td><a href="/cgi-bin/koha/opac-detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="reserves_title" --></a>
+                    <!-- TMPL_VAR NAME="author" -->
+                </td>
+                <td><!-- TMPL_VAR NAME="reservedate" --></td>
+                <td><!-- TMPL_VAR NAME="branch" --></td>
+                <td>
+                    <!-- TMPL_IF NAME="wait" -->
+                        <!-- TMPL_IF NAME="atdestination" -->
+                            <!-- TMPL_IF NAME="found" -->
+                            Document mis de coté à <b> <!-- TMPL_VAR NAME="wbrname" --> </b>
+                            <input type="hidden" name="pickup" value="<!-- TMPL_VAR NAME="wbrcd" -->" />
+                            <!-- TMPL_ELSE -->
+                            En attente de retrait à <b><!-- TMPL_VAR NAME="wbrname" --></b>
+                        <!-- /TMPL_IF -->
+                        <!-- TMPL_ELSE -->
+                            Document en cours de transfert vers <b><!-- TMPL_VAR NAME="wbrname" --></b> <input type="hidden" name="pickup" value="<!-- TMPL_VAR NAME="wbrcd" -->" />
+                        <!-- /TMPL_IF -->
+                    <!-- TMPL_ELSE -->
+                            <!-- TMPL_IF NAME="intransit" -->
+                                Document en transit de <b><!-- TMPL_VAR NAME="frombranch" --></b> depuis le <!-- TMPL_VAR NAME="datesent" -->
+                            <!-- TMPL_ELSE -->
+                                En attente de retrait
+                            <!-- /TMPL_IF -->
+                    <!-- /TMPL_IF -->
+                </td>
+		<td>
+		<form action="/cgi-bin/koha/opac-modrequest.pl" method="post">
+		<input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->" />
+		<input type="submit" name="submit" class="icon delete cancel" value="Annuler" onclick="return confirmDelete('Are you sure you want to cancel this hold?');"></form>
+		</td>
+
+            </tr>
+            <!-- /TMPL_LOOP -->
+			</tbody>
+        </table>
+    </div>
+    <!-- /TMPL_IF -->
+    </div><!-- /opac-user views -->
+    </div><!-- /userdetails -->
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

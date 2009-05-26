@@ -1,0 +1,43 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->كوها على الانترنت<!-- /TMPL_IF -->  سلسلات  &rsaquo; دليل
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+<div id="doc3" class="yui-t1">
+<div id="bd">
+    <div id="yui-main">
+    <div class="yui-b">
+<div class="container">    <!-- TMPL_IF name="typeissue" -->
+        <h1 class="catalogue">اشترك في المسألة و تلّقى التحذير</h1>
+            <form action="opac-alert-subscribe.pl" method="post">
+                <p>هل تريد أن تتلقى رسالة الكترونيه عند وصول مسألة جديدة  لهذا الاشتراك؟</p>
+                <!-- TMPL_VAR name="bibliotitle" --> <!-- TMPL_IF name="notes" -->(<!-- TMPL_VAR name="notes" -->)<!-- /TMPL_IF --> أتى ؟</p>
+                <input type="hidden" name="externalid" value="<!-- TMPL_VAR name="externalid" -->">
+                <input type="hidden" name="alerttype" value="issue">
+                <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR name="biblionumber" -->">
+                <input type="hidden" name="op" value="alert_confirmed">
+                <input type="submit" value="نعم">
+                <a href="opac-serial-issues.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->" >لا</a>
+            </form>
+
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF name="typeissuecancel" -->
+        <h1 class="catalogue">إلغــاء الاشتراك</h1>
+            <form action="opac-alert-subscribe.pl" method="post">
+                <p>الرجاء تأكيد انك لا تريد استلام البريد الالكتروني عندما يصل  موضوع جديد الى هذا الاكتتاب</p>
+                <!-- TMPL_VAR name="bibliotitle" --> <!-- TMPL_IF name="notes" -->(<!-- TMPL_VAR name="notes" -->)<!-- /TMPL_IF --> ?</p>
+                <input type="hidden" name="externalid" value="<!-- TMPL_VAR name="externalid" -->">
+                <input type="hidden" name="alerttype" value="issue">
+                <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR name="biblionumber" -->">
+                <input type="hidden" name="op" value="cancel_confirmed">
+                <input type="submit" value="نعم" class="button">
+                <a href="opac-serial-issues.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->" class="button">لا</a>
+            </form>
+
+    <!-- /TMPL_IF --></div>
+</div>
+</div>
+</div>
+
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

@@ -1,0 +1,47 @@
+<SUBJECT>
+سلّة تسوّقك
+<END_SUBJECT>
+
+<HEADER>
+مرحبا ، سلة التسوق الخاصة بك هنا ، ارسلت من على دليل شبكتنا. يرجى ملاحظه ان الملف المرفق هو ملف مارك السجلات الببليوغرافيه التي يمكن استيرادها الى الببليوغرافيه الشخصيه البرمجيات مثل نهاية المذكره ، والمراجع ، او مواقع الاستشهاد.
+<END_HEADER>
+
+<MESSAGE>
+---------------------------------------------
+
+<!-- TMPL_IF NAME="comment" -->
+    <!-- TMPL_VAR NAME="comment" -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_LOOP NAME="BIBLIO_RESULTS" -->
+    <!-- TMPL_VAR NAME="title" -->
+    <!-- TMPL_IF name="subtitle" -->
+       <!-- TMPL_VAR NAME="subtitle" -->
+    <!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="MARCAUTHORS" -->
+<!-- TMPL_LOOP NAME="MARCAUTHORS"-->
+    <!-- TMPL_VAR NAME="value" --> : المؤلفون
+<!-- /TMPL_LOOP -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="publishercode" -->
+
+ISBN: <!-- TMPL_VAR NAME="ISBN" --><!-- /TMPL_IF --><!-- TMPL_IF name="author" -->
+ : <!-- TMPL_VAR NAME="publishercode" --> نشرمن قبل<!-- /TMPL_IF --><!-- TMPL_IF name="publicationyear" --> في <!-- /TMPL_IF --><!-- TMPL_VAR NAME="publicationyear" --><!-- TMPL_IF name="pages" -->, <!-- /TMPL_IF --><!-- TMPL_VAR name="pages" --><!-- TMPL_IF name="size" -->, <!-- /TMPL_IF --><!-- TMPL_VAR name="size" --><!-- TMPL_IF name="collection" -->
+  <!-- TMPL_VAR NAME="seriestitle" -->  :سلسلة  <!-- /TMPL_IF --><!-- TMPL_IF name="subject" -->
+<!-- TMPL_VAR NAME="subject" --> : الموضوع<!-- /TMPL_IF --><!-- TMPL_IF name="copyrightdate" -->
+  <!-- TMPL_VAR NAME="copyrightdate" --> :سنة حقوق الطبع والنشر<!-- /TMPL_IF --><!-- TMPL_IF name="notes" -->
+  <!-- TMPL_VAR NAME="notes" --> : ملاحظات<!-- /TMPL_IF --><!-- TMPL_IF name="unititle" -->
+<!-- TMPL_VAR NAME="unititle" --> :عنوان موحد<!-- /TMPL_IF --><!-- TMPL_IF name="serial" -->
+ <!-- TMPL_VAR NAME="serial" -->  : السلسلة  <!-- /TMPL_IF --><!-- TMPL_IF name="dewey" -->
+ <!-- TMPL_VAR name="dewey" --> : Dewey <!-- /TMPL_IF --><!-- TMPL_IF name="classification" -->
+  <!-- TMPL_VAR name="classification" -->  :التصنيف<!-- /TMPL_IF --><!-- TMPL_IF name="lccn" -->
+LCCN: <!-- TMPL_VAR name="lccn" --><!-- /TMPL_IF --><!-- TMPL_IF name="url" -->
+ <!-- TMPL_VAR NAME="url" --> :عنوان الموقع<!-- /TMPL_IF -->
+:العناصر  <!-- TMPL_LOOP NAME="ITEM_RESULTS" -->
+	<!-- TMPL_VAR NAME="branchname" --> <!-- TMPL_VAR NAME="location" --> <!-- TMPL_IF name="itemcallnumber" -->(<!-- TMPL_VAR NAME="itemcallnumber" -->)<!-- /TMPL_IF --> <!-- TMPL_VAR NAME="barcode" -->
+<!-- /TMPL_LOOP -->
+---------------------------------------------
+<!-- /TMPL_LOOP -->
+<END_MESSAGE>

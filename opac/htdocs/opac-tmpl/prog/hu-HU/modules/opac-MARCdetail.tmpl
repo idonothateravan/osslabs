@@ -1,0 +1,154 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Online Koha<!-- /TMPL_IF --> Catalog &rsaquo; MARC Details for Record No. <!-- TMPL_VAR name="biblionumber" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_IF NAME="OpacNav" --><div id="doc3" class="yui-t1"><!-- TMPL_ELSE --><div id="doc3" class="yui-t7"><!-- /TMPL_IF -->
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b">
+<div class="container"><div class="yui-g">
+<div id="toolbar">
+<ul>
+	<!-- TMPL_UNLESS NAME="norequests" --><!-- TMPL_IF NAME="opacuserlogin" --><!-- TMPL_IF NAME="RequestOnOpac" --><li><a class="link reserve" href="/cgi-bin/koha/opac-reserve.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">Place Hold</a></li><!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_UNLESS -->
+	<li><a class="link print" href="/cgi-bin/koha/opac-detailprint.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->" onclick="Dopop('opac-detailprint.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->'); return false;">Nyomtat</a></li>
+	<!-- TMPL_IF name="virtualshelves" --><!-- TMPL_IF NAME="opacuserlogin" --><!-- TMPL_IF NAME="loggedinusername" --><li><a class="link addtoshelf" href="/cgi-bin/koha/opac-addbybiblionumber.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->" onclick="Dopop('opac-addbybiblionumber.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->'); return false;">Save to Your Lists</a></li><!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_IF -->
+	<!-- TMPL_IF NAME="opacbookbag" --><li><a class="link addtocart" href="#" onclick="addRecord('<!-- TMPL_VAR NAME="biblionumber" -->'); return false;">Add to Your Cart</a></li><!-- /TMPL_IF -->
+</ul>
+</div>
+</div>
+
+    <div class="yui-g" style="margin-top : 1em;">
+	<div id="views"><h1 style="display: inline;">MARC nézet</h1> <span class="views"><a id="Normalview" href="/cgi-bin/koha/opac-detail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">Normál nézet</a> <span id="MARCview">MARC nézet</span> <!-- TMPL_IF NAME="ISBD" --><a id="ISBDview"  href="/cgi-bin/koha/opac-ISBDdetail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">ISBD View</a><!-- /TMPL_IF --></span></div>
+    <h1><!-- TMPL_VAR NAME="bibliotitle" --> (Record no. <!-- TMPL_VAR NAME="biblionumber" -->)</h1>
+	<table id="marc">
+        <!-- TMPL_LOOP name="0XX" -->
+        <tr><th colspan="2"><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+        <!-- TMPL_LOOP name="1XX" -->
+        <tr><th colspan="2"><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td  ><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td  ><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+
+        <!-- TMPL_LOOP name="2XX" -->
+        <tr><th colspan="2"><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+
+        <!-- TMPL_LOOP name="3XX" -->
+        <tr><th colspan="2"><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+
+        <!-- TMPL_LOOP name="4XX" -->
+        <tr><th colspan="2" ><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+
+        <!-- TMPL_LOOP name="5XX" -->
+        <tr><th colspan="2"><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+
+        <!-- TMPL_LOOP name="6XX" -->
+        <tr><th colspan="2"><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+
+        <!-- TMPL_LOOP name="7XX" -->
+        <tr><th colspan="2"><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+
+        <!-- TMPL_LOOP name="8XX" -->
+        <tr><th colspan="2"><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+
+        <!-- TMPL_LOOP name="9XX" -->
+        <tr><th colspan="2"><!-- TMPL_VAR name="tag" --></th></tr>
+        <!-- TMPL_LOOP name="subfield" -->
+                <tr>
+                    <td><!-- TMPL_VAR name="marc_lib" --></td>
+                    <td><!-- TMPL_VAR name="marc_value" --></td>
+                </tr>
+            <!-- /TMPL_LOOP -->
+        <!-- /TMPL_LOOP -->
+    </table>
+<!-- TMPL_IF NAME="item_header_loop" -->
+        <table id="items">
+			<caption>Példányok</caption>
+                <tr>
+                    <!-- TMPL_LOOP name="item_header_loop" -->
+                        <th>
+                            <!-- TMPL_VAR name="header_value" -->
+                        </th>
+                    <!-- /TMPL_LOOP -->
+                </tr>
+                <!-- TMPL_LOOP name="item_loop" -->
+                    <tr>
+                        <!-- TMPL_VAR name="item_value" -->
+                    </tr>
+                <!-- /TMPL_LOOP -->
+        </table><!-- TMPL_ELSE -->
+        <p>Nincs hozzáférhető példány.</p>
+    <!-- /TMPL_IF -->
+</div>
+</div>
+</div>
+</div>
+<!-- TMPL_IF NAME="OpacNav" -->
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+</div>
+</div><!-- /TMPL_IF -->
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

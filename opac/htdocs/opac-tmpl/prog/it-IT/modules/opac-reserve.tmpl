@@ -1,0 +1,243 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_VAR NAME="LibraryNameTitle" DEFAULT="Koha Online" --> Catalogo &rsaquo; <!-- TMPL_VAR NAME="title" --> è stato riservato per <!-- TMPL_LOOP NAME="USER_INFO" --><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --><!-- /TMPL_LOOP -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+// <![CDATA[ 
+ $(document).ready(function() {
+ 	$("#requestany").click(function() {
+		if(this.checked){
+		$("input[@name=checkitem]").each(function() {
+			$(this).attr("checked","");
+		});
+		}
+	});
+ 	$("input[@name=checkitem]").click(function() {
+		onechecked = 0;
+		$("input[@name=checkitem]").each(function() {
+			if(this.checked){
+				onechecked = 1;
+			}
+		});
+		if(onechecked == 1){
+			$("#requestany").attr("checked","");
+		} else {
+			$("#requestany").attr("checked","checked");
+		}
+	});
+ });
+// ]]>
+</script>
+</head>
+<body>
+<div id="doc3" class="yui-t7">
+<!--TMPL_INCLUDE NAME="masthead.inc" -->
+
+   <div id="bd">
+	<div id="yui-g">
+<div id="holds" class="container">
+<!-- TMPL_IF NAME="message" -->
+    <!-- TMPL_IF NAME="GNA" -->
+    <div class="dialog alert">
+        <strong>Ci dispiace</strong> , non puoi effetuare prenotazioni perchè la biblioteca non ha <a href="/cgi-bin/koha/opac-userdetails.pl"> informazioni  aggiornate per contattarti</a>.
+    </div>
+    <div class="dialog alert"> Prego contatta il tuo bibliotecario, o usa il <a href="/cgi-bin/koha/opac-userupdate.pl">modulo di aggiornamento online</a> per inviare le informazioni aggiornate (<em>Nota:</em> ci può essere un ritardo nel ripristinare il tuo account se l'invio avviene online)
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="lost" -->
+    <div class="dialog alert">
+        <strong>Ci dispiace</strong> , non puoi effettuare prenotazioni perchè la tua tessera è contrassegnata come persa o rubata.
+    </div>
+    <div class="dialog alert">
+         Se si tratta di un errore, prego porta la tua tessera al banco del prestito nella tua biblioteca e l'errore sarà corretto.
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="debarred" -->
+    <p class="error">
+        <strong>Ci dispiace</strong> , non puoi effettuare prenotazioni perchè il tuo account è stato bloccato.
+    </div>
+    <div class="dialog alert"> Di norma le ragioni per bloccare un account sono vecchi prestiti scaduti o multe per danni. Se <a href="/cgi-bin/koha/opac-user.pl">la web page del tuo account</a> dice che il tuo account deve essere sbloccato, consulta un bibliotecario
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="too_much_oweing" -->
+    <div class="dialog alert">
+        Ci dispiace, non puoi fare prenotazioni perchè sei in debito di <!-- TMPL_VAR NAME="too_much_oweing" -->
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="too_many_reserves" -->
+        <div class="dialog alert">Ci dispiace, non puoi fare più di <!-- TMPL_VAR NAME="too_many_reserves" --> prenotazioni
+        </div>
+        <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="already_reserved" -->
+    <div class="dialog alert">
+        Hai già posto una prenotazione su questa copia. <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">Torna alla pagina con i dettagli della copia</a>
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="no_items_selected" -->
+    <div class="dialog alert">
+        Devi scegliere almeno una copia.
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="no_branch_selected" -->
+    <div class="dialog alert">
+        Devi scegliere una biblioteca per il ritiro
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="no_biblionumber" -->
+    <div class="dialog alert">Errore: non fornito il biblionumber</div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="bad_biblionumber" -->
+    <div class="dialog alert">Errore: Non trovato record corrispondente al biblionumber <!-- TMPL_VAR NAME="bad_biblionumber" --></div>
+    <!-- /TMPL_IF -->
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="select_item_types" -->
+    <!-- The first time round you select which bibitems you want -->
+    <form action="/cgi-bin/koha/opac-reserve.pl" method="post">
+        <input type="hidden" name="item_types_selected" value="1">
+        <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->">
+        <h3>Fai una prenotazione su <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a><!-- TMPL_IF NAME="author" -->, da <!-- TMPL_VAR NAME="author" --><!-- /TMPL_IF --></h3>
+
+<!-- TMPL_IF NAME="OPACItemHolds" --> <!-- TMPL_LOOP name="bibitemloop" --> 
+            <!-- TMPL_UNLESS NAME="item-level_itypes" -->
+            <p><strong>Tipo copia:</strong> <!-- TMPL_VAR NAME="description" --></p>
+            <!-- /TMPL_UNLESS -->
+            <!-- TMPL_IF NAME="publicationyear" --><p><strong>Anno di pubblicazione:</strong> <!-- TMPL_VAR NAME="publicationyear" --></p><!-- /TMPL_IF -->
+<!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+		<fieldset class="rows holds">
+			<ol>
+				<li><span class="label">Per:</span> <!-- TMPL_LOOP NAME="USER_INFO" --><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --> (<!-- TMPL_VAR NAME="cardnumber" -->)
+            <!-- TMPL_IF NAME="singleBranchMode" -->
+             <input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branchcode" -->"/>
+            <!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP --></li>
+            <li><span class="label">Priorità:</span><!-- TMPL_VAR Name="rank" DEFAULT="?" --> fuori da <!-- TMPL_VAR Name="reservecount" DEFAULT="?" -->
+			</li> 
+            <!-- TMPL_UNLESS NAME="singleBranchMode" -->
+            <li><label for="branch">Scegli da:</label> <select name="branch" id="branch">
+                    <!-- TMPL_LOOP NAME="CGIbranch" -->
+                        <!-- TMPL_IF name="selected" -->
+                            <option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="branch" --></option>
+                        <!-- TMPL_ELSE -->
+                            <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branch" --></option>
+                        <!-- /TMPL_IF -->
+                    <!-- /TMPL_LOOP -->
+            </select>
+            </li>
+            <!-- /TMPL_UNLESS -->
+			
+			<!-- TMPL_IF NAME="forloan" -->
+            <!-- TMPL_IF NAME="OPACItemHolds" --><li> <label for="requestany">Fai una prenotazione sulla prossima copia disponibile </label>
+            <input type="checkbox" name="request" id="requestany" checked="checked" value="Ogni">
+            </li><!-- TMPL_ELSE --><input type="hidden" name="request" value="Any" /><!-- /TMPL_IF -->
+			</ol>
+		</fieldset>
+
+
+<fieldset class="action">            <input type="hidden" name="biblioitem" value="<!-- TMPL_VAR NAME="biblioitemnumber" -->" />
+            <input type="submit" value="Fai una prenotazione">
+            <input type="hidden" name="all" value="1" /></p>
+            <input type="hidden" name="place_reserve" value="1" /></fieldset>
+			<!-- /TMPL_IF -->  
+			          
+       <!-- TMPL_IF NAME="OPACItemHolds" --> <!-- TMPL_LOOP name="bibitemloop" -->    
+
+            <table id="requestspecific">
+			<caption>Fai una prenotazione su una specifica copia</caption>
+            <tr>
+                <th>Prenota</th>
+	            <!-- TMPL_IF NAME="item-level_itypes" -->
+                <th>Tipo copia</th>
+                <!-- /TMPL_IF -->
+                <th>Codice a barre</th>
+                <!-- TMPL_UNLESS NAME="singleBranchMode" -->
+                <th>Pagina principale biblioteca</th>
+                <th>Ultima collocazione</th>
+                <!-- /TMPL_UNLESS -->
+                <th>Segnatura</th>
+                <th>Altri dati</th>
+            </tr>
+        <!-- TMPL_LOOP Name="itemloop" -->
+        <tr class="<!-- TMPL_VAR NAME="backgroundcolor" -->">
+            <td>
+            <!-- TMPL_IF NAME="available" -->
+            <input type="radio" name="checkitem" value="<!-- TMPL_VAR NAME="itemnumber" -->" />
+            <!-- TMPL_ELSE -->
+            <input disabled="disabled" type="radio" name="checkitem" value="<!-- TMPL_VAR NAME="itemnumber" -->" />
+            <!-- /TMPL_IF -->
+            </td>
+            <!-- TMPL_IF NAME="item-level_itypes" -->
+            <td>
+            <img src="<!-- TMPL_VAR NAME="imageurl" -->" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->" />
+            </td>
+            <!-- /TMPL_IF -->
+            <td><!-- TMPL_VAR NAME="barcode"           --></td>
+            <!-- TMPL_UNLESS NAME="singleBranchMode" -->
+            <td><!-- TMPL_VAR NAME="homebranchname"    --></td>
+            <td><!-- TMPL_VAR NAME="holdingbranchname" --></td>
+            <!-- /TMPL_UNLESS -->
+            <td><!-- TMPL_VAR NAME="itemcallnumber"    --></td>
+            <td>
+        <!-- TMPL_IF Name="date_due" -->
+            <span class="checkedout">Scaduto <!-- TMPL_VAR NAME="date_due" --></span>
+        <!-- TMPL_ELSIF Name="transfertwhen" -->
+            <span class="intransit">In trasferimento da <!-- TMPL_VAR NAME="transfertfrom" --> a <!-- TMPL_VAR NAME="transfertto" -->, dal <!-- TMPL_VAR NAME="transfertwhen" --></span>
+        <!-- /TMPL_IF -->
+
+        <!-- TMPL_IF Name="message" -->
+            <span class="lost">Non disponibile (perso o mancante)</span>
+        <!-- /TMPL_IF -->
+
+        <!-- TMPL_IF Name="notforloan" -->
+            <span class="notforloan">Non prestabile (<!-- TMPL_VAR NAME="notforloanvalue" -->)</span>
+        <!-- /TMPL_IF -->
+
+            <!-- TMPL_IF NAME="reservedate"-->
+                    <span class="waiting"><!-- TMPL_IF NAME="waitingdate" -->In attesa<!-- TMPL_ELSE -->In attesa<!-- /TMPL_IF --> per l'utente 
+                    <!-- TMPL_IF NAME="waitingdate" -->presso<!-- TMPL_ELSE -->in attesa presso<!-- /TMPL_IF --> <!-- TMPL_VAR NAME="ExpectedAtLibrary" --> da
+                    <!-- TMPL_IF NAME="waitingdate" --><!-- TMPL_VAR NAME="waitingdate" --><!-- TMPL_ELSE --><!-- TMPL_IF name="reservedate" --><!-- TMPL_VAR NAME="reservedate" --><!-- /TMPL_IF --><!-- /TMPL_IF -->.</span>
+            <!-- TMPL_ELSE -->
+                    <span class="notonhold">Non prenotato</span>
+            <!-- /TMPL_IF -->&nbsp;
+            </td>
+        </tr>
+        <!-- /TMPL_LOOP --> <!-- itemloop -->
+        </table>
+        <!-- /TMPL_LOOP --> <!-- bibitemloop -->
+        <input type="submit" value="Fai una prenotazione">
+        </form><!-- /TMPL_IF -->
+    <!-- end of the first form -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="item_types_selected" -->
+<!-- if the bibitems have already been selected -->
+<form action="/cgi-bin/koha/opac-reserve.pl" method="post">
+<input type="hidden" name="place_reserve" value="1">
+<input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->"><h3>Conferma prenotazione</h3>
+<div class="details">
+    <table>
+        <tr><th>Titolo: </th><td><span class="title"><!-- TMPL_VAR NAME="title" --></span></td></tr>
+
+<!-- TMPL_IF NAME="all" -->
+        <tr><th>Tipo copia: </th><td>Ogni<input type="hidden" name="all" value="1"></td></tr>
+<!-- TMPL_ELSE -->
+        <tr><th>Tipi di copia: </th><td><!-- TMPL_LOOP NAME="TYPES" -->
+<input type="hidden" name="itemtype" value="<!-- TMPL_VAR NAME="itemtype" -->"><!-- TMPL_VAR NAME="description" -->;
+<!-- /TMPL_LOOP --></td></tr>
+
+<!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="singleBranchMode" -->
+        <input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branch" -->">
+        <!-- TMPL_ELSE -->
+        <tr><th>Scegli da: </th><td><!-- TMPL_VAR NAME="branchname" --><input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branch" -->"></td></tr>
+        <!-- /TMPL_IF -->
+</table>
+</div>
+<p><input type="submit" value="Termina ed effettua la prenotazione" class="submit" onclick="this.value='Please wait...'; this.disabled=true; this.form.submit();"></p>
+
+</form>
+
+<!-- /TMPL_IF -->
+</div></div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc"-->

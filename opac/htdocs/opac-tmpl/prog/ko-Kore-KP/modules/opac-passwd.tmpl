@@ -1,0 +1,62 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha Online<!-- /TMPL_IF --> Catalog &rsaquo; Account for <!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+	<div class="container">
+	<h3><a href="/cgi-bin/koha/opac-user.pl"><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" -->'s account</a> <img src="<!-- TMPL_VAR NAME="themelang" -->l../../images/caret.gif" width="16" height="16" alt="&gt;" border="0" /> 패스워드변경 </h3>
+
+    <!-- TMPL_IF NAME= "Error_messages" -->
+<div class="dialog error">        <h3>귀하의 입력사항에 문제가 있었습니다</h3>
+        <p>
+            <!-- TMPL_IF NAME= "PassMismatch" -->
+            패스워드가 일치하지 않습니다. 새 패스워드를 다시 입력해 주세요.
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME= "ShortPass" -->
+            Your new password must be at least <!-- TMPL_VAR NAME="minpasslen" --> characters long
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME= "WrongPass" -->
+            Your current password was entered incorrectly.  If this problem persists, please ask a librarian to re-set your password for you.	
+            <!-- /TMPL_IF -->
+        </p></div>
+    <!-- /TMPL_IF -->
+    
+    <!-- TMPL_IF NAME= "Ask_data" -->
+        <!-- TMPL_IF NAME="OpacPasswordChange" -->
+        <form action="/cgi-bin/koha/opac-passwd.pl" name="mainform" id="mainform" method="post"><fieldset class="brief">
+			<!-- TMPL_UNLESS NAME= "ShortPass" --><div class="hint">Your password must be at least <!-- TMPL_VAR NAME="minpasslen" --> characters long.</div><!-- /TMPL_UNLESS -->
+          <ol>  <li><label for="password">현재 패스워드:</label> <input type="password" id="Oldkey" size="25"  name="Oldkey" /></li>
+            <li><label for="Newkey">새로운 패스워드:</label> <input type="password" id="Newkey"  size="25"  name="Newkey" /></li>
+            <li><label for="Confirm">새 패스워드를 다시 한 번 입력하세요:</label> <input type="password"  id="Confirm" size="25" name="Confirm" /></li></ol></fieldset>
+            <fieldset class="action"><input type="submit" value="입력사항변경" class="submit"> <a href="/cgi-bin/koha/opac-user.pl" class="cancel">Cancel</a></fieldset>
+    </form>
+        <!-- TMPL_ELSE -->
+            <div class="dialog alert">You can't change your password.</div>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+    
+    <!-- TMPL_IF NAME= "password_updated" -->
+        <div class="dialog message"><h1>패스워드갱신</h1>
+        귀하의 암호가 변경되었습니다.</div>
+        <form action="/cgi-bin/koha/opac-user.pl" method="post">
+            <input type="hidden" name="borrowernumber" value="<!-- TMPL_VAR NAME="borrowernumber" -->" />
+            <p><input type="submit" class="icon back" value="개인 기록에 반환"></p>
+        </form>
+    <!-- /TMPL_IF -->
+</div>
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

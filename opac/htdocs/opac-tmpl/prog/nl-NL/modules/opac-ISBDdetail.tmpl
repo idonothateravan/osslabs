@@ -1,0 +1,190 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha Online<!-- /TMPL_IF --> Catalogus &rsaquo; Toon ISBD
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/JavaScript" language="JavaScript">
+//<![CDATA[
+	$(document).ready(function() {
+		$('#bibliodescriptions > ul').tabs();
+	}); 
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_IF NAME="OpacNav" --><div id="doc3" class="yui-t1"><!-- TMPL_ELSE --><div id="doc3" class="yui-t7"><!-- /TMPL_IF -->
+   <div id="bd" class="columnfix">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b">
+	<div class="yui-ge">
+    <div class="yui-u first">
+	<div class="container">	
+	
+	
+    <div id="views"> <h1 style="display: inline;">ISBD</h1> <span class="views"><a id="Normalview" href="/cgi-bin/koha/opac-detail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">Toon normaal</a> <a id="MARCview" href="/cgi-bin/koha/opac-MARCdetail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->">Toon MARC</a> <span id="ISBDview">ISBD tonen</span></span></div>
+    <!-- TMPL_VAR name="ISBD" -->
+	
+		<div id="bibliodescriptions" class="toptabs">
+	<ul>   
+	<!-- TMPL_IF name="subscriptionsnumber" --><li>
+	            <a href="/cgi-bin/koha/opac-ISBDdetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->#opac-isbd-subscriptions">Abonnementen</a>
+	    </li><!-- /TMPL_IF -->
+	<!-- TMPL_IF NAME="reviewson" --><li><a href="/cgi-bin/koha/opac-ISBDdetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->#comments">Commentaren</a></li><!-- /TMPL_IF -->
+	 	<!-- TMPL_IF NAME="AmazonContent" --><li><a href="/cgi-bin/koha/opac-ISBDdetail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->#opac-isbd-amazonreviews">Amazon besprekingen</a></li><!-- /TMPL_IF -->
+	</ul>
+
+		<div id="opac-isbd-subscriptions">    <!-- TMPL_IF name="subscriptionsnumber" -->
+	        <h2>
+	            We hebben <!-- TMPL_VAR name="subscriptionsnumber" --> abonnement(en) voor deze titel.
+	        </h2>
+	        <!-- TMPL_LOOP Name="subscriptions" -->
+	            <h3>In bibliotheek: <!-- TMPL_VAR name="branchcode" --> <!-- TMPL_VAR name="notes" --></h3>
+	            <p>Bekijk de drie recentste ontleningen:</p>
+	            <!-- TMPL_IF name="subscriptionnotes"-->
+	                <p><!--TMPL_VAR Name="subscriptionnotes"--> </p>
+	            <!-- /TMPL_IF -->
+	            <!--TMPL_IF Name="latestserials"-->
+	            <table>
+	            <tr><th>Artikelnummer</th><th>Datum</th><th>Status</th></tr>
+	            <!--TMPL_LOOP Name="latestserials"-->
+	                <tr>
+	                    <td>            <!--TMPL_VAR Name="serialseq"-->
+	                    </td>
+	                    <td>            <!--TMPL_VAR Name="planneddate"-->
+	                    </td>
+	                    <td>            <!--TMPL_IF Name="status1"-->Hangende
+	                        <!--TMPL_ELSE -->
+	                            <!-- TMPL_IF Name="status2"-->Aangekomen
+	                            <!--TMPL_ELSE -->
+	                                <!-- TMPL_IF Name="status3"-->Te laat
+	                                <!--TMPL_ELSE -->
+	                                    <!-- TMPL_IF Name="status4"-->Onvindbaar
+	                                    <!--TMPL_ELSE -->
+	                                        <!-- TMPL_IF Name="status5"-->Niet uitgeleend
+	                                        <!--/TMPL_IF-->
+	                                    <!--/TMPL_IF-->
+	                                <!--/TMPL_IF-->
+	                            <!--/TMPL_IF-->
+	                        <!--/TMPL_IF-->
+	                    </td>
+	                </tr>
+	            <!--/TMPL_LOOP -->
+	            </table>
+	            <!-- /TMPL_IF -->
+	        <!-- /TMPL_LOOP -->
+	        <p> <a href="/cgi-bin/koha/opac-serial-issues.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->" title="Serial issues">Klik hier</a> voor meer informatie over de abonnement(en)geschiedenis</p>
+	    <!-- /TMPL_IF --></div>
+
+	<!-- TMPL_IF NAME="reviewson" -->
+	<div id="comments">
+	<!-- TMPL_IF NAME="reviews" -->
+	        <!--TMPL_LOOP NAME="reviews"-->
+	            <h5>
+	                Commentaar door <!--TMPL_VAR NAME="title"--> <!--TMPL_VAR NAME="firstname"--> <!--TMPL_VAR NAME="surname"-->
+	            </h5>
+				<small>
+	                <!--TMPL_VAR NAME="datereviewed"-->
+	            </small>
+	        <p>
+	          <!--TMPL_VAR NAME="review" ESCAPE="HTML"-->
+	        </p>
+	        <!--/TMPL_LOOP-->
+	    <!-- TMPL_ELSE  -->
+	        <p>Geen opmerkingen voor dit artikel.</p>
+	<!-- /TMPL_IF -->
+
+	    <!-- TMPL_IF NAME="loggedinusername" -->
+	       <p> <a href="javascript:Dopop('/cgi-bin/koha/opac-review.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber"-->');">
+	            Bevestig of bewerk uw opmerkingen op dit artikel.
+	        </a></p>
+	    <!-- TMPL_ELSE -->
+	        <p><a href="/cgi-bin/koha/opac-user.pl">Meld je aan</a> om commentaar te kunnen geven.</p>
+	    <!-- /TMPL_IF -->
+		</div>
+
+	<!-- /TMPL_IF -->
+
+	<!-- TMPL_IF NAME="AmazonContent" -->
+	<!-- Amazon Reviews -->
+	<div id="opac-isbd-amazonreviews">
+
+	    <!-- TMPL_LOOP NAME="BIBLIO_RESULTS" -->
+	    <!-- TMPL_IF NAME="isbn" -->
+	        <h4><a href="http://www.amazon.com/gp/customer-reviews/write-a-review.html/002-2970817-7876066?%5Fencoding=UTF8&asin=<!-- TMPL_VAR NAME="isbn" -->&amp;store=books">Voeg je eigen bespreking toe</a></h4>
+	    <!-- /TMPL_IF -->
+	    <!-- /TMPL_LOOP --><br/>
+
+	        <!-- TMPL_IF NAME="rating" -->
+	            <h4>Beoordeling (van Amazon.com)</h4>
+	        <div id="starMT"><div id="starFull" style="width:<!-- TMPL_VAR NAME="rating" -->px"></div></div>
+
+	        <!-- TMPL_LOOP NAME="AMAZONREVIEWS" -->
+	            <div class="content_set">
+	            <!-- TMPL_IF NAME="summary" -->
+	            <h4 class="underline">  <!-- TMPL_VAR NAME="summary" --></h4>
+	            <!-- /TMPL_IF -->
+	            <!-- TMPL_IF NAME="comment" -->
+	                <p><!-- TMPL_VAR NAME="comment" -->
+	            </p><!-- /TMPL_IF -->
+	            </div>
+	    <!-- /TMPL_LOOP -->
+	    <!-- TMPL_ELSE -->
+
+	    <p> Sorry, er zijn geen besprekingen voor dit artikel. </p>
+
+	    <!-- /TMPL_IF -->
+	</div> <!-- itemReviews -->
+	<!-- /TMPL_IF-->
+	</div>
+	</div>
+	</div>
+	<div class="yui-u">
+	<div class="container">
+<ul id="action">
+
+<!-- TMPL_UNLESS NAME="norequests" -->
+    <!-- TMPL_UNLESS name="bi_notforloan" -->
+        <!-- TMPL_IF NAME="opacuserlogin" --><!-- TMPL_IF NAME="RequestOnOpac" -->
+            <li><a class="reserve" href="/cgi-bin/koha/opac-reserve.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">
+            Reserveer
+            </a></li>
+        <!-- /TMPL_IF --><!-- /TMPL_IF -->
+    <!-- /TMPL_UNLESS -->
+<!-- /TMPL_UNLESS -->
+        <li><a class="print" href="/cgi-bin/koha/opac-detailprint.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->" onclick="Dopop('opac-detailprint.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->'); return false;">
+            Print
+        </a></li>
+<!-- TMPL_IF name="virtualshelves" -->
+   <!-- TMPL_IF NAME="opacuserlogin" --> <!-- TMPL_IF NAME="loggedinusername" -->
+        <li><a class="addtoshelf" href="/cgi-bin/koha/opac-addbybiblionumber.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->" onclick="Dopop('opac-addbybiblionumber.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->'); return false;">
+            Bewaar uw lijsten
+        </a></li>
+    <!-- /TMPL_IF --><!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="opacbookbag" --><li><a class="addtocart" href="#" onclick="addRecord('<!-- TMPL_VAR NAME="biblionumber" -->'); return false;">
+            Voeg toe aan je winkelwagentje
+        </a></li><!-- /TMPL_IF -->
+</ul>
+		<div id="export">
+		<form method="get" action="/cgi-bin/koha/opac-export.pl">
+		<label for="format">Bewaar verslag</label>
+	    <select name="format" id="format">
+		<option value="">-- Kies formaat --</option>
+        <option value="mods">MODS (XML)</option>
+        <option value="dc">Dublin Core (XML)</option>
+        <option value="marcxml">MARCXML</option>
+        <option value="marc8">MARC (non-Unicode/MARC-8)</option>
+        <option value="utf8">MARC (Unicode/UTF-8)</option>    </select><input type="hidden" name="op" value="export" /><input type="hidden" name="bib" value="<!-- TMPL_VAR NAME="biblionumber" -->" />
+<input type="submit" name="save" value="Ga"></form></div>
+</div>
+</div>
+</div>
+
+</div>
+</div><!-- TMPL_IF NAME="OpacNav" -->
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+</div>
+</div><!-- /TMPL_IF -->
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

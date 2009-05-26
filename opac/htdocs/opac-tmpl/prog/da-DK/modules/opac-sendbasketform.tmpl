@@ -1,0 +1,38 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha på nettet<!-- /TMPL_IF --> Catalog &rsaquo;  Sending Your Cart
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body style="padding: 1em;" id="sendbasket">
+<div class="container"><!-- TMPL_IF NAME="email_add" -->
+
+	<!-- TMPL_IF NAME="SENT" -->
+		<h3>Besked sendt</h3>
+	    <p>Handlekurven ble sendt til: <!-- TMPL_VAR NAME="email_add" --></p>
+		<p><a class="close" href="#">Luk vinduet</a></p>
+	<!-- /TMPL_IF  -->
+	<!-- TMPL_IF NAME="error" -->
+	<p>Problem med at sende indkøbskurv...</p>
+	<!-- /TMPL_IF -->
+	
+<!-- TMPL_ELSE -->
+
+<form action="<!-- TMPL_VAR NAME="url" -->" method="post">
+
+<fieldset class="rows"> 
+<legend>Send din indkøbskurv</legend>
+<ol>   <li>
+        <label for="email_add">E-mailadresse:</label>
+        <input type="text" id="email_add" name="email_add" size="43" />
+    </li>
+    <li>
+            <label for="comment">Kommentar:</label>
+            <textarea id="comment" name="comment" rows="4" cols="40"></textarea>
+    </li>
+    <li>
+        <input type="hidden" name="bib_list" value="<!-- TMPL_VAR NAME="bib_list" -->" />
+    </li></ol></fieldset>
+       <fieldset class="action"> <input type="submit" value="Send" /> <a class="cancel close" href="#">Afbryd</a> </fieldset>
+</form>
+
+<!-- /TMPL_IF --></div>
+</body>
+</html>

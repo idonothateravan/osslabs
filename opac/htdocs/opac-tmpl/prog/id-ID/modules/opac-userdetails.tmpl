@@ -1,0 +1,87 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha Online<!-- /TMPL_IF --> Catalog &rsaquo; Personal Details for <!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+
+<h3><a href="/cgi-bin/koha/opac-user.pl"><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --> akun</a> <img src="<!-- TMPL_VAR NAME="themelang" -->../../images/caret.gif" width="16" height="16" alt="&gt;" border="0" /> Personal Details</h3>
+
+<table>
+<tr><th scope="row">Nama:</th><td> <!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --></td></tr>
+<tr><th scope="row">
+Nomer Kartu:</th><td><!-- TMPL_VAR NAME="cardnumber" --></td></tr>
+</table>
+
+<table>
+<caption>Rincian Kontak</caption>
+<tr><th scope="row">Alamat Surat:</th><td>&s, <!-- TMPL_VAR NAME="address" --></td></tr>
+
+<tr><th scope="row">Alamat Tetap:</th><td> &s, <!-- TMPL_VAR NAME="B_address" --></td></tr>
+
+<tr><th scope="row">Telepon (Rumah):</th><td><!-- TMPL_IF NAME="phone" --><!-- TMPL_VAR NAME="phone" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Telepon (Siang):</th><td><!-- TMPL_IF NAME="mobile" --><!-- TMPL_VAR NAME="mobile" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Faks:</th><td><!-- TMPL_IF NAME="fax" --><!-- TMPL_VAR NAME="fax" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">E-mail:</th><td><!-- TMPL_IF NAME="email" --><a href="mailto:<!-- TMPL_VAR NAME="email" -->"><!-- TMPL_VAR NAME="email" --></a><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+</table>
+
+<table>
+<caption>Rincian Keanggotaan</caption>
+<tr><th scope="row">Nomer Anggota:</th><td> <!-- TMPL_VAR NAME="borrowernumber" --></td></tr>
+
+<tr><th scope="row">Kategori Keanggotaan:</th><td>  <!-- TMPL_VAR NAME="categorycode" --></td></tr>
+
+<!-- <td>Fee:</th><td>  /year, Paid</td> -->
+
+<tr><th scope="row">Bergabung:</th><td><!-- TMPL_VAR NAME="dateenrolled" --></td></tr>
+
+<tr><th scope="row">Kadaluwarsa:</th><td><!-- TMPL_VAR NAME="dateexpiry" --></td></tr>
+
+<!-- TMPL_IF NAME="joiningbranch" --><tr><th>Cabang bergabung:</th><td><!-- TMPL_VAR NAME="joiningbranch" --></td></tr><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></table>
+
+<table>
+<caption>Rincian Indentitas</caption>
+<tr><th scope="row">TTL:</th><td> <!-- TMPL_IF NAME="dateofbirth" --><!-- TMPL_VAR NAME="dateofbirth" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Sex:</th><td><!-- TMPL_IF NAME="sex" --><!-- TMPL_VAR NAME="sex" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr></table>
+
+<!-- TMPL_IF NAME="contactname"-->
+<table>
+<caption>Butiran Perhubungan Alternatif</caption>
+<tr><th scope="row">Perhubungan Alternatif:</th><td> <!-- TMPL_IF NAME="contactname" --><!-- TMPL_VAR NAME="contactname" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Telepon:</th><td> <!-- TMPL_IF NAME="B_phone" --><!-- TMPL_VAR NAME="B_phone" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Hubungan:</th><td> <!-- TMPL_IF NAME="relationship" --><!-- TMPL_VAR NAME="relationship" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF -->  </td></tr>
+
+<tr><th scope="row">Catatan:</th><td> <!-- TMPL_IF NAME="contactnote" --><!-- TMPL_VAR NAME="contactnote" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --> </td></tr>
+
+<tr><th scope="row">Guarantor:</th><td> <!-- TMPL_IF NAME="guarantorid" --><!-- TMPL_VAR NAME="guarantorid" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --> </td></tr></table>
+
+<!-- TMPL_ELSE -->
+<h4>No alternate contact on file.</h4>
+<!-- /TMPL_IF -->
+
+<form action="/cgi-bin/koha/opac-userupdate.pl" method="post">
+<input type="submit" name="Modify" value="Ubah catatan Anda">
+</form>
+
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

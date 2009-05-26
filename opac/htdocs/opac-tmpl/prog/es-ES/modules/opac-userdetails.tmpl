@@ -1,0 +1,87 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha En l&iacute;nea<!-- /TMPL_IF --> Catalog &rsaquo; Personal Details for <!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+
+<h3><a href="/cgi-bin/koha/opac-user.pl">cuenta de <!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --></a> <img src="<!-- TMPL_VAR NAME="themelang" -->../../images/caret.gif" width="16" height="16" alt="&gt;" border="0" /> Personal Details</h3>
+
+<table>
+<tr><th scope="row">Nombre:</th><td> <!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --></td></tr>
+<tr><th scope="row">
+Tarjeta N&uacute;mero:</th><td><!-- TMPL_VAR NAME="cardnumber" --></td></tr>
+</table>
+
+<table>
+<caption>Detalles del contacto</caption>
+<tr><th scope="row">Dirección de correo:</th><td><!-- TMPL_VAR NAME="address" -->, <!-- TMPL_VAR NAME="city" --></td></tr>
+
+<tr><th scope="row">Dirección permanente:</th><td> <!-- TMPL_VAR NAME="B_address" -->, <!-- TMPL_VAR NAME="B_city" --></td></tr>
+
+<tr><th scope="row">Teléfono (casa):</th><td><!-- TMPL_IF NAME="phone" --><!-- TMPL_VAR NAME="phone" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Teléfono (Actual):</th><td><!-- TMPL_IF NAME="mobile" --><!-- TMPL_VAR NAME="mobile" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Fax:</th><td><!-- TMPL_IF NAME="fax" --><!-- TMPL_VAR NAME="fax" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Correo electrónico:</th><td><!-- TMPL_IF NAME="email" --><a href="mailto:<!-- TMPL_VAR NAME="email" -->"><!-- TMPL_VAR NAME="email" --></a><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+</table>
+
+<table>
+<caption>Detalles del usuario</caption>
+<tr><th scope="row">N&uacute;mero del usuario</th><td> <!-- TMPL_VAR NAME="borrowernumber" --></td></tr>
+
+<tr><th scope="row">Categor&iacute;a del usuario:</th><td>  <!-- TMPL_VAR NAME="categorycode" --></td></tr>
+
+<!-- <td>Fee:</th><td>  /year, Paid</td> -->
+
+<tr><th scope="row">Ensamblado:</th><td><!-- TMPL_VAR NAME="dateenrolled" --></td></tr>
+
+<tr><th scope="row">Espira:</th><td><!-- TMPL_VAR NAME="dateexpiry" --></td></tr>
+
+<!-- TMPL_IF NAME="joiningbranch" --><tr><th>Rama ensamblada:</th><td><!-- TMPL_VAR NAME="joiningbranch" --></td></tr><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></table>
+
+<table>
+<caption>Detalles de la identidad</caption>
+<tr><th scope="row">Fecha de Nacimiento</th><td> <!-- TMPL_IF NAME="dateofbirth" --><!-- TMPL_VAR NAME="dateofbirth" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Sexo:</th><td><!-- TMPL_IF NAME="sex" --><!-- TMPL_VAR NAME="sex" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr></table>
+
+<!-- TMPL_IF NAME="contactname"-->
+<table>
+<caption>Detalles de contacto alternativo</caption>
+<tr><th scope="row">Contacto alternativo:</th><td> <!-- TMPL_IF NAME="contactname" --><!-- TMPL_VAR NAME="contactname" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Teléfono:</th><td> <!-- TMPL_IF NAME="B_phone" --><!-- TMPL_VAR NAME="B_phone" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Relacciones:</th><td> <!-- TMPL_IF NAME="relationship" --><!-- TMPL_VAR NAME="relationship" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF -->  </td></tr>
+
+<tr><th scope="row">Notas:</th><td> <!-- TMPL_IF NAME="contactnote" --><!-- TMPL_VAR NAME="contactnote" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --> </td></tr>
+
+<tr><th scope="row">Garante:</th><td> <!-- TMPL_IF NAME="guarantorid" --><!-- TMPL_VAR NAME="guarantorid" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --> </td></tr></table>
+
+<!-- TMPL_ELSE -->
+<h4>No alternate contact on file.</h4>
+<!-- /TMPL_IF -->
+
+<form action="/cgi-bin/koha/opac-userupdate.pl" method="post">
+<input type="submit" name="Modify" value="Modificar su registro">
+</form>
+
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

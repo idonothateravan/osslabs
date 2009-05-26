@@ -1,0 +1,41 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_VAR NAME="LibraryNameTitle" DEFAULT="Koha Online" --> Katalog &rsaquo; ISBD
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t<!-- TMPL_IF NAME="OpacNav" -->1<!-- TMPL_ELSE -->7<!-- /TMPL_IF -->">
+  <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	  <div class="yui-b"><div class="yui-g">
+		<div id="subjectcloud" class="container"> <h1>Themenwolke</h1>
+	<!-- TMPL_IF NAME="OpacCloud" -->
+		<!-- TMPL_IF NAME="LOOP" -->
+    	<p>Diese "Wolke" zeigt Ihnen die häufigsten Themen in ihrem Katalog. Klicken Sie auf eines der Themen, um die damit verbundenen Titel in unserem Bestand zu sehen.</p>
+        <fieldset>
+        <legend>anzeigen</legend>
+        <form action="/cgi-bin/koha/opac-tags_subject.pl" method="post">
+            <p>bis zu <input type="text" name="number" value="<!-- TMPL_VAR name="number" -->" size="4" maxlength="4" /> Sachworte <input type="submit" value="OK" /></p>
+        </form>
+        </fieldset>
+
+        <!-- TMPL_LOOP name="LOOP" -->
+            <a href="/cgi-bin/koha/opac-search.pl?q=su:<!-- TMPL_VAR name="entry" ESCAPE="HTML" -->" style="font-size:<!-- TMPL_VAR name="weight" -->px;"><!-- TMPL_VAR name="entry" --></a>
+        <!-- /TMPL_LOOP -->
+		<!-- TMPL_ELSE -->
+			<p>Hinweis: Dieses Feature ist nur in französischen Katalogen verfügbar, in denen ISBD-Sachgebiete zugeordnet und ein Index mit einem separaten Skript erstellt wurde.</p>
+		<!-- /TMPL_IF -->
+	<!-- TMPL_ELSE -->
+		<p>Die ISBD-Wolke ist nicht aktiviert.</p>
+	<!-- /TMPL_IF -->
+		</div>
+	  </div></div>
+	</div>
+	<!-- TMPL_IF NAME="OpacNav" -->
+	<div class="yui-b"><div class="container">
+	<!--TMPL_INCLUDE NAME="navigation.inc" -->
+	</div></div>
+	<!-- /TMPL_IF -->
+  </div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

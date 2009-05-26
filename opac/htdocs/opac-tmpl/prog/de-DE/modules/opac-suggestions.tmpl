@@ -1,0 +1,167 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha Online<!-- /TMPL_IF --> Katalog &rsaquo;  
+<!-- TMPL_IF name="op_add" -->Geben Sie einen Anschaffungsvorschlag ein<!-- /TMPL_IF -->
+<!-- TMPL_IF name="op_else" -->Kaufempfehlung<!-- /TMPL_IF -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" src="<!-- TMPL_VAR name="themelang" -->/lib/jquery/plugins/jquery.checkboxes.pack.js"></script>
+<script type="text/javascript" src="<!-- TMPL_VAR name="themelang" -->/lib/jquery/plugins/jquery.tablesorter.min.js"></script>
+<script type="text/JavaScript" language="JavaScript">
+//<![CDATA[
+$.tablesorter.addParser({
+    id: 'articles', 
+    is: function(s) {return false;  }, 
+    format: function(s) { return s.toLowerCase().replace(/^(the|an|a) /,''); }, 
+    type: 'text' 
+});
+
+       $(function() {
+			$("#suggestt").tablesorter({
+				widgets : ['zebra'],
+				<!-- TMPL_IF NAME="loggedinusername" -->sortList: [[1,0]],<!-- TMPL_ELSE -->sortList: [[0,0]],<!-- /TMPL_IF -->
+		        headers: {
+				<!-- TMPL_IF NAME="loggedinusername" -->
+					<!-- TMPL_IF NAME="OPACViewOthersSuggestions" -->
+					0: { sorter: false },2: { sorter: 'articles' },2: {sorter: false },4: {sorter: false},5:{sorter:false}
+					<!-- TMPL_ELSE -->
+					0: { sorter: false },2: { sorter: 'articles' },2: {sorter: false },3: {sorter: false},4:{sorter:false}
+					<!-- /TMPL_IF -->
+				<!-- TMPL_ELSE -->
+				<!-- TMPL_IF NAME="OPACViewOthersSuggestions" -->
+					0: { sorter: 'articles' },1: {sorter: false },3: {sorter: false},4:{sorter:false}
+					<!-- TMPL_ELSE -->
+					0: { sorter: 'articles' },1: {sorter: false },2: {sorter: false},3:{sorter:false}
+					<!-- /TMPL_IF -->
+				<!-- /TMPL_IF -->
+				}
+			}); 
+			$("#CheckAll").click(function(){
+		        $(".checkboxed").checkCheckboxes();
+		        return false;
+		    });
+		    $("#CheckNone").click(function(){
+		        $(".checkboxed").unCheckCheckboxes();
+		        return false;
+		    }); 
+       });
+//]]>
+</script>
+</head>
+<body>
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+<div class="container">
+<!-- TMPL_IF name="op_add" -->
+    <h1>Geben Sie einen Anschaffungsvorschlag ein</h1>
+
+    <p>Bitte füllen Sie dieses Formular aus, um der Bibliothek einen Anschaffungsvorschlag zu machen. Sie erhalten eine E-Mail, wenn die Bibliothek Ihren Vorschlag bearbeitet hat.</p>
+    <p>Keine Felder ist verpflichtend. Geben Sie die Informationen ein, die Sie haben. Das "Notizen"-Feld kann benutzt werden, um zusätzliche Informationen zu geben.</p>
+    <form action="/cgi-bin/koha/opac-suggestions.pl" method="post">
+   <fieldset class="rows"> <ol>
+    <li><label for="title">Titel:</label><input type="text" id="title" name="title" size="50" maxlentgh="80" /></li>
+    <li><label for="author">Verfasser:</label><input type="text" id="author" name="author" size="50" maxlength="80" /></li>
+    <li><label for="copyrightdate">Copyright-Datum:</label><input type="text" id="copyrightdate" name="copyrightdate" size="4" maxlength="4" /></li>
+    <li><label for="publishercode">Verlag:</label><input type="text" id="publishercode" name="publishercode" size="50" maxlength="80" /></li>
+    <li><label for="note">Hinweise:</label><textarea name="note" id="note" rows="5" cols="40"></textarea></li>
+    </ol></fieldset>
+        <fieldset class="action"><input type="hidden" name="op" value="add_confirm" /><input type="submit" value="Ihren Anschaffungsvorschlag absenden"> <a class="action" href="/cgi-bin/koha/opac-suggestions.pl">Abbrechen</a></fieldset>
+    </form>
+
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF name="op_else" -->
+    <h1><!-- TMPL_UNLESS NAME="OPACViewOthersSuggestions" --><!-- TMPL_IF NAME="loggedinusername" -->Mein <!-- /TMPL_IF --><!-- /TMPL_UNLESS -->Kaufempfehlung</h1>
+    <!-- TMPL_IF NAME="suggestions_loop" -->
+    <!-- TMPL_IF NAME="OPACViewOthersSuggestions" -->
+	<form action="/cgi-bin/koha/opac-suggestions.pl" method="get">
+    <table>
+        <tr>
+                <th>
+                    Suche nach:
+                </th>
+                <td>
+                    <input type="text" name="title" value="<!-- TMPL_VAR name="title"-->" />
+                </td>
+                <th>
+                Vorgeschlagen von:
+                </th>
+                <td>
+                    <select name="suggestedbyme">
+                        <option value="0">Irgendwer </option>
+                        <option value="1">Mich</option>
+                    </select>
+                </td>
+                <th>
+                    <input type="submit" value="Suche">
+                </th>
+        </tr>
+		</table>
+            </form><!-- /TMPL_IF -->
+        <form action="/cgi-bin/koha/opac-suggestions.pl" method="post">
+            <input type="hidden" name="op" value="delete_confirm" />
+			<div><span class="checkall"><a href="#" id="CheckAll">Alle auswählen</a></span>
+		<span class="clearall"><a href="#" id="CheckNone">Alles abwählen</a></span> | <!-- TMPL_IF NAME="loggedinusername" --><a class="new" href="/cgi-bin/koha/opac-suggestions.pl?op=add">Neue Kaufempfehlung</a><!-- TMPL_ELSE --><!-- TMPL_IF NAME="AnonSuggestions" --><a class="new" href="/cgi-bin/koha/opac-suggestions.pl?op=add">Neue Kaufempfehlung</a><!-- /TMPL_IF --><!-- /TMPL_IF -->
+</div>
+			<table id="suggestt" class="checkboxed">
+			<thead><tr>
+            <!-- TMPL_IF NAME="loggedinusername" --><th>&nbsp;</th><!-- /TMPL_IF -->
+            <th>Zusammenfassung</th>
+            <th>Hinweis:</th>
+            <!-- TMPL_IF NAME="OPACViewOthersSuggestions" --><th>Vorgeschlagen von</th><!-- /TMPL_IF -->
+            <th>Verwaltet von</th>
+            <th>Status</th>
+        </tr></thead>
+        <tbody><!-- TMPL_LOOP NAME="suggestions_loop" -->
+            <!-- TMPL_IF name="even" --><tr><!-- TMPL_ELSE --><tr class="highlight"><!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="loggedinusername" --><td>
+                    <input type="checkbox" name="delete_field" value="<!--TMPL_VAR name="suggestionid" -->" />
+                </td><!-- /TMPL_IF -->
+                <td>
+                    <p><strong><!-- TMPL_VAR NAME="title" --></strong></p>
+                    <p><!-- TMPL_IF name="author" --><!-- TMPL_VAR NAME="author" -->,<!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="copyrightdate" --> - <!-- TMPL_VAR NAME="copyrightdate" -->,<!-- /TMPL_IF --> 
+                        <!-- TMPL_IF name="publishercode" --> - <!-- TMPL_VAR name="publishercode" --><!-- /TMPL_IF -->
+                    </p>
+                </td>
+                <td>
+                    <!-- TMPL_VAR name="note" -->
+                </td>
+                <!-- TMPL_IF NAME="OPACViewOthersSuggestions" --><td>
+                    <!-- TMPL_IF NAME="surnamesuggestedby" --><!-- TMPL_VAR name="surnamesuggestedby" --><!-- TMPL_IF name="firstnamesuggestedby" -->,<!-- /TMPL_IF --> <!-- TMPL_VAR name="firstnamesuggestedby" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF -->
+                </td><!-- /TMPL_IF -->
+                <td>
+					<!-- TMPL_IF NAME="surnamemanagedby" --><!-- TMPL_VAR name="surnamemanagedby" --><!-- TMPL_IF name="firstnamemanagedby" -->,<!-- /TMPL_IF --> <!-- TMPL_VAR name="firstnamemanagedby" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF -->
+                </td>
+                <td>
+                    <!-- TMPL_IF name="ASKED" -->vorbestellt<!-- /TMPL_IF -->
+                    <!-- TMPL_IF name="ACCEPTED" -->Von der Bibliothek angenommen<!-- /TMPL_IF -->
+                    <!-- TMPL_IF name="ORDERED" -->Durch die Bibliothek bestellt<!-- /TMPL_IF -->
+                    <!-- TMPL_IF name="REJECTED" -->Vorschlag abgelehnt <!-- /TMPL_IF -->
+                    <!-- TMPL_IF name="AVAILABLE" -->In der Bibliothek verfügbar<!-- /TMPL_IF -->
+                    <!-- TMPL_IF name="reason" -->(<!-- TMPL_VAR name="reason" -->)<!-- /TMPL_IF -->
+                </td>
+            </tr>
+        <!-- /TMPL_LOOP -->
+       </tbody>
+    </table> <!-- TMPL_IF NAME="loggedinusername" --><fieldset class="action">
+                <input type="submit" value="Lösche ausgewählte Exemplare">
+            </fieldset>
+        <!-- /TMPL_IF -->
+        </form>
+    <!-- TMPL_ELSE --><p>Es gibt keine offenen Kaufempfehlungen.</p> <!-- TMPL_IF NAME="loggedinusername" --><p><a class="new" href="/cgi-bin/koha/opac-suggestions.pl?op=add">Neue Kaufempfehlung</a></p><!-- TMPL_ELSE --><!-- TMPL_IF NAME="AnonSuggestions" --><p><a class="new" href="/cgi-bin/koha/opac-suggestions.pl?op=add">Neue Kaufempfehlung</a></p><!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_IF -->
+	
+<!-- /TMPL_IF -->
+</div>
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

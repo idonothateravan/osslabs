@@ -1,0 +1,126 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha Online<!-- /TMPL_IF --> Katalog &rsaquo; Zeitschriften
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!-- TMPL_IF NAME="OpacNav" --><div id="doc3" class="yui-t1"><!-- TMPL_ELSE --><div id="doc3" class="yui-t7"><!-- /TMPL_IF -->
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+
+<div class="container">
+<h1>Hefte eines Abonnements</h1>
+	<a href="opac-detail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->" class="button">Normale Ansicht</a> <a href="opac-serial-issues.pl?selectview=full&amp;biblionumber=<!-- TMPL_VAR name="biblionumber" -->" class="button">Vollständiger Verlauf</a>
+
+<form method="post" name="f">
+<!-- TMPL_LOOP name="subscription_LOOP" -->
+<h2>Abonnementinformationen für <!-- TMPL_VAR name="bibliotitle" --></h2>
+		<p>Das aktuelle Abonnement begann am <b><!-- TMPL_VAR name="startdate" --></b> und erscheint alle <b>
+		<!--TMPL_IF name="periodicity1" -->
+				Tag
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity2" -->
+				Woche
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity3" -->
+				2 Wochen
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity4" -->
+				3 Wochen
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity5" -->
+				Monat
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity6" -->
+				2 Monate
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity7" -->
+				3 Monate
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity8" -->
+				Quartal
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity9" -->
+				2 Quartale
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity10" -->
+				Jahr
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="periodicity11" -->
+				2 Jahre
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="arrival1" -->
+			am Montag
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="arrival2" -->
+				am Dienstag
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="arrival3" -->
+				am Mittwoch
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="arrival4" -->
+				am Donnerstag
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="arrival5" -->
+				am Freitag
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="arrival6" -->
+				am Samstag
+		<!-- /TMPL_IF -->
+		<!--TMPL_IF name="arrival7" -->
+				am Sonntag
+		<!-- /TMPL_IF -->
+		
+		für 
+			<!-- TMPL_IF name="numberlength" --><!-- TMPL_VAR name="numberlength" --> Ausleihen<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="weeklength" --><!-- TMPL_VAR name="weeklength" --> Wochen<!-- /TMPL_IF -->
+			<!-- TMPL_IF name="monthlength" --><!-- TMPL_VAR name="monthlength" --> Monate<!-- /TMPL_IF -->
+			
+		<p>Das erste Abonnement begann am <!-- TMPl_VAR name="histstartdate" --></p>
+		<!-- TMPL_IF name="histenddate" -->
+            <p>Das Abonnement ist am <!-- TMPl_VAR name="histenddate" --> abgelaufen</p>
+        <!-- /TMPL_IF -->
+		</p>
+    <h2><!-- TMPL_VAR name="branchcode" --> <!-- TMPL_VAR name="notes" --></h2>
+  <!-- TMPL_IF name="recievedlist" -->
+    <h3>Verfügbare Ausgaben</h3>
+    <p>
+      <!-- TMPL_VAR name="recievedlist" -->
+    </p>
+  <!-- /TMPL_IF -->
+  <!-- TMPL_IF name="missinglist" -->
+    <h3>Nicht verfügbare Hefte</h3>
+    <p>
+      <!-- TMPL_VAR name="missinglist" -->
+    </p>
+  <!-- /TMPL_IF -->
+    <!-- TMPL_IF name="opacnote" -->
+        <h3>Ausleihzusammenfassung</h3>
+        <p>
+            <!-- TMPL_VAR name="opacnote" -->
+        </p>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF name="letter" -->
+        <!-- TMPL_IF name="hasalert" -->
+            Sie haben die Emailbenachrichtigung für neue Hefte abonniert. <a href="opac-alert-subscribe.pl?op=cancel&amp;externalid=<!-- TMPL_VAR name="subscriptionid" -->&amp;alerttype=issue&amp;biblionumber=<!-- TMPL_VAR name="biblionumber" -->" class="button" title="Cancel email notification"> Emailbenachrichtigung beenden </a>
+        <!-- TMPL_ELSE -->
+            <a href="opac-alert-subscribe.pl?externalid=<!-- TMPL_VAR name="subscriptionid" -->&amp;alerttype=issue&amp;biblionumber=<!-- TMPL_VAR name="biblionumber" -->" class="button" title="E-Mailbenachrichtigung für neue Zeitschriftenhefte abonnieren">
+                E-Mailbenachrichtigung für neue Zeitschriftenhefte abonnieren
+            </a>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+
+<!-- /TMPL_LOOP -->
+</div>
+</div>
+</div>
+</div>
+			<!-- TMPL_IF NAME="OpacNav" -->
+			<div class="yui-b">
+			<div class="container">
+			<!--TMPL_INCLUDE NAME="navigation.inc" -->
+			</div>
+			</div><!-- /TMPL_IF -->
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

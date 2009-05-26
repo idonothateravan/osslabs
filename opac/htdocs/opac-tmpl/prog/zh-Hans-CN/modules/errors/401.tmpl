@@ -1,0 +1,29 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha 在线<!-- /TMPL_IF --> %s 馆藏目录 &rsaquo; 发生错误
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<!--TMPL_INCLUDE NAME="masthead.inc" -->
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+        <div id="yui-main">
+        <div class="yui-b"><div class="yui-g">
+            <h3>发生错误</h3>
+            <h4>Error 404</h4>
+            <ul>
+                <li>This error means that the you are trying to access a link that you're not authorized to see.</li>
+                <li>Try logging in to the catalog</li>
+                <li>你可以<a href="mailto:<!-- TMPL_VAR NAME="admin" -->">发送电子邮件给系统管理员<a>来报告此错误。</li>
+                <li>使用顶部菜单条导航至Koha的其他部分。</li>
+            </ul>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div id="main"> -->
+<!-- </div> -->
+</body>
+</html>

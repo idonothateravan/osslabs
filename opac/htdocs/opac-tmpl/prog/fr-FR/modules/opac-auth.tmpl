@@ -1,0 +1,71 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha en ligne<!-- /TMPL_IF --> 
+<!-- TMPL_IF NAME="opacuserlogin" -->
+ Catalogue &rsaquo; Accédez à votre compte
+<!-- TMPL_ELSE -->
+ Catalogue &rsaquo; Identification désactivée
+<!-- /TMPL_IF -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t7">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-g">
+<div class="container">
+<div id="opac-auth">
+<!--CONTENT-->
+<!-- TMPL_IF NAME="opacuserlogin" -->
+<!-- TMPL_IF NAME="loginprompt" -->
+<!-- login prompt time-->
+<h3>Me connecter à mon compte</h3>
+<!-- TMPL_IF NAME="nopermission" -->
+<!-- This is what is displayed if user doesnt have permission -->
+<p>Désolé, Koha pense que vous n'avez pas les droits pour accéder à cette page. </p>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="timed_out" -->
+<!-- This is what is displayed if login has timed out -->
+<p>Désolé, votre session a expiré. Merci de vous reconnecter.</p>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="different_ip" -->
+<!-- This is what is displayed if user doesnt have permission -->
+<p>Vous êtes déjà connecté à Koha depuis une autre adresse IP. Merci de vous reconnecter.</p>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="invalid_username_or_password" -->
+<!-- This is what is displayed if user doesnt have permission -->
+<p>Vous avez saisi un nom d'utilisateur ou mot de passe invalide, merci de réessayer. Et n'oubliez pas que les noms d'utilisateur et les mots de passe sont sensibles à la casse.</p>
+<!-- /TMPL_IF -->
+
+<form action="<!-- TMPL_VAR NAME="url" -->" name="auth" id="auth" method="post">
+  <input type="hidden" name="koha_login_context" value="opac" />
+<fieldset class="brief"><!-- TMPL_LOOP NAME="INPUTS" -->
+  <input type="hidden" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" />
+<!-- /TMPL_LOOP -->
+<ol>
+<li><label for="userid">Mon numéro de carte</label>
+<input type="text"  size="25" id="userid"  name="userid" /></li>
+<li><label for="password">Mot de passe ou PIN</label><input type="password"  size="25" id="password"  name="password" /></li>
+</ol></fieldset>
+
+<input type="submit" value="Se connecter" class="submit">
+<div>  <h5>Pas encore de mot de passe ?</h5><p> Si vous n'avez pas encore de mot de passe, passez par la banque de prêt la prochaine fois que vous viendrez à la bibliothèque. Nous serons ravis de vous en attribuer un.</p>
+<h5>Pas de carte de la bibliothèque ?</h5><p> Si vous n'êtes pas inscrit, passez à la bibliothèque la plus proche pour le faire.  </p></div>
+</form>
+
+
+<!-- /TMPL_IF -->
+<!-- TMPL_ELSE -->
+<h4>L'identification sur l'OPAC n'a pas été activée par la bibliothèque.</h4>
+<ul>
+  <li>Pour signaler cette erreur, vous pouvez envoyer un <a href="mailto:<!-- TMPL_VAR NAME="admin" -->">e-mail à l'administrateur</a></li>
+  <li>Utilisez le menu en haut pour accéder à une autre partie de Koha.</li>
+</ul>
+<!-- /TMPL_IF --></div>
+</div>
+</div>
+</div>
+
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

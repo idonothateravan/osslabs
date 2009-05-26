@@ -1,0 +1,72 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha på nettet<!-- /TMPL_IF --> Katalog &rsaquo; tilføj til liste
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<style type="text/css">
+   #custom-doc { width:34.62em;*width:33.78em;min-width:450px; margin:auto; margin-top: .4em;text-align:left; } 
+   </style>
+</head>
+<body id="addtolist">
+<div id="custom-doc" class="yui-t7">
+<div class="container">
+<!-- TMPL_IF NAME="authorized" -->
+	<!-- TMPL_UNLESS NAME="newshelf" -->
+		<!-- TMPL_IF NAME="multiple"-->
+    		<h1>Tilføj <!-- TMPL_VAR NAME="total"--> eksemplarer til <!-- TMPL_IF NAME="singleshelf" --><em><!-- TMPL_VAR NAME="shelfname" --></em>: <!-- TMPL_ELSE -->en liste:<!-- /TMPL_IF --></h1>
+		<!-- TMPL_ELSE -->
+			<h1>Tilføj <!-- TMPL_IF NAME="singleshelf" --><em><!-- TMPL_VAR NAME="shelfname" --></em><!-- TMPL_ELSE -->en liste:<!-- /TMPL_IF --></h1>
+		<!-- /TMPL_IF -->
+    	<ul>
+		<!-- TMPL_LOOP NAME="biblios"-->
+    		<li> <span class="title"><!-- TMPL_VAR NAME="title"--></span> 
+        	<!-- TMPL_IF NAME="author"--><span class="author"> <!-- TMPL_VAR NAME="author"--> </span><!-- /TMPL_IF -->
+        	</li>
+        <!-- /TMPL_LOOP -->
+		</ul>
+		<!-- TMPL_IF NAME="CGIvirtualshelves"-->
+			<form name="f1" action="/cgi-bin/koha/opac-addbybiblionumber.pl" method="post">
+    		<fieldset class="rows"><legend>Vælg en liste</legend>
+			<ol><li>    <label for="shelfnumber">Tilføj til en liste</label> <!-- TMPL_VAR NAME="CGIvirtualshelves" --></li></ol>
+ 			<!-- TMPL_LOOP NAME="biblios" --> <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->" /><!-- /TMPL_LOOP -->
+    		<input type="hidden" name="modifyshelfcontents" value="1" /></fieldset>
+    		<fieldset class="action"><input type="submit" value="Gem" class="submit"> <a class="close cancel" href="#">Afbryd</a></fieldset>
+			</form>
+			<p>... eller ...</p>
+		<!-- TMPL_ELSE -->
+			<!-- TMPL_IF NAME="singleshelf" -->
+				<form name="f1" action="/cgi-bin/koha/opac-addbybiblionumber.pl" method="post">
+				<!-- TMPL_LOOP NAME="biblios" --> <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->"><!-- /TMPL_LOOP -->
+				<input type="hidden" name="shelfnumber" value="<!-- TMPL_VAR NAME="shelfnumber" -->" />
+				<input type="hidden" name="modifyshelfcontents" value="1" /></fieldset>
+				<fieldset class="action"><input type="submit" value="Gem" class="submit"> <a class="close cancel" href="#">Afbryd</a></fieldset>
+				</form>
+			<!-- /TMPL_IF -->
+		<!-- /TMPL_IF -->
+	<!-- /TMPL_UNLESS -->
+	<!-- TMPL_UNLESS NAME="singleshelf" --><form name="f2" method="post" action="/cgi-bin/koha/opac-addbybiblionumber.pl">
+		<fieldset class="rows">    <legend>Tilføj til en ny liste:</legend>
+		<ol><li>
+		<label for="newvirtualshelf">
+		Listenavn:
+		</label>
+		<input type="text" name="newvirtualshelf" id="newvirtualshelf" size="40" />
+		</li>
+		<li><label for="category">Kategori:</label>
+		<select name="category" id="category">
+		<option value="1">Privat</option>
+		<option value="2">Offentlig</option>
+		</select></li></ol></fieldset>
+		<!-- TMPL_LOOP NAME="biblios" --> <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->" /><!-- /TMPL_LOOP -->
+		<fieldset class="action"><input type="submit" value="Gem" class="submit"> <a class="close cancel" href="#">Afbryd</a></fieldset>
+		</form>
+	<!-- /TMPL_UNLESS -->
+<!-- TMPL_ELSE -->
+	<p align="center">
+		Dette er ikke en åben liste. Emner kan ikke tilføjes.
+	</p>
+<!-- /TMPL_IF -->
+<p align="center">
+    <a href="#" class="close">Close this window.</a>
+</p>
+</div></div>
+</body>
+</html>

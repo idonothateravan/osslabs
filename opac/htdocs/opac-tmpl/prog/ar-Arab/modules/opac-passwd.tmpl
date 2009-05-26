@@ -1,0 +1,62 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->كوها على الانترنت<!-- /TMPL_IF -->  <!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" --> حساب  &rsaquo; دليل 
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+	<div class="container">
+	<h3><a href="/cgi-bin/koha/opac-user.pl"><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --> حساب</a> <img src="<!-- TMPL_VAR NAME="themelang" -->l../../images/caret.gif" width="16" height="16" alt="&gt;" border="0" /> تغيير كلمة المرور الخاصة بك </h3>
+
+    <!-- TMPL_IF NAME= "Error_messages" -->
+<div class="dialog error">        <h3>هــناك مشكلة مع تسجيلك </h3>
+        <p>
+            <!-- TMPL_IF NAME= "PassMismatch" -->
+             :كلمة العبور لا تعمل. الرجاء اعادة كتابة كلمة العبور الجديدة
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME= "ShortPass" -->
+              حرفا <!-- TMPL_VAR NAME="minpasslen" --> يجب ان تتكون كلمة العبور على الاقل من                      
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME= "WrongPass" -->
+            .كلمة العبور الحالية خــاطئة. في حالة استمرار المشكلة ، يرجى ان تطلب من احد امناء المكتبة  اعادة تعيينهـــا	
+            <!-- /TMPL_IF -->
+        </p></div>
+    <!-- /TMPL_IF -->
+    
+    <!-- TMPL_IF NAME= "Ask_data" -->
+        <!-- TMPL_IF NAME="OpacPasswordChange" -->
+        <form action="/cgi-bin/koha/opac-passwd.pl" name="mainform" id="mainform" method="post"><fieldset class="brief">
+			<!-- TMPL_UNLESS NAME= "ShortPass" --><div class="hint">  حرفا <!-- TMPL_VAR NAME="minpasslen" --> يجب ان تتكون كلمة العبور على الاقل من</div><!-- /TMPL_UNLESS -->
+          <ol>  <li><label for="password">:كلمة العبور الحالية</label> <input type="password" id="Oldkey" size="25"  name="Oldkey" /></li>
+            <li><label for="Newkey">:كلمة العبور الجديدة </label> <input type="password" id="Newkey"  size="25"  name="Newkey" /></li>
+            <li><label for="Confirm">:إعادة كتابة كلمة العبور الجديدة </label> <input type="password"  id="Confirm" size="25" name="Confirm" /></li></ol></fieldset>
+            <fieldset class="action"><input type="submit" value="سجل التغييرات" class="submit"> <a href="/cgi-bin/koha/opac-user.pl" class="cancel">الغاء</a></fieldset>
+    </form>
+        <!-- TMPL_ELSE -->
+            <div class="dialog alert">لا تستطيع تغيير كلمة عبورك</div>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+    
+    <!-- TMPL_IF NAME= "password_updated" -->
+        <div class="dialog message"><h1>تحديث كلمة العبور</h1>
+        لقد تمّ تغيير كلمة العبور</div>
+        <form action="/cgi-bin/koha/opac-user.pl" method="post">
+            <input type="hidden" name="borrowernumber" value="<!-- TMPL_VAR NAME="borrowernumber" -->" />
+            <p><input type="submit" class="icon back" value="العودة إلى السجّل الخــاص"></p>
+        </form>
+    <!-- /TMPL_IF -->
+</div>
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

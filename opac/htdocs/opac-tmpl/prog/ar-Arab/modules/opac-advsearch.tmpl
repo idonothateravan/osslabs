@@ -1,0 +1,359 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->
+<!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->كوها على الانترنت<!-- /TMPL_IF -->
+    دليل &rsaquo; البحث التفصيلي
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body id="advsearch"><div id="doc3" class="yui-t7">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+<form action="/cgi-bin/koha/opac-search.pl" method="get">
+	<div class="yui-gc">
+<div class="yui-u first">
+    <!-- TMPL_IF NAME="if_expanded_options_actually_worked" -->
+       <div id="databases" class="container"> <!-- TMPL_IF NAME="outer_servers_loop" -->
+            <!-- DATABASES -->
+            
+            <fieldset>
+                    <legend> : اختر قواعد البيانات المحلية </legend>
+                        <!-- TMPL_LOOP NAME="outer_servers_loop" -->
+                            <!-- TMPL_LOOP NAME="inner_servers_loop" -->
+
+<!-- TMPL_IF NAME="checked" --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" checked="<!-- TMPL_VAR NAME="checked" -->" value="<!-- TMPL_VAR NAME="value" -->" /><!-- TMPL_ELSE --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->"  value="<!-- TMPL_VAR NAME="value" -->" /><!-- /TMPL_IF -->
+<label for="<!-- TMPL_VAR NAME="id" -->"><img width="16" height="16" alt="<!-- TMPL_VAR NAME="id" -->" src="<!-- TMPL_VAR NAME="themelang" -->/images/<!-- TMPL_VAR NAME="icon" -->" /> <!-- TMPL_VAR NAME="label" --></label>
+                            <!-- /TMPL_LOOP -->
+                            <!-- /TMPL_LOOP -->
+            </fieldset>
+            <!-- /DATABASES -->
+        <!-- /TMPL_IF -->
+    
+        <!-- TMPL_IF NAME="outer_sup_servers_loop" -->
+            <!-- REMOTE DATABASES -->
+            <fieldset>
+                <legend> : اختر قواعد البيانات عن بعد </legend>
+                    <!-- TMPL_LOOP NAME="outer_sup_servers_loop" -->
+                            <!-- TMPL_LOOP NAME="inner_sup_servers_loop" -->
+
+<!-- TMPL_IF NAME="checked" --><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" checked="<!-- TMPL_VAR NAME="checked" -->" value="<!-- TMPL_VAR NAME="value" -->" /><input type="checkbox" id="<!-- TMPL_VAR NAME="id" -->" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" />
+<!-- /TMPL_IF -->
+<label for="<!-- TMPL_VAR NAME="id" -->"><img alt="<!-- TMPL_VAR NAME="id" -->" src="<!-- TMPL_VAR NAME="themelang" -->/images/<!-- TMPL_VAR NAME="icon" -->" /><!-- TMPL_VAR NAME="label" --></label>
+                            <!-- /TMPL_LOOP -->
+                            <!-- /TMPL_LOOP -->
+                </fieldset>
+            <!-- /REMOTE DATABASES -->
+        <!-- /TMPL_IF --></div>
+    <!-- /TMPL_IF -->
+
+    <!-- BOOLEAN SEARCH OPTIONS -->
+    <div id="booleansearch" class="container"><fieldset>
+    <legend> : البحث عن </legend>
+    <!-- TMPL_LOOP NAME="search_boxes_loop" -->
+        <p>
+        <!-- TMPL_IF NAME="expanded_options" -->
+            <!-- TMPL_IF NAME="search_boxes_label" -->
+                <!-- p tag was here -->
+            <!-- TMPL_ELSE -->
+                 <!-- p tag was here -->
+            <!-- /TMPL_IF -->
+        <!-- TMPL_ELSE -->
+             <!-- p tag was here -->
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="expanded_options" --><!-- TMPL_VAR NAME="left_content" --><!-- /TMPL_IF --> 
+        <select name="idx">
+		<!-- TMPL_IF NAME="selected" -->
+            <option value="kw" selected="selected">الكلمة المفتاح</option>
+			<!-- TMPL_ELSE -->
+            <option value="kw">الكلمة المفتاح</option>
+			<!-- /TMPL_IF -->
+			<!-- TMPL_IF NAME="selected" -->
+            <option value="au,wrdl" selected="selected">المؤلف</option>
+			<!-- TMPL_ELSE -->
+            <option value="au,wrdl">المؤلف</option>
+			<!-- /TMPL_IF -->
+			
+<!-- TMPL_IF NAME="expanded_options" -->
+			
+			<!-- TMPL_IF NAME="selected" -->
+                <option value="au,phr" selected="selected">عبارة المؤلف &nbsp;&nbsp;&nbsp;&nbsp;</option>
+<!-- TMPL_ELSE -->
+                <option value="au,phr">عبارة المؤلف &nbsp;&nbsp;&nbsp;&nbsp;</option>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="selected" -->
+                <option value="cpn,wrdl" selected="selected">اسم الشركة &nbsp;&nbsp;&nbsp;&nbsp;</option>
+<!-- TMPL_ELSE -->
+                <option value="cpn,wrdl">اسم الشركة &nbsp;&nbsp;&nbsp;&nbsp;</option>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="selected" -->
+                <option value="cfn,wrdl" selected="selected">اسم المحاضرة &nbsp;&nbsp;&nbsp;&nbsp;</option>
+<!-- TMPL_ELSE -->
+                <option value="cfn,wrdl">اسم المحاضرة &nbsp;&nbsp;&nbsp;&nbsp;</option>
+<!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF NAME="selected" -->
+                    <option value="cpn,phr" selected="selected">عبارة اسم المؤتمر &nbsp;&nbsp;&nbsp;&nbsp;</option>
+<!-- TMPL_ELSE -->
+                    <option value="cfn,phr">عبارة اسم المؤتمر &nbsp;&nbsp;&nbsp;&nbsp;</option><!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF NAME="selected" -->
+                    <option value="pn,wrdl" selected="selected">الاسم الشخصي &nbsp;&nbsp;&nbsp;&nbsp; </option>
+<!-- TMPL_ELSE -->	
+                    <option value="pn,wrdl">الاسم الشخصي &nbsp;&nbsp;&nbsp;&nbsp; </option><!-- /TMPL_IF -->
+				
+ <!-- TMPL_IF NAME="selected" -->				
+                    <option value="pn,phr" selected="selected">عبارة الاسم الشخصي &nbsp;&nbsp;&nbsp;&nbsp;</option>		
+<!-- TMPL_ELSE -->		
+                    <option value="pn,phr">عبارة الاسم الشخصي &nbsp;&nbsp;&nbsp;&nbsp;</option>
+<!-- /TMPL_IF -->
+
+ <!-- /TMPL_IF -->
+ 
+ <!-- TMPL_IF NAME="selected" -->
+            <option value="ln" selected="selected">اللغة</option>
+			<!-- TMPL_ELSE -->
+            <option value="ln">اللغة</option><!-- /TMPL_IF -->
+
+
+                <!-- TMPL_IF NAME="expanded_options" -->
+                <!-- TMPL_IF NAME="selected" --><option value="nt" selected="selected">ملاحظات / تعليقات</option><!-- TMPL_ELSE -->
+                <option value="nt">ملاحظات / تعليقات</option><!-- /TMPL_IF -->
+<!-- /TMPL_IF -->
+<!-- TMPL_IF NAME="selected" -->
+            <option value="pb,wrdl" selected="selected">الناشر</option>
+			<!-- TMPL_ELSE -->
+            <option value="pb,wrdl">الناشر</option><!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="selected" -->
+                <option value="pl,wrdl" selected="selected">موقع الناشر</option>
+<!-- TMPL_ELSE -->
+                <option value="pl,wrdl">موقع الناشر</option><!-- /TMPL_IF -->
+                
+
+
+                <!-- TMPL_IF NAME="expanded_options" --><!-- TMPL_IF NAME="selected" -->
+                <option value="sn" selected="selected">العدد المتّفق عليه</option>
+				<!-- TMPL_ELSE -->
+                <option value="sn">العدد المتّفق عليه</option><!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF NAME="selected" -->
+                    <option value="nb" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp; ISBN</option>
+					<!-- TMPL_ELSE -->
+                    <option value="nb">&nbsp;&nbsp;&nbsp;&nbsp; ISBN</option><!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF NAME="selected" -->
+                    <option value="ns" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp; ISSN</option>
+					<!-- TMPL_ELSE -->
+                    <option value="ns">&nbsp;&nbsp;&nbsp;&nbsp; ISSN</option><!-- /TMPL_IF -->
+				
+				<!-- TMPL_IF NAME="selected" -->
+                    <option value="lcn,phr" selected="selected">رقم الاتصال &nbsp;&nbsp;&nbsp;&nbsp;</option>
+					<!-- TMPL_ELSE -->
+                    <option value="lcn,phr">رقم الاتصال &nbsp;&nbsp;&nbsp;&nbsp;</option><!-- /TMPL_IF -->
+
+
+                <!-- /TMPL_IF -->
+				<!-- TMPL_IF NAME="selected" -->
+            <option value="su,wrdl" selected="selected">الموضوع</option>
+			<!-- TMPL_ELSE -->
+            <option value="su,wrdl">الموضوع</option><!-- /TMPL_IF -->
+
+
+                <!-- TMPL_IF NAME="expanded_options" -->
+				<!-- TMPL_IF NAME="selected" -->
+                <option value="su,phr" selected="selected">عبارة الموضوع &nbsp;&nbsp;&nbsp;&nbsp; </option>
+<!-- TMPL_ELSE -->
+                <option value="su,phr">عبارة الموضوع &nbsp;&nbsp;&nbsp;&nbsp; </option><!-- /TMPL_IF -->
+                <!-- /TMPL_IF -->
+				<!-- TMPL_IF NAME="selected" -->
+            <option value="ti" selected="selected">العنوان</option>
+			<!-- TMPL_ELSE -->
+            <option value="ti">العنوان</option><!-- /TMPL_IF -->
+                <!-- TMPL_IF NAME="expanded_options" -->
+				<!-- TMPL_IF NAME="selected" -->
+                <option value="ti,phr" selected="selected">عبارة العنوان &nbsp;&nbsp;&nbsp;&nbsp;</option>
+<!-- TMPL_ELSE -->
+                <option value="ti,phr">عبارة العنوان &nbsp;&nbsp;&nbsp;&nbsp;</option><!-- /TMPL_IF -->
+                <!-- /TMPL_IF -->
+				<!-- TMPL_IF NAME="selected" -->
+                <option value="se,wrdl" selected="selected">عنوان السلسلات</option>
+<!-- TMPL_ELSE -->
+                <option value="se,wrdl">عنوان السلسلات</option><!-- /TMPL_IF -->
+        </select>
+        <input type="text" size="30" name="q" title="ادخل كلمات البحث" value="">
+        <!-- TMPL_IF NAME="expanded_options" -->
+          <!--   <!-- TMPL_IF NAME="scan_index" --><input type="checkbox" name="scan" id="scan" value="1" /> Scan Indexes<!-- /TMPL_IF --> -->
+            <!-- TMPL_IF NAME="add_field" --><a href="JavaScript:add_field();" id="ButtonPlus" title="إضافة حقل آخر">[+]</a><!-- /TMPL_IF -->
+        <!-- /TMPL_IF -->
+        </p>
+    <!-- /TMPL_LOOP -->
+
+    </fieldset></div>
+<!-- /BOOLEAN SEARCH OPTIONS -->
+    <div id="advsearch-itemtype" class="container">
+    <h3>حدد النوع  من الآتي</h3>
+    <table>
+        <tr>
+      <!--TMPL_LOOP Name="itemtypeloop"-->
+        <td><input type="checkbox" id="<!-- TMPL_VAR NAME="ccl" -->-<!--TMPL_VAR Name="number" -->" name="limit" value="mc-<!-- TMPL_VAR NAME="ccl" -->:<!--TMPL_VAR Name="code" -->"/><!-- TMPL_IF name="imageurl"--><!-- TMPL_IF NAME="imageurl" --><img border="0" src="<!--TMPL_VAR Name="imageurl" -->" alt="<!--TMPL_VAR Name="description" -->" /><!-- /TMPL_IF --><!-- /TMPL_IF -->&nbsp;
+        <!--TMPL_VAR Name="description" --></td>
+        <!-- TMPL_UNLESS name="count5" --></tr><tr><!-- /TMPL_UNLESS -->
+      <!--/TMPL_LOOP-->
+	  <!-- FIXME: for validation, avoid generating emtpy row -->
+		</tr>
+    </table>
+    </div>
+<!-- TMPL_IF NAME="expanded_options" -->
+    <!-- BASIC LIMITS -->
+    <!--TMPL_IF Name="usmarc"-->
+        <fieldset>
+            <legend>حد النوع إلى: أربط من الآتي</legend>
+            <table class="itemtypes">
+                <tr>
+                    <td><input type="checkbox" id="mc-bks" name="limit" value="mc:t"/><label for="mc-bks" title="كتب و نشريات و تقارير تقنية و مخطوطات و أوراق قانونيه و رسائل جامعيه و أطروحات"><img border="0" src="/intranet-tmpl/prog/en/images/AF.gif" alt="الكتب">الكتب</label></td>
+                    <td><input type="checkbox" id="mc-vis" name="limit" value="mc:v"/><label for="mc-vis" title="الصور المتحركه ,التسجيلات الفيديو, المقاطع السينمائية, الشرائح, الشفافيات, الصور, البطاقات, المخططات, الرسوم"><img border="0" src="/intranet-tmpl/prog/en/images/AV Aids.gif" alt="المواد المرئيّة">المواد المرئيّة</label></td>
+                    <td><input type="checkbox" id="mc-sr" name="limit" value="mc-rtype:i" /><label for="mc-sr" title="تسجيلات, كتب في أقراص مضغوطة و كاسيت"><img border="0" src="/intranet-tmpl/prog/en/images/AF.gif" alt="كتب على الشريط">كتب على الشريط</label></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="mc-cf" name="limit" value="mc:c" /><label for="mc-cf" title="ملفات الحاسوب والبيانات والبرمجيات"><img border="0" src="/intranet-tmpl/prog/en/images/CD-ROM software.gif" alt="ملفات الحاسوب">ملفات الحاسوب</label></td>
+                    <td><input type="checkbox" id="mc-lh" name="limit" value="mc-collection:LH" /><label for="mc-lh" title="مواد التاريخ المحلي"><img border="0" src="/intranet-tmpl/prog/en/images/Local history.gif" alt="مواد التاريخ المحلي">مواد التاريخ المحلي</label></td>
+                    <td><input type="checkbox" id="mc-map" name="limit" value="mc:a" /><label for="mc-map" title="الخرائط و الكرات"><img border="0" src="/intranet-tmpl/prog/en/images/PF.gif " alt="الخرائط">الخرائط</label></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="mc-mus" name="limit" value="mc-rtype:j" /><label for="mc-mus" title="موسيقى"><img border="0" src="/intranet-tmpl/prog/en/images/CDM.gif" alt="موسيقى">موسيقى</label></td>
+                    <td><input type="checkbox" id="mc-kit" name="limit" value="mc-rtype:o" /><label for="mc-kit" title="مجموعات"><img border="0" src="/intranet-tmpl/prog/en/images/KIT.gif" alt="مجموعات">مجموعات</label></td>
+                    <td><input type="checkbox" id="mc-ref" name="limit" value="mc-collection:REF" /><label for="mc-ref" title="الاشارة"><img border="0" src="/intranet-tmpl/prog/en/images/REF.gif" alt="الاشارة">الاشارة</label></td></tr>
+                
+                </table>
+        </fieldset>
+        <!-- /BASIC LIMITS -->
+
+        <!-- SUBTYPE LIMITS -->
+            <div id="subtypes" class="container"><fieldset>
+            <legend> حدود الصنف الفرعي</legend><select name="limit" class="subtype">
+                <option value="" selected="selected" class="menuheader">اي جمهور</option>
+                    <option value="aud:a">سهل</option>
+                    <option value="aud:c">الحدث</option>
+                    <option value="aud:d">الصغار الكبار</option>
+                    <option value="aud:e">بالغ</option>
+                </select>
+            
+            <select name="limit" class="subtype">
+                <option value="" selected="selected" class="menuheader">أي محتوى</option>
+                    <option value="fic:1">الخيال</option>
+                    <option value="fic:0">غير خيالي</option>
+                    <option value="bio:b">السيرة </option>
+                    <option value="mus:j">تسجيل الموسيقى</option>
+                    <option value="mus:i">تسجيل غير موسيقي</option>
+                </select>
+    
+            
+            <select name="limit" class="subtype">
+                <option value="" selected="selected" class="menuheader">أي شكل</option>
+                    <option value="l-format:ta">طباعة عاديه</option>
+                    <option value="l-format:tb">الطباعه الكبيرة</option>
+                    <option value="l-format:fk">طريقة بريل</option>
+                    <option value="">-----------</option>
+                    <option value="l-format:sd">قرص السمعيات</option>
+                    <option value="l-format:ss">تسجيل الشريط</option>
+                    <option value="l-format:vf">VHS tape / Videocassette\t \tشريط VHS / كاسيت فيديو</option>
+                    <option value="l-format:vd">د ف د فيديو / قرص فيديو</option>
+                    <option value="l-format:co">قرص البرمجيات</option>
+                    <option value="l-format:cr">موقع</option>
+                </select>
+            
+            <select name="limit" class="subtype">
+                <option value="">أنواع المحتوى الاضافية</option>
+                    <option value="ctype:a">خلاصات / ملخصات</option>
+                    <option value="ctype:b">المراجع</option>
+                    <option value="ctype:c">الأدلة</option>
+                    <option value="ctype:d">القواميس</option>
+                    <option value="ctype:e">الموسوعات </option>
+                    <option value="ctype:f">الكتيبات</option>
+                    <option value="ctype:g">مقالات قانونيه</option>
+                    <option value="ctype:i">الادله</option>
+                    <option value="ctype:j">وثيقة براءه الاختراع</option>
+                    <option value="ctype:k">التسجيلات</option>
+                    <option value="ctype:l">التشريع</option>
+                    <option value="ctype:m">الأطروحات</option>
+                    <option value="ctype:n">الدراسات الإستقصائية</option>
+                    <option value="ctype:o">الاستعراضات</option>
+                    <option value="ctype:p">النصوص المبرمجه</option>
+                    <option value="ctype:q">قائمة الافلام</option>
+                    <option value="ctype:r">الأدلة</option>
+                    <option value="ctype:s">إحصائيّات</option>
+                    <option value="ctype:t">التقارير الفنية</option>
+                    <option value="ctype:v">القضايا القانونية  و ملاحظات القضية</option>
+                    <option value="ctype:w">التقارير القانونية و الملخصات</option>
+                    <option value="ctype:z">المعاهدات </option>
+                </select>
+    
+    </fieldset></div>
+    <!--/TMPL_IF -->
+    <!--TMPL_IF Name="UNIMARC" -->
+        <div id="subtypes_unimarc" class="container"><!-- SUBTYPE LIMITS -->
+    <!-- TMPL_INCLUDE NAME="subtypes_unimarc.inc" --></div>
+    <!--/TMPL_IF-->
+<!--/TMPL_IF-->
+</div>
+        <div class="yui-u">
+<!-- AVAILABILITY LIMITS -->
+	<!-- TMPL_UNLESS NAME="singleBranchMode" -->
+    <div id="location" class="container"><fieldset><legend> :الموقع و التوفر </legend>
+        
+        <select name="limit" id="branchloop" style="width: 20em;">
+        <option value="">جميع المكتبات</option>
+        <!-- TMPL_LOOP NAME="branchloop" -->
+        <!--TMPL_IF Name="selected"-->
+        <option value="branch:<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="branchname" --></option>
+        <!--TMPL_ELSE-->    
+        <option value="branch:<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branchname" --></option>
+        <!--/TMPL_IF-->    
+        <!-- /TMPL_LOOP -->
+        </select>
+        
+        
+        <div style="margin-top:.4em"><label for="available-items"><input type="checkbox" id="available-items" name="limit" value="متوفّر"> الا العناصر المتاحة حاليا</label></div>
+    </fieldset></div>
+	<!-- /TMPL_UNLESS -->
+<!-- /AVAILABILITY LIMITS -->
+
+<!-- RANK LIMITS -->
+    <div id="sortby" class="container"><fieldset><legend> :مرتّب حسب  </legend>
+        <select id="sort_by" name="sort_by" style="width:20em;">
+<!--TMPL_INCLUDE NAME="resort_form.inc" -->
+</select></fieldset></div>
+<!-- RANK LIMITS -->
+</div>
+</div>
+
+<div class="yui-g" style="text-align: center;"><div class="container"><!-- SEARCH BUTTONS -->
+
+    <input class="submit" type="submit" accesskey="s" name="do" title="البحث" value="موافق">
+    <!-- TMPL_IF NAME="expanded_options" -->
+        <a href="/cgi-bin/koha/opac-search.pl?expanded_options=0">[عدد اقل من الخيارات]</a>
+    <!-- TMPL_ELSE -->
+        <a href="/cgi-bin/koha/opac-search.pl?expanded_options=1">[المزيد من الخيارات]</a>
+    <!-- /TMPL_IF -->
+    <a href="/cgi-bin/koha/opac-search.pl?do=Clear">[بحث جديد]</a>
+
+<!-- /SEARCH BUTTONS --></div></div>
+</form>
+
+<script type="text/JavaScript" language="JavaScript">
+	/**
+	 *  Function add_field();
+         *  This function allows to display a new field to search.
+         */
+	function add_field() {
+		var ButtonPlus = document.getElementById('ButtonPlus');
+		var line       = ButtonPlus.parentNode;
+		var dad        = line.parentNode;
+		dad.appendChild(line.cloneNode(true));
+		line.removeChild(ButtonPlus);
+        }
+</script>
+
+
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

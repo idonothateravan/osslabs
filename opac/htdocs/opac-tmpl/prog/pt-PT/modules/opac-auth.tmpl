@@ -1,0 +1,71 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha Online<!-- /TMPL_IF --> 
+<!-- TMPL_IF NAME="opacuserlogin" -->
+ Catalog &rsaquo;  Log in to Your Account
+<!-- TMPL_ELSE -->
+ Catalog &rsaquo; Catalog Login Disabled
+<!-- /TMPL_IF -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t7">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-g">
+<div class="container">
+<div id="opac-auth">
+<!--CONTENT-->
+<!-- TMPL_IF NAME="opacuserlogin" -->
+<!-- TMPL_IF NAME="loginprompt" -->
+<!-- login prompt time-->
+<h3>Iniciar uma sessão na sua conta</h3>
+<!-- TMPL_IF NAME="nopermission" -->
+<!-- This is what is displayed if user doesnt have permission -->
+<p>Sorry, the system doesn't think you have permission to access this page. </p>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="timed_out" -->
+<!-- This is what is displayed if login has timed out -->
+<p>Desculpe, a sua sessão expirou. Por favor inicie a sessão de novo.</p>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="different_ip" -->
+<!-- This is what is displayed if user doesnt have permission -->
+<p> Está a iniciar uma sessão de um endereço IP diferente. Por favor inicie a sessão novamente.</p>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="invalid_username_or_password" -->
+<!-- This is what is displayed if user doesnt have permission -->
+<p>You entered an incorrect username or password. Please try again! And remember, usernames and passwords are case sensitive.</p>
+<!-- /TMPL_IF -->
+
+<form action="<!-- TMPL_VAR NAME="url" -->" name="auth" id="auth" method="post">
+  <input type="hidden" name="koha_login_context" value="opac" />
+<fieldset class="brief"><!-- TMPL_LOOP NAME="INPUTS" -->
+  <input type="hidden" name="<!-- TMPL_VAR NAME="name" -->" value="<!-- TMPL_VAR NAME="value" -->" />
+<!-- /TMPL_LOOP -->
+<ol>
+<li><label for="userid">O número do seu cartão</label>
+<input type="text"  size="25" id="userid"  name="userid" /></li>
+<li><label for="password">Senha ou Número de Identificação Pessoal</label><input type="password"  size="25" id="password"  name="password" /></li>
+</ol></fieldset>
+
+<input type="submit" value="Iniciar uma sessão" class="submit">
+<div>  <h5>Ainda não tem senha?</h5><p> If you don't have a password yet, stop by the circulation desk the next time you're in the library. We'll happily set one up for you.</p>
+<h5>Não tem cartão da Biblioteca?</h5><p> If you don't have a library card, stop by your local library to sign up.  </p></div>
+</form>
+
+
+<!-- /TMPL_IF -->
+<!-- TMPL_ELSE -->
+<h4>A autenticação no catálogo não foi activada para esta biblioteca.</h4>
+<ul>
+  <li>Para reportar este erro, pode <a href="mailto:<!-- TMPL_VAR NAME="admin" -->">email ao administrador Koha Administrador</a>.</li>
+  <li>Utilize o menu superior para navegar pelo programa.</li>
+</ul>
+<!-- /TMPL_IF --></div>
+</div>
+</div>
+</div>
+
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

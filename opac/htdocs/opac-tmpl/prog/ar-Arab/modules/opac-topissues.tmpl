@@ -1,0 +1,131 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->كوها على الانترنت<!-- /TMPL_IF -->  العناوين الاكثر شعبية  &rsaquo; دليل
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript" src="<!-- TMPL_VAR name="themelang" -->/lib/jquery/plugins/jquery.tablesorter.min.js"></script>
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+$.tablesorter.addParser({
+    id: 'articles', 
+    is: function(s) {return false;  }, 
+    format: function(s) { return s.toLowerCase().replace(/^(the|an|a) /,''); }, 
+    type: 'text' 
+});
+    $(function() {
+		$("#topissuest").tablesorter({
+				widgets : ['zebra'],
+				sortList: [[2,1]],
+				headers: { 0:{sorter:'articles'}<!-- TMPL_IF NAME="opacuserlogin" -->,3:{sorter:false}<!-- /TMPL_IF -->
+				}
+			}); 
+	});
+function Dopop(link) {
+    newin=window.open(link,'width=500,height=400,toolbar=false,scrollbars=yes');
+}
+//]]>
+</script>
+<style type="text/css">
+	#search-facets fieldset { border: 0; margin: 0;padding:0;}#search-facets ol{padding:.3em;}#search-facets li {list-style-type:none;padding:4px 4px;}#search-facets label{font-weight:bold;display:block;margin:.2em 0;}#search-facets fieldset.action {padding-left:4px;margin:.3em;};
+</style>
+</head>
+<body>
+	<!-- TMPL_IF EXPR="OpacNav||results_loop" --><div id="doc3" class="yui-t1"><!-- TMPL_ELSE --><div id="doc3" class="yui-t7"><!-- /TMPL_IF -->
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+	<div id="topissues" class="container">
+    <!-- TMPL_IF NAME="results_loop" -->
+    
+        <table id="topissuest">
+		<caption>  تدقيقــا <!-- TMPL_VAR NAME="limit"-->  الأكثر   
+        <!-- TMPL_IF name="itemtype" -->
+            <!-- TMPL_VAR name="itemtype" -->
+        <!-- TMPL_ELSE --> عناو ين<!-- /TMPL_IF -->
+        <!-- TMPL_IF name="branch" -->
+         <!-- TMPL_VAR name="branch" --> في 
+        <!-- /TMPL_IF -->
+        <!-- TMPL_IF name="timeLimit" -->
+         أشهر <!-- TMPL_VAR name="timeLimit" -->  في الماضي
+        <!-- TMPL_ELSE --> في كل العصور<!-- /TMPL_IF -->
+    </caption>
+            <thead><tr>
+                <th>العنوان</th>
+                <th>نوع العنصر</th>
+                <th>التدقيقات</th>
+				<!-- TMPL_IF NAME="opacuserlogin" --><th>&nbsp;</th><!-- /TMPL_IF -->
+				
+            </tr></thead>
+                <tbody><!-- TMPL_LOOP NAME="results_loop" -->
+                    <tr>
+                        <td><a href="/cgi-bin/koha/opac-detail.pl?biblionumber=<!-- TMPL_VAR name="biblionumber" -->"><!-- TMPL_VAR name="title" --></a><p><!-- TMPL_VAR NAME="author" -->
+                        <!-- TMPL_IF name="publicationyear" --> - <!-- TMPL_VAR name="publicationyear" --><!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="publishercode" -->- <!-- TMPL_VAR name="publishercode" --><!-- /TMPL_IF --> <!-- TMPL_IF name="seriestitle" -->(<!-- TMPL_VAR name="seriestitle" -->)<!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="place" --> ; <!-- TMPL_VAR name="place" --><!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="pages" --> - <!-- TMPL_VAR name="pages" --><!-- /TMPL_IF -->
+                        <!-- TMPL_IF name="size" --> ; <!-- TMPL_VAR name="size" --><!-- /TMPL_IF --></p>
+                        </td>
+                        <td><!-- TMPL_VAR name="description" --></td>
+                        <td><!-- TMPL_VAR name="tot" --></td>
+						<!-- TMPL_IF NAME="opacuserlogin" --><td><!-- TMPL_IF name="RequestOnOpac" --><!-- TMPL_UNLESS NAME="norequests" --><a href="/cgi-bin/koha/opac-reserve.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">مكان ممسك</a><!-- /TMPL_UNLESS --><!-- /TMPL_IF --></td><!-- /TMPL_IF -->
+                        </tr>
+                <!-- /TMPL_LOOP--></tbody>
+        </table>
+<!-- TMPL_ELSE -->
+<form method="post" action="/cgi-bin/koha/opac-topissues.pl">
+		<fieldset class="rows">
+		<legend>انظر إلى العناوين الأكثر شعبيّة</legend>
+          <ol>  <li><label for="limit">إظــهــار البداية </label> <select name="limit" id="limit">
+                            <!-- TMPL_IF EXPR="limit == 10" --><option value ="10" selected="selected"> 10عناوين </option><!-- TMPL_ELSE --><option value="10"> 10عناوين </option><!-- /TMPL_IF -->
+                            <!-- TMPL_IF EXPR="limit == 15" --><option value ="15" selected="selected"> 15عنوان       </option><!-- TMPL_ELSE --><option value="15"> 15عنوان       </option><!-- /TMPL_IF -->
+                            <!-- TMPL_IF EXPR="limit == 20" --><option value ="20" selected="selected"> 20عنوان</option><!-- TMPL_ELSE --><option value="20"> 20عنوان</option><!-- /TMPL_IF -->
+                            <!-- TMPL_IF EXPR="limit == 30" --><option value ="30" selected="selected"> 30عنوان</option><!-- TMPL_ELSE --><option value="30"> 30عنوان</option><!-- /TMPL_IF -->
+                            <!-- TMPL_IF EXPR="limit == 40" --><option value ="40" selected="selected">40عنوان</option><!-- TMPL_ELSE --><option value="40">40عنوان</option><!-- /TMPL_IF -->
+                            <!-- TMPL_IF EXPR="limit == 50" --><option value ="50" selected="selected">50عنوان</option><!-- TMPL_ELSE --><option value="50">50عنوان</option><!-- /TMPL_IF -->
+                            <!-- TMPL_IF EXPR="limit == 100" --><option value ="100" selected="selected"> 100عنوان </option><!-- TMPL_ELSE --><option value="100"> 100عنوان </option><!-- /TMPL_IF -->
+                        </select>
+						</li>
+				<li>
+               <label for="branch">من  </label>
+                <select name="branch" id="branch">
+                <option value="">جميع الفروع</option>
+                <!-- TMPL_LOOP name="branchloop" -->
+                    <!-- TMPL_IF EXPR="branch eq branchname" --><option value="<!-- TMPL_VAR name="value" -->" selected="selected"><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR name="value" -->"><!-- /TMPL_IF -->
+                        <!-- TMPL_VAR name="branchname" -->
+                    </option>
+                <!-- /TMPL_LOOP -->
+                </select>
+            </li>
+            <li><label for="itemtype">محدد إلى </label>
+                    <select name="itemtype" id="itemtype">
+                        <option value="">كل أنواع العناصر</option>
+                       <!-- TMPL_LOOP name="itemtypeloop" -->
+                            <!-- TMPL_IF EXPR="itemtype eq description" --><option value="<!-- TMPL_VAR name="value" -->" selected="selected"><!-- TMPL_ELSE --><option value="<!-- TMPL_VAR name="value" -->"><!-- /TMPL_IF -->
+                                <!-- TMPL_VAR name="description" -->
+                            </option>
+                        <!-- /TMPL_LOOP -->
+                    </select></li>
+			<li>
+            <label for="timeLimit"> : حصلت في الماضي </label> <select name="timeLimit" id="timeLimit">
+                <!-- TMPL_IF EXPR="timeLimit == 3" --><option value="3" selected="selected">3اشهر</option><!-- TMPL_ELSE --><option value="3">3اشهر</option><!-- /TMPL_IF -->
+                 <!-- TMPL_IF EXPR="timeLimit == 6" --><option value="6" selected="selected">6اشهر</option><!-- TMPL_ELSE --><option value="6">6اشهر</option><!-- /TMPL_IF -->
+                 <!-- TMPL_IF EXPR="timeLimit == 12" --><option value="12" selected="selected"> 12شهرا</option><!-- TMPL_ELSE --><option value="12"> 12شهرا</option><!-- /TMPL_IF -->
+                 <!-- TMPL_IF EXPR="timeLimit == 999" --><option value="999" selected="selected">لا حدود</option><!-- TMPL_ELSE --><option value="999">لا حدود</option><!-- /TMPL_IF -->
+				</select>
+            </li></ol>
+        <input type="hidden" name="do_it" value="1" />
+    </fieldset>
+	<fieldset class="action">
+        <input type="submit" value="سجّل"></fieldset>
+    </form>
+   <!-- /TMPL_IF -->
+	</div>
+</div>
+</div>
+</div><!-- TMPL_IF EXPR="OpacNav||results_loop" -->
+<div class="yui-b"><div class="container">
+<!-- TMPL_IF NAME="results_loop" --><!-- TMPL_INCLUDE NAME="opac-topissues.inc" --><!-- /TMPL_IF -->
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+</div></div>
+<!-- /TMPL_IF -->
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

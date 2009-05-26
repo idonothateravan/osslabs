@@ -1,0 +1,243 @@
+<!-- TMPL_INCLUDE NAME="doc-head-open.inc" -->لفائدة <!-- TMPL_VAR NAME="LibraryNameTitle" DEFAULT="Koha Online" --> حجز; &rsaquo <!-- TMPL_VAR NAME="title" --> دليل المكتبه <!-- TMPL_LOOP NAME="USER_INFO" --><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --><!-- /TMPL_LOOP -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+<script type="text/javascript">
+// <![CDATA[ 
+ $(document).ready(function() {
+ 	$("#requestany").click(function() {
+		if(this.checked){
+		$("input[@name=checkitem]").each(function() {
+			$(this).attr("checked","");
+		});
+		}
+	});
+ 	$("input[@name=checkitem]").click(function() {
+		onechecked = 0;
+		$("input[@name=checkitem]").each(function() {
+			if(this.checked){
+				onechecked = 1;
+			}
+		});
+		if(onechecked == 1){
+			$("#requestany").attr("checked","");
+		} else {
+			$("#requestany").attr("checked","checked");
+		}
+	});
+ });
+// ]]>
+</script>
+</head>
+<body>
+<div id="doc3" class="yui-t7">
+<!--TMPL_INCLUDE NAME="masthead.inc" -->
+
+   <div id="bd">
+	<div id="yui-g">
+<div id="holds" class="container">
+<!-- TMPL_IF NAME="message" -->
+    <!-- TMPL_IF NAME="GNA" -->
+    <div class="dialog alert">
+        <strong>عذرا</strong>  .على الملف <a href="/cgi-bin/koha/opac-userdetails.pl">  معلومات الاتصال  </a>  أنت لا تستطيع الاستعارة   لأن المكتبه  ليس لديها احدث  
+    </div>
+    <div class="dialog alert"> قد يكون هناك تأخير في استعادة حسابك اذا كنت ترسل على شبكة الانترنت  <em> الرجاء ملاحظه: </em> <a href="/cgi-bin/koha/opac-userupdate.pl"> استخدام التحديث على الانترنت</a>  الرجاء الاتصال بامين مكتبتك, أو   
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="lost" -->
+    <div class="dialog alert">
+        <strong>عذرا</strong> أنت لا تستطيع الاستعارة لان بطاقة المكتبه الخاصة بك فقدت او سرقت
+    </div>
+    <div class="dialog alert">
+        إذا كان هذا خطأ الرجاء أخذ بطاقتك إلى مكتب التداول بمكتبتك المحلية لتصحيح هذا الخطأ
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="debarred" -->
+    <p class="error">
+        <strong>عذرا</strong>.انت لا تستطيع الاستعارة لأن حسابك قد تم تجميده
+    </div>
+    <div class="dialog alert">تشير إلى أنّ حسابك سيمحى ، يرجى الرجوع إلى أمين المكتبة  <a href="/cgi-bin/koha/opac-user.pl"> صفحة حسابك </a> اذا كانت عادة ما يكون سبب تجميد الحساب القديم تجاوز في المستحقات أو رسوم و اضرار.  
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="too_much_oweing" -->
+    <div class="dialog alert">
+         . <!-- TMPL_VAR NAME="too_much_oweing" --> عفوا ، لا يمكنك وضع المقتنيــات لأنك مدين بــ
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="too_many_reserves" -->
+        <div class="dialog alert"> . <!-- TMPL_VAR NAME="too_many_reserves" --> عفوا ، لا يمكنك اقتنـــاء  أكثر من 
+        </div>
+        <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="already_reserved" -->
+    <div class="dialog alert">
+        .<a href="/cgi-bin/koha/opac-detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->">العودة الى شاشة تفصيل العنــاصر </a>.لديك عقد على هذا  العنصر 
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="no_items_selected" -->
+    <div class="dialog alert">
+        عليك على الأقلّ اختيـــار عنصر 
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="no_branch_selected" -->
+    <div class="dialog alert">
+         يجب ان تختار مكتبة للاقتنـــاء
+    </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="no_biblionumber" -->
+    <div class="dialog alert">خطأ : لم يتم التحصل على رقم السجل </div>
+    <!-- /TMPL_IF -->
+    <!-- TMPL_IF NAME="bad_biblionumber" -->
+    <div class="dialog alert"> .<!-- TMPL_VAR NAME="bad_biblionumber" --> خطأ : لم يتم العثور على السجل حامل الرقم  </div>
+    <!-- /TMPL_IF -->
+</div>
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="select_item_types" -->
+    <!-- The first time round you select which bibitems you want -->
+    <form action="/cgi-bin/koha/opac-reserve.pl" method="post">
+        <input type="hidden" name="item_types_selected" value="1">
+        <input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->">
+        <h3><a href="/cgi-bin/koha/opac-detail.pl?biblionumber=<!-- TMPL_VAR NAME="biblionumber" -->"><!-- TMPL_VAR NAME="title" --></a>تحضير عقد <!-- TMPL_IF NAME="author" --> <!-- TMPL_VAR NAME="author" -->  بواسطة   <!-- /TMPL_IF --></h3>
+
+<!-- TMPL_IF NAME="OPACItemHolds" --> <!-- TMPL_LOOP name="bibitemloop" --> 
+            <!-- TMPL_UNLESS NAME="item-level_itypes" -->
+            <p><strong>:نوع العنصر</strong> <!-- TMPL_VAR NAME="description" --></p>
+            <!-- /TMPL_UNLESS -->
+            <!-- TMPL_IF NAME="publicationyear" --><p><strong> :سنة النشر </strong> <!-- TMPL_VAR NAME="publicationyear" --></p><!-- /TMPL_IF -->
+<!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+		<fieldset class="rows holds">
+			<ol>
+				<li><span class="label">لــــ </span> <!-- TMPL_LOOP NAME="USER_INFO" --><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --> (<!-- TMPL_VAR NAME="cardnumber" -->)
+            <!-- TMPL_IF NAME="singleBranchMode" -->
+             <input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branchcode" -->"/>
+            <!-- /TMPL_IF -->
+            <!-- /TMPL_LOOP --></li>
+            <li><span class="label">الاولوية </span><!-- TMPL_VAR Name="rank" DEFAULT="?" --> من<!-- TMPL_VAR Name="reservecount" DEFAULT="?" -->
+			</li> 
+            <!-- TMPL_UNLESS NAME="singleBranchMode" -->
+            <li><label for="branch">:التقاط من</label> <select name="branch" id="branch">
+                    <!-- TMPL_LOOP NAME="CGIbranch" -->
+                        <!-- TMPL_IF name="selected" -->
+                            <option value="<!-- TMPL_VAR NAME="value" -->" selected="selected"><!-- TMPL_VAR NAME="branch" --></option>
+                        <!-- TMPL_ELSE -->
+                            <option value="<!-- TMPL_VAR NAME="value" -->"><!-- TMPL_VAR NAME="branch" --></option>
+                        <!-- /TMPL_IF -->
+                    <!-- /TMPL_LOOP -->
+            </select>
+            </li>
+            <!-- /TMPL_UNLESS -->
+			
+			<!-- TMPL_IF NAME="forloan" -->
+            <!-- TMPL_IF NAME="OPACItemHolds" --><li> <label for="requestany">تحضير عقد على النسخة المتاحة المقبلة </label>
+            <input type="checkbox" name="request" id="requestany" checked="checked" value="غير محدد">
+            </li><!-- TMPL_ELSE --><input type="hidden" name="request" value="Any" /><!-- /TMPL_IF -->
+			</ol>
+		</fieldset>
+
+
+<fieldset class="action">            <input type="hidden" name="biblioitem" value="<!-- TMPL_VAR NAME="biblioitemnumber" -->" />
+            <input type="submit" value="مكان ممسك">
+            <input type="hidden" name="all" value="1" /></p>
+            <input type="hidden" name="place_reserve" value="1" /></fieldset>
+			<!-- /TMPL_IF -->  
+			          
+       <!-- TMPL_IF NAME="OPACItemHolds" --> <!-- TMPL_LOOP name="bibitemloop" -->    
+
+            <table id="requestspecific">
+			<caption>تحضير عقد على نسخة محددة</caption>
+            <tr>
+                <th>يمسك</th>
+	            <!-- TMPL_IF NAME="item-level_itypes" -->
+                <th>نوع العنصر</th>
+                <!-- /TMPL_IF -->
+                <th>شفرة التعرف</th>
+                <!-- TMPL_UNLESS NAME="singleBranchMode" -->
+                <th>الصفحه الرئيسية للمكتبة</th>
+                <th>اخر موقع </th>
+                <!-- /TMPL_UNLESS -->
+                <th>رقم الاتصال</th>
+                <th>المعلومات</th>
+            </tr>
+        <!-- TMPL_LOOP Name="itemloop" -->
+        <tr class="<!-- TMPL_VAR NAME="backgroundcolor" -->">
+            <td>
+            <!-- TMPL_IF NAME="available" -->
+            <input type="radio" name="checkitem" value="<!-- TMPL_VAR NAME="itemnumber" -->" />
+            <!-- TMPL_ELSE -->
+            <input disabled="disabled" type="radio" name="checkitem" value="<!-- TMPL_VAR NAME="itemnumber" -->" />
+            <!-- /TMPL_IF -->
+            </td>
+            <!-- TMPL_IF NAME="item-level_itypes" -->
+            <td>
+            <img src="<!-- TMPL_VAR NAME="imageurl" -->" alt="<!-- TMPL_VAR NAME="description" -->" title="<!-- TMPL_VAR NAME="description" -->" />
+            </td>
+            <!-- /TMPL_IF -->
+            <td><!-- TMPL_VAR NAME="barcode"           --></td>
+            <!-- TMPL_UNLESS NAME="singleBranchMode" -->
+            <td><!-- TMPL_VAR NAME="homebranchname"    --></td>
+            <td><!-- TMPL_VAR NAME="holdingbranchname" --></td>
+            <!-- /TMPL_UNLESS -->
+            <td><!-- TMPL_VAR NAME="itemcallnumber"    --></td>
+            <td>
+        <!-- TMPL_IF Name="date_due" -->
+            <span class="checkedout"> <!-- TMPL_VAR NAME="date_due" --> المستحق   </span>
+        <!-- TMPL_ELSIF Name="transfertwhen" -->
+            <span class="intransit">في العبور من  <!-- TMPL_VAR NAME="transfertfrom" --> , الى  <!-- TMPL_VAR NAME="transfertto" -->, منذ  <!-- TMPL_VAR NAME="transfertwhen" --></span>
+        <!-- /TMPL_IF -->
+
+        <!-- TMPL_IF Name="message" -->
+            <span class="lost">(غير متوفّر( ضــائع أو مفقود</span>
+        <!-- /TMPL_IF -->
+
+        <!-- TMPL_IF Name="notforloan" -->
+            <span class="notforloan">(<!-- TMPL_VAR NAME="notforloanvalue" -->)ليس للقرض</span>
+        <!-- /TMPL_IF -->
+
+            <!-- TMPL_IF NAME="reservedate"-->
+                    <span class="waiting"><!-- TMPL_IF NAME="waitingdate" -->إنتظـــار<!-- TMPL_ELSE -->في الانتظار<!-- /TMPL_IF --> لراع 
+                    <!-- TMPL_IF NAME="waitingdate" -->في<!-- TMPL_ELSE --> متوقع في<!-- /TMPL_IF -->  <!-- TMPL_VAR NAME="ExpectedAtLibrary" -->   منذ 
+                    <!-- TMPL_IF NAME="waitingdate" --><!-- TMPL_VAR NAME="waitingdate" --><!-- TMPL_ELSE --><!-- TMPL_IF name="reservedate" --><!-- TMPL_VAR NAME="reservedate" --><!-- /TMPL_IF --><!-- /TMPL_IF -->.</span>
+            <!-- TMPL_ELSE -->
+                    <span class="notonhold">لا تعليق</span>
+            <!-- /TMPL_IF -->&nbsp;
+            </td>
+        </tr>
+        <!-- /TMPL_LOOP --> <!-- itemloop -->
+        </table>
+        <!-- /TMPL_LOOP --> <!-- bibitemloop -->
+        <input type="submit" value="مكان ممسك">
+        </form><!-- /TMPL_IF -->
+    <!-- end of the first form -->
+<!-- /TMPL_IF -->
+
+<!-- TMPL_IF NAME="item_types_selected" -->
+<!-- if the bibitems have already been selected -->
+<form action="/cgi-bin/koha/opac-reserve.pl" method="post">
+<input type="hidden" name="place_reserve" value="1">
+<input type="hidden" name="biblionumber" value="<!-- TMPL_VAR NAME="biblionumber" -->"><h3>تأكيد الحجز</h3>
+<div class="details">
+    <table>
+        <tr><th> :العنوان  </th><td><span class="title"><!-- TMPL_VAR NAME="title" --></span></td></tr>
+
+<!-- TMPL_IF NAME="all" -->
+        <tr><th>:نوع العنصر </th><td>غير محدد<input type="hidden" name="all" value="1"></td></tr>
+<!-- TMPL_ELSE -->
+        <tr><th>:انواع العناصر </th><td><!-- TMPL_LOOP NAME="TYPES" -->
+<input type="hidden" name="itemtype" value="<!-- TMPL_VAR NAME="itemtype" -->"><!-- TMPL_VAR NAME="description" -->;
+<!-- /TMPL_LOOP --></td></tr>
+
+<!-- /TMPL_IF -->
+        <!-- TMPL_IF NAME="singleBranchMode" -->
+        <input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branch" -->">
+        <!-- TMPL_ELSE -->
+        <tr><th>:التقاط من </th><td><!-- TMPL_VAR NAME="branchname" --><input type="hidden" name="branch" value="<!-- TMPL_VAR NAME="branch" -->"></td></tr>
+        <!-- /TMPL_IF -->
+</table>
+</div>
+<p><input type="submit" value="الانهاء و الحجز " class="submit" onclick="this.value='Please wait...'; this.disabled=true; this.form.submit();"></p>
+
+</form>
+
+<!-- /TMPL_IF -->
+</div></div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc"-->

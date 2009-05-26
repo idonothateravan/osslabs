@@ -1,0 +1,87 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha Online<!-- /TMPL_IF --> Catalog &rsaquo; Personal Details for <!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+
+<h3><a href="/cgi-bin/koha/opac-user.pl"><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" -->'s account</a> <img src="<!-- TMPL_VAR NAME="themelang" -->../../images/caret.gif" width="16" height="16" alt="&gt;" border="0" /> Personal Details</h3>
+
+<table>
+<tr><th scope="row">이름：</th><td> <!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --></td></tr>
+<tr><th scope="row">
+대출카드번호</th><td><!-- TMPL_VAR NAME="cardnumber" --></td></tr>
+</table>
+
+<table>
+<caption>세부사항연결</caption>
+<tr><th scope="row">우송 주소：</th><td><!-- TMPL_VAR NAME="address" -->, <!-- TMPL_VAR NAME="city" --></td></tr>
+
+<tr><th scope="row">현재 거주지 주소</th><td> <!-- TMPL_VAR NAME="B_address" -->, <!-- TMPL_VAR NAME="B_city" --></td></tr>
+
+<tr><th scope="row">전화번호(집):</th><td><!-- TMPL_IF NAME="phone" --><!-- TMPL_VAR NAME="phone" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">전화번호(일과중):</th><td><!-- TMPL_IF NAME="mobile" --><!-- TMPL_VAR NAME="mobile" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">Fax:</th><td><!-- TMPL_IF NAME="fax" --><!-- TMPL_VAR NAME="fax" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">전자메일:</th><td><!-- TMPL_IF NAME="email" --><a href="mailto:<!-- TMPL_VAR NAME="email" -->"><!-- TMPL_VAR NAME="email" --></a><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+</table>
+
+<table>
+<caption>회원입회 세부내용</caption>
+<tr><th scope="row">회원입회 수:</th><td> <!-- TMPL_VAR NAME="borrowernumber" --></td></tr>
+
+<tr><th scope="row">회원입회 범주</th><td>  <!-- TMPL_VAR NAME="categorycode" --></td></tr>
+
+<!-- <td>Fee:</th><td>  /year, Paid</td> -->
+
+<tr><th scope="row">등록 날짜：</th><td><!-- TMPL_VAR NAME="dateenrolled" --></td></tr>
+
+<tr><th scope="row">만료기간:</th><td><!-- TMPL_VAR NAME="dateexpiry" --></td></tr>
+
+<!-- TMPL_IF NAME="joiningbranch" --><tr><th>협력인접분관</th><td><!-- TMPL_VAR NAME="joiningbranch" --></td></tr><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></table>
+
+<table>
+<caption>상세개인정보</caption>
+<tr><th scope="row">DoB:</th><td> <!-- TMPL_IF NAME="dateofbirth" --><!-- TMPL_VAR NAME="dateofbirth" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">성별:</th><td><!-- TMPL_IF NAME="sex" --><!-- TMPL_VAR NAME="sex" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr></table>
+
+<!-- TMPL_IF NAME="contactname"-->
+<table>
+<caption>대리 컨택담당자 세부사항</caption>
+<tr><th scope="row">대리 컨택 담당자:</th><td> <!-- TMPL_IF NAME="contactname" --><!-- TMPL_VAR NAME="contactname" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">전화번호:</th><td> <!-- TMPL_IF NAME="B_phone" --><!-- TMPL_VAR NAME="B_phone" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --></td></tr>
+
+<tr><th scope="row">관계：</th><td> <!-- TMPL_IF NAME="relationship" --><!-- TMPL_VAR NAME="relationship" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF -->  </td></tr>
+
+<tr><th scope="row">주：</th><td> <!-- TMPL_IF NAME="contactnote" --><!-- TMPL_VAR NAME="contactnote" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --> </td></tr>
+
+<tr><th scope="row">Guarantor:</th><td> <!-- TMPL_IF NAME="guarantorid" --><!-- TMPL_VAR NAME="guarantorid" --><!-- TMPL_ELSE -->&nbsp;<!-- /TMPL_IF --> </td></tr></table>
+
+<!-- TMPL_ELSE -->
+<h4>No alternate contact on file.</h4>
+<!-- /TMPL_IF -->
+
+<form action="/cgi-bin/koha/opac-userupdate.pl" method="post">
+<input type="submit" name="Modify" value="귀하의 기록을 수정합니다">
+</form>
+
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->

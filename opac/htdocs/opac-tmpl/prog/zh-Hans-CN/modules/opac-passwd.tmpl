@@ -1,0 +1,62 @@
+<!-- TMPL_INCLUDE name="doc-head-open.inc" --><!-- TMPL_IF NAME="LibraryNameTitle" --><!-- TMPL_VAR NAME="LibraryNameTitle" --><!-- TMPL_ELSE -->Koha 在线<!-- /TMPL_IF --> 馆藏目录 &rsaquo; 账号<!-- TMPL_VAR name="firstname" --> <!-- TMPL_VAR name="surname" -->
+<!-- TMPL_INCLUDE NAME="doc-head-close.inc" -->
+</head>
+<body>
+<div id="doc3" class="yui-t1">
+   <div id="bd">
+<!-- TMPL_INCLUDE name="masthead.inc" -->
+
+	<div id="yui-main">
+	<div class="yui-b"><div class="yui-g">
+	<div class="container">
+	<h3><a href="/cgi-bin/koha/opac-user.pl"><!-- TMPL_VAR NAME="firstname" --> <!-- TMPL_VAR NAME="surname" --> 的账号</a> <img src="<!-- TMPL_VAR NAME="themelang" -->l../../images/caret.gif" width="16" height="16" alt="下一笔 &gt;&gt;" border="0"> 修改密码 </h3>
+
+    <!-- TMPL_IF NAME= "Error_messages" -->
+<div class="dialog error">        <h3>提交过程出现问题</h3>
+        <p>
+            <!-- TMPL_IF NAME= "PassMismatch" -->
+            密码不相符。请重新输入新的密码。
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME= "ShortPass" -->
+            新密码必须最少 <!-- TMPL_VAR NAME="minpasslen" --> 个字符长
+            <!-- /TMPL_IF -->
+            <!-- TMPL_IF NAME= "WrongPass" -->
+            Your current password was entered incorrectly.  If this problem persists, please ask a librarian to re-set your password for you.	
+            <!-- /TMPL_IF -->
+        </p></div>
+    <!-- /TMPL_IF -->
+    
+    <!-- TMPL_IF NAME= "Ask_data" -->
+        <!-- TMPL_IF NAME="OpacPasswordChange" -->
+        <form action="/cgi-bin/koha/opac-passwd.pl" name="mainform" id="mainform" method="post"><fieldset class="brief">
+			<!-- TMPL_UNLESS NAME= "ShortPass" --><div class="hint">新密码必须最少 <!-- TMPL_VAR NAME="minpasslen" --> 个字符长</div><!-- /TMPL_UNLESS -->
+          <ol>  <li><label for="password">当前密码：</label> <input type="password" id="Oldkey" size="25"  name="Oldkey" /></li>
+            <li><label for="Newkey">新密码：</label> <input type="password" id="Newkey"  size="25"  name="Newkey" /></li>
+            <li><label for="Confirm">再输入新密码：</label> <input type="password"  id="Confirm" size="25" name="Confirm" /></li></ol></fieldset>
+            <fieldset class="action"><input type="submit" value="提交改变" class="submit"> <a href="/cgi-bin/koha/opac-user.pl" class="cancel">取消</a></fieldset>
+    </form>
+        <!-- TMPL_ELSE -->
+            <div class="dialog alert">你无法改变密码。</div>
+        <!-- /TMPL_IF -->
+    <!-- /TMPL_IF -->
+    
+    <!-- TMPL_IF NAME= "password_updated" -->
+        <div class="dialog message"><h1>成功修改密码</h1>
+        您的密码已成功修改</div>
+        <form action="/cgi-bin/koha/opac-user.pl" method="post">
+            <input type="hidden" name="borrowernumber" value="<!-- TMPL_VAR NAME="borrowernumber" -->" />
+            <p><input type="submit" class="icon back" value="返回到个人记录"></p>
+        </form>
+    <!-- /TMPL_IF -->
+</div>
+</div>
+</div>
+</div>
+<div class="yui-b">
+<div class="container">
+<!--TMPL_INCLUDE NAME="navigation.inc" -->
+<!-- TMPL_INCLUDE name="usermenu.inc" -->
+</div>
+</div>
+</div>
+<!-- TMPL_INCLUDE NAME="opac-bottom.inc" -->
