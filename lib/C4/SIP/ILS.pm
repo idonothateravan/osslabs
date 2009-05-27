@@ -86,33 +86,30 @@ sub to_bool {
     my $bool = shift;
     # If it's defined, and matches a true sort of string, or is
     # a non-zero number, then it's true.
-	#
-	# FIXME: this test is faulty
-	# 	We're running under warnings and strict.
-	#	But if we don't match regexp, then we go ahead and numerical compare?
-	# 	That means we'd generate a warning on 'FALSE' or ''.
-    return defined($bool) && (($bool =~ /true|y|yes/i) || $bool != 0);
+    defined($bool) or return;                   # false
+    ($bool =~ /true|y|yes/i) and return 1;      # true
+    return ($bool =~ /^\d+$/ and $bool != 0);   # true for non-zero numbers, false otherwise
 }
 
 sub checkout_ok {
     my $self = shift;
-    return (exists($self->{policy}->{checkout})
-	    && to_bool($self->{policy}->{checkout}));
+    return (exists($self->{institution}->{policy}->{checkout})
+	    && to_bool($self->{institution}->{policy}->{checkout}));
 }
 sub checkin_ok {
     my $self = shift;
-    return (exists($self->{policy}->{checkin})
-	    && to_bool($self->{policy}->{checkin}));
+    return (exists($self->{institution}->{policy}->{checkin})
+	    && to_bool($self->{institution}->{policy}->{checkin}));
 }
 sub status_update_ok {
     my $self = shift;
-    return (exists($self->{policy}->{status_update})
-	    && to_bool($self->{policy}->{status_update}));
+    return (exists($self->{institution}->{policy}->{status_update})
+	    && to_bool($self->{institution}->{policy}->{status_update}));
 }
 sub offline_ok {
     my $self = shift;
-    return (exists($self->{policy}->{offline})
-	    && to_bool($self->{policy}->{offline}));
+    return (exists($self->{institution}->{policy}->{offline})
+	    && to_bool($self->{institution}->{policy}->{offline}));
 }
 
 #
@@ -138,15 +135,16 @@ sub checkout {
 		$circ->screen_msg("Patron Blocked");
     } elsif (!$item) {
 		$circ->screen_msg("Invalid Item");
-    } elsif ($item->hold_queue && @{$item->hold_queue} && ($patron_id ne $item->hold_queue->[0])) {
-		$circ->screen_msg("Item on Hold for Another User");
+    # holds checked inside do_checkout
+    # } elsif ($item->hold_queue && @{$item->hold_queue} && ! $item->barcode_is_borrowernumber($patron_id, $item->hold_queue->[0]->{borrowernumber})) {
+	#	$circ->screen_msg("Item on Hold for Another User");
     } elsif ($item->{patron} && ($item->{patron} ne $patron_id)) {
 	# I can't deal with this right now
 		$circ->screen_msg("Item checked out to another patron");
     } else {
 		$circ->do_checkout();
 		if ($circ->ok){
-			warn "circ is ok";
+			$debug and warn "circ is ok";
 			# If the item is already associated with this patron, then
 			# we're renewing it.
 			$circ->renew_ok($item->{patron} && ($item->{patron} eq $patron_id));
@@ -160,7 +158,7 @@ sub checkout {
 				$patron_id, join(', ', @{$patron->{items}}));
 		}
 		else {
-			syslog("LOG_DEBUG", "ILS::Checkout Issue failed");
+			syslog("LOG_ERR", "ILS::Checkout Issue failed");
 		}
     }
     # END TRANSACTION
@@ -302,7 +300,7 @@ sub cancel_hold {
     # record but not on the item record, we'll treat that as success.
     foreach my $i (0 .. scalar @{$item->hold_queue}) {
 		$hold = $item->hold_queue->[$i];
-		if ($hold->{patron_id} eq $patron->id) {
+		if ($item->barcode_is_borrowernumber($patron->id, $hold->{borrowernumber})) {
 		    # found it: delete it.
 		    splice @{$item->hold_queue}, $i, 1;
 		    last;		# ?? should we keep going, in case there are multiples

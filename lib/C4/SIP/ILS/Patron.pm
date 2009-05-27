@@ -25,7 +25,7 @@ use Digest::MD5 qw(md5_base64);
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
 BEGIN {
-	$VERSION = 2.01;
+	$VERSION = 2.02;
 	@ISA = qw(Exporter);
 	@EXPORT_OK = qw(invalid_patron);
 }
@@ -37,19 +37,19 @@ sub new {
     my $type = ref($class) || $class;
     my $self;
 	$kp = GetMember($patron_id,'cardnumber');
-	$debug and warn "new Patron: " . Dumper($kp);
+	$debug and warn "new Patron (GetMember): " . Dumper($kp);
     unless (defined $kp) {
 		syslog("LOG_DEBUG", "new ILS::Patron(%s): no such patron", $patron_id);
 		return undef;
 	}
 	$kp = GetMemberDetails(undef,$patron_id);
-	$debug and warn "new Patron: " . Dumper($kp);
+	$debug and warn "new Patron (GetMemberDetails): " . Dumper($kp);
 	my $pw = $kp->{password};    ## FIXME - md5hash -- deal with . 
 	my $dob= $kp->{dateofbirth};
 	my $fines_out = GetMemberAccountRecords($kp->{borrowernumber});
 	my $flags = $kp->{flags}; # or warn "Warning: No flags from patron object for '$patron_id'"; 
 	my $debarred = $kp->{debarred}; ### 1 if ($kp->{flags}->{DBARRED}->{noissues});
-	$debug and warn "Debarred: $debarred = " . Dumper(%{$kp->{flags}});
+	$debug and warn sprintf("Debarred = %s : ",($debarred||'undef')) . Dumper(%{$kp->{flags}});
 	my %ilspatron;
 	my $adr     = $kp->{streetnumber} || '';
 	my $address = $kp->{address}      || ''; 
@@ -58,12 +58,14 @@ sub new {
 	no warnings;	# any of these $kp->{fields} being concat'd could be undef
 	$dob =~ s/\-//g;
 	%ilspatron = (
+	  getmemberdetails_object => $kp,
 		name => $kp->{firstname} . " " . $kp->{surname},
 		  id => $kp->{cardnumber},			# to SIP, the id is the BARCODE, not userid
 		  password => $pw,
 		     ptype => $kp->{categorycode}, # 'A'dult.  Whatever.
 		 birthdate => $kp->{dateofbirth}, ##$dob,
 		branchcode => $kp->{branchcode},
+	borrowernumber => $kp->{borrowernumber},
 		   address => $adr,
 		home_phone => $kp->{phone},
 		email_addr => $kp->{email},
@@ -92,15 +94,16 @@ sub new {
 		($flags->{$_}) or next;
 		$ilspatron{screen_msg} .= ($flags->{$_}->{message} || '') ;
 		if ($flags->{$_}->{noissues}){
-			$ilspatron{qw(charge_ok renew_ok recall_ok hold_ok)} = (0,0,0,0);
+			foreach my $toggle (qw(charge_ok renew_ok recall_ok hold_ok)) {
+				$ilspatron{$toggle} = 0;
+			}
 		}
 	}
 
-	# FIXME: populate items fine_items recall_items
+	# FIXME: populate fine_items recall_items
 #   $ilspatron{hold_items}    = (GetReservesFromBorrowernumber($kp->{borrowernumber},'F'));
 	$ilspatron{unavail_holds} = [(GetReservesFromBorrowernumber($kp->{borrowernumber}))];
-	my ($count,$issues) = GetPendingIssues($kp->{borrowernumber});
-	$ilspatron{items} = $issues;
+	$ilspatron{items} = GetPendingIssues($kp->{borrowernumber});
 	$self = \%ilspatron;
 	$debug and warn Dumper($self);
     syslog("LOG_DEBUG", "new ILS::Patron(%s): found patron '%s'", $patron_id,$self->{id});
@@ -220,6 +223,10 @@ sub too_many_billed {
     my $self = shift;
     return $self->{too_many_billed};
 }
+sub getmemberdetails_object {
+    my $self = shift;
+    return $self->{getmemberdetails_object};
+}
 
 #
 # List of outstanding holds placed
@@ -312,7 +319,7 @@ sub enable {
     syslog("LOG_DEBUG", "Patron(%s)->enable: charge: %s, renew:%s, recall:%s, hold:%s",
 	   $self->{id}, $self->{charge_ok}, $self->{renew_ok},
 	   $self->{recall_ok}, $self->{hold_ok});
-    $self->{screen_msg} = "All privileges restored.";
+    $self->{screen_msg} = "All privileges restored.";   # FIXME: not really affecting patron record
     return $self;
 }
 
@@ -336,7 +343,7 @@ sub charge_denied {
 1;
 __END__
 
-=doc 
+=head2 EXAMPLES
 
 our %patron_example = (
 		  djfiander => {
